@@ -1,4 +1,4 @@
-package com.example.edubizexchange;
+package ebe.edubizexchange;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
