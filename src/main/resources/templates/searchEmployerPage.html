@@ -20,10 +20,13 @@
 
 <style>
 
-
+    .input-border{
+        border-radius: 0;
+    }
 
     body{
-        overflow: scroll !important;
+        overflow-y: scroll !important;
+        overflow-x: hidden;
     }
     .card{
         border: none !important;
@@ -200,12 +203,12 @@
 
                 <div class="mb-3">
                     <label for="exampleFormControlInput1">NO of Employers</label>
-                    <input type="number" class="form-control" id="exampleFormControlInput1" placeholder="">
+                    <input type="number" class="form-control input-border" id="exampleFormControlInput1" placeholder="">
                 </div>
 
                 <div class="mb-3">
                     <label>Local Authorities</label>
-                    <select class="custom-select">
+                    <select class="custom-select input-border">
                         <option selected>Cardiff</option>
                         <option value="1">Swansea</option>
                         <option value="2">Newport</option>
@@ -340,7 +343,7 @@
 
                 <div class="form-group">
                     <label for="exampleInputEmail1">School Working with</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1">
+                    <input type="text" class="form-control input-border" id="exampleInputEmail1">
                 </div>
 
 
@@ -353,9 +356,9 @@
                     <div class="row">
                         <!-- Search -->
                         <div class="input-group col-8">
-                            <input type="text" class="form-control" placeholder="Search">
+                            <input type="text" class="form-control input-border" placeholder="Search">
                             <div class="input-group-append">
-                                <span class="input-group-text">
+                                <span class="input-group-text input-border">
                                     <i class="fa fa-search"></i>
                                 </span>
                             </div>
@@ -366,12 +369,11 @@
                         <div class="col-4">
                             <div class="input-group">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text">Sort By:</span>
+                                    <span class="input-group-text input-border">Sort By:</span>
                                 </div>
-                                <select class="form-control">
-                                    <option selected="selected">orange</option>
-                                    <option>white</option>
-                                    <option>purple</option>
+                                <select class="form-control input-border">
+                                    <option selected="selected">Date</option>
+                                    <option>Name</option>
                                 </select>
                             </div>
                         </div>
