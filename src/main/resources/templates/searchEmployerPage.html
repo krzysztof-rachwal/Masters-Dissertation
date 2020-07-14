@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta id="_csrf" name="_csrf" th:content="${_csrf.token}"/>
+    <meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}"/>
+    <link rel="stylesheet" type="text/css" href="https://use.fortawesome.com/kits/747c3a74/publications/latest/eot.css">
+    <link rel="stylesheet" type="text/css" href="https://use.fortawesome.com/kits/747c3a74/publications/latest/woff.css">
+    <link rel="stylesheet" type="text/css" href="https://use.fortawesome.com/kits/747c3a74/publications/latest/woff2.css">
+    <link rel="stylesheet" type="text/css" href="https://careerswales.gov.wales/styleguide/assets/css/gel-styleguide.css">
+    <link rel="stylesheet" media="all" href="https://careerswales.gov.wales/styleguide/assets/css/gel-elements.css" />
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" media="all" href="https://careerswales.gov.wales/sites/default/files/css/css_Ix2IjZRJPxhlyX0UzoOcvWoONN1wNDbQY7jrFiB85O0.css" />
+    <link rel="stylesheet" media="all" href="https://careerswales.gov.wales/sites/default/files/css/css_yFFWPpQsZCFeHMtvOieuCWLiTEiz--tT0otLunNJdLs.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <title>Employer Search</title>
+</head>
+
+<style>
+
+    .input-border{
+        border-radius: 0;
+    }
+
+    body{
+        overflow-y: scroll !important;
+        overflow-x: hidden;
+    }
+    .card{
+        border: none !important;
+    }
+
+    .flex-container{
+        display: flex;
+        align-items: stretch;
+    }
+
+    .card--style-icon .card__inner .card__content .content__body .body__title{
+        color: black !important;
+    }
+    a {
+        text-decoration: none !important;
+    }
+
+    .list-employers{
+        overflow-y:scroll;
+        overflow-x: hidden;
+        -webkit-overflow-scrolling: touch;
+        max-height: 125vh;
+    }
+
+    .gel-content-container{
+        max-width: 1050px;
+    }
+
+</style>
+
+<body>
+<!--    <header th:replace="fragments/headerTemplate :: header"></header>-->
+<div class="wg-header">
+    <div class="wg-header__content">
+        <a href="beta.gov.wales" target="_blank" class="content__wg-link" gel-processed="processed" title="Link to Welsh Government logo">
+            <img src="https://careerswales.gov.wales/styleguide/assets/img/logos/wg-logo-light.svg" alt="Welsh Government logo">
+        </a>
+        <form class="content__search-form">
+            <div class="form__group js-form-group form__text">
+                <label class="group__label" for="text-search-input">Search this site</label>
+                <div class="group__element group__element--has-prefix-suffix">
+                    <input type="text" id="text-search-input" name="text-name-prefix-suffix" placeholder="Search Careers Wales">
+                    <div class="group__suffix"><button class="button--icon icon--search icon--text-hidden" aria-label="Search"></button></div>
+                </div>
+            </div>
+        </form>
+        <a href="#" class="button button--style-dark button--small content__lang-link" gel-processed="processed" title="Link to Cymraeg">
+            Cymraeg
+        </a>
+    </div>
+</div>
+
+<div class="branded-masthead js-branded-masthead">
+    <div class="branded-masthead__content">
+        <div class="content__logos">
+            <a href="#" class="ignore-link" title="Careers Wales home">
+                <img class="content--logo logo--mob-en" src="https://careerswales.gov.wales/styleguide/assets/img/logos/cw-logo-mob-en.svg" role="presentation" alt="">
+                <img class="content--logo logo--mob-cy" src="https://careerswales.gov.wales/styleguide/assets/img/logos/cw-logo-mob-cy.svg" role="presentation" alt="">
+                <img class="content--logo" src="https://careerswales.gov.wales/styleguide/assets/img/logos/cw-logo.svg" role="presentation" alt="">
+                <span class="visually-hidden">Careers Wales home</span>
+            </a>
+        </div>
+        <div class="content__helper-menu js-helper-nav" gel-processed="processed">
+            <ul>
+                <li>
+                    <a href="https://careerswales.gov.wales/contact-us" >Contact Us</a>
+                </li>
+                <li>
+                    <a href="https://careerswales.gov.wales/events" >Events</a>
+                </li>
+                <li>
+                    <a href="https://careerswales.gov.wales/news" >News</a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</div>
+<nav aria-label="primary navigation" class="primary js-primary-nav" style="">
+    <div class="nav__toggle">
+        <button class="toggle__button js-toggle-nav" gel-processed="processed">
+            <span></span><span></span><span></span>Menu
+        </button>
+    </div>
+    <div class="nav__content">
+        <ul>
+            <li>
+                <a href="https://careerswales.gov.wales/" >Employer</a>
+            </li>
+            <li>
+                <a href="https://careerswales.gov.wales/plan-your-career" >Request</a>
+            </li>
+            <li>
+                <a href="https://careerswales.gov.wales/courses-and-training" >Contact Us</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+    <div class="gel-content-container">
+        <div class="container my-4">
+            <h2>Employers</h2>
+        </div>
+
+        <div class="flex-container">
+            <div class="col-lg-3">
+                <div class="mb-3">
+                    <h6>INDUSTRY SECTOR</h6>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="ind1">
+                        <label class="form-check-label" for="ind1">
+                            Agriculture, Forest, And Fishing
+                        </label>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="ind2">
+                        <label class="form-check-label" for="ind2">
+                            Mining
+                        </label>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="ind3">
+                        <label class="form-check-label" for="ind3">
+                            Construction
+                        </label>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="ind4">
+                        <label class="form-check-label" for="ind4">
+                            Transport,Communications, Electric, Gas, And Sanitary Services
+                        </label>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="ind5">
+                        <label class="form-check-label" for="ind5">
+                            Wholesale Trade
+                        </label>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="ind6">
+                        <label class="form-check-label" for="ind6">
+                            Retail Trade
+                        </label>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <h6>ALUMNI SCHOOL</h6>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="schoolId1">
+                        <label class="form-check-label" for="schoolId1">
+                            St' James
+                        </label>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="schoolId2">
+                        <label class="form-check-label" for="schoolId2">
+                            St'John
+                        </label>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="schoolId3">
+                        <label class="form-check-label" for="schoolId3">
+                            Fitzalan School
+                        </label>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1">NO of Employers</label>
+                    <input type="number" class="form-control input-border" id="exampleFormControlInput1" placeholder="">
+                </div>
+
+                <div class="mb-3">
+                    <label>Local Authorities</label>
+                    <select class="custom-select input-border">
+                        <option selected>Cardiff</option>
+                        <option value="1">Swansea</option>
+                        <option value="2">Newport</option>
+                        <option value="3">Bridgend</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <h6>Offers</h6>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                        <label class="form-check-label" for="defaultCheck1">
+                            Work Experience
+                        </label>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck2">
+                        <label class="form-check-label" for="defaultCheck2">
+                            Site visits
+                        </label>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck3">
+                        <label class="form-check-label" for="defaultCheck3">
+                            Workshops school based
+                        </label>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck4">
+                        <label class="form-check-label" for="defaultCheck4">
+                            Presentations
+                        </label>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck5">
+                        <label class="form-check-label" for="defaultCheck5">
+                            Industry days/ Career Fairs
+                        </label>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck6">
+                        <label class="form-check-label" for="defaultCheck6">
+                            Webinars/ digital presentations
+                        </label>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <h6>Other</h6>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="defaultChe1">
+                        <label class="form-check-label" for="defaultChe1">
+                            Work with primary schools
+                        </label>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="defaultChe2">
+                        <label class="form-check-label" for="defaultChe2">
+                            Foreign language
+                        </label>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="defaultChe3">
+                        <label class="form-check-label" for="defaultChe3">
+                            Works in Welsh
+                        </label>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="defaultChe4">
+                        <label class="form-check-label" for="defaultChe4">
+                            Deliver in Welsh
+                        </label>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="defaultChe5">
+                        <label class="form-check-label" for="defaultChe5">
+                            Have apprenticeship programme
+                        </label>
+                    </div>
+                </div>
+
+                    <div class="mb-3">
+                    <h6>Curriculum Areas</h6>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="curArea1">
+                        <label class="form-check-label" for="curArea1">
+                            Mathematics & Numeracy
+                        </label>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="curArea2">
+                        <label class="form-check-label" for="curArea2">
+                            Languages Literacy & Communication
+                        </label>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="curArea3">
+                        <label class="form-check-label" for="curArea3">
+                            Health & Well-being
+                        </label>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="curArea4">
+                        <label class="form-check-label" for="curArea4">
+                            Humanities
+                        </label>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="curArea5">
+                        <label class="form-check-label" for="curArea5">
+                            Expressive Arts
+                        </label>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="curArea6">
+                        <label class="form-check-label" for="curArea6">
+                            Science and Technology
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="workWithSchool">School Working with</label>
+                    <input type="text" class="form-control input-border" id="workWithSchool">
+                </div>
+
+
+            </div>
+
+
+            <div class="col-lg-9" style="border-left: grey 1px solid">
+                <div class="gel-content-container">
+
+                    <div class="row">
+                        <!-- Search -->
+                        <div class="input-group col-8">
+                            <input type="text" class="form-control input-border" placeholder="Search">
+                            <div class="input-group-append">
+                                <span class="input-group-text input-border">
+                                    <i class="fa fa-search"></i>
+                                </span>
+                            </div>
+                        </div>
+
+
+                        <!-- Sorted by-->
+                        <div class="col-4">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text input-border">Sort By:</span>
+                                </div>
+                                <select class="form-control input-border">
+                                    <option selected="selected">Date</option>
+                                    <option>Name</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                <br>
+
+                <!-- Cards -->
+
+                <div class="list-employers">
+                    <div class="gel-content-row ">
+                        <article class="card js-card card--style-icon card--100" gel-processed="processed">
+                            <a href="#" class="card__inner" gel-processed="processed" title="Link to Card heading and link title">
+                                <div class="card__content">
+                                    <div class="content__image">
+                                        <div>
+                                            <img alt="Card image" src="https://source.unsplash.com/90x90/?business">
+                                        </div>
+                                    </div>
+                                    <div class="content__body">
+                                        <div class="body__title">Card heading and link title</div>
+                                        <div class="body__body">
+                                            Lorem ipsum dolor sit amet, consecetur adipisicing elit sed do.
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </article>
+                    </div>
+                    <div class="gel-content-row">
+                        <article class="card js-card card--style-icon card--100" gel-processed="processed">
+                            <a href="#" class="card__inner" gel-processed="processed" title="Link to Card heading and link title">
+                                <div class="card__content">
+                                    <div class="content__image">
+                                        <div>
+                                            <img alt="Card image" src="https://source.unsplash.com/90x90/?business">
+                                        </div>
+                                    </div>
+                                    <div class="content__body">
+                                        <div class="body__title">Card heading and link title</div>
+                                        <div class="body__body">
+                                            Lorem ipsum dolor sit amet, consecetur adipisicing elit sed do.
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </article>
+                    </div>
+                    <div class="gel-content-row">
+                        <article class="card js-card card--style-icon card--100" gel-processed="processed">
+                            <a href="#" class="card__inner" gel-processed="processed" title="Link to Card heading and link title">
+                                <div class="card__content">
+                                    <div class="content__image">
+                                        <div>
+                                            <img alt="Card image" src="https://source.unsplash.com/90x90/?business">
+                                        </div>
+                                    </div>
+                                    <div class="content__body">
+                                        <div class="body__title">Card heading and link title</div>
+                                        <div class="body__body">
+                                            Lorem ipsum dolor sit amet, consecetur adipisicing elit sed do.
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </article>
+                    </div>
+                    <div class="gel-content-row">
+                        <article class="card js-card card--style-icon card--100" gel-processed="processed">
+                            <a href="#" class="card__inner" gel-processed="processed" title="Link to Card heading and link title">
+                                <div class="card__content">
+                                    <div class="content__image">
+                                        <div>
+                                            <img alt="Card image" src="https://source.unsplash.com/90x90/?business">
+                                        </div>
+                                    </div>
+                                    <div class="content__body">
+                                        <div class="body__title">Card heading and link title</div>
+                                        <div class="body__body">
+                                            Lorem ipsum dolor sit amet, consecetur adipisicing elit sed do.
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </article>
+                    </div>
+                    <div class="gel-content-row">
+                        <article class="card js-card card--style-icon card--100" gel-processed="processed">
+                            <a href="#" class="card__inner" gel-processed="processed" title="Link to Card heading and link title">
+                                <div class="card__content">
+                                    <div class="content__image">
+                                        <div>
+                                            <img alt="Card image" src="https://source.unsplash.com/90x90/?business">
+                                        </div>
+                                    </div>
+                                    <div class="content__body">
+                                        <div class="body__title">Card heading and link title</div>
+                                        <div class="body__body">
+                                            Lorem ipsum dolor sit amet, consecetur adipisicing elit sed do.
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </article>
+                    </div>
+                    <div class="gel-content-row">
+                        <article class="card js-card card--style-icon card--100" gel-processed="processed">
+                            <a href="#" class="card__inner" gel-processed="processed" title="Link to Card heading and link title">
+                                <div class="card__content">
+                                    <div class="content__image">
+                                        <div>
+                                            <img alt="Card image" src="https://source.unsplash.com/90x90/?business">
+                                        </div>
+                                    </div>
+                                    <div class="content__body">
+                                        <div class="body__title">Card heading and link title</div>
+                                        <div class="body__body">
+                                            Lorem ipsum dolor sit amet, consecetur adipisicing elit sed do.
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </article>
+                    </div>
+                    <div class="gel-content-row">
+                        <article class="card js-card card--style-icon card--100" gel-processed="processed">
+                            <a href="#" class="card__inner" gel-processed="processed" title="Link to Card heading and link title">
+                                <div class="card__content">
+                                    <div class="content__image">
+                                        <div>
+                                            <img alt="Card image" src="https://source.unsplash.com/90x90/?business">
+                                        </div>
+                                    </div>
+                                    <div class="content__body">
+                                        <div class="body__title">Card heading and link title</div>
+                                        <div class="body__body">
+                                            Lorem ipsum dolor sit amet, consecetur adipisicing elit sed do.
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </article>
+                    </div>
+                    <div class="gel-content-row">
+                        <article class="card js-card card--style-icon card--100" gel-processed="processed">
+                            <a href="#" class="card__inner" gel-processed="processed" title="Link to Card heading and link title">
+                                <div class="card__content">
+                                    <div class="content__image">
+                                        <div>
+                                            <img alt="Card image" src="https://source.unsplash.com/90x90/?business">
+                                        </div>
+                                    </div>
+                                    <div class="content__body">
+                                        <div class="body__title">Card heading and link title</div>
+                                        <div class="body__body">
+                                            Lorem ipsum dolor sit amet, consecetur adipisicing elit sed do.
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </article>
+                    </div>
+                    <div class="gel-content-row">
+                        <article class="card js-card card--style-icon card--100" gel-processed="processed">
+                            <a href="#" class="card__inner" gel-processed="processed" title="Link to Card heading and link title">
+                                <div class="card__content">
+                                    <div class="content__image">
+                                        <div>
+                                            <img alt="Card image" src="https://source.unsplash.com/90x90/?business">
+                                        </div>
+                                    </div>
+                                    <div class="content__body">
+                                        <div class="body__title">Card heading and link title</div>
+                                        <div class="body__body">
+                                            Lorem ipsum dolor sit amet, consecetur adipisicing elit sed do.
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </article>
+                    </div>
+                    <div class="gel-content-row">
+                        <article class="card js-card card--style-icon card--100" gel-processed="processed">
+                            <a href="#" class="card__inner" gel-processed="processed" title="Link to Card heading and link title">
+                                <div class="card__content">
+                                    <div class="content__image">
+                                        <div>
+                                            <img alt="Card image" src="https://source.unsplash.com/90x90/?business">
+                                        </div>
+                                    </div>
+                                    <div class="content__body">
+                                        <div class="body__title">Card heading and link title</div>
+                                        <div class="body__body">
+                                            Lorem ipsum dolor sit amet, consecetur adipisicing elit sed do.
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </article>
+                    </div>
+                    <div class="gel-content-row">
+                        <article class="card js-card card--style-icon card--100" gel-processed="processed">
+                            <a href="#" class="card__inner" gel-processed="processed" title="Link to Card heading and link title">
+                                <div class="card__content">
+                                    <div class="content__image">
+                                        <div>
+                                            <img alt="Card image" src="https://source.unsplash.com/90x90/?business">
+                                        </div>
+                                    </div>
+                                    <div class="content__body">
+                                        <div class="body__title">Card heading and link title</div>
+                                        <div class="body__body">
+                                            Lorem ipsum dolor sit amet, consecetur adipisicing elit sed do.
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </article>
+                    </div>
+                    <div class="gel-content-row">
+                        <article class="card js-card card--style-icon card--100" gel-processed="processed">
+                            <a href="#" class="card__inner" gel-processed="processed" title="Link to Card heading and link title">
+                                <div class="card__content">
+                                    <div class="content__image">
+                                        <div>
+                                            <img alt="Card image" src="https://source.unsplash.com/90x90/?business">
+                                        </div>
+                                    </div>
+                                    <div class="content__body">
+                                        <div class="body__title">Card heading and link title</div>
+                                        <div class="body__body">
+                                            Lorem ipsum dolor sit amet, consecetur adipisicing elit sed do.
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </article>
+                    </div>
+                    <div class="gel-content-row">
+                        <article class="card js-card card--style-icon card--100 card--has-next card-next-type--icon" gel-processed="processed">
+                            <a href="#" class="card__inner" gel-processed="processed" title="Link to Card heading and link title">
+                                <div class="card__content">
+                                    <div class="content__image">
+                                        <div>
+                                            <img alt="Card image" src="https://source.unsplash.com/90x90/?business">
+                                        </div>
+                                    </div>
+                                    <div class="content__body">
+                                        <div class="body__title">Card heading and link title</div>
+                                        <div class="body__body">
+                                            Lorem ipsum dolor sit amet, consecetur adipisicing elit sed do.
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </article>
+                        <article class="card js-card card--style-icon card--100 card--has-previous card-previous-type--icon" gel-processed="processed">
+                            <a href="#" class="card__inner" gel-processed="processed" title="Link to Card heading and link title">
+                                <div class="card__content">
+                                    <div class="content__image">
+                                        <div>
+                                            <img alt="Card image" src="https://source.unsplash.com/90x90/?business">
+                                        </div>
+                                    </div>
+                                    <div class="content__body">
+                                        <div class="body__title">Card heading and link title</div>
+                                        <div class="body__body">
+                                            Lorem ipsum dolor sit amet.
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </article>
+                    </div>
+
+                    <div class="gel-content-row">
+                        <article class="card js-card card--style-icon card--100" gel-processed="processed">
+                            <a href="#" class="card__inner" gel-processed="processed" title="Link to Card heading and link title">
+                                <div class="card__content">
+                                    <div class="content__image">
+                                        <div>
+                                            <img alt="Card image" src="https://source.unsplash.com/90x90/?business">
+                                        </div>
+                                    </div>
+                                    <div class="content__body">
+                                        <div class="body__title">Card heading and link title</div>
+                                        <div class="body__body">
+                                            Lorem ipsum dolor sit amet, consecetur adipisicing elit sed do.
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </article>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+</div>
+<!--    <footer th:replace="fragments/footerTemplate :: footer"></footer>-->
+
+<!--        <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/js/foundation.min.js" integrity="sha256-pRF3zifJRA9jXGv++b06qwtSqX1byFQOLjqa2PTEb2o=" crossorigin="anonymous"></script>-->
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://careerswales.gov.wales/styleguide/assets/js/gel-styleguide.js"></script>
+<script type="text/javascript" src="https://careerswales.gov.wales/styleguide/assets/js/gel-elements-loader.js"></script>
+<script type="text/javascript" src="https://careerswales.gov.wales/styleguide/assets/js/gel-elements.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+
+    });
+
+</script>
+
+</body>
+</html>
+
