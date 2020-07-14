@@ -55,6 +55,17 @@ public class BaseController {
         return mv;
     }
 
+    //Search Vacancies
+    @GetMapping("/searchVacancies")
+    public ModelAndView SearchVacancies(HttpSession session) {
+        System.out.println("aui");
+        ModelAndView mv = new ModelAndView();
+        ObjectMapper objectMapper = new ObjectMapper();
+        // session = context.getSession();
+        mv.setViewName("searchVacanciesPage");
+        return mv;
+    }
+
     @GetMapping("/error")
     public RedirectView ErrorPage() {
         return new RedirectView("/searchEmployerPage");
