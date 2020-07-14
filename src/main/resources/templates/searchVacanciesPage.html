@@ -55,6 +55,19 @@
         max-width: 1050px;
     }
 
+    .title-h1{
+        font-size: 3em;
+        margin-top: 0.67em;
+        margin-bottom: 0.67em;
+        margin-left: 0;
+        margin-right: 0;
+        font-weight: bold;
+    }
+
+    .typoWhite{
+        color: white !important;
+    }
+
 </style>
 
 <body>
@@ -114,13 +127,16 @@
     <div class="nav__content">
         <ul>
             <li>
-                <a href="https://careerswales.gov.wales/" >Employer</a>
+                <a href="https://careerswales.gov.wales/">Employers</a>
             </li>
             <li>
-                <a href="https://careerswales.gov.wales/plan-your-career" >Request</a>
+                <a href="https://careerswales.gov.wales/plan-your-career">Vacancies</a>
             </li>
             <li>
-                <a href="https://careerswales.gov.wales/courses-and-training" >Contact Us</a>
+                <a href="https://careerswales.gov.wales/courses-and-training">Events</a>
+            </li>
+            <li>
+                <a href="https://careerswales.gov.wales/courses-and-training">Reports</a>
             </li>
         </ul>
     </div>
@@ -128,7 +144,12 @@
 
     <div class="gel-content-container">
         <div class="container my-4">
-            <h2>Employers</h2>
+            <div class="row-fluid">
+                <span class="title-h1">Vacancies</span>
+                <button type="button"  id="addVacancy" class="btn btn-outline-green input-border">Add Vacancy</button>
+            </div>
+
+
         </div>
 
         <div class="flex-container">
@@ -524,7 +545,10 @@
 
 <script>
     $(document).ready(function() {
-
+        $("#addVacancy").hover(function(){
+            $(this).addClass("typoWhite")
+        },
+            function(){$(this).removeClass("typoWhite")})
     });
 
 </script>
