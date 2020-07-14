@@ -47,7 +47,6 @@ public class BaseController {
     //Search Employer
     @GetMapping("/searchEmployer")
     public ModelAndView SearchEmployer(HttpSession session) {
-        System.out.println("aui");
         ModelAndView mv = new ModelAndView();
         ObjectMapper objectMapper = new ObjectMapper();
         // session = context.getSession();
@@ -58,7 +57,6 @@ public class BaseController {
     //Search Vacancies
     @GetMapping("/searchVacancies")
     public ModelAndView SearchVacancies(HttpSession session) {
-        System.out.println("aui");
         ModelAndView mv = new ModelAndView();
         ObjectMapper objectMapper = new ObjectMapper();
         // session = context.getSession();
