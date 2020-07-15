@@ -240,7 +240,7 @@
         height: 100%
     }
     body {
-        overflow: hidden
+        overflow: scroll
     }
     .guide-container .guide-options {
         display: none
