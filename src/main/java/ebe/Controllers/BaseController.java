@@ -35,8 +35,7 @@ public class BaseController {
 
     // HomePage
     @GetMapping("/")
-    public ModelAndView HomePage(HttpSession session) {
-        System.out.println("aui");
+    public ModelAndView HomePage(HttpSession session) { ;
         ModelAndView mv = new ModelAndView();
         ObjectMapper objectMapper = new ObjectMapper();
         // session = context.getSession();
@@ -47,7 +46,6 @@ public class BaseController {
     //Search Employer
     @GetMapping("/searchEmployer")
     public ModelAndView SearchEmployer(HttpSession session) {
-        System.out.println("aui");
         ModelAndView mv = new ModelAndView();
         ObjectMapper objectMapper = new ObjectMapper();
         // session = context.getSession();
@@ -56,7 +54,7 @@ public class BaseController {
     }
 
     // Search Events
-    @GetMapping("/searchEvents")
+    @GetMapping("/searchEvent")
     public ModelAndView SearchEvents(HttpSession session) {
         ModelAndView mv = new ModelAndView();
         ObjectMapper objectMapper = new ObjectMapper();
@@ -64,6 +62,28 @@ public class BaseController {
         mv.setViewName("searchEventsPage");
         return mv;
     }
+
+    // Search Events
+    @GetMapping("/request")
+    public ModelAndView Request(HttpSession session) {
+        ModelAndView mv = new ModelAndView();
+        ObjectMapper objectMapper = new ObjectMapper();
+        // session = context.getSession();
+        mv.setViewName("requestPage");
+        return mv;
+    }
+
+
+    // Search Events
+    @GetMapping("/contactUs")
+    public ModelAndView contactUs(HttpSession session) {
+        ModelAndView mv = new ModelAndView();
+        ObjectMapper objectMapper = new ObjectMapper();
+        // session = context.getSession();
+        mv.setViewName("contactUsPage");
+        return mv;
+    }
+
 
     @GetMapping("/error")
     public RedirectView ErrorPage() {
