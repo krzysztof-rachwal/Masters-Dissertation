@@ -55,16 +55,20 @@ public class BaseController {
         return mv;
     }
 
+    // Search Events
+    @GetMapping("/searchEvents")
+    public ModelAndView SearchEvents(HttpSession session) {
+        ModelAndView mv = new ModelAndView();
+        ObjectMapper objectMapper = new ObjectMapper();
+        // session = context.getSession();
+        mv.setViewName("searchEventsPage");
+        return mv;
+    }
+
     @GetMapping("/error")
     public RedirectView ErrorPage() {
         return new RedirectView("/searchEmployerPage");
     }
-
-
-
-
-
-
 
     // Default Controller
     @GetMapping("/employersProfile")
