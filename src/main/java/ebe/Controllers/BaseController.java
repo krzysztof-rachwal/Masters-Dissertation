@@ -73,6 +73,16 @@ public class BaseController {
         return mv;
     }
 
+    // Report
+    @GetMapping("/report")
+    public ModelAndView Report(HttpSession session) {
+        ModelAndView mv = new ModelAndView();
+        ObjectMapper objectMapper = new ObjectMapper();
+        // session = context.getSession();
+        mv.setViewName("reportPage");
+        return mv;
+    }
+
 
     // Contact Us
     @GetMapping("/contactUs")
