@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
-    <title>Employer Search</title>
+    <title>Events Search</title>
 </head>
 
 <style>
@@ -63,77 +63,53 @@
 
     <div class="gel-content-container">
         <div class="container my-4">
-            <h2>Employers</h2>
+            <h2>Events</h2>
         </div>
 
         <div class="flex-container">
             <div class="col-lg-3">
                 <div class="mb-3">
-                    <h6>INDUSTRY SECTOR</h6>
+                    <h6>TYPE OF EVENT</h6>
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" value="" id="ind1">
                         <label class="form-check-label" for="ind1">
-                            Agriculture, Forest, And Fishing
+                            Activate
                         </label>
                     </div>
 
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" value="" id="ind2">
                         <label class="form-check-label" for="ind2">
-                            Mining
+                            World of Work
                         </label>
                     </div>
 
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" value="" id="ind3">
                         <label class="form-check-label" for="ind3">
-                            Construction
-                        </label>
-                    </div>
-
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="ind4">
-                        <label class="form-check-label" for="ind4">
-                            Transport,Communications, Electric, Gas, And Sanitary Services
+                            High Impact Event
                         </label>
                     </div>
 
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" value="" id="ind5">
                         <label class="form-check-label" for="ind5">
-                            Wholesale Trade
+                            Webinar/Virtual Event
                         </label>
                     </div>
 
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" value="" id="ind6">
                         <label class="form-check-label" for="ind6">
-                            Retail Trade
+                            Digital Presentation
                         </label>
                     </div>
                 </div>
 
                 <div class="mb-3">
-                    <h6>ALUMNI SCHOOL</h6>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="schoolId1">
-                        <label class="form-check-label" for="schoolId1">
-                            St' James
-                        </label>
-                    </div>
-
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="schoolId2">
-                        <label class="form-check-label" for="schoolId2">
-                            St'John
-                        </label>
-                    </div>
-
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="schoolId3">
-                        <label class="form-check-label" for="schoolId3">
-                            Fitzalan School
-                        </label>
+                    <h6>DATE</h6>
+                    <div>
+                        <input class="form-control" type="date" value="" id="date">
                     </div>
                 </div>
 
@@ -161,149 +137,29 @@
                     </div>
                 </div>
 
-                <div class="mb-3">
-                    <label>Local Authorities</label>
-                    <select class="custom-select input-border">
-                        <option selected>Cardiff</option>
-                        <option value="1">Swansea</option>
-                        <option value="2">Newport</option>
-                        <option value="3">Bridgend</option>
-                    </select>
-                </div>
 
                 <div class="mb-3">
-                    <h6>Offers</h6>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                        <label class="form-check-label" for="defaultCheck1">
-                            Work Experience
-                        </label>
-                    </div>
-
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck2">
-                        <label class="form-check-label" for="defaultCheck2">
-                            Site visits
-                        </label>
-                    </div>
-
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck3">
-                        <label class="form-check-label" for="defaultCheck3">
-                            Workshops school based
-                        </label>
-                    </div>
-
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck4">
-                        <label class="form-check-label" for="defaultCheck4">
-                            Presentations
-                        </label>
-                    </div>
-
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck5">
-                        <label class="form-check-label" for="defaultCheck5">
-                            Industry days/ Career Fairs
-                        </label>
-                    </div>
-
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck6">
-                        <label class="form-check-label" for="defaultCheck6">
-                            Webinars/ digital presentations
-                        </label>
-                    </div>
-                </div>
-
-                <div class="mb-3">
-                    <h6>Other</h6>
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" value="" id="defaultChe1">
                         <label class="form-check-label" for="defaultChe1">
-                            Work with primary schools
+                            Promotes apprenticeship
                         </label>
                     </div>
 
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" value="" id="defaultChe2">
                         <label class="form-check-label" for="defaultChe2">
-                            Foreign language
+                            Works in Welsh
                         </label>
                     </div>
 
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" value="" id="defaultChe3">
                         <label class="form-check-label" for="defaultChe3">
-                            Works in Welsh
-                        </label>
-                    </div>
-
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="defaultChe4">
-                        <label class="form-check-label" for="defaultChe4">
-                            Deliver in Welsh
-                        </label>
-                    </div>
-
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="defaultChe5">
-                        <label class="form-check-label" for="defaultChe5">
-                            Have apprenticeship programme
+                            Challenges gender stereotypes
                         </label>
                     </div>
                 </div>
-
-                    <div class="mb-3">
-                    <h6>Curriculum Areas</h6>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="curArea1">
-                        <label class="form-check-label" for="curArea1">
-                            Mathematics & Numeracy
-                        </label>
-                    </div>
-
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="curArea2">
-                        <label class="form-check-label" for="curArea2">
-                            Languages Literacy & Communication
-                        </label>
-                    </div>
-
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="curArea3">
-                        <label class="form-check-label" for="curArea3">
-                            Health & Well-being
-                        </label>
-                    </div>
-
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="curArea4">
-                        <label class="form-check-label" for="curArea4">
-                            Humanities
-                        </label>
-                    </div>
-
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="curArea5">
-                        <label class="form-check-label" for="curArea5">
-                            Expressive Arts
-                        </label>
-                    </div>
-
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="curArea6">
-                        <label class="form-check-label" for="curArea6">
-                            Science and Technology
-                        </label>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="workWithSchool">School Working with</label>
-                    <input type="text" class="form-control input-border" id="workWithSchool">
-                </div>
-
 
             </div>
 

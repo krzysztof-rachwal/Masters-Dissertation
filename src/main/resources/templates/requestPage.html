@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta id="_csrf" name="_csrf" th:content="${_csrf.token}"/>
+    <meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}"/>
+    <link rel="stylesheet" type="text/css" href="https://use.fortawesome.com/kits/747c3a74/publications/latest/eot.css">
+    <link rel="stylesheet" type="text/css" href="https://use.fortawesome.com/kits/747c3a74/publications/latest/woff.css">
+    <link rel="stylesheet" type="text/css" href="https://use.fortawesome.com/kits/747c3a74/publications/latest/woff2.css">
+    <link rel="stylesheet" type="text/css" href="https://careerswales.gov.wales/styleguide/assets/css/gel-styleguide.css">
+    <link rel="stylesheet" media="all" href="https://careerswales.gov.wales/styleguide/assets/css/gel-elements.css" />
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" media="all" href="https://careerswales.gov.wales/sites/default/files/css/css_Ix2IjZRJPxhlyX0UzoOcvWoONN1wNDbQY7jrFiB85O0.css" />
+    <link rel="stylesheet" media="all" href="https://careerswales.gov.wales/sites/default/files/css/css_yFFWPpQsZCFeHMtvOieuCWLiTEiz--tT0otLunNJdLs.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <title>Request</title>
+</head>
+
+<style>
+
+    .input-border{
+        border-radius: 0;
+    }
+
+    body{
+        overflow-y: scroll !important;
+        overflow-x: hidden;
+    }
+    .card{
+        border: none !important;
+    }
+
+    .flex-container{
+        display: flex;
+        align-items: stretch;
+    }
+
+    .card--style-icon .card__inner .card__content .content__body .body__title{
+        color: black !important;
+    }
+    a {
+        text-decoration: none !important;
+    }
+
+    .list-employers{
+        overflow-y:scroll;
+        overflow-x: hidden;
+        -webkit-overflow-scrolling: touch;
+        max-height: 125vh;
+    }
+
+    .gel-content-container{
+        max-width: 1050px;
+    }
+
+</style>
+
+<body>
+
+<header th:replace="fragments/headerTemplate :: header">
+</header>
+
+
+<!--MAIN CONTENT-->
+<div class="gel-content-container">
+    <h1>Request</h1>
+
+    <p>Request an event of your choice with employers you want to attend.</p>
+    <div>
+        <form>
+            <label for="event_name">Event Name:</label><br>
+            <input type="text" id="event_name" name="event_name"><br><br>
+            <label for="event_type">Event Type:</label><br>
+            <select id="event_type" name="event_type">
+                <option value="type1">type1</option>
+                <option value="type2">type2</option>
+                <option value="type3">type3</option>
+            </select><br><br>
+            <label for="event_date">Event Date:</label><br>
+            <input type="date" id="event_date" name="event_date"><br><br>
+            <label for="event_time">Event Time:</label><br>
+            <input type="time" id="event_time" name="event_time"><br><br>
+            <label for="event_guests">Guest(s) ???:</label><br>
+            <select id="event_guests" name="event_guests">
+                <option value="guest1">guest1</option>
+                <option value="guest2">guest2</option>
+                <option value="guest3">guest3</option>
+            </select><br><br>
+            <input class="button" type="submit" value="Request Event">
+            <p>or this one</p>
+            <input class="button--secondary" type="submit" value="Request Event">
+        </form>
+    </div>
+</div>
+<!--END OF MAIN CONTENT-->
+
+<footer th:replace="fragments/footerTemplate :: footer"></footer>
+<script type="text/javascript" src="https://careerswales.gov.wales/styleguide//assets/js/jquery-3.0.0.min.js"></script>
+<script type="text/javascript" src="https://careerswales.gov.wales/styleguide//assets/js/gel-elements.js"></script>
+<script type="text/javascript" src="https://careerswales.gov.wales/styleguide//assets/js/gel-elements-loader.js"></script>
+</body>
+</html>
