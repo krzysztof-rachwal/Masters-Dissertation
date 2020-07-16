@@ -55,6 +55,20 @@
         max-width: 1050px;
     }
 
+    .container-headline{
+        max-width: 987px;
+        padding-right: 15px;
+        padding-left: 15px;
+    }
+
+    .title-h2{
+        margin-bottom: .5rem;
+        font-weight: 500;
+        line-height: 1.2;
+        font-size: 2rem;
+    }
+
+
 </style>
 
 <body>
@@ -65,11 +79,13 @@
 
 <!--MAIN CONTENT-->
 <div class="gel-content-container">
-    <h1>Request</h1>
+    <div class="container-headline my-4">
+        <span class="title-h2">Request</span>
+    </div>
 
-    <p>Request an event of your choice with employers you want to attend.</p>
-    <div>
-        <form>
+    <p class="container-headline">Request an event of your choice with employers you want to attend.</p>
+    <div class="container-headline">
+        <form class="justify-content-center">
             <label for="event_name">Event Name:</label><br>
             <input type="text" id="event_name" name="event_name"><br><br>
             <label for="event_type">Event Type:</label><br>
@@ -78,7 +94,7 @@
                 <option value="type2">type2</option>
                 <option value="type3">type3</option>
             </select><br><br>
-            <label for="event_date">Event Date:</label><br>
+            <label  class=" text-left" for="event_date">Event Date:</label><br>
             <input type="date" id="event_date" name="event_date"><br><br>
             <label for="event_time">Event Time:</label><br>
             <input type="time" id="event_time" name="event_time"><br><br>
@@ -89,8 +105,7 @@
                 <option value="guest3">guest3</option>
             </select><br><br>
             <input class="button" type="submit" value="Request Event">
-            <p>or this one</p>
-            <input class="button--secondary" type="submit" value="Request Event">
+
         </form>
     </div>
 </div>
