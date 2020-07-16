@@ -73,6 +73,16 @@ public class BaseController {
         return mv;
     }
 
+    // Create Events (get id of the event)
+    @GetMapping("/eventProfile")
+    public ModelAndView EventProfile(HttpSession session) {
+        ModelAndView mv = new ModelAndView();
+        ObjectMapper objectMapper = new ObjectMapper();
+        // session = context.getSession();
+        mv.setViewName("eventsProfilePage");
+        return mv;
+    }
+
     // Request
     @GetMapping("/request")
     public ModelAndView Request(HttpSession session) {
