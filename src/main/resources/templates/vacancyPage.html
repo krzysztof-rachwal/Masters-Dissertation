@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
-    <title>Request</title>
+    <title>Careers Wales</title>
 </head>
 
 <style>
@@ -55,8 +55,20 @@
         max-width: 1050px;
     }
 
-</style>
+    .title-h1{
+        font-size: 3em;
+        margin-top: 0.67em;
+        margin-bottom: 0.67em;
+        margin-left: 0;
+        margin-right: 0;
+        font-weight: bold;
+    }
 
+    .typoWhite{
+        color: white !important;
+    }
+
+</style>
 <body>
 
 <header th:replace="fragments/headerTemplate :: header">
@@ -65,31 +77,85 @@
 
 <!--MAIN CONTENT-->
 <div class="gel-content-container">
-    <h1>Request</h1>
+    <div class="container my-4">
+        <div class="row-fluid">
+            <span class="title-h1">Role Title</span>
+            <button type="button"  id="updateVacancy" style="margin:0.5em" class="button--secondary my-3 float-right">Update</button>
+            <button type="button"  id="deleteVacancy" class="button--secondary my-3 float-right">Delete</button>
+        </div>
+    </div>
 
-    <p>Request an event of your choice with employers you want to attend.</p>
-    <div>
-        <form>
-            <label for="event_name">Event Name:</label><br>
-            <input type="text" id="event_name" name="event_name"><br><br>
-            <label for="event_type">Event Type:</label><br>
-            <select id="event_type" name="event_type">
-                <option value="type1">type1</option>
-                <option value="type2">type2</option>
-                <option value="type3">type3</option>
-            </select><br><br>
-            <label for="event_date">Event Date:</label><br>
-            <input type="date" id="event_date" name="event_date"><br><br>
-            <label for="event_time">Event Time:</label><br>
-            <input type="time" id="event_time" name="event_time"><br><br>
-            <label for="event_guests">Guest(s) ???:</label><br>
-            <select id="event_guests" name="event_guests">
-                <option value="guest1">guest1</option>
-                <option value="guest2">guest2</option>
-                <option value="guest3">guest3</option>
-            </select><br><br>
-            <input class="button" type="submit" value="Request Event">
-        </form>
+    <div class="row-fluid">
+        <div class="col-lg-3">
+            <p><strong>Employer name</strong></p>
+        </div>
+        <div class="col-lg-9">
+            <p>Admiral</p>
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="col-lg-3">
+            <p><strong>Vacancy description</strong></p>
+        </div>
+        <div class="col-lg-9">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar sic tempor. Sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus pronin sapien nunc accuan eget.</p>
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="col-lg-3">
+            <p><strong>Link to website</strong></p>
+        </div>
+        <div class="col-lg-9">
+            <p>www.admiral.co.uk</p>
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="col-lg-3">
+            <p><strong>Type of vacancy</strong></p>
+        </div>
+        <div class="col-lg-9">
+            <p>Full-time</p>
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="col-lg-3">
+            <p><strong>Start date</strong></p>
+        </div>
+        <div class="col-lg-9">
+            <p>18 July 2020</p>
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="col-lg-3">
+            <p><strong>Closing date</strong></p>
+        </div>
+        <div class="col-lg-9">
+            <p>15 July 2020</p>
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="col-lg-3">
+            <p><strong>Occupational code</strong></p>
+        </div>
+        <div class="col-lg-9">
+            <p>SOC</p>
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="col-lg-3">
+            <p><strong>Application method</strong></p>
+        </div>
+        <div class="col-lg-9">
+            <p>CV</p>
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="col-lg-3">
+            <p><strong>Postcode</strong></p>
+        </div>
+        <div class="col-lg-9">
+            <p>CF24 1AA</p>
+        </div>
     </div>
 </div>
 <!--END OF MAIN CONTENT-->
