@@ -63,7 +63,7 @@ public class BaseController {
         return mv;
     }
 
-    // Search Events
+    // Request
     @GetMapping("/request")
     public ModelAndView Request(HttpSession session) {
         ModelAndView mv = new ModelAndView();
@@ -74,7 +74,7 @@ public class BaseController {
     }
 
 
-    // Search Events
+    // Contact Us
     @GetMapping("/contactUs")
     public ModelAndView contactUs(HttpSession session) {
         ModelAndView mv = new ModelAndView();
@@ -86,7 +86,7 @@ public class BaseController {
 
 
     //Search Vacancies
-    @GetMapping("/searchVacancies")
+    @GetMapping("/searchVacancy")
     public ModelAndView SearchVacancies(HttpSession session) {
         ModelAndView mv = new ModelAndView();
         ObjectMapper objectMapper = new ObjectMapper();
