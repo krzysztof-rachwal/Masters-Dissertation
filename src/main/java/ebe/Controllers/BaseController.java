@@ -116,7 +116,7 @@ public class BaseController {
 
 
     //Search Vacancies
-    @GetMapping("/searchVacancy")
+    @GetMapping("/vacancies")
     public ModelAndView SearchVacancies(HttpSession session) {
         ModelAndView mv = new ModelAndView();
         ObjectMapper objectMapper = new ObjectMapper();
