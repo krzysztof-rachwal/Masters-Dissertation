@@ -105,7 +105,7 @@ public class BaseController {
 
 
     // Contact Us
-    @GetMapping("/contactUs")
+    @GetMapping("/contact-us")
     public ModelAndView contactUs(HttpSession session) {
         ModelAndView mv = new ModelAndView();
         ObjectMapper objectMapper = new ObjectMapper();
