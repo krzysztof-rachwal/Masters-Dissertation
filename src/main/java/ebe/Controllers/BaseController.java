@@ -54,7 +54,7 @@ public class BaseController {
     }
 
     // Search Events
-    @GetMapping("/searchEvent")
+    @GetMapping("/events")
     public ModelAndView SearchEvents(HttpSession session) {
         ModelAndView mv = new ModelAndView();
         ObjectMapper objectMapper = new ObjectMapper();
