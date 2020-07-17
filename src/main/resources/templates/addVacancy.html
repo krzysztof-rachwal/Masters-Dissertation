@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta id="_csrf" name="_csrf" th:content="${_csrf.token}"/>
+    <meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}"/>
+    <link rel="stylesheet" type="text/css" href="https://use.fortawesome.com/kits/747c3a74/publications/latest/eot.css">
+    <link rel="stylesheet" type="text/css"
+          href="https://use.fortawesome.com/kits/747c3a74/publications/latest/woff.css">
+    <link rel="stylesheet" type="text/css"
+          href="https://use.fortawesome.com/kits/747c3a74/publications/latest/woff2.css">
+    <link rel="stylesheet" type="text/css"
+          href="https://careerswales.gov.wales/styleguide/assets/css/gel-styleguide.css">
+    <link rel="stylesheet" media="all" href="https://careerswales.gov.wales/styleguide/assets/css/gel-elements.css"/>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" media="all"
+          href="https://careerswales.gov.wales/sites/default/files/css/css_Ix2IjZRJPxhlyX0UzoOcvWoONN1wNDbQY7jrFiB85O0.css"/>
+    <link rel="stylesheet" media="all"
+          href="https://careerswales.gov.wales/sites/default/files/css/css_yFFWPpQsZCFeHMtvOieuCWLiTEiz--tT0otLunNJdLs.css"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <title>Create Event</title>
+    <style>
+
+        body {
+            font-family: Arial;
+        }
+
+        .gel-content-container {
+            max-width: 1050px;
+        }
+
+        .container-fluid {
+            background-color: #EEEEEE;
+        }
+
+        form {
+            background-color: #EEEEEE;
+        }
+    </style>
+</head>
+
+<!--    <header th:replace="fragments/headerTemplate :: header"></header>-->
+<header th:replace="fragments/headerTemplate :: header">
+
+    <div class="gel-content-container">
+        <div class="container my-4">
+            <h2>Add Vacancy</h2>
+        </div>
+
+        <form>
+            <div class="container-fluid">
+                <div class="row d-inline">
+                    <div class="form-group">
+                        <label for="employer-name" class=" d-inline ">Employer name</label>
+                        <input type="text" class="form-control input-border d-inline ml-2" id="employer-name">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="vacancy-desc" class=" d-inline mb-3">Vacancy Description</label>
+                    <textarea class="form-control mt-2" id="vacancy-desc" rows="5"></textarea>
+                </div>
+                <div class="row d-inline">
+                    <div class="form-group">
+                        <label for="website-link" class=" d-inline ">Link to website</label>
+                        <input type="text" class="form-control input-border d-inline ml-2" id="website-link">
+                    </div>
+                </div>
+                <div class="form-inline">
+                    <div class="form-group ">
+                        <label for="vacancy-type">Type of Vacancy</label>
+                        <select class="custom-select ml-2  p-2" id="vacancy-type">
+                            <option selected>Select</option>
+                            <option value="Employment FT">Employment FT</option>
+                            <option value="Employment PT">Employment PT</option>
+                            <option value="Apprenticeship">Apprenticeship</option>
+                            <option value="Traineeship">Traineeship</option>
+                        </select>
+                    </div>
+                </div>
+
+
+
+
+
+                </div>
+        </form>
+    </div>
+
+
+        <footer th:replace="fragments/footerTemplate :: footer"></footer>
+
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+                integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+                crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+                integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+                crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+                integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+                crossorigin="anonymous"></script>
+        <script type="text/javascript" src="https://careerswales.gov.wales/styleguide/assets/js/gel-styleguide.js"></script>
+        <script type="text/javascript"
+                src="https://careerswales.gov.wales/styleguide/assets/js/gel-elements-loader.js"></script>
+        <script type="text/javascript" src="https://careerswales.gov.wales/styleguide/assets/js/gel-elements.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+
+
+        <script>
+            $(document).ready(function () {
+
+            });
+
+        </script>
+        <script>
+            $(document).ready(function () {
+                $('.js-example-basic-multiple').select2();
+            });
+            s
+        </script>
+
+        </body>
+</html>
