@@ -51,14 +51,34 @@
             font-size: 2rem;
         }
 
-        .buttonUpdate{
-            background: #007066;
-            color: #fff;
-        }
+        /*.buttonUpdate{*/
+        /*    background: #007066;*/
+        /*    color: #fff;*/
+        /*}*/
 
         .buttonDelete{
             background:#fff ;
             color:#007066 ;
+            border-right: 2px solid #007066;
+            padding: 5px 20px !important;
+        }
+
+        .buttonUpdate{
+            background:#fff ;
+            color:#007066 ;
+            padding: 5px 20px !important;
+        }
+
+        .buttonDelete:focus , .buttonUpdate:focus {
+             background: #007066;
+             color: #fff;
+             outline:none;
+         }
+
+        .buttonDelete:hover , .buttonUpdate:hover {
+            background: #007066;
+            color: #fff;
+            border: none !important;
         }
 
         body{
@@ -226,9 +246,9 @@
             </div>
             <div class="modal-body">
                <p>
-                Are you sure you want to delete this Event?
+                Are you sure you want to delete this employer?
                </p>
-                <button type="button" class="btn buttonUpdate">Save changes</button>
+                <button type="button" class="btn buttonUpdate">Delete</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
         </div>
@@ -236,7 +256,7 @@
 </div>
 
 <div class="gel-content-container">
-    <div class="container-headline my-4">
+    <div class="container-headline my-5">
         <span class="title-h2">Employer Name</span>
         <button type="button"  id="updateEvent" data-toggle="modal" data-target="#updateModal" class="buttonUpdate float-right">Update</button>
         <button type="button"  id="deleteEvent"  data-toggle="modal" data-target="#deleteModal" class="buttonDelete float-right">Delete</button>
