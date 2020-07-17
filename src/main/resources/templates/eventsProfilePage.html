@@ -235,76 +235,77 @@
 </div>
 
 <div class="gel-content-container">
-    <div class="container-headline my-5">
+    <div class="container-headline mt-5">
         <span class="title-h2">Event</span>
         <button type="button"  id="updateEvent" data-toggle="modal" data-target="#updateModal" class="buttonUpdate float-right">Update</button>
         <button type="button"  id="deleteEvent"  data-toggle="modal" data-target="#deleteModal" class="buttonDelete float-right">Delete</button>
     </div>
 
-    <div class="container-fluid eventBackground">
+    <div class="container-fluid py-5 px-5 eventBackground">
             <div class="row">
+                <div class="col-md-6 ">
+                    <div class="form-group form-inline">
+                        <span class="font-weight-bold h6">Event name </span>
+                        <span class="ml-4">St’James Career Fair</span>
+                    </div>
+                    <div class="form-group form-inline">
+                        <span class="font-weight-bold h6">Event Type </span>
+                        <span class="ml-4">Career Fair</span>
+                    </div>
+                    <div class="form-group form-inline">
+                        <span class="font-weight-bold h6">Event Date </span>
+                        <span class="ml-4">28/09/2020</span>
+                    </div>
+                    <div class="form-group form-inline">
+                        <span class="font-weight-bold h6">Event Time </span>
+                        <span class="ml-4">11:00</span>
+                    </div>
+
+                    <div class="form-group form-inline">
+                        <span class="font-weight-bold h6">Event Venue </span>
+                        <span class="ml-4">City Hall</span>
+                    </div>
+
+                    <div class="form-group form-inline">
+                        <span class="font-weight-bold h6">Adviser name </span>
+                        <span class="ml-4">James</span>
+                    </div>
+                </div>
                 <div class="col-md-6">
-                    <div class="form-group">
-                        <span class="font-weight-bold">Event name </span>
-                        <span>St’James Career Fair</span>
+                    <div class="form-group form-inline">
+                        <span class="font-weight-bold h6">No of Attendees </span>
+                        <span class="ml-4">300</span>
                     </div>
-                    <div class="form-group">
-                        <span class="font-weight-bold">Event Type </span>
-                        <span>Career Fair</span>
-                    </div>
-                    <div class="form-group">
-                        <span class="font-weight-bold">Event Date </span>
-                        <span>28/09/2020</span>
-                    </div>
-                    <div class="form-group">
-                        <span class="font-weight-bold">Event Time </span>
-                        <span>11:00</span>
+                    <div class="form-group form-inline">
+                        <span class="font-weight-bold h6">Schools Attending </span>
+                        <span class="ml-4">50</span>
                     </div>
 
-                    <div class="form-group">
-                        <span class="font-weight-bold">Event Venue </span>
-                        <span>City Hall</span>
+                    <div class="form-group form-inline">
+                        <span class="font-weight-bold h6">Employers Attending </span>
+                        <span class="ml-4">50</span>
                     </div>
 
-                    <div class="form-group">
-                        <span class="font-weight-bold">Adviser name </span>
-                        <span>James</span>
-                    </div>
-                    <div class="form-group">
-                        <span class="font-weight-bold">No of Attendees </span>
-                        <span>300</span>
+                    <div class="form-group form-inline">
+                        <span class="font-weight-bold h6">Can the event be condutcted in Welsh? </span>
+                        <span class="ml-4">Yes</span>
                     </div>
 
-                    <div class="form-group">
-                        <span class="font-weight-bold">Schools Attending </span>
-                        <span>50</span>
+                    <div class="form-group form-inline">
+                        <span class="font-weight-bold h6">Does the event promote apprenticeship? </span>
+                        <span class="ml-4">Yes</span>
                     </div>
 
-                    <div class="form-group">
-                        <span class="font-weight-bold">Employers Attending </span>
-                        <span>50</span>
-                    </div>
-
-                    <div class="form-group">
-                        <span class="font-weight-bold">Can the event be condutcted in Welsh? </span>
-                        <span>Yes</span>
-                    </div>
-
-                    <div class="form-group">
-                        <span class="font-weight-bold">Does the event promote apprenticeship? </span>
-                        <span>Yes</span>
-                    </div>
-
-                    <div class="form-group">
-                        <span class="font-weight-bold">Does the event challenger gender stereotypes? </span>
-                        <span>Yes</span>
+                    <div class="form-group form-inline">
+                        <span class="font-weight-bold h6">Does the event challenger gender stereotypes? </span>
+                        <span class="ml-4">Yes</span>
                     </div>
                 </div>
             </div>
 
-            <div class="row">
-                <div class="mb-auto p-2 col-6">
-                    <label for="exampleFormControlSelect1">Schools Attending</label>
+            <div class="row pt-3">
+                <div class="mb-auto p-2 col-md-6">
+                    <label class="font-weight-bold h6" for="exampleFormControlSelect1">Schools Attending</label>
                     <select multiple class="form-control" id="exampleFormControlSelect1">
                         <option>Bryn Hafod Primary School</option>
                         <option>Christ The King RC Primary School</option>
@@ -313,13 +314,12 @@
                     </select>
                 </div>
 
-                <div class="mb-auto p-2 col-6">
-                    <label for="exampleFormControlSelect2">Employers Attending</label>
+                <div class="mb-auto p-2 col-md-6">
+                    <label class="font-weight-bold h6" for="exampleFormControlSelect2">Employers Attending</label>
                     <select multiple class="form-control" id="exampleFormControlSelect2">
                         <option>Admiral</option>
                         <option>Evolve Tech</option>
                         <option>Rynolds & Rynolds</option>
-
                     </select>
                 </div>
             </div>
