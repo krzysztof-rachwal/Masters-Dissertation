@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta id="_csrf" name="_csrf" th:content="${_csrf.token}"/>
+    <meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}"/>
+    <link rel="stylesheet" type="text/css" href="https://use.fortawesome.com/kits/747c3a74/publications/latest/eot.css">
+    <link rel="stylesheet" type="text/css"
+          href="https://use.fortawesome.com/kits/747c3a74/publications/latest/woff.css">
+    <link rel="stylesheet" type="text/css"
+          href="https://use.fortawesome.com/kits/747c3a74/publications/latest/woff2.css">
+    <link rel="stylesheet" type="text/css"
+          href="https://careerswales.gov.wales/styleguide/assets/css/gel-styleguide.css">
+    <link rel="stylesheet" media="all" href="https://careerswales.gov.wales/styleguide/assets/css/gel-elements.css"/>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" media="all"
+          href="https://careerswales.gov.wales/sites/default/files/css/css_Ix2IjZRJPxhlyX0UzoOcvWoONN1wNDbQY7jrFiB85O0.css"/>
+    <link rel="stylesheet" media="all"
+          href="https://careerswales.gov.wales/sites/default/files/css/css_yFFWPpQsZCFeHMtvOieuCWLiTEiz--tT0otLunNJdLs.css"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <title>Employer Profile</title>
+    <style>
+
+        body {
+            font-family: Arial;
+        }
+
+        .gel-content-container {
+            max-width: 1050px;
+        }
+
+        .container-fluid, form, .modal-body {
+            background-color: #EEEEEE;
+        }
+
+
+
+        .container-headline{
+            max-width: 987px;
+            padding-right: 15px;
+            padding-left: 15px;
+        }
+
+        .title-h2{
+            margin-bottom: .5rem;
+            font-weight: 500;
+            line-height: 1.2;
+            font-size: 2rem;
+        }
+
+        .buttonUpdate{
+            background: #007066;
+            color: #fff;
+        }
+
+        .buttonDelete{
+            background:#fff ;
+            color:#007066 ;
+        }
+
+        body{
+            overflow-y: scroll !important;
+            overflow-x: hidden;
+        }
+
+        .eventBackground{
+            background: white !important;
+        }
+
+        .modal-content{
+            background:  #EEEEEE !important;
+            border-radius: 0!important;
+        }
+
+        .modal-header, .modal-body, .modal-footer{
+            border: none !important;
+        }
+
+
+    </style>
+</head>
+
+<header th:replace="fragments/headerTemplate :: header"></header>
+
+
+<!-- Modal Update -->
+<div class="modal fade bd-example-modal-lg" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog gel-content-container" role="document">
+        <div class="modal-content">
+
+            <div class="modal-body">
+                <form>
+                    <div class="modal-header">
+                        <h2 class="modal-title mb-2" id="exampleModalLabel" style="font-weight: bold">Event Update</h2>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="container-fluid">
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="event-name">Event name</label>
+                                    <input type="text" class="form-control input-border" id="event-name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="event-type">Event type</label>
+                                    <input type="text" class="form-control input-border" id="event-type">
+                                </div>
+                                <div class="form-group">
+                                    <label for="event-date">Event date</label>
+                                    <input type="date" class="form-control input-border" id="event-date">
+                                </div>
+                                <div class="form-group">
+                                    <label for="event-time">Event time</label>
+                                    <input type="time" class="form-control input-border" id="event-time">
+                                </div>
+                                <div class="form-group">
+                                    <label for="event-venue">Event venue</label>
+                                    <input type="text" class="form-control input-border" id="event-venue">
+                                </div>
+                            </div>
+                            <div class="col-md-6 ">
+                                <div class="form-group">
+                                    <label for="adviser-name">Adviser name</label>
+                                    <input type="text" class="form-control input-border" id="adviser-name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="no-attendees">No of Attendees</label>
+                                    <input type="number" class="form-control input-border" id="no-attendees">
+                                </div>
+                                <div class="form-group">
+                                    <label for="schools-attending">Schools Attending</label>
+                                    <input type="text" class="form-control input-border" id="schools-attending">
+                                </div>
+                                <div class="form-group">
+                                    <label for="employers-attending">Employers Attending</label>
+                                    <input type="text" class="form-control input-border" id="employers-attending">
+                                </div>
+                            </div>
+                        </div>
+                        <div class=" row flex-column pl-3">
+                            <div class="form-group">
+                                <fieldset id="group1">
+                                    <label>Can the event be conducted in Welsh?</label>
+                                    <input type="radio" id="welsh-yes" name="group1" value="No">
+                                    <label for="welsh-yes">Yes</label>
+                                    <input type="radio" id="welsh-no" name="group1" value="No">
+                                    <label for="welsh-no">No</label>
+                                </fieldset>
+                            </div>
+                            <div class="form-group">
+                                <fieldset id="group2">
+                                    <label>Does the event promote apprenticeship?</label>
+                                    <input type="radio" id="appr-yes" name="group2" value="No">
+                                    <label for="appr-yes">Yes</label>
+                                    <input type="radio" id="appr-no" name="group2" value="No">
+                                    <label for="appr-no">No</label>
+                                </fieldset>
+                            </div>
+                            <div class="form-group">
+                                <fieldset id="group3">
+                                    <label>Does the event challenger gender stereotypes?</label>
+                                    <input type="radio" id="gender-yes" name="group3" value="No">
+                                    <label for="gender-yes">Yes</label>
+                                    <input type="radio" id="gender-no" name="group3" value="No">
+                                    <label for="gender-no">No</label>
+                                </fieldset>
+                            </div>
+                        </div>
+                        <div class="row flex-column">
+                            <div class="mb-auto p-2 d-flex flex-column">
+                                <label>Choose employers</label>
+                                <select class="js-example-basic-multiple" name="employers[]" multiple="multiple">
+                                    <option value="Employer4">Employer1</option>
+                                    <option value="Employer4">Employer2</option>
+                                    <option value="Employer4">Employer3</option>
+                                    <option value="Employer4">Employer4</option>
+                                    <option value="Employer4">Employer5</option>
+                                    <option value="Employer4">Employer6</option>
+                                    <option value="Employer4">Employer7</option>
+                                    <option value="Employer4">Employer8</option>
+                                    <option value="Employer4">Employer9</option>
+                                    <option value="Employer4">Employer10</option>
+                                </select>
+                            </div>
+                            <div class="mt-auto p-2 d-flex flex-column">
+                                <label>Choose schools</label>
+                                <select class="js-example-basic-multiple" multiple="multiple" name="schools[]">
+                                    <option value="schools">School1</option>
+                                    <option value="schools">School2</option>
+                                    <option value="schools">School3</option>
+                                    <option value="schools">School4</option>
+                                    <option value="schools">School5</option>
+                                    <option value="schools">School6</option>
+                                    <option value="schools">School7</option>
+                                    <option value="schools">School8</option>
+                                    <option value="schools">School9</option>
+                                    <option value="schools">School10</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container my-4 text-center">
+                        <button type="button" class="button--secondary buttonUpdate text-center mt-5 px-5 py-3">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Update -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog gel-content-container" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Delete Event</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+               <p>
+                Are you sure you want to delete this Event?
+               </p>
+                <button type="button" class="btn buttonUpdate">Save changes</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="gel-content-container">
+    <div class="container-headline my-4">
+        <span class="title-h2">Employer Name</span>
+        <button type="button"  id="updateEvent" data-toggle="modal" data-target="#updateModal" class="buttonUpdate float-right">Update</button>
+        <button type="button"  id="deleteEvent"  data-toggle="modal" data-target="#deleteModal" class="buttonDelete float-right">Delete</button>
+    </div>
+
+    <div class="container-fluid eventBackground">
+            <div class="row">
+                <div class="col-md-4">
+                    <img alt="Card image" src="https://source.unsplash.com/400x400">
+                </div>
+                <div class="col-md-8">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h4>Company Summary</h4>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar sic tempor. Sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus pronin sapien nunc accuan eget.
+                                Lorem ipsum dolor sit amet, consectetur adipiscing.
+                            </p>
+                        </div>
+
+                        <div class="col-md-12">
+                            <h4> Notes</h4>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar sic tempor. Sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus pronin sapien nunc accuan eget.
+                                Lorem ipsum dolor sit amet, consectetur adipiscing.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="mb-auto p-2 col-6">
+                    <label for="exampleFormControlSelect1">Schools Attending</label>
+                    <select multiple class="form-control" id="exampleFormControlSelect1">
+                        <option>Bryn Hafod Primary School</option>
+                        <option>Christ The King RC Primary School</option>
+                        <option>Gabafalfa Primary School</option>
+
+                    </select>
+                </div>
+
+                <div class="mb-auto p-2 col-6">
+                    <label for="exampleFormControlSelect2">Employers Attending</label>
+                    <select multiple class="form-control" id="exampleFormControlSelect2">
+                        <option>Admiral</option>
+                        <option>Evolve Tech</option>
+                        <option>Rynolds & Rynolds</option>
+
+                    </select>
+                </div>
+            </div>
+        </div>
+</div>
+<footer th:replace="fragments/footerTemplate :: footer"></footer>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://careerswales.gov.wales/styleguide/assets/js/gel-styleguide.js"></script>
+<script type="text/javascript"
+        src="https://careerswales.gov.wales/styleguide/assets/js/gel-elements-loader.js"></script>
+<script type="text/javascript" src="https://careerswales.gov.wales/styleguide/assets/js/gel-elements.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+
+
+<script>
+    $(document).ready(function () {
+
+    });
+
+</script>
+<script>
+    $(document).ready(function () {
+        $('.js-example-basic-multiple').select2();
+    });
+    s
+</script>
+
+</body>
+</html>

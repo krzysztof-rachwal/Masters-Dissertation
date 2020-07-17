@@ -53,6 +53,16 @@ public class BaseController {
         return mv;
     }
 
+    // Employer Profile (with the id)
+    @GetMapping("/employersProfile")
+    public ModelAndView EmployersProfile(HttpSession session) {
+        ModelAndView mv = new ModelAndView();
+        ObjectMapper objectMapper = new ObjectMapper();
+        // session = context.getSession();
+        mv.setViewName("employersProfilePage");
+        return mv;
+    }
+
     // Search Events
     @GetMapping("/searchEvent")
     public ModelAndView SearchEvents(HttpSession session) {
@@ -100,16 +110,6 @@ public class BaseController {
     @GetMapping("/error")
     public RedirectView ErrorPage() {
         return new RedirectView("/searchEmployerPage");
-    }
-
-    // Default Controller
-    @GetMapping("/employersProfile")
-    public ModelAndView EmployersProfile(HttpSession session) {
-        ModelAndView mv = new ModelAndView();
-        ObjectMapper objectMapper = new ObjectMapper();
-        // session = context.getSession();
-        mv.setViewName("employersProfilePage");
-        return mv;
     }
 
 
