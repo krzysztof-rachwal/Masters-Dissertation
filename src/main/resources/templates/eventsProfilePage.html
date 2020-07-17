@@ -36,9 +36,7 @@
             background-color: #EEEEEE;
         }
 
-        form {
-            background-color: #EEEEEE;
-        }
+
 
         .container-headline{
             max-width: 987px;
@@ -53,9 +51,32 @@
             font-size: 2rem;
         }
 
+        .buttonUpdate{
+            background: #007066;
+            color: #fff;
+        }
+
+        .buttonDelete{
+            background:#fff ;
+            color:#007066 ;
+        }
+
         body{
             overflow-y: scroll !important;
             overflow-x: hidden;
+        }
+
+        .eventBackground{
+            background: white !important;
+        }
+
+        .modal-content{
+            background: #f1f1f1;
+            border-radius: 0!important;
+        }
+
+        .modal-header, .modal-body, .modal-footer{
+            border: none !important;
         }
 
     </style>
@@ -65,123 +86,249 @@
 <header th:replace="fragments/headerTemplate :: header">
 </header>
 
+
+<!-- Modal Delete -->
+<div class="modal fade bd-example-modal-lg" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog gel-content-container" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="exampleModalLabel">Event Update</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="event-name">Event name</label>
+                                    <input type="text" class="form-control input-border" id="event-name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="event-type">Event type</label>
+                                    <input type="text" class="form-control input-border" id="event-type">
+                                </div>
+                                <div class="form-group">
+                                    <label for="event-date">Event date</label>
+                                    <input type="date" class="form-control input-border" id="event-date">
+                                </div>
+                                <div class="form-group">
+                                    <label for="event-time">Event time</label>
+                                    <input type="time" class="form-control input-border" id="event-time">
+                                </div>
+                                <div class="form-group">
+                                    <label for="event-venue">Event venue</label>
+                                    <input type="text" class="form-control input-border" id="event-venue">
+                                </div>
+                            </div>
+                            <div class="col-md-6 ">
+                                <div class="form-group">
+                                    <label for="adviser-name">Adviser name</label>
+                                    <input type="text" class="form-control input-border" id="adviser-name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="no-attendees">No of Attendees</label>
+                                    <input type="number" class="form-control input-border" id="no-attendees">
+                                </div>
+                                <div class="form-group">
+                                    <label for="schools-attending">Schools Attending</label>
+                                    <input type="text" class="form-control input-border" id="schools-attending">
+                                </div>
+                                <div class="form-group">
+                                    <label for="employers-attending">Employers Attending</label>
+                                    <input type="text" class="form-control input-border" id="employers-attending">
+                                </div>
+                            </div>
+                        </div>
+                        <div class=" row flex-column pl-3">
+                            <div class="form-group">
+                                <fieldset id="group1">
+                                    <label>Can the event be conducted in Welsh?</label>
+                                    <input type="radio" id="welsh-yes" name="group1" value="No">
+                                    <label for="welsh-yes">Yes</label>
+                                    <input type="radio" id="welsh-no" name="group1" value="No">
+                                    <label for="welsh-no">No</label>
+                                </fieldset>
+                            </div>
+                            <div class="form-group">
+                                <fieldset id="group2">
+                                    <label>Does the event promote apprenticeship?</label>
+                                    <input type="radio" id="appr-yes" name="group2" value="No">
+                                    <label for="appr-yes">Yes</label>
+                                    <input type="radio" id="appr-no" name="group2" value="No">
+                                    <label for="appr-no">No</label>
+                                </fieldset>
+                            </div>
+                            <div class="form-group">
+                                <fieldset id="group3">
+                                    <label>Does the event challenger gender stereotypes?</label>
+                                    <input type="radio" id="gender-yes" name="group3" value="No">
+                                    <label for="gender-yes">Yes</label>
+                                    <input type="radio" id="gender-no" name="group3" value="No">
+                                    <label for="gender-no">No</label>
+                                </fieldset>
+                            </div>
+                        </div>
+                        <div class="row flex-column">
+                            <div class="mb-auto p-2 d-flex flex-column">
+                                <label>Choose employers</label>
+                                <select class="js-example-basic-multiple" name="employers[]" multiple="multiple">
+                                    <option value="Employer4">Employer1</option>
+                                    <option value="Employer4">Employer2</option>
+                                    <option value="Employer4">Employer3</option>
+                                    <option value="Employer4">Employer4</option>
+                                    <option value="Employer4">Employer5</option>
+                                    <option value="Employer4">Employer6</option>
+                                    <option value="Employer4">Employer7</option>
+                                    <option value="Employer4">Employer8</option>
+                                    <option value="Employer4">Employer9</option>
+                                    <option value="Employer4">Employer10</option>
+                                </select>
+                            </div>
+                            <div class="mt-auto p-2 d-flex flex-column">
+                                <label>Choose schools</label>
+                                <select class="js-example-basic-multiple" multiple="multiple" name="schools[]">
+                                    <option value="schools">School1</option>
+                                    <option value="schools">School2</option>
+                                    <option value="schools">School3</option>
+                                    <option value="schools">School4</option>
+                                    <option value="schools">School5</option>
+                                    <option value="schools">School6</option>
+                                    <option value="schools">School7</option>
+                                    <option value="schools">School8</option>
+                                    <option value="schools">School9</option>
+                                    <option value="schools">School10</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container my-4 text-center">
+                        <button type="button" class="button--secondary buttonUpdate text-center">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Update -->
+<div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal__content">
+        <header>
+            <div class="header__content">
+                Update Event.
+            </div>
+            <button   data-dismiss="modal" aria-label="Close" class="close js-modal-close button--secondary button--icon icon--cross">Close</button>
+        </header>
+        <main class="content__content">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin aliquet nisl ac luctus congue. Praesent vitae justo mattis, eleifend sem nec, tincidunt lorem. Sed tempor, quam nec semper cursus, magna augue suscipit diam, eu
+                tristique arcu purus ac purus. Praesent et magna nisl. Vestibulum nec ante in arcu tincidunt interdum. Suspendisse blandit ligula eu euismod viverra. Donec dapibus ligula elementum tellus consequat, ac ultrices nisi vehicula.
+                Aenean non egestas libero, eu tempus libero.</p>
+        </main>
+        <footer>
+            <button type="button"  id="submitChanges" class="buttonUpdate float-center">Update</button>
+        </footer>
+    </div>
+</div>
+
 <div class="gel-content-container">
     <div class="container-headline my-4">
-        <span class="title-h2">Employers</span>
-        <button type="button"  id="updateEvent" class="button--secondary float-right">Update</button>
-        <button type="button"  id="deleteEvent" class="button--secondary float-right">Delete</button>
+        <span class="title-h2">Event</span>
+        <button type="button"  id="updateEvent" data-toggle="modal" data-target="#updateModal" class="buttonUpdate float-right">Update</button>
+        <button type="button"  id="deleteEvent"  data-toggle="modal" data-target="#deleteModal" class="buttonDelete float-right">Delete</button>
     </div>
 
-    <form>
-        <div class="container-fluid">
+    <div class="container-fluid eventBackground">
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="event-name">Event name</label>
-                        <input type="text" class="form-control input-border" id="event-name">
+                        <span class="font-weight-bold">Event name </span>
+                        <span>St’James Career Fair</span>
                     </div>
                     <div class="form-group">
-                        <label for="event-type">Event type</label>
-                        <input type="text" class="form-control input-border" id="event-type">
+                        <span class="font-weight-bold">Event Type </span>
+                        <span>Career Fair</span>
                     </div>
                     <div class="form-group">
-                        <label for="event-date">Event date</label>
-                        <input type="date" class="form-control input-border" id="event-date">
+                        <span class="font-weight-bold">Event Date </span>
+                        <span>28/09/2020</span>
                     </div>
                     <div class="form-group">
-                        <label for="event-time">Event time</label>
-                        <input type="time" class="form-control input-border" id="event-time">
+                        <span class="font-weight-bold">Event Time </span>
+                        <span>11:00</span>
+                    </div>
+
+                    <div class="form-group">
+                        <span class="font-weight-bold">Event Venue </span>
+                        <span>City Hall</span>
+                    </div>
+
+                    <div class="form-group">
+                        <span class="font-weight-bold">Adviser name </span>
+                        <span>James</span>
                     </div>
                     <div class="form-group">
-                        <label for="event-venue">Event venue</label>
-                        <input type="text" class="form-control input-border" id="event-venue">
+                        <span class="font-weight-bold">No of Attendees </span>
+                        <span>300</span>
                     </div>
-                </div>
-                <div class="col-md-6 ">
+
                     <div class="form-group">
-                        <label for="adviser-name">Adviser name</label>
-                        <input type="text" class="form-control input-border" id="adviser-name">
+                        <span class="font-weight-bold">Schools Attending </span>
+                        <span>50</span>
                     </div>
+
                     <div class="form-group">
-                        <label for="no-attendees">No of Attendees</label>
-                        <input type="number" class="form-control input-border" id="no-attendees">
+                        <span class="font-weight-bold">Employers Attending </span>
+                        <span>50</span>
                     </div>
+
                     <div class="form-group">
-                        <label for="schools-attending">Schools Attending</label>
-                        <input type="text" class="form-control input-border" id="schools-attending">
+                        <span class="font-weight-bold">Can the event be condutcted in Welsh? </span>
+                        <span>Yes</span>
                     </div>
+
                     <div class="form-group">
-                        <label for="employers-attending">Employers Attending</label>
-                        <input type="text" class="form-control input-border" id="employers-attending">
+                        <span class="font-weight-bold">Does the event promote apprenticeship? </span>
+                        <span>Yes</span>
                     </div>
-                </div>
-            </div>
-            <div class=" row flex-column pl-3">
-                <div class="form-group">
-                    <fieldset id="group1">
-                        <label>Can the event be conducted in Welsh?</label>
-                        <input type="radio" id="welsh-yes" name="group1" value="No">
-                        <label for="welsh-yes">Yes</label>
-                        <input type="radio" id="welsh-no" name="group1" value="No">
-                        <label for="welsh-no">No</label>
-                    </fieldset>
-                </div>
-                <div class="form-group">
-                    <fieldset id="group2">
-                        <label>Does the event promote apprenticeship?</label>
-                        <input type="radio" id="appr-yes" name="group2" value="No">
-                        <label for="appr-yes">Yes</label>
-                        <input type="radio" id="appr-no" name="group2" value="No">
-                        <label for="appr-no">No</label>
-                    </fieldset>
-                </div>
-                <div class="form-group">
-                    <fieldset id="group3">
-                        <label>Does the event challenger gender stereotypes?</label>
-                        <input type="radio" id="gender-yes" name="group3" value="No">
-                        <label for="gender-yes">Yes</label>
-                        <input type="radio" id="gender-no" name="group3" value="No">
-                        <label for="gender-no">No</label>
-                    </fieldset>
+
+                    <div class="form-group">
+                        <span class="font-weight-bold">Does the event challenger gender stereotypes? </span>
+                        <span>Yes</span>
+                    </div>
                 </div>
             </div>
-            <div class="row flex-column">
-                <div class="mb-auto p-2 d-flex flex-column">
-                    <label>Choose employers</label>
-                    <select class="js-example-basic-multiple" name="employers[]" multiple="multiple">
-                        <option value="Employer4">Employer1</option>
-                        <option value="Employer4">Employer2</option>
-                        <option value="Employer4">Employer3</option>
-                        <option value="Employer4">Employer4</option>
-                        <option value="Employer4">Employer5</option>
-                        <option value="Employer4">Employer6</option>
-                        <option value="Employer4">Employer7</option>
-                        <option value="Employer4">Employer8</option>
-                        <option value="Employer4">Employer9</option>
-                        <option value="Employer4">Employer10</option>
+
+            <div class="row">
+                <div class="mb-auto p-2 col-6">
+                    <label for="exampleFormControlSelect1">Schools Attending</label>
+                    <select multiple class="form-control" id="exampleFormControlSelect1">
+                        <option>Bryn Hafod Primary School</option>
+                        <option>Christ The King RC Primary School</option>
+                        <option>Gabafalfa Primary School</option>
+
                     </select>
                 </div>
-                <div class="mt-auto p-2 d-flex flex-column">
-                    <label>Choose schools</label>
-                    <select class="js-example-basic-multiple" multiple="multiple" name="schools[]">
-                        <option value="schools">School1</option>
-                        <option value="schools">School2</option>
-                        <option value="schools">School3</option>
-                        <option value="schools">School4</option>
-                        <option value="schools">School5</option>
-                        <option value="schools">School6</option>
-                        <option value="schools">School7</option>
-                        <option value="schools">School8</option>
-                        <option value="schools">School9</option>
-                        <option value="schools">School10</option>
+
+                <div class="mb-auto p-2 col-6">
+                    <label for="exampleFormControlSelect2">Employers Attending</label>
+                    <select multiple class="form-control" id="exampleFormControlSelect2">
+                        <option>Admiral</option>
+                        <option>Evolve Tech</option>
+                        <option>Rynolds & Rynolds</option>
+
                     </select>
                 </div>
             </div>
+
             <div class="container my-4 text-center">
                 <button type="button" class="button--secondary text-center">Add Vacancy</button>
             </div>
+
+
         </div>
-    </form>
 </div>
 <footer th:replace="fragments/footerTemplate :: footer"></footer>
 
