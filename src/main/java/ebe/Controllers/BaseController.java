@@ -64,7 +64,7 @@ public class BaseController {
     }
 
     // Create Events
-    @GetMapping("/createEventsPage")
+    @GetMapping("/create-events")
     public ModelAndView CreateEvents(HttpSession session) {
         ModelAndView mv = new ModelAndView();
         ObjectMapper objectMapper = new ObjectMapper();
