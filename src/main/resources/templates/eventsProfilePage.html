@@ -87,8 +87,8 @@
 </header>
 
 
-<!-- Modal Delete -->
-<div class="modal fade bd-example-modal-lg" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<!-- Modal Update -->
+<div class="modal fade bd-example-modal-lg" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog gel-content-container" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -214,22 +214,23 @@
 </div>
 
 <!-- Modal Update -->
-<div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal__content">
-        <header>
-            <div class="header__content">
-                Update Event.
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog gel-content-container" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Delete Event</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
-            <button   data-dismiss="modal" aria-label="Close" class="close js-modal-close button--secondary button--icon icon--cross">Close</button>
-        </header>
-        <main class="content__content">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin aliquet nisl ac luctus congue. Praesent vitae justo mattis, eleifend sem nec, tincidunt lorem. Sed tempor, quam nec semper cursus, magna augue suscipit diam, eu
-                tristique arcu purus ac purus. Praesent et magna nisl. Vestibulum nec ante in arcu tincidunt interdum. Suspendisse blandit ligula eu euismod viverra. Donec dapibus ligula elementum tellus consequat, ac ultrices nisi vehicula.
-                Aenean non egestas libero, eu tempus libero.</p>
-        </main>
-        <footer>
-            <button type="button"  id="submitChanges" class="buttonUpdate float-center">Update</button>
-        </footer>
+            <div class="modal-body">
+               <p>
+                Are you sure you want to delete this Event?
+               </p>
+                <button type="button" class="btn buttonUpdate">Save changes</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -322,12 +323,6 @@
                     </select>
                 </div>
             </div>
-
-            <div class="container my-4 text-center">
-                <button type="button" class="button--secondary text-center">Add Vacancy</button>
-            </div>
-
-
         </div>
 </div>
 <footer th:replace="fragments/footerTemplate :: footer"></footer>
