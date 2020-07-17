@@ -44,7 +44,7 @@ public class BaseController {
     }
 
     //Search Employer
-    @GetMapping("/searchEmployer")
+    @GetMapping("/employers")
     public ModelAndView SearchEmployer(HttpSession session) {
         ModelAndView mv = new ModelAndView();
         ObjectMapper objectMapper = new ObjectMapper();
