@@ -112,5 +112,16 @@ public class BaseController {
         return mv;
     }
 
+    // Default Controller
+    @GetMapping("/add-employer")
+    public ModelAndView AddEmployer (HttpSession session) {
+        ModelAndView mv = new ModelAndView();
+        ObjectMapper objectMapper = new ObjectMapper();
+        // session = context.getSession();
+        mv.setViewName("addEmployer");
+        return mv;
+    }
+
+
 
 }
