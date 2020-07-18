@@ -112,5 +112,14 @@ public class BaseController {
         return mv;
     }
 
+    @GetMapping("/add-vacancy")
+    public ModelAndView AddVacancy (HttpSession session) {
+        ModelAndView mv = new ModelAndView();
+        ObjectMapper objectMapper = new ObjectMapper();
+        // session = context.getSession();
+        mv.setViewName("addVacancy");
+        return mv;
+    }
+
 
 }

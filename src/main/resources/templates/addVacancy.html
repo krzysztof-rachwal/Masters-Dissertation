@@ -21,7 +21,7 @@
           integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
-    <title>Create Event</title>
+    <title>Add Vacancy</title>
     <style>
 
         body {
@@ -43,7 +43,7 @@
 </head>
 
 <!--    <header th:replace="fragments/headerTemplate :: header"></header>-->
-<header th:replace="fragments/headerTemplate :: header">
+<header th:replace="fragments/headerTemplate :: header"/>
 
     <div class="gel-content-container">
         <div class="container my-4">
@@ -52,40 +52,96 @@
 
         <form>
             <div class="container-fluid">
-                <div class="row d-inline">
-                    <div class="form-group">
-                        <label for="employer-name" class=" d-inline ">Employer name</label>
-                        <input type="text" class="form-control input-border d-inline ml-2" id="employer-name">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="form-group">
+                            <label for="employer-name" class="  mb-1">Employer name</label>
+                            <input type="text" class="form-control input-border" id="employer-name">
+                        </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="vacancy-desc" class="  mb-1">Vacancy Description</label>
+                            <textarea class="form-control mt-2" id="vacancy-desc" rows="5"></textarea>
+                        </div>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label for="vacancy-desc" class=" d-inline mb-3">Vacancy Description</label>
-                    <textarea class="form-control mt-2" id="vacancy-desc" rows="5"></textarea>
-                </div>
-                <div class="row d-inline">
-                    <div class="form-group">
-                        <label for="website-link" class=" d-inline ">Link to website</label>
-                        <input type="text" class="form-control input-border d-inline ml-2" id="website-link">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="form-group">
+                            <label for="web-link" class="  mb-1">Link to website</label>
+                            <input type="text" class="form-control input-border" id="web-link">
+                        </div>
                     </div>
                 </div>
-                <div class="form-inline">
-                    <div class="form-group ">
-                        <label for="vacancy-type">Type of Vacancy</label>
-                        <select class="custom-select ml-2  p-2" id="vacancy-type">
-                            <option selected>Select</option>
-                            <option value="Employment FT">Employment FT</option>
-                            <option value="Employment PT">Employment PT</option>
-                            <option value="Apprenticeship">Apprenticeship</option>
-                            <option value="Traineeship">Traineeship</option>
-                        </select>
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="form-group">
+                            <label for="post-code" class="  mb-1">Post Code</label>
+                            <input type="text" class="form-control input-border" id="post-code">
+                        </div>
                     </div>
                 </div>
-
-
-
-
-
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="form-group">
+                            <label for="start-date" class="  mb-1">Start Date</label>
+                            <input type="date" class="form-control input-border" id="start-date">
+                        </div>
+                    </div>
                 </div>
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="form-group">
+                            <label for="closing-date" class="  mb-1">Closing Date</label>
+                            <input type="date" class="form-control input-border" id="closing-date">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="vacancy-type" class="  mb-1">Type of Vacancy</label>
+                            <select class="custom-select p-2" id="vacancy-type">
+                                <option selected>Select</option>
+                                <option value="Employment FT">Employment FT</option>
+                                <option value="Employment PT">Employment PT</option>
+                                <option value="Apprenticeship">Apprenticeship</option>
+                                <option value="Traineeship">Traineeship</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="occup-code" class="  mb-1">Occupational Code</label>
+                            <select class="custom-select p-2" id="occup-code">
+                                <option selected>Select</option>
+                                <option value="soc">SOC</option>
+                                <option value="crci">CRCI</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="appl-method" class="  mb-1">Application methods</label>
+                            <select class="custom-select p-2" id="appl-method">
+                                <option selected>Select</option>
+                                <option value="apply-online">Apply online</option>
+                                <option value="cv">CV</option>
+                                <option value="contact-employer">Contact employer</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="container my-4 text-center">
+                    <button type="button" class="button--secondary text-center">Add Vacancy</button>
+                </div>
+            </div>
         </form>
     </div>
 
