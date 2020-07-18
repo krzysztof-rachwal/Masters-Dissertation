@@ -105,6 +105,16 @@ public class BaseController {
         return mv;
     }
 
+    //Vacancy Profile
+    @GetMapping("/vacancy")
+    public ModelAndView Vacancy(HttpSession session) {
+        ModelAndView mv = new ModelAndView();
+        ObjectMapper objectMapper = new ObjectMapper();
+        // session = context.getSession();
+        mv.setViewName("vacancyPage");
+        return mv;
+    }
+
 
 
     @GetMapping("/error")
