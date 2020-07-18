@@ -55,99 +55,33 @@
         max-width: 1050px;
     }
 
-    .title-h1{
-        font-size: 3em;
-        margin-top: 0.67em;
-        margin-bottom: 0.67em;
-        margin-left: 0;
-        margin-right: 0;
-        font-weight: bold;
+    .title-h2{
+        margin-bottom: .5rem;
+        font-weight: 500;
+        line-height: 1.2;
+        font-size: 2rem;
     }
 
     .typoWhite{
         color: white !important;
     }
 
+    .container-headline{
+        max-width: 987px;
+        padding-right: 15px;
+        padding-left: 15px;
+    }
+
 </style>
 
 <body>
-<!--    <header th:replace="fragments/headerTemplate :: header"></header>-->
-<div class="wg-header">
-    <div class="wg-header__content">
-        <a href="beta.gov.wales" target="_blank" class="content__wg-link" gel-processed="processed" title="Link to Welsh Government logo">
-            <img src="https://careerswales.gov.wales/styleguide/assets/img/logos/wg-logo-light.svg" alt="Welsh Government logo">
-        </a>
-        <form class="content__search-form">
-            <div class="form__group js-form-group form__text">
-                <label class="group__label" for="text-search-input">Search this site</label>
-                <div class="group__element group__element--has-prefix-suffix">
-                    <input type="text" id="text-search-input" name="text-name-prefix-suffix" placeholder="Search Careers Wales">
-                    <div class="group__suffix"><button class="button--icon icon--search icon--text-hidden" aria-label="Search"></button></div>
-                </div>
-            </div>
-        </form>
-        <a href="#" class="button button--style-dark button--small content__lang-link" gel-processed="processed" title="Link to Cymraeg">
-            Cymraeg
-        </a>
-    </div>
-</div>
-
-<div class="branded-masthead js-branded-masthead">
-    <div class="branded-masthead__content">
-        <div class="content__logos">
-            <a href="#" class="ignore-link" title="Careers Wales home">
-                <img class="content--logo logo--mob-en" src="https://careerswales.gov.wales/styleguide/assets/img/logos/cw-logo-mob-en.svg" role="presentation" alt="">
-                <img class="content--logo logo--mob-cy" src="https://careerswales.gov.wales/styleguide/assets/img/logos/cw-logo-mob-cy.svg" role="presentation" alt="">
-                <img class="content--logo" src="https://careerswales.gov.wales/styleguide/assets/img/logos/cw-logo.svg" role="presentation" alt="">
-                <span class="visually-hidden">Careers Wales home</span>
-            </a>
-        </div>
-        <div class="content__helper-menu js-helper-nav" gel-processed="processed">
-            <ul>
-                <li>
-                    <a href="https://careerswales.gov.wales/contact-us" >Contact Us</a>
-                </li>
-                <li>
-                    <a href="https://careerswales.gov.wales/events" >Events</a>
-                </li>
-                <li>
-                    <a href="https://careerswales.gov.wales/news" >News</a>
-                </li>
-
-            </ul>
-        </div>
-    </div>
-</div>
-<nav aria-label="primary navigation" class="primary js-primary-nav" style="">
-    <div class="nav__toggle">
-        <button class="toggle__button js-toggle-nav" gel-processed="processed">
-            <span></span><span></span><span></span>Menu
-        </button>
-    </div>
-    <div class="nav__content">
-        <ul>
-            <li>
-                <a href="https://careerswales.gov.wales/">Employers</a>
-            </li>
-            <li>
-                <a href="https://careerswales.gov.wales/plan-your-career">Vacancies</a>
-            </li>
-            <li>
-                <a href="https://careerswales.gov.wales/courses-and-training">Events</a>
-            </li>
-            <li>
-                <a href="https://careerswales.gov.wales/courses-and-training">Reports</a>
-            </li>
-        </ul>
-    </div>
-</nav>
+<header th:replace="fragments/headerTemplate :: header">
+</header>
 
     <div class="gel-content-container">
-        <div class="container my-4">
-            <div class="row-fluid">
-                <span class="title-h1">Vacancies</span>
-                <button type="button"  id="addVacancy" class="button--secondary my-3 float-right">Add Vacancy</button>
-            </div>
+        <div class="container-headline my-4">
+            <span class="title-h2">Vacancies</span>
+            <button type="button"  id="addVacancy" class="button--secondary float-right">Add Vacancy</button>
         </div>
 
         <div class="flex-container">
@@ -529,9 +463,8 @@
     </div>
 
 </div>
-<!--    <footer th:replace="fragments/footerTemplate :: footer"></footer>-->
 
-<!--        <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/js/foundation.min.js" integrity="sha256-pRF3zifJRA9jXGv++b06qwtSqX1byFQOLjqa2PTEb2o=" crossorigin="anonymous"></script>-->
+<footer th:replace="fragments/footerTemplate :: footer"></footer>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>

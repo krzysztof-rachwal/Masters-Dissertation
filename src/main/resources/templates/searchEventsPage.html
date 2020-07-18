@@ -55,6 +55,20 @@
         max-width: 1050px;
     }
 
+    .container-headline{
+        max-width: 987px;
+        padding-right: 15px;
+        padding-left: 15px;
+    }
+
+    .title-h2{
+        margin-bottom: .5rem;
+        font-weight: 500;
+        line-height: 1.2;
+        font-size: 2rem;
+    }
+
+
 </style>
 
 <body>
@@ -62,8 +76,11 @@
 </header>
 
     <div class="gel-content-container">
-        <div class="container my-4">
-            <h2>Events</h2>
+        <div class="container-headline my-5">
+            <span class="title-h2">Events</span>
+            <a href="/create-events">
+                <button type="button"  id="addVacancy" class="button--secondary float-right" >Add Event</button>
+            </a>
         </div>
 
         <div class="flex-container">
@@ -110,30 +127,6 @@
                     <h6>DATE</h6>
                     <div>
                         <input class="form-control" type="date" value="" id="date">
-                    </div>
-                </div>
-
-                <div class="mb-3">
-                    <h6>NO OF EMPLOYERS</h6>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="employeeno1">
-                        <label class="form-check-label" for="ind4">
-                            0-99
-                        </label>
-                    </div>
-
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="employeeno2">
-                        <label class="form-check-label" for="ind5">
-                            100-150
-                        </label>
-                    </div>
-
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="employeeno3">
-                        <label class="form-check-label" for="ind6">
-                            200-300
-                        </label>
                     </div>
                 </div>
 
@@ -200,7 +193,7 @@
                 <div class="list-employers">
                     <div class="gel-content-row ">
                         <article class="card js-card card--style-icon card--100" gel-processed="processed">
-                            <a href="#" class="card__inner" gel-processed="processed" title="Link to Card heading and link title">
+                            <a href="/events/id" class="card__inner" gel-processed="processed" title="Link to Card heading and link title">
                                 <div class="card__content">
                                     <div class="content__image">
                                         <div>
@@ -490,10 +483,9 @@
     </div>
 
 </div>
-<!--    <footer th:replace="fragments/footerTemplate :: footer"></footer>-->
 
-<!--        <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/js/foundation.min.js" integrity="sha256-pRF3zifJRA9jXGv++b06qwtSqX1byFQOLjqa2PTEb2o=" crossorigin="anonymous"></script>-->
 <footer th:replace="fragments/footerTemplate :: footer"></footer>
+
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
