@@ -44,7 +44,7 @@ public class BaseController {
     }
 
     //Search Employer
-    @GetMapping("/searchEmployer")
+    @GetMapping("/employers")
     public ModelAndView SearchEmployer(HttpSession session) {
         ModelAndView mv = new ModelAndView();
         ObjectMapper objectMapper = new ObjectMapper();
@@ -64,7 +64,7 @@ public class BaseController {
     }
 
     // Search Events
-    @GetMapping("/searchEvent")
+    @GetMapping("/events")
     public ModelAndView SearchEvents(HttpSession session) {
         ModelAndView mv = new ModelAndView();
         ObjectMapper objectMapper = new ObjectMapper();
@@ -73,7 +73,27 @@ public class BaseController {
         return mv;
     }
 
-    // Search Events
+    // Create Events
+    @GetMapping("/create-events")
+    public ModelAndView CreateEvents(HttpSession session) {
+        ModelAndView mv = new ModelAndView();
+        ObjectMapper objectMapper = new ObjectMapper();
+        // session = context.getSession();
+        mv.setViewName("createEventsPage");
+        return mv;
+    }
+
+    // Create Events (get id of the event)
+    @GetMapping("/events/id")
+    public ModelAndView EventProfile(HttpSession session) {
+        ModelAndView mv = new ModelAndView();
+        ObjectMapper objectMapper = new ObjectMapper();
+        // session = context.getSession();
+        mv.setViewName("eventsProfilePage");
+        return mv;
+    }
+
+    // Request
     @GetMapping("/request")
     public ModelAndView Request(HttpSession session) {
         ModelAndView mv = new ModelAndView();
@@ -83,9 +103,19 @@ public class BaseController {
         return mv;
     }
 
+    // Report
+    @GetMapping("/report")
+    public ModelAndView Report(HttpSession session) {
+        ModelAndView mv = new ModelAndView();
+        ObjectMapper objectMapper = new ObjectMapper();
+        // session = context.getSession();
+        mv.setViewName("reportPage");
+        return mv;
+    }
 
-    // Search Events
-    @GetMapping("/contactUs")
+
+    // Contact Us
+    @GetMapping("/contact-us")
     public ModelAndView contactUs(HttpSession session) {
         ModelAndView mv = new ModelAndView();
         ObjectMapper objectMapper = new ObjectMapper();
@@ -96,7 +126,7 @@ public class BaseController {
 
 
     //Search Vacancies
-    @GetMapping("/searchVacancies")
+    @GetMapping("/vacancies")
     public ModelAndView SearchVacancies(HttpSession session) {
         ModelAndView mv = new ModelAndView();
         ObjectMapper objectMapper = new ObjectMapper();
@@ -121,6 +151,36 @@ public class BaseController {
     public RedirectView ErrorPage() {
         return new RedirectView("/searchEmployerPage");
     }
+
+    // Default Controller
+    @GetMapping("/employersProfile")
+    public ModelAndView EmployersProfile(HttpSession session) {
+        ModelAndView mv = new ModelAndView();
+        ObjectMapper objectMapper = new ObjectMapper();
+        // session = context.getSession();
+        mv.setViewName("employersProfilePage");
+        return mv;
+    }
+
+    @GetMapping("/add-vacancy")
+    public ModelAndView AddVacancy (HttpSession session) {
+        ModelAndView mv = new ModelAndView();
+        ObjectMapper objectMapper = new ObjectMapper();
+        // session = context.getSession();
+        mv.setViewName("addVacancy");
+        return mv;
+    }
+
+    // Default Controller
+    @GetMapping("/add-employer")
+    public ModelAndView AddEmployer (HttpSession session) {
+        ModelAndView mv = new ModelAndView();
+        ObjectMapper objectMapper = new ObjectMapper();
+        // session = context.getSession();
+        mv.setViewName("addEmployer");
+        return mv;
+    }
+
 
 
 }

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Careers Wales</title>
+    <link rel="stylesheet" type="text/css" href="https://use.fortawesome.com/kits/747c3a74/publications/latest/eot.css">
+    <link rel="stylesheet" type="text/css" href="https://use.fortawesome.com/kits/747c3a74/publications/latest/woff.css">
+    <link rel="stylesheet" type="text/css" href="https://use.fortawesome.com/kits/747c3a74/publications/latest/woff2.css">
+    <link rel="stylesheet" type="text/css" href="https://careerswales.gov.wales/styleguide/assets/css/gel-styleguide.css">
+    <link rel="stylesheet" type="text/css" href="https://careerswales.gov.wales/styleguide/assets/css/gel-elements.css">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+
+    <style>
+        .counters .container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-gap: 30px;
+            text-align: center;
+        }
+
+        .counters i {
+            color: lightskyblue;
+            margin-bottom: 5px;
+        }
+
+        .counters .counter {
+            font-size: 45px;
+            margin: 10px 0;
+            color: #007066;
+        }
+
+        @media (max-width: 700px) {
+            .counters .container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .counters .container > div:nth-of-type(1),
+            .counters .container > div:nth-of-type(2) {
+                border-bottom: 1px lightskyblue solid;
+                padding-bottom: 20px;
+            }
+        }
+
+        .container-headline{
+            max-width: 987px;
+            padding-right: 15px;
+            padding-left: 15px;
+        }
+
+        .title-h2{
+            margin-bottom: .5rem;
+            font-weight: 500;
+            line-height: 1.2;
+            font-size: 2rem;
+        }
+    </style>
+</head>
+<body>
+
+
+<header th:replace="fragments/headerTemplate :: header">
+</header>
+
+<!--MAIN CONTENT-->
+<div class="gel-content-container">
+    <h1>Stats</h1>
+    <br>
+
+<!--COUNTERS-->
+    <section class="counters">
+        <div class="container">
+            <div>
+                <i class="fab fa-vacancies fa-4x"></i>
+                <div class="counter" data-target="60000">0</div>
+                <h3>Employer Vacancies</h3>
+            </div>
+            <div>
+                <i class="fab fa-schools fa-4x"></i>
+                <div class="counter" data-target="15000">0</div>
+                <h3>Requests by Schools</h3>
+            </div>
+            <div>
+                <i class="fab fa-offerings fa-4x"></i>
+                <div class="counter" data-target="9000">0</div>
+                <h3>Employer Offerings</h3>
+            </div>
+        </div>
+    </section>
+</div>
+<!--END OF MAIN CONTENT-->
+<footer th:replace="fragments/footerTemplate :: footer"></footer>
+
+<script type="text/javascript" src="https://careerswales.gov.wales/styleguide//assets/js/jquery-3.0.0.min.js"></script>
+<script type="text/javascript" src="https://careerswales.gov.wales/styleguide//assets/js/gel-elements.js"></script>
+<script type="text/javascript" src="https://careerswales.gov.wales/styleguide//assets/js/gel-elements-loader.js"></script>
+<script>
+    const counters = document.querySelectorAll('.counter');
+    const speed = 150; // The lower the slower
+
+    counters.forEach(counter => {
+        const updateCount = () => {
+        const target = +counter.getAttribute('data-target');
+    const count = +counter.innerText;
+
+    // Lower inc to slow and higher to slow
+    const inc = target / speed;
+
+    // console.log(inc);
+    // console.log(count);
+
+    // Check if target is reached
+    if (count < target) {
+        // Add inc to count and output in counter
+        counter.innerText = count + inc;
+        // Call function every ms
+        setTimeout(updateCount, 1);
+    } else {
+        counter.innerText = target;
+    }
+    };
+
+    updateCount();
+    });
+</script>
+</body>
+</html>
