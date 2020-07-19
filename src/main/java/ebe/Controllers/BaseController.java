@@ -152,16 +152,6 @@ public class BaseController {
         return new RedirectView("/searchEmployerPage");
     }
 
-    // Default Controller
-    @GetMapping("/employersProfile")
-    public ModelAndView EmployersProfile(HttpSession session) {
-        ModelAndView mv = new ModelAndView();
-        ObjectMapper objectMapper = new ObjectMapper();
-        // session = context.getSession();
-        mv.setViewName("employersProfilePage");
-        return mv;
-    }
-
     @GetMapping("/add-vacancy")
     public ModelAndView AddVacancy (HttpSession session) {
         ModelAndView mv = new ModelAndView();
