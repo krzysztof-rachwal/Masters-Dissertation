@@ -106,7 +106,7 @@ public class BaseController {
     }
 
     //Vacancy Profile
-    @GetMapping("/vacancy")
+    @GetMapping("/vacancies/id")
     public ModelAndView Vacancy(HttpSession session) {
         ModelAndView mv = new ModelAndView();
         ObjectMapper objectMapper = new ObjectMapper();
