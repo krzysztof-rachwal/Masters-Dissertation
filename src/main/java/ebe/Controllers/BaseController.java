@@ -54,7 +54,7 @@ public class BaseController {
     }
 
     // Employer Profile (with the id)
-    @GetMapping("/employersProfile")
+    @GetMapping("/employers/id")
     public ModelAndView EmployersProfile(HttpSession session) {
         ModelAndView mv = new ModelAndView();
         ObjectMapper objectMapper = new ObjectMapper();
