@@ -6,23 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
-import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
-
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.RedirectView;
-
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
-import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.Instant;
-import java.util.ArrayList;
-import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -53,6 +37,18 @@ public class BaseController {
         return mv;
     }
 
+    // Add Employer
+    @GetMapping("/add-employer")
+    public ModelAndView AddEmployer (HttpSession session) {
+        ModelAndView mv = new ModelAndView();
+        ObjectMapper objectMapper = new ObjectMapper();
+        // session = context.getSession();
+        mv.setViewName("addEmployerPage");
+        return mv;
+    }
+
+
+
     // Employer Profile (with the id)
     @GetMapping("/employers/id")
     public ModelAndView EmployersProfile(HttpSession session) {
@@ -73,17 +69,17 @@ public class BaseController {
         return mv;
     }
 
-    // Create Events
-    @GetMapping("/create-events")
-    public ModelAndView CreateEvents(HttpSession session) {
+    // Add Events
+    @GetMapping("/add-events")
+    public ModelAndView AddEvents(HttpSession session) {
         ModelAndView mv = new ModelAndView();
         ObjectMapper objectMapper = new ObjectMapper();
         // session = context.getSession();
-        mv.setViewName("createEventsPage");
+        mv.setViewName("addEventsPage");
         return mv;
     }
 
-    // Create Events (get id of the event)
+    // Events Profile (get id of the event)
     @GetMapping("/events/id")
     public ModelAndView EventProfile(HttpSession session) {
         ModelAndView mv = new ModelAndView();
@@ -141,10 +137,19 @@ public class BaseController {
         ModelAndView mv = new ModelAndView();
         ObjectMapper objectMapper = new ObjectMapper();
         // session = context.getSession();
-        mv.setViewName("vacancyPage");
+        mv.setViewName("vacancyProfilePage");
         return mv;
     }
 
+
+    @GetMapping("/add-vacancy")
+    public ModelAndView AddVacancy (HttpSession session) {
+        ModelAndView mv = new ModelAndView();
+        ObjectMapper objectMapper = new ObjectMapper();
+        // session = context.getSession();
+        mv.setViewName("addVacancyPage");
+        return mv;
+    }
 
 
     @GetMapping("/error")
@@ -152,24 +157,6 @@ public class BaseController {
         return new RedirectView("/searchEmployerPage");
     }
 
-    @GetMapping("/add-vacancy")
-    public ModelAndView AddVacancy (HttpSession session) {
-        ModelAndView mv = new ModelAndView();
-        ObjectMapper objectMapper = new ObjectMapper();
-        // session = context.getSession();
-        mv.setViewName("addVacancy");
-        return mv;
-    }
-
-    // Default Controller
-    @GetMapping("/add-employer")
-    public ModelAndView AddEmployer (HttpSession session) {
-        ModelAndView mv = new ModelAndView();
-        ObjectMapper objectMapper = new ObjectMapper();
-        // session = context.getSession();
-        mv.setViewName("addEmployer");
-        return mv;
-    }
 
 
 
