@@ -17,6 +17,12 @@ body {
     margin: 10px;
 }
 
+.well2{
+    padding: 15px;
+    margin: 0px;
+    background-color: #DDDDDD;
+}
+
 .container-headline{
     max-width: 987px;
     padding-right: 15px;
