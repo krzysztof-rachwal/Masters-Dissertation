@@ -5,15 +5,22 @@
     <meta id="_csrf" name="_csrf" th:content="${_csrf.token}"/>
     <meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}"/>
     <link rel="stylesheet" type="text/css" href="https://use.fortawesome.com/kits/747c3a74/publications/latest/eot.css">
-    <link rel="stylesheet" type="text/css" href="https://use.fortawesome.com/kits/747c3a74/publications/latest/woff.css">
-    <link rel="stylesheet" type="text/css" href="https://use.fortawesome.com/kits/747c3a74/publications/latest/woff2.css">
-    <link rel="stylesheet" type="text/css" href="https://careerswales.gov.wales/styleguide/assets/css/gel-styleguide.css">
+    <link rel="stylesheet" type="text/css"
+          href="https://use.fortawesome.com/kits/747c3a74/publications/latest/woff.css">
+    <link rel="stylesheet" type="text/css"
+          href="https://use.fortawesome.com/kits/747c3a74/publications/latest/woff2.css">
+    <link rel="stylesheet" type="text/css"
+          href="https://careerswales.gov.wales/styleguide/assets/css/gel-styleguide.css">
     <link rel="stylesheet" media="all" href="https://careerswales.gov.wales/styleguide/assets/css/gel-elements.css"/>
-    <link rel="stylesheet" media="all" href="https://careerswales.gov.wales/sites/default/files/css/css_Ix2IjZRJPxhlyX0UzoOcvWoONN1wNDbQY7jrFiB85O0.css"/>
-    <link rel="stylesheet" media="all" href="https://careerswales.gov.wales/sites/default/files/css/css_yFFWPpQsZCFeHMtvOieuCWLiTEiz--tT0otLunNJdLs.css"/>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" media="all"
+          href="https://careerswales.gov.wales/sites/default/files/css/css_Ix2IjZRJPxhlyX0UzoOcvWoONN1wNDbQY7jrFiB85O0.css"/>
+    <link rel="stylesheet" media="all"
+          href="https://careerswales.gov.wales/sites/default/files/css/css_yFFWPpQsZCFeHMtvOieuCWLiTEiz--tT0otLunNJdLs.css"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link th:href="@{../css/ebe_style.css}" href="../css/ebe_style.css" rel="stylesheet" />
+    <link href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css" rel="stylesheet"/>
+    <link th:href="@{../css/ebe_style.css}" href="../css/ebe_style.css" rel="stylesheet"/>
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
     <title>Request</title>
 </head>
@@ -27,33 +34,66 @@
 <div class="gel-content-container">
     <div class="container-headline my-4">
         <span class="title-h2">Request</span>
+        <p class="mt-3">Request an event of your choice with employers you want to attend.</p>
     </div>
 
-    <p class="container-headline">Request an event of your choice with employers you want to attend.</p>
-    <div class="container-headline">
-        <form class="justify-content-center">
-            <label for="event_name">Event Name:</label><br>
-            <input type="text" id="event_name" name="event_name"><br><br>
-            <label for="event_type">Event Type:</label><br>
-            <select id="event_type" name="event_type">
-                <option value="type1">type1</option>
-                <option value="type2">type2</option>
-                <option value="type3">type3</option>
-            </select><br><br>
-            <label  class=" text-left" for="event_date">Event Date:</label><br>
-            <input type="date" id="event_date" name="event_date"><br><br>
-            <label for="event_time">Event Time:</label><br>
-            <input type="time" id="event_time" name="event_time"><br><br>
-            <label for="event_guests">Guest(s) ???:</label><br>
-            <select id="event_guests" name="event_guests">
-                <option value="guest1">guest1</option>
-                <option value="guest2">guest2</option>
-                <option value="guest3">guest3</option>
-            </select><br><br>
-            <input class="button" type="submit" value="Request Event">
+    <form>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="form-group">
+                        <label for="event_name">Event Name</label>
+                        <input type="text" id="event_name" name="event_name" class="form-control input-border">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="form-group">
+                        <label class=" text-left" for="event_date">Event Date</label>
+                        <input type="date" id="event_date" class="form-control input-border" name="event_date">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="form-group">
+                        <label for="event_time">Event Time</label>
+                        <input type="time" id="event_time" class="form-control input-border" name="event_time">
+                    </div>
+                </div>
+            </div>
 
-        </form>
-    </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="event_type">Event Type</label>
+                        <select id="event_type" name="event_type" class="custom-select p-2">
+                            <option value="type1">type1</option>
+                            <option value="type2">type2</option>
+                            <option value="type3">type3</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="form-group">
+                        <label for="event-guests">Guest(s)</label><br>
+                        <select class="js-example-basic-multiple border-0" name="guests[]" multiple="multiple" id="event-guests">
+                            <option value="guest1">Guest 1</option>
+                            <option value="guest2">Guest 2</option>
+                            <option value="guest3">Guest 3</option>
+                            <option value="guest4">Guest 4</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="container mt-5 mb-4 text-center">
+                <button type="button" class="button--secondary text-center">Request</button>
+            </div>
+        </div>
+    </form>
 </div>
 <!--END OF MAIN CONTENT-->
 
@@ -61,6 +101,13 @@
 
 <script type="text/javascript" src="https://careerswales.gov.wales/styleguide//assets/js/jquery-3.0.0.min.js"></script>
 <script type="text/javascript" src="https://careerswales.gov.wales/styleguide//assets/js/gel-elements.js"></script>
-<script type="text/javascript" src="https://careerswales.gov.wales/styleguide//assets/js/gel-elements-loader.js"></script>
+<script type="text/javascript"
+        src="https://careerswales.gov.wales/styleguide//assets/js/gel-elements-loader.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $(".js-example-basic-multiple").select2();
+    });
+</script>
 </body>
 </html>
