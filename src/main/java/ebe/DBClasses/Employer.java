@@ -62,6 +62,36 @@ public class Employer {
         Employerscol = employerscol;
     }
 
+    public Employer(int statusOfEmployer, String employerName, String employerAddressCity, String employerAddressStreet, String employerAddressNumber, String employerPostcode, String email, String phone, String website, int numberOfEmployees, String companySummary, String notes, String employerDocumentsAndVideos, String employerLogo, Boolean givesSiteExperience, Boolean givesSiteVisits, Boolean givesWorkshops, Boolean givesPresentations, Boolean attendsCareerFairs, Boolean givesWebinars, Boolean worksWithPrimaryPupils, Boolean useOfModernForeignLanguage, Boolean runsBusinessInWelsh, Boolean canDeliverToSchoolsInWelsh, Boolean hasApprenticeshipProgramm, int schoolPreferences, String employerscol) {
+        StatusOfEmployer = statusOfEmployer;
+        EmployerName = employerName;
+        EmployerAddressCity = employerAddressCity;
+        EmployerAddressStreet = employerAddressStreet;
+        EmployerAddressNumber = employerAddressNumber;
+        EmployerPostcode = employerPostcode;
+        Email = email;
+        Phone = phone;
+        Website = website;
+        NumberOfEmployees = numberOfEmployees;
+        CompanySummary = companySummary;
+        Notes = notes;
+        EmployerDocumentsAndVideos = employerDocumentsAndVideos;
+        EmployerLogo = employerLogo;
+        GivesSiteExperience = givesSiteExperience;
+        GivesSiteVisits = givesSiteVisits;
+        GivesWorkshops = givesWorkshops;
+        GivesPresentations = givesPresentations;
+        AttendsCareerFairs = attendsCareerFairs;
+        GivesWebinars = givesWebinars;
+        WorksWithPrimaryPupils = worksWithPrimaryPupils;
+        UseOfModernForeignLanguage = useOfModernForeignLanguage;
+        RunsBusinessInWelsh = runsBusinessInWelsh;
+        CanDeliverToSchoolsInWelsh = canDeliverToSchoolsInWelsh;
+        HasApprenticeshipProgramm = hasApprenticeshipProgramm;
+        SchoolPreferences = schoolPreferences;
+        Employerscol = employerscol;
+    }
+
     public int getEmployerID() {
         return EmployerID;
     }

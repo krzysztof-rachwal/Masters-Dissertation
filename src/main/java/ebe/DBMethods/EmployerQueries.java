@@ -32,7 +32,7 @@ public class EmployerQueries extends DBQueries {
                 );
     }
 
-    // 2. Get Employer by Id
+    // 2. Get Employer Information by Id
     public Employer getEmployerDetailsById(int employerId) throws DataAccessException{
         String getSql = String.format("SELECT * FROM Employer WHERE EmployerID = \"%s\" LIMIT 1", employerId);
         List<Employer>  employerInfo = jdbcTemplate().query(getSql, new Object[]{},
@@ -52,6 +52,31 @@ public class EmployerQueries extends DBQueries {
     }
 
     ///////////////////////////////////// UPDATE ALL METHODS ///////////////////////////////////////////////
+    //1. Create Employer Information
+
+    public int  createNewEmployer(int statusOfEmployer, String employerName, String employerAddressCity, String employerAddressStreet, String employerAddressNumber,
+                                  String employerPostcode, String email, String phone, String website, int numberOfEmployees, String companySummary,
+                                  String notes, String employerDocumentsAndVideos, String employerLogo, Boolean givesSiteExperience, Boolean givesSiteVisits,
+                                  Boolean givesWorkshops, Boolean givesPresentations, Boolean attendsCareerFairs, Boolean givesWebinars, Boolean worksWithPrimaryPupils,
+                                  Boolean useOfModernForeignLanguage, Boolean runsBusinessInWelsh, Boolean canDeliverToSchoolsInWelsh, Boolean hasApprenticeshipProgramm,
+                                  int schoolPreferences, String employerscol) throws DataAccessException {
+
+        String updateSql = "INSERT TO Employer Employer(statusOfEmployer, employerName, employerAddressCity, employerAddressStreet, employerAddressNumber," +
+                "                                   employerPostcode, email, phone, website, numberOfEmployees,  companySummary, notes, employerDocumentsAndVideos, " +
+                "                                   employerLogo, givesSiteExperience, givesSiteVisits, givesWorkshops, givesPresentations, attendsCareerFairs," +
+                "                                   givesWebinars,  worksWithPrimaryPupils, useOfModernForeignLanguage, runsBusinessInWelsh, canDeliverToSchoolsInWelsh," +
+                "                                   hasApprenticeshipProgramm, schoolPreferences, employerscol)" +
+                "                                  VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+
+        return jdbcTemplate().update(updateSql, statusOfEmployer, employerName, employerAddressCity, employerAddressStreet, employerAddressNumber,
+                employerPostcode, email, phone, website, numberOfEmployees,  companySummary, notes, employerDocumentsAndVideos,
+                employerLogo, givesSiteExperience, givesSiteVisits, givesWorkshops, givesPresentations, attendsCareerFairs,
+                givesWebinars,  worksWithPrimaryPupils, useOfModernForeignLanguage, runsBusinessInWelsh, canDeliverToSchoolsInWelsh,
+                hasApprenticeshipProgramm, schoolPreferences, employerscol);
+
+
+
+    }
 
 
     ///////////////////////////////////// DELETE ALL METHODS ///////////////////////////////////////////////
