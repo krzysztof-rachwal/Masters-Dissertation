@@ -43,11 +43,18 @@ body {
     padding: 5px 20px !important;
 }
 
+.buttonUpdateModal{
+     /*background:#fff ;*/
+     color:#007066 ;
+     padding: 5px 20px !important;
+ }
+
 .buttonUpdate{
     background:#fff ;
     color:#007066 ;
     padding: 5px 20px !important;
 }
+
 
 .buttonDelete:focus , .buttonUpdate:focus {
     background: #007066;
