@@ -14,25 +14,24 @@ public class Employer {
     private String Website;
     private int NumberOfEmployees;
     private String CompanySummary;
+    private String Notes;
     private String EmployerDocumentsAndVideos;
     private String EmployerLogo;
-    private Byte GivesSiteExperience;
-    private Byte GivesSiteVisits;
-    private Byte GivesWorkshops;
-    private Byte GivesPresentations;
-    private Byte AttendsCareerFairs;
-    private Byte GivesWebinars;
-    private Byte AttendsCreerFairs;
-    private Byte WorksWithPrimaryPupils;
-    private Byte UseOfModernForeignLanguage;
-    private Byte RunsBusinessInWelsh;
-    private Byte CanDeliverToSchoolsInWelsh;
-    private Byte HasApprenticeshipProgramm;
+    private Boolean GivesSiteExperience;
+    private Boolean GivesSiteVisits;
+    private Boolean GivesWorkshops;
+    private Boolean GivesPresentations;
+    private Boolean AttendsCareerFairs;
+    private Boolean GivesWebinars;
+    private Boolean WorksWithPrimaryPupils;
+    private Boolean UseOfModernForeignLanguage;
+    private Boolean RunsBusinessInWelsh;
+    private Boolean CanDeliverToSchoolsInWelsh;
+    private Boolean HasApprenticeshipProgramm;
     private int SchoolPreferences;
     private String Employerscol;
 
-
-    public Employer(int employerID, int statusOfEmployer, String employerName, String employerAddressCity, String employerAddressStreet, String employerAddressNumber, String employerPostcode, String email, String phone, String website, int numberOfEmployees, String companySummary, String employerDocumentsAndVideos, String employerLogo, Byte givesSiteExperience, Byte givesSiteVisits, Byte givesWorkshops, Byte givesPresentations, Byte attendsCareerFairs, Byte givesWebinars, Byte attendsCreerFairs, Byte worksWithPrimaryPupils, Byte useOfModernForeignLanguage, Byte runsBusinessInWelsh, Byte canDeliverToSchoolsInWelsh, Byte hasApprenticeshipProgramm, int schoolPreferences, String employerscol) {
+    public Employer(int employerID, int statusOfEmployer, String employerName, String employerAddressCity, String employerAddressStreet, String employerAddressNumber, String employerPostcode, String email, String phone, String website, int numberOfEmployees, String companySummary, String notes, String employerDocumentsAndVideos, String employerLogo, Boolean givesSiteExperience, Boolean givesSiteVisits, Boolean givesWorkshops, Boolean givesPresentations, Boolean attendsCareerFairs, Boolean givesWebinars, Boolean worksWithPrimaryPupils, Boolean useOfModernForeignLanguage, Boolean runsBusinessInWelsh, Boolean canDeliverToSchoolsInWelsh, Boolean hasApprenticeshipProgramm, int schoolPreferences, String employerscol) {
         EmployerID = employerID;
         StatusOfEmployer = statusOfEmployer;
         EmployerName = employerName;
@@ -45,6 +44,7 @@ public class Employer {
         Website = website;
         NumberOfEmployees = numberOfEmployees;
         CompanySummary = companySummary;
+        Notes = notes;
         EmployerDocumentsAndVideos = employerDocumentsAndVideos;
         EmployerLogo = employerLogo;
         GivesSiteExperience = givesSiteExperience;
@@ -53,7 +53,6 @@ public class Employer {
         GivesPresentations = givesPresentations;
         AttendsCareerFairs = attendsCareerFairs;
         GivesWebinars = givesWebinars;
-        AttendsCreerFairs = attendsCreerFairs;
         WorksWithPrimaryPupils = worksWithPrimaryPupils;
         UseOfModernForeignLanguage = useOfModernForeignLanguage;
         RunsBusinessInWelsh = runsBusinessInWelsh;
@@ -159,6 +158,14 @@ public class Employer {
         CompanySummary = companySummary;
     }
 
+    public String getNotes() {
+        return Notes;
+    }
+
+    public void setNotes(String notes) {
+        Notes = notes;
+    }
+
     public String getEmployerDocumentsAndVideos() {
         return EmployerDocumentsAndVideos;
     }
@@ -175,99 +182,91 @@ public class Employer {
         EmployerLogo = employerLogo;
     }
 
-    public Byte getGivesSiteExperience() {
+    public Boolean getGivesSiteExperience() {
         return GivesSiteExperience;
     }
 
-    public void setGivesSiteExperience(Byte givesSiteExperience) {
+    public void setGivesSiteExperience(Boolean givesSiteExperience) {
         GivesSiteExperience = givesSiteExperience;
     }
 
-    public Byte getGivesSiteVisits() {
+    public Boolean getGivesSiteVisits() {
         return GivesSiteVisits;
     }
 
-    public void setGivesSiteVisits(Byte givesSiteVisits) {
+    public void setGivesSiteVisits(Boolean givesSiteVisits) {
         GivesSiteVisits = givesSiteVisits;
     }
 
-    public Byte getGivesWorkshops() {
+    public Boolean getGivesWorkshops() {
         return GivesWorkshops;
     }
 
-    public void setGivesWorkshops(Byte givesWorkshops) {
+    public void setGivesWorkshops(Boolean givesWorkshops) {
         GivesWorkshops = givesWorkshops;
     }
 
-    public Byte getGivesPresentations() {
+    public Boolean getGivesPresentations() {
         return GivesPresentations;
     }
 
-    public void setGivesPresentations(Byte givesPresentations) {
+    public void setGivesPresentations(Boolean givesPresentations) {
         GivesPresentations = givesPresentations;
     }
 
-    public Byte getAttendsCareerFairs() {
+    public Boolean getAttendsCareerFairs() {
         return AttendsCareerFairs;
     }
 
-    public void setAttendsCareerFairs(Byte attendsCareerFairs) {
+    public void setAttendsCareerFairs(Boolean attendsCareerFairs) {
         AttendsCareerFairs = attendsCareerFairs;
     }
 
-    public Byte getGivesWebinars() {
+    public Boolean getGivesWebinars() {
         return GivesWebinars;
     }
 
-    public void setGivesWebinars(Byte givesWebinars) {
+    public void setGivesWebinars(Boolean givesWebinars) {
         GivesWebinars = givesWebinars;
     }
 
-    public Byte getAttendsCreerFairs() {
-        return AttendsCreerFairs;
-    }
-
-    public void setAttendsCreerFairs(Byte attendsCreerFairs) {
-        AttendsCreerFairs = attendsCreerFairs;
-    }
-
-    public Byte getWorksWithPrimaryPupils() {
+    public Boolean getWorksWithPrimaryPupils() {
         return WorksWithPrimaryPupils;
     }
 
-    public void setWorksWithPrimaryPupils(Byte worksWithPrimaryPupils) {
+    public void setWorksWithPrimaryPupils(Boolean worksWithPrimaryPupils) {
         WorksWithPrimaryPupils = worksWithPrimaryPupils;
     }
 
-    public Byte getUseOfModernForeignLanguage() {
+    public Boolean getUseOfModernForeignLanguage() {
         return UseOfModernForeignLanguage;
     }
 
-    public void setUseOfModernForeignLanguage(Byte useOfModernForeignLanguage) {
+    public void setUseOfModernForeignLanguage(Boolean useOfModernForeignLanguage) {
         UseOfModernForeignLanguage = useOfModernForeignLanguage;
     }
 
-    public Byte getRunsBusinessInWelsh() {
+    public Boolean getRunsBusinessInWelsh() {
         return RunsBusinessInWelsh;
     }
 
-    public void setRunsBusinessInWelsh(Byte runsBusinessInWelsh) {
+    public void setRunsBusinessInWelsh(Boolean runsBusinessInWelsh) {
         RunsBusinessInWelsh = runsBusinessInWelsh;
     }
 
-    public Byte getCanDeliverToSchoolsInWelsh() {
+    public Boolean getCanDeliverToSchoolsInWelsh() {
         return CanDeliverToSchoolsInWelsh;
     }
 
-    public void setCanDeliverToSchoolsInWelsh(Byte canDeliverToSchoolsInWelsh) {
+    public void setCanDeliverToSchoolsInWelsh(Boolean canDeliverToSchoolsInWelsh) {
         CanDeliverToSchoolsInWelsh = canDeliverToSchoolsInWelsh;
     }
 
-    public Byte getHasApprenticeshipProgramm() {
+    public Boolean getHasApprenticeshipProgramm() {
         return HasApprenticeshipProgramm;
     }
 
-    public void setHasApprenticeshipProgramm(Byte hasApprenticeshipProgramm) {
+    public void setHasApprenticeshipProgramm(Boolean hasApprenticeshipProgramm) {
         HasApprenticeshipProgramm = hasApprenticeshipProgramm;
     }
 
@@ -287,3 +286,5 @@ public class Employer {
         Employerscol = employerscol;
     }
 }
+
+

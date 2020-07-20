@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class DBQueries {
 
-    protected JdbcTemplate jdbcTemplate;
+     JdbcTemplate jdbcTemplate;
 
     public DBQueries(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
