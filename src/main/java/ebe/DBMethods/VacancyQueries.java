@@ -1,14 +1,12 @@
-package ebe.DBMethhods;
+package ebe.DBMethods;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-public class StatusOfVacancyQueries extends DBQueries {
+public class VacancyQueries extends DBQueries {
 
     @Autowired
-    public StatusOfVacancyQueries(JdbcTemplate jdbctemplate) {
+    public VacancyQueries(JdbcTemplate jdbctemplate) {
         super(jdbctemplate);
-    } {
-
     }
 }

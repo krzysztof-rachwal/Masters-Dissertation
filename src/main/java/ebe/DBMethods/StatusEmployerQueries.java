@@ -1,14 +1,12 @@
-package ebe.DBMethhods;
+package ebe.DBMethods;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-public class EventQueries extends DBQueries {
+public class StatusEmployerQueries extends DBQueries {
 
     @Autowired
-    public EventQueries(JdbcTemplate jdbctemplate) {
+    public StatusEmployerQueries(JdbcTemplate jdbctemplate) {
         super(jdbctemplate);
-    } {
-
     }
 }

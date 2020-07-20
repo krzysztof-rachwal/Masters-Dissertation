@@ -1,14 +1,12 @@
-package ebe.DBMethhods;
+package ebe.DBMethods;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-public class AlumniQueries extends DBQueries {
+public class AreasOfCurriculumQueries extends DBQueries {
 
     @Autowired
-    public AlumniQueries(JdbcTemplate jdbctemplate) {
+    public AreasOfCurriculumQueries(JdbcTemplate jdbctemplate) {
         super(jdbctemplate);
-    } {
-
     }
 }

@@ -1,14 +1,12 @@
-package ebe.DBMethhods;
+package ebe.DBMethods;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-public class TypeOfEventQueries extends DBQueries {
+public class LocalAuthorityQueries extends DBQueries {
 
     @Autowired
-    public TypeOfEventQueries(JdbcTemplate jdbctemplate) {
+    public LocalAuthorityQueries(JdbcTemplate jdbctemplate) {
         super(jdbctemplate);
-    } {
-
     }
 }

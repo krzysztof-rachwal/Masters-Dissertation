@@ -1,14 +1,12 @@
-package ebe.DBMethhods;
+package ebe.DBMethods;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-public class VacancyQueries extends DBQueries {
+public class LanguagesQueries extends DBQueries {
 
     @Autowired
-    public VacancyQueries(JdbcTemplate jdbctemplate) {
+    public LanguagesQueries(JdbcTemplate jdbctemplate) {
         super(jdbctemplate);
-    } {
-
     }
 }

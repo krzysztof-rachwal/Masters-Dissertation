@@ -2,287 +2,288 @@ package ebe.DBClasses;
 
 public class Employer {
 
-    private int employerID;
-    private String name;
-    private String locationCity;
-    private String locationStreet;
-    private String locationNumber;
-    private String locationPostcode;
-    private String contactPersonName;
-    private String telephoneNumber;
-    private String mobileNumber;
-    private String email;
-    private String twitter;
-    private String website;
-    private String sector;
-    private int numberOfEmployers;
-    private String localAuthList;
-    private String companySummary;
-    private Boolean workExperience;
-    private Boolean siteVisits;
-    private Boolean workshops;
-    private Boolean careersFairs;
-    private Boolean webinars;
-    private Boolean workWithPrimarySchools;
-    private Boolean workInForeignLanguage;
-    private String ifYesWhichLanguage;
-    private Boolean worksInWelsh;
-    private Boolean hasApprenticeshipProgramme;
-    private String curriculumAreas;
-    private int schoolID;
+    private int EmployerID;
+    private int StatusOfEmployer;
+    private String EmployerName;
+    private String EmployerAddressCity;
+    private String EmployerAddressStreet;
+    private String EmployerAddressNumber;
+    private String EmployerPostcode;
+    private String Email;
+    private String Phone;
+    private String Website;
+    private int NumberOfEmployees;
+    private String CompanySummary;
+    private String EmployerDocumentsAndVideos;
+    private String EmployerLogo;
+    private Byte GivesSiteExperience;
+    private Byte GivesSiteVisits;
+    private Byte GivesWorkshops;
+    private Byte GivesPresentations;
+    private Byte AttendsCareerFairs;
+    private Byte GivesWebinars;
+    private Byte AttendsCreerFairs;
+    private Byte WorksWithPrimaryPupils;
+    private Byte UseOfModernForeignLanguage;
+    private Byte RunsBusinessInWelsh;
+    private Byte CanDeliverToSchoolsInWelsh;
+    private Byte HasApprenticeshipProgramm;
+    private int SchoolPreferences;
+    private String Employerscol;
 
-    public Employer(int employerID, String name, String locationCity, String locationStreet, String locationNumber, String locationPostcode, String contactPersonName, String telephoneNumber, String mobileNumber, String email, String twitter, String website, String sector, int numberOfEmployers, String localAuthList, String companySummary, Boolean workExperience, Boolean siteVisits, Boolean workshops, Boolean careersFairs, Boolean webinars, Boolean workWithPrimarySchools, Boolean workInForeignLanguage, String ifYesWhichLanguage, Boolean worksInWelsh, Boolean hasApprenticeshipProgramme, String curriculumAreas, int schoolID) {
-        this.employerID = employerID;
-        this.name = name;
-        this.locationCity = locationCity;
-        this.locationStreet = locationStreet;
-        this.locationNumber = locationNumber;
-        this.locationPostcode = locationPostcode;
-        this.contactPersonName = contactPersonName;
-        this.telephoneNumber = telephoneNumber;
-        this.mobileNumber = mobileNumber;
-        this.email = email;
-        this.twitter = twitter;
-        this.website = website;
-        this.sector = sector;
-        this.numberOfEmployers = numberOfEmployers;
-        this.localAuthList = localAuthList;
-        this.companySummary = companySummary;
-        this.workExperience = workExperience;
-        this.siteVisits = siteVisits;
-        this.workshops = workshops;
-        this.careersFairs = careersFairs;
-        this.webinars = webinars;
-        this.workWithPrimarySchools = workWithPrimarySchools;
-        this.workInForeignLanguage = workInForeignLanguage;
-        this.ifYesWhichLanguage = ifYesWhichLanguage;
-        this.worksInWelsh = worksInWelsh;
-        this.hasApprenticeshipProgramme = hasApprenticeshipProgramme;
-        this.curriculumAreas = curriculumAreas;
-        this.schoolID = schoolID;
+
+    public Employer(int employerID, int statusOfEmployer, String employerName, String employerAddressCity, String employerAddressStreet, String employerAddressNumber, String employerPostcode, String email, String phone, String website, int numberOfEmployees, String companySummary, String employerDocumentsAndVideos, String employerLogo, Byte givesSiteExperience, Byte givesSiteVisits, Byte givesWorkshops, Byte givesPresentations, Byte attendsCareerFairs, Byte givesWebinars, Byte attendsCreerFairs, Byte worksWithPrimaryPupils, Byte useOfModernForeignLanguage, Byte runsBusinessInWelsh, Byte canDeliverToSchoolsInWelsh, Byte hasApprenticeshipProgramm, int schoolPreferences, String employerscol) {
+        EmployerID = employerID;
+        StatusOfEmployer = statusOfEmployer;
+        EmployerName = employerName;
+        EmployerAddressCity = employerAddressCity;
+        EmployerAddressStreet = employerAddressStreet;
+        EmployerAddressNumber = employerAddressNumber;
+        EmployerPostcode = employerPostcode;
+        Email = email;
+        Phone = phone;
+        Website = website;
+        NumberOfEmployees = numberOfEmployees;
+        CompanySummary = companySummary;
+        EmployerDocumentsAndVideos = employerDocumentsAndVideos;
+        EmployerLogo = employerLogo;
+        GivesSiteExperience = givesSiteExperience;
+        GivesSiteVisits = givesSiteVisits;
+        GivesWorkshops = givesWorkshops;
+        GivesPresentations = givesPresentations;
+        AttendsCareerFairs = attendsCareerFairs;
+        GivesWebinars = givesWebinars;
+        AttendsCreerFairs = attendsCreerFairs;
+        WorksWithPrimaryPupils = worksWithPrimaryPupils;
+        UseOfModernForeignLanguage = useOfModernForeignLanguage;
+        RunsBusinessInWelsh = runsBusinessInWelsh;
+        CanDeliverToSchoolsInWelsh = canDeliverToSchoolsInWelsh;
+        HasApprenticeshipProgramm = hasApprenticeshipProgramm;
+        SchoolPreferences = schoolPreferences;
+        Employerscol = employerscol;
     }
 
     public int getEmployerID() {
-        return employerID;
+        return EmployerID;
     }
 
     public void setEmployerID(int employerID) {
-        this.employerID = employerID;
+        EmployerID = employerID;
     }
 
-    public String getName() {
-        return name;
+    public int getStatusOfEmployer() {
+        return StatusOfEmployer;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setStatusOfEmployer(int statusOfEmployer) {
+        StatusOfEmployer = statusOfEmployer;
     }
 
-    public String getLocationCity() {
-        return locationCity;
+    public String getEmployerName() {
+        return EmployerName;
     }
 
-    public void setLocationCity(String locationCity) {
-        this.locationCity = locationCity;
+    public void setEmployerName(String employerName) {
+        EmployerName = employerName;
     }
 
-    public String getLocationStreet() {
-        return locationStreet;
+    public String getEmployerAddressCity() {
+        return EmployerAddressCity;
     }
 
-    public void setLocationStreet(String locationStreet) {
-        this.locationStreet = locationStreet;
+    public void setEmployerAddressCity(String employerAddressCity) {
+        EmployerAddressCity = employerAddressCity;
     }
 
-    public String getLocationNumber() {
-        return locationNumber;
+    public String getEmployerAddressStreet() {
+        return EmployerAddressStreet;
     }
 
-    public void setLocationNumber(String locationNumber) {
-        this.locationNumber = locationNumber;
+    public void setEmployerAddressStreet(String employerAddressStreet) {
+        EmployerAddressStreet = employerAddressStreet;
     }
 
-    public String getLocationPostcode() {
-        return locationPostcode;
+    public String getEmployerAddressNumber() {
+        return EmployerAddressNumber;
     }
 
-    public void setLocationPostcode(String locationPostcode) {
-        this.locationPostcode = locationPostcode;
+    public void setEmployerAddressNumber(String employerAddressNumber) {
+        EmployerAddressNumber = employerAddressNumber;
     }
 
-    public String getContactPersonName() {
-        return contactPersonName;
+    public String getEmployerPostcode() {
+        return EmployerPostcode;
     }
 
-    public void setContactPersonName(String contactPersonName) {
-        this.contactPersonName = contactPersonName;
-    }
-
-    public String getTelephoneNumber() {
-        return telephoneNumber;
-    }
-
-    public void setTelephoneNumber(String telephoneNumber) {
-        this.telephoneNumber = telephoneNumber;
-    }
-
-    public String getMobileNumber() {
-        return mobileNumber;
-    }
-
-    public void setMobileNumber(String mobileNumber) {
-        this.mobileNumber = mobileNumber;
+    public void setEmployerPostcode(String employerPostcode) {
+        EmployerPostcode = employerPostcode;
     }
 
     public String getEmail() {
-        return email;
+        return Email;
     }
 
     public void setEmail(String email) {
-        this.email = email;
+        Email = email;
     }
 
-    public String getTwitter() {
-        return twitter;
+    public String getPhone() {
+        return Phone;
     }
 
-    public void setTwitter(String twitter) {
-        this.twitter = twitter;
+    public void setPhone(String phone) {
+        Phone = phone;
     }
 
     public String getWebsite() {
-        return website;
+        return Website;
     }
 
     public void setWebsite(String website) {
-        this.website = website;
+        Website = website;
     }
 
-    public String getSector() {
-        return sector;
+    public int getNumberOfEmployees() {
+        return NumberOfEmployees;
     }
 
-    public void setSector(String sector) {
-        this.sector = sector;
-    }
-
-    public int getNumberOfEmployers() {
-        return numberOfEmployers;
-    }
-
-    public void setNumberOfEmployers(int numberOfEmployers) {
-        this.numberOfEmployers = numberOfEmployers;
-    }
-
-    public String getLocalAuthList() {
-        return localAuthList;
-    }
-
-    public void setLocalAuthList(String localAuthList) {
-        this.localAuthList = localAuthList;
+    public void setNumberOfEmployees(int numberOfEmployees) {
+        NumberOfEmployees = numberOfEmployees;
     }
 
     public String getCompanySummary() {
-        return companySummary;
+        return CompanySummary;
     }
 
     public void setCompanySummary(String companySummary) {
-        this.companySummary = companySummary;
+        CompanySummary = companySummary;
     }
 
-    public Boolean getWorkExperience() {
-        return workExperience;
+    public String getEmployerDocumentsAndVideos() {
+        return EmployerDocumentsAndVideos;
     }
 
-    public void setWorkExperience(Boolean workExperience) {
-        this.workExperience = workExperience;
+    public void setEmployerDocumentsAndVideos(String employerDocumentsAndVideos) {
+        EmployerDocumentsAndVideos = employerDocumentsAndVideos;
     }
 
-    public Boolean getSiteVisits() {
-        return siteVisits;
+    public String getEmployerLogo() {
+        return EmployerLogo;
     }
 
-    public void setSiteVisits(Boolean siteVisits) {
-        this.siteVisits = siteVisits;
+    public void setEmployerLogo(String employerLogo) {
+        EmployerLogo = employerLogo;
     }
 
-    public Boolean getWorkshops() {
-        return workshops;
+    public Byte getGivesSiteExperience() {
+        return GivesSiteExperience;
     }
 
-    public void setWorkshops(Boolean workshops) {
-        this.workshops = workshops;
+    public void setGivesSiteExperience(Byte givesSiteExperience) {
+        GivesSiteExperience = givesSiteExperience;
     }
 
-    public Boolean getCareersFairs() {
-        return careersFairs;
+    public Byte getGivesSiteVisits() {
+        return GivesSiteVisits;
     }
 
-    public void setCareersFairs(Boolean careersFairs) {
-        this.careersFairs = careersFairs;
+    public void setGivesSiteVisits(Byte givesSiteVisits) {
+        GivesSiteVisits = givesSiteVisits;
     }
 
-    public Boolean getWebinars() {
-        return webinars;
+    public Byte getGivesWorkshops() {
+        return GivesWorkshops;
     }
 
-    public void setWebinars(Boolean webinars) {
-        this.webinars = webinars;
+    public void setGivesWorkshops(Byte givesWorkshops) {
+        GivesWorkshops = givesWorkshops;
     }
 
-    public Boolean getWorkWithPrimarySchools() {
-        return workWithPrimarySchools;
+    public Byte getGivesPresentations() {
+        return GivesPresentations;
     }
 
-    public void setWorkWithPrimarySchools(Boolean workWithPrimarySchools) {
-        this.workWithPrimarySchools = workWithPrimarySchools;
+    public void setGivesPresentations(Byte givesPresentations) {
+        GivesPresentations = givesPresentations;
     }
 
-    public Boolean getWorkInForeignLanguage() {
-        return workInForeignLanguage;
+    public Byte getAttendsCareerFairs() {
+        return AttendsCareerFairs;
     }
 
-    public void setWorkInForeignLanguage(Boolean workInForeignLanguage) {
-        this.workInForeignLanguage = workInForeignLanguage;
+    public void setAttendsCareerFairs(Byte attendsCareerFairs) {
+        AttendsCareerFairs = attendsCareerFairs;
     }
 
-    public String getIfYesWhichLanguage() {
-        return ifYesWhichLanguage;
+    public Byte getGivesWebinars() {
+        return GivesWebinars;
     }
 
-    public void setIfYesWhichLanguage(String ifYesWhichLanguage) {
-        this.ifYesWhichLanguage = ifYesWhichLanguage;
+    public void setGivesWebinars(Byte givesWebinars) {
+        GivesWebinars = givesWebinars;
     }
 
-    public Boolean getWorksInWelsh() {
-        return worksInWelsh;
+    public Byte getAttendsCreerFairs() {
+        return AttendsCreerFairs;
     }
 
-    public void setWorksInWelsh(Boolean worksInWelsh) {
-        this.worksInWelsh = worksInWelsh;
+    public void setAttendsCreerFairs(Byte attendsCreerFairs) {
+        AttendsCreerFairs = attendsCreerFairs;
     }
 
-    public Boolean getHasApprenticeshipProgramme() {
-        return hasApprenticeshipProgramme;
+    public Byte getWorksWithPrimaryPupils() {
+        return WorksWithPrimaryPupils;
     }
 
-    public void setHasApprenticeshipProgramme(Boolean hasApprenticeshipProgramme) {
-        this.hasApprenticeshipProgramme = hasApprenticeshipProgramme;
+    public void setWorksWithPrimaryPupils(Byte worksWithPrimaryPupils) {
+        WorksWithPrimaryPupils = worksWithPrimaryPupils;
     }
 
-    public String getCurriculumAreas() {
-        return curriculumAreas;
+    public Byte getUseOfModernForeignLanguage() {
+        return UseOfModernForeignLanguage;
     }
 
-    public void setCurriculumAreas(String curriculumAreas) {
-        this.curriculumAreas = curriculumAreas;
+    public void setUseOfModernForeignLanguage(Byte useOfModernForeignLanguage) {
+        UseOfModernForeignLanguage = useOfModernForeignLanguage;
     }
 
-    public int getSchoolID() {
-        return schoolID;
+    public Byte getRunsBusinessInWelsh() {
+        return RunsBusinessInWelsh;
     }
 
-    public void setSchoolID(int schoolID) {
-        this.schoolID = schoolID;
+    public void setRunsBusinessInWelsh(Byte runsBusinessInWelsh) {
+        RunsBusinessInWelsh = runsBusinessInWelsh;
+    }
+
+    public Byte getCanDeliverToSchoolsInWelsh() {
+        return CanDeliverToSchoolsInWelsh;
+    }
+
+    public void setCanDeliverToSchoolsInWelsh(Byte canDeliverToSchoolsInWelsh) {
+        CanDeliverToSchoolsInWelsh = canDeliverToSchoolsInWelsh;
+    }
+
+    public Byte getHasApprenticeshipProgramm() {
+        return HasApprenticeshipProgramm;
+    }
+
+    public void setHasApprenticeshipProgramm(Byte hasApprenticeshipProgramm) {
+        HasApprenticeshipProgramm = hasApprenticeshipProgramm;
+    }
+
+    public int getSchoolPreferences() {
+        return SchoolPreferences;
+    }
+
+    public void setSchoolPreferences(int schoolPreferences) {
+        SchoolPreferences = schoolPreferences;
+    }
+
+    public String getEmployerscol() {
+        return Employerscol;
+    }
+
+    public void setEmployerscol(String employerscol) {
+        Employerscol = employerscol;
     }
 }

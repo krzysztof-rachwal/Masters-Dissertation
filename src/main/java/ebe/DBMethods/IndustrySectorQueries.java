@@ -1,14 +1,13 @@
-package ebe.DBMethhods;
+package ebe.DBMethods;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-public class OccupationalCodesQueries extends DBQueries {
+public class IndustrySectorQueries extends DBQueries {
 
     @Autowired
-    public OccupationalCodesQueries(JdbcTemplate jdbctemplate) {
+    public IndustrySectorQueries(JdbcTemplate jdbctemplate)
+    {
         super(jdbctemplate);
-    } {
-
     }
 }

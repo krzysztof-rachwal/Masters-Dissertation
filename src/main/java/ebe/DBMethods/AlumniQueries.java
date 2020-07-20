@@ -1,14 +1,13 @@
-package ebe.DBMethhods;
+package ebe.DBMethods;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-public class LocalAuthorityQueries extends DBQueries {
+public class AlumniQueries extends DBQueries {
 
     @Autowired
-    public LocalAuthorityQueries(JdbcTemplate jdbctemplate) {
+    public AlumniQueries(JdbcTemplate jdbctemplate) {
         super(jdbctemplate);
-    } {
-
     }
+
 }
