@@ -96,7 +96,7 @@ public class EmployerQueries extends DBQueries {
                 employerPostcode, email, phone, website, numberOfEmployees, companySummary, notes, employerDocumentsAndVideos,
                 employerLogo, givesSiteExperience, givesSiteVisits, givesWorkshops, givesPresentations, attendsCareerFairs,
                 givesWebinars, worksWithPrimaryPupils, useOfModernForeignLanguage, runsBusinessInWelsh, canDeliverToSchoolsInWelsh,
-                hasApprenticeshipProgramme, schoolPreferences);
+                hasApprenticeshipProgramme, schoolPreferences, employerId);
     }
 
 

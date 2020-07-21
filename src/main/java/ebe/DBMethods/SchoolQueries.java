@@ -1,5 +1,6 @@
 package ebe.DBMethods;
 
+import ebe.DBClasses.School;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -14,73 +15,57 @@ public class SchoolQueries extends DBQueries {
     }
 
     ///////////////////////////////////// GET ALL METHODS ///////////////////////////////////////////////
-    // 1. Get All Events
-    public List<Event> getAllEvents() throws DataAccessException {
-        return jdbcTemplate().query("SELECT * FROM Event", new Object[]{},
-                (rs, i) -> new Event(rs.getInt("EventID"), rs.getString("Name"),
-                        rs.getInt("TypeOfEvent"), rs.getBoolean("isPublic"),
-                        rs.getBoolean("isCancelled"), rs.getString("PostCode"),
-                        rs.getString("NameOfAdviser"), rs.getString("NumberOfAttendees"),
-                        rs.getInt("AttendingSchools"),rs.getInt("AttendingEmployers"),
-                        rs.getBoolean("PromotesApprenticeships"), rs.getBoolean("PromotesWelshLanguage"),
-                        rs.getBoolean("ChallengesGenderStereotypes"))
+    // 1. Get All School
+    public List<School> getAllSchools() throws DataAccessException {
+        return jdbcTemplate().query("SELECT * FROM School", new Object[]{},
+                (rs, i) -> new School(rs.getInt("SchoolID"), rs.getString("SchoolName"),
+                        rs.getString("SchoolAddressCity"), rs.getString("SchoolAddressStreet"),
+                        rs.getString("SchoolAddressNumber"), rs.getString("Email"),
+                        rs.getString("Phone"))
         );
     }
 
-    // 2. Get Event by Id
-    public Event getEventDetailsById(int eventId) throws DataAccessException {
-        String getSql = String.format("SELECT * FROM Event WHERE EventID = \"%s\" LIMIT 1", eventId);
-        List<Event> eventInfo = jdbcTemplate().query(getSql, new Object[]{},
-                (rs, i) -> new Event(rs.getInt("EventID"), rs.getString("EventName"),
-                        rs.getInt("TypeOfEvent"), rs.getBoolean("isPublic"),
-                        rs.getBoolean("isCancelled"), rs.getString("PostCode"),
-                        rs.getString("NameOfAdviser"), rs.getString("NumberOfAttendees"),
-                        rs.getInt("AttendingSchools"),rs.getInt("AttendingEmployers"),
-                        rs.getBoolean("PromotesApprenticeships"), rs.getBoolean("PromotesWelshLanguage"),
-                        rs.getBoolean("ChallengesGenderStereotypes"))
+    // 2. Get School by Id
+    public School getSchoolDetailsById(int schoolId) throws DataAccessException {
+        String getSql = String.format("SELECT * FROM School WHERE SchoolID = \"%s\" LIMIT 1", schoolId);
+        List<School> schoolInfo = jdbcTemplate().query(getSql, new Object[]{},
+                (rs, i) -> new School(rs.getInt("SchoolID"), rs.getString("SchoolName"),
+                        rs.getString("SchoolAddressCity"), rs.getString("SchoolAddressStreet"),
+                        rs.getString("SchoolAddressNumber"), rs.getString("Email"),
+                        rs.getString("Phone"))
         );
-        return eventInfo.get(0);
+        return schoolInfo.get(0);
     }
 
 
     ///////////////////////////////////// CREATE ALL METHODS ///////////////////////////////////////////////
-    // 1. Create a new Event
-    public int createNewEvent(String EventName, int TypeOfEvent, Boolean isPublic, Boolean isCancelled, String PostCode, String NameOfAdviser,
-                              String NumberOfAttendees, int AttendingSchools, int AttendingEmployers, Boolean PromotesApprenticeships, Boolean PromotesWelshLanguage,
-                              Boolean ChallengesGenderStereoTypes) throws DataAccessException {
+    // 1. Create a new School
+    public int createNewSchool(String SchoolName, String SchoolAddressCity, String SchoolAddressStreet,
+                               Boolean SchoolAddressNumber, String Email, String Phone) throws DataAccessException {
 
-        String insertSql = "INSERT TO Event Event(EventName, TypeOfEvent, isPublic, isCancelled, PostCode, NameOfAdviser," +
-                "                                 NumberOfAttendees, AttendingSchools, AttendingEmployers, PromotesApprenticeships, PromotesWelshLanguage," +
-                "                                 ChallengesGenderStereoTypes)" +
-                "                                  VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        String insertSql = "INSERT TO School School(SchoolName, SchoolAddressCity, SchoolAddressStreet, SchoolAddressNumber, Email, Phone)" +
+                "                                  VALUES(?,?,?,?,?,?)";
 
-        return jdbcTemplate().update(insertSql, EventName, TypeOfEvent, isPublic, isCancelled, PostCode, NameOfAdviser,
-                NumberOfAttendees, AttendingSchools, AttendingEmployers, PromotesApprenticeships, PromotesWelshLanguage,
-                ChallengesGenderStereoTypes);
+        return jdbcTemplate().update(insertSql, SchoolName, SchoolAddressCity, SchoolAddressStreet, SchoolAddressNumber, Email, Phone);
 
     }
     ///////////////////////////////////// UPDATE ALL METHODS ///////////////////////////////////////////////
-    // 1. Update an Events by Id
+    // 1. Update an School by Id
 
-    public Integer updateEvent(int EventID, String EventName, int TypeOfEvent, Boolean isPublic, Boolean isCancelled, String PostCode, String NameOfAdviser,
-                               String NumberOfAttendees, int AttendingSchools, int AttendingEmployers, Boolean PromotesApprenticeships, Boolean PromotesWelshLanguage,
-                               Boolean ChallengesGenderStereoTypes) throws DataAccessException {
+    public Integer updateSchool(int SchoolID,String SchoolName, String SchoolAddressCity, String SchoolAddressStreet,
+                                Boolean SchoolAddressNumber, String Email, String Phone) throws DataAccessException {
 
-        String updateSql = "UPDATE Event SET EventName =?, EmployerName = ?, TypeOfEvent =?, isPublic=?, isCancelled=?," +
-                "PostCode=?, NameOfAdviser=?, NumberOfAttendees=?, AttendingSchools=?, AttendingEmployers=?,  PromotesApprenticeships=?, PromotesWelshLanguage=?" +
-                "EmployerLogo=?, GivesSiteExperience=?, GivesSiteVisits=?, GivesWorkshops=?, GivesPresentations=?, AttendsCareerFairs=?," +
-                "ChallengesGenderStereoTypes=?";
+        String updateSql = "UPDATE School SET SchoolName =?, SchoolAddressCity = ?, SchoolAddressStreet =?, SchoolAddressNumber=?," +
+                           " SchoolAddressNumber=?, Email=?, Phone=?  WHERE SchoolID =?";
 
-        return jdbcTemplate().update(updateSql, EventName, TypeOfEvent, isPublic, isCancelled, PostCode, NameOfAdviser,
-                NumberOfAttendees, AttendingSchools, AttendingEmployers, PromotesApprenticeships, PromotesWelshLanguage,
-                ChallengesGenderStereoTypes);
+        return jdbcTemplate().update(updateSql, SchoolName, SchoolAddressCity, SchoolAddressStreet, SchoolAddressNumber, Email, Phone, SchoolID);
     }
 
     ///////////////////////////////////// DELETE ALL METHODS ///////////////////////////////////////////////
-    // 1. Delete an Event by ID
+    // 1. Delete an School by ID
 
-    public Integer deleteEvent(int eventId) throws DataAccessException {
-        String deleteSql = String.format("DELETE FROM Event WHERE EventID = '%s'",eventId);
+    public Integer deleteSchool(int schoolId) throws DataAccessException {
+        String deleteSql = String.format("DELETE FROM School WHERE SchoolID = '%s'",schoolId);
         return jdbcTemplate().update(deleteSql);
     }
 }
