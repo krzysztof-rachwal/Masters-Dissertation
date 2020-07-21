@@ -70,11 +70,11 @@ public class EventQueries extends DBQueries {
         String updateSql = "UPDATE Event SET EventName =?, EmployerName = ?, TypeOfEvent =?, isPublic=?, isCancelled=?," +
                 "PostCode=?, NameOfAdviser=?, NumberOfAttendees=?, AttendingSchools=?, AttendingEmployers=?,  PromotesApprenticeships=?, PromotesWelshLanguage=?" +
                 "EmployerLogo=?, GivesSiteExperience=?, GivesSiteVisits=?, GivesWorkshops=?, GivesPresentations=?, AttendsCareerFairs=?," +
-                "ChallengesGenderStereoTypes=?";
+                "ChallengesGenderStereoTypes=? WHERE EventlID =?";
 
         return jdbcTemplate().update(updateSql, EventName, TypeOfEvent, isPublic, isCancelled, PostCode, NameOfAdviser,
                 NumberOfAttendees, AttendingSchools, AttendingEmployers, PromotesApprenticeships, PromotesWelshLanguage,
-                ChallengesGenderStereoTypes);
+                ChallengesGenderStereoTypes, EventID);
     }
 
     ///////////////////////////////////// DELETE ALL METHODS ///////////////////////////////////////////////
