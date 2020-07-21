@@ -7,7 +7,7 @@ import java.util.Date;
 public class Event {
 
     private int EventID;
-    private String Name;
+    private String EventName;
     private int TypeOfEvent;
     private Boolean isPublic;
     private Boolean isCancelled;
@@ -20,9 +20,9 @@ public class Event {
     private Boolean PromotesWelshLanguage;
     private Boolean ChallengesGenderStereotypes;
 
-    public Event(int eventID, String name, int typeOfEvent, Boolean isPublic, Boolean isCancelled, String postCode, String nameOfAdviser, String numberOfAttendees, int attendingSchools, int attendingEmployers, Boolean promotesApprenticeships, Boolean promotesWelshLanguage, Boolean challengesGenderStereotypes) {
+    public Event(int eventID, String eventName, int typeOfEvent, Boolean isPublic, Boolean isCancelled, String postCode, String nameOfAdviser, String numberOfAttendees, int attendingSchools, int attendingEmployers, Boolean promotesApprenticeships, Boolean promotesWelshLanguage, Boolean challengesGenderStereotypes) {
         EventID = eventID;
-        Name = name;
+        EventName = eventName;
         TypeOfEvent = typeOfEvent;
         this.isPublic = isPublic;
         this.isCancelled = isCancelled;
@@ -36,8 +36,8 @@ public class Event {
         ChallengesGenderStereotypes = challengesGenderStereotypes;
     }
 
-    public Event(String name, int typeOfEvent, Boolean isPublic, Boolean isCancelled, String postCode, String nameOfAdviser, String numberOfAttendees, int attendingSchools, int attendingEmployers, Boolean promotesApprenticeships, Boolean promotesWelshLanguage, Boolean challengesGenderStereotypes) {
-        Name = name;
+    public Event(String eventName, int typeOfEvent, Boolean isPublic, Boolean isCancelled, String postCode, String nameOfAdviser, String numberOfAttendees, int attendingSchools, int attendingEmployers, Boolean promotesApprenticeships, Boolean promotesWelshLanguage, Boolean challengesGenderStereotypes) {
+        EventName = eventName;
         TypeOfEvent = typeOfEvent;
         this.isPublic = isPublic;
         this.isCancelled = isCancelled;
@@ -59,12 +59,12 @@ public class Event {
         EventID = eventID;
     }
 
-    public String getName() {
-        return Name;
+    public String getEventName() {
+        return EventName;
     }
 
-    public void setName(String name) {
-        Name = name;
+    public void setEventName(String eventName) {
+        EventName = eventName;
     }
 
     public int getTypeOfEvent() {

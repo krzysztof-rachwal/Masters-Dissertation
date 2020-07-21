@@ -29,7 +29,7 @@ public class EmployerQueries extends DBQueries {
                         rs.getBoolean("GivesPresentations"), rs.getBoolean("AttendsCareerFairs"), rs.getBoolean("GivesWebinars"),
                         rs.getBoolean("WorksWithPrimaryPupils"), rs.getBoolean("UseOfModernForeignLanguage"),
                         rs.getBoolean("RunsBusinessInWelsh"), rs.getBoolean("CanDeliverToSchoolsInWelsh"),
-                        rs.getBoolean("HasApprenticeshipProgramm"), rs.getInt("SchoolsPreferences"), rs.getString("Employerscol"))
+                        rs.getBoolean("HasApprenticeshipProgramme"), rs.getInt("SchoolsPreferences"))
         );
     }
 
@@ -47,7 +47,7 @@ public class EmployerQueries extends DBQueries {
                         rs.getBoolean("GivesPresentations"), rs.getBoolean("AttendsCareerFairs"), rs.getBoolean("GivesWebinars"),
                         rs.getBoolean("WorksWithPrimaryPupils"), rs.getBoolean("UseOfModernForeignLanguage"),
                         rs.getBoolean("RunsBusinessInWelsh"), rs.getBoolean("CanDeliverToSchoolsInWelsh"),
-                        rs.getBoolean("HasApprenticeshipProgramm"), rs.getInt("SchoolsPreferences"), rs.getString("Employerscol"))
+                        rs.getBoolean("HasApprenticeshipProgramme"), rs.getInt("SchoolsPreferences"))
         );
         return employerInfo.get(0);
     }
@@ -59,21 +59,21 @@ public class EmployerQueries extends DBQueries {
                                  String employerPostcode, String email, String phone, String website, int numberOfEmployees, String companySummary,
                                  String notes, String employerDocumentsAndVideos, String employerLogo, Boolean givesSiteExperience, Boolean givesSiteVisits,
                                  Boolean givesWorkshops, Boolean givesPresentations, Boolean attendsCareerFairs, Boolean givesWebinars, Boolean worksWithPrimaryPupils,
-                                 Boolean useOfModernForeignLanguage, Boolean runsBusinessInWelsh, Boolean canDeliverToSchoolsInWelsh, Boolean hasApprenticeshipProgramm,
-                                 int schoolPreferences, String employerscol) throws DataAccessException {
+                                 Boolean useOfModernForeignLanguage, Boolean runsBusinessInWelsh, Boolean canDeliverToSchoolsInWelsh, Boolean hasApprenticeshipProgramme,
+                                 int schoolPreferences) throws DataAccessException {
 
         String insertSql = "INSERT TO Employer Employer(statusOfEmployer, employerName, employerAddressCity, employerAddressStreet, employerAddressNumber," +
                 "                                   employerPostcode, email, phone, website, numberOfEmployees,  companySummary, notes, employerDocumentsAndVideos, " +
                 "                                   employerLogo, givesSiteExperience, givesSiteVisits, givesWorkshops, givesPresentations, attendsCareerFairs," +
                 "                                   givesWebinars,  worksWithPrimaryPupils, useOfModernForeignLanguage, runsBusinessInWelsh, canDeliverToSchoolsInWelsh," +
-                "                                   hasApprenticeshipProgramm, schoolPreferences, employerscol)" +
-                "                                  VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                "                                   hasApprenticeshipProgramme, schoolPreferences)" +
+                "                                  VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
         return jdbcTemplate().update(insertSql, statusOfEmployer, employerName, employerAddressCity, employerAddressStreet, employerAddressNumber,
                 employerPostcode, email, phone, website, numberOfEmployees, companySummary, notes, employerDocumentsAndVideos,
                 employerLogo, givesSiteExperience, givesSiteVisits, givesWorkshops, givesPresentations, attendsCareerFairs,
                 givesWebinars, worksWithPrimaryPupils, useOfModernForeignLanguage, runsBusinessInWelsh, canDeliverToSchoolsInWelsh,
-                hasApprenticeshipProgramm, schoolPreferences, employerscol);
+                hasApprenticeshipProgramme, schoolPreferences);
 
     }
 
@@ -83,20 +83,20 @@ public class EmployerQueries extends DBQueries {
                                   String employerPostcode, String email, String phone, String website, int numberOfEmployees, String companySummary,
                                   String notes, String employerDocumentsAndVideos, String employerLogo, Boolean givesSiteExperience, Boolean givesSiteVisits,
                                   Boolean givesWorkshops, Boolean givesPresentations, Boolean attendsCareerFairs, Boolean givesWebinars, Boolean worksWithPrimaryPupils,
-                                  Boolean useOfModernForeignLanguage, Boolean runsBusinessInWelsh, Boolean canDeliverToSchoolsInWelsh, Boolean hasApprenticeshipProgramm,
-                                  int schoolPreferences, String employerscol) throws DataAccessException {
+                                  Boolean useOfModernForeignLanguage, Boolean runsBusinessInWelsh, Boolean canDeliverToSchoolsInWelsh, Boolean hasApprenticeshipProgramme,
+                                  int schoolPreferences) throws DataAccessException {
 
         String updateSql = "UPDATE Employer SET StatusOfEmployer =?, EmployerName = ?, EmployerAddressCity =?, EmployerAddressStreet=?, EmployerAddressNumber=?," +
                 "EmployerPostcode=?, Email=?, Phone=?, Website=?, NumberOfEmployees=?,  CompanySummary=?, Notes=?, EmployerDocumentsAndVideos=?" +
                 "EmployerLogo=?, GivesSiteExperience=?, GivesSiteVisits=?, GivesWorkshops=?, GivesPresentations=?, AttendsCareerFairs=?," +
                 "GivesWebinars=?,  WorksWithPrimaryPupils=?, UseOfModernForeignLanguage=?, RunsBusinessInWelsh=?, CanDeliverToSchoolsInWelsh=?," +
-                "HasApprenticeshipProgramm=?, SchoolPreferences=?, Employerscol=? WHERE EmployerID =?";
+                "HasApprenticeshipProgramme=?, SchoolPreferences=? WHERE EmployerID =?";
 
-        return jdbcTemplate().update(updateSql, employerId, statusOfEmployer, employerName, employerAddressCity, employerAddressStreet, employerAddressNumber,
+        return jdbcTemplate().update(updateSql, statusOfEmployer, employerName, employerAddressCity, employerAddressStreet, employerAddressNumber,
                 employerPostcode, email, phone, website, numberOfEmployees, companySummary, notes, employerDocumentsAndVideos,
                 employerLogo, givesSiteExperience, givesSiteVisits, givesWorkshops, givesPresentations, attendsCareerFairs,
                 givesWebinars, worksWithPrimaryPupils, useOfModernForeignLanguage, runsBusinessInWelsh, canDeliverToSchoolsInWelsh,
-                hasApprenticeshipProgramm, schoolPreferences, employerscol);
+                hasApprenticeshipProgramme, schoolPreferences);
     }
 
 

@@ -27,13 +27,11 @@ public class Employer {
     private Boolean UseOfModernForeignLanguage;
     private Boolean RunsBusinessInWelsh;
     private Boolean CanDeliverToSchoolsInWelsh;
-    private Boolean HasApprenticeshipProgramm;
+    private Boolean HasApprenticeshipProgramme;
     private int SchoolPreferences;
-    private String Employerscol;
 
 
-
-    public Employer(int employerID, int statusOfEmployer, String employerName, String employerAddressCity, String employerAddressStreet, String employerAddressNumber, String employerPostcode, String email, String phone, String website, int numberOfEmployees, String companySummary, String notes, String employerDocumentsAndVideos, String employerLogo, Boolean givesSiteExperience, Boolean givesSiteVisits, Boolean givesWorkshops, Boolean givesPresentations, Boolean attendsCareerFairs, Boolean givesWebinars, Boolean worksWithPrimaryPupils, Boolean useOfModernForeignLanguage, Boolean runsBusinessInWelsh, Boolean canDeliverToSchoolsInWelsh, Boolean hasApprenticeshipProgramm, int schoolPreferences, String employerscol) {
+    public Employer(int employerID, int statusOfEmployer, String employerName, String employerAddressCity, String employerAddressStreet, String employerAddressNumber, String employerPostcode, String email, String phone, String website, int numberOfEmployees, String companySummary, String notes, String employerDocumentsAndVideos, String employerLogo, Boolean givesSiteExperience, Boolean givesSiteVisits, Boolean givesWorkshops, Boolean givesPresentations, Boolean attendsCareerFairs, Boolean givesWebinars, Boolean worksWithPrimaryPupils, Boolean useOfModernForeignLanguage, Boolean runsBusinessInWelsh, Boolean canDeliverToSchoolsInWelsh, Boolean hasApprenticeshipProgramme, int schoolPreferences) {
         EmployerID = employerID;
         StatusOfEmployer = statusOfEmployer;
         EmployerName = employerName;
@@ -59,12 +57,11 @@ public class Employer {
         UseOfModernForeignLanguage = useOfModernForeignLanguage;
         RunsBusinessInWelsh = runsBusinessInWelsh;
         CanDeliverToSchoolsInWelsh = canDeliverToSchoolsInWelsh;
-        HasApprenticeshipProgramm = hasApprenticeshipProgramm;
+        HasApprenticeshipProgramme = hasApprenticeshipProgramme;
         SchoolPreferences = schoolPreferences;
-        Employerscol = employerscol;
     }
 
-    public Employer(int statusOfEmployer, String employerName, String employerAddressCity, String employerAddressStreet, String employerAddressNumber, String employerPostcode, String email, String phone, String website, int numberOfEmployees, String companySummary, String notes, String employerDocumentsAndVideos, String employerLogo, Boolean givesSiteExperience, Boolean givesSiteVisits, Boolean givesWorkshops, Boolean givesPresentations, Boolean attendsCareerFairs, Boolean givesWebinars, Boolean worksWithPrimaryPupils, Boolean useOfModernForeignLanguage, Boolean runsBusinessInWelsh, Boolean canDeliverToSchoolsInWelsh, Boolean hasApprenticeshipProgramm, int schoolPreferences, String employerscol) {
+    public Employer(int statusOfEmployer, String employerName, String employerAddressCity, String employerAddressStreet, String employerAddressNumber, String employerPostcode, String email, String phone, String website, int numberOfEmployees, String companySummary, String notes, String employerDocumentsAndVideos, String employerLogo, Boolean givesSiteExperience, Boolean givesSiteVisits, Boolean givesWorkshops, Boolean givesPresentations, Boolean attendsCareerFairs, Boolean givesWebinars, Boolean worksWithPrimaryPupils, Boolean useOfModernForeignLanguage, Boolean runsBusinessInWelsh, Boolean canDeliverToSchoolsInWelsh, Boolean hasApprenticeshipProgramme, int schoolPreferences) {
         StatusOfEmployer = statusOfEmployer;
         EmployerName = employerName;
         EmployerAddressCity = employerAddressCity;
@@ -89,9 +86,8 @@ public class Employer {
         UseOfModernForeignLanguage = useOfModernForeignLanguage;
         RunsBusinessInWelsh = runsBusinessInWelsh;
         CanDeliverToSchoolsInWelsh = canDeliverToSchoolsInWelsh;
-        HasApprenticeshipProgramm = hasApprenticeshipProgramm;
+        HasApprenticeshipProgramme = hasApprenticeshipProgramme;
         SchoolPreferences = schoolPreferences;
-        Employerscol = employerscol;
     }
 
     public int getEmployerID() {
@@ -294,12 +290,12 @@ public class Employer {
         CanDeliverToSchoolsInWelsh = canDeliverToSchoolsInWelsh;
     }
 
-    public Boolean getHasApprenticeshipProgramm() {
-        return HasApprenticeshipProgramm;
+    public Boolean getHasApprenticeshipProgramme() {
+        return HasApprenticeshipProgramme;
     }
 
-    public void setHasApprenticeshipProgramm(Boolean hasApprenticeshipProgramm) {
-        HasApprenticeshipProgramm = hasApprenticeshipProgramm;
+    public void setHasApprenticeshipProgramme(Boolean hasApprenticeshipProgramme) {
+        HasApprenticeshipProgramme = hasApprenticeshipProgramme;
     }
 
     public int getSchoolPreferences() {
@@ -308,14 +304,6 @@ public class Employer {
 
     public void setSchoolPreferences(int schoolPreferences) {
         SchoolPreferences = schoolPreferences;
-    }
-
-    public String getEmployerscol() {
-        return Employerscol;
-    }
-
-    public void setEmployerscol(String employerscol) {
-        Employerscol = employerscol;
     }
 }
 
