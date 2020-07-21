@@ -17,6 +17,12 @@ body {
     margin: 10px;
 }
 
+.well2{
+    padding: 15px;
+    margin: 0px;
+    background-color: #DDDDDD;
+}
+
 .container-headline{
     max-width: 987px;
     padding-right: 15px;
@@ -37,11 +43,18 @@ body {
     padding: 5px 20px !important;
 }
 
+.buttonUpdateModal{
+     /*background:#fff ;*/
+     color:#007066 ;
+     padding: 5px 20px !important;
+ }
+
 .buttonUpdate{
     background:#fff ;
     color:#007066 ;
     padding: 5px 20px !important;
 }
+
 
 .buttonDelete:focus , .buttonUpdate:focus {
     background: #007066;
