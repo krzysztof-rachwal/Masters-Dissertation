@@ -13,14 +13,14 @@ public class Event {
     private Boolean isCancelled;
     private String PostCode;
     private String NameOfAdviser;
-    private String NumberOfAteendees;
+    private String NumberOfAttendees;
     private int AttendingSchools;
     private int AttendingEmployers;
-    private Boolean PromotesApprentinceships;
+    private Boolean PromotesApprenticeships;
     private Boolean PromotesWelshLanguage;
-    private Boolean ChalangesGenderStereotypes;
+    private Boolean ChallengesGenderStereotypes;
 
-    public Event(int eventID, String name, int typeOfEvent, Boolean isPublic, Boolean isCancelled, String postCode, String nameOfAdviser, String numberOfAteendees, int attendingSchools, int attendingEmployers, Boolean promotesApprentinceships, Boolean promotesWelshLanguage, Boolean chalangesGenderStereotypes) {
+    public Event(int eventID, String name, int typeOfEvent, Boolean isPublic, Boolean isCancelled, String postCode, String nameOfAdviser, String numberOfAttendees, int attendingSchools, int attendingEmployers, Boolean promotesApprenticeships, Boolean promotesWelshLanguage, Boolean challengesGenderStereotypes) {
         EventID = eventID;
         Name = name;
         TypeOfEvent = typeOfEvent;
@@ -28,27 +28,27 @@ public class Event {
         this.isCancelled = isCancelled;
         PostCode = postCode;
         NameOfAdviser = nameOfAdviser;
-        NumberOfAteendees = numberOfAteendees;
+        NumberOfAttendees = numberOfAttendees;
         AttendingSchools = attendingSchools;
         AttendingEmployers = attendingEmployers;
-        PromotesApprentinceships = promotesApprentinceships;
+        PromotesApprenticeships = promotesApprenticeships;
         PromotesWelshLanguage = promotesWelshLanguage;
-        ChalangesGenderStereotypes = chalangesGenderStereotypes;
+        ChallengesGenderStereotypes = challengesGenderStereotypes;
     }
 
-    public Event(String name, int typeOfEvent, Boolean isPublic, Boolean isCancelled, String postCode, String nameOfAdviser, String numberOfAteendees, int attendingSchools, int attendingEmployers, Boolean promotesApprentinceships, Boolean promotesWelshLanguage, Boolean chalangesGenderStereotypes) {
+    public Event(String name, int typeOfEvent, Boolean isPublic, Boolean isCancelled, String postCode, String nameOfAdviser, String numberOfAttendees, int attendingSchools, int attendingEmployers, Boolean promotesApprenticeships, Boolean promotesWelshLanguage, Boolean challengesGenderStereotypes) {
         Name = name;
         TypeOfEvent = typeOfEvent;
         this.isPublic = isPublic;
         this.isCancelled = isCancelled;
         PostCode = postCode;
         NameOfAdviser = nameOfAdviser;
-        NumberOfAteendees = numberOfAteendees;
+        NumberOfAttendees = numberOfAttendees;
         AttendingSchools = attendingSchools;
         AttendingEmployers = attendingEmployers;
-        PromotesApprentinceships = promotesApprentinceships;
+        PromotesApprenticeships = promotesApprenticeships;
         PromotesWelshLanguage = promotesWelshLanguage;
-        ChalangesGenderStereotypes = chalangesGenderStereotypes;
+        ChallengesGenderStereotypes = challengesGenderStereotypes;
     }
 
     public int getEventID() {
@@ -107,12 +107,12 @@ public class Event {
         NameOfAdviser = nameOfAdviser;
     }
 
-    public String getNumberOfAteendees() {
-        return NumberOfAteendees;
+    public String getNumberOfAttendees() {
+        return NumberOfAttendees;
     }
 
-    public void setNumberOfAteendees(String numberOfAteendees) {
-        NumberOfAteendees = numberOfAteendees;
+    public void setNumberOfAttendees(String numberOfAttendees) {
+        NumberOfAttendees = numberOfAttendees;
     }
 
     public int getAttendingSchools() {
@@ -131,12 +131,12 @@ public class Event {
         AttendingEmployers = attendingEmployers;
     }
 
-    public Boolean getPromotesApprentinceships() {
-        return PromotesApprentinceships;
+    public Boolean getPromotesApprenticeships() {
+        return PromotesApprenticeships;
     }
 
-    public void setPromotesApprentinceships(Boolean promotesApprentinceships) {
-        PromotesApprentinceships = promotesApprentinceships;
+    public void setPromotesApprenticeships(Boolean promotesApprenticeships) {
+        PromotesApprenticeships = promotesApprenticeships;
     }
 
     public Boolean getPromotesWelshLanguage() {
@@ -147,11 +147,11 @@ public class Event {
         PromotesWelshLanguage = promotesWelshLanguage;
     }
 
-    public Boolean getChalangesGenderStereotypes() {
-        return ChalangesGenderStereotypes;
+    public Boolean getChallengesGenderStereotypes() {
+        return ChallengesGenderStereotypes;
     }
 
-    public void setChalangesGenderStereotypes(Boolean chalangesGenderStereotypes) {
-        ChalangesGenderStereotypes = chalangesGenderStereotypes;
+    public void setChallengesGenderStereotypes(Boolean challengesGenderStereotypes) {
+        ChallengesGenderStereotypes = challengesGenderStereotypes;
     }
 }
