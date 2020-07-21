@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import javax.xml.crypto.Data;
 import java.util.List;
 
 public class EmployerQueries extends DBQueries {
@@ -51,8 +52,8 @@ public class EmployerQueries extends DBQueries {
         return employerInfo.get(0);
     }
 
-    ///////////////////////////////////// UPDATE ALL METHODS ///////////////////////////////////////////////
-    //1. Create Employer Information
+    ///////////////////////////////////// CREATE ALL METHODS ///////////////////////////////////////////////
+    //1. Create New Employer
 
     public int  createNewEmployer(int statusOfEmployer, String employerName, String employerAddressCity, String employerAddressStreet, String employerAddressNumber,
                                   String employerPostcode, String email, String phone, String website, int numberOfEmployees, String companySummary,
@@ -74,10 +75,30 @@ public class EmployerQueries extends DBQueries {
                 givesWebinars,  worksWithPrimaryPupils, useOfModernForeignLanguage, runsBusinessInWelsh, canDeliverToSchoolsInWelsh,
                 hasApprenticeshipProgramm, schoolPreferences, employerscol);
 
+    }
 
+    ///////////////////////////////////// UPDATE ALL METHODS ///////////////////////////////////////////////
+    //1. Update Employer by Id
+    public Integer updateEmployer(int employerId, int statusOfEmployer, String employerName, String employerAddressCity, String employerAddressStreet, String employerAddressNumber,
+                                  String employerPostcode, String email, String phone, String website, int numberOfEmployees, String companySummary,
+                                  String notes, String employerDocumentsAndVideos, String employerLogo, Boolean givesSiteExperience, Boolean givesSiteVisits,
+                                  Boolean givesWorkshops, Boolean givesPresentations, Boolean attendsCareerFairs, Boolean givesWebinars, Boolean worksWithPrimaryPupils,
+                                  Boolean useOfModernForeignLanguage, Boolean runsBusinessInWelsh, Boolean canDeliverToSchoolsInWelsh, Boolean hasApprenticeshipProgramm,
+                                  int schoolPreferences, String employerscol) throws DataAccessException {
 
+        String updateSql = "UPDATE Employer SET StatusOfEmployer =?, EmployerName = ?, EmployerAddressCity =?, EmployerAddressStreet=?, EmployerAddressNumber=?," +
+                "EmployerPostcode=?, Email=?, Phone=?, Website=?, NumberOfEmployees=?,  CompanySummary=?, Notes=?, EmployerDocumentsAndVideos=?" +
+                "EmployerLogo=?, GivesSiteExperience=?, GivesSiteVisits=?, GivesWorkshops=?, GivesPresentations=?, AttendsCareerFairs=?," +
+                "GivesWebinars=?,  WorksWithPrimaryPupils=?, UseOfModernForeignLanguage=?, RunsBusinessInWelsh=?, CanDeliverToSchoolsInWelsh=?," +
+                "HasApprenticeshipProgramm=?, SchoolPreferences=?, Employerscol=? WHERE EmployerID =?";
+
+        return jdbcTemplate().update(updateSql, employerId, statusOfEmployer, employerName, employerAddressCity, employerAddressStreet, employerAddressNumber,
+                employerPostcode, email, phone, website, numberOfEmployees,  companySummary, notes, employerDocumentsAndVideos,
+                employerLogo, givesSiteExperience, givesSiteVisits, givesWorkshops, givesPresentations, attendsCareerFairs,
+                givesWebinars,  worksWithPrimaryPupils, useOfModernForeignLanguage, runsBusinessInWelsh, canDeliverToSchoolsInWelsh,
+                hasApprenticeshipProgramm, schoolPreferences, employerscol);
     }
 
 
     ///////////////////////////////////// DELETE ALL METHODS ///////////////////////////////////////////////
-}
+
