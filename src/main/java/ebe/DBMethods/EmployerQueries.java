@@ -17,37 +17,37 @@ public class EmployerQueries extends DBQueries {
 
     ///////////////////////////////////// GET ALL METHODS ///////////////////////////////////////////////
     // 1. Get All Employers
-    public List<Employer> getAllEmployers() throws DataAccessException{
+    public List<Employer> getAllEmployers() throws DataAccessException {
         return jdbcTemplate().query("SELECT * FROM Employer", new Object[]{},
                 (rs, i) -> new Employer(rs.getInt("EmployerID"), rs.getInt("StatusOfEmployer"),
                         rs.getString("EmployerName"), rs.getString("EmployerAddressCity"),
-                        rs.getString("EmployerAddressStreet"),rs.getString("EmployerAddressNumber"),
-                        rs.getString("EmployerPostCode"),rs.getString("Email"), rs.getString("Phone"),
+                        rs.getString("EmployerAddressStreet"), rs.getString("EmployerAddressNumber"),
+                        rs.getString("EmployerPostCode"), rs.getString("Email"), rs.getString("Phone"),
                         rs.getString("Website"), rs.getInt("NumberOfEmployees"), rs.getString("CompanySummary"),
                         rs.getString("Notes"), rs.getString("EmployerDocumentsAndVideos"), rs.getString("EmployerLogo"),
-                        rs.getBoolean("GivesSiteExperience"),rs.getBoolean("GivesSiteVisits"), rs.getBoolean("GivesWorkshops") ,
-                        rs.getBoolean("GivesPresentations"),rs.getBoolean("AttendsCareerFairs"), rs.getBoolean("GivesWebinars"),
-                        rs.getBoolean("WorksWithPrimaryPupils"),rs.getBoolean("UseOfModernForeignLanguage"),
+                        rs.getBoolean("GivesSiteExperience"), rs.getBoolean("GivesSiteVisits"), rs.getBoolean("GivesWorkshops"),
+                        rs.getBoolean("GivesPresentations"), rs.getBoolean("AttendsCareerFairs"), rs.getBoolean("GivesWebinars"),
+                        rs.getBoolean("WorksWithPrimaryPupils"), rs.getBoolean("UseOfModernForeignLanguage"),
                         rs.getBoolean("RunsBusinessInWelsh"), rs.getBoolean("CanDeliverToSchoolsInWelsh"),
-                        rs.getBoolean("HasApprenticeshipProgramm"),rs.getInt("SchoolsPreferences"),rs.getString("Employerscol"))
-                );
+                        rs.getBoolean("HasApprenticeshipProgramm"), rs.getInt("SchoolsPreferences"), rs.getString("Employerscol"))
+        );
     }
 
     // 2. Get Employer Information by Id
-    public Employer getEmployerDetailsById(int employerId) throws DataAccessException{
+    public Employer getEmployerDetailsById(int employerId) throws DataAccessException {
         String getSql = String.format("SELECT * FROM Employer WHERE EmployerID = \"%s\" LIMIT 1", employerId);
-        List<Employer>  employerInfo = jdbcTemplate().query(getSql, new Object[]{},
+        List<Employer> employerInfo = jdbcTemplate().query(getSql, new Object[]{},
                 (rs, i) -> new Employer(rs.getInt("EmployerID"), rs.getInt("StatusOfEmployer"),
                         rs.getString("EmployerName"), rs.getString("EmployerAddressCity"),
-                        rs.getString("EmployerAddressStreet"),rs.getString("EmployerAddressNumber"),
-                        rs.getString("EmployerPostCode"),rs.getString("Email"), rs.getString("Phone"),
+                        rs.getString("EmployerAddressStreet"), rs.getString("EmployerAddressNumber"),
+                        rs.getString("EmployerPostCode"), rs.getString("Email"), rs.getString("Phone"),
                         rs.getString("Website"), rs.getInt("NumberOfEmployees"), rs.getString("CompanySummary"),
                         rs.getString("Notes"), rs.getString("EmployerDocumentsAndVideos"), rs.getString("EmployerLogo"),
-                        rs.getBoolean("GivesSiteExperience"),rs.getBoolean("GivesSiteVisits"), rs.getBoolean("GivesWorkshops") ,
-                        rs.getBoolean("GivesPresentations"),rs.getBoolean("AttendsCareerFairs"), rs.getBoolean("GivesWebinars"),
-                        rs.getBoolean("WorksWithPrimaryPupils"),rs.getBoolean("UseOfModernForeignLanguage"),
+                        rs.getBoolean("GivesSiteExperience"), rs.getBoolean("GivesSiteVisits"), rs.getBoolean("GivesWorkshops"),
+                        rs.getBoolean("GivesPresentations"), rs.getBoolean("AttendsCareerFairs"), rs.getBoolean("GivesWebinars"),
+                        rs.getBoolean("WorksWithPrimaryPupils"), rs.getBoolean("UseOfModernForeignLanguage"),
                         rs.getBoolean("RunsBusinessInWelsh"), rs.getBoolean("CanDeliverToSchoolsInWelsh"),
-                        rs.getBoolean("HasApprenticeshipProgramm"),rs.getInt("SchoolsPreferences"),rs.getString("Employerscol"))
+                        rs.getBoolean("HasApprenticeshipProgramm"), rs.getInt("SchoolsPreferences"), rs.getString("Employerscol"))
         );
         return employerInfo.get(0);
     }
@@ -55,12 +55,12 @@ public class EmployerQueries extends DBQueries {
     ///////////////////////////////////// CREATE ALL METHODS ///////////////////////////////////////////////
     //1. Create New Employer
 
-    public int  createNewEmployer(int statusOfEmployer, String employerName, String employerAddressCity, String employerAddressStreet, String employerAddressNumber,
-                                  String employerPostcode, String email, String phone, String website, int numberOfEmployees, String companySummary,
-                                  String notes, String employerDocumentsAndVideos, String employerLogo, Boolean givesSiteExperience, Boolean givesSiteVisits,
-                                  Boolean givesWorkshops, Boolean givesPresentations, Boolean attendsCareerFairs, Boolean givesWebinars, Boolean worksWithPrimaryPupils,
-                                  Boolean useOfModernForeignLanguage, Boolean runsBusinessInWelsh, Boolean canDeliverToSchoolsInWelsh, Boolean hasApprenticeshipProgramm,
-                                  int schoolPreferences, String employerscol) throws DataAccessException {
+    public int createNewEmployer(int statusOfEmployer, String employerName, String employerAddressCity, String employerAddressStreet, String employerAddressNumber,
+                                 String employerPostcode, String email, String phone, String website, int numberOfEmployees, String companySummary,
+                                 String notes, String employerDocumentsAndVideos, String employerLogo, Boolean givesSiteExperience, Boolean givesSiteVisits,
+                                 Boolean givesWorkshops, Boolean givesPresentations, Boolean attendsCareerFairs, Boolean givesWebinars, Boolean worksWithPrimaryPupils,
+                                 Boolean useOfModernForeignLanguage, Boolean runsBusinessInWelsh, Boolean canDeliverToSchoolsInWelsh, Boolean hasApprenticeshipProgramm,
+                                 int schoolPreferences, String employerscol) throws DataAccessException {
 
         String updateSql = "INSERT TO Employer Employer(statusOfEmployer, employerName, employerAddressCity, employerAddressStreet, employerAddressNumber," +
                 "                                   employerPostcode, email, phone, website, numberOfEmployees,  companySummary, notes, employerDocumentsAndVideos, " +
@@ -70,9 +70,9 @@ public class EmployerQueries extends DBQueries {
                 "                                  VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
         return jdbcTemplate().update(updateSql, statusOfEmployer, employerName, employerAddressCity, employerAddressStreet, employerAddressNumber,
-                employerPostcode, email, phone, website, numberOfEmployees,  companySummary, notes, employerDocumentsAndVideos,
+                employerPostcode, email, phone, website, numberOfEmployees, companySummary, notes, employerDocumentsAndVideos,
                 employerLogo, givesSiteExperience, givesSiteVisits, givesWorkshops, givesPresentations, attendsCareerFairs,
-                givesWebinars,  worksWithPrimaryPupils, useOfModernForeignLanguage, runsBusinessInWelsh, canDeliverToSchoolsInWelsh,
+                givesWebinars, worksWithPrimaryPupils, useOfModernForeignLanguage, runsBusinessInWelsh, canDeliverToSchoolsInWelsh,
                 hasApprenticeshipProgramm, schoolPreferences, employerscol);
 
     }
@@ -93,12 +93,18 @@ public class EmployerQueries extends DBQueries {
                 "HasApprenticeshipProgramm=?, SchoolPreferences=?, Employerscol=? WHERE EmployerID =?";
 
         return jdbcTemplate().update(updateSql, employerId, statusOfEmployer, employerName, employerAddressCity, employerAddressStreet, employerAddressNumber,
-                employerPostcode, email, phone, website, numberOfEmployees,  companySummary, notes, employerDocumentsAndVideos,
+                employerPostcode, email, phone, website, numberOfEmployees, companySummary, notes, employerDocumentsAndVideos,
                 employerLogo, givesSiteExperience, givesSiteVisits, givesWorkshops, givesPresentations, attendsCareerFairs,
-                givesWebinars,  worksWithPrimaryPupils, useOfModernForeignLanguage, runsBusinessInWelsh, canDeliverToSchoolsInWelsh,
+                givesWebinars, worksWithPrimaryPupils, useOfModernForeignLanguage, runsBusinessInWelsh, canDeliverToSchoolsInWelsh,
                 hasApprenticeshipProgramm, schoolPreferences, employerscol);
     }
 
 
     ///////////////////////////////////// DELETE ALL METHODS ///////////////////////////////////////////////
+    //1. DELETE EMPLOYER
+    public Integer deleteEmployer(int employerId) throws DataAccessException {
+        String deleteSql = String.format("DELETE FROM Employer WHERE EmployerID = '%s'",employerId);
+        return jdbcTemplate().update(deleteSql);
+    }
 
+}
