@@ -33,7 +33,7 @@ public class EmployerQueries extends DBQueries {
         );
     }
 
-    // 2. Get Employer Information by Id
+    // 2. Get Employer by Id
     public Employer getEmployerDetailsById(int employerId) throws DataAccessException {
         String getSql = String.format("SELECT * FROM Employer WHERE EmployerID = \"%s\" LIMIT 1", employerId);
         List<Employer> employerInfo = jdbcTemplate().query(getSql, new Object[]{},
@@ -62,14 +62,14 @@ public class EmployerQueries extends DBQueries {
                                  Boolean useOfModernForeignLanguage, Boolean runsBusinessInWelsh, Boolean canDeliverToSchoolsInWelsh, Boolean hasApprenticeshipProgramm,
                                  int schoolPreferences, String employerscol) throws DataAccessException {
 
-        String updateSql = "INSERT TO Employer Employer(statusOfEmployer, employerName, employerAddressCity, employerAddressStreet, employerAddressNumber," +
+        String insertSql = "INSERT TO Employer Employer(statusOfEmployer, employerName, employerAddressCity, employerAddressStreet, employerAddressNumber," +
                 "                                   employerPostcode, email, phone, website, numberOfEmployees,  companySummary, notes, employerDocumentsAndVideos, " +
                 "                                   employerLogo, givesSiteExperience, givesSiteVisits, givesWorkshops, givesPresentations, attendsCareerFairs," +
                 "                                   givesWebinars,  worksWithPrimaryPupils, useOfModernForeignLanguage, runsBusinessInWelsh, canDeliverToSchoolsInWelsh," +
                 "                                   hasApprenticeshipProgramm, schoolPreferences, employerscol)" +
                 "                                  VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
-        return jdbcTemplate().update(updateSql, statusOfEmployer, employerName, employerAddressCity, employerAddressStreet, employerAddressNumber,
+        return jdbcTemplate().update(insertSql, statusOfEmployer, employerName, employerAddressCity, employerAddressStreet, employerAddressNumber,
                 employerPostcode, email, phone, website, numberOfEmployees, companySummary, notes, employerDocumentsAndVideos,
                 employerLogo, givesSiteExperience, givesSiteVisits, givesWorkshops, givesPresentations, attendsCareerFairs,
                 givesWebinars, worksWithPrimaryPupils, useOfModernForeignLanguage, runsBusinessInWelsh, canDeliverToSchoolsInWelsh,
@@ -101,7 +101,7 @@ public class EmployerQueries extends DBQueries {
 
 
     ///////////////////////////////////// DELETE ALL METHODS ///////////////////////////////////////////////
-    //1. DELETE EMPLOYER
+    //1. DELETE EMPLOYER by Id
     public Integer deleteEmployer(int employerId) throws DataAccessException {
         String deleteSql = String.format("DELETE FROM Employer WHERE EmployerID = '%s'",employerId);
         return jdbcTemplate().update(deleteSql);
