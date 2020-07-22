@@ -18,7 +18,10 @@ import org.springframework.stereotype.Controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class BaseController {
@@ -45,18 +48,25 @@ public class BaseController {
     @GetMapping("/")
     public ModelAndView HomePage(HttpSession session) { ;
         ModelAndView mv = new ModelAndView();
-        ObjectMapper objectMapper = new ObjectMapper();
-//        List<Employer> allEmployers = null;
-//        allEmployers = EmployerQrys.getAllEmployers();
-//        System.out.println(EmployerQrys.getAllEmployers());
-//        System.out.println("--------------------------------------------------------");
-//        System.out.println(EventQrys.getAllEvents());
-//        System.out.println("--------------------------------------------------------");
-//        System.out.println(SchoolQrys.getAllSchools());
-//        System.out.println("--------------------------------------------------------");
-//        System.out.println(VacancyQrys.getAllVacancy());
-        // session = context.getSession();
         mv.setViewName("searchEmployerPage");
+        Employer employerABC = new Employer();
+        List<Employer> employers;
+        employers = EmployerQrys.getAllEmployers();
+        for (Employer employer : employers) {
+//           mv.addObject("employer",employer.getName());
+            System.out.println(employer.getName());
+        }
+
+        Map<String,Object> allEmployers = new HashMap<String,Object>();
+        allEmployers.put("allEmployers", employers);
+        System.out.println(allEmployers);
+        mv.addAllObjects(allEmployers);
+
+
+
+
+        // session = context.getSession();
+
         return mv;
     }
 
@@ -189,8 +199,5 @@ public class BaseController {
     public RedirectView ErrorPage() {
         return new RedirectView("/searchEmployerPage");
     }
-
-
-
 
 }
