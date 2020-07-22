@@ -2,287 +2,286 @@ package ebe.DBClasses;
 
 public class Employer {
 
-    private int employerID;
-    private String name;
-    private String locationCity;
-    private String locationStreet;
-    private String locationNumber;
-    private String locationPostcode;
-    private String contactPersonName;
-    private String telephoneNumber;
-    private String mobileNumber;
-    private String email;
-    private String twitter;
-    private String website;
-    private String sector;
-    private int numberOfEmployers;
-    private String localAuthList;
-    private String companySummary;
-    private Boolean workExperience;
-    private Boolean siteVisits;
-    private Boolean workshops;
-    private Boolean careersFairs;
-    private Boolean webinars;
-    private Boolean workWithPrimarySchools;
-    private Boolean workInForeignLanguage;
-    private String ifYesWhichLanguage;
-    private Boolean worksInWelsh;
-    private Boolean hasApprenticeshipProgramme;
-    private String curriculumAreas;
-    private int schoolID;
+    private int EmployerID;
+    private int StatusOfEmployer;
+    private String Name;
+    private String AddressCity;
+    private String AddressStreet;
+    private String AddressNumber;
+    private String Postcode;
+    private String Email;
+    private String Phone;
+    private String Website;
+    private int NumberOfEmployees;
+    private String CompanySummary;
+    private String Notes;
+    private String LogoLink;
+    private Boolean GivesSiteExperience;
+    private Boolean GivesSiteVisits;
+    private Boolean GivesWorkshops;
+    private Boolean GivesPresentations;
+    private Boolean AttendsCareerFairs;
+    private Boolean GivesWebinars;
+    private Boolean WorksWithPrimaryPupils;
+    private Boolean UseOfModernForeignLanguage;
+    private Boolean RunsBusinessInWelsh;
+    private Boolean CanDeliverToSchoolsInWelsh;
+    private Boolean HasApprenticeshipProgramme;
 
-    public Employer(int employerID, String name, String locationCity, String locationStreet, String locationNumber, String locationPostcode, String contactPersonName, String telephoneNumber, String mobileNumber, String email, String twitter, String website, String sector, int numberOfEmployers, String localAuthList, String companySummary, Boolean workExperience, Boolean siteVisits, Boolean workshops, Boolean careersFairs, Boolean webinars, Boolean workWithPrimarySchools, Boolean workInForeignLanguage, String ifYesWhichLanguage, Boolean worksInWelsh, Boolean hasApprenticeshipProgramme, String curriculumAreas, int schoolID) {
-        this.employerID = employerID;
-        this.name = name;
-        this.locationCity = locationCity;
-        this.locationStreet = locationStreet;
-        this.locationNumber = locationNumber;
-        this.locationPostcode = locationPostcode;
-        this.contactPersonName = contactPersonName;
-        this.telephoneNumber = telephoneNumber;
-        this.mobileNumber = mobileNumber;
-        this.email = email;
-        this.twitter = twitter;
-        this.website = website;
-        this.sector = sector;
-        this.numberOfEmployers = numberOfEmployers;
-        this.localAuthList = localAuthList;
-        this.companySummary = companySummary;
-        this.workExperience = workExperience;
-        this.siteVisits = siteVisits;
-        this.workshops = workshops;
-        this.careersFairs = careersFairs;
-        this.webinars = webinars;
-        this.workWithPrimarySchools = workWithPrimarySchools;
-        this.workInForeignLanguage = workInForeignLanguage;
-        this.ifYesWhichLanguage = ifYesWhichLanguage;
-        this.worksInWelsh = worksInWelsh;
-        this.hasApprenticeshipProgramme = hasApprenticeshipProgramme;
-        this.curriculumAreas = curriculumAreas;
-        this.schoolID = schoolID;
+    public Employer(int employerID, int statusOfEmployer, String name, String addressCity, String addressStreet, String addressNumber, String postcode, String email, String phone, String website, int numberOfEmployees, String companySummary, String notes, String logoLink, Boolean givesSiteExperience, Boolean givesSiteVisits, Boolean givesWorkshops, Boolean givesPresentations, Boolean attendsCareerFairs, Boolean givesWebinars, Boolean worksWithPrimaryPupils, Boolean useOfModernForeignLanguage, Boolean runsBusinessInWelsh, Boolean canDeliverToSchoolsInWelsh, Boolean hasApprenticeshipProgramme) {
+        EmployerID = employerID;
+        StatusOfEmployer = statusOfEmployer;
+        Name = name;
+        AddressCity = addressCity;
+        AddressStreet = addressStreet;
+        AddressNumber = addressNumber;
+        Postcode = postcode;
+        Email = email;
+        Phone = phone;
+        Website = website;
+        NumberOfEmployees = numberOfEmployees;
+        CompanySummary = companySummary;
+        Notes = notes;
+        LogoLink = logoLink;
+        GivesSiteExperience = givesSiteExperience;
+        GivesSiteVisits = givesSiteVisits;
+        GivesWorkshops = givesWorkshops;
+        GivesPresentations = givesPresentations;
+        AttendsCareerFairs = attendsCareerFairs;
+        GivesWebinars = givesWebinars;
+        WorksWithPrimaryPupils = worksWithPrimaryPupils;
+        UseOfModernForeignLanguage = useOfModernForeignLanguage;
+        RunsBusinessInWelsh = runsBusinessInWelsh;
+        CanDeliverToSchoolsInWelsh = canDeliverToSchoolsInWelsh;
+        HasApprenticeshipProgramme = hasApprenticeshipProgramme;
+    }
+
+    public Employer(int statusOfEmployer, String name, String addressCity, String addressStreet, String addressNumber, String postcode, String email, String phone, String website, int numberOfEmployees, String companySummary, String notes, String logoLink, Boolean givesSiteExperience, Boolean givesSiteVisits, Boolean givesWorkshops, Boolean givesPresentations, Boolean attendsCareerFairs, Boolean givesWebinars, Boolean worksWithPrimaryPupils, Boolean useOfModernForeignLanguage, Boolean runsBusinessInWelsh, Boolean canDeliverToSchoolsInWelsh, Boolean hasApprenticeshipProgramme) {
+        StatusOfEmployer = statusOfEmployer;
+        Name = name;
+        AddressCity = addressCity;
+        AddressStreet = addressStreet;
+        AddressNumber = addressNumber;
+        Postcode = postcode;
+        Email = email;
+        Phone = phone;
+        Website = website;
+        NumberOfEmployees = numberOfEmployees;
+        CompanySummary = companySummary;
+        Notes = notes;
+        LogoLink = logoLink;
+        GivesSiteExperience = givesSiteExperience;
+        GivesSiteVisits = givesSiteVisits;
+        GivesWorkshops = givesWorkshops;
+        GivesPresentations = givesPresentations;
+        AttendsCareerFairs = attendsCareerFairs;
+        GivesWebinars = givesWebinars;
+        WorksWithPrimaryPupils = worksWithPrimaryPupils;
+        UseOfModernForeignLanguage = useOfModernForeignLanguage;
+        RunsBusinessInWelsh = runsBusinessInWelsh;
+        CanDeliverToSchoolsInWelsh = canDeliverToSchoolsInWelsh;
+        HasApprenticeshipProgramme = hasApprenticeshipProgramme;
     }
 
     public int getEmployerID() {
-        return employerID;
+        return EmployerID;
     }
 
     public void setEmployerID(int employerID) {
-        this.employerID = employerID;
+        EmployerID = employerID;
+    }
+
+    public int getStatusOfEmployer() {
+        return StatusOfEmployer;
+    }
+
+    public void setStatusOfEmployer(int statusOfEmployer) {
+        StatusOfEmployer = statusOfEmployer;
     }
 
     public String getName() {
-        return name;
+        return Name;
     }
 
     public void setName(String name) {
-        this.name = name;
+        Name = name;
     }
 
-    public String getLocationCity() {
-        return locationCity;
+    public String getAddressCity() {
+        return AddressCity;
     }
 
-    public void setLocationCity(String locationCity) {
-        this.locationCity = locationCity;
+    public void setAddressCity(String addressCity) {
+        AddressCity = addressCity;
     }
 
-    public String getLocationStreet() {
-        return locationStreet;
+    public String getAddressStreet() {
+        return AddressStreet;
     }
 
-    public void setLocationStreet(String locationStreet) {
-        this.locationStreet = locationStreet;
+    public void setAddressStreet(String addressStreet) {
+        AddressStreet = addressStreet;
     }
 
-    public String getLocationNumber() {
-        return locationNumber;
+    public String getAddressNumber() {
+        return AddressNumber;
     }
 
-    public void setLocationNumber(String locationNumber) {
-        this.locationNumber = locationNumber;
+    public void setAddressNumber(String addressNumber) {
+        AddressNumber = addressNumber;
     }
 
-    public String getLocationPostcode() {
-        return locationPostcode;
+    public String getPostcode() {
+        return Postcode;
     }
 
-    public void setLocationPostcode(String locationPostcode) {
-        this.locationPostcode = locationPostcode;
-    }
-
-    public String getContactPersonName() {
-        return contactPersonName;
-    }
-
-    public void setContactPersonName(String contactPersonName) {
-        this.contactPersonName = contactPersonName;
-    }
-
-    public String getTelephoneNumber() {
-        return telephoneNumber;
-    }
-
-    public void setTelephoneNumber(String telephoneNumber) {
-        this.telephoneNumber = telephoneNumber;
-    }
-
-    public String getMobileNumber() {
-        return mobileNumber;
-    }
-
-    public void setMobileNumber(String mobileNumber) {
-        this.mobileNumber = mobileNumber;
+    public void setPostcode(String postcode) {
+        Postcode = postcode;
     }
 
     public String getEmail() {
-        return email;
+        return Email;
     }
 
     public void setEmail(String email) {
-        this.email = email;
+        Email = email;
     }
 
-    public String getTwitter() {
-        return twitter;
+    public String getPhone() {
+        return Phone;
     }
 
-    public void setTwitter(String twitter) {
-        this.twitter = twitter;
+    public void setPhone(String phone) {
+        Phone = phone;
     }
 
     public String getWebsite() {
-        return website;
+        return Website;
     }
 
     public void setWebsite(String website) {
-        this.website = website;
+        Website = website;
     }
 
-    public String getSector() {
-        return sector;
+    public int getNumberOfEmployees() {
+        return NumberOfEmployees;
     }
 
-    public void setSector(String sector) {
-        this.sector = sector;
-    }
-
-    public int getNumberOfEmployers() {
-        return numberOfEmployers;
-    }
-
-    public void setNumberOfEmployers(int numberOfEmployers) {
-        this.numberOfEmployers = numberOfEmployers;
-    }
-
-    public String getLocalAuthList() {
-        return localAuthList;
-    }
-
-    public void setLocalAuthList(String localAuthList) {
-        this.localAuthList = localAuthList;
+    public void setNumberOfEmployees(int numberOfEmployees) {
+        NumberOfEmployees = numberOfEmployees;
     }
 
     public String getCompanySummary() {
-        return companySummary;
+        return CompanySummary;
     }
 
     public void setCompanySummary(String companySummary) {
-        this.companySummary = companySummary;
+        CompanySummary = companySummary;
     }
 
-    public Boolean getWorkExperience() {
-        return workExperience;
+    public String getNotes() {
+        return Notes;
     }
 
-    public void setWorkExperience(Boolean workExperience) {
-        this.workExperience = workExperience;
+    public void setNotes(String notes) {
+        Notes = notes;
     }
 
-    public Boolean getSiteVisits() {
-        return siteVisits;
+    public String getLogoLink() {
+        return LogoLink;
     }
 
-    public void setSiteVisits(Boolean siteVisits) {
-        this.siteVisits = siteVisits;
+    public void setLogoLink(String logoLink) {
+        LogoLink = logoLink;
     }
 
-    public Boolean getWorkshops() {
-        return workshops;
+    public Boolean getGivesSiteExperience() {
+        return GivesSiteExperience;
     }
 
-    public void setWorkshops(Boolean workshops) {
-        this.workshops = workshops;
+    public void setGivesSiteExperience(Boolean givesSiteExperience) {
+        GivesSiteExperience = givesSiteExperience;
     }
 
-    public Boolean getCareersFairs() {
-        return careersFairs;
+    public Boolean getGivesSiteVisits() {
+        return GivesSiteVisits;
     }
 
-    public void setCareersFairs(Boolean careersFairs) {
-        this.careersFairs = careersFairs;
+    public void setGivesSiteVisits(Boolean givesSiteVisits) {
+        GivesSiteVisits = givesSiteVisits;
     }
 
-    public Boolean getWebinars() {
-        return webinars;
+    public Boolean getGivesWorkshops() {
+        return GivesWorkshops;
     }
 
-    public void setWebinars(Boolean webinars) {
-        this.webinars = webinars;
+    public void setGivesWorkshops(Boolean givesWorkshops) {
+        GivesWorkshops = givesWorkshops;
     }
 
-    public Boolean getWorkWithPrimarySchools() {
-        return workWithPrimarySchools;
+    public Boolean getGivesPresentations() {
+        return GivesPresentations;
     }
 
-    public void setWorkWithPrimarySchools(Boolean workWithPrimarySchools) {
-        this.workWithPrimarySchools = workWithPrimarySchools;
+    public void setGivesPresentations(Boolean givesPresentations) {
+        GivesPresentations = givesPresentations;
     }
 
-    public Boolean getWorkInForeignLanguage() {
-        return workInForeignLanguage;
+    public Boolean getAttendsCareerFairs() {
+        return AttendsCareerFairs;
     }
 
-    public void setWorkInForeignLanguage(Boolean workInForeignLanguage) {
-        this.workInForeignLanguage = workInForeignLanguage;
+    public void setAttendsCareerFairs(Boolean attendsCareerFairs) {
+        AttendsCareerFairs = attendsCareerFairs;
     }
 
-    public String getIfYesWhichLanguage() {
-        return ifYesWhichLanguage;
+    public Boolean getGivesWebinars() {
+        return GivesWebinars;
     }
 
-    public void setIfYesWhichLanguage(String ifYesWhichLanguage) {
-        this.ifYesWhichLanguage = ifYesWhichLanguage;
+    public void setGivesWebinars(Boolean givesWebinars) {
+        GivesWebinars = givesWebinars;
     }
 
-    public Boolean getWorksInWelsh() {
-        return worksInWelsh;
+    public Boolean getWorksWithPrimaryPupils() {
+        return WorksWithPrimaryPupils;
     }
 
-    public void setWorksInWelsh(Boolean worksInWelsh) {
-        this.worksInWelsh = worksInWelsh;
+    public void setWorksWithPrimaryPupils(Boolean worksWithPrimaryPupils) {
+        WorksWithPrimaryPupils = worksWithPrimaryPupils;
+    }
+
+    public Boolean getUseOfModernForeignLanguage() {
+        return UseOfModernForeignLanguage;
+    }
+
+    public void setUseOfModernForeignLanguage(Boolean useOfModernForeignLanguage) {
+        UseOfModernForeignLanguage = useOfModernForeignLanguage;
+    }
+
+    public Boolean getRunsBusinessInWelsh() {
+        return RunsBusinessInWelsh;
+    }
+
+    public void setRunsBusinessInWelsh(Boolean runsBusinessInWelsh) {
+        RunsBusinessInWelsh = runsBusinessInWelsh;
+    }
+
+    public Boolean getCanDeliverToSchoolsInWelsh() {
+        return CanDeliverToSchoolsInWelsh;
+    }
+
+    public void setCanDeliverToSchoolsInWelsh(Boolean canDeliverToSchoolsInWelsh) {
+        CanDeliverToSchoolsInWelsh = canDeliverToSchoolsInWelsh;
     }
 
     public Boolean getHasApprenticeshipProgramme() {
-        return hasApprenticeshipProgramme;
+        return HasApprenticeshipProgramme;
     }
 
     public void setHasApprenticeshipProgramme(Boolean hasApprenticeshipProgramme) {
-        this.hasApprenticeshipProgramme = hasApprenticeshipProgramme;
-    }
-
-    public String getCurriculumAreas() {
-        return curriculumAreas;
-    }
-
-    public void setCurriculumAreas(String curriculumAreas) {
-        this.curriculumAreas = curriculumAreas;
-    }
-
-    public int getSchoolID() {
-        return schoolID;
-    }
-
-    public void setSchoolID(int schoolID) {
-        this.schoolID = schoolID;
+        HasApprenticeshipProgramme = hasApprenticeshipProgramme;
     }
 }
+
+

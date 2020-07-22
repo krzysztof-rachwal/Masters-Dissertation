@@ -2,92 +2,145 @@ package ebe.DBClasses;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.sql.Time;
 import java.util.Date;
 
 public class Vacancy {
 
-    private int vacancyID;
-    private int employerID;
-    private String position;
-    private @DateTimeFormat(pattern = "yyyy-MM-dd") Date applicationDeadline;
-    private double salary;
-    private String description;
-    private String typeOfContract;
-    private @DateTimeFormat(pattern = "HH:mm") Time duration;
+    private int VacancyID;
+    private int EmployerID;
+    private String VacancyTitle;
+    private String Details;
+    private String Link;
+    private int  TypeOfVacancy;
+    private int StatusOfVacancy;
+    private @DateTimeFormat(pattern = "yyyy-MM-dd") Date StartOfVacancy;
+    private @DateTimeFormat(pattern = "yyyy-MM-dd") Date ClosingDate;
+    private int OccupationalCode;
+    private String ApplicationMethod;
+    private String Postcode;
 
-    public Vacancy(int vacancyID, int employerID, String position, Date applicationDeadline, double salary, String description, String typeOfContract, Time duration) {
-        this.vacancyID = vacancyID;
-        this.employerID = employerID;
-        this.position = position;
-        this.applicationDeadline = applicationDeadline;
-        this.salary = salary;
-        this.description = description;
-        this.typeOfContract = typeOfContract;
-        this.duration = duration;
+    public Vacancy(int vacancyID, int employerID, String vacancyTitle, String details, String link, int typeOfVacancy, int statusOfVacancy, Date startOfVacancy, Date closingDate, int occupationalCode, String applicationMethod, String postcode) {
+        VacancyID = vacancyID;
+        EmployerID = employerID;
+        VacancyTitle = vacancyTitle;
+        Details = details;
+        Link = link;
+        TypeOfVacancy = typeOfVacancy;
+        StatusOfVacancy = statusOfVacancy;
+        StartOfVacancy = startOfVacancy;
+        ClosingDate = closingDate;
+        OccupationalCode = occupationalCode;
+        ApplicationMethod = applicationMethod;
+        Postcode = postcode;
+    }
+
+    public Vacancy(int employerID, String vacancyTitle, String details, String link, int typeOfVacancy, int statusOfVacancy, Date startOfVacancy, Date closingDate, int occupationalCode, String applicationMethod, String postcode) {
+        EmployerID = employerID;
+        VacancyTitle = vacancyTitle;
+        Details = details;
+        Link = link;
+        TypeOfVacancy = typeOfVacancy;
+        StatusOfVacancy = statusOfVacancy;
+        StartOfVacancy = startOfVacancy;
+        ClosingDate = closingDate;
+        OccupationalCode = occupationalCode;
+        ApplicationMethod = applicationMethod;
+        Postcode = postcode;
     }
 
     public int getVacancyID() {
-        return vacancyID;
+        return VacancyID;
     }
 
     public void setVacancyID(int vacancyID) {
-        this.vacancyID = vacancyID;
+        VacancyID = vacancyID;
     }
 
     public int getEmployerID() {
-        return employerID;
+        return EmployerID;
     }
 
     public void setEmployerID(int employerID) {
-        this.employerID = employerID;
+        EmployerID = employerID;
     }
 
-    public String getPosition() {
-        return position;
+    public String getVacancyTitle() {
+        return VacancyTitle;
     }
 
-    public void setPosition(String position) {
-        this.position = position;
+    public void setVacancyTitle(String vacancyTitle) {
+        VacancyTitle = vacancyTitle;
     }
 
-    public Date getApplicationDeadline() {
-        return applicationDeadline;
+    public String getDetails() {
+        return Details;
     }
 
-    public void setApplicationDeadline(Date applicationDeadline) {
-        this.applicationDeadline = applicationDeadline;
+    public void setDetails(String details) {
+        Details = details;
     }
 
-    public double getSalary() {
-        return salary;
+    public String getLink() {
+        return Link;
     }
 
-    public void setSalary(double salary) {
-        this.salary = salary;
+    public void setLink(String link) {
+        Link = link;
     }
 
-    public String getDescription() {
-        return description;
+    public int getTypeOfVacancy() {
+        return TypeOfVacancy;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setTypeOfVacancy(int typeOfVacancy) {
+        TypeOfVacancy = typeOfVacancy;
     }
 
-    public String getTypeOfContract() {
-        return typeOfContract;
+    public int getStatusOfVacancy() {
+        return StatusOfVacancy;
     }
 
-    public void setTypeOfContract(String typeOfContract) {
-        this.typeOfContract = typeOfContract;
+    public void setStatusOfVacancy(int statusOfVacancy) {
+        StatusOfVacancy = statusOfVacancy;
     }
 
-    public Time getDuration() {
-        return duration;
+    public Date getStartOfVacancy() {
+        return StartOfVacancy;
     }
 
-    public void setDuration(Time duration) {
-        this.duration = duration;
+    public void setStartOfVacancy(Date startOfVacancy) {
+        StartOfVacancy = startOfVacancy;
+    }
+
+    public Date getClosingDate() {
+        return ClosingDate;
+    }
+
+    public void setClosingDate(Date closingDate) {
+        ClosingDate = closingDate;
+    }
+
+    public int getOccupationalCode() {
+        return OccupationalCode;
+    }
+
+    public void setOccupationalCode(int occupationalCode) {
+        OccupationalCode = occupationalCode;
+    }
+
+    public String getApplicationMethod() {
+        return ApplicationMethod;
+    }
+
+    public void setApplicationMethod(String applicationMethod) {
+        ApplicationMethod = applicationMethod;
+    }
+
+    public String getPostcode() {
+        return Postcode;
+    }
+
+    public void setPostcode(String postcode) {
+        Postcode = postcode;
     }
 }

@@ -6,97 +6,141 @@ import java.util.Date;
 
 public class Event {
 
-    private int eventID;
-    private String eventName;
-    private int schoolID;
-    private String eventType;
-    private String locationCity;
-    private String locationStreet;
-    private String locationNumber;
-    private String locationPostcode;
-    private @DateTimeFormat(pattern = "yyyy-MM-dd") Date date;
+    private int EventID;
+    private String Name;
+    private int TypeOfEvent;
+    private @DateTimeFormat(pattern = "yyyy-MM-dd") Date Date;
+    private Boolean isPublic;
+    private Boolean isCancelled;
+    private String PostCode;
+    private String NameOfAdviser;
+    private String NumberOfAttendees;
+    private Boolean PromotesApprenticeships;
+    private Boolean PromotesWelshLanguage;
+    private Boolean ChallangesGenderStereotypes;
 
-    public Event(int eventID, String eventName, int schoolID, String eventType, String locationCity, String locationStreet, String locationNumber, String locationPostcode, Date date) {
-        this.eventID = eventID;
-        this.eventName = eventName;
-        this.schoolID = schoolID;
-        this.eventType = eventType;
-        this.locationCity = locationCity;
-        this.locationStreet = locationStreet;
-        this.locationNumber = locationNumber;
-        this.locationPostcode = locationPostcode;
-        this.date = date;
+    public Event(int eventID, String name, int typeOfEvent, java.util.Date date, Boolean isPublic, Boolean isCancelled, String postCode, String nameOfAdviser, String numberOfAttendees, Boolean promotesApprenticeships, Boolean promotesWelshLanguage, Boolean challangesGenderStereotypes) {
+        EventID = eventID;
+        Name = name;
+        TypeOfEvent = typeOfEvent;
+        Date = date;
+        this.isPublic = isPublic;
+        this.isCancelled = isCancelled;
+        PostCode = postCode;
+        NameOfAdviser = nameOfAdviser;
+        NumberOfAttendees = numberOfAttendees;
+        PromotesApprenticeships = promotesApprenticeships;
+        PromotesWelshLanguage = promotesWelshLanguage;
+        ChallangesGenderStereotypes = challangesGenderStereotypes;
+    }
+
+    public Event(String name, int typeOfEvent, java.util.Date date, Boolean isPublic, Boolean isCancelled, String postCode, String nameOfAdviser, String numberOfAttendees, Boolean promotesApprenticeships, Boolean promotesWelshLanguage, Boolean challangesGenderStereotypes) {
+        Name = name;
+        TypeOfEvent = typeOfEvent;
+        Date = date;
+        this.isPublic = isPublic;
+        this.isCancelled = isCancelled;
+        PostCode = postCode;
+        NameOfAdviser = nameOfAdviser;
+        NumberOfAttendees = numberOfAttendees;
+        PromotesApprenticeships = promotesApprenticeships;
+        PromotesWelshLanguage = promotesWelshLanguage;
+        ChallangesGenderStereotypes = challangesGenderStereotypes;
     }
 
     public int getEventID() {
-        return eventID;
+        return EventID;
     }
 
     public void setEventID(int eventID) {
-        this.eventID = eventID;
+        EventID = eventID;
     }
 
-    public String getEventName() {
-        return eventName;
+    public String getName() {
+        return Name;
     }
 
-    public void setEventName(String eventName) {
-        this.eventName = eventName;
+    public void setName(String name) {
+        Name = name;
     }
 
-    public int getSchoolID() {
-        return schoolID;
+    public int getTypeOfEvent() {
+        return TypeOfEvent;
     }
 
-    public void setSchoolID(int schoolID) {
-        this.schoolID = schoolID;
+    public void setTypeOfEvent(int typeOfEvent) {
+        TypeOfEvent = typeOfEvent;
     }
 
-    public String getEventType() {
-        return eventType;
+    public java.util.Date getDate() {
+        return Date;
     }
 
-    public void setEventType(String eventType) {
-        this.eventType = eventType;
+    public void setDate(java.util.Date date) {
+        Date = date;
     }
 
-    public String getLocationCity() {
-        return locationCity;
+    public Boolean getPublic() {
+        return isPublic;
     }
 
-    public void setLocationCity(String locationCity) {
-        this.locationCity = locationCity;
+    public void setPublic(Boolean aPublic) {
+        isPublic = aPublic;
     }
 
-    public String getLocationStreet() {
-        return locationStreet;
+    public Boolean getCancelled() {
+        return isCancelled;
     }
 
-    public void setLocationStreet(String locationStreet) {
-        this.locationStreet = locationStreet;
+    public void setCancelled(Boolean cancelled) {
+        isCancelled = cancelled;
     }
 
-    public String getLocationNumber() {
-        return locationNumber;
+    public String getPostCode() {
+        return PostCode;
     }
 
-    public void setLocationNumber(String locationNumber) {
-        this.locationNumber = locationNumber;
+    public void setPostCode(String postCode) {
+        PostCode = postCode;
     }
 
-    public String getLocationPostcode() {
-        return locationPostcode;
+    public String getNameOfAdviser() {
+        return NameOfAdviser;
     }
 
-    public void setLocationPostcode(String locationPostcode) {
-        this.locationPostcode = locationPostcode;
+    public void setNameOfAdviser(String nameOfAdviser) {
+        NameOfAdviser = nameOfAdviser;
     }
 
-    public Date getDate() {
-        return date;
+    public String getNumberOfAttendees() {
+        return NumberOfAttendees;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setNumberOfAttendees(String numberOfAttendees) {
+        NumberOfAttendees = numberOfAttendees;
+    }
+
+    public Boolean getPromotesApprenticeships() {
+        return PromotesApprenticeships;
+    }
+
+    public void setPromotesApprenticeships(Boolean promotesApprenticeships) {
+        PromotesApprenticeships = promotesApprenticeships;
+    }
+
+    public Boolean getPromotesWelshLanguage() {
+        return PromotesWelshLanguage;
+    }
+
+    public void setPromotesWelshLanguage(Boolean promotesWelshLanguage) {
+        PromotesWelshLanguage = promotesWelshLanguage;
+    }
+
+    public Boolean getChallangesGenderStereotypes() {
+        return ChallangesGenderStereotypes;
+    }
+
+    public void setChallangesGenderStereotypes(Boolean challangesGenderStereotypes) {
+        ChallangesGenderStereotypes = challangesGenderStereotypes;
     }
 }
