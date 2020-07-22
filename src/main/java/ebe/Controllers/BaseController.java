@@ -11,6 +11,7 @@ import ebe.DBMethods.SchoolQueries;
 import ebe.DBMethods.VacancyQueries;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -52,20 +53,13 @@ public class BaseController {
         Employer employerABC = new Employer();
         List<Employer> employers;
         employers = EmployerQrys.getAllEmployers();
-        for (Employer employer : employers) {
-//           mv.addObject("employer",employer.getName());
-            System.out.println(employer.getName());
-        }
+//        for (Employer employer : employers) {
+//            System.out.println(employer.getName());
+//        }
 
         Map<String,Object> allEmployers = new HashMap<String,Object>();
         allEmployers.put("allEmployers", employers);
-        System.out.println(allEmployers);
         mv.addAllObjects(allEmployers);
-
-
-
-
-        // session = context.getSession();
 
         return mv;
     }
@@ -93,12 +87,13 @@ public class BaseController {
 
 
     // Employer Profile (with the id)
-    @GetMapping("/employers/id")
-    public ModelAndView EmployersProfile(HttpSession session) {
+    @GetMapping("/profile-employer")
+    public ModelAndView EmployersProfile(@RequestParam(value="employerId" )int id) {
         ModelAndView mv = new ModelAndView();
         ObjectMapper objectMapper = new ObjectMapper();
         // session = context.getSession();
         mv.setViewName("employersProfilePage");
+
         return mv;
     }
 

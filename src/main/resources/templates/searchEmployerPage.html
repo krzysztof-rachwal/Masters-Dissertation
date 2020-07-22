@@ -321,8 +321,8 @@
 
                 <div  class="list-employers">
                     <div class="gel-content-row" th:each="employer : ${allEmployers}"  >
-                        <article class="card js-card card--style-icon card--100" gel-processed="processed">
-                            <a href="/employers/id" class="card__inner" gel-processed="processed" title="Link to Card heading and link title">
+                        <article class="card js-card card--style-icon card--100" gel-processed="processed" th:id="${employer.getEmployerID()}">
+                            <a th:href="@{/profile-employer(employerId=${employer.getEmployerID()})}" class="card__inner" gel-processed="processed" title="Link to Card heading and link title">
                                 <div class="card__content">
                                     <div class="content__image">
                                         <div>

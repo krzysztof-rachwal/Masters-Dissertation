@@ -40,6 +40,7 @@ public class EmployerQueries extends DBQueries {
                 employer = new Employer();
 				/*Retrieve one employee details
 				and store it in employee object*/
+                employer.setEmployerID(rs.getInt("EmployerID"));
                 employer.setStatusOfEmployer(rs.getInt("StatusOfEmployer"));
                 employer.setName(rs.getString("Name"));
                 employer.setAddressCity(rs.getString("AddressCity"));
@@ -76,20 +77,6 @@ public class EmployerQueries extends DBQueries {
             DBUtil.close(connection);
         }
         return list;
-
-//        return jdbcTemplate().query("SELECT * FROM Employer  LIMIT 1", new Object[]{},
-//                (rs, i) -> new Employer(rs.getInt("EmployerID"), rs.getInt("StatusOfEmployer"),
-//                        rs.getString("Name"), rs.getString("AddressCity"),
-//                        rs.getString("AddressStreet"), rs.getString("AddressNumber"),
-//                        rs.getString("PostCode"), rs.getString("Email"), rs.getString("Phone"),
-//                        rs.getString("Website"), rs.getInt("NumberOfEmployees"), rs.getString("CompanySummary"),
-//                        rs.getString("Notes"), rs.getString("LogoLink"),rs.getBoolean("GivesSiteExperience"),
-//                        rs.getBoolean("GivesSiteVisits"), rs.getBoolean("GivesWorkshops"),
-//                        rs.getBoolean("GivesPresentations"), rs.getBoolean("AttendsCareerFairs"), rs.getBoolean("GivesWebinars"),
-//                        rs.getBoolean("WorksWithPrimaryPupils"), rs.getBoolean("UseOfModernForeignLanguage"),
-//                        rs.getBoolean("RunsBusinessInWelsh"), rs.getBoolean("CanDeliverToSchoolsInWelsh"),
-//                        rs.getBoolean("HasApprenticeshipProgramme"))
-//        );
     }
 
     // 2. Get Employer by Id
