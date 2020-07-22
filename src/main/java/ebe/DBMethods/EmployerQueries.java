@@ -81,21 +81,52 @@ public class EmployerQueries extends DBQueries {
 
     // 2. Get Employer by Id
     public Employer getEmployerDetailsById(int employerId) throws DataAccessException {
-        String getSql = String.format("SELECT * FROM Employer WHERE EmployerID = \"%s\" LIMIT 1", employerId);
-        List<Employer> employerInfo = jdbcTemplate().query(getSql, new Object[]{},
-                (rs, i) -> new Employer(rs.getInt("EmployerID"), rs.getInt("StatusOfEmployer"),
-                        rs.getString("Name"), rs.getString("AddressCity"),
-                        rs.getString("AddressStreet"), rs.getString("AddressNumber"),
-                        rs.getString("PostCode"), rs.getString("Email"), rs.getString("Phone"),
-                        rs.getString("Website"), rs.getInt("NumberOfEmployees"), rs.getString("CompanySummary"),
-                        rs.getString("Notes"), rs.getString("LogoLink"),
-                        rs.getBoolean("GivesSiteExperience"), rs.getBoolean("GivesSiteVisits"), rs.getBoolean("GivesWorkshops"),
-                        rs.getBoolean("GivesPresentations"), rs.getBoolean("AttendsCareerFairs"), rs.getBoolean("GivesWebinars"),
-                        rs.getBoolean("WorksWithPrimaryPupils"), rs.getBoolean("UseOfModernForeignLanguage"),
-                        rs.getBoolean("RunsBusinessInWelsh"), rs.getBoolean("CanDeliverToSchoolsInWelsh"),
-                        rs.getBoolean("HasApprenticeshipProgramme"))
-        );
-        return employerInfo.get(0);
+        String getQuery = String.format("SELECT * FROM Employer WHERE EmployerID = \"%s\" LIMIT 1", employerId);
+//        String getQuery = "SELECT * FROM Employer";
+        Employer employer = null;
+        ResultSet rs = null;
+        try {
+            connection = ConnectionFactory.getConnection();
+            statement = connection.createStatement();
+            rs = statement.executeQuery(getQuery);
+            while (rs.next()) {
+
+                employer = new Employer();
+                employer.setEmployerID(rs.getInt("EmployerID"));
+                employer.setStatusOfEmployer(rs.getInt("StatusOfEmployer"));
+                employer.setName(rs.getString("Name"));
+                employer.setAddressCity(rs.getString("AddressCity"));
+                employer.setAddressStreet(rs.getString("AddressStreet"));
+                employer.setAddressNumber(rs.getString("AddressNumber"));
+                employer.setPostcode(rs.getString("PostCode"));
+                employer.setEmail(rs.getString("Email"));
+                employer.setPhone(rs.getString("Phone"));
+                employer.setWebsite(rs.getString("Website"));
+                employer.setNumberOfEmployees(rs.getInt("NumberOfEmployees"));
+                employer.setCompanySummary(rs.getString("CompanySummary"));
+                employer.setNotes(rs.getString("Notes"));
+                employer.setLogoLink(rs.getString("LogoLink"));
+                employer.setGivesSiteExperience(rs.getBoolean("GivesSiteExperience"));
+                employer.setGivesSiteVisits(rs.getBoolean("GivesSiteVisits"));
+                employer.setGivesWorkshops(rs.getBoolean("GivesWorkshops"));
+                employer.setGivesPresentations(rs.getBoolean("GivesPresentations"));
+                employer.setAttendsCareerFairs(rs.getBoolean("AttendsCareerFairs"));
+                employer.setGivesWebinars(rs.getBoolean("GivesWebinars"));
+                employer.setWorksWithPrimaryPupils(rs.getBoolean("WorksWithPrimaryPupils"));
+                employer.setUseOfModernForeignLanguage(rs.getBoolean("UseOfModernForeignLanguage"));
+                employer.setRunsBusinessInWelsh(rs.getBoolean("RunsBusinessInWelsh"));
+                employer.setCanDeliverToSchoolsInWelsh(rs.getBoolean("CanDeliverToSchoolsInWelsh"));
+                employer.setHasApprenticeshipProgramme(rs.getBoolean("HasApprenticeshipProgramme"));
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.close(rs);
+            DBUtil.close(statement);
+            DBUtil.close(connection);
+        }
+        return employer;
     }
 
     ///////////////////////////////////// CREATE ALL METHODS ///////////////////////////////////////////////

@@ -47,15 +47,22 @@ public class BaseController {
 
     // HomePage
     @GetMapping("/")
-    public ModelAndView HomePage(HttpSession session) { ;
+    public ModelAndView HomePage(HttpSession session) {
+        ModelAndView mv = new ModelAndView();
+        ObjectMapper objectMapper = new ObjectMapper();
+        // session = context.getSession();
+        mv.setViewName("searchEmployerPage");
+        return mv;
+    };
+
+    //Search Employer
+    @GetMapping("/employers")
+    public ModelAndView SearchEmployer(HttpSession session) {
+
         ModelAndView mv = new ModelAndView();
         mv.setViewName("searchEmployerPage");
-        Employer employerABC = new Employer();
         List<Employer> employers;
         employers = EmployerQrys.getAllEmployers();
-//        for (Employer employer : employers) {
-//            System.out.println(employer.getName());
-//        }
 
         Map<String,Object> allEmployers = new HashMap<String,Object>();
         allEmployers.put("allEmployers", employers);
@@ -64,13 +71,16 @@ public class BaseController {
         return mv;
     }
 
-    //Search Employer
-    @GetMapping("/employers")
-    public ModelAndView SearchEmployer(HttpSession session) {
+    // Employer Profile (with the id)
+    @GetMapping("/profile-employer")
+    public ModelAndView EmployersProfile(@RequestParam(value="employerId" )int id) {
         ModelAndView mv = new ModelAndView();
-        ObjectMapper objectMapper = new ObjectMapper();
-        // session = context.getSession();
-        mv.setViewName("searchEmployerPage");
+        mv.setViewName("employersProfilePage");
+        Employer employer = EmployerQrys.getEmployerDetailsById(id);
+        mv.addObject("employer",employer);
+        //        for (Employer employer : employers) {
+//            System.out.println(employer.getName());
+//        }
         return mv;
     }
 
@@ -84,18 +94,6 @@ public class BaseController {
         return mv;
     }
 
-
-
-    // Employer Profile (with the id)
-    @GetMapping("/profile-employer")
-    public ModelAndView EmployersProfile(@RequestParam(value="employerId" )int id) {
-        ModelAndView mv = new ModelAndView();
-        ObjectMapper objectMapper = new ObjectMapper();
-        // session = context.getSession();
-        mv.setViewName("employersProfilePage");
-
-        return mv;
-    }
 
     // Search Events
     @GetMapping("/events")

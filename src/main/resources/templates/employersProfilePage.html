@@ -365,7 +365,7 @@
 
 <div class="gel-content-container">
     <div class="container-headline my-5">
-        <span class="title-h2">Employer Name</span>
+        <span class="title-h2" th:text="${employer.getName()}"></span>
         <button type="button" id="updateEvent" data-toggle="modal" data-target="#updateModal"
                 class="buttonUpdate float-right">Update
         </button>
@@ -383,22 +383,13 @@
                 <div class="row">
                     <div class="col-md-12">
                         <h4>Company Summary</h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet.
-                            Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar
-                            sic tempor. Sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus
-                            mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus
-                            pronin sapien nunc accuan eget.
-                            Lorem ipsum dolor sit amet, consectetur adipiscing.
-                        </p>
+                        <p th:text="${employer.getCompanySummary()}"></p>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
                         <h4>Notes</h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet.
-                            Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar
-                            sic tempor. Sociis natoque penatibus et magnis dis parturient montes.
-                        </p>
+                        <p th:text="${employer.getNotes()}"></p>
                     </div>
                 </div>
             </div>
@@ -409,49 +400,49 @@
             <div class="col-md-4 well ">
                 <div class="my-2">
                     <span class="text-h5 font-weight-bold">Post Code:</span>
-                    <span class="text-h5">CF24 5RF</span>
+                    <span class="text-h5" th:text="${employer.getPostcode()}"></span>
                 </div>
 
                 <div class="my-2">
                     <span class="text-h5 font-weight-bold">Website:</span>
-                    <span class="text-h5">Science and Technology</span>
+                    <span class="text-h5" th:text="${employer.getWebsite()}"></span>
                 </div>
 
                 <div class="my-2">
                     <span class="text-h5 font-weight-bold">No of employees:</span>
-                    <span class="text-h5">100</span>
+                    <span class="text-h5" th:text="${employer.getNumberOfEmployees()}"></span>
                 </div>
 
                 <div class="my-2">
                     <span class="text-h5 font-weight-bold">Works with primary schools:</span>
-                    <span class="text-h5">Yes</span>
+                    <span class="text-h5" th:text="${employer.getWorksWithPrimaryPupils()}"></span>
                 </div>
 
                 <div class="my-2">
                     <span class="text-h5 font-weight-bold">Works in foreign languages:</span>
-                    <span class="text-h5">French</span>
+                    <span class="text-h5" th:text="${employer.getUseOfModernForeignLanguage()}"></span>
                 </div>
 
                 <div class="my-2">
                     <span class="text-h5 font-weight-bold">Works in Welsh:</span>
-                    <span class="text-h5">Yes</span>
+                    <span class="text-h5" th:text="${employer.getRunsBusinessInWelsh()}"></span>
                 </div>
 
                 <div class="my-2">
                     <span class="text-h5 font-weight-bold">Has Apprenticeship programme:</span>
-                    <span class="text-h5">Yes</span>
+                    <span class="text-h5" th:text="${employer.getHasApprenticeshipProgramme()}"></span>
                 </div>
             </div>
 
             <div class="col-md-4 well">
                 <h6 class="font-weight-bold">Coperation Types</h6>
                 <ul>
-                    <li class="my-2">Webinars / digital presentations</li>
-                    <li class="my-2">Industry days / careers fairs</li>
-                    <li class="my-2">Work Experience</li>
-                    <li class="my-2">Site visits</li>
-                    <li class="my-2">Workshops (school based)</li>
-                    <li class="my-2">Presentations</li>
+                    <li class="my-2" th:classappend="${ employer.getGivesWebinars()} == true ? visible : d-none">Webinars / digital presentations</li>
+                    <li class="my-2" th:classappend="${ employer.getAttendsCareerFairs()} == true ? visible : d-none">Industry days / careers fairs</li>
+                    <li class="my-2" th:classappend="${ employer.getGivesSiteExperience()} == true ? visible : d-none">Work Experience</li>
+                    <li class="my-2" th:classappend="${ employer.getGivesSiteVisits()} == true ? visible : d-none">Site visits</li>
+                    <li class="my-2" th:classappend="${ employer.getGivesWorkshops()} == true ? visible : d-none">Workshops (school based)</li>
+                    <li class="my-2" th:classappend="${ employer.getGivesPresentations()} == true ? visible : d-none">Presentations</li>
                 </ul>
             </div>
 
