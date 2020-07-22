@@ -46,34 +46,33 @@ public class EventQueries extends DBQueries {
 
     ///////////////////////////////////// CREATE ALL METHODS ///////////////////////////////////////////////
     // 1. Create a new Event
-    public int createNewEvent(String Name, int TypeOfEvent, Boolean isPublic, Boolean isCancelled, String PostCode, String NameOfAdviser,
+    public int createNewEvent(String Name, int TypeOfEvent, String Date, Boolean isPublic, Boolean isCancelled, String PostCode, String NameOfAdviser,
                               String NumberOfAttendees, int AttendingSchools, Boolean PromotesApprenticeships, Boolean PromotesWelshLanguage,
                               Boolean ChallengesGenderStereoTypes) throws DataAccessException {
 
-        String insertSql = "INSERT TO Event Event(Name, TypeOfEvent, isPublic, isCancelled, PostCode, NameOfAdviser," +
-                "                                 NumberOfAttendees, AttendingSchools, AttendingEmployers, PromotesApprenticeships, PromotesWelshLanguage," +
+        String insertSql = "INSERT TO Event Event(Name, TypeOfEvent, Date, isPublic, isCancelled, PostCode, NameOfAdviser," +
+                "                                 NumberOfAttendees, AttendingSchools, PromotesApprenticeships, PromotesWelshLanguage," +
                 "                                 ChallengesGenderStereoTypes)" +
-                "                                  VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                "                                  VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
 
-        return jdbcTemplate().update(insertSql, Name, TypeOfEvent, isPublic, isCancelled, PostCode, NameOfAdviser,
-                NumberOfAttendees, AttendingSchools, AttendingEmployers, PromotesApprenticeships, PromotesWelshLanguage,
+        return jdbcTemplate().update(insertSql, Name, TypeOfEvent, Date, isPublic, isCancelled, PostCode, NameOfAdviser,
+                NumberOfAttendees, AttendingSchools, PromotesApprenticeships, PromotesWelshLanguage,
                 ChallengesGenderStereoTypes);
 
     }
     ///////////////////////////////////// UPDATE ALL METHODS ///////////////////////////////////////////////
     // 1. Update an Events by Id
 
-    public Integer updateEvent(int EventID, String EventName, int TypeOfEvent, Boolean isPublic, Boolean isCancelled, String PostCode, String NameOfAdviser,
-                               String NumberOfAttendees, int AttendingSchools, int AttendingEmployers, Boolean PromotesApprenticeships, Boolean PromotesWelshLanguage,
+    public Integer updateEvent(int EventID, String Name, int TypeOfEvent, String Date, Boolean isPublic, Boolean isCancelled, String PostCode, String NameOfAdviser,
+                               String NumberOfAttendees, int AttendingSchools, Boolean PromotesApprenticeships, Boolean PromotesWelshLanguage,
                                Boolean ChallengesGenderStereoTypes) throws DataAccessException {
 
-        String updateSql = "UPDATE Event SET EventName =?, EmployerName = ?, TypeOfEvent =?, isPublic=?, isCancelled=?," +
-                "PostCode=?, NameOfAdviser=?, NumberOfAttendees=?, AttendingSchools=?, AttendingEmployers=?,  PromotesApprenticeships=?, PromotesWelshLanguage=?" +
-                "EmployerLogo=?, GivesSiteExperience=?, GivesSiteVisits=?, GivesWorkshops=?, GivesPresentations=?, AttendsCareerFairs=?," +
+        String updateSql = "UPDATE Event SET Name =?, TypeOfEvent =?, Date= ?, isPublic=?, isCancelled=?," +
+                "PostCode=?, NameOfAdviser=?, NumberOfAttendees=?, AttendingSchools=?,  PromotesApprenticeships=?, PromotesWelshLanguage=?" +
                 "ChallengesGenderStereoTypes=? WHERE EventlID =?";
 
-        return jdbcTemplate().update(updateSql, EventName, TypeOfEvent, isPublic, isCancelled, PostCode, NameOfAdviser,
-                NumberOfAttendees, AttendingSchools, AttendingEmployers, PromotesApprenticeships, PromotesWelshLanguage,
+        return jdbcTemplate().update(updateSql, Name, TypeOfEvent, Date, isPublic, isCancelled, PostCode, NameOfAdviser,
+                NumberOfAttendees, AttendingSchools, PromotesApprenticeships, PromotesWelshLanguage,
                 ChallengesGenderStereoTypes, EventID);
     }
 

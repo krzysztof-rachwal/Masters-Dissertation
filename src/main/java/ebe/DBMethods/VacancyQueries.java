@@ -20,7 +20,7 @@ public class VacancyQueries extends DBQueries {
     public List<Vacancy> getAllVacancy() throws DataAccessException {
         return jdbcTemplate().query("SELECT * FROM Vacancy", new Object[]{},
                 (rs, i) -> new Vacancy(rs.getInt("VacancyID"), rs.getInt("EmployerID"),
-                        rs.getString("Details"), rs.getString("Link"),
+                        rs.getString("VacancyTitle"), rs.getString("Details"), rs.getString("Link"),
                         rs.getInt("TypeOfVacancy"), rs.getInt("StatusOfVacancy"),
                         rs.getDate("StartOfVacancy"),rs.getDate("ClosingDate"),
                         rs.getInt("OccupationalCode"), rs.getString("ApplicationMethod"),
@@ -33,7 +33,7 @@ public class VacancyQueries extends DBQueries {
         String getSql = String.format("SELECT * FROM Vacancy WHERE VacancyID = \"%s\" LIMIT 1", vacancyId);
         List<Vacancy> schoolInfo = jdbcTemplate().query(getSql, new Object[]{},
                 (rs, i) -> new Vacancy(rs.getInt("VacancyID"), rs.getInt("EmployerID"),
-                        rs.getString("Details"), rs.getString("Link"),
+                        rs.getString("VacancyTitle"), rs.getString("Details"), rs.getString("Link"),
                         rs.getInt("TypeOfVacancy"), rs.getInt("StatusOfVacancy"),
                         rs.getDate("StartOfVacancy"),rs.getDate("ClosingDate"),
                         rs.getInt("OccupationalCode"), rs.getString("ApplicationMethod"),
@@ -45,27 +45,27 @@ public class VacancyQueries extends DBQueries {
 
     ///////////////////////////////////// CREATE ALL METHODS ///////////////////////////////////////////////
     // 1. Create a new Vacancy
-    public int createNewVacancy (int EmployerID, String Details, String Link, int TypeOfVacancy,int StatusOfVacancy ,Date StartOfVacancy,
+    public int createNewVacancy (int EmployerID, String VacancyTitle, String Details, String Link, int TypeOfVacancy,int StatusOfVacancy ,Date StartOfVacancy,
                                 Date ClosingDate, int OccupationalCode, String ApplicationMethod, String Postcode) throws DataAccessException {
 
-        String insertSql = "INSERT TO Vacancy Vacancy(EmployerID, Details, Link, TypeOfVacancy, StatusOfVacancy" +
+        String insertSql = "INSERT TO Vacancy Vacancy(EmployerID, VacancyTitle, Details, Link, TypeOfVacancy, StatusOfVacancy" +
                 "StartOfVacancy, StartOfVacancy, ClosingDate, OccupationalCode, ApplicationMethod, Postcode)" +
-                "                                  VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
+                "                                  VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
-        return jdbcTemplate().update(insertSql, EmployerID, Details, Link, TypeOfVacancy, TypeOfVacancy,StatusOfVacancy,
+        return jdbcTemplate().update(insertSql, EmployerID, VacancyTitle, Details, Link, TypeOfVacancy, TypeOfVacancy,StatusOfVacancy,
                 StartOfVacancy, ClosingDate, OccupationalCode, ApplicationMethod, Postcode);
 
     }
     ///////////////////////////////////// UPDATE ALL METHODS ///////////////////////////////////////////////
     // 1. Update an Vacancy by Id
 
-    public Integer updateVacancy(int VacancyID, int EmployerID, String Details, String Link, int TypeOfVacancy,int StatusOfVacancy ,Date StartOfVacancy,
+    public Integer updateVacancy(int VacancyID, int EmployerID, String VacancyTitle, String Details, String Link, int TypeOfVacancy,int StatusOfVacancy ,Date StartOfVacancy,
                                  Date ClosingDate, int OccupationalCode, String ApplicationMethod, String Postcode) throws DataAccessException {
 
-        String updateSql = "UPDATE Vacancy SET EmployerID =?, Details = ?, Link =?, TypeOfVacancy=?, StatusOfVacancy=?," +
+        String updateSql = "UPDATE Vacancy SET EmployerID =?, VacancyTitle=?, Details = ?, Link =?, TypeOfVacancy=?, StatusOfVacancy=?," +
                 "StartOfVacancy=?, ClosingDate=?, OccupationalCode=?, ApplicationMethod=?, Postcode=?  WHERE VacancyID =?";
 
-        return jdbcTemplate().update(updateSql,EmployerID, Details, Link, TypeOfVacancy,StatusOfVacancy,
+        return jdbcTemplate().update(updateSql,EmployerID, VacancyTitle, Details, Link, TypeOfVacancy,StatusOfVacancy,
                 StartOfVacancy, ClosingDate, OccupationalCode, ApplicationMethod, Postcode, VacancyID);
     }
 
