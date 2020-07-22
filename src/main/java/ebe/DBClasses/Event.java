@@ -15,12 +15,11 @@ public class Event {
     private String PostCode;
     private String NameOfAdviser;
     private String NumberOfAttendees;
-    private int AttendingSchools;
     private Boolean PromotesApprenticeships;
     private Boolean PromotesWelshLanguage;
-    private Boolean ChallengesGenderStereotypes;
+    private Boolean ChallangesGenderStereotypes;
 
-    public Event(int eventID, String name, int typeOfEvent, java.util.Date date, Boolean isPublic, Boolean isCancelled, String postCode, String nameOfAdviser, String numberOfAttendees, int attendingSchools, Boolean promotesApprenticeships, Boolean promotesWelshLanguage, Boolean challengesGenderStereotypes) {
+    public Event(int eventID, String name, int typeOfEvent, java.util.Date date, Boolean isPublic, Boolean isCancelled, String postCode, String nameOfAdviser, String numberOfAttendees, Boolean promotesApprenticeships, Boolean promotesWelshLanguage, Boolean challangesGenderStereotypes) {
         EventID = eventID;
         Name = name;
         TypeOfEvent = typeOfEvent;
@@ -30,13 +29,12 @@ public class Event {
         PostCode = postCode;
         NameOfAdviser = nameOfAdviser;
         NumberOfAttendees = numberOfAttendees;
-        AttendingSchools = attendingSchools;
         PromotesApprenticeships = promotesApprenticeships;
         PromotesWelshLanguage = promotesWelshLanguage;
-        ChallengesGenderStereotypes = challengesGenderStereotypes;
+        ChallangesGenderStereotypes = challangesGenderStereotypes;
     }
 
-    public Event(String name, int typeOfEvent, java.util.Date date, Boolean isPublic, Boolean isCancelled, String postCode, String nameOfAdviser, String numberOfAttendees, int attendingSchools, Boolean promotesApprenticeships, Boolean promotesWelshLanguage, Boolean challengesGenderStereotypes) {
+    public Event(String name, int typeOfEvent, java.util.Date date, Boolean isPublic, Boolean isCancelled, String postCode, String nameOfAdviser, String numberOfAttendees, Boolean promotesApprenticeships, Boolean promotesWelshLanguage, Boolean challangesGenderStereotypes) {
         Name = name;
         TypeOfEvent = typeOfEvent;
         Date = date;
@@ -45,10 +43,9 @@ public class Event {
         PostCode = postCode;
         NameOfAdviser = nameOfAdviser;
         NumberOfAttendees = numberOfAttendees;
-        AttendingSchools = attendingSchools;
         PromotesApprenticeships = promotesApprenticeships;
         PromotesWelshLanguage = promotesWelshLanguage;
-        ChallengesGenderStereotypes = challengesGenderStereotypes;
+        ChallangesGenderStereotypes = challangesGenderStereotypes;
     }
 
     public int getEventID() {
@@ -123,14 +120,6 @@ public class Event {
         NumberOfAttendees = numberOfAttendees;
     }
 
-    public int getAttendingSchools() {
-        return AttendingSchools;
-    }
-
-    public void setAttendingSchools(int attendingSchools) {
-        AttendingSchools = attendingSchools;
-    }
-
     public Boolean getPromotesApprenticeships() {
         return PromotesApprenticeships;
     }
@@ -147,11 +136,11 @@ public class Event {
         PromotesWelshLanguage = promotesWelshLanguage;
     }
 
-    public Boolean getChallengesGenderStereotypes() {
-        return ChallengesGenderStereotypes;
+    public Boolean getChallangesGenderStereotypes() {
+        return ChallangesGenderStereotypes;
     }
 
-    public void setChallengesGenderStereotypes(Boolean challengesGenderStereotypes) {
-        ChallengesGenderStereotypes = challengesGenderStereotypes;
+    public void setChallangesGenderStereotypes(Boolean challangesGenderStereotypes) {
+        ChallangesGenderStereotypes = challangesGenderStereotypes;
     }
 }

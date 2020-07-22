@@ -4,9 +4,11 @@ import ebe.DBClasses.Event;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public class EventQueries extends DBQueries {
 
     @Autowired
@@ -22,9 +24,8 @@ public class EventQueries extends DBQueries {
                         rs.getInt("TypeOfEvent"), rs.getDate("Date"), rs.getBoolean("isPublic"),
                         rs.getBoolean("isCancelled"), rs.getString("PostCode"),
                         rs.getString("NameOfAdviser"), rs.getString("NumberOfAttendees"),
-                        rs.getInt("AttendingSchools"),
                         rs.getBoolean("PromotesApprenticeships"), rs.getBoolean("PromotesWelshLanguage"),
-                        rs.getBoolean("ChallengesGenderStereotypes"))
+                        rs.getBoolean("ChallangesGenderStereotypes"))
         );
     }
 
@@ -36,9 +37,8 @@ public class EventQueries extends DBQueries {
                         rs.getInt("TypeOfEvent"), rs.getDate("Date"), rs.getBoolean("isPublic"),
                         rs.getBoolean("isCancelled"), rs.getString("PostCode"),
                         rs.getString("NameOfAdviser"), rs.getString("NumberOfAttendees"),
-                        rs.getInt("AttendingSchools"),
                         rs.getBoolean("PromotesApprenticeships"), rs.getBoolean("PromotesWelshLanguage"),
-                        rs.getBoolean("ChallengesGenderStereotypes"))
+                        rs.getBoolean("ChallangesGenderStereotypes"))
         );
         return eventInfo.get(0);
     }
@@ -47,33 +47,33 @@ public class EventQueries extends DBQueries {
     ///////////////////////////////////// CREATE ALL METHODS ///////////////////////////////////////////////
     // 1. Create a new Event
     public int createNewEvent(String Name, int TypeOfEvent, String Date, Boolean isPublic, Boolean isCancelled, String PostCode, String NameOfAdviser,
-                              String NumberOfAttendees, int AttendingSchools, Boolean PromotesApprenticeships, Boolean PromotesWelshLanguage,
-                              Boolean ChallengesGenderStereoTypes) throws DataAccessException {
+                              String NumberOfAttendees, Boolean PromotesApprenticeships, Boolean PromotesWelshLanguage,
+                              Boolean ChallangesGenderStereoTypes) throws DataAccessException {
 
         String insertSql = "INSERT TO Event Event(Name, TypeOfEvent, Date, isPublic, isCancelled, PostCode, NameOfAdviser," +
-                "                                 NumberOfAttendees, AttendingSchools, PromotesApprenticeships, PromotesWelshLanguage," +
-                "                                 ChallengesGenderStereoTypes)" +
-                "                                  VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
+                "                                 NumberOfAttendees, PromotesApprenticeships, PromotesWelshLanguage," +
+                "                                 ChallangesGenderStereoTypes)" +
+                "                                  VALUES(?,?,?,?,?,?,?,?,?,?,?)";
 
         return jdbcTemplate().update(insertSql, Name, TypeOfEvent, Date, isPublic, isCancelled, PostCode, NameOfAdviser,
-                NumberOfAttendees, AttendingSchools, PromotesApprenticeships, PromotesWelshLanguage,
-                ChallengesGenderStereoTypes);
+                NumberOfAttendees, PromotesApprenticeships, PromotesWelshLanguage,
+                ChallangesGenderStereoTypes);
 
     }
     ///////////////////////////////////// UPDATE ALL METHODS ///////////////////////////////////////////////
     // 1. Update an Events by Id
 
     public Integer updateEvent(int EventID, String Name, int TypeOfEvent, String Date, Boolean isPublic, Boolean isCancelled, String PostCode, String NameOfAdviser,
-                               String NumberOfAttendees, int AttendingSchools, Boolean PromotesApprenticeships, Boolean PromotesWelshLanguage,
-                               Boolean ChallengesGenderStereoTypes) throws DataAccessException {
+                               String NumberOfAttendees, Boolean PromotesApprenticeships, Boolean PromotesWelshLanguage,
+                               Boolean ChallangesGenderStereoTypes) throws DataAccessException {
 
         String updateSql = "UPDATE Event SET Name =?, TypeOfEvent =?, Date= ?, isPublic=?, isCancelled=?," +
-                "PostCode=?, NameOfAdviser=?, NumberOfAttendees=?, AttendingSchools=?,  PromotesApprenticeships=?, PromotesWelshLanguage=?" +
-                "ChallengesGenderStereoTypes=? WHERE EventlID =?";
+                "PostCode=?, NameOfAdviser=?, NumberOfAttendees=?, PromotesApprenticeships=?, PromotesWelshLanguage=?" +
+                "ChallangesGenderStereoTypes=? WHERE EventlID =?";
 
         return jdbcTemplate().update(updateSql, Name, TypeOfEvent, Date, isPublic, isCancelled, PostCode, NameOfAdviser,
-                NumberOfAttendees, AttendingSchools, PromotesApprenticeships, PromotesWelshLanguage,
-                ChallengesGenderStereoTypes, EventID);
+                NumberOfAttendees, PromotesApprenticeships, PromotesWelshLanguage,
+                ChallangesGenderStereoTypes, EventID);
     }
 
     ///////////////////////////////////// DELETE ALL METHODS ///////////////////////////////////////////////

@@ -1,6 +1,14 @@
 package ebe.Controllers;
 
+import com.fasterxml.jackson.annotation.JacksonAnnotationsInside;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import ebe.DBClasses.Employer;
+import ebe.DBClasses.Event;
+import ebe.DBClasses.School;
+import ebe.DBMethods.EmployerQueries;
+import ebe.DBMethods.EventQueries;
+import ebe.DBMethods.SchoolQueries;
+import ebe.DBMethods.VacancyQueries;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -10,18 +18,43 @@ import org.springframework.stereotype.Controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 public class BaseController {
 
+    private EmployerQueries EmployerQrys;
+    private EventQueries EventQrys;
+    private SchoolQueries SchoolQrys;
+    private VacancyQueries VacancyQrys;
+
+    @Autowired
+    public BaseController(EmployerQueries em, EventQueries ev, SchoolQueries sc, VacancyQueries va){
+        EmployerQrys = em;
+        EventQrys = ev;
+        SchoolQrys = sc;
+        VacancyQrys = va;
+    }
+
+
     @Autowired
     private HttpServletRequest context; // this will provide the current instance of HttpServletRequest
+
 
     // HomePage
     @GetMapping("/")
     public ModelAndView HomePage(HttpSession session) { ;
         ModelAndView mv = new ModelAndView();
         ObjectMapper objectMapper = new ObjectMapper();
+//        List<Employer> allEmployers = null;
+//        allEmployers = EmployerQrys.getAllEmployers();
+//        System.out.println(EmployerQrys.getAllEmployers());
+//        System.out.println("--------------------------------------------------------");
+//        System.out.println(EventQrys.getAllEvents());
+//        System.out.println("--------------------------------------------------------");
+//        System.out.println(SchoolQrys.getAllSchools());
+//        System.out.println("--------------------------------------------------------");
+//        System.out.println(VacancyQrys.getAllVacancy());
         // session = context.getSession();
         mv.setViewName("searchEmployerPage");
         return mv;
