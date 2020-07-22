@@ -3,28 +3,28 @@ package ebe.DBClasses;
 public class School {
 
     private int SchoolID;
-    private String SchoolName;
-    private String SchoolAddressCity;
-    private String SchoolAddressStreet;
-    private String SchoolAddressNumber;
+    private String Name;
+    private String AddressCity;
+    private String AddressStreet;
+    private String AddressNumber;
     private String Email;
     private String Phone;
 
-    public School(int schoolID, String schoolName, String schoolAddressCity, String schoolAddressStreet, String schoolAddressNumber, String email, String phone) {
+    public School(int schoolID, String name, String addressCity, String addressStreet, String addressNumber, String email, String phone) {
         SchoolID = schoolID;
-        SchoolName = schoolName;
-        SchoolAddressCity = schoolAddressCity;
-        SchoolAddressStreet = schoolAddressStreet;
-        SchoolAddressNumber = schoolAddressNumber;
+        Name = name;
+        AddressCity = addressCity;
+        AddressStreet = addressStreet;
+        AddressNumber = addressNumber;
         Email = email;
         Phone = phone;
     }
 
-    public School(String schoolName, String schoolAddressCity, String schoolAddressStreet, String schoolAddressNumber, String email, String phone) {
-        SchoolName = schoolName;
-        SchoolAddressCity = schoolAddressCity;
-        SchoolAddressStreet = schoolAddressStreet;
-        SchoolAddressNumber = schoolAddressNumber;
+    public School(String name, String addressCity, String addressStreet, String addressNumber, String email, String phone) {
+        Name = name;
+        AddressCity = addressCity;
+        AddressStreet = addressStreet;
+        AddressNumber = addressNumber;
         Email = email;
         Phone = phone;
     }
@@ -37,36 +37,36 @@ public class School {
         SchoolID = schoolID;
     }
 
-    public String getSchoolName() {
-        return SchoolName;
+    public String getName() {
+        return Name;
     }
 
-    public void setSchoolName(String schoolName) {
-        SchoolName = schoolName;
+    public void setName(String name) {
+        Name = name;
     }
 
-    public String getSchoolAddressCity() {
-        return SchoolAddressCity;
+    public String getAddressCity() {
+        return AddressCity;
     }
 
-    public void setSchoolAddressCity(String schoolAddressCity) {
-        SchoolAddressCity = schoolAddressCity;
+    public void setAddressCity(String addressCity) {
+        AddressCity = addressCity;
     }
 
-    public String getSchoolAddressStreet() {
-        return SchoolAddressStreet;
+    public String getAddressStreet() {
+        return AddressStreet;
     }
 
-    public void setSchoolAddressStreet(String schoolAddressStreet) {
-        SchoolAddressStreet = schoolAddressStreet;
+    public void setAddressStreet(String addressStreet) {
+        AddressStreet = addressStreet;
     }
 
-    public String getSchoolAddressNumber() {
-        return SchoolAddressNumber;
+    public String getAddressNumber() {
+        return AddressNumber;
     }
 
-    public void setSchoolAddressNumber(String schoolAddressNumber) {
-        SchoolAddressNumber = schoolAddressNumber;
+    public void setAddressNumber(String addressNumber) {
+        AddressNumber = addressNumber;
     }
 
     public String getEmail() {

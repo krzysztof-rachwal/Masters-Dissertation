@@ -19,10 +19,10 @@ public class EventQueries extends DBQueries {
     public List<Event> getAllEvents() throws DataAccessException {
         return jdbcTemplate().query("SELECT * FROM Event", new Object[]{},
                 (rs, i) -> new Event(rs.getInt("EventID"), rs.getString("Name"),
-                        rs.getInt("TypeOfEvent"), rs.getBoolean("isPublic"),
+                        rs.getInt("TypeOfEvent"), rs.getDate("Date"), rs.getBoolean("isPublic"),
                         rs.getBoolean("isCancelled"), rs.getString("PostCode"),
                         rs.getString("NameOfAdviser"), rs.getString("NumberOfAttendees"),
-                        rs.getInt("AttendingSchools"),rs.getInt("AttendingEmployers"),
+                        rs.getInt("AttendingSchools"),
                         rs.getBoolean("PromotesApprenticeships"), rs.getBoolean("PromotesWelshLanguage"),
                         rs.getBoolean("ChallengesGenderStereotypes"))
         );
@@ -32,11 +32,11 @@ public class EventQueries extends DBQueries {
     public Event getEventDetailsById(int eventId) throws DataAccessException {
         String getSql = String.format("SELECT * FROM Event WHERE EventID = \"%s\" LIMIT 1", eventId);
         List<Event> eventInfo = jdbcTemplate().query(getSql, new Object[]{},
-                (rs, i) -> new Event(rs.getInt("EventID"), rs.getString("EventName"),
-                        rs.getInt("TypeOfEvent"), rs.getBoolean("isPublic"),
+                (rs, i) -> new Event(rs.getInt("EventID"), rs.getString("Name"),
+                        rs.getInt("TypeOfEvent"), rs.getDate("Date"), rs.getBoolean("isPublic"),
                         rs.getBoolean("isCancelled"), rs.getString("PostCode"),
                         rs.getString("NameOfAdviser"), rs.getString("NumberOfAttendees"),
-                        rs.getInt("AttendingSchools"),rs.getInt("AttendingEmployers"),
+                        rs.getInt("AttendingSchools"),
                         rs.getBoolean("PromotesApprenticeships"), rs.getBoolean("PromotesWelshLanguage"),
                         rs.getBoolean("ChallengesGenderStereotypes"))
         );
@@ -46,16 +46,16 @@ public class EventQueries extends DBQueries {
 
     ///////////////////////////////////// CREATE ALL METHODS ///////////////////////////////////////////////
     // 1. Create a new Event
-    public int createNewEvent(String EventName, int TypeOfEvent, Boolean isPublic, Boolean isCancelled, String PostCode, String NameOfAdviser,
-                              String NumberOfAttendees, int AttendingSchools, int AttendingEmployers, Boolean PromotesApprenticeships, Boolean PromotesWelshLanguage,
+    public int createNewEvent(String Name, int TypeOfEvent, Boolean isPublic, Boolean isCancelled, String PostCode, String NameOfAdviser,
+                              String NumberOfAttendees, int AttendingSchools, Boolean PromotesApprenticeships, Boolean PromotesWelshLanguage,
                               Boolean ChallengesGenderStereoTypes) throws DataAccessException {
 
-        String insertSql = "INSERT TO Event Event(EventName, TypeOfEvent, isPublic, isCancelled, PostCode, NameOfAdviser," +
+        String insertSql = "INSERT TO Event Event(Name, TypeOfEvent, isPublic, isCancelled, PostCode, NameOfAdviser," +
                 "                                 NumberOfAttendees, AttendingSchools, AttendingEmployers, PromotesApprenticeships, PromotesWelshLanguage," +
                 "                                 ChallengesGenderStereoTypes)" +
                 "                                  VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
-        return jdbcTemplate().update(insertSql, EventName, TypeOfEvent, isPublic, isCancelled, PostCode, NameOfAdviser,
+        return jdbcTemplate().update(insertSql, Name, TypeOfEvent, isPublic, isCancelled, PostCode, NameOfAdviser,
                 NumberOfAttendees, AttendingSchools, AttendingEmployers, PromotesApprenticeships, PromotesWelshLanguage,
                 ChallengesGenderStereoTypes);
 

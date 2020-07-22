@@ -7,45 +7,45 @@ import java.util.Date;
 public class Event {
 
     private int EventID;
-    private String EventName;
+    private String Name;
     private int TypeOfEvent;
+    private @DateTimeFormat(pattern = "yyyy-MM-dd") Date Date;
     private Boolean isPublic;
     private Boolean isCancelled;
     private String PostCode;
     private String NameOfAdviser;
     private String NumberOfAttendees;
     private int AttendingSchools;
-    private int AttendingEmployers;
     private Boolean PromotesApprenticeships;
     private Boolean PromotesWelshLanguage;
     private Boolean ChallengesGenderStereotypes;
 
-    public Event(int eventID, String eventName, int typeOfEvent, Boolean isPublic, Boolean isCancelled, String postCode, String nameOfAdviser, String numberOfAttendees, int attendingSchools, int attendingEmployers, Boolean promotesApprenticeships, Boolean promotesWelshLanguage, Boolean challengesGenderStereotypes) {
+    public Event(int eventID, String name, int typeOfEvent, java.util.Date date, Boolean isPublic, Boolean isCancelled, String postCode, String nameOfAdviser, String numberOfAttendees, int attendingSchools, Boolean promotesApprenticeships, Boolean promotesWelshLanguage, Boolean challengesGenderStereotypes) {
         EventID = eventID;
-        EventName = eventName;
+        Name = name;
         TypeOfEvent = typeOfEvent;
+        Date = date;
         this.isPublic = isPublic;
         this.isCancelled = isCancelled;
         PostCode = postCode;
         NameOfAdviser = nameOfAdviser;
         NumberOfAttendees = numberOfAttendees;
         AttendingSchools = attendingSchools;
-        AttendingEmployers = attendingEmployers;
         PromotesApprenticeships = promotesApprenticeships;
         PromotesWelshLanguage = promotesWelshLanguage;
         ChallengesGenderStereotypes = challengesGenderStereotypes;
     }
 
-    public Event(String eventName, int typeOfEvent, Boolean isPublic, Boolean isCancelled, String postCode, String nameOfAdviser, String numberOfAttendees, int attendingSchools, int attendingEmployers, Boolean promotesApprenticeships, Boolean promotesWelshLanguage, Boolean challengesGenderStereotypes) {
-        EventName = eventName;
+    public Event(String name, int typeOfEvent, java.util.Date date, Boolean isPublic, Boolean isCancelled, String postCode, String nameOfAdviser, String numberOfAttendees, int attendingSchools, Boolean promotesApprenticeships, Boolean promotesWelshLanguage, Boolean challengesGenderStereotypes) {
+        Name = name;
         TypeOfEvent = typeOfEvent;
+        Date = date;
         this.isPublic = isPublic;
         this.isCancelled = isCancelled;
         PostCode = postCode;
         NameOfAdviser = nameOfAdviser;
         NumberOfAttendees = numberOfAttendees;
         AttendingSchools = attendingSchools;
-        AttendingEmployers = attendingEmployers;
         PromotesApprenticeships = promotesApprenticeships;
         PromotesWelshLanguage = promotesWelshLanguage;
         ChallengesGenderStereotypes = challengesGenderStereotypes;
@@ -59,12 +59,12 @@ public class Event {
         EventID = eventID;
     }
 
-    public String getEventName() {
-        return EventName;
+    public String getName() {
+        return Name;
     }
 
-    public void setEventName(String eventName) {
-        EventName = eventName;
+    public void setName(String name) {
+        Name = name;
     }
 
     public int getTypeOfEvent() {
@@ -73,6 +73,14 @@ public class Event {
 
     public void setTypeOfEvent(int typeOfEvent) {
         TypeOfEvent = typeOfEvent;
+    }
+
+    public java.util.Date getDate() {
+        return Date;
+    }
+
+    public void setDate(java.util.Date date) {
+        Date = date;
     }
 
     public Boolean getPublic() {
@@ -121,14 +129,6 @@ public class Event {
 
     public void setAttendingSchools(int attendingSchools) {
         AttendingSchools = attendingSchools;
-    }
-
-    public int getAttendingEmployers() {
-        return AttendingEmployers;
-    }
-
-    public void setAttendingEmployers(int attendingEmployers) {
-        AttendingEmployers = attendingEmployers;
     }
 
     public Boolean getPromotesApprenticeships() {

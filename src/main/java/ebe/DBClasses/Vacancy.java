@@ -8,6 +8,7 @@ public class Vacancy {
 
     private int VacancyID;
     private int EmployerID;
+    private String VacancyTitle;
     private String Details;
     private String Link;
     private int  TypeOfVacancy;
@@ -18,9 +19,10 @@ public class Vacancy {
     private String ApplicationMethod;
     private String Postcode;
 
-    public Vacancy(int vacancyID, int employerID, String details, String link, int typeOfVacancy, int statusOfVacancy, Date startOfVacancy, Date closingDate, int occupationalCode, String applicationMethod, String postcode) {
+    public Vacancy(int vacancyID, int employerID, String vacancyTitle, String details, String link, int typeOfVacancy, int statusOfVacancy, Date startOfVacancy, Date closingDate, int occupationalCode, String applicationMethod, String postcode) {
         VacancyID = vacancyID;
         EmployerID = employerID;
+        VacancyTitle = vacancyTitle;
         Details = details;
         Link = link;
         TypeOfVacancy = typeOfVacancy;
@@ -32,8 +34,9 @@ public class Vacancy {
         Postcode = postcode;
     }
 
-    public Vacancy(int employerID, String details, String link, int typeOfVacancy, int statusOfVacancy, Date startOfVacancy, Date closingDate, int occupationalCode, String applicationMethod, String postcode) {
+    public Vacancy(int employerID, String vacancyTitle, String details, String link, int typeOfVacancy, int statusOfVacancy, Date startOfVacancy, Date closingDate, int occupationalCode, String applicationMethod, String postcode) {
         EmployerID = employerID;
+        VacancyTitle = vacancyTitle;
         Details = details;
         Link = link;
         TypeOfVacancy = typeOfVacancy;
@@ -59,6 +62,14 @@ public class Vacancy {
 
     public void setEmployerID(int employerID) {
         EmployerID = employerID;
+    }
+
+    public String getVacancyTitle() {
+        return VacancyTitle;
+    }
+
+    public void setVacancyTitle(String vacancyTitle) {
+        VacancyTitle = vacancyTitle;
     }
 
     public String getDetails() {
