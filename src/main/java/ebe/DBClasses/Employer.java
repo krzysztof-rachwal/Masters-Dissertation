@@ -83,6 +83,10 @@ public class Employer {
         HasApprenticeshipProgramme = hasApprenticeshipProgramme;
     }
 
+    public Employer() {
+
+    }
+
     public int getEmployerID() {
         return EmployerID;
     }
