@@ -2,77 +2,86 @@ package ebe.DBClasses;
 
 public class School {
 
-    private int schoolID;
-    private String schoolName;
-    private String description;
-    private String locationCity;
-    private String locationStreet;
-    private String locationNumber;
-    private String locationPostcode;
+    private int SchoolID;
+    private String Name;
+    private String AddressCity;
+    private String AddressStreet;
+    private String AddressNumber;
+    private String Email;
+    private String Phone;
 
-    public School(int schoolID, String schoolName, String description, String locationCity, String locationStreet, String locationNumber, String locationPostcode) {
-        this.schoolID = schoolID;
-        this.schoolName = schoolName;
-        this.description = description;
-        this.locationCity = locationCity;
-        this.locationStreet = locationStreet;
-        this.locationNumber = locationNumber;
-        this.locationPostcode = locationPostcode;
+    public School(int schoolID, String name, String addressCity, String addressStreet, String addressNumber, String email, String phone) {
+        SchoolID = schoolID;
+        Name = name;
+        AddressCity = addressCity;
+        AddressStreet = addressStreet;
+        AddressNumber = addressNumber;
+        Email = email;
+        Phone = phone;
+    }
+
+    public School(String name, String addressCity, String addressStreet, String addressNumber, String email, String phone) {
+        Name = name;
+        AddressCity = addressCity;
+        AddressStreet = addressStreet;
+        AddressNumber = addressNumber;
+        Email = email;
+        Phone = phone;
     }
 
     public int getSchoolID() {
-        return schoolID;
+        return SchoolID;
     }
 
     public void setSchoolID(int schoolID) {
-        this.schoolID = schoolID;
+        SchoolID = schoolID;
     }
 
-    public String getSchoolName() {
-        return schoolName;
+    public String getName() {
+        return Name;
     }
 
-    public void setSchoolName(String schoolName) {
-        this.schoolName = schoolName;
+    public void setName(String name) {
+        Name = name;
     }
 
-    public String getDescription() {
-        return description;
+    public String getAddressCity() {
+        return AddressCity;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setAddressCity(String addressCity) {
+        AddressCity = addressCity;
     }
 
-    public String getLocationCity() {
-        return locationCity;
+    public String getAddressStreet() {
+        return AddressStreet;
     }
 
-    public void setLocationCity(String locationCity) {
-        this.locationCity = locationCity;
+    public void setAddressStreet(String addressStreet) {
+        AddressStreet = addressStreet;
     }
 
-    public String getLocationStreet() {
-        return locationStreet;
+    public String getAddressNumber() {
+        return AddressNumber;
     }
 
-    public void setLocationStreet(String locationStreet) {
-        this.locationStreet = locationStreet;
+    public void setAddressNumber(String addressNumber) {
+        AddressNumber = addressNumber;
     }
 
-    public String getLocationNumber() {
-        return locationNumber;
+    public String getEmail() {
+        return Email;
     }
 
-    public void setLocationNumber(String locationNumber) {
-        this.locationNumber = locationNumber;
+    public void setEmail(String email) {
+        Email = email;
     }
 
-    public String getLocationPostcode() {
-        return locationPostcode;
+    public String getPhone() {
+        return Phone;
     }
 
-    public void setLocationPostcode(String locationPostcode) {
-        this.locationPostcode = locationPostcode;
+    public void setPhone(String phone) {
+        Phone = phone;
     }
 }
