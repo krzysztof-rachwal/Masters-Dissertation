@@ -5,15 +5,21 @@
     <meta id="_csrf" name="_csrf" th:content="${_csrf.token}"/>
     <meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}"/>
     <link rel="stylesheet" type="text/css" href="https://use.fortawesome.com/kits/747c3a74/publications/latest/eot.css">
-    <link rel="stylesheet" type="text/css" href="https://use.fortawesome.com/kits/747c3a74/publications/latest/woff.css">
-    <link rel="stylesheet" type="text/css" href="https://use.fortawesome.com/kits/747c3a74/publications/latest/woff2.css">
-    <link rel="stylesheet" type="text/css" href="https://careerswales.gov.wales/styleguide/assets/css/gel-styleguide.css">
+    <link rel="stylesheet" type="text/css"
+          href="https://use.fortawesome.com/kits/747c3a74/publications/latest/woff.css">
+    <link rel="stylesheet" type="text/css"
+          href="https://use.fortawesome.com/kits/747c3a74/publications/latest/woff2.css">
+    <link rel="stylesheet" type="text/css"
+          href="https://careerswales.gov.wales/styleguide/assets/css/gel-styleguide.css">
     <link rel="stylesheet" media="all" href="https://careerswales.gov.wales/styleguide/assets/css/gel-elements.css"/>
-    <link rel="stylesheet" media="all" href="https://careerswales.gov.wales/sites/default/files/css/css_Ix2IjZRJPxhlyX0UzoOcvWoONN1wNDbQY7jrFiB85O0.css"/>
-    <link rel="stylesheet" media="all" href="https://careerswales.gov.wales/sites/default/files/css/css_yFFWPpQsZCFeHMtvOieuCWLiTEiz--tT0otLunNJdLs.css"/>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" media="all"
+          href="https://careerswales.gov.wales/sites/default/files/css/css_Ix2IjZRJPxhlyX0UzoOcvWoONN1wNDbQY7jrFiB85O0.css"/>
+    <link rel="stylesheet" media="all"
+          href="https://careerswales.gov.wales/sites/default/files/css/css_yFFWPpQsZCFeHMtvOieuCWLiTEiz--tT0otLunNJdLs.css"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link th:href="@{../css/ebe_style.css}" href="../css/ebe_style.css" rel="stylesheet" />
+    <link th:href="@{../css/ebe_style.css}" href="../css/ebe_style.css" rel="stylesheet"/>
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
     <title>Events Profile</title>
 </head>
@@ -23,66 +29,146 @@
 <header th:replace="fragments/headerTemplate :: header">
 </header>
 
-<!--MAIN CONTENT-->
 <div class="gel-content-container">
-    <h1>Stats</h1>
-    <br>
+    <div class="container-headline mt-5">
+        <span class="title-h2">Stats</span>
+    </div>
 
-<!--COUNTERS-->
-    <section class="counters">
-        <div class="container">
-            <div>
-                <i class="fab fa-vacancies fa-4x"></i>
-                <div class="counter" data-target="60000">0</div>
-                <h3>Employer Vacancies</h3>
+    <div class="container-fluid eventBackground">
+        <div class="row p-2">
+            <div class="col-md p-2 well">
+                <h5 class="font-weight-bold mt-1">Events Info</h5>
+                <div class="row d-block ml-2">
+                    <span class="h4 mt-1 counter text-success d-flex justify-content-center mb-0"
+                          data-target="60000">0</span>
+                    <span class="h3 my-0 d-flex justify-content-center mb-0">Events</span>
+                    <div class="row d-inline">
+                        <div class="col-md-6">
+                            <div class="d-block  mb-2">
+                                <span class="h4 mt-1 text-info d-inline">450</span>
+                                <span class="d-inline ml-2">Webinars</span>
+                            </div>
+                            <div class="d-block  mb-2">
+                                <span class="h4 mt-1 text-info d-inline">600</span>
+                                <span class="d-inline ml-2">Industry Days</span>
+                            </div>
+                            <div class="d-block  mb-2">
+                                <span class="h4 mt-1  text-info d-inline">345</span>
+                                <span class="d-inline ml-2">Workshop</span>
+                            </div>
+                            <div class="d-block  mb-2">
+                                <span class="h4 mt-1  text-info d-inline">300</span>
+                                <span class="d-inline ml-2">Webinars</span>
+                            </div>
+                            <div class="d-block  mb-2">
+                                <span class="h4 mt-1 text-info d-inline">240</span>
+                                <span class="d-inline ml-2">Webinars</span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="d-block  mb-2">
+                                <span class="h4 mt-1 text-info d-inline">200</span>
+                                <span class="d-inline-block ml-2">in Cardiff</span>
+                            </div>
+                            <div class="d-block  mb-2">
+                                <span class="h4 mt-1 text-info d-inline">58</span>
+                                <span class="d-inline ml-2">in Caerphilly</span>
+                            </div>
+                            <div class="d-block  mb-2">
+                                <span class="h4 mt-1 text-info d-inline">146</span>
+                                <span class="d-inline ml-2">in Swansea</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div>
-                <i class="fab fa-schools fa-4x"></i>
-                <div class="counter" data-target="15000">0</div>
-                <h3>Requests by Schools</h3>
-            </div>
-            <div>
-                <i class="fab fa-offerings fa-4x"></i>
-                <div class="counter" data-target="9000">0</div>
-                <h3>Employer Offerings</h3>
+            <div class="col-md p-2 well">
+                <h5 class="font-weight-bold mt-1">Employers Info</h5>
+                <div class="row d-block ml-2">
+                    <span class="h4 mt-1 counter text-success d-flex justify-content-center mb-0"
+                          data-target="60000">0</span>
+                    <span class="h3 mt-0 d-flex justify-content-center mb-0">Employers</span>
+                    <div class="row d-inline">
+                        <div class="col-md">
+                            <div class="d-block  mb-2">
+                                <span class="h4 mt-1 text-info d-inline">146</span>
+                                <span class="mt-1 d-inline">Science and Technology</span>
+                            </div>
+                            <div class="d-block  mb-2">
+                                <span class="h4 mt-1 text-info d-inline">240</span>
+                                <span class="mt-1 d-inline">Humanities</span>
+                            </div>
+                            <div class="d-block  mb-2">
+                                <span class="h4 mt-1 text-info d-inline">456</span>
+                                <span class="mt-1 d-inline">Health And Wellbeing</span>
+                            </div>
+                            <div class="d-block  mb-2">
+                                <span class="h4 mt-1 text-info d-inline">146</span>
+                                <span class="mt-1 d-inline">Science and Technology</span>
+                            </div>
+                            <div class="d-block  mb-2">
+                                <span class="h4 mt-1 text-info d-inline">240</span>
+                                <span class="mt-1 d-inline">Humanities</span>
+                            </div>
+                            <div class="d-block  mb-2">
+                                <span class="h4 mt-1 text-info d-inline">456</span>
+                                <span class="mt-1 d-inline">Health And Wellbeing</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </section>
-</div>
-<!--END OF MAIN CONTENT-->
-<footer th:replace="fragments/footerTemplate :: footer"></footer>
+        <div class="row well d-block">
+            <span class="h4 mt-1 counter text-success d-flex justify-content-center" data-target="60000">0</span>
+            <span class="h3 d-flex mt-0 justify-content-center">Requests by schools</span>
+            <div class="container my-4 text-center">
+                <button type="button" class="button--secondary text-center">View schools</button>
+            </div>
+        </div>
+        <div class="row p-2 well d-block">
+            <div class="col-md d-block">
+                <span class="h4 mt-1 counter text-success d-flex justify-content-center" data-target="60000">0</span>
+                <span class="h3 mt-0 d-flex justify-content-center">Employer Offerings</span>
+            </div>
+        </div>
 
-<script type="text/javascript" src="https://careerswales.gov.wales/styleguide//assets/js/jquery-3.0.0.min.js"></script>
-<script type="text/javascript" src="https://careerswales.gov.wales/styleguide//assets/js/gel-elements.js"></script>
-<script type="text/javascript" src="https://careerswales.gov.wales/styleguide//assets/js/gel-elements-loader.js"></script>
-<script>
-    const counters = document.querySelectorAll('.counter');
-    const speed = 150; // The lower the slower
+    </div>
 
-    counters.forEach(counter => {
-        const updateCount = () => {
-        const target = +counter.getAttribute('data-target');
-    const count = +counter.innerText;
+    <footer th:replace="fragments/footerTemplate :: footer"></footer>
+    <script type="text/javascript"
+            src="https://careerswales.gov.wales/styleguide//assets/js/jquery-3.0.0.min.js"></script>
+    <script type="text/javascript" src="https://careerswales.gov.wales/styleguide//assets/js/gel-elements.js"></script>
+    <script type="text/javascript"
+            src="https://careerswales.gov.wales/styleguide//assets/js/gel-elements-loader.js"></script>
+    <script>
+        const counters = document.querySelectorAll('.counter');
+        const speed = 150; // The lower the slower
 
-    // Lower inc to slow and higher to slow
-    const inc = target / speed;
+        counters.forEach(counter => {
+            const updateCount = () => {
+                const target = +counter.getAttribute('data-target');
+                const count = +counter.innerText;
 
-    // console.log(inc);
-    // console.log(count);
+                // Lower inc to slow and higher to slow
+                const inc = target / speed;
 
-    // Check if target is reached
-    if (count < target) {
-        // Add inc to count and output in counter
-        counter.innerText = count + inc;
-        // Call function every ms
-        setTimeout(updateCount, 1);
-    } else {
-        counter.innerText = target;
-    }
-    };
+                // console.log(inc);
+                // console.log(count);
 
-    updateCount();
-    });
-</script>
+                // Check if target is reached
+                if (count < target) {
+                    // Add inc to count and output in counter
+                    counter.innerText = count + inc;
+                    // Call function every ms
+                    setTimeout(updateCount, 1);
+                } else {
+                    counter.innerText = target;
+                }
+            };
+
+            updateCount();
+        });
+    </script>
 </body>
 </html>
