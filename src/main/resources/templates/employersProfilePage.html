@@ -398,14 +398,10 @@
         <div class="row my-5">
 
             <div class="col-md-4 well ">
-                <div class="my-2">
-                    <span class="text-h5 font-weight-bold">Post Code:</span>
-                    <span class="text-h5" th:text="${employer.getPostcode()}"></span>
-                </div>
 
                 <div class="my-2">
-                    <span class="text-h5 font-weight-bold">Website:</span>
-                    <span class="text-h5" ></span>
+                    <span class="text-h5 font-weight-bold">Sector:</span>
+                    <span class="text-h5" >Insurance</span>
                 </div>
 
                 <div class="my-2">
@@ -426,6 +422,11 @@
                 <div class="my-2">
                     <span class="text-h5 font-weight-bold">Works in Welsh:</span>
                     <span class="text-h5" th:text="${employer.getRunsBusinessInWelsh()}"></span>
+                </div>
+
+                <div class="my-2">
+                    <span class="text-h5 font-weight-bold">Deliver in Welsh:</span>
+                    <span class="text-h5" th:text="${employer.getCanDeliverToSchoolsInWelsh()}"></span>
                 </div>
 
                 <div class="my-2">
@@ -467,6 +468,10 @@
         <h3>Alumni</h3>
         <ul>
             <li>James Howell</li>
+            <li>Daniel Morrison</li>
+            <li>Caroline Wallace</li>
+            <li>Michael Stanton</li>
+            <li>Evelyn Klein</li>
         </ul>
     </div>
 
@@ -493,12 +498,12 @@
                     <span>John Smith </span>
                 </div>
                 <div>
-                    <span class="">Telephone Number:</span>
-                    <span>000</span>
+                    <span th:text=" 'Email: ' + ${employer.getEmail()}"></span>
                 </div>
                 <div>
                     <span th:text=" 'Contact Number: ' + ${employer.getPhone()}"></span>
                 </div>
+
             </div>
 
             <div class="col-md-4">
@@ -508,9 +513,6 @@
                 </div>
                 <div>
                     <span th:text=" 'Website: ' + ${employer.getWebsite()}"></span>
-                </div>
-                <div>
-                    <span th:text=" 'Email: ' + ${employer.getEmail()}"></span>
                 </div>
             </div>
 
@@ -526,8 +528,11 @@
     <div class="col-md-12">
         <h3>School Preferences</h3>
         <ul>
-            <li>St James</li>
-            <li>St James</li>
+            <li>Gwernyfed</li>
+            <li>Ysgol Gyfun Gwyr</li>
+            <li>Olchfa School</li>
+            <li>Ysgol Glantaf</li>
+            <li>Ysgol y Preseli</li>
         </ul>
     </div>
 
@@ -538,11 +543,24 @@
     </div>
 
     <div class="col-md-12">
-        <h3>Employer Documents and videos</h3>
+        <h3>Employer Documents</h3>
         <ul>
-            <li>Document</li>
-            <li>Document</li>
-            <li>Video link</li>
+            <li>flyer1.pdf</li>
+            <li>flyer2.pdf</li>
+        </ul>
+    </div>
+
+    <div class="row">
+        <div class="col"></div>
+        <hr class="col-md-6 float-center my-2">
+        <div class="col"></div>
+    </div>
+
+    <div class="col-md-12">
+        <h3>Employer Videos</h3>
+        <ul>
+            <li>https://www.youtube.com/watch?v=8yAlRupcfds</li>
+            <li>https://www.youtube.com/watch?v=7rUKTcffJbM</li>
         </ul>
     </div>
 
