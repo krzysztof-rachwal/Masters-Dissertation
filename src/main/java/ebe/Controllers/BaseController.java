@@ -11,6 +11,7 @@ import ebe.DBMethods.SchoolQueries;
 import ebe.DBMethods.VacancyQueries;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -18,7 +19,10 @@ import org.springframework.stereotype.Controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class BaseController {
@@ -43,30 +47,40 @@ public class BaseController {
 
     // HomePage
     @GetMapping("/")
-    public ModelAndView HomePage(HttpSession session) { ;
+    public ModelAndView HomePage(HttpSession session) {
         ModelAndView mv = new ModelAndView();
         ObjectMapper objectMapper = new ObjectMapper();
-//        List<Employer> allEmployers = null;
-//        allEmployers = EmployerQrys.getAllEmployers();
-//        System.out.println(EmployerQrys.getAllEmployers());
-//        System.out.println("--------------------------------------------------------");
-//        System.out.println(EventQrys.getAllEvents());
-//        System.out.println("--------------------------------------------------------");
-//        System.out.println(SchoolQrys.getAllSchools());
-//        System.out.println("--------------------------------------------------------");
-//        System.out.println(VacancyQrys.getAllVacancy());
         // session = context.getSession();
         mv.setViewName("searchEmployerPage");
         return mv;
-    }
+    };
 
     //Search Employer
     @GetMapping("/employers")
     public ModelAndView SearchEmployer(HttpSession session) {
+
         ModelAndView mv = new ModelAndView();
-        ObjectMapper objectMapper = new ObjectMapper();
-        // session = context.getSession();
         mv.setViewName("searchEmployerPage");
+        List<Employer> employers;
+        employers = EmployerQrys.getAllEmployers();
+
+        Map<String,Object> allEmployers = new HashMap<String,Object>();
+        allEmployers.put("allEmployers", employers);
+        mv.addAllObjects(allEmployers);
+
+        return mv;
+    }
+
+    // Employer Profile (with the id)
+    @GetMapping("/profile-employer")
+    public ModelAndView EmployersProfile(@RequestParam(value="employerId" )int id) {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("employersProfilePage");
+        Employer employer = EmployerQrys.getEmployerDetailsById(id);
+        mv.addObject("employer",employer);
+        //        for (Employer employer : employers) {
+//            System.out.println(employer.getName());
+//        }
         return mv;
     }
 
@@ -80,17 +94,6 @@ public class BaseController {
         return mv;
     }
 
-
-
-    // Employer Profile (with the id)
-    @GetMapping("/employers/id")
-    public ModelAndView EmployersProfile(HttpSession session) {
-        ModelAndView mv = new ModelAndView();
-        ObjectMapper objectMapper = new ObjectMapper();
-        // session = context.getSession();
-        mv.setViewName("employersProfilePage");
-        return mv;
-    }
 
     // Search Events
     @GetMapping("/events")
@@ -189,8 +192,5 @@ public class BaseController {
     public RedirectView ErrorPage() {
         return new RedirectView("/searchEmployerPage");
     }
-
-
-
 
 }
