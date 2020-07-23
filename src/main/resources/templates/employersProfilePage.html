@@ -405,7 +405,7 @@
 
                 <div class="my-2">
                     <span class="text-h5 font-weight-bold">Website:</span>
-                    <span class="text-h5" th:text="${employer.getWebsite()}"></span>
+                    <span class="text-h5" ></span>
                 </div>
 
                 <div class="my-2">
@@ -449,32 +449,11 @@
             <div class="col-md-3 well">
                 <h6 class="font-weight-bold">Curriculum Areas</h6>
                 <ul>
-                    <li class="my-2">Science And Technology</li>
-                    <li class="my-2">Health And Wellbeing</li>
+                    <li class="my-2 d-none">Science And Technology</li>
+                    <li class="my-2 d-none">Health And Wellbeing</li>
                     <li class="my-2">Humanities</li>
                 </ul>
             </div>
-        </div>
-    </div>
-
-    <div class="row gel-content-container">
-        <div class="mb-auto p-2 col-6">
-            <label for="exampleFormControlSelect1" class="font-weight-bold">Schools Attending</label>
-            <select multiple class="form-control" id="exampleFormControlSelect1">
-                <option>Bryn Hafod Primary School</option>
-                <option>Christ The King RC Primary School</option>
-                <option>Gabafalfa Primary School</option>
-
-            </select>
-        </div>
-
-        <div class="mb-auto p-2 col-6">
-            <label for="exampleFormControlSelect2" class="font-weight-bold">Employers Attending</label>
-            <select multiple class="form-control" id="exampleFormControlSelect2">
-                <option>Admiral</option>
-                <option>Evolve Tech</option>
-                <option>Rynolds & Rynolds</option>
-            </select>
         </div>
     </div>
 
@@ -487,8 +466,7 @@
     <div class="col-md-12">
         <h3>Alumni</h3>
         <ul>
-            <li>St James</li>
-            <li>St James</li>
+            <li>James Howell</li>
         </ul>
     </div>
 
@@ -503,10 +481,9 @@
         <div class="row">
             <div class="col-md-4 mt-2">
                 <h4 class="font-weight-bold">Address</h4>
-                <h6>119 The Parade</h6>
-                <h6>SA1 5RF</h6>
-                <h6>Swansea</h6>
-                <h6>UK</h6>
+                <h6 th:text="${employer.getAddressNumber()} +' '+ ${employer.getAddressStreet()}"></h6>
+                <h6 th:text="${employer.getPostcode()}"></h6>
+                <h6 th:text="${employer.getAddressCity()}"></h6>
             </div>
 
             <div class="col-md-4">
@@ -520,8 +497,7 @@
                     <span>000</span>
                 </div>
                 <div>
-                    <span class="">Contact Number:</span>
-                    <span>000</span>
+                    <span th:text=" 'Contact Number: ' + ${employer.getPhone()}"></span>
                 </div>
             </div>
 
@@ -531,10 +507,10 @@
                     <span class="">Twitter:</span>
                 </div>
                 <div>
-                    <span class="">Website:</span>
+                    <span th:text=" 'Website: ' + ${employer.getWebsite()}"></span>
                 </div>
                 <div>
-                    <span class="">Email:</span>
+                    <span th:text=" 'Email: ' + ${employer.getEmail()}"></span>
                 </div>
             </div>
 
