@@ -5,17 +5,31 @@
     <meta id="_csrf" name="_csrf" th:content="${_csrf.token}"/>
     <meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}"/>
     <link rel="stylesheet" type="text/css" href="https://use.fortawesome.com/kits/747c3a74/publications/latest/eot.css">
-    <link rel="stylesheet" type="text/css" href="https://use.fortawesome.com/kits/747c3a74/publications/latest/woff.css">
-    <link rel="stylesheet" type="text/css" href="https://use.fortawesome.com/kits/747c3a74/publications/latest/woff2.css">
-    <link rel="stylesheet" type="text/css" href="https://careerswales.gov.wales/styleguide/assets/css/gel-styleguide.css">
+    <link rel="stylesheet" type="text/css"
+          href="https://use.fortawesome.com/kits/747c3a74/publications/latest/woff.css">
+    <link rel="stylesheet" type="text/css"
+          href="https://use.fortawesome.com/kits/747c3a74/publications/latest/woff2.css">
+    <link rel="stylesheet" type="text/css"
+          href="https://careerswales.gov.wales/styleguide/assets/css/gel-styleguide.css">
     <link rel="stylesheet" media="all" href="https://careerswales.gov.wales/styleguide/assets/css/gel-elements.css"/>
-    <link rel="stylesheet" media="all" href="https://careerswales.gov.wales/sites/default/files/css/css_Ix2IjZRJPxhlyX0UzoOcvWoONN1wNDbQY7jrFiB85O0.css"/>
-    <link rel="stylesheet" media="all" href="https://careerswales.gov.wales/sites/default/files/css/css_yFFWPpQsZCFeHMtvOieuCWLiTEiz--tT0otLunNJdLs.css"/>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" media="all"
+          href="https://careerswales.gov.wales/sites/default/files/css/css_Ix2IjZRJPxhlyX0UzoOcvWoONN1wNDbQY7jrFiB85O0.css"/>
+    <link rel="stylesheet" media="all"
+          href="https://careerswales.gov.wales/sites/default/files/css/css_yFFWPpQsZCFeHMtvOieuCWLiTEiz--tT0otLunNJdLs.css"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link th:href="@{../css/ebe_style.css}" href="../css/ebe_style.css" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css"/>
+    <link th:href="@{../css/ebe_style.css}" href="../css/ebe_style.css" rel="stylesheet"/>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
     <title>Employer Profile</title>
+
 </head>
 
 <header th:replace="fragments/headerTemplate :: header"></header>
@@ -184,23 +198,19 @@
                         <div class="row">
                             <div class="col-md-8 my-4">
                                 <div class="form-group">
-                                    <label for="schools" class="mt-3">School Preferences</label>
-                                    <select class="custom-select p-2 mb-3" id="schools">
-                                        <option selected>Select</option>
-                                        <option value="school">Schoool</option>
-                                        <option value="school">Schoool</option>
-                                        <option value="school">Schoool</option>
-                                        <option value="school">Schoool</option>
-                                        <option value="school">Schoool</option>
-                                        <option value="school">Schoool</option>
-                                        <option value="school">Schoool</option>
-                                        <option value="school">Schoool</option>
-                                        <option value="school">Schoool</option>
-                                        <option value="school">Schoool</option>
-                                        <option value="school">Schoool</option>
-                                        <option value="school">Schoool</option>
-                                        <option value="school">Schoool</option>
-                                    </select>
+                                    <div class="row d-inline">
+                                        <label for="schools" class="mt-3 mb-0 d-block">School Preferences</label>
+                                        <select class="selectpicker p-2 d-block" multiple data-live-search="true" id="schools">
+                                            <option value="school">School</option>
+                                            <option value="school">School</option>
+                                            <option value="school">School</option>
+                                            <option value="school">School</option>
+                                            <option value="school">School</option>
+                                            <option value="school">School</option>
+                                            <option value="school">School</option>
+                                            <option value="school">School</option>
+                                        </select>
+                                    </div>
                                 </div>
                                 <span class="h6 mt-3">Preferences</span>
                                 <div class="form-check">
@@ -601,20 +611,13 @@
         src="https://careerswales.gov.wales/styleguide/assets/js/gel-elements-loader.js"></script>
 <script type="text/javascript" src="https://careerswales.gov.wales/styleguide/assets/js/gel-elements.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
-
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
 <script>
-    $(document).ready(function () {
-
-    });
-
+    $('select').selectpicker();
 </script>
-<script>
-    $(document).ready(function () {
-        $('.js-example-basic-multiple').select2();
-    });
 
-</script>
 
 </body>
 </html>
