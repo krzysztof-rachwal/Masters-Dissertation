@@ -20,6 +20,11 @@
           integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css" rel="stylesheet"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css"/>
     <link th:href="@{../css/ebe_style.css}" href="../css/ebe_style.css" rel="stylesheet"/>
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
     <title>Request</title>
@@ -63,16 +68,26 @@
                     </div>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="event_notes">Event Notes</label>
+                        <textarea type="time" id="event_notes" class="form-control input-border border-0" rows="5" name="event_notes"></textarea>
+                    </div>
+                </div>
+            </div>
 
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="event_type">Event Type</label>
-                        <select id="event_type" name="event_type" class="custom-select p-2">
-                            <option value="type1">type1</option>
-                            <option value="type2">type2</option>
-                            <option value="type3">type3</option>
-                        </select>
+                        <div class="row d-inline">
+                            <label for="event_type" class="d-block">Event Type</label>
+                            <select id="event_type" name="event_type" class="selectpicker d-block">
+                                <option value="type1">type1</option>
+                                <option value="type2">type2</option>
+                                <option value="type3">type3</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -80,7 +95,7 @@
                 <div class="col-md-8">
                     <div class="form-group">
                         <label for="event-guests">Guest(s)</label><br>
-                        <select class="js-example-basic-multiple border-0" name="guests[]" multiple="multiple" id="event-guests">
+                        <select class="selectpicker" multiple data-live-search="true" id="event-guests">
                             <option value="guest1">Guest 1</option>
                             <option value="guest2">Guest 2</option>
                             <option value="guest3">Guest 3</option>
@@ -98,16 +113,20 @@
 <!--END OF MAIN CONTENT-->
 
 <footer th:replace="fragments/footerTemplate :: footer"></footer>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://careerswales.gov.wales/styleguide/assets/js/gel-styleguide.js"></script>
+<script type="text/javascript" src="https://careerswales.gov.wales/styleguide/assets/js/gel-elements-loader.js"></script>
+<script type="text/javascript" src="https://careerswales.gov.wales/styleguide/assets/js/gel-elements.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
 
-<script type="text/javascript" src="https://careerswales.gov.wales/styleguide//assets/js/jquery-3.0.0.min.js"></script>
-<script type="text/javascript" src="https://careerswales.gov.wales/styleguide//assets/js/gel-elements.js"></script>
-<script type="text/javascript"
-        src="https://careerswales.gov.wales/styleguide//assets/js/gel-elements-loader.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
+
 <script>
-    $(document).ready(function () {
-        $(".js-example-basic-multiple").select2();
-    });
+    $('select').selectpicker();
 </script>
 </body>
 </html>
