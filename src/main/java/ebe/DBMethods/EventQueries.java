@@ -6,10 +6,15 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.sql.Connection;
+import java.sql.Statement;
 import java.util.List;
 
 @Repository
 public class EventQueries extends DBQueries {
+
+    private Connection connection;
+    private Statement statement;
 
     @Autowired
     public EventQueries(JdbcTemplate jdbctemplate) {
