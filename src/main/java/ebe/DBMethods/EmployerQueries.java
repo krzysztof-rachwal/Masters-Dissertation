@@ -65,7 +65,6 @@ public class EmployerQueries extends DBQueries {
     // 2. Get Employer by Id
     public Employer getEmployerDetailsById(int employerId) throws DataAccessException {
         String getQuery = String.format("SELECT * FROM Employer WHERE EmployerID = \"%s\" LIMIT 1", employerId);
-//        String getQuery = "SELECT * FROM Employer";
         Employer employer = null;
         ResultSet rs = null;
         try {

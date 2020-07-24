@@ -60,16 +60,30 @@ public class VacancyQueries extends DBQueries {
 
     // 2. Get Vacancy by Id
     public Vacancy getVacancyDetailsById(int vacancyId) throws DataAccessException {
-        String getSql = String.format("SELECT * FROM Vacancy WHERE VacancyID = \"%s\" LIMIT 1", vacancyId);
-        List<Vacancy> schoolInfo = jdbcTemplate().query(getSql, new Object[]{},
-                (rs, i) -> new Vacancy(rs.getInt("VacancyID"), rs.getInt("EmployerID"),
+        String getQuery = String.format("SELECT * FROM Vacancy WHERE VacancyID = \"%s\" LIMIT 1", vacancyId);
+        Vacancy vacancy = null;
+        ResultSet rs = null;
+        try {
+            connection = ConnectionFactory.getConnection();
+            statement = connection.createStatement();
+            rs = statement.executeQuery(getQuery);
+            while (rs.next()) {
+
+                vacancy = new Vacancy(rs.getInt("VacancyID"), rs.getInt("EmployerID"),
                         rs.getString("VacancyTitle"), rs.getString("Details"), rs.getString("Link"),
                         rs.getInt("TypeOfVacancy"), rs.getInt("StatusOfVacancy"),
                         rs.getDate("StartOfVacancy"),rs.getDate("ClosingDate"),
                         rs.getInt("OccupationalCode"), rs.getString("ApplicationMethod"),
-                        rs.getString("Postcode"))
-        );
-        return schoolInfo.get(0);
+                        rs.getString("Postcode"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.close(rs);
+            DBUtil.close(statement);
+            DBUtil.close(connection);
+        }
+        return vacancy;
     }
 
 

@@ -112,13 +112,14 @@ public class BaseController {
     }
 
     //5. Vacancy Profile
-
     @GetMapping("/profile-vacancy")
     public ModelAndView Vacancy(@RequestParam(value="vacancyId" )int id) {
         ModelAndView mv = new ModelAndView();
-        ObjectMapper objectMapper = new ObjectMapper();
-        // session = context.getSession();
         mv.setViewName("vacancyProfilePage");
+
+        Vacancy vacancy = VacancyQrys.getVacancyDetailsById(id);
+        mv.addObject("vacancy",vacancy);
+
         return mv;
     }
 
