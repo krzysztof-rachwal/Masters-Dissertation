@@ -40,7 +40,6 @@ public class BaseController {
         VacancyQrys = va;
     }
 
-
     @Autowired
     private HttpServletRequest context; // this will provide the current instance of HttpServletRequest
 
@@ -55,7 +54,8 @@ public class BaseController {
         return mv;
     };
 
-    //Search Employer
+    /////////1st - Header Menu /////////
+    //1. Search Employer
     @GetMapping("/employers")
     public ModelAndView SearchEmployer(HttpSession session) {
 
@@ -71,7 +71,7 @@ public class BaseController {
         return mv;
     }
 
-    // Employer Profile (with the id)
+    //2. Employer Profile (with the id)
     @GetMapping("/profile-employer")
     public ModelAndView EmployersProfile(@RequestParam(value="employerId" )int id) {
         ModelAndView mv = new ModelAndView();
@@ -84,7 +84,7 @@ public class BaseController {
         return mv;
     }
 
-    // Add Employer
+    //3. Add Employer
     @GetMapping("/add-employer")
     public ModelAndView AddEmployer (HttpSession session) {
         ModelAndView mv = new ModelAndView();
@@ -94,80 +94,23 @@ public class BaseController {
         return mv;
     }
 
-
-    // Search Events
-    @GetMapping("/events")
-    public ModelAndView SearchEvents(HttpSession session) {
-        ModelAndView mv = new ModelAndView();
-        ObjectMapper objectMapper = new ObjectMapper();
-        // session = context.getSession();
-        mv.setViewName("searchEventsPage");
-        return mv;
-    }
-
-    // Add Events
-    @GetMapping("/add-events")
-    public ModelAndView AddEvents(HttpSession session) {
-        ModelAndView mv = new ModelAndView();
-        ObjectMapper objectMapper = new ObjectMapper();
-        // session = context.getSession();
-        mv.setViewName("addEventsPage");
-        return mv;
-    }
-
-    // Events Profile (get id of the event)
-    @GetMapping("/events/id")
-    public ModelAndView EventProfile(HttpSession session) {
-        ModelAndView mv = new ModelAndView();
-        ObjectMapper objectMapper = new ObjectMapper();
-        // session = context.getSession();
-        mv.setViewName("eventsProfilePage");
-        return mv;
-    }
-
-    // Request
-    @GetMapping("/request")
-    public ModelAndView Request(HttpSession session) {
-        ModelAndView mv = new ModelAndView();
-        ObjectMapper objectMapper = new ObjectMapper();
-        // session = context.getSession();
-        mv.setViewName("requestPage");
-        return mv;
-    }
-
-    // Report
-    @GetMapping("/report")
-    public ModelAndView Report(HttpSession session) {
-        ModelAndView mv = new ModelAndView();
-        ObjectMapper objectMapper = new ObjectMapper();
-        // session = context.getSession();
-        mv.setViewName("reportPage");
-        return mv;
-    }
-
-
-    // Contact Us
-    @GetMapping("/contact-us")
-    public ModelAndView contactUs(HttpSession session) {
-        ModelAndView mv = new ModelAndView();
-        ObjectMapper objectMapper = new ObjectMapper();
-        // session = context.getSession();
-        mv.setViewName("contactUsPage");
-        return mv;
-    }
-
-
-    //Search Vacancies
+    /////////2nd - Header Menu /////////
+    //4. Search Vacancies
     @GetMapping("/vacancies")
     public ModelAndView SearchVacancies(HttpSession session) {
         ModelAndView mv = new ModelAndView();
-        ObjectMapper objectMapper = new ObjectMapper();
-        // session = context.getSession();
         mv.setViewName("searchVacanciesPage");
+        List<Employer> employers;
+        employers = EmployerQrys.getAllEmployers();
+
+        Map<String,Object> allEmployers = new HashMap<String,Object>();
+        allEmployers.put("allEmployers", employers);
+        mv.addAllObjects(allEmployers);
+
         return mv;
     }
 
-    //Vacancy Profile
+    //5. Vacancy Profile
     @GetMapping("/vacancies/id")
     public ModelAndView Vacancy(HttpSession session) {
         ModelAndView mv = new ModelAndView();
@@ -177,13 +120,77 @@ public class BaseController {
         return mv;
     }
 
-
+    //6. Add Vacancy
     @GetMapping("/add-vacancy")
     public ModelAndView AddVacancy (HttpSession session) {
         ModelAndView mv = new ModelAndView();
         ObjectMapper objectMapper = new ObjectMapper();
         // session = context.getSession();
         mv.setViewName("addVacancyPage");
+        return mv;
+    }
+
+    /////////3rd - Header Menu /////////
+    //7. Search Events
+    @GetMapping("/events")
+    public ModelAndView SearchEvents(HttpSession session) {
+        ModelAndView mv = new ModelAndView();
+        ObjectMapper objectMapper = new ObjectMapper();
+        // session = context.getSession();
+        mv.setViewName("searchEventsPage");
+        return mv;
+    }
+
+    //8. Add Events
+    @GetMapping("/add-events")
+    public ModelAndView AddEvents(HttpSession session) {
+        ModelAndView mv = new ModelAndView();
+        ObjectMapper objectMapper = new ObjectMapper();
+        // session = context.getSession();
+        mv.setViewName("addEventsPage");
+        return mv;
+    }
+
+    //9. Events Profile (get id of the event)
+    @GetMapping("/events/id")
+    public ModelAndView EventProfile(HttpSession session) {
+        ModelAndView mv = new ModelAndView();
+        ObjectMapper objectMapper = new ObjectMapper();
+        // session = context.getSession();
+        mv.setViewName("eventsProfilePage");
+        return mv;
+    }
+
+    /////////4th - Header Menu /////////
+    //10. Request
+    @GetMapping("/request")
+    public ModelAndView Request(HttpSession session) {
+        ModelAndView mv = new ModelAndView();
+        ObjectMapper objectMapper = new ObjectMapper();
+        // session = context.getSession();
+        mv.setViewName("requestPage");
+        return mv;
+    }
+
+    /////////5th - Header Menu /////////
+    //11. Report
+    @GetMapping("/report")
+    public ModelAndView Report(HttpSession session) {
+        ModelAndView mv = new ModelAndView();
+        ObjectMapper objectMapper = new ObjectMapper();
+        // session = context.getSession();
+        mv.setViewName("reportPage");
+        return mv;
+    }
+
+    /////////6th - Header Menu /////////
+    //12. Contact Us
+    @GetMapping("/contact-us")
+    public ModelAndView contactUs(HttpSession session) {
+        ModelAndView mv = new ModelAndView();
+        ObjectMapper objectMapper = new ObjectMapper();
+        // session = context.getSession();
+        mv.setViewName("contactUsPage");
         return mv;
     }
 
