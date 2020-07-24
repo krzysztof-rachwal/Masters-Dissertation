@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import ebe.DBClasses.Employer;
 import ebe.DBClasses.Event;
 import ebe.DBClasses.School;
+import ebe.DBClasses.Vacancy;
 import ebe.DBMethods.EmployerQueries;
 import ebe.DBMethods.EventQueries;
 import ebe.DBMethods.SchoolQueries;
@@ -79,8 +80,8 @@ public class BaseController {
         Employer employer = EmployerQrys.getEmployerDetailsById(id);
         mv.addObject("employer",employer);
         //        for (Employer employer : employers) {
-//            System.out.println(employer.getName());
-//        }
+        //            System.out.println(employer.getName());
+        //        }
         return mv;
     }
 
@@ -100,19 +101,20 @@ public class BaseController {
     public ModelAndView SearchVacancies(HttpSession session) {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("searchVacanciesPage");
-        List<Employer> employers;
-        employers = EmployerQrys.getAllEmployers();
+        List<Vacancy> vacancies;
+        vacancies = VacancyQrys.getAllVacancy();
 
-        Map<String,Object> allEmployers = new HashMap<String,Object>();
-        allEmployers.put("allEmployers", employers);
-        mv.addAllObjects(allEmployers);
+        Map<String,Object> allVacancies = new HashMap<String,Object>();
+        allVacancies.put("allVacancies", vacancies);
+        mv.addAllObjects(allVacancies);
 
         return mv;
     }
 
     //5. Vacancy Profile
-    @GetMapping("/vacancies/id")
-    public ModelAndView Vacancy(HttpSession session) {
+
+    @GetMapping("/profile-vacancy")
+    public ModelAndView Vacancy(@RequestParam(value="vacancyId" )int id) {
         ModelAndView mv = new ModelAndView();
         ObjectMapper objectMapper = new ObjectMapper();
         // session = context.getSession();
