@@ -1,16 +1,25 @@
 package ebe.DBMethods;
 
+import ebe.DBClasses.Employer;
 import ebe.DBClasses.Vacancy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 @Repository
 public class VacancyQueries extends DBQueries {
+
+    private Connection connection;
+    private Statement statement;
 
     @Autowired
     public VacancyQueries(JdbcTemplate jdbctemplate) {
@@ -20,28 +29,61 @@ public class VacancyQueries extends DBQueries {
     ///////////////////////////////////// GET ALL METHODS ///////////////////////////////////////////////
     // 1. Get All Vacancy
     public List<Vacancy> getAllVacancy() throws DataAccessException {
-        return jdbcTemplate().query("SELECT * FROM Vacancy", new Object[]{},
-                (rs, i) -> new Vacancy(rs.getInt("VacancyID"), rs.getInt("EmployerID"),
+        String getQuery = "SELECT * FROM Vacancy";
+        List<Vacancy> list = new ArrayList<Vacancy>();
+        Vacancy vacancy = null;
+        ResultSet rs = null;
+        try {
+            connection = ConnectionFactory.getConnection();
+            statement = connection.createStatement();
+            rs = statement.executeQuery(getQuery);
+            while (rs.next()) {
+                vacancy = new Vacancy(rs.getInt("VacancyID"), rs.getInt("EmployerID"),
                         rs.getString("VacancyTitle"), rs.getString("Details"), rs.getString("Link"),
                         rs.getInt("TypeOfVacancy"), rs.getInt("StatusOfVacancy"),
                         rs.getDate("StartOfVacancy"),rs.getDate("ClosingDate"),
                         rs.getInt("OccupationalCode"), rs.getString("ApplicationMethod"),
-                        rs.getString("Postcode"))
-        );
+                        rs.getString("Postcode"));
+
+                list.add(vacancy);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }  finally {
+            DBUtil.close(rs);
+            DBUtil.close(statement);
+            DBUtil.close(connection);
+        }
+        return list;
     }
+
 
     // 2. Get Vacancy by Id
     public Vacancy getVacancyDetailsById(int vacancyId) throws DataAccessException {
-        String getSql = String.format("SELECT * FROM Vacancy WHERE VacancyID = \"%s\" LIMIT 1", vacancyId);
-        List<Vacancy> schoolInfo = jdbcTemplate().query(getSql, new Object[]{},
-                (rs, i) -> new Vacancy(rs.getInt("VacancyID"), rs.getInt("EmployerID"),
+        String getQuery = String.format("SELECT * FROM Vacancy WHERE VacancyID = \"%s\" LIMIT 1", vacancyId);
+        Vacancy vacancy = null;
+        ResultSet rs = null;
+        try {
+            connection = ConnectionFactory.getConnection();
+            statement = connection.createStatement();
+            rs = statement.executeQuery(getQuery);
+            while (rs.next()) {
+
+                vacancy = new Vacancy(rs.getInt("VacancyID"), rs.getInt("EmployerID"),
                         rs.getString("VacancyTitle"), rs.getString("Details"), rs.getString("Link"),
                         rs.getInt("TypeOfVacancy"), rs.getInt("StatusOfVacancy"),
                         rs.getDate("StartOfVacancy"),rs.getDate("ClosingDate"),
                         rs.getInt("OccupationalCode"), rs.getString("ApplicationMethod"),
-                        rs.getString("Postcode"))
-        );
-        return schoolInfo.get(0);
+                        rs.getString("Postcode"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.close(rs);
+            DBUtil.close(statement);
+            DBUtil.close(connection);
+        }
+        return vacancy;
     }
 
 
