@@ -16,9 +16,10 @@ body {
     max-width: 1050px;
 }
 
-.well{
+.well {
     padding: 15px;
-    margin: 10px;
+    border-left: 10px solid white;
+    border-right: 10px solid white;
 }
 
 .well2{
