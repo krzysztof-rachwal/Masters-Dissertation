@@ -55,7 +55,7 @@ public class BaseController {
         return mv;
     };
 
-    /////////1st - Header Menu /////////
+    /////////1st - Header Menu (Employer) /////////
     //1. Search Employer
     @GetMapping("/employers")
     public ModelAndView SearchEmployer(HttpSession session) {
@@ -74,7 +74,7 @@ public class BaseController {
 
     //2. Employer Profile (with the id)
     @GetMapping("/profile-employer")
-    public ModelAndView EmployersProfile(@RequestParam(value="employerId" )int id) {
+    public ModelAndView EmployersProfile(@RequestParam(value="employerId")int id) {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("employersProfilePage");
         Employer employer = EmployerQrys.getEmployerDetailsById(id);
@@ -95,7 +95,7 @@ public class BaseController {
         return mv;
     }
 
-    /////////2nd - Header Menu /////////
+    /////////2nd - Header Menu (Vacancies) /////////
     //4. Search Vacancies
     @GetMapping("/vacancies")
     public ModelAndView SearchVacancies(HttpSession session) {
@@ -113,7 +113,7 @@ public class BaseController {
 
     //5. Vacancy Profile
     @GetMapping("/profile-vacancy")
-    public ModelAndView Vacancy(@RequestParam(value="vacancyId" )int id) {
+    public ModelAndView Vacancy(@RequestParam(value="vacancyId")int id) {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("vacancyProfilePage");
 
@@ -133,14 +133,19 @@ public class BaseController {
         return mv;
     }
 
-    /////////3rd - Header Menu /////////
+    /////////3rd - Header Menu (Events) /////////
     //7. Search Events
     @GetMapping("/events")
     public ModelAndView SearchEvents(HttpSession session) {
         ModelAndView mv = new ModelAndView();
-        ObjectMapper objectMapper = new ObjectMapper();
-        // session = context.getSession();
         mv.setViewName("searchEventsPage");
+        List<Event> events;
+        events = EventQrys.getAllEvents();
+
+        Map<String,Object> allEvents = new HashMap<String,Object>();
+        allEvents.put("allEvents", events);
+        mv.addAllObjects(allEvents);
+
         return mv;
     }
 
@@ -155,16 +160,18 @@ public class BaseController {
     }
 
     //9. Events Profile (get id of the event)
-    @GetMapping("/events/id")
-    public ModelAndView EventProfile(HttpSession session) {
+    @GetMapping("/profile-event")
+    public ModelAndView EventProfile(@RequestParam(value="eventId")int id) {
         ModelAndView mv = new ModelAndView();
-        ObjectMapper objectMapper = new ObjectMapper();
-        // session = context.getSession();
         mv.setViewName("eventsProfilePage");
+
+        Event event = EventQrys.getEventDetailsById(id);
+        mv.addObject("event",event);
+
         return mv;
     }
 
-    /////////4th - Header Menu /////////
+    /////////4th - Header Menu (Request) /////////
     //10. Request
     @GetMapping("/request")
     public ModelAndView Request(HttpSession session) {
@@ -175,7 +182,7 @@ public class BaseController {
         return mv;
     }
 
-    /////////5th - Header Menu /////////
+    /////////5th - Header Menu (Report) /////////
     //11. Report
     @GetMapping("/report")
     public ModelAndView Report(HttpSession session) {
@@ -186,7 +193,7 @@ public class BaseController {
         return mv;
     }
 
-    /////////6th - Header Menu /////////
+    /////////6th - Header Menu (Contact Us) /////////
     //12. Contact Us
     @GetMapping("/contact-us")
     public ModelAndView contactUs(HttpSession session) {
