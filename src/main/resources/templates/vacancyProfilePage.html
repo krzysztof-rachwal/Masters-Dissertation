@@ -152,7 +152,7 @@
     </div>
 </div>
 
-<!-- Modal Update -->
+<!-- Modal Delete -->
 <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog gel-content-container" role="document">
         <div class="modal-content">
@@ -164,8 +164,8 @@
             </div>
             <div class="modal-body">
                 <p th:text="'Are you sure you want to delete '+${vacancy.getVacancyTitle()}+' Vacancy Information?'"></p>
-                <button type="button" class="btn buttonUpdate">Delete</button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn buttonUpdate">Yes</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
             </div>
         </div>
     </div>
