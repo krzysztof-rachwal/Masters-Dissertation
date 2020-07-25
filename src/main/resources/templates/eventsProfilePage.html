@@ -194,7 +194,7 @@
             <div class="col-md-6">
                 <div class="form-group form-inline">
                     <span class="font-weight-bold h6">Event name </span>
-                    <span class="ml-4">St’James Career Fair</span>
+                    <span class="ml-4" th:text="${event.getName()}"></span>
                 </div>
                 <div class="form-group form-inline">
                     <span class="font-weight-bold h6">Event Type </span>
@@ -202,7 +202,7 @@
                 </div>
                 <div class="form-group form-inline">
                     <span class="font-weight-bold h6">Event Date </span>
-                    <span class="ml-4">28/09/2020</span>
+                    <span class="ml-4" th:text="${event.getDate()}"></span>
                 </div>
                 <div class="form-group form-inline">
                     <span class="font-weight-bold h6">Event Time </span>
@@ -211,42 +211,42 @@
 
                 <div class="form-group form-inline">
                     <span class="font-weight-bold h6">Event Venue </span>
-                    <span class="ml-4">City Hall</span>
+                    <span class="ml-4" th:text="${event.getPostCode()}"></span>
                 </div>
 
                 <div class="form-group form-inline">
                     <span class="font-weight-bold h6">Adviser name </span>
-                    <span class="ml-4">James</span>
+                    <span class="ml-4" th:text="${event.getNameOfAdviser()}"></span>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group form-inline">
                     <span class="font-weight-bold h6">No of Attendees </span>
-                    <span class="ml-4">300</span>
+                    <span class="ml-4" th:text="${event.getNumberOfAttendees()}"></span>
                 </div>
                 <div class="form-group form-inline">
                     <span class="font-weight-bold h6">Schools Attending </span>
-                    <span class="ml-4">50</span>
+                    <span class="ml-4"></span>
                 </div>
 
                 <div class="form-group form-inline">
                     <span class="font-weight-bold h6">Employers Attending </span>
-                    <span class="ml-4">50</span>
+                    <span class="ml-4"></span>
                 </div>
 
                 <div class="form-group form-inline">
                     <span class="font-weight-bold h6">Can the event be condutcted in Welsh? </span>
-                    <span class="ml-4">Yes</span>
+                    <span class="ml-4" th:text="${event.getPromotesWelshLanguage()}"></span>
                 </div>
 
                 <div class="form-group form-inline">
                     <span class="font-weight-bold h6">Does the event promote apprenticeship? </span>
-                    <span class="ml-4">Yes</span>
+                    <span class="ml-4"  th:text="${event.getPromotesApprenticeships()}"></span>
                 </div>
 
                 <div class="form-group form-inline">
                     <span class="font-weight-bold h6">Does the event challenger gender stereotypes? </span>
-                    <span class="ml-4">Yes</span>
+                    <span class="ml-4"  th:text="${event.getChallangesGenderStereotypes()}"></span>
                 </div>
             </div>
         </div>
