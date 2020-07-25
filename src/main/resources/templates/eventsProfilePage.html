@@ -47,15 +47,15 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="event-name">Event name</label>
-                                    <input type="text" class="form-control input-border" id="event-name">
+                                    <input type="text" class="form-control input-border" id="event-name" th:value="${event.getName()}">
                                 </div>
                                 <div class="form-group">
                                     <label for="event-type">Event type</label>
-                                    <input type="text" class="form-control input-border" id="event-type">
+                                    <input type="text" class="form-control input-border" id="event-type" th:value="${event.getTypeOfEvent()}">
                                 </div>
                                 <div class="form-group">
                                     <label for="event-date">Event date</label>
-                                    <input type="date" class="form-control input-border" id="event-date">
+                                    <input type="date" class="form-control input-border" id="event-date" th:value="${event.getDate()}">
                                 </div>
                                 <div class="form-group">
                                     <label for="event-time">Event time</label>
@@ -69,11 +69,11 @@
                             <div class="col-md-6 ">
                                 <div class="form-group">
                                     <label for="adviser-name">Adviser name</label>
-                                    <input type="text" class="form-control input-border" id="adviser-name">
+                                    <input type="text" class="form-control input-border" id="adviser-name" th:value="${event.getNameOfAdviser()}">
                                 </div>
                                 <div class="form-group">
                                     <label for="no-attendees">No of Attendees</label>
-                                    <input type="number" class="form-control input-border" id="no-attendees">
+                                    <input type="number" class="form-control input-border" id="no-attendees" th:value="${event.getNumberOfAttendees()}">
                                 </div>
                                 <div class="form-group">
                                     <label for="schools-attending">Schools Attending</label>
@@ -89,27 +89,27 @@
                             <div class="form-group">
                                 <fieldset id="group1">
                                     <label>Can the event be conducted in Welsh?</label>
-                                    <input type="radio" id="welsh-yes" name="group1" value="No">
+                                    <input type="radio" id="welsh-yes" name="group1" value="Yes" th:checked="${event.getPromotesWelshLanguage() == True}">
                                     <label for="welsh-yes">Yes</label>
-                                    <input type="radio" id="welsh-no" name="group1" value="No">
+                                    <input type="radio" id="welsh-no" name="group1" value="No"th:checked="${event.getPromotesWelshLanguage() == False}">
                                     <label for="welsh-no">No</label>
                                 </fieldset>
                             </div>
                             <div class="form-group">
                                 <fieldset id="group2">
                                     <label>Does the event promote apprenticeship?</label>
-                                    <input type="radio" id="appr-yes" name="group2" value="No">
+                                    <input type="radio" id="appr-yes" name="group2" value="Yes" th:checked="${event.getPromotesApprenticeships() == True}">
                                     <label for="appr-yes">Yes</label>
-                                    <input type="radio" id="appr-no" name="group2" value="No">
+                                    <input type="radio" id="appr-no" name="group2" value="No" th:checked="${event.getPromotesApprenticeships() == False}">
                                     <label for="appr-no">No</label>
                                 </fieldset>
                             </div>
                             <div class="form-group">
                                 <fieldset id="group3">
                                     <label>Does the event challenger gender stereotypes?</label>
-                                    <input type="radio" id="gender-yes" name="group3" value="No">
+                                    <input type="radio" id="gender-yes" name="group3" value="Yes" th:checked="${event.getChallangesGenderStereotypes() == True}">
                                     <label for="gender-yes">Yes</label>
-                                    <input type="radio" id="gender-no" name="group3" value="No">
+                                    <input type="radio" id="gender-no" name="group3" value="No" th:checked="${event.getChallangesGenderStereotypes() == False}">
                                     <label for="gender-no">No</label>
                                 </fieldset>
                             </div>
@@ -149,7 +149,7 @@
                         </div>
                     </div>
                     <div class="container my-4 text-center">
-                        <button type="button" class="button--secondary buttonUpdateModal text-center">Submit</button>
+                        <button type="button" class="button--secondary buttonUpdateModal text-center">Update</button>
                     </div>
                 </form>
             </div>
@@ -157,7 +157,7 @@
     </div>
 </div>
 
-<!-- Modal Update -->
+<!-- Modal Delete -->
 <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog gel-content-container" role="document">
         <div class="modal-content">
@@ -168,11 +168,10 @@
                 </button>
             </div>
             <div class="modal-body">
-               <p>
-                Are you sure you want to delete this Event?
+               <p  th:text="'Are you sure you want to delete '+ ${event.getName()} + ' event?'">
                </p>
-                <button type="button" class="btn buttonUpdate">Save changes</button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn buttonUpdate">Yes</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
             </div>
         </div>
     </div>
