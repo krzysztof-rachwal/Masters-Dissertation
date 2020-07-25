@@ -13,13 +13,12 @@
     <link rel="stylesheet" media="all" href="https://careerswales.gov.wales/sites/default/files/css/css_yFFWPpQsZCFeHMtvOieuCWLiTEiz--tT0otLunNJdLs.css"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
     <link th:href="@{../css/ebe_style.css}" href="../css/ebe_style.css" rel="stylesheet" />
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
-
-    <title>Employer Search</title>
+    <title>Employers</title>
 
 </head>
-
 <body>
 <header th:replace="fragments/headerTemplate :: header">
 </header>
@@ -127,83 +126,83 @@
                 </div>
 
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="employeeno3">
+                    <input class="form-check-input" type="checkbox" value="" id="employeeno4">
                     <label class="form-check-label" for="ind6">
                         200-500
                     </label>
                 </div>
 
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="employeeno3">
+                    <input class="form-check-input" type="checkbox" value="" id="employeeno5">
                     <label class="form-check-label" for="ind6">
                         +500
                     </label>
                 </div>
             </div>
 
-            <div class="mb-3">
-                <label>Local Authorities</label>
-                <select class="custom-select input-border">
-                    <option selected>Cardiff</option>
-                    <option value="1">Swansea</option>
-                    <option value="2">Newport</option>
-                    <option value="3">Bridgend</option>
-                </select>
-            </div>
-
-            <div class="mb-3">
-                <h6>Offers</h6>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                    <label class="form-check-label" for="defaultCheck1">
-                        Work Experience
-                    </label>
+                <div class="mb-3">
+                    <label for="localAuth">Local Authorities</label>
+                    <select class="selectpicker" multiple data-live-search="true" id="localAuth">
+                        <option value="0">Cardiff</option>
+                        <option value="1">Swansea</option>
+                        <option value="2">Newport</option>
+                        <option value="3">Bridgend</option>
+                    </select>
                 </div>
 
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck2">
-                    <label class="form-check-label" for="defaultCheck2">
-                        Site visits
-                    </label>
+                <div class="mb-3">
+                    <h6>Offers</h6>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                        <label class="form-check-label" for="defaultCheck1">
+                            Work Experience
+                        </label>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck2">
+                        <label class="form-check-label" for="defaultCheck2">
+                            Site visits
+                        </label>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck3">
+                        <label class="form-check-label" for="defaultCheck3">
+                            Workshops school based
+                        </label>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck4">
+                        <label class="form-check-label" for="defaultCheck4">
+                            Presentations
+                        </label>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck5">
+                        <label class="form-check-label" for="defaultCheck5">
+                            Industry days/ Career Fairs
+                        </label>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck6">
+                        <label class="form-check-label" for="defaultCheck6">
+                            Webinars/ digital presentations
+                        </label>
+                    </div>
                 </div>
 
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck3">
-                    <label class="form-check-label" for="defaultCheck3">
-                        Workshops school based
-                    </label>
-                </div>
-
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck4">
-                    <label class="form-check-label" for="defaultCheck4">
-                        Presentations
-                    </label>
-                </div>
-
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck5">
-                    <label class="form-check-label" for="defaultCheck5">
-                        Industry days/ Career Fairs
-                    </label>
-                </div>
-
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck6">
-                    <label class="form-check-label" for="defaultCheck6">
-                        Webinars/ digital presentations
-                    </label>
-                </div>
-            </div>
-
-            <div class="mb-3">
-                <h6>Other</h6>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="defaultChe1">
-                    <label class="form-check-label" for="defaultChe1">
-                        Work with primary schools
-                    </label>
-                </div>
+                <div class="mb-3">
+                    <h6>Other</h6>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="defaultChe1">
+                        <label class="form-check-label" for="defaultChe1">
+                            Work with primary schools
+                        </label>
+                    </div>
 
                 <div class="form-check">
                     <input class="form-check-input" type="checkbox" value="" id="defaultChe2">
@@ -279,11 +278,15 @@
                 </div>
             </div>
 
-            <div class="form-group">
-                <label for="workWithSchool">School Working with</label>
-                <input type="text" class="form-control input-border" id="workWithSchool">
+                <div class="form-group">
+                    <label for="workWithSchool">School Working with</label>
+                    <select class="selectpicker" multiple data-live-search="true" id="workWithSchool">
+                        <option value="school">School</option>
+                        <option value="school">School</option>
+                        <option value="school">School</option>
+                    </select>
+                </div>
             </div>
-        </div>
 
 
         <div class="col-lg-9" style="border-left: grey 1px solid">
@@ -337,8 +340,6 @@
                             </a>
                         </article>
                     </div>
-
-
                 </div>
             </div>
 
@@ -356,12 +357,11 @@
 <script type="text/javascript" src="https://careerswales.gov.wales/styleguide/assets/js/gel-elements-loader.js"></script>
 <script type="text/javascript" src="https://careerswales.gov.wales/styleguide/assets/js/gel-elements.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/i18n/defaults-*.min.js"></script>
 
 <script>
-    $(document).ready(function() {
-
-    });
-
+    $('select').selectpicker();
 </script>
 
 </body>

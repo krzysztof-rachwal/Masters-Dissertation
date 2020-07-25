@@ -14,6 +14,11 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
     <link th:href="@{../css/ebe_style.css}" href="../css/ebe_style.css" rel="stylesheet" />
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
     <title>Create Event</title>
@@ -102,7 +107,7 @@
             <div class="row flex-column">
                 <div class="mb-auto p-2 d-flex flex-column">
                     <label>Choose employers</label>
-                    <select class="js-example-basic-multiple" name="employers[]" multiple="multiple">
+                    <select class="selectpicker" multiple data-live-search="true">
                         <option value="Employer4">Employer1</option>
                         <option value="Employer4">Employer2</option>
                         <option value="Employer4">Employer3</option>
@@ -117,7 +122,7 @@
                 </div>
                 <div class="mt-auto p-2 d-flex flex-column">
                     <label>Choose schools</label>
-                    <select class="js-example-basic-multiple" multiple="multiple" name="schools[]">
+                    <select class="selectpicker" multiple data-live-search="true">
                         <option value="schools">School1</option>
                         <option value="schools">School2</option>
                         <option value="schools">School3</option>
@@ -153,17 +158,11 @@
         src="https://careerswales.gov.wales/styleguide/assets/js/gel-elements-loader.js"></script>
 <script type="text/javascript" src="https://careerswales.gov.wales/styleguide/assets/js/gel-elements.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
 <script>
-    $(document).ready(function () {
-
-    });
-
-</script>
-<script>
-    $(document).ready(function () {
-        $(".js-example-basic-multiple").select2();
-    });
+    $('select').selectpicker();
 </script>
 
 </body>
