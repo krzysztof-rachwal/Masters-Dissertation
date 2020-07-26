@@ -1,10 +1,8 @@
 package ebe.Controllers;
 
-import com.fasterxml.jackson.annotation.JacksonAnnotationsInside;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ebe.DBClasses.Employer;
 import ebe.DBClasses.Event;
-import ebe.DBClasses.School;
 import ebe.DBClasses.Vacancy;
 import ebe.DBMethods.EmployerQueries;
 import ebe.DBMethods.EventQueries;
@@ -20,7 +18,6 @@ import org.springframework.stereotype.Controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -76,7 +73,7 @@ public class BaseController {
     @GetMapping("/profile-employer")
     public ModelAndView EmployersProfile(@RequestParam(value="employerId")int id) {
         ModelAndView mv = new ModelAndView();
-        mv.setViewName("employersProfilePage");
+        mv.setViewName("profileEmployerPage");
         Employer employer = EmployerQrys.getEmployerDetailsById(id);
         mv.addObject("employer",employer);
         //        for (Employer employer : employers) {
@@ -115,7 +112,7 @@ public class BaseController {
     @GetMapping("/profile-vacancy")
     public ModelAndView Vacancy(@RequestParam(value="vacancyId")int id) {
         ModelAndView mv = new ModelAndView();
-        mv.setViewName("vacancyProfilePage");
+        mv.setViewName("profileVacancyPage");
 
         Vacancy vacancy = VacancyQrys.getVacancyDetailsById(id);
         mv.addObject("vacancy",vacancy);
@@ -149,25 +146,26 @@ public class BaseController {
         return mv;
     }
 
-    //8. Add Events
+
+    //8. Events Profile (get id of the event)
+    @GetMapping("/profile-event")
+    public ModelAndView EventProfile(@RequestParam(value="eventId")int id) {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("profileEventPage");
+
+        Event event = EventQrys.getEventDetailsById(id);
+        mv.addObject("event",event);
+
+        return mv;
+    }
+
+    //9. Add Events
     @GetMapping("/add-events")
     public ModelAndView AddEvents(HttpSession session) {
         ModelAndView mv = new ModelAndView();
         ObjectMapper objectMapper = new ObjectMapper();
         // session = context.getSession();
         mv.setViewName("addEventsPage");
-        return mv;
-    }
-
-    //9. Events Profile (get id of the event)
-    @GetMapping("/profile-event")
-    public ModelAndView EventProfile(@RequestParam(value="eventId")int id) {
-        ModelAndView mv = new ModelAndView();
-        mv.setViewName("eventsProfilePage");
-
-        Event event = EventQrys.getEventDetailsById(id);
-        mv.addObject("event",event);
-
         return mv;
     }
 

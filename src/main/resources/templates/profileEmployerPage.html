@@ -348,7 +348,7 @@
             </div>
             <div class="modal-body">
                 <p th:text="'Are you sure you want to delete '+${employer.getName()}+' Profile Information?'"></p>
-                <button type="button" class="btn buttonUpdate">Yes</button>
+                <button type="button" class="btn buttonUpdate" th:onclick="|deleteEmployer(${employer.getEmployerID()})|">Yes</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
             </div>
         </div>
@@ -571,13 +571,12 @@
 <script type="text/javascript" src="https://careerswales.gov.wales/styleguide/assets/js/gel-styleguide.js"></script>
 <script type="text/javascript" src="https://careerswales.gov.wales/styleguide/assets/js/gel-elements-loader.js"></script>
 <script type="text/javascript" src="https://careerswales.gov.wales/styleguide/assets/js/gel-elements.js"></script>
-<script th:src="@{../js/events.js}" src="../js/events.js"></script>
+<script th:src="@{../js/employer.js}" src="../js/employer.js"></script>
 
 
 <script>
     $(document).ready(function () {
-        // $('.js-example-basic-multiple').select2();
-        $('.selectpicker').selectpicker();
+
     });
 </script>
 

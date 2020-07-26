@@ -28,7 +28,7 @@ public class EmployerAPI {
     //1. Delete Events
     @DeleteMapping("api/delete/employer")
     public boolean deleteEvents(@RequestParam(value="employerId") Integer employerId){
-        if (EventQrys.deleteEvent(employerId) == 1) {
+        if (EmployerQrys.deleteEmployer(employerId) == 1) {
             return true;
         } else {
             return false;
