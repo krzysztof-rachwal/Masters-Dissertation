@@ -16,7 +16,7 @@
             },
             success: function (data) {
                 if (data === true) {
-                    location.reload() // refresh the page
+                    llocation.assign("/events")
                 } else {
                     alert("There was an error, please try again.")
                     alert(data.responseText)

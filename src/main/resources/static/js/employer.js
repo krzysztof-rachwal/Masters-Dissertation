@@ -16,7 +16,7 @@ function deleteEmployer(employerId) {
         },
         success: function (data) {
             if (data === true) {
-                location.reload() // refresh the page
+                location.assign("/employers")
             } else {
                 alert("There was an error, please try again.")
                 alert(data.responseText)
