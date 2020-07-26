@@ -1,15 +1,24 @@
 package ebe.DBMethods;
 
 import ebe.DBClasses.Event;
+import ebe.DBClasses.Vacancy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
 public class EventQueries extends DBQueries {
+
+    private Connection connection;
+    private Statement statement;
 
     @Autowired
     public EventQueries(JdbcTemplate jdbctemplate) {
@@ -19,28 +28,60 @@ public class EventQueries extends DBQueries {
     ///////////////////////////////////// GET ALL METHODS ///////////////////////////////////////////////
     // 1. Get All Events
     public List<Event> getAllEvents() throws DataAccessException {
-        return jdbcTemplate().query("SELECT * FROM Event", new Object[]{},
-                (rs, i) -> new Event(rs.getInt("EventID"), rs.getString("Name"),
+        String getQuery = "SELECT * FROM Event";
+        List<Event> list = new ArrayList<Event>();
+        Event event = null;
+        ResultSet rs = null;
+        try {
+            connection = ConnectionFactory.getConnection();
+            statement = connection.createStatement();
+            rs = statement.executeQuery(getQuery);
+            while (rs.next()) {
+                event = new Event(rs.getInt("EventID"), rs.getString("Name"),
                         rs.getInt("TypeOfEvent"), rs.getDate("Date"), rs.getBoolean("isPublic"),
                         rs.getBoolean("isCancelled"), rs.getString("PostCode"),
                         rs.getString("NameOfAdviser"), rs.getString("NumberOfAttendees"),
                         rs.getBoolean("PromotesApprenticeships"), rs.getBoolean("PromotesWelshLanguage"),
-                        rs.getBoolean("ChallangesGenderStereotypes"))
-        );
+                        rs.getBoolean("ChallangesGenderStereotypes"));
+
+                list.add(event);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.close(rs);
+            DBUtil.close(statement);
+            DBUtil.close(connection);
+        }
+        return list;
     }
 
     // 2. Get Event by Id
     public Event getEventDetailsById(int eventId) throws DataAccessException {
-        String getSql = String.format("SELECT * FROM Event WHERE EventID = \"%s\" LIMIT 1", eventId);
-        List<Event> eventInfo = jdbcTemplate().query(getSql, new Object[]{},
-                (rs, i) -> new Event(rs.getInt("EventID"), rs.getString("Name"),
+    String getQuery = String.format("SELECT * FROM Event WHERE EventID = \"%s\" LIMIT 1", eventId);
+        Event event = null;
+        ResultSet rs = null;
+        try {
+            connection = ConnectionFactory.getConnection();
+            statement = connection.createStatement();
+            rs = statement.executeQuery(getQuery);
+            while (rs.next()) {
+
+                event = new Event(rs.getInt("EventID"), rs.getString("Name"),
                         rs.getInt("TypeOfEvent"), rs.getDate("Date"), rs.getBoolean("isPublic"),
                         rs.getBoolean("isCancelled"), rs.getString("PostCode"),
                         rs.getString("NameOfAdviser"), rs.getString("NumberOfAttendees"),
                         rs.getBoolean("PromotesApprenticeships"), rs.getBoolean("PromotesWelshLanguage"),
-                        rs.getBoolean("ChallangesGenderStereotypes"))
-        );
-        return eventInfo.get(0);
+                        rs.getBoolean("ChallangesGenderStereotypes"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.close(rs);
+            DBUtil.close(statement);
+            DBUtil.close(connection);
+        }
+        return event;
     }
 
 

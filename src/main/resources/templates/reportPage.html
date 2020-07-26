@@ -5,17 +5,25 @@
     <meta id="_csrf" name="_csrf" th:content="${_csrf.token}"/>
     <meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}"/>
     <link rel="stylesheet" type="text/css" href="https://use.fortawesome.com/kits/747c3a74/publications/latest/eot.css">
-    <link rel="stylesheet" type="text/css" href="https://use.fortawesome.com/kits/747c3a74/publications/latest/woff.css">
-    <link rel="stylesheet" type="text/css" href="https://use.fortawesome.com/kits/747c3a74/publications/latest/woff2.css">
-    <link rel="stylesheet" type="text/css" href="https://careerswales.gov.wales/styleguide/assets/css/gel-styleguide.css">
+    <link rel="stylesheet" type="text/css"
+          href="https://use.fortawesome.com/kits/747c3a74/publications/latest/woff.css">
+    <link rel="stylesheet" type="text/css"
+          href="https://use.fortawesome.com/kits/747c3a74/publications/latest/woff2.css">
+    <link rel="stylesheet" type="text/css"
+          href="https://careerswales.gov.wales/styleguide/assets/css/gel-styleguide.css">
     <link rel="stylesheet" media="all" href="https://careerswales.gov.wales/styleguide/assets/css/gel-elements.css"/>
-    <link rel="stylesheet" media="all" href="https://careerswales.gov.wales/sites/default/files/css/css_Ix2IjZRJPxhlyX0UzoOcvWoONN1wNDbQY7jrFiB85O0.css"/>
-    <link rel="stylesheet" media="all" href="https://careerswales.gov.wales/sites/default/files/css/css_yFFWPpQsZCFeHMtvOieuCWLiTEiz--tT0otLunNJdLs.css"/>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" media="all"
+          href="https://careerswales.gov.wales/sites/default/files/css/css_Ix2IjZRJPxhlyX0UzoOcvWoONN1wNDbQY7jrFiB85O0.css"/>
+    <link rel="stylesheet" media="all"
+          href="https://careerswales.gov.wales/sites/default/files/css/css_yFFWPpQsZCFeHMtvOieuCWLiTEiz--tT0otLunNJdLs.css"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link th:href="@{../css/ebe_style.css}" href="../css/ebe_style.css" rel="stylesheet" />
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+    <link th:href="@{../css/ebe_style.css}" href="../css/ebe_style.css" rel="stylesheet"/>
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
-    <title>Events Profile</title>
+    <title>Report - Statistics</title>
 </head>
 <body>
 
@@ -23,65 +31,516 @@
 <header th:replace="fragments/headerTemplate :: header">
 </header>
 
-<!--MAIN CONTENT-->
-<div class="gel-content-container">
-    <h1>Stats</h1>
-    <br>
+<div class="modal fade bd-example-modal-lg" id="viewRequests" tabindex="-1" role="dialog"
+     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog gel-content-container" role="document">
+        <div class="modal-content">
+          <div class="modal-body">
+                <div class="modal-center">
+                    <div class="container-fluid">  
+                        <div class="container my-3 p-0">
+                            <h4 class="modal-title float-left">Requests by schools</h4>
+                            <button type="button" class="close float-right" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="row well border-0">
+                  
+                            <div class="col-md-12 p-0 list-employers">
+                            <div class="gel-content-row">
+                                <article class="card js-card card--style-icon card--100" gel-processed="processed">
+                                    <a href="#" class="card__inner" gel-processed="processed"
+                                       title="Link to Card heading and link title">
+                                        <div class="card__content">
+                                            <div class="content__image">
+                                                <div>
+                                                    <img alt="Card image"
+                                                         src="https://source.unsplash.com/90x90/?business">
+                                                </div>
+                                            </div>
+                                            <div class="content__body">
+                                                <div class="body__title">Card heading and link title</div>
+                                                <div class="body__body">
+                                                    Local Area of School.
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </article>
+                            </div>
+                            <div class="gel-content-row">
+                                <article class="card js-card card--style-icon card--100" gel-processed="processed">
+                                    <a href="#" class="card__inner" gel-processed="processed"
+                                       title="Link to Card heading and link title">
+                                        <div class="card__content">
+                                            <div class="content__image">
+                                                <div>
+                                                    <img alt="Card image"
+                                                         src="https://source.unsplash.com/90x90/?business">
+                                                </div>
+                                            </div>
+                                            <div class="content__body">
+                                                <div class="body__title">Card heading and link title</div>
+                                                <div class="body__body">
+                                                    Local Area of School.
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </article>
+                            </div>
+                            <div class="gel-content-row">
+                                <article class="card js-card card--style-icon card--100" gel-processed="processed">
+                                    <a href="#" class="card__inner" gel-processed="processed"
+                                       title="Link to Card heading and link title">
+                                        <div class="card__content">
+                                            <div class="content__image">
+                                                <div>
+                                                    <img alt="Card image"
+                                                         src="https://source.unsplash.com/90x90/?business">
+                                                </div>
+                                            </div>
+                                            <div class="content__body">
+                                                <div class="body__title">Card heading and link title</div>
+                                                <div class="body__body">
+                                                    Local Area of School.
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </article>
+                            </div>
+                            <div class="gel-content-row">
+                                <article class="card js-card card--style-icon card--100" gel-processed="processed">
+                                    <a href="#" class="card__inner" gel-processed="processed"
+                                       title="Link to Card heading and link title">
+                                        <div class="card__content">
+                                            <div class="content__image">
+                                                <div>
+                                                    <img alt="Card image"
+                                                         src="https://source.unsplash.com/90x90/?business">
+                                                </div>
+                                            </div>
+                                            <div class="content__body">
+                                                <div class="body__title">Card heading and link title</div>
+                                                <div class="body__body">
+                                                    Local Area of School.
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </article>
+                            </div>
+                            <div class="gel-content-row">
+                                <article class="card js-card card--style-icon card--100" gel-processed="processed">
+                                    <a href="#" class="card__inner" gel-processed="processed"
+                                       title="Link to Card heading and link title">
+                                        <div class="card__content">
+                                            <div class="content__image">
+                                                <div>
+                                                    <img alt="Card image"
+                                                         src="https://source.unsplash.com/90x90/?business">
+                                                </div>
+                                            </div>
+                                            <div class="content__body">
+                                                <div class="body__title">Card heading and link title</div>
+                                                <div class="body__body">
+                                                    Local Area of School.
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </article>
+                            </div>
+                            <div class="gel-content-row">
+                                <article class="card js-card card--style-icon card--100" gel-processed="processed">
+                                    <a href="#" class="card__inner" gel-processed="processed"
+                                       title="Link to Card heading and link title">
+                                        <div class="card__content">
+                                            <div class="content__image">
+                                                <div>
+                                                    <img alt="Card image"
+                                                         src="https://source.unsplash.com/90x90/?business">
+                                                </div>
+                                            </div>
+                                            <div class="content__body">
+                                                <div class="body__title">Card heading and link title</div>
+                                                <div class="body__body">
+                                                    Local Area of School.
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </article>
+                            </div>
+                            <div class="gel-content-row">
+                                <article class="card js-card card--style-icon card--100" gel-processed="processed">
+                                    <a href="#" class="card__inner" gel-processed="processed"
+                                       title="Link to Card heading and link title">
+                                        <div class="card__content">
+                                            <div class="content__image">
+                                                <div>
+                                                    <img alt="Card image"
+                                                         src="https://source.unsplash.com/90x90/?business">
+                                                </div>
+                                            </div>
+                                            <div class="content__body">
+                                                <div class="body__title">Card heading and link title</div>
+                                                <div class="body__body">
+                                                    Local Area of School.
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </article>
+                            </div>
+                            <div class="gel-content-row">
+                                <article class="card js-card card--style-icon card--100" gel-processed="processed">
+                                    <a href="#" class="card__inner" gel-processed="processed"
+                                       title="Link to Card heading and link title">
+                                        <div class="card__content">
+                                            <div class="content__image">
+                                                <div>
+                                                    <img alt="Card image"
+                                                         src="https://source.unsplash.com/90x90/?business">
+                                                </div>
+                                            </div>
+                                            <div class="content__body">
+                                                <div class="body__title">Card heading and link title</div>
+                                                <div class="body__body">
+                                                    Local Area of School.
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </article>
+                            </div>
+                            <div class="gel-content-row">
+                                <article class="card js-card card--style-icon card--100" gel-processed="processed">
+                                    <a href="#" class="card__inner" gel-processed="processed"
+                                       title="Link to Card heading and link title">
+                                        <div class="card__content">
+                                            <div class="content__image">
+                                                <div>
+                                                    <img alt="Card image"
+                                                         src="https://source.unsplash.com/90x90/?business">
+                                                </div>
+                                            </div>
+                                            <div class="content__body">
+                                                <div class="body__title">Card heading and link title</div>
+                                                <div class="body__body">
+                                                    Local Area of School.
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </article>
+                            </div>
+                        </div>
+                                 
+                        </div>
 
-<!--COUNTERS-->
-    <section class="counters">
-        <div class="container">
-            <div>
-                <i class="fab fa-vacancies fa-4x"></i>
-                <div class="counter" data-target="60000">0</div>
-                <h3>Employer Vacancies</h3>
-            </div>
-            <div>
-                <i class="fab fa-schools fa-4x"></i>
-                <div class="counter" data-target="15000">0</div>
-                <h3>Requests by Schools</h3>
-            </div>
-            <div>
-                <i class="fab fa-offerings fa-4x"></i>
-                <div class="counter" data-target="9000">0</div>
-                <h3>Employer Offerings</h3>
+                    </div>
+                </div>
             </div>
         </div>
-    </section>
+    </div>
 </div>
-<!--END OF MAIN CONTENT-->
-<footer th:replace="fragments/footerTemplate :: footer"></footer>
 
-<script type="text/javascript" src="https://careerswales.gov.wales/styleguide//assets/js/jquery-3.0.0.min.js"></script>
-<script type="text/javascript" src="https://careerswales.gov.wales/styleguide//assets/js/gel-elements.js"></script>
-<script type="text/javascript" src="https://careerswales.gov.wales/styleguide//assets/js/gel-elements-loader.js"></script>
+<div class="gel-content-container">
+    <div class="container-headline mt-5">
+        <span class="title-h2">Statistics</span>
+    </div>
+
+    <div class="container-fluid eventBackground">
+        <div class="row">
+            <div class="card-group mt-4 mb-4">
+                <div class="card">
+                    <div class="card-body p-2">
+                        <h4 class="card-title gel-text-align-center text-success font-weight-bold counter" data-target="3000">0</h4>
+                        <span class="h5 gel-text-align-center mt-0">Events hosted</span>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body p-2">
+                        <h4 class="card-title gel-text-align-center text-info font-weight-bold counter" data-target="3000">5000</h4>
+                        <span class="h5 gel-text-align-center mt-0">Employers</span>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body p-2">
+                        <h4 class="card-title gel-text-align-center text-success font-weight-bold counter" data-target="3000">500</h4>
+                        <span class="h5 gel-text-align-center mt-0">Vacancies</span>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body p-2">
+                        <h4 class="card-title gel-text-align-center text-info font-weight-bold counter" data-target="3000">3000</h4>
+                        <span class="h5 gel-text-align-center mt-0">Requests by schools</span>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body p-2">
+                        <h4 class="card-title gel-text-align-center text-success font-weight-bold counter" data-target="3000">3000</h4>
+                        <span class="h5 gel-text-align-center mt-0">Schools at events</span>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body p-2">
+                        <h4 class="card-title gel-text-align-center text-info font-weight-bold counter" data-target="3000">3000</h4>
+                        <span class="h5 gel-text-align-center mt-0">Total pupils</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 well">
+                <span class="h5 mt-0 mb-4">Events by local authority</span>
+                <div class="col-md-6">
+                    <h6><span class="h4 text-info d-inline">58</span> in Cardiff</h6>
+                    <h6><span class="h4 text-info d-inline">58</span> in Cardiff</h6>
+                    <h6><span class="h4 text-info d-inline">58</span> in Cardiff</h6>
+                    <h6><span class="h4 text-info d-inline">58</span> in Cardiff</h6>
+                    <h6><span class="h4 text-info d-inline">58</span> in Cardiff</h6>
+                    <h6><span class="h4 text-info d-inline">58</span> in Cardiff</h6>
+                    <h6><span class="h4 text-info d-inline">58</span> in Cardiff</h6>
+                    <h6><span class="h4 text-info d-inline">58</span> in Cardiff</h6>
+                    <h6><span class="h4 text-info d-inline">58</span> in Cardiff</h6>
+                    <h6><span class="h4 text-info d-inline">58</span> in Cardiff</h6>
+                </div>
+                <div class="col-md-6">
+                    <h6><span class="h4 text-info d-inline">58</span> in Cardiff</h6>
+                    <h6><span class="h4 text-info d-inline">58</span> in Cardiff</h6>
+                    <h6><span class="h4 text-info d-inline">58</span> in Cardiff</h6>
+                    <h6><span class="h4 text-info d-inline">58</span> in Cardiff</h6>
+                    <h6><span class="h4 text-info d-inline">58</span> in Cardiff</h6>
+                    <h6><span class="h4 text-info d-inline">58</span> in Cardiff</h6>
+                    <h6><span class="h4 text-info d-inline">58</span> in Cardiff</h6>
+                    <h6><span class="h4 text-info d-inline">58</span> in Cardiff</h6>
+                    <h6><span class="h4 text-info d-inline">58</span> in Cardiff</h6>
+                    <h6><span class="h4 text-info d-inline">58</span> in Cardiff</h6>
+                </div>
+            </div>
+            <div class="col-md-6 well">
+                <span class="h5 mt-0 mb-4">Events by adviser</span>
+                <div class="col-md-6">
+                    <h6><span class="h4 text-info d-inline">58</span> by Andrea Jones</h6>
+                    <h6><span class="h4 text-info d-inline">58</span> by Andrea Jones</h6>
+                    <h6><span class="h4 text-info d-inline">58</span> by Andrea Jones</h6>
+                    <h6><span class="h4 text-info d-inline">58</span> by Andrea Jones</h6>
+                    <h6><span class="h4 text-info d-inline">58</span> by Andrea Jones</h6>
+                    <h6><span class="h4 text-info d-inline">58</span> by Andrea Jones</h6>
+                    <h6><span class="h4 text-info d-inline">58</span> by Andrea Jones</h6>
+                    <h6><span class="h4 text-info d-inline">58</span> by Andrea Jones</h6>
+                    <h6><span class="h4 text-info d-inline">58</span> by Andrea Jones</h6>
+                    <h6><span class="h4 text-info d-inline">58</span> by Andrea Jones</h6>
+                </div>
+                <div class="col-md-6">
+                    <h6><span class="h4 text-info d-inline">58</span> by Andrea Jones</h6>
+                    <h6><span class="h4 text-info d-inline">58</span> by Andrea Jones</h6>
+                    <h6><span class="h4 text-info d-inline">58</span> by Andrea Jones</h6>
+                    <h6><span class="h4 text-info d-inline">58</span> by Andrea Jones</h6>
+                    <h6><span class="h4 text-info d-inline">58</span> by Andrea Jones</h6>
+                    <h6><span class="h4 text-info d-inline">58</span> by Andrea Jones</h6>
+                    <h6><span class="h4 text-info d-inline">58</span> by Andrea Jones</h6>
+                    <h6><span class="h4 text-info d-inline">58</span> by Andrea Jones</h6>
+                    <h6><span class="h4 text-info d-inline">58</span> by Andrea Jones</h6>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-md-6 well">
+                <span class="h5 mt-0 mb-4">Events by type</span>
+                <h6 class="mb-4"><span class="h4 text-info d-inline">58</span> Work Experience</h6>
+                <h6 class="mb-4"><span class="h4 text-info d-inline">58</span> Site visits</h6>
+                <h6 class="mb-4"><span class="h4 text-info d-inline">58</span> Workshops school based</h6>
+                <h6 class="mb-4"><span class="h4 text-info d-inline">58</span> Presentations</h6>
+                <h6 class="mb-4"><span class="h4 text-info d-inline">58</span> Industry days/ Careers Fairs</h6>
+                <h6 class="mb-4"><span class="h4 text-info d-inline">58</span> Webinars/ digital presentations</h6>
+            </div>
+            <div class="col-md-6 well">
+                <span class="h5 mt-0 mb-4">Employers by sector</span>
+                <div class="col-md-12">
+                    <h6 class="mb-4"><span class="h4 text-info d-inline">58</span> Agriculture, Forest, And Fishing</h6>
+                    <h6 class="mb-4"><span class="h4 text-info d-inline">58</span> Mining</h6>
+                    <h6 class="mb-4"><span class="h4 text-info d-inline">58</span> Construction </h6>
+                    <h6 class="mb-4"><span class="h4 text-info d-inline">58</span> Transport,Communications, Electric, Gas, And Sanitary Services</h6>
+                    <h6 class="mb-4"><span class="h4 text-info d-inline">58</span> Wholesale Trade </h6>
+                    <h6 class="mb-4"><span class="h4 text-info d-inline">58</span> Retail Trade </h6>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-md-6 well">
+                <span class="h5 mt-0 mb-4">Number of pupils attending by local authority</span>
+                <div class="col-md-6">
+                    <h6><span class="h4 text-info d-inline">58</span> in Cardiff</h6>
+                    <h6><span class="h4 text-info d-inline">58</span> in Cardiff</h6>
+                    <h6><span class="h4 text-info d-inline">58</span> in Cardiff</h6>
+                    <h6><span class="h4 text-info d-inline">58</span> in Cardiff</h6>
+                    <h6><span class="h4 text-info d-inline">58</span> in Cardiff</h6>
+                    <h6><span class="h4 text-info d-inline">58</span> in Cardiff</h6>
+                    <h6><span class="h4 text-info d-inline">58</span> in Cardiff</h6>
+                    <h6><span class="h4 text-info d-inline">58</span> in Cardiff</h6>
+                    <h6><span class="h4 text-info d-inline">58</span> in Cardiff</h6>
+                    <h6><span class="h4 text-info d-inline">58</span> in Cardiff</h6>
+                </div>
+                <div class="col-md-6">
+                    <h6><span class="h4 text-info d-inline">58</span> in Cardiff</h6>
+                    <h6><span class="h4 text-info d-inline">58</span> in Cardiff</h6>
+                    <h6><span class="h4 text-info d-inline">58</span> in Cardiff</h6>
+                    <h6><span class="h4 text-info d-inline">58</span> in Cardiff</h6>
+                    <h6><span class="h4 text-info d-inline">58</span> in Cardiff</h6>
+                    <h6><span class="h4 text-info d-inline">58</span> in Cardiff</h6>
+                    <h6><span class="h4 text-info d-inline">58</span> in Cardiff</h6>
+                    <h6><span class="h4 text-info d-inline">58</span> in Cardiff</h6>
+                    <h6><span class="h4 text-info d-inline">58</span> in Cardiff</h6>
+                    <h6><span class="h4 text-info d-inline">58</span> in Cardiff</h6>
+                </div>
+            </div>
+            <div class="col-md-6 well">
+                <span class="h5 mt-0 mb-4">Schools attending by local authority</span>
+                <div class="col-md-6">
+                    <h6><span class="h4 text-info d-inline">58</span> in Cardiff</h6>
+                    <h6><span class="h4 text-info d-inline">58</span> in Cardiff</h6>
+                    <h6><span class="h4 text-info d-inline">58</span> in Cardiff</h6>
+                    <h6><span class="h4 text-info d-inline">58</span> in Cardiff</h6>
+                    <h6><span class="h4 text-info d-inline">58</span> in Cardiff</h6>
+                    <h6><span class="h4 text-info d-inline">58</span> in Cardiff</h6>
+                    <h6><span class="h4 text-info d-inline">58</span> in Cardiff</h6>
+                    <h6><span class="h4 text-info d-inline">58</span> in Cardiff</h6>
+                    <h6><span class="h4 text-info d-inline">58</span> in Cardiff</h6>
+                    <h6><span class="h4 text-info d-inline">58</span> in Cardiff</h6>
+                </div>
+                <div class="col-md-6">
+                    <h6><span class="h4 text-info d-inline">58</span> in Cardiff</h6>
+                    <h6><span class="h4 text-info d-inline">58</span> in Cardiff</h6>
+                    <h6><span class="h4 text-info d-inline">58</span> in Cardiff</h6>
+                    <h6><span class="h4 text-info d-inline">58</span> in Cardiff</h6>
+                    <h6><span class="h4 text-info d-inline">58</span> in Cardiff</h6>
+                    <h6><span class="h4 text-info d-inline">58</span> in Cardiff</h6>
+                    <h6><span class="h4 text-info d-inline">58</span> in Cardiff</h6>
+                    <h6><span class="h4 text-info d-inline">58</span> in Cardiff</h6>
+                    <h6><span class="h4 text-info d-inline">58</span> in Cardiff</h6>
+                    <h6><span class="h4 text-info d-inline">58</span> in Cardiff</h6>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-md-6 well">
+                <span class="h5 mt-0 mb-4">Employers by local authority</span>
+                <div class="col-md-6">
+                    <h6><span class="h4 text-info d-inline">58</span> in Cardiff</h6>
+                    <h6><span class="h4 text-info d-inline">58</span> in Cardiff</h6>
+                    <h6><span class="h4 text-info d-inline">58</span> in Cardiff</h6>
+                    <h6><span class="h4 text-info d-inline">58</span> in Cardiff</h6>
+                    <h6><span class="h4 text-info d-inline">58</span> in Cardiff</h6>
+                    <h6><span class="h4 text-info d-inline">58</span> in Cardiff</h6>
+                    <h6><span class="h4 text-info d-inline">58</span> in Cardiff</h6>
+                    <h6><span class="h4 text-info d-inline">58</span> in Cardiff</h6>
+                    <h6><span class="h4 text-info d-inline">58</span> in Cardiff</h6>
+                    <h6><span class="h4 text-info d-inline">58</span> in Cardiff</h6>
+                </div>
+                <div class="col-md-6">
+                    <h6><span class="h4 text-info d-inline">58</span> in Cardiff</h6>
+                    <h6><span class="h4 text-info d-inline">58</span> in Cardiff</h6>
+                    <h6><span class="h4 text-info d-inline">58</span> in Cardiff</h6>
+                    <h6><span class="h4 text-info d-inline">58</span> in Cardiff</h6>
+                    <h6><span class="h4 text-info d-inline">58</span> in Cardiff</h6>
+                    <h6><span class="h4 text-info d-inline">58</span> in Cardiff</h6>
+                    <h6><span class="h4 text-info d-inline">58</span> in Cardiff</h6>
+                    <h6><span class="h4 text-info d-inline">58</span> in Cardiff</h6>
+                    <h6><span class="h4 text-info d-inline">58</span> in Cardiff</h6>
+                    <h6><span class="h4 text-info d-inline">58</span> in Cardiff</h6>
+                </div>
+            </div>
+            <div class="col-md-6 well">
+                <span class="h5 mt-0 mb-4">Events by type and local authority</span>
+                <div class="d-block">
+                    <label class="d-block mb-0 ">Type of event</label>
+                    <select class="selectpicker d-block">
+                        <option>Careers Fair</option>
+                        <option>Webinar</option>
+                        <option>Industry day</option>
+                    </select>
+                </div>
+                <div class="d-block">
+                    <label class="d-block mb-0 mt-3">Local Authority</label>
+                    <select class="selectpicker d-block">
+                        <option>Cardiff</option>
+                        <option>Swansea</option>
+                        <option>Caerphilly</option>
+                    </select>
+                </div>
+                <form class="pl-0 py-3">
+                    <button type="button" id="addEmployer" class="button--secondary">Submit</button>
+                </form>
+                <div class="d-block ">
+                    <h4 class="h4 text-info d-block gel-text-align-center">46</h4>
+                    <span class="d-block gel-text-align-center">events of type _____ in ______</span>
+                </div>
+            </div>
+        </div>
+        <div class="row well d-block mt-3">
+            <span class="h4 mt-1 counter text-success d-flex justify-content-center" data-target="60000">0</span>
+            <span class="h3 d-flex mt-0 justify-content-center">Requests by schools</span>
+            <div class="container my-4 text-center">
+                <button type="button" class="button--secondary text-center" data-toggle="modal" data-target="#viewRequests">View schools</button>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+<footer th:replace="fragments/footerTemplate :: footer"></footer>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://careerswales.gov.wales/styleguide/assets/js/gel-styleguide.js"></script>
+<script type="text/javascript"
+        src="https://careerswales.gov.wales/styleguide/assets/js/gel-elements-loader.js"></script>
+<script type="text/javascript" src="https://careerswales.gov.wales/styleguide/assets/js/gel-elements.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/i18n/defaults-*.min.js"></script>
+<script>
+    $('.my-select').selectpicker();
+</script>
 <script>
     const counters = document.querySelectorAll('.counter');
     const speed = 150; // The lower the slower
 
     counters.forEach(counter => {
         const updateCount = () => {
-        const target = +counter.getAttribute('data-target');
-    const count = +counter.innerText;
+            const target = +counter.getAttribute('data-target');
+            const count = +counter.innerText;
 
-    // Lower inc to slow and higher to slow
-    const inc = target / speed;
+            // Lower inc to slow and higher to slow
+            const inc = target / speed;
 
-    // console.log(inc);
-    // console.log(count);
+            // console.log(inc);
+            // console.log(count);
 
-    // Check if target is reached
-    if (count < target) {
-        // Add inc to count and output in counter
-        counter.innerText = count + inc;
-        // Call function every ms
-        setTimeout(updateCount, 1);
-    } else {
-        counter.innerText = target;
-    }
-    };
+            // Check if target is reached
+            if (count < target) {
+                // Add inc to count and output in counter
+                counter.innerText = count + inc;
+                // Call function every ms
+                setTimeout(updateCount, 1);
+            } else {
+                counter.innerText = target;
+            }
+        };
 
-    updateCount();
+        updateCount();
     });
 </script>
 </body>

@@ -19,6 +19,12 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
           integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
+    <link th:href="@{../css/ebe_style.css}" href="../css/ebe_style.css" rel="stylesheet"/>
     <link th:href="@{../css/ebe_style.css}" href="../css/ebe_style.css" rel="stylesheet"/>
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
@@ -47,15 +53,15 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="event-name">Event name</label>
-                                    <input type="text" class="form-control input-border" id="event-name">
+                                    <input type="text" class="form-control input-border" id="event-name" th:value="${event.getName()}">
                                 </div>
                                 <div class="form-group">
                                     <label for="event-type">Event type</label>
-                                    <input type="text" class="form-control input-border" id="event-type">
+                                    <input type="text" class="form-control input-border" id="event-type" th:value="${event.getTypeOfEvent()}">
                                 </div>
                                 <div class="form-group">
                                     <label for="event-date">Event date</label>
-                                    <input type="date" class="form-control input-border" id="event-date">
+                                    <input type="date" class="form-control input-border" id="event-date" th:value="${event.getDate()}">
                                 </div>
                                 <div class="form-group">
                                     <label for="event-time">Event time</label>
@@ -69,11 +75,11 @@
                             <div class="col-md-6 ">
                                 <div class="form-group">
                                     <label for="adviser-name">Adviser name</label>
-                                    <input type="text" class="form-control input-border" id="adviser-name">
+                                    <input type="text" class="form-control input-border" id="adviser-name" th:value="${event.getNameOfAdviser()}">
                                 </div>
                                 <div class="form-group">
                                     <label for="no-attendees">No of Attendees</label>
-                                    <input type="number" class="form-control input-border" id="no-attendees">
+                                    <input type="number" class="form-control input-border" id="no-attendees" th:value="${event.getNumberOfAttendees()}">
                                 </div>
                                 <div class="form-group">
                                     <label for="schools-attending">Schools Attending</label>
@@ -89,27 +95,27 @@
                             <div class="form-group">
                                 <fieldset id="group1">
                                     <label>Can the event be conducted in Welsh?</label>
-                                    <input type="radio" id="welsh-yes" name="group1" value="No">
+                                    <input type="radio" id="welsh-yes" name="group1" value="Yes" th:checked="${event.getPromotesWelshLanguage() == True}">
                                     <label for="welsh-yes">Yes</label>
-                                    <input type="radio" id="welsh-no" name="group1" value="No">
+                                    <input type="radio" id="welsh-no" name="group1" value="No"th:checked="${event.getPromotesWelshLanguage() == False}">
                                     <label for="welsh-no">No</label>
                                 </fieldset>
                             </div>
                             <div class="form-group">
                                 <fieldset id="group2">
                                     <label>Does the event promote apprenticeship?</label>
-                                    <input type="radio" id="appr-yes" name="group2" value="No">
+                                    <input type="radio" id="appr-yes" name="group2" value="Yes" th:checked="${event.getPromotesApprenticeships() == True}">
                                     <label for="appr-yes">Yes</label>
-                                    <input type="radio" id="appr-no" name="group2" value="No">
+                                    <input type="radio" id="appr-no" name="group2" value="No" th:checked="${event.getPromotesApprenticeships() == False}">
                                     <label for="appr-no">No</label>
                                 </fieldset>
                             </div>
                             <div class="form-group">
                                 <fieldset id="group3">
                                     <label>Does the event challenger gender stereotypes?</label>
-                                    <input type="radio" id="gender-yes" name="group3" value="No">
+                                    <input type="radio" id="gender-yes" name="group3" value="Yes" th:checked="${event.getChallangesGenderStereotypes() == True}">
                                     <label for="gender-yes">Yes</label>
-                                    <input type="radio" id="gender-no" name="group3" value="No">
+                                    <input type="radio" id="gender-no" name="group3" value="No" th:checked="${event.getChallangesGenderStereotypes() == False}">
                                     <label for="gender-no">No</label>
                                 </fieldset>
                             </div>
@@ -118,7 +124,7 @@
                         <div class="row flex-column">
                             <div class="mb-auto p-2 d-flex flex-column">
                                 <label>Choose employers</label>
-                                <select class="js-example-basic-multiple" name="employers[]" multiple="multiple">
+                                <select class="selectpicker" multiple data-live-search="true">
                                     <option value="Employer4">Employer1</option>
                                     <option value="Employer4">Employer2</option>
                                     <option value="Employer4">Employer3</option>
@@ -133,7 +139,7 @@
                             </div>
                             <div class="mt-auto p-2 d-flex flex-column">
                                 <label>Choose schools</label>
-                                <select class="js-example-basic-multiple" multiple="multiple" name="schools[]">
+                                <select class="selectpicker" multiple data-live-search="true">
                                     <option value="schools">School1</option>
                                     <option value="schools">School2</option>
                                     <option value="schools">School3</option>
@@ -149,7 +155,7 @@
                         </div>
                     </div>
                     <div class="container my-4 text-center">
-                        <button type="button" class="button--secondary buttonUpdateModal text-center">Submit</button>
+                        <button type="button" class="button--secondary buttonUpdateModal text-center">Update</button>
                     </div>
                 </form>
             </div>
@@ -157,7 +163,7 @@
     </div>
 </div>
 
-<!-- Modal Update -->
+<!-- Modal Delete -->
 <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog gel-content-container" role="document">
         <div class="modal-content">
@@ -168,11 +174,10 @@
                 </button>
             </div>
             <div class="modal-body">
-               <p>
-                Are you sure you want to delete this Event?
+               <p  th:text="'Are you sure you want to delete '+ ${event.getName()} + ' event?'">
                </p>
-                <button type="button" class="btn buttonUpdate">Save changes</button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn buttonUpdate">Yes</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
             </div>
         </div>
     </div>
@@ -189,12 +194,12 @@
         </button>
     </div>
 
-    <div class="container-fluid py-5 px-5 eventBackground">
+    <div class="container-fluid py-5 eventBackground">
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group form-inline">
                     <span class="font-weight-bold h6">Event name </span>
-                    <span class="ml-4">St’James Career Fair</span>
+                    <span class="ml-4" th:text="${event.getName()}"></span>
                 </div>
                 <div class="form-group form-inline">
                     <span class="font-weight-bold h6">Event Type </span>
@@ -202,7 +207,7 @@
                 </div>
                 <div class="form-group form-inline">
                     <span class="font-weight-bold h6">Event Date </span>
-                    <span class="ml-4">28/09/2020</span>
+                    <span class="ml-4" th:text="${event.getDate()}"></span>
                 </div>
                 <div class="form-group form-inline">
                     <span class="font-weight-bold h6">Event Time </span>
@@ -211,65 +216,67 @@
 
                 <div class="form-group form-inline">
                     <span class="font-weight-bold h6">Event Venue </span>
-                    <span class="ml-4">City Hall</span>
+                    <span class="ml-4" th:text="${event.getPostCode()}"></span>
                 </div>
 
                 <div class="form-group form-inline">
                     <span class="font-weight-bold h6">Adviser name </span>
-                    <span class="ml-4">James</span>
+                    <span class="ml-4" th:text="${event.getNameOfAdviser()}"></span>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group form-inline">
                     <span class="font-weight-bold h6">No of Attendees </span>
-                    <span class="ml-4">300</span>
+                    <span class="ml-4" th:text="${event.getNumberOfAttendees()}"></span>
                 </div>
                 <div class="form-group form-inline">
                     <span class="font-weight-bold h6">Schools Attending </span>
-                    <span class="ml-4">50</span>
+                    <span class="ml-4"></span>
                 </div>
 
                 <div class="form-group form-inline">
                     <span class="font-weight-bold h6">Employers Attending </span>
-                    <span class="ml-4">50</span>
+                    <span class="ml-4"></span>
                 </div>
 
                 <div class="form-group form-inline">
                     <span class="font-weight-bold h6">Can the event be condutcted in Welsh? </span>
-                    <span class="ml-4">Yes</span>
+                    <span class="ml-4" th:text="${event.getPromotesWelshLanguage()}"></span>
                 </div>
 
                 <div class="form-group form-inline">
                     <span class="font-weight-bold h6">Does the event promote apprenticeship? </span>
-                    <span class="ml-4">Yes</span>
+                    <span class="ml-4"  th:text="${event.getPromotesApprenticeships()}"></span>
                 </div>
 
                 <div class="form-group form-inline">
                     <span class="font-weight-bold h6">Does the event challenger gender stereotypes? </span>
-                    <span class="ml-4">Yes</span>
+                    <span class="ml-4"  th:text="${event.getChallangesGenderStereotypes()}"></span>
                 </div>
             </div>
         </div>
-        <div class="row pt-3">
-            <div class="mb-auto p-2 col-md-6 well2">
-                <label class="font-weight-bold h6">Schools Attending</label>
-                <ul class="list-group">
-                    <li class="list-group-item">Cras justo odio</li>
-                    <li class="list-group-item">Dapibus ac facilisis in</li>
-                    <li class="list-group-item">Morbi leo risus</li>
-                    <li class="list-group-item">Porta ac consectetur ac</li>
-                    <li class="list-group-item">Vestibulum at eros</li>
-                </ul>
-            </div>
-            <div class="mb-auto p-2 col-md-6 well2">
-                <label class="font-weight-bold h6">Employers Attending</label>
-                <ul class="list-group">
-                    <li class="list-group-item">Cras justo odio</li>
-                    <li class="list-group-item">Dapibus ac facilisis in</li>
-                    <li class="list-group-item">Morbi leo risus</li>
-                    <li class="list-group-item">Porta ac consectetur ac</li>
-                    <li class="list-group-item">Vestibulum at eros</li>
-                </ul>
+        <div class="container">
+            <div class="row pt-3">
+                <div class="mb-auto p-2 col-md-6 well2">
+                    <label class="font-weight-bold h6">Schools Attending</label>
+                    <ul class="list-group">
+                        <li class="list-group-item">Cras justo odio</li>
+                        <li class="list-group-item">Dapibus ac facilisis in</li>
+                        <li class="list-group-item">Morbi leo risus</li>
+                        <li class="list-group-item">Porta ac consectetur ac</li>
+                        <li class="list-group-item">Vestibulum at eros</li>
+                    </ul>
+                </div>
+                <div class="mb-auto p-2 col-md-6 well2">
+                    <label class="font-weight-bold h6">Employers Attending</label>
+                    <ul class="list-group">
+                        <li class="list-group-item">Cras justo odio</li>
+                        <li class="list-group-item">Dapibus ac facilisis in</li>
+                        <li class="list-group-item">Morbi leo risus</li>
+                        <li class="list-group-item">Porta ac consectetur ac</li>
+                        <li class="list-group-item">Vestibulum at eros</li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
@@ -290,18 +297,11 @@
         src="https://careerswales.gov.wales/styleguide/assets/js/gel-elements-loader.js"></script>
 <script type="text/javascript" src="https://careerswales.gov.wales/styleguide/assets/js/gel-elements.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
-
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
 <script>
-    $(document).ready(function () {
-
-    });
-
-</script>
-<script>
-    $(document).ready(function () {
-        $('.js-example-basic-multiple').select2();
-    });
+    $('select').selectpicker();
 </script>
 </body>
 </html>
