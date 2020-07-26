@@ -2,8 +2,8 @@
 //HTTP REQUEST METHODS
 function deleteEmployer(employerId) {
     var baseUri = "/api/delete/employer";
-    var eventId_url = "employerId=" + employerId;
-    var fullUri = baseUri + "?" + eventId_url;
+    var employerId_url = "employerId=" + employerId;
+    var fullUri = baseUri + "?" + employerId_url;
 
     var token = $("meta[name='_csrf']").attr("content");    // Used to bypass Spring Boot's CSRF protocol     -- SOlution taken from 'https://stackoverflow.com/questions/34747437/use-of-spring-csrf-with-ajax-rest-call-and-html-page-with-thymeleaf' on Nov 26th 2019
     var header = $("meta[name='_csrf_header']").attr("content");    // Used to bypass SPring Boot's CSRF protocol
