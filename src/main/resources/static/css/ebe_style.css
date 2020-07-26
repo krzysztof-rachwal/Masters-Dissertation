@@ -143,3 +143,10 @@ a {
 .typoWhite{
     color: white !important;
 }
+@media screen and (min-width: 600px){
+
+    .modal-center {
+        margin: 0 0 40px;
+        padding: 40px;
+        }
+}
