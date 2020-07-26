@@ -148,7 +148,7 @@
                                     </div>
                                     <div class="content__body">
                                         <div class="body__title" th:text="${event.getName()}"></div>
-                                        <div class="body__body" th:utext="'<b>Date:</b> ' + ${event.getDate()} + '<br>' + '<b>PostCode:</b>' + ${event.getPostCode()} "></div>
+                                        <div class="body__body" th:utext=" ${event.getDate()} + '<br>' +  ${event.getTypeOfEvent()} "></div>
                                     </div>
                                 </div>
                             </a>
