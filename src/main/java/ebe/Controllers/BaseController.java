@@ -124,9 +124,32 @@ public class BaseController {
     @GetMapping("/add-vacancy")
     public ModelAndView AddVacancy (HttpSession session) {
         ModelAndView mv = new ModelAndView();
-        ObjectMapper objectMapper = new ObjectMapper();
-        // session = context.getSession();
         mv.setViewName("addVacancyPage");
+
+        List<Vacancy> vacanciesAllTypes;
+        List<Vacancy> vacanciesAllStatus;
+        List<Vacancy> vacanciesAllOccupationalCodes;
+
+        vacanciesAllTypes = VacancyQrys.getAllTypesOfVacancy();
+        vacanciesAllStatus = VacancyQrys.getAllStatusOfVacancy();
+        vacanciesAllOccupationalCodes = VacancyQrys.getAllOccupationalCodes();
+
+//        List<Vacancy> vacancies =  VacancyQrys.getAllOccupationalCodes();
+//                for (Vacancy vacancy : vacancies) {
+//                    System.out.println(vacancy.getOccupationalCode());
+//                    System.out.println(vacancy.getOccupationalCodeName());
+//                }
+
+//        Map<String,Object> allVacanciesTypes = new HashMap<String,Object>();
+//        allVacanciesTypes.put("allVacanciesTypes", vacanciesAllTypes);
+//        mv.addAllObjects(allVacanciesTypes);
+
+        Map<String,Object> allVacancies = new HashMap<String,Object>();
+        allVacancies.put("allVacanciesTypes", vacanciesAllTypes);
+        allVacancies.put("allVacanciesOccupationalCodes", vacanciesAllOccupationalCodes);
+        mv.addAllObjects(allVacancies);
+
+
         return mv;
     }
 
