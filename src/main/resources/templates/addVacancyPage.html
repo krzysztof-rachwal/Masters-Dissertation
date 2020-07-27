@@ -13,8 +13,10 @@
     <link rel="stylesheet" media="all" href="https://careerswales.gov.wales/sites/default/files/css/css_yFFWPpQsZCFeHMtvOieuCWLiTEiz--tT0otLunNJdLs.css"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css"/>
+
     <link th:href="@{../css/ebe_style.css}" href="../css/ebe_style.css" rel="stylesheet" />
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
     <title>Add Vacancy</title>
 </head>
@@ -32,7 +34,7 @@
             <div class="row">
                 <div class="col-md-8">
                     <div class="form-group">
-                        <label for="employer-name" class="  mb-1">Vacancy Name</label>
+                        <label for="vacancy-name" class="  mb-1">Vacancy name</label>
                         <input type="text" class="form-control input-border" id="vacancy-name">
                     </div>
                 </div>
@@ -40,8 +42,10 @@
             <div class="row">
                 <div class="col-md-8">
                     <div class="form-group">
-                        <label for="employer-name" class="  mb-1">Employer name</label>
-                        <input type="text" class="form-control input-border" id="employer-name">
+                        <label for="employer-name" class="  mb-1">Employer Name</label><br>
+                        <select class="selectpicker" data-live-search="true" id="employer-name">
+                            <option  th:each="employer : ${AllEmployerNamesAndIds}" th:value="${employer.getEmployerID()}" th:text="${employer.getName()}"></option>
+                        </select>
                     </div>
                 </div>
             </div>
@@ -82,6 +86,16 @@
                     <div class="form-group">
                         <label for="closing-date" class="  mb-1">Closing Date</label>
                         <input type="date" class="form-control input-border" id="closing-date">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="vacancy-type" class="  mb-1">Type of Vacancy</label>
+                        <select class="custom-select p-2" id="vacancy-status">
+                            <option th:each="vacancyStatus : ${allVacanciesStatus}" th:value="${vacancyStatus.getStatusOfVacancy()}" th:text="${vacancyStatus.getStatusOfVacancyString()}"></option>
+                        </select>
                     </div>
                 </div>
             </div>
@@ -134,7 +148,12 @@
 <script type="text/javascript" src="https://careerswales.gov.wales/styleguide/assets/js/gel-styleguide.js"></script>
 <script type="text/javascript" src="https://careerswales.gov.wales/styleguide/assets/js/gel-elements-loader.js"></script>
 <script type="text/javascript" src="https://careerswales.gov.wales/styleguide/assets/js/gel-elements.js"></script>
-<script th:src="@{../js/vacancy.js}" src="../js/vacancy.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
 
+<script th:src="@{../js/vacancy.js}" src="../js/vacancy.js"></script>
+<script>
+    $('.selectpicker').selectpicker();
+</script>
 </body>
 </html>

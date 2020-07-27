@@ -200,8 +200,8 @@ public class VacancyQueries extends DBQueries {
             rs = statement.executeQuery(getQuery);
             while (rs.next()) {
                 vacancy = new Vacancy();
-                vacancy.setTypeOfVacancy(rs.getInt("StatusOfVacancyID"));
-                vacancy.setTypeOfVacancyName(rs.getString("StatusOfVacancyName"));
+                vacancy.setStatusOfVacancy(rs.getInt("StatusOfVacancyID"));
+                vacancy.setStatusOfVacancyString(rs.getString("StatusOfVacancyName"));
 
                 list.add(vacancy);
             }
@@ -248,11 +248,10 @@ public class VacancyQueries extends DBQueries {
     public int createVacancy (int EmployerID, String VacancyTitle, String Details, String Link, int TypeOfVacancy,int StatusOfVacancy ,String StartOfVacancy,
                               String ClosingDate, int OccupationalCode, String ApplicationMethod, String Postcode) throws DataAccessException {
 
-        String insertSql = "INSERT INTO Vacancy(EmployerID, VacancyTitle, Details, Link, TypeOfVacancy, StatusOfVacancy" +
+        String insertSql = "INSERT INTO Vacancy(EmployerID, VacancyTitle, Details, Link, TypeOfVacancy, StatusOfVacancy," +
                 "StartOfVacancy, ClosingDate, OccupationalCode, ApplicationMethod, Postcode)" +
                 "VALUES(?,?,?,?,?,?,?,?,?,?,?)";
 
-        System.out.println("I'm here ----------------------");
         return jdbcTemplate().update(insertSql, EmployerID, VacancyTitle, Details, Link, TypeOfVacancy,StatusOfVacancy,
                 StartOfVacancy, ClosingDate, OccupationalCode, ApplicationMethod, Postcode);
 

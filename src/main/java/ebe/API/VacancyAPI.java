@@ -32,29 +32,17 @@ public class VacancyAPI {
     //1. Create Vacancies
     @RequestMapping(value="/api/create/vacancy", method= RequestMethod.GET)
     public boolean createVacancy(
-            @RequestParam(name="employerName") String employerName,
+            @RequestParam(name="employerName") int employerId,
             @RequestParam(name="VacancyTitle") String vacancyTitle,
             @RequestParam(name="Details") String details,
             @RequestParam(name="Link") String link,
             @RequestParam(name="TypeOfVacancy") int typeOfVacancy,
+            @RequestParam(name="StatusOfVacancy") int StatusOfVacancy,
             @RequestParam(name="StartOfVacancy") String startOfVacancy,
             @RequestParam(name="ClosingDate") String closingDate,
             @RequestParam(name="OccupationalCode") int occupationalCode,
             @RequestParam(name="ApplicationMethod") String applicationMethod,
             @RequestParam(name="Postcode") String postCode) throws ParseException {
-
-        System.out.println("qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq");
-        int employerId = EmployerQrys.getEmployerIdByGivingName(employerName);
-        int StatusOfVacancy = 1;
-        System.out.println("P3");
-//        Date startOfVacancy = new SimpleDateFormat("yyyy/MM/dd").parse(startOfVacancyString);
-//      Date closingDate = new SimpleDateFormat("yyyy/MM/dd").parse(closingDateString);
-
-        System.out.println("-------------------------------------------");
-        System.out.println(employerId+vacancyTitle+details+link+typeOfVacancy+1+
-                startOfVacancy+closingDate+occupationalCode+applicationMethod+postCode);
-        // Status of Vacancy 1 = Live
-
 
         return 1 == VacancyQrys.createVacancy(employerId,vacancyTitle,details,link,typeOfVacancy,StatusOfVacancy,
                 startOfVacancy,closingDate,occupationalCode,applicationMethod,postCode);

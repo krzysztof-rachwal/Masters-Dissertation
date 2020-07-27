@@ -111,9 +111,10 @@ public class EmployerQueries extends DBQueries {
         return employer;
     }
 
-    //4. Get a Employer Id by giving a Name
-    public Integer getEmployerIdByGivingName(String employerName) throws DataAccessException {
-        String getQuery = String.format("SELECT EmployerID FROM Employer WHERE Name = \"%s\" LIMIT 1", employerName);
+    //4. Get all Employer Ids and Names
+    public List<Employer> getAllEmployerNamesAndIds() throws DataAccessException {
+        String getQuery = "SELECT EmployerID, Name  FROM Employer";
+        List<Employer> list = new ArrayList<Employer>();
         Employer employer = null;
         ResultSet rs = null;
         try {
@@ -121,9 +122,11 @@ public class EmployerQueries extends DBQueries {
             statement = connection.createStatement();
             rs = statement.executeQuery(getQuery);
             while (rs.next()) {
-
                 employer = new Employer();
                 employer.setEmployerID(rs.getInt("EmployerID"));
+                employer.setName(rs.getString("Name"));
+
+                list.add(employer);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -132,7 +135,7 @@ public class EmployerQueries extends DBQueries {
             DBUtil.close(statement);
             DBUtil.close(connection);
         }
-        return employer.getEmployerID();
+        return list;
     }
 
 

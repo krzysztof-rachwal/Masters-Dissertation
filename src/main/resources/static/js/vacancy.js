@@ -2,11 +2,12 @@
 //1. Create Vacancy
 function createVacancy() {
     var baseUri = "/api/create/vacancy";
-    var employerName_url = "employerName=" + $('input[id=employer-name]').val();
+    var employerName_url = "employerName=" + $('select[id=employer-name]').val();
     var vacancyTitle_url = "VacancyTitle=" + $('input[id=vacancy-name]').val();
     var link_url = "Link=" + $('input[id=web-link]').val();
     var details_url = "Details=" + $('textarea[id=vacancy-desc]').val();
     var typeOfVacancy_url = "TypeOfVacancy=" + $('select[id=vacancy-type]').val();
+    var statusOfVacancy_url="StatusOfVacancy=" + $('select[id=vacancy-status]').val();
     var startOfVacancy_url = "StartOfVacancy=" + $('input[id=start-date]').val();
     var closingDate_url = "ClosingDate=" + $('input[id=closing-date]').val();
     var occupationalCode_url = "OccupationalCode=" + $('select[id=occup-code]').val();
@@ -14,7 +15,7 @@ function createVacancy() {
     var postcode_url = "Postcode=" + $('input[id=post-code]').val();
 
     var fullUri = baseUri + "?" + "&" + employerName_url+ "&" + vacancyTitle_url + "&" + link_url
-        + "&" + details_url + "&" + typeOfVacancy_url  + "&" + startOfVacancy_url + "&"
+        + "&" + details_url + "&" + typeOfVacancy_url  + "&" + "&" + statusOfVacancy_url  + "&" + startOfVacancy_url + "&"
         + closingDate_url + "&" + occupationalCode_url+ "&" + applicationMethod_url + "&" + postcode_url  ;
 
     var token = $("meta[name='_csrf']").attr("content");    // Used to bypass Spring Boot's CSRF protocol     -- SOlution taken from 'https://stackoverflow.com/questions/34747437/use-of-spring-csrf-with-ajax-rest-call-and-html-page-with-thymeleaf' on Nov 26th 2019
@@ -75,3 +76,5 @@ function deleteVacancy(vacancyId) {
 
     });
 }
+// For the Vacancy Name selector
+$('.selectpicker').selectpicker();
