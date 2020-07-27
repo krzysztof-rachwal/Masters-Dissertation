@@ -87,8 +87,8 @@ public class EventQueries extends DBQueries {
 
     ///////////////////////////////////// CREATE ALL METHODS ///////////////////////////////////////////////
     // 1. Create a new Event
-    public int createNewEvent(String Name, int TypeOfEvent, String Date, Boolean isPublic, Boolean isCancelled, String PostCode, String NameOfAdviser,
-                              String NumberOfAttendees, Boolean PromotesApprenticeships, Boolean PromotesWelshLanguage,
+    public int createEvent(String Name, int TypeOfEvent, String Date, Boolean isPublic, Boolean isCancelled, String PostCode, String NameOfAdviser,
+                              int NumberOfAttendees, Boolean PromotesApprenticeships, Boolean PromotesWelshLanguage,
                               Boolean ChallangesGenderStereoTypes) throws DataAccessException {
 
         String insertSql = "INSERT TO Event Event(Name, TypeOfEvent, Date, isPublic, isCancelled, PostCode, NameOfAdviser," +
