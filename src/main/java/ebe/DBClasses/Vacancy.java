@@ -12,10 +12,13 @@ public class Vacancy {
     private String Details;
     private String Link;
     private int  TypeOfVacancy;
+    private String  TypeOfVacancyName;
     private int StatusOfVacancy;
+    private String StatusOfVacancyString;
     private @DateTimeFormat(pattern = "yyyy-MM-dd") Date StartOfVacancy;
     private @DateTimeFormat(pattern = "yyyy-MM-dd") Date ClosingDate;
     private int OccupationalCode;
+    private String OccupationalCodeName;
     private String ApplicationMethod;
     private String Postcode;
 
@@ -46,6 +49,9 @@ public class Vacancy {
         OccupationalCode = occupationalCode;
         ApplicationMethod = applicationMethod;
         Postcode = postcode;
+    }
+
+    public Vacancy() {
     }
 
     public int getVacancyID() {
@@ -142,5 +148,29 @@ public class Vacancy {
 
     public void setPostcode(String postcode) {
         Postcode = postcode;
+    }
+
+    public String getTypeOfVacancyName() {
+        return TypeOfVacancyName;
+    }
+
+    public void setTypeOfVacancyName(String typeOfVacancyName) {
+        TypeOfVacancyName = typeOfVacancyName;
+    }
+
+    public String getStatusOfVacancyString() {
+        return StatusOfVacancyString;
+    }
+
+    public void setStatusOfVacancyString(String statusOfVacancyString) {
+        StatusOfVacancyString = statusOfVacancyString;
+    }
+
+    public String getOccupationalCodeName() {
+        return OccupationalCodeName;
+    }
+
+    public void setOccupationalCodeName(String occupationalCodeName) {
+        OccupationalCodeName = occupationalCodeName;
     }
 }
