@@ -84,9 +84,37 @@ public class EventQueries extends DBQueries {
         return event;
     }
 
+    // 3. Get List of Event Types Names and Ids
+    public List<Event> getAllTypesOfEvents() throws DataAccessException {
+        String getQuery = "SELECT * FROM TypeOfEventList";
+        List<Event> list = new ArrayList<Event>();
+        Event event = null;
+        ResultSet rs = null;
+        try {
+            connection = ConnectionFactory.getConnection();
+            statement = connection.createStatement();
+            rs = statement.executeQuery(getQuery);
+            while (rs.next()) {
+                event = new Event();
+                event.setTypeOfEvent(rs.getInt("TypeOfEventID"));
+                event.setTypeOfEventString(rs.getString("TypeOfEventName"));
+
+                list.add(event);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }  finally {
+            DBUtil.close(rs);
+            DBUtil.close(statement);
+            DBUtil.close(connection);
+        }
+        return list;
+    }
+
+
 
     ///////////////////////////////////// CREATE ALL METHODS ///////////////////////////////////////////////
-    // 1. Create a new Event
+    // 5. Create a new Event
     public int createEvent(String Name, int TypeOfEvent, String Date, Boolean isPublic, Boolean isCancelled, String PostCode, String NameOfAdviser,
                               int NumberOfAttendees, Boolean PromotesApprenticeships, Boolean PromotesWelshLanguage,
                               Boolean ChallangesGenderStereoTypes) throws DataAccessException {
@@ -102,7 +130,7 @@ public class EventQueries extends DBQueries {
 
     }
     ///////////////////////////////////// UPDATE ALL METHODS ///////////////////////////////////////////////
-    // 1. Update an Events by Id
+    // 6. Update an Events by Id
 
     public Integer updateEvent(int EventID, String Name, int TypeOfEvent, String Date, Boolean isPublic, Boolean isCancelled, String PostCode, String NameOfAdviser,
                                String NumberOfAttendees, Boolean PromotesApprenticeships, Boolean PromotesWelshLanguage,
@@ -118,7 +146,7 @@ public class EventQueries extends DBQueries {
     }
 
     ///////////////////////////////////// DELETE ALL METHODS ///////////////////////////////////////////////
-    // 1. Delete an Event by ID
+    // 7. Delete an Event by ID
 
     public Integer deleteEvent(int eventId) throws DataAccessException {
         String deleteSql = String.format("DELETE FROM Event WHERE EventID = '%s'",eventId);

@@ -9,6 +9,7 @@ public class Event {
     private int EventID;
     private String Name;
     private int TypeOfEvent;
+    private String TypeOfEventString;
     private @DateTimeFormat(pattern = "yyyy-MM-dd") Date Date;
     private Boolean isPublic;
     private Boolean isCancelled;
@@ -46,6 +47,9 @@ public class Event {
         PromotesApprenticeships = promotesApprenticeships;
         PromotesWelshLanguage = promotesWelshLanguage;
         ChallangesGenderStereotypes = challangesGenderStereotypes;
+    }
+
+    public Event() {
     }
 
     public int getEventID() {
@@ -142,5 +146,13 @@ public class Event {
 
     public void setChallangesGenderStereotypes(Boolean challangesGenderStereotypes) {
         ChallangesGenderStereotypes = challangesGenderStereotypes;
+    }
+
+    public String getTypeOfEventString() {
+        return TypeOfEventString;
+    }
+
+    public void setTypeOfEventString(String typeOfEventString) {
+        TypeOfEventString = typeOfEventString;
     }
 }

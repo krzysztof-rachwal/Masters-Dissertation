@@ -29,6 +29,9 @@ public class School {
         Phone = phone;
     }
 
+    public School() {
+    }
+
     public int getSchoolID() {
         return SchoolID;
     }

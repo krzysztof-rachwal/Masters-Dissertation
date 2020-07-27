@@ -6,10 +6,18 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
 public class SchoolQueries extends DBQueries {
+
+    private Connection connection;
+    private Statement statement;
 
     @Autowired
     public SchoolQueries(JdbcTemplate jdbctemplate) {
@@ -38,6 +46,36 @@ public class SchoolQueries extends DBQueries {
         );
         return schoolInfo.get(0);
     }
+
+
+    // 1. Get All School Names and Ids
+    public List<School> getAllSchoolNamesAndIds() throws DataAccessException {
+        String getQuery = "SELECT * FROM TypeOfEventList";
+        List<School> list = new ArrayList<School>();
+        School school = null;
+        ResultSet rs = null;
+        try {
+            connection = ConnectionFactory.getConnection();
+            statement = connection.createStatement();
+            rs = statement.executeQuery(getQuery);
+            while (rs.next()) {
+                school = new School();
+                school.setSchoolID(rs.getInt("SchoolID"));
+                school.setName(rs.getString("Name"));
+
+                list.add(school);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            DBUtil.close(rs);
+            DBUtil.close(statement);
+            DBUtil.close(connection);
+        }
+        return list;
+    }
+
+
 
 
     ///////////////////////////////////// CREATE ALL METHODS ///////////////////////////////////////////////
