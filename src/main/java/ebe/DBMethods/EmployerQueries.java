@@ -38,17 +38,17 @@ public class EmployerQueries extends DBQueries {
             rs = statement.executeQuery(getQuery);
             while (rs.next()) {
                 employer = new Employer(rs.getInt("EmployerID"), rs.getInt("StatusOfEmployer"),
-                rs.getString("Name"), rs.getString("AddressCity"),
-                rs.getString("AddressStreet"), rs.getString("AddressNumber"),
-                rs.getString("PostCode"), rs.getString("Email"), rs.getString("Phone"),
-                rs.getString("Website"), rs.getInt("NumberOfEmployees"),
-                rs.getString("CompanySummary"), rs.getString("Notes"),
-                rs.getString("LogoLink"), rs.getBoolean("GivesSiteExperience"),
-                rs.getBoolean("GivesSiteVisits"), rs.getBoolean("GivesWorkshops"),
-                rs.getBoolean("GivesPresentations"), rs.getBoolean("AttendsCareerFairs"),
-                rs.getBoolean("GivesWebinars"), rs.getBoolean("WorksWithPrimaryPupils"),
-                rs.getBoolean("UseOfModernForeignLanguage"), rs.getBoolean("RunsBusinessInWelsh"),
-                rs.getBoolean("CanDeliverToSchoolsInWelsh"), rs.getBoolean("HasApprenticeshipProgramme"));
+                        rs.getString("Name"), rs.getString("AddressCity"),
+                        rs.getString("AddressStreet"), rs.getString("AddressNumber"),
+                        rs.getString("PostCode"), rs.getString("Email"), rs.getString("Phone"),
+                        rs.getString("Website"), rs.getInt("NumberOfEmployees"),
+                        rs.getString("CompanySummary"), rs.getString("Notes"),
+                        rs.getString("LogoLink"), rs.getBoolean("GivesSiteExperience"),
+                        rs.getBoolean("GivesSiteVisits"), rs.getBoolean("GivesWorkshops"),
+                        rs.getBoolean("GivesPresentations"), rs.getBoolean("AttendsCareerFairs"),
+                        rs.getBoolean("GivesWebinars"), rs.getBoolean("WorksWithPrimaryPupils"),
+                        rs.getBoolean("UseOfModernForeignLanguage"), rs.getBoolean("RunsBusinessInWelsh"),
+                        rs.getBoolean("CanDeliverToSchoolsInWelsh"), rs.getBoolean("HasApprenticeshipProgramme"));
 
                 list.add(employer);
             }
@@ -111,8 +111,33 @@ public class EmployerQueries extends DBQueries {
         return employer;
     }
 
+    //4. Get a Employer Id by giving a Name
+    public Integer getEmployerIdByGivingName(String employerName) throws DataAccessException {
+        String getQuery = String.format("SELECT EmployerID FROM Employer WHERE Name = \"%s\" LIMIT 1", employerName);
+        Employer employer = null;
+        ResultSet rs = null;
+        try {
+            connection = ConnectionFactory.getConnection();
+            statement = connection.createStatement();
+            rs = statement.executeQuery(getQuery);
+            while (rs.next()) {
+
+                employer = new Employer();
+                employer.setEmployerID(rs.getInt("EmployerID"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.close(rs);
+            DBUtil.close(statement);
+            DBUtil.close(connection);
+        }
+        return employer.getEmployerID();
+    }
+
+
     ///////////////////////////////////// CREATE ALL METHODS ///////////////////////////////////////////////
-    //1. Create New Employer
+    //3. Create New Employer
 
     public int createNewEmployer(int statusOfEmployer, String Name, String AddressCity, String AddressStreet, String AddressNumber,
                                  String Postcode, String email, String phone, String website, int numberOfEmployees, String companySummary,
@@ -137,7 +162,7 @@ public class EmployerQueries extends DBQueries {
     }
 
     ///////////////////////////////////// UPDATE ALL METHODS ///////////////////////////////////////////////
-    //1. Update Employer by Id
+    //5. Update Employer by Id
     public Integer updateEmployer(int employerId, int statusOfEmployer, String Name, String AddressCity, String AddressStreet, String AddressNumber,
                                   String Postcode, String email, String phone, String website, int numberOfEmployees, String companySummary,
                                   String notes, String DocumentsAndVideos, String Logo, Boolean givesSiteExperience, Boolean givesSiteVisits,
@@ -160,7 +185,7 @@ public class EmployerQueries extends DBQueries {
 
 
     ///////////////////////////////////// DELETE ALL METHODS ///////////////////////////////////////////////
-    //1. DELETE EMPLOYER by Id
+    //6. DELETE EMPLOYER by Id
     public Integer deleteEmployer(int employerId) throws DataAccessException {
         String deleteSql = String.format("DELETE FROM Employer WHERE EmployerID = '%s'",employerId);
         return jdbcTemplate().update(deleteSql);

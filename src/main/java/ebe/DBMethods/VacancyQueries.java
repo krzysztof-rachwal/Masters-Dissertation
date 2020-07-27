@@ -58,7 +58,7 @@ public class VacancyQueries extends DBQueries {
     }
 
 
-    // 2. Get Vacancy by Id
+    // 2. Get Vacancy by id
     public Vacancy getVacancyDetailsById(int vacancyId) throws DataAccessException {
         String getQuery = String.format("SELECT * FROM Vacancy WHERE VacancyID = \"%s\" LIMIT 1", vacancyId);
         Vacancy vacancy = null;
@@ -86,22 +86,180 @@ public class VacancyQueries extends DBQueries {
         return vacancy;
     }
 
+    // 3. Get Vacancy Type id
+    public Integer getTypeOfVacancyIdByName(String vacancyType) throws DataAccessException {
+        String getQuery = String.format("SELECT TypeOfVacancyID FROM TypeOfVacancyList WHERE TypeOfVacancyName = \"%s\" LIMIT 1", vacancyType);
+        Vacancy vacancy = null;
+        ResultSet rs = null;
+        System.out.println(vacancyType);
+        try {
+            connection = ConnectionFactory.getConnection();
+            statement = connection.createStatement();
+            rs = statement.executeQuery(getQuery);
+            while (rs.next()) {
+
+                vacancy = new Vacancy();
+                vacancy.setTypeOfVacancy( rs.getInt("TypeOfVacancyID"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.close(rs);
+            DBUtil.close(statement);
+            DBUtil.close(connection);
+        }
+        System.out.println(vacancy.getTypeOfVacancy());
+        return vacancy.getTypeOfVacancy();
+    }
+
+    // 4. Get Vacancy OccupationalCode id
+    public Integer getOccupationalCodeIdByName(String occupationalCode) throws DataAccessException {
+        String getQuery = String.format("OccupationalCodeID \"%s\" LIMIT 1", occupationalCode);
+        Vacancy vacancy = null;
+        ResultSet rs = null;
+        System.out.println(occupationalCode);
+        try {
+            connection = ConnectionFactory.getConnection();
+            statement = connection.createStatement();
+            rs = statement.executeQuery(getQuery);
+            while (rs.next()) {
+
+                vacancy = new Vacancy();
+                vacancy.setOccupationalCode( rs.getInt("OccupationalCodeID"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.close(rs);
+            DBUtil.close(statement);
+            DBUtil.close(connection);
+        }
+        return vacancy.getOccupationalCode();
+    }
+
+    // 5. Get Vacancy Status id
+    public Integer getStatusOfVacancyIdByName(String vacancyStatus) throws DataAccessException {
+        String getQuery = String.format("SELECT StatusOfVacancyID FROM StatusOfVacancyList WHERE StatusOfVacancyName = \"%s\" LIMIT 1", vacancyStatus);
+        Vacancy vacancy = null;
+        ResultSet rs = null;
+        try {
+            connection = ConnectionFactory.getConnection();
+            statement = connection.createStatement();
+            rs = statement.executeQuery(getQuery);
+            while (rs.next()) {
+
+                vacancy = new Vacancy();
+                vacancy.setStatusOfVacancy( rs.getInt("StatusOfVacancyID"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.close(rs);
+            DBUtil.close(statement);
+            DBUtil.close(connection);
+        }
+        return vacancy.getStatusOfVacancy();
+    }
+
+    // 6. Get List of Vacancy Types Names and Ids
+    public List<Vacancy> getAllTypesOfVacancy() throws DataAccessException {
+        String getQuery = "SELECT * FROM TypeOfVacancyList";
+        List<Vacancy> list = new ArrayList<Vacancy>();
+        Vacancy vacancy = null;
+        ResultSet rs = null;
+        try {
+            connection = ConnectionFactory.getConnection();
+            statement = connection.createStatement();
+            rs = statement.executeQuery(getQuery);
+            while (rs.next()) {
+                vacancy = new Vacancy();
+                vacancy.setTypeOfVacancy(rs.getInt("TypeOfVacancyID"));
+                vacancy.setTypeOfVacancyName(rs.getString("TypeOfVacancyName"));
+
+                list.add(vacancy);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }  finally {
+            DBUtil.close(rs);
+            DBUtil.close(statement);
+            DBUtil.close(connection);
+        }
+        return list;
+    }
+
+    // 7. Get List of Vacancy Status Names and Ids
+    public List<Vacancy> getAllStatusOfVacancy() throws DataAccessException {
+        String getQuery = "SELECT * FROM StatusOfVacancyList";
+        List<Vacancy> list = new ArrayList<Vacancy>();
+        Vacancy vacancy = null;
+        ResultSet rs = null;
+        try {
+            connection = ConnectionFactory.getConnection();
+            statement = connection.createStatement();
+            rs = statement.executeQuery(getQuery);
+            while (rs.next()) {
+                vacancy = new Vacancy();
+                vacancy.setTypeOfVacancy(rs.getInt("StatusOfVacancyID"));
+                vacancy.setTypeOfVacancyName(rs.getString("StatusOfVacancyName"));
+
+                list.add(vacancy);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }  finally {
+            DBUtil.close(rs);
+            DBUtil.close(statement);
+            DBUtil.close(connection);
+        }
+        return list;
+    }
+
+    // 8. Get List of OccupationalCodes Names and Ids
+    public List<Vacancy> getAllOccupationalCodes() throws DataAccessException {
+        String getQuery = "SELECT * FROM OccupationalCodesList";
+        List<Vacancy> list = new ArrayList<Vacancy>();
+        Vacancy vacancy = null;
+        ResultSet rs = null;
+        try {
+            connection = ConnectionFactory.getConnection();
+            statement = connection.createStatement();
+            rs = statement.executeQuery(getQuery);
+            while (rs.next()) {
+                vacancy = new Vacancy();
+                vacancy.setOccupationalCode(rs.getInt("OccupationalCodeID"));
+                vacancy.setOccupationalCodeName(rs.getString("OccupationalCodeName"));
+
+                list.add(vacancy);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }  finally {
+            DBUtil.close(rs);
+            DBUtil.close(statement);
+            DBUtil.close(connection);
+        }
+        return list;
+    }
+
 
     ///////////////////////////////////// CREATE ALL METHODS ///////////////////////////////////////////////
-    // 1. Create a new Vacancy
-    public int createNewVacancy (int EmployerID, String VacancyTitle, String Details, String Link, int TypeOfVacancy,int StatusOfVacancy ,Date StartOfVacancy,
-                                Date ClosingDate, int OccupationalCode, String ApplicationMethod, String Postcode) throws DataAccessException {
+    // 9. Create a new Vacancy
+    public int createVacancy (int EmployerID, String VacancyTitle, String Details, String Link, int TypeOfVacancy,int StatusOfVacancy ,String StartOfVacancy,
+                              String ClosingDate, int OccupationalCode, String ApplicationMethod, String Postcode) throws DataAccessException {
 
-        String insertSql = "INSERT TO Vacancy Vacancy(EmployerID, VacancyTitle, Details, Link, TypeOfVacancy, StatusOfVacancy" +
-                "StartOfVacancy, StartOfVacancy, ClosingDate, OccupationalCode, ApplicationMethod, Postcode)" +
-                "                                  VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        String insertSql = "INSERT INTO Vacancy(EmployerID, VacancyTitle, Details, Link, TypeOfVacancy, StatusOfVacancy" +
+                "StartOfVacancy, ClosingDate, OccupationalCode, ApplicationMethod, Postcode)" +
+                "VALUES(?,?,?,?,?,?,?,?,?,?,?)";
 
-        return jdbcTemplate().update(insertSql, EmployerID, VacancyTitle, Details, Link, TypeOfVacancy, TypeOfVacancy,StatusOfVacancy,
+        System.out.println("I'm here ----------------------");
+        return jdbcTemplate().update(insertSql, EmployerID, VacancyTitle, Details, Link, TypeOfVacancy,StatusOfVacancy,
                 StartOfVacancy, ClosingDate, OccupationalCode, ApplicationMethod, Postcode);
+
 
     }
     ///////////////////////////////////// UPDATE ALL METHODS ///////////////////////////////////////////////
-    // 1. Update an Vacancy by Id
+    // 10. Update an Vacancy by Id
 
     public Integer updateVacancy(int VacancyID, int EmployerID, String VacancyTitle, String Details, String Link, int TypeOfVacancy,int StatusOfVacancy ,Date StartOfVacancy,
                                  Date ClosingDate, int OccupationalCode, String ApplicationMethod, String Postcode) throws DataAccessException {
@@ -114,7 +272,7 @@ public class VacancyQueries extends DBQueries {
     }
 
     ///////////////////////////////////// DELETE ALL METHODS ///////////////////////////////////////////////
-    // 1. Delete an Vacancy by ID
+    // 11. Delete an Vacancy by ID
 
     public Integer deleteVacancy(int vacancyId) throws DataAccessException {
         String deleteSql = String.format("DELETE FROM Vacancy WHERE VacancyID = '%s'",vacancyId);
