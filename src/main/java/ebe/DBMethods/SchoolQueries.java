@@ -50,7 +50,7 @@ public class SchoolQueries extends DBQueries {
 
     // 1. Get All School Names and Ids
     public List<School> getAllSchoolNamesAndIds() throws DataAccessException {
-        String getQuery = "SELECT SchoolID, Name FROM School";
+        String getQuery = "SELECT SchoolID,SchoolName FROM School";
         List<School> list = new ArrayList<School>();
         School school = null;
         ResultSet rs = null;
@@ -61,7 +61,7 @@ public class SchoolQueries extends DBQueries {
             while (rs.next()) {
                 school = new School();
                 school.setSchoolID(rs.getInt("SchoolID"));
-                school.setSchoolName(rs.getString("Name"));
+                school.setSchoolName(rs.getString("SchoolName"));
 
                 list.add(school);
             }

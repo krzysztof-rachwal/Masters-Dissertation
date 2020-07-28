@@ -139,7 +139,6 @@ public class BaseController {
         vacanciesAllOccupationalCodes = VacancyQrys.getAllOccupationalCodes();
         vacanciesAllApplicationMethods = VacancyQrys.getAllApplicationMethods();
 
-
         Map<String,Object> allVacancies = new HashMap<String,Object>();
         allVacancies.put("AllEmployerNamesAndIds", employerAllNamesAndIds);
         allVacancies.put("allVacanciesTypes", vacanciesAllTypes);

@@ -117,42 +117,88 @@ public class EventQueries extends DBQueries {
         return list;
     }
 
+    // 4. Get List of Event Types Names and Ids
+    public Integer getLastEventCreated(String eventName) throws DataAccessException {
+        String getQuery = String.format("SELECT EventID FROM Event WHERE EventName = \"%s\"  ORDER BY EventID DESC LIMIT 1", eventName);
+        Event event = null;
+        ResultSet rs = null;
+        try {
+            connection = ConnectionFactory.getConnection();
+            statement = connection.createStatement();
+            rs = statement.executeQuery(getQuery);
+            while (rs.next()) {
+                event = new Event();
+                event.setEventID(rs.getInt("EventID"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }  finally {
+            DBUtil.close(rs);
+            DBUtil.close(statement);
+            DBUtil.close(connection);
+        }
+        return event.getEventID();
+    }
+
 
 
     ///////////////////////////////////// CREATE ALL METHODS ///////////////////////////////////////////////
     // 5. Create a new Event
-    public int createEvent(String Name, int TypeOfEvent, String Date, Boolean isPublic, Boolean isCancelled, String PostCode, String NameOfAdviser,
-                              int NumberOfAttendees, Boolean PromotesApprenticeships, Boolean PromotesWelshLanguage,
-                              Boolean ChallangesGenderStereoTypes) throws DataAccessException {
+    public int createEvent( String EventName, int TypeOfEventID, String EventDateAndTime, String EventVenueName,
+                           String EventAddressCity, String EventAddressStreet, String EventAddressNumber, String EventVenuePostcode,
+                           String EventSummary, Boolean IsPublic, Boolean IsCancelled, String NameOfAdviser, int NumberOfAttendees,
+                           Boolean PromotesApprenticeships, Boolean PromotesWelshLanguage, Boolean ChallengesGenderStereoTypes) throws DataAccessException {
 
-        String insertSql = "INSERT TO Event Event(Name, TypeOfEvent, Date, isPublic, isCancelled, PostCode, NameOfAdviser," +
-                "                                 NumberOfAttendees, PromotesApprenticeships, PromotesWelshLanguage," +
-                "                                 ChallangesGenderStereoTypes)" +
-                "                                  VALUES(?,?,?,?,?,?,?,?,?,?,?)";
+        String insertSql = "INSERT INTO Event(EventName, TypeOfEventID, EventDateAndTime, EventVenueName, EventAddressCity," +
+                " EventAddressStreet, EventAddressNumber, EventVenuePostcode, EventSummary, IsPublic, IsCancelled, NameOfAdviser," +
+                " NumberOfAttendees, PromotesApprenticeships, PromotesWelshLanguage,ChallengesGenderStereoTypes)" +
+                " VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
-        return jdbcTemplate().update(insertSql, Name, TypeOfEvent, Date, isPublic, isCancelled, PostCode, NameOfAdviser,
-                NumberOfAttendees, PromotesApprenticeships, PromotesWelshLanguage,
-                ChallangesGenderStereoTypes);
+        return jdbcTemplate().update(insertSql, EventName, TypeOfEventID, EventDateAndTime, EventVenueName, EventAddressCity,
+                EventAddressStreet, EventAddressNumber, EventVenuePostcode, EventSummary, IsPublic, IsCancelled, NameOfAdviser,
+                NumberOfAttendees, PromotesApprenticeships, PromotesWelshLanguage, ChallengesGenderStereoTypes);
 
     }
-    ///////////////////////////////////// UPDATE ALL METHODS ///////////////////////////////////////////////
-    // 6. Update an Events by Id
 
+    // 6. Create new Employer / Event Intersection
+    public void updateEmployerEventIntersection(int EventID, List<Integer> EmployerID) throws DataAccessException {
+
+        String updateSql = "INSERT INTO INT_AttendingEmployerOnEvent(EventID, EmployerID) VALUE(?,?)";
+
+        for (Integer employerId : EmployerID ){
+            jdbcTemplate().update(updateSql, EventID, employerId);
+        };
+    }
+
+    // 7. Create new School / Event Intersection
+    public void updateSchoolEventIntersection(int EventID, List<Integer> SchoolID) throws DataAccessException {
+
+        String updateSql = "INSERT INTO INT_AttendingSchoolOnEvent(EventID, SchoolID) VALUES(?,?)";
+
+        for (Integer schoolId : SchoolID ){
+            jdbcTemplate().update(updateSql, EventID, schoolId);
+        };
+    }
+
+    ///////////////////////////////////// UPDATE ALL METHODS ///////////////////////////////////////////////
+
+    // 8. Update an Events by Id
     public Integer updateEvent(int EventID, String Name, int TypeOfEvent, String Date, Boolean isPublic, Boolean isCancelled, String PostCode, String NameOfAdviser,
                                String NumberOfAttendees, Boolean PromotesApprenticeships, Boolean PromotesWelshLanguage,
-                               Boolean ChallangesGenderStereoTypes) throws DataAccessException {
+                               Boolean ChallengesGenderStereoTypes) throws DataAccessException {
 
         String updateSql = "UPDATE Event SET Name =?, TypeOfEvent =?, Date= ?, isPublic=?, isCancelled=?," +
                 "PostCode=?, NameOfAdviser=?, NumberOfAttendees=?, PromotesApprenticeships=?, PromotesWelshLanguage=?" +
-                "ChallangesGenderStereoTypes=? WHERE EventlID =?";
+                "ChallengesGenderStereoTypes=? WHERE EventlID =?";
 
         return jdbcTemplate().update(updateSql, Name, TypeOfEvent, Date, isPublic, isCancelled, PostCode, NameOfAdviser,
                 NumberOfAttendees, PromotesApprenticeships, PromotesWelshLanguage,
-                ChallangesGenderStereoTypes, EventID);
+                ChallengesGenderStereoTypes, EventID);
     }
 
+
     ///////////////////////////////////// DELETE ALL METHODS ///////////////////////////////////////////////
-    // 7. Delete an Event by ID
+    // 9. Delete an Event by ID
 
     public Integer deleteEvent(int eventId) throws DataAccessException {
         String deleteSql = String.format("DELETE FROM Event WHERE EventID = '%s'",eventId);
