@@ -2,21 +2,21 @@
 //1. Create Vacancy
 function createVacancy() {
     var baseUri = "/api/create/vacancy";
-    var employerName_url = "employerName=" + $('select[id=employer-name]').val();
-    var vacancyTitle_url = "VacancyTitle=" + $('input[id=vacancy-name]').val();
-    var link_url = "Link=" + $('input[id=web-link]').val();
-    var details_url = "Details=" + $('textarea[id=vacancy-desc]').val();
-    var typeOfVacancy_url = "TypeOfVacancy=" + $('select[id=vacancy-type]').val();
-    var statusOfVacancy_url="StatusOfVacancy=" + $('select[id=vacancy-status]').val();
+    var employerID_url = "EmployerID=" + $('select[id=employer-name]').val();
+    var vacancyName_url = "VacancyName=" + $('input[id=vacancy-name]').val();
+    var vacancylink_url = "VacancyLink=" + $('input[id=web-link]').val();
+    var vacancySummary = "VacancySummary=" + $('textarea[id=vacancy-summary]').val();
+    var typeOfVacancyID_url = "TypeOfVacancyID=" + $('select[id=vacancy-type]').val();
+    var statusOfVacancyID_url="StatusOfVacancyID=" + $('select[id=vacancy-status]').val();
     var startOfVacancy_url = "StartOfVacancy=" + $('input[id=start-date]').val();
-    var closingDate_url = "ClosingDate=" + $('input[id=closing-date]').val();
-    var occupationalCode_url = "OccupationalCode=" + $('select[id=occup-code]').val();
-    var applicationMethod_url = "ApplicationMethod=" + $('select[id=appl-method]').val();
-    var postcode_url = "Postcode=" + $('input[id=post-code]').val();
+    var deadlineForApplication_url = "DeadlineForApplication=" + $('input[id=closing-date]').val();
+    var occupationalCodeID_url = "OccupationalCodeID=" + $('select[id=occup-code]').val();
+    var applicationMethodID_url = "ApplicationMethodID=" + $('select[id=appl-method]').val();
+    var vacancyPostcode_url = "VacancyPostcode=" + $('input[id=post-code]').val();
 
-    var fullUri = baseUri + "?" + "&" + employerName_url+ "&" + vacancyTitle_url + "&" + link_url
-        + "&" + details_url + "&" + typeOfVacancy_url  + "&" + "&" + statusOfVacancy_url  + "&" + startOfVacancy_url + "&"
-        + closingDate_url + "&" + occupationalCode_url+ "&" + applicationMethod_url + "&" + postcode_url  ;
+    var fullUri = baseUri + "?" + "&" + employerID_url+ "&" + vacancyName_url + "&" + vacancylink_url
+        + "&" + vacancySummary + "&" + typeOfVacancyID_url  + "&" + "&" + statusOfVacancyID_url  + "&" + startOfVacancy_url + "&"
+        + deadlineForApplication_url + "&" + occupationalCodeID_url+ "&" + applicationMethodID_url + "&" + vacancyPostcode_url  ;
 
     var token = $("meta[name='_csrf']").attr("content");    // Used to bypass Spring Boot's CSRF protocol     -- SOlution taken from 'https://stackoverflow.com/questions/34747437/use-of-spring-csrf-with-ajax-rest-call-and-html-page-with-thymeleaf' on Nov 26th 2019
     var header = $("meta[name='_csrf_header']").attr("content");    // Used to bypass Spring Boot's CSRF protocol

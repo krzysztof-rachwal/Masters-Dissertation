@@ -217,7 +217,7 @@ public class VacancyQueries extends DBQueries {
 
     // 8. Get List of OccupationalCodes Names and Ids
     public List<Vacancy> getAllOccupationalCodes() throws DataAccessException {
-        String getQuery = "SELECT * FROM OccupationalCodesList";
+        String getQuery = "SELECT OccupationalCodeID, OccupationalCodeName FROM OccupationalCodeList";
         List<Vacancy> list = new ArrayList<Vacancy>();
         Vacancy vacancy = null;
         ResultSet rs = null;
@@ -242,23 +242,50 @@ public class VacancyQueries extends DBQueries {
         return list;
     }
 
+    // 8. Get List of ApplicationMethods Names and Ids
+    public List<Vacancy> getAllApplicationMethods() throws DataAccessException {
+        String getQuery = "SELECT ApplicationMethodID, ApplicationMethodName FROM ApplicationMethodList";
+        List<Vacancy> list = new ArrayList<Vacancy>();
+        Vacancy vacancy = null;
+        ResultSet rs = null;
+        try {
+            connection = ConnectionFactory.getConnection();
+            statement = connection.createStatement();
+            rs = statement.executeQuery(getQuery);
+            while (rs.next()) {
+                vacancy = new Vacancy();
+                vacancy.setApplicationMethodID(rs.getInt("ApplicationMethodID"));
+                vacancy.setApplicationMethodName(rs.getString("ApplicationMethodName"));
+
+                list.add(vacancy);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }  finally {
+            DBUtil.close(rs);
+            DBUtil.close(statement);
+            DBUtil.close(connection);
+        }
+        return list;
+    }
+
 
     ///////////////////////////////////// CREATE ALL METHODS ///////////////////////////////////////////////
-    // 9. Create a new Vacancy
-    public int createVacancy (int EmployerID, String VacancyTitle, String Details, String Link, int TypeOfVacancy,int StatusOfVacancy ,String StartOfVacancy,
-                              String ClosingDate, int OccupationalCode, String ApplicationMethod, String Postcode) throws DataAccessException {
+    // 10. Create a new Vacancy
+    public int createVacancy (int EmployerID, String VacancyName, String VacancySummary, String VacancyLink, int TypeOfVacancyID,int StatusOfVacancyID ,String StartOfVacancy,
+                              String DeadlineForApplication, int OccupationalCodeID, String ApplicationMethodID, String VacancyPostcode) throws DataAccessException {
 
-        String insertSql = "INSERT INTO Vacancy(EmployerID, VacancyTitle, Details, Link, TypeOfVacancy, StatusOfVacancy," +
-                "StartOfVacancy, ClosingDate, OccupationalCode, ApplicationMethod, Postcode)" +
+        String insertSql = "INSERT INTO Vacancy(EmployerID, VacancyName, VacancySummary, VacancyLink, TypeOfVacancyID, StatusOfVacancyID," +
+                "StartOfVacancy, DeadlineForApplication, OccupationalCodeID, ApplicationMethodID, VacancyPostcode)" +
                 "VALUES(?,?,?,?,?,?,?,?,?,?,?)";
 
-        return jdbcTemplate().update(insertSql, EmployerID, VacancyTitle, Details, Link, TypeOfVacancy,StatusOfVacancy,
-                StartOfVacancy, ClosingDate, OccupationalCode, ApplicationMethod, Postcode);
+        return jdbcTemplate().update(insertSql, EmployerID, VacancyName, VacancySummary, VacancyLink, TypeOfVacancyID, StatusOfVacancyID,
+                StartOfVacancy, DeadlineForApplication, OccupationalCodeID, ApplicationMethodID, VacancyPostcode);
 
 
     }
     ///////////////////////////////////// UPDATE ALL METHODS ///////////////////////////////////////////////
-    // 10. Update an Vacancy by Id
+    // 11. Update an Vacancy by Id
 
     public Integer updateVacancy(int VacancyID, int EmployerID, String VacancyTitle, String Details, String Link, int TypeOfVacancy,int StatusOfVacancy ,Date StartOfVacancy,
                                  Date ClosingDate, int OccupationalCode, String ApplicationMethod, String Postcode) throws DataAccessException {

@@ -6,7 +6,7 @@ function createEvent() {
     var adviserName_url = "adviserName=" + $('input[id=adviser-name]').val();
     var eventType_url = "eventType=" + $('select[id=event-type]').val();
     var details_url = "Details=" + $('textarea[id=vacancy-desc]').val();
-    var eventDate_url = "TypeOfVeventDateacancy=" + $('input[id=event-date]').val();
+    var eventDate_url = "TypeOfEventDateVacancy=" + $('input[id=event-date]').val();
     var employerAttending_url="StatusOfVacancy=" + $('select[id=employers-attending]').val();
     var eventTime_url = "StartOfVacancy=" + $('input[id=event-time]').val();
     var schoolAttending_url = "ClosingDate=" + $('select[id=schools-attending]').val();
@@ -62,7 +62,7 @@ function deleteEvent(eventId) {
         },
         success: function (data) {
             if (data === true) {
-                llocation.assign("/events")
+                location.assign("/events")
             } else {
                 alert("There was an error, please try again.")
                 alert(data.responseText)

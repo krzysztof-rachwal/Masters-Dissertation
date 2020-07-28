@@ -193,7 +193,7 @@
             <div class="col-md-6">
                 <div class="form-group form-inline">
                     <span class="font-weight-bold h6">Event name </span>
-                    <span class="ml-4" th:text="${event.getName()}"></span>
+                    <span class="ml-4" th:text="${event.getEventName()}"></span>
                 </div>
                 <div class="form-group form-inline">
                     <span class="font-weight-bold h6">Event Type </span>
@@ -201,7 +201,7 @@
                 </div>
                 <div class="form-group form-inline">
                     <span class="font-weight-bold h6">Event Date </span>
-                    <span class="ml-4" th:text="${event.getDate()}"></span>
+                    <span class="ml-4" th:text="${event.getEventDateAndTime()}"></span>
                 </div>
                 <div class="form-group form-inline">
                     <span class="font-weight-bold h6">Event Time </span>
@@ -210,7 +210,7 @@
 
                 <div class="form-group form-inline">
                     <span class="font-weight-bold h6">Event Venue </span>
-                    <span class="ml-4" th:text="${event.getPostCode()}"></span>
+                    <span class="ml-4" th:text="${event.getEventAddressCity()}"></span>
                 </div>
 
                 <div class="form-group form-inline">
@@ -245,7 +245,7 @@
 
                 <div class="form-group form-inline">
                     <span class="font-weight-bold h6">Does the event challenger gender stereotypes? </span>
-                    <span class="ml-4"  th:text="${event.getChallangesGenderStereotypes()}"></span>
+                    <span class="ml-4"  th:text="${event.getChallengesGenderStereotypes()}"></span>
                 </div>
             </div>
         </div>

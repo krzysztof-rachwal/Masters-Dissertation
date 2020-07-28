@@ -50,6 +50,7 @@ public class EventAPI {
     //2. Delete Events
     @DeleteMapping("api/delete/event")
     public boolean deleteEvents(@RequestParam(value="eventId") Integer eventId){
+
         if (EventQrys.deleteEvent(eventId) == 1) {
             return true;
         } else {

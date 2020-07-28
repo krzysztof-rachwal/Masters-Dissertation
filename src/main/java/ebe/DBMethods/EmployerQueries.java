@@ -120,7 +120,7 @@ public class EmployerQueries extends DBQueries {
 
     //4. Get all Employer Ids and Names
     public List<Employer> getAllEmployerNamesAndIds() throws DataAccessException {
-        String getQuery = "SELECT EmployerID, Name  FROM Employer";
+        String getQuery = "SELECT EmployerID, EmployerName  FROM Employer";
         List<Employer> list = new ArrayList<Employer>();
         Employer employer = null;
         ResultSet rs = null;

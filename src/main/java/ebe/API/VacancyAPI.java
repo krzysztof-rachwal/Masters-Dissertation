@@ -32,20 +32,21 @@ public class VacancyAPI {
     //1. Create Vacancies
     @RequestMapping(value="/api/create/vacancy", method= RequestMethod.GET)
     public boolean createVacancy(
-            @RequestParam(name="employerName") int employerId,
-            @RequestParam(name="VacancyTitle") String vacancyTitle,
-            @RequestParam(name="Details") String details,
-            @RequestParam(name="Link") String link,
-            @RequestParam(name="TypeOfVacancy") int typeOfVacancy,
-            @RequestParam(name="StatusOfVacancy") int StatusOfVacancy,
+            @RequestParam(name="EmployerID") int employerId,
+            @RequestParam(name="VacancyName") String vacancyName,
+            @RequestParam(name="VacancyLink") String vacancyLink,
+            @RequestParam(name="VacancySummary") String vacancySummary,
+            @RequestParam(name="TypeOfVacancyID") int typeOfVacancyID,
+            @RequestParam(name="StatusOfVacancyID") int StatusOfVacancyID,
             @RequestParam(name="StartOfVacancy") String startOfVacancy,
-            @RequestParam(name="ClosingDate") String closingDate,
-            @RequestParam(name="OccupationalCode") int occupationalCode,
-            @RequestParam(name="ApplicationMethod") String applicationMethod,
-            @RequestParam(name="Postcode") String postCode) throws ParseException {
+            @RequestParam(name="DeadlineForApplication") String deadlineForApplication,
+            @RequestParam(name="OccupationalCodeID") int occupationalCodeID,
+            @RequestParam(name="ApplicationMethodID") String applicationMethodID,
+            @RequestParam(name="VacancyPostcode") String vacancyPostCode) throws ParseException {
 
-        return 1 == VacancyQrys.createVacancy(employerId,vacancyTitle,details,link,typeOfVacancy,StatusOfVacancy,
-                startOfVacancy,closingDate,occupationalCode,applicationMethod,postCode);
+         return 1 == VacancyQrys.createVacancy(employerId,vacancyName,vacancySummary,vacancyLink,typeOfVacancyID,
+                 StatusOfVacancyID, startOfVacancy,deadlineForApplication,occupationalCodeID,applicationMethodID,
+                 vacancyPostCode);
 
     }
 

@@ -52,8 +52,8 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="form-group">
-                        <label for="vacancy-desc" class="  mb-1">Vacancy Description</label>
-                        <textarea class="form-control mt-2" id="vacancy-desc" rows="5"></textarea>
+                        <label for="vacancy-summary" class="  mb-1">Vacancy Description</label>
+                        <textarea class="form-control mt-2" id="vacancy-summary" rows="5"></textarea>
                     </div>
                 </div>
             </div>
@@ -124,9 +124,7 @@
                     <div class="form-group">
                         <label for="appl-method" class="  mb-1">Application methods</label>
                         <select class="custom-select p-2" id="appl-method">
-                            <option value="apply-online">Apply online</option>
-                            <option value="cv">CV Contact</option>
-                            <option value="contact-employer">Employer</option>
+                            <option th:each="vacancyApplicationMethods : ${allVacanciesApplicationMethods}" th:value="${vacancyApplicationMethods.getApplicationMethodID()}" th:text="${vacancyApplicationMethods.getApplicationMethodName()}"></option>
                         </select>
                     </div>
                 </div>
