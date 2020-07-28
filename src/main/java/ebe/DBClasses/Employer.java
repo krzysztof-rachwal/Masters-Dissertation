@@ -3,16 +3,22 @@ package ebe.DBClasses;
 public class Employer {
 
     private int EmployerID;
-    private int StatusOfEmployer;
-    private String Name;
-    private String AddressCity;
-    private String AddressStreet;
-    private String AddressNumber;
-    private String Postcode;
-    private String Email;
-    private String Phone;
-    private String Website;
-    private int NumberOfEmployees;
+    private int StatusOfEmployerID;
+    private String StatusOfEmployerName;
+    private String EmployerName;
+    private String EmployerAddressCity;
+    private String EmployerAddressStreet;
+    private String EmployerAddressNumber;
+    private String EmployerPostcode;
+    private String EmployerEmail;
+    private String ContactPersonNameSurname;
+    private String ContactPersonPosition;
+    private String EmployerPhone;
+    private String EmployerWebsite;
+    private String EmployerTwitter;
+    private String EmployerFB;
+    private int NumberOfEmployeesID;
+    private String NumberOfEmployeesName;
     private String CompanySummary;
     private String Notes;
     private String LogoLink;
@@ -28,63 +34,38 @@ public class Employer {
     private Boolean CanDeliverToSchoolsInWelsh;
     private Boolean HasApprenticeshipProgramme;
 
-    public Employer(int employerID, int statusOfEmployer, String name, String addressCity, String addressStreet, String addressNumber, String postcode, String email, String phone, String website, int numberOfEmployees, String companySummary, String notes, String logoLink, Boolean givesSiteExperience, Boolean givesSiteVisits, Boolean givesWorkshops, Boolean givesPresentations, Boolean attendsCareerFairs, Boolean givesWebinars, Boolean worksWithPrimaryPupils, Boolean useOfModernForeignLanguage, Boolean runsBusinessInWelsh, Boolean canDeliverToSchoolsInWelsh, Boolean hasApprenticeshipProgramme) {
-        EmployerID = employerID;
-        StatusOfEmployer = statusOfEmployer;
-        Name = name;
-        AddressCity = addressCity;
-        AddressStreet = addressStreet;
-        AddressNumber = addressNumber;
-        Postcode = postcode;
-        Email = email;
-        Phone = phone;
-        Website = website;
-        NumberOfEmployees = numberOfEmployees;
-        CompanySummary = companySummary;
-        Notes = notes;
-        LogoLink = logoLink;
-        GivesSiteExperience = givesSiteExperience;
-        GivesSiteVisits = givesSiteVisits;
-        GivesWorkshops = givesWorkshops;
-        GivesPresentations = givesPresentations;
-        AttendsCareerFairs = attendsCareerFairs;
-        GivesWebinars = givesWebinars;
-        WorksWithPrimaryPupils = worksWithPrimaryPupils;
-        UseOfModernForeignLanguage = useOfModernForeignLanguage;
-        RunsBusinessInWelsh = runsBusinessInWelsh;
-        CanDeliverToSchoolsInWelsh = canDeliverToSchoolsInWelsh;
-        HasApprenticeshipProgramme = hasApprenticeshipProgramme;
-    }
-
-    public Employer(int statusOfEmployer, String name, String addressCity, String addressStreet, String addressNumber, String postcode, String email, String phone, String website, int numberOfEmployees, String companySummary, String notes, String logoLink, Boolean givesSiteExperience, Boolean givesSiteVisits, Boolean givesWorkshops, Boolean givesPresentations, Boolean attendsCareerFairs, Boolean givesWebinars, Boolean worksWithPrimaryPupils, Boolean useOfModernForeignLanguage, Boolean runsBusinessInWelsh, Boolean canDeliverToSchoolsInWelsh, Boolean hasApprenticeshipProgramme) {
-        StatusOfEmployer = statusOfEmployer;
-        Name = name;
-        AddressCity = addressCity;
-        AddressStreet = addressStreet;
-        AddressNumber = addressNumber;
-        Postcode = postcode;
-        Email = email;
-        Phone = phone;
-        Website = website;
-        NumberOfEmployees = numberOfEmployees;
-        CompanySummary = companySummary;
-        Notes = notes;
-        LogoLink = logoLink;
-        GivesSiteExperience = givesSiteExperience;
-        GivesSiteVisits = givesSiteVisits;
-        GivesWorkshops = givesWorkshops;
-        GivesPresentations = givesPresentations;
-        AttendsCareerFairs = attendsCareerFairs;
-        GivesWebinars = givesWebinars;
-        WorksWithPrimaryPupils = worksWithPrimaryPupils;
-        UseOfModernForeignLanguage = useOfModernForeignLanguage;
-        RunsBusinessInWelsh = runsBusinessInWelsh;
-        CanDeliverToSchoolsInWelsh = canDeliverToSchoolsInWelsh;
-        HasApprenticeshipProgramme = hasApprenticeshipProgramme;
-    }
-
     public Employer() {
+    }
 
+    public Employer(int statusOfEmployerID, String employerName, String employerAddressCity, String employerAddressStreet, String employerAddressNumber, String employerPostcode, String employerEmail, String contactPersonNameSurname, String contactPersonPosition, String employerPhone, String employerWebsite, String employerTwitter, String employerFB, int numberOfEmployeesID, String companySummary, String notes, String logoLink, Boolean givesSiteExperience, Boolean givesSiteVisits, Boolean givesWorkshops, Boolean givesPresentations, Boolean attendsCareerFairs, Boolean givesWebinars, Boolean worksWithPrimaryPupils, Boolean useOfModernForeignLanguage, Boolean runsBusinessInWelsh, Boolean canDeliverToSchoolsInWelsh, Boolean hasApprenticeshipProgramme) {
+        StatusOfEmployerID = statusOfEmployerID;
+        EmployerName = employerName;
+        EmployerAddressCity = employerAddressCity;
+        EmployerAddressStreet = employerAddressStreet;
+        EmployerAddressNumber = employerAddressNumber;
+        EmployerPostcode = employerPostcode;
+        EmployerEmail = employerEmail;
+        ContactPersonNameSurname = contactPersonNameSurname;
+        ContactPersonPosition = contactPersonPosition;
+        EmployerPhone = employerPhone;
+        EmployerWebsite = employerWebsite;
+        EmployerTwitter = employerTwitter;
+        EmployerFB = employerFB;
+        NumberOfEmployeesID = numberOfEmployeesID;
+        CompanySummary = companySummary;
+        Notes = notes;
+        LogoLink = logoLink;
+        GivesSiteExperience = givesSiteExperience;
+        GivesSiteVisits = givesSiteVisits;
+        GivesWorkshops = givesWorkshops;
+        GivesPresentations = givesPresentations;
+        AttendsCareerFairs = attendsCareerFairs;
+        GivesWebinars = givesWebinars;
+        WorksWithPrimaryPupils = worksWithPrimaryPupils;
+        UseOfModernForeignLanguage = useOfModernForeignLanguage;
+        RunsBusinessInWelsh = runsBusinessInWelsh;
+        CanDeliverToSchoolsInWelsh = canDeliverToSchoolsInWelsh;
+        HasApprenticeshipProgramme = hasApprenticeshipProgramme;
     }
 
     public int getEmployerID() {
@@ -95,84 +76,132 @@ public class Employer {
         EmployerID = employerID;
     }
 
-    public int getStatusOfEmployer() {
-        return StatusOfEmployer;
+    public int getStatusOfEmployerID() {
+        return StatusOfEmployerID;
     }
 
-    public void setStatusOfEmployer(int statusOfEmployer) {
-        StatusOfEmployer = statusOfEmployer;
+    public void setStatusOfEmployerID(int statusOfEmployerID) {
+        StatusOfEmployerID = statusOfEmployerID;
     }
 
-    public String getName() {
-        return Name;
+    public String getStatusOfEmployerName() {
+        return StatusOfEmployerName;
     }
 
-    public void setName(String name) {
-        Name = name;
+    public void setStatusOfEmployerName(String statusOfEmployerName) {
+        StatusOfEmployerName = statusOfEmployerName;
     }
 
-    public String getAddressCity() {
-        return AddressCity;
+    public String getEmployerName() {
+        return EmployerName;
     }
 
-    public void setAddressCity(String addressCity) {
-        AddressCity = addressCity;
+    public void setEmployerName(String employerName) {
+        EmployerName = employerName;
     }
 
-    public String getAddressStreet() {
-        return AddressStreet;
+    public String getEmployerAddressCity() {
+        return EmployerAddressCity;
     }
 
-    public void setAddressStreet(String addressStreet) {
-        AddressStreet = addressStreet;
+    public void setEmployerAddressCity(String employerAddressCity) {
+        EmployerAddressCity = employerAddressCity;
     }
 
-    public String getAddressNumber() {
-        return AddressNumber;
+    public String getEmployerAddressStreet() {
+        return EmployerAddressStreet;
     }
 
-    public void setAddressNumber(String addressNumber) {
-        AddressNumber = addressNumber;
+    public void setEmployerAddressStreet(String employerAddressStreet) {
+        EmployerAddressStreet = employerAddressStreet;
     }
 
-    public String getPostcode() {
-        return Postcode;
+    public String getEmployerAddressNumber() {
+        return EmployerAddressNumber;
     }
 
-    public void setPostcode(String postcode) {
-        Postcode = postcode;
+    public void setEmployerAddressNumber(String employerAddressNumber) {
+        EmployerAddressNumber = employerAddressNumber;
     }
 
-    public String getEmail() {
-        return Email;
+    public String getEmployerPostcode() {
+        return EmployerPostcode;
     }
 
-    public void setEmail(String email) {
-        Email = email;
+    public void setEmployerPostcode(String employerPostcode) {
+        EmployerPostcode = employerPostcode;
     }
 
-    public String getPhone() {
-        return Phone;
+    public String getEmployerEmail() {
+        return EmployerEmail;
     }
 
-    public void setPhone(String phone) {
-        Phone = phone;
+    public void setEmployerEmail(String employerEmail) {
+        EmployerEmail = employerEmail;
     }
 
-    public String getWebsite() {
-        return Website;
+    public String getContactPersonNameSurname() {
+        return ContactPersonNameSurname;
     }
 
-    public void setWebsite(String website) {
-        Website = website;
+    public void setContactPersonNameSurname(String contactPersonNameSurname) {
+        ContactPersonNameSurname = contactPersonNameSurname;
     }
 
-    public int getNumberOfEmployees() {
-        return NumberOfEmployees;
+    public String getContactPersonPosition() {
+        return ContactPersonPosition;
     }
 
-    public void setNumberOfEmployees(int numberOfEmployees) {
-        NumberOfEmployees = numberOfEmployees;
+    public void setContactPersonPosition(String contactPersonPosition) {
+        ContactPersonPosition = contactPersonPosition;
+    }
+
+    public String getEmployerPhone() {
+        return EmployerPhone;
+    }
+
+    public void setEmployerPhone(String employerPhone) {
+        EmployerPhone = employerPhone;
+    }
+
+    public String getEmployerWebsite() {
+        return EmployerWebsite;
+    }
+
+    public void setEmployerWebsite(String employerWebsite) {
+        EmployerWebsite = employerWebsite;
+    }
+
+    public String getEmployerTwitter() {
+        return EmployerTwitter;
+    }
+
+    public void setEmployerTwitter(String employerTwitter) {
+        EmployerTwitter = employerTwitter;
+    }
+
+    public String getEmployerFB() {
+        return EmployerFB;
+    }
+
+    public void setEmployerFB(String employerFB) {
+        EmployerFB = employerFB;
+    }
+
+    public int getNumberOfEmployeesID() {
+        return NumberOfEmployeesID;
+    }
+
+    public void setNumberOfEmployeesID(int numberOfEmployeesID) {
+        NumberOfEmployeesID = numberOfEmployeesID;
+    }
+
+    public String getNumberOfEmployeesName() {
+        return NumberOfEmployeesName;
+    }
+
+    public void setNumberOfEmployeesName(String numberOfEmployeesName) {
+        NumberOfEmployeesName = numberOfEmployeesName;
     }
 
     public String getCompanySummary() {

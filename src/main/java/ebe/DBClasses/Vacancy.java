@@ -8,50 +8,36 @@ public class Vacancy {
 
     private int VacancyID;
     private int EmployerID;
-    private String VacancyTitle;
-    private String Details;
-    private String Link;
-    private int  TypeOfVacancy;
+    private String VacancyName;
+    private String VacancySummary;
+    private String VacancyLink;
+    private int  TypeOfVacancyID;
     private String  TypeOfVacancyName;
-    private int StatusOfVacancy;
-    private String StatusOfVacancyString;
+    private int StatusOfVacancyID;
+    private String StatusOfVacancyName;
     private @DateTimeFormat(pattern = "yyyy-MM-dd") Date StartOfVacancy;
-    private @DateTimeFormat(pattern = "yyyy-MM-dd") Date ClosingDate;
-    private int OccupationalCode;
+    private @DateTimeFormat(pattern = "yyyy-MM-dd") Date DeadlineForApplication;
+    private int OccupationalCodeID;
     private String OccupationalCodeName;
-    private String ApplicationMethod;
-    private String Postcode;
-
-    public Vacancy(int vacancyID, int employerID, String vacancyTitle, String details, String link, int typeOfVacancy, int statusOfVacancy, Date startOfVacancy, Date closingDate, int occupationalCode, String applicationMethod, String postcode) {
-        VacancyID = vacancyID;
-        EmployerID = employerID;
-        VacancyTitle = vacancyTitle;
-        Details = details;
-        Link = link;
-        TypeOfVacancy = typeOfVacancy;
-        StatusOfVacancy = statusOfVacancy;
-        StartOfVacancy = startOfVacancy;
-        ClosingDate = closingDate;
-        OccupationalCode = occupationalCode;
-        ApplicationMethod = applicationMethod;
-        Postcode = postcode;
-    }
-
-    public Vacancy(int employerID, String vacancyTitle, String details, String link, int typeOfVacancy, int statusOfVacancy, Date startOfVacancy, Date closingDate, int occupationalCode, String applicationMethod, String postcode) {
-        EmployerID = employerID;
-        VacancyTitle = vacancyTitle;
-        Details = details;
-        Link = link;
-        TypeOfVacancy = typeOfVacancy;
-        StatusOfVacancy = statusOfVacancy;
-        StartOfVacancy = startOfVacancy;
-        ClosingDate = closingDate;
-        OccupationalCode = occupationalCode;
-        ApplicationMethod = applicationMethod;
-        Postcode = postcode;
-    }
+    private int ApplicationMethodID;
+    private String ApplicationMethodName;
+    private String VacancyPostcode;
 
     public Vacancy() {
+    }
+
+    public Vacancy(int employerID, String vacancyName, String vacancySummary, String vacancyLink, int typeOfVacancyID, int statusOfVacancyID, Date startOfVacancy, Date deadlineForApplication, int occupationalCodeID, int applicationMethodID, String vacancyPostcode) {
+        EmployerID = employerID;
+        VacancyName = vacancyName;
+        VacancySummary = vacancySummary;
+        VacancyLink = vacancyLink;
+        TypeOfVacancyID = typeOfVacancyID;
+        StatusOfVacancyID = statusOfVacancyID;
+        StartOfVacancy = startOfVacancy;
+        DeadlineForApplication = deadlineForApplication;
+        OccupationalCodeID = occupationalCodeID;
+        ApplicationMethodID = applicationMethodID;
+        VacancyPostcode = vacancyPostcode;
     }
 
     public int getVacancyID() {
@@ -70,84 +56,36 @@ public class Vacancy {
         EmployerID = employerID;
     }
 
-    public String getVacancyTitle() {
-        return VacancyTitle;
+    public String getVacancyName() {
+        return VacancyName;
     }
 
-    public void setVacancyTitle(String vacancyTitle) {
-        VacancyTitle = vacancyTitle;
+    public void setVacancyName(String vacancyName) {
+        VacancyName = vacancyName;
     }
 
-    public String getDetails() {
-        return Details;
+    public String getVacancySummary() {
+        return VacancySummary;
     }
 
-    public void setDetails(String details) {
-        Details = details;
+    public void setVacancySummary(String vacancySummary) {
+        VacancySummary = vacancySummary;
     }
 
-    public String getLink() {
-        return Link;
+    public String getVacancyLink() {
+        return VacancyLink;
     }
 
-    public void setLink(String link) {
-        Link = link;
+    public void setVacancyLink(String vacancyLink) {
+        VacancyLink = vacancyLink;
     }
 
-    public int getTypeOfVacancy() {
-        return TypeOfVacancy;
+    public int getTypeOfVacancyID() {
+        return TypeOfVacancyID;
     }
 
-    public void setTypeOfVacancy(int typeOfVacancy) {
-        TypeOfVacancy = typeOfVacancy;
-    }
-
-    public int getStatusOfVacancy() {
-        return StatusOfVacancy;
-    }
-
-    public void setStatusOfVacancy(int statusOfVacancy) {
-        StatusOfVacancy = statusOfVacancy;
-    }
-
-    public Date getStartOfVacancy() {
-        return StartOfVacancy;
-    }
-
-    public void setStartOfVacancy(Date startOfVacancy) {
-        StartOfVacancy = startOfVacancy;
-    }
-
-    public Date getClosingDate() {
-        return ClosingDate;
-    }
-
-    public void setClosingDate(Date closingDate) {
-        ClosingDate = closingDate;
-    }
-
-    public int getOccupationalCode() {
-        return OccupationalCode;
-    }
-
-    public void setOccupationalCode(int occupationalCode) {
-        OccupationalCode = occupationalCode;
-    }
-
-    public String getApplicationMethod() {
-        return ApplicationMethod;
-    }
-
-    public void setApplicationMethod(String applicationMethod) {
-        ApplicationMethod = applicationMethod;
-    }
-
-    public String getPostcode() {
-        return Postcode;
-    }
-
-    public void setPostcode(String postcode) {
-        Postcode = postcode;
+    public void setTypeOfVacancyID(int typeOfVacancyID) {
+        TypeOfVacancyID = typeOfVacancyID;
     }
 
     public String getTypeOfVacancyName() {
@@ -158,12 +96,44 @@ public class Vacancy {
         TypeOfVacancyName = typeOfVacancyName;
     }
 
-    public String getStatusOfVacancyString() {
-        return StatusOfVacancyString;
+    public int getStatusOfVacancyID() {
+        return StatusOfVacancyID;
     }
 
-    public void setStatusOfVacancyString(String statusOfVacancyString) {
-        StatusOfVacancyString = statusOfVacancyString;
+    public void setStatusOfVacancyID(int statusOfVacancyID) {
+        StatusOfVacancyID = statusOfVacancyID;
+    }
+
+    public String getStatusOfVacancyName() {
+        return StatusOfVacancyName;
+    }
+
+    public void setStatusOfVacancyName(String statusOfVacancyName) {
+        StatusOfVacancyName = statusOfVacancyName;
+    }
+
+    public Date getStartOfVacancy() {
+        return StartOfVacancy;
+    }
+
+    public void setStartOfVacancy(Date startOfVacancy) {
+        StartOfVacancy = startOfVacancy;
+    }
+
+    public Date getDeadlineForApplication() {
+        return DeadlineForApplication;
+    }
+
+    public void setDeadlineForApplication(Date deadlineForApplication) {
+        DeadlineForApplication = deadlineForApplication;
+    }
+
+    public int getOccupationalCodeID() {
+        return OccupationalCodeID;
+    }
+
+    public void setOccupationalCodeID(int occupationalCodeID) {
+        OccupationalCodeID = occupationalCodeID;
     }
 
     public String getOccupationalCodeName() {
@@ -172,5 +142,29 @@ public class Vacancy {
 
     public void setOccupationalCodeName(String occupationalCodeName) {
         OccupationalCodeName = occupationalCodeName;
+    }
+
+    public int getApplicationMethodID() {
+        return ApplicationMethodID;
+    }
+
+    public void setApplicationMethodID(int applicationMethodID) {
+        ApplicationMethodID = applicationMethodID;
+    }
+
+    public String getApplicationMethodName() {
+        return ApplicationMethodName;
+    }
+
+    public void setApplicationMethodName(String applicationMethodName) {
+        ApplicationMethodName = applicationMethodName;
+    }
+
+    public String getVacancyPostcode() {
+        return VacancyPostcode;
+    }
+
+    public void setVacancyPostcode(String vacancyPostcode) {
+        VacancyPostcode = vacancyPostcode;
     }
 }

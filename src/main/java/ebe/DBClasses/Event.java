@@ -7,49 +7,44 @@ import java.util.Date;
 public class Event {
 
     private int EventID;
-    private String Name;
-    private int TypeOfEvent;
-    private String TypeOfEventString;
-    private @DateTimeFormat(pattern = "yyyy-MM-dd") Date Date;
+    private String EventName;
+    private int TypeOfEventID;
+    private String TypeOfEventName;
+    private @DateTimeFormat(pattern = "yyyy-MM-dd") Date EventDateAndTime ;
+    private String EventVenueName;
+    private String EventAddressCity;
+    private String EventAddressStreet;
+    private String EventAddressNumber;
+    private String EventVenuePostcode;
+    private String EventSummary;
     private Boolean isPublic;
     private Boolean isCancelled;
-    private String PostCode;
     private String NameOfAdviser;
-    private String NumberOfAttendees;
+    private int NumberOfAttendees;
     private Boolean PromotesApprenticeships;
     private Boolean PromotesWelshLanguage;
-    private Boolean ChallangesGenderStereotypes;
-
-    public Event(int eventID, String name, int typeOfEvent, java.util.Date date, Boolean isPublic, Boolean isCancelled, String postCode, String nameOfAdviser, String numberOfAttendees, Boolean promotesApprenticeships, Boolean promotesWelshLanguage, Boolean challangesGenderStereotypes) {
-        EventID = eventID;
-        Name = name;
-        TypeOfEvent = typeOfEvent;
-        Date = date;
-        this.isPublic = isPublic;
-        this.isCancelled = isCancelled;
-        PostCode = postCode;
-        NameOfAdviser = nameOfAdviser;
-        NumberOfAttendees = numberOfAttendees;
-        PromotesApprenticeships = promotesApprenticeships;
-        PromotesWelshLanguage = promotesWelshLanguage;
-        ChallangesGenderStereotypes = challangesGenderStereotypes;
-    }
-
-    public Event(String name, int typeOfEvent, java.util.Date date, Boolean isPublic, Boolean isCancelled, String postCode, String nameOfAdviser, String numberOfAttendees, Boolean promotesApprenticeships, Boolean promotesWelshLanguage, Boolean challangesGenderStereotypes) {
-        Name = name;
-        TypeOfEvent = typeOfEvent;
-        Date = date;
-        this.isPublic = isPublic;
-        this.isCancelled = isCancelled;
-        PostCode = postCode;
-        NameOfAdviser = nameOfAdviser;
-        NumberOfAttendees = numberOfAttendees;
-        PromotesApprenticeships = promotesApprenticeships;
-        PromotesWelshLanguage = promotesWelshLanguage;
-        ChallangesGenderStereotypes = challangesGenderStereotypes;
-    }
+    private Boolean ChallengesGenderStereotypes;
 
     public Event() {
+    }
+
+    public Event(String eventName, int typeOfEventID, Date eventDateAndTime, String eventVenueName, String eventAddressCity, String eventAddressStreet, String eventAddressNumber, String eventVenuePostcode, String eventSummary, Boolean isPublic, Boolean isCancelled, String nameOfAdviser, int numberOfAttendees, Boolean promotesApprenticeships, Boolean promotesWelshLanguage, Boolean challengesGenderStereotypes) {
+        EventName = eventName;
+        TypeOfEventID = typeOfEventID;
+        EventDateAndTime = eventDateAndTime;
+        EventVenueName = eventVenueName;
+        EventAddressCity = eventAddressCity;
+        EventAddressStreet = eventAddressStreet;
+        EventAddressNumber = eventAddressNumber;
+        EventVenuePostcode = eventVenuePostcode;
+        EventSummary = eventSummary;
+        this.isPublic = isPublic;
+        this.isCancelled = isCancelled;
+        NameOfAdviser = nameOfAdviser;
+        NumberOfAttendees = numberOfAttendees;
+        PromotesApprenticeships = promotesApprenticeships;
+        PromotesWelshLanguage = promotesWelshLanguage;
+        ChallengesGenderStereotypes = challengesGenderStereotypes;
     }
 
     public int getEventID() {
@@ -60,28 +55,84 @@ public class Event {
         EventID = eventID;
     }
 
-    public String getName() {
-        return Name;
+    public String getEventName() {
+        return EventName;
     }
 
-    public void setName(String name) {
-        Name = name;
+    public void setEventName(String eventName) {
+        EventName = eventName;
     }
 
-    public int getTypeOfEvent() {
-        return TypeOfEvent;
+    public int getTypeOfEventID() {
+        return TypeOfEventID;
     }
 
-    public void setTypeOfEvent(int typeOfEvent) {
-        TypeOfEvent = typeOfEvent;
+    public void setTypeOfEventID(int typeOfEventID) {
+        TypeOfEventID = typeOfEventID;
     }
 
-    public java.util.Date getDate() {
-        return Date;
+    public String getTypeOfEventName() {
+        return TypeOfEventName;
     }
 
-    public void setDate(java.util.Date date) {
-        Date = date;
+    public void setTypeOfEventName(String typeOfEventName) {
+        TypeOfEventName = typeOfEventName;
+    }
+
+    public Date getEventDateAndTime() {
+        return EventDateAndTime;
+    }
+
+    public void setEventDateAndTime(Date eventDateAndTime) {
+        EventDateAndTime = eventDateAndTime;
+    }
+
+    public String getEventVenueName() {
+        return EventVenueName;
+    }
+
+    public void setEventVenueName(String eventVenueName) {
+        EventVenueName = eventVenueName;
+    }
+
+    public String getEventAddressCity() {
+        return EventAddressCity;
+    }
+
+    public void setEventAddressCity(String eventAddressCity) {
+        EventAddressCity = eventAddressCity;
+    }
+
+    public String getEventAddressStreet() {
+        return EventAddressStreet;
+    }
+
+    public void setEventAddressStreet(String eventAddressStreet) {
+        EventAddressStreet = eventAddressStreet;
+    }
+
+    public String getEventAddressNumber() {
+        return EventAddressNumber;
+    }
+
+    public void setEventAddressNumber(String eventAddressNumber) {
+        EventAddressNumber = eventAddressNumber;
+    }
+
+    public String getEventVenuePostcode() {
+        return EventVenuePostcode;
+    }
+
+    public void setEventVenuePostcode(String eventVenuePostcode) {
+        EventVenuePostcode = eventVenuePostcode;
+    }
+
+    public String getEventSummary() {
+        return EventSummary;
+    }
+
+    public void setEventSummary(String eventSummary) {
+        EventSummary = eventSummary;
     }
 
     public Boolean getPublic() {
@@ -100,14 +151,6 @@ public class Event {
         isCancelled = cancelled;
     }
 
-    public String getPostCode() {
-        return PostCode;
-    }
-
-    public void setPostCode(String postCode) {
-        PostCode = postCode;
-    }
-
     public String getNameOfAdviser() {
         return NameOfAdviser;
     }
@@ -116,11 +159,11 @@ public class Event {
         NameOfAdviser = nameOfAdviser;
     }
 
-    public String getNumberOfAttendees() {
+    public int getNumberOfAttendees() {
         return NumberOfAttendees;
     }
 
-    public void setNumberOfAttendees(String numberOfAttendees) {
+    public void setNumberOfAttendees(int numberOfAttendees) {
         NumberOfAttendees = numberOfAttendees;
     }
 
@@ -140,19 +183,11 @@ public class Event {
         PromotesWelshLanguage = promotesWelshLanguage;
     }
 
-    public Boolean getChallangesGenderStereotypes() {
-        return ChallangesGenderStereotypes;
+    public Boolean getChallengesGenderStereotypes() {
+        return ChallengesGenderStereotypes;
     }
 
-    public void setChallangesGenderStereotypes(Boolean challangesGenderStereotypes) {
-        ChallangesGenderStereotypes = challangesGenderStereotypes;
-    }
-
-    public String getTypeOfEventString() {
-        return TypeOfEventString;
-    }
-
-    public void setTypeOfEventString(String typeOfEventString) {
-        TypeOfEventString = typeOfEventString;
+    public void setChallengesGenderStereotypes(Boolean challengesGenderStereotypes) {
+        ChallengesGenderStereotypes = challengesGenderStereotypes;
     }
 }
