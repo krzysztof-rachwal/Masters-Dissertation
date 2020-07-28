@@ -15,248 +15,316 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link th:href="@{../css/ebe_style.css}" href="../css/ebe_style.css" rel="stylesheet" />
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
-    <title>Vacancy</title>
+    <title>Add Employer</title>
 </head>
 
-<header th:replace="fragments/headerTemplate :: header"></header>
-
-
-<!-- Modal Update -->
-<div class="modal fade bd-example-modal-lg" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog gel-content-container" role="document">
-        <div class="modal-content">
-
-            <div class="modal-body">
-
-                <form>
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="container my-3 p-0">
-                                <h4 class="modal-title float-left">Update Vacancy Information</h4>
-                                <button type="button" class="close float-right" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="col-md-8">
-                                <div class="form-group">
-                                    <label for="employer-name" class="  mb-1">Employer name</label>
-                                    <input type="text" class="form-control input-border" id="employer-name">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label for="vacancy-desc" class="  mb-1">Vacancy Description</label>
-                                    <textarea class="form-control mt-2" id="vacancy-desc" rows="5" th:text="${vacancy.getDetails()}"></textarea>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-8">
-                                <div class="form-group">
-                                    <label for="web-link" class="  mb-1">Link to website</label>
-                                    <input type="text" class="form-control input-border" id="web-link" th:value="${vacancy.getLink()}">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-8">
-                                <div class="form-group">
-                                    <label for="post-code" class="  mb-1">Post Code</label>
-                                    <input type="text" class="form-control input-border" id="post-code" th:value="${vacancy.getPostcode()}">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-8">
-                                <div class="form-group">
-                                    <label for="start-date" class="  mb-1">Start Date</label>
-                                    <input type="date" class="form-control input-border" id="start-date" th:value="${vacancy.getStartOfVacancy()}">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-8">
-                                <div class="form-group">
-                                    <label for="closing-date" class="  mb-1">Closing Date</label>
-                                    <input type="date" class="form-control input-border" id="closing-date" th:value="${vacancy.getClosingDate()}">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="vacancy-type" class="  mb-1">Type of Vacancy</label>
-                                    <select class="custom-select p-2" id="vacancy-type">
-                                        <option value="Employment FT" th:selected="${vacancy.getTypeOfVacancy()== 1}">Full-Time</option>
-                                        <option value="Employment PT" th:selected="${vacancy.getTypeOfVacancy()== 2}">Part-Time </option>
-                                        <option value="Apprenticeship" th:selected="${vacancy.getTypeOfVacancy()== 3}">Apprenticeship</option>
-                                        <option value="Traineeship" th:selected="${vacancy.getTypeOfVacancy()== 4}">Traineeship</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="occup-code" class="  mb-1">Occupational Code</label>
-                                    <select class="custom-select p-2" id="occup-code">
-                                        <option value="bfo" th:selected="${vacancy.getOccupationalCode()== 1}">Business and Financial Operations</option>
-                                        <option value="cm" th:selected="${vacancy.getOccupationalCode()== 2}">Computer and Mathematical</option>
-                                        <option value="ae" th:selected="${vacancy.getOccupationalCode()== 3}">Architecture and Engineering</option>
-                                        <option value="lpss" th:selected="${vacancy.getOccupationalCode()== 4}">Life, Physical, and Social ScienceC</option>
-                                        <option value="css" th:selected="${vacancy.getOccupationalCode()== 5}">Community and Social Service</option>
-                                        <option value="l" th:selected="${vacancy.getOccupationalCode()== 6}">Legal</option>
-                                        <option value="eil" th:selected="${vacancy.getOccupationalCode()== 7}">Educational Instruction and Library</option>
-                                        <option value="adesm" th:selected="${vacancy.getOccupationalCode()== 8}">Arts, Design, Entertainment, Sports, and Media</option>
-                                        <option value="hpt" th:selected="${vacancy.getOccupationalCode()== 9}">Healthcare Practitioners and Technical</option>
-                                        <option value="hs" th:selected="${vacancy.getOccupationalCode()== 10}">Healthcare Support</option>
-                                        <option value="ps" th:selected="${vacancy.getOccupationalCode()== 11}">Protective Service</option>
-                                        <option value="fpsr" th:selected="${vacancy.getOccupationalCode()== 12}">Food Preparation and Serving Related</option>
-                                        <option value="bgcm" th:selected="${vacancy.getOccupationalCode()== 13}">Building and Grounds Cleaning and Maintenance</option>
-                                        <option value="pcs" th:selected="${vacancy.getOccupationalCode()== 14}">Personal Care and Service</option>
-                                        <option value="sr" th:selected="${vacancy.getOccupationalCode()== 15}">Sales and Related</option>
-                                        <option value="oas" th:selected="${vacancy.getOccupationalCode()== 16}">Office and Administrative Support</option>
-                                        <option value="fff" th:selected="${vacancy.getOccupationalCode()== 17}">Farming, Fishing, and Forestry</option>
-                                        <option value="ce" th:selected="${vacancy.getOccupationalCode()== 18}">Construction and Extraction</option>
-                                        <option value="imr" th:selected="${vacancy.getOccupationalCode()== 19}">Installation, Maintenance, and Repair</option>
-                                        <option value="p" th:selected="${vacancy.getOccupationalCode()== 20}">Production</option>
-                                        <option value="tmm" th:selected="${vacancy.getOccupationalCode()== 21}">Transportation and Material Moving</option>
-                                        <option value="ms" th:selected="${vacancy.getOccupationalCode()== 22}">Military Specific</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="appl-method" class="  mb-1">Application methods</label>
-                                    <select class="custom-select p-2" id="appl-method">
-                                        <option value="apply-online" th:selected="${vacancy.getApplicationMethod()== 'Apply online'}">Apply Online</option>
-                                        <option value="cv" th:selected="${vacancy.getApplicationMethod()== 'CV Contact'}">CV Contact</option>
-                                        <option value="contact-employer" th:selected="${vacancy.getApplicationMethod()== 'Employer'}">Contact Employer</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="container my-4 text-center">
-                            <button type="button" class="button--secondary text-center">Add Vacancy</button>
-                        </div>
-                    </div>
-                </form>
-
-
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Modal Delete -->
-<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog gel-content-container" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 class="modal-title">Delete Vacancy</h3>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <p th:text="'Are you sure you want to delete '+${vacancy.getVacancyTitle()}+' Vacancy Information?'"></p>
-                <button type="button" class="btn buttonUpdate" th:onclick="|deleteVacancy(${vacancy.getVacancyID()})|">Yes</button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-            </div>
-        </div>
-    </div>
-</div>
+<header th:replace="fragments/headerTemplate :: header">
+</header>
 
 <div class="gel-content-container">
-    <div class="container-headline my-5">
-        <span class="title-h2" th:text="${vacancy.getVacancyTitle()}"></span>
-        <button type="button"  id="updateEvent" data-toggle="modal" data-target="#updateModal" class="buttonUpdate float-right">Update</button>
-        <button type="button"  id="deleteEvent"  data-toggle="modal" data-target="#deleteModal" class="buttonDelete float-right">Delete</button>
+    <div class="container my-4">
+        <h2>Add Employer</h2>
     </div>
-
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-3">
-                <p><strong>Employer name</strong></p>
+    <form>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="container my-3 p-0">
+                    <h4>Personal Info</h4>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="company-name">Company name</label>
+                        <input type="text" class="form-control input-border" id="company-name">
+                    </div>
+                    <div class="form-group">
+                        <label for="company-summary">Company summary</label>
+                        <input type="text" class="form-control input-border mt-2" id="company-summary">
+                    </div>
+                    <div class="form-group mt-3">
+                        <label for="no-employees" class="mt-0">No of Employees</label>
+                        <input type="text" class="form-control input-border" id="no-employees">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label>Address</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <input type="text" id="street" class="form-control border-right input-sm"
+                                   placeholder="Street">
+                            <input type="text" id="buildingNo" class="form-control" placeholder="Building No">
+                        </div>
+                        <div class="input-group-prepend mt-1">
+                            <input type="text" id="PostCode" class="form-control border-right" placeholder="Post Code">
+                            <input type="text" id="city" class="form-control" placeholder="City">
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="col-lg-9">
-                <p></p>
+            <div class="row">
+                <div class="container my-3 p-0">
+                    <h4>Contact Info</h4>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="contact-name">Contact Name</label>
+                        <input type="text" class="form-control input-border" id="contact-name">
+                    </div>
+                    <div class="form-group">
+                        <label for="tel-num">Telephone number</label>
+                        <input type="text" class="form-control input-border" id="tel-num">
+                    </div>
+                    <div class="form-group">
+                        <label for="mob-num">Mobile number</label>
+                        <input type="text" class="form-control input-border" id="mob-num">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="twitter">Twitter</label>
+                        <input type="text" class="form-control input-border" id="twitter">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="text" class="form-control input-border" id="email">
+                    </div>
+                    <div class="form-group">
+                        <label for="website">Website</label>
+                        <input type="text" class="form-control input-border" id="website">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="container my-3 p-0">
+                    <h4>Other</h4>
+                </div>
+                <div class="col-md-4 ">
+                    <span class="h6">Sector Areas</span>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="it">
+                        <label class="form-check-label" for="it">IT</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="social-care">
+                        <label class="form-check-label" for="social-care">Social Care</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="ngo">
+                        <label class="form-check-label" for="ngo">NGO</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="tourism">
+                        <label class="form-check-label" for="tourism">Tourism</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="media">
+                        <label class="form-check-label" for="media">Media</label>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <span class="h6">Cooperation Type</span>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="work-ex">
+                        <label class="form-check-label" for="work-ex">Work Experience</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="site-visits">
+                        <label class="form-check-label" for="site-visits">Site visits</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="workshops">
+                        <label class="form-check-label" for="workshops">Workshops</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="career">
+                        <label class="form-check-label" for="career">Career Fairs</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="webinars">
+                        <label class="form-check-label" for="webinars">Webinars</label>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <span class="h6">Curriculum Areas</span>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="science">
+                        <label class="form-check-label" for="science">Science And Technology</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="health">
+                        <label class="form-check-label" for="health">Health And Wellbeing</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="humanities">
+                        <label class="form-check-label" for="humanities">Humanities</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="language">
+                        <label class="form-check-label" for="language">Language Literacy And Communication</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="maths">
+                        <label class="form-check-label" for="maths">Mathematics And Numeracy</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="expressive">
+                        <label class="form-check-label" for="expressive">Expressive Arts</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8 my-4">
+                    <div class="form-group">
+                        <div class="row d-inline">
+                            <label for="schools" class="mt-3 d-block">School Preferences</label>
+                            <select class="selectpicker d-block" multiple data-live-search="true" id="schools">
+                                <option value="school">Schoool</option>
+                                <option value="school">Schoool</option>
+                                <option value="school">Schoool</option>
+                                <option value="school">Schoool</option>
+                                <option value="school">Schoool</option>
+                                <option value="school">Schoool</option>
+                                <option value="school">Schoool</option>
+                                <option value="school">Schoool</option>
+                                <option value="school">Schoool</option>
+                                <option value="school">Schoool</option>
+                                <option value="school">Schoool</option>
+                                <option value="school">Schoool</option>
+                                <option value="school">Schoool</option>
+                            </select>
+                        </div>
+                    </div>
+                    <span class="h6 mt-3">Preferences</span>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="primary-school">
+                        <label class="form-check-label" for="primary-school">Wants to work with primary schools</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="apprenticeship">
+                        <label class="form-check-label" for="apprenticeship">Has apprenticeship program</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="welsh">
+                        <label class="form-check-label" for="welsh">Works in Welsh</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="foreign">
+                        <label class="form-check-label" for="foreign">Works in Foreign Language</label>
+                    </div>
+                    <div class="form-group col-md">
+                        <label for="lang">If yes, what languages?</label>
+                        <input type="text" class="form-control input-border" id="lang">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md my-3">
+                    <span class="h6">Local Authorities</span>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="caerphilly">
+                                <label class="form-check-label" for="caerphilly">Caerphilly</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="cere">
+                                <label class="form-check-label" for="cere">Ceredigion</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="Flintshire">
+                                <label class="form-check-label" for="Flintshire">Flintshire</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="Merthyr">
+                                <label class="form-check-label" for="cere">Merthyr Tydfil</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="newport">
+                                <label class="form-check-label" for="cere">Newport</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="rhonnda">
+                                <label class="form-check-label" for="rhonnda">Rhondda Cynon Taf</label>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="Isle">
+                                <label class="form-check-label" for="Isle">Isle of Anglesey</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="Neath">
+                                <label class="form-check-label" for="Neath">Neath Port Talbot</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="Powys">
+                                <label class="form-check-label" for="Powys">Powys</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="Torfaen">
+                                <label class="form-check-label" for="Torfaen">Torfaen</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="Blaenau">
+                                <label class="form-check-label" for="Blaenau">Blaenau</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="cardiff">
+                                <label class="form-check-label" for="cardiff">Cardiff</label>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="swansea">
+                                <label class="form-check-label" for="swansea">Swansea</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="wrexham">
+                                <label class="form-check-label" for="wrexham">Wrexham</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="vale">
+                                <label class="form-check-label" for="vale">Vale of Glamorgan</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="bridgend">
+                                <label class="form-check-label" for="bridgend">Bridgend</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="carmathenshire">
+                                <label class="form-check-label" for="carmathenshire">Carmathenshire</label>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="Monmountshire">
+                                <label class="form-check-label" for="Monmountshire">Monmountshire</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="gwynedd">
+                                <label class="form-check-label" for="gwynedd">Gwynedd</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="conwy">
+                                <label class="form-check-label" for="conwy">Conwy</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="Denbigshire">
+                                <label class="form-check-label" for="Denbigshire">Denbigshire</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="pembrokeshire">
+                                <label class="form-check-label" for="pembrokeshire">pembrokeshire</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-lg-3">
-                <p><strong>Vacancy description</strong></p>
-            </div>
-            <div class="col-lg-9">
-                <p th:text="${vacancy.getDetails()}"></p>
-            </div>
+        <div class="container my-4 text-center">
+            <button type="button" class="button--secondary text-center">Add Employer</button>
         </div>
-        <div class="row">
-            <div class="col-lg-3">
-                <p><strong>Link to website</strong></p>
-            </div>
-            <div class="col-lg-9">
-                <p th:text="${vacancy.getLink()}"></p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-3">
-                <p><strong>Type of vacancy</strong></p>
-            </div>
-            <div class="col-lg-9">
-                <p th:text="${vacancy.getTypeOfVacancy()}"></p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-3">
-                <p><strong>Start date</strong></p>
-            </div>
-            <div class="col-lg-9">
-                <p th:text="${vacancy.getStartOfVacancy()}"></p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-3">
-                <p><strong>Closing date</strong></p>
-            </div>
-            <div class="col-lg-9">
-                <p th:text="${vacancy.getClosingDate()}"></p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-3">
-                <p><strong>Occupational code</strong></p>
-            </div>
-            <div class="col-lg-9">
-                <p th:text="${vacancy.getOccupationalCode()}"></p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-3">
-                <p><strong>Application method</strong></p>
-            </div>
-            <div class="col-lg-9">
-                <p th:text="${vacancy.getApplicationMethod()}"></p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-3">
-                <p><strong>Postcode</strong></p>
-            </div>
-            <div class="col-lg-9">
-                <p th:text="${vacancy.getEmployerPostcode()}"></p>
-            </div>
-        </div>
-    </div>
+    </form>
 </div>
-
-
-
-
 <footer th:replace="fragments/footerTemplate :: footer"></footer>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
@@ -266,7 +334,7 @@
 <script type="text/javascript" src="https://careerswales.gov.wales/styleguide/assets/js/gel-styleguide.js"></script>
 <script type="text/javascript" src="https://careerswales.gov.wales/styleguide/assets/js/gel-elements-loader.js"></script>
 <script type="text/javascript" src="https://careerswales.gov.wales/styleguide/assets/js/gel-elements.js"></script>
-<script th:src="@{../js/vacancy.js}" src="../js/vacancy.js"></script>
+<script th:src="@{../js/employer.js}" src="../js/employer.js"></script>
 
 
 </body>
