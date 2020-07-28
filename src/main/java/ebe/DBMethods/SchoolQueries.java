@@ -50,7 +50,7 @@ public class SchoolQueries extends DBQueries {
 
     // 1. Get All School Names and Ids
     public List<School> getAllSchoolNamesAndIds() throws DataAccessException {
-        String getQuery = "SELECT * FROM TypeOfEventList";
+        String getQuery = "SELECT SchoolID, Name FROM School";
         List<School> list = new ArrayList<School>();
         School school = null;
         ResultSet rs = null;
