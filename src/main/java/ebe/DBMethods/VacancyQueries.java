@@ -39,11 +39,11 @@ public class VacancyQueries extends DBQueries {
             rs = statement.executeQuery(getQuery);
             while (rs.next()) {
                 vacancy = new Vacancy(rs.getInt("VacancyID"), rs.getInt("EmployerID"),
-                        rs.getString("VacancyTitle"), rs.getString("Details"), rs.getString("Link"),
-                        rs.getInt("TypeOfVacancy"), rs.getInt("StatusOfVacancy"),
-                        rs.getDate("StartOfVacancy"),rs.getDate("ClosingDate"),
-                        rs.getInt("OccupationalCode"), rs.getString("ApplicationMethod"),
-                        rs.getString("Postcode"));
+                        rs.getString("VacancyName"), rs.getString("VacancySummary"), rs.getString("VacancyLink"),
+                        rs.getInt("TypeOfVacancyID"), rs.getInt("StatusOfVacancyID"),
+                        rs.getDate("StartOfVacancy"),rs.getDate("DeadlineForApplication"),
+                        rs.getInt("OccupationalCodeID"), rs.getInt("ApplicationMethodID"),
+                        rs.getString("VacancyPostcode"));
 
                 list.add(vacancy);
             }
@@ -70,11 +70,11 @@ public class VacancyQueries extends DBQueries {
             while (rs.next()) {
 
                 vacancy = new Vacancy(rs.getInt("VacancyID"), rs.getInt("EmployerID"),
-                        rs.getString("VacancyTitle"), rs.getString("Details"), rs.getString("Link"),
-                        rs.getInt("TypeOfVacancy"), rs.getInt("StatusOfVacancy"),
-                        rs.getDate("StartOfVacancy"),rs.getDate("ClosingDate"),
-                        rs.getInt("OccupationalCode"), rs.getString("ApplicationMethod"),
-                        rs.getString("Postcode"));
+                        rs.getString("VacancyName"), rs.getString("VacancySummary"), rs.getString("VacancyLink"),
+                        rs.getInt("TypeOfVacancyID"), rs.getInt("StatusOfVacancyID"),
+                        rs.getDate("StartOfVacancy"),rs.getDate("DeadlineForApplication"),
+                        rs.getInt("OccupationalCodeID"), rs.getInt("ApplicationMethodID"),
+                        rs.getString("VacancyPostcode"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -99,7 +99,7 @@ public class VacancyQueries extends DBQueries {
             while (rs.next()) {
 
                 vacancy = new Vacancy();
-                vacancy.setTypeOfVacancy( rs.getInt("TypeOfVacancyID"));
+                vacancy.setTypeOfVacancyID( rs.getInt("TypeOfVacancyID"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -108,8 +108,8 @@ public class VacancyQueries extends DBQueries {
             DBUtil.close(statement);
             DBUtil.close(connection);
         }
-        System.out.println(vacancy.getTypeOfVacancy());
-        return vacancy.getTypeOfVacancy();
+        System.out.println(vacancy.getTypeOfVacancyID());
+        return vacancy.getTypeOfVacancyID();
     }
 
     // 4. Get Vacancy OccupationalCode id
@@ -125,7 +125,7 @@ public class VacancyQueries extends DBQueries {
             while (rs.next()) {
 
                 vacancy = new Vacancy();
-                vacancy.setOccupationalCode( rs.getInt("OccupationalCodeID"));
+                vacancy.setOccupationalCodeID( rs.getInt("OccupationalCodeID"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -134,7 +134,7 @@ public class VacancyQueries extends DBQueries {
             DBUtil.close(statement);
             DBUtil.close(connection);
         }
-        return vacancy.getOccupationalCode();
+        return vacancy.getOccupationalCodeID();
     }
 
     // 5. Get Vacancy Status id
@@ -149,7 +149,7 @@ public class VacancyQueries extends DBQueries {
             while (rs.next()) {
 
                 vacancy = new Vacancy();
-                vacancy.setStatusOfVacancy( rs.getInt("StatusOfVacancyID"));
+                vacancy.setStatusOfVacancyID( rs.getInt("StatusOfVacancyID"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -158,7 +158,7 @@ public class VacancyQueries extends DBQueries {
             DBUtil.close(statement);
             DBUtil.close(connection);
         }
-        return vacancy.getStatusOfVacancy();
+        return vacancy.getStatusOfVacancyID();
     }
 
     // 6. Get List of Vacancy Types Names and Ids
@@ -173,7 +173,7 @@ public class VacancyQueries extends DBQueries {
             rs = statement.executeQuery(getQuery);
             while (rs.next()) {
                 vacancy = new Vacancy();
-                vacancy.setTypeOfVacancy(rs.getInt("TypeOfVacancyID"));
+                vacancy.setTypeOfVacancyID(rs.getInt("TypeOfVacancyID"));
                 vacancy.setTypeOfVacancyName(rs.getString("TypeOfVacancyName"));
 
                 list.add(vacancy);
@@ -200,8 +200,8 @@ public class VacancyQueries extends DBQueries {
             rs = statement.executeQuery(getQuery);
             while (rs.next()) {
                 vacancy = new Vacancy();
-                vacancy.setStatusOfVacancy(rs.getInt("StatusOfVacancyID"));
-                vacancy.setStatusOfVacancyString(rs.getString("StatusOfVacancyName"));
+                vacancy.setStatusOfVacancyID(rs.getInt("StatusOfVacancyID"));
+                vacancy.setStatusOfVacancyName(rs.getString("StatusOfVacancyName"));
 
                 list.add(vacancy);
             }
@@ -227,7 +227,7 @@ public class VacancyQueries extends DBQueries {
             rs = statement.executeQuery(getQuery);
             while (rs.next()) {
                 vacancy = new Vacancy();
-                vacancy.setOccupationalCode(rs.getInt("OccupationalCodeID"));
+                vacancy.setOccupationalCodeID(rs.getInt("OccupationalCodeID"));
                 vacancy.setOccupationalCodeName(rs.getString("OccupationalCodeName"));
 
                 list.add(vacancy);

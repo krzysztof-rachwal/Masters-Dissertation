@@ -28,10 +28,10 @@ public class SchoolQueries extends DBQueries {
     // 1. Get All School
     public List<School> getAllSchools() throws DataAccessException {
         return jdbcTemplate().query("SELECT * FROM School", new Object[]{},
-                (rs, i) -> new School(rs.getInt("SchoolID"), rs.getString("Name"),
-                        rs.getString("AddressCity"), rs.getString("AddressStreet"),
-                        rs.getString("AddressNumber"), rs.getString("Email"),
-                        rs.getString("Phone"))
+                (rs, i) -> new School(rs.getInt("SchoolID"), rs.getString("SchoolName"),
+                        rs.getString("SchoolAddressCity"), rs.getString("SchoolAddressStreet"),
+                        rs.getString("SchoolAddressNumber"), rs.getString("SchoolEmail"),
+                        rs.getString("SchoolPostCode"),rs.getString("SchoolPhone"))
         );
     }
 
@@ -39,10 +39,10 @@ public class SchoolQueries extends DBQueries {
     public School getSchoolDetailsById(int schoolId) throws DataAccessException {
         String getSql = String.format("SELECT * FROM School WHERE SchoolID = \"%s\" LIMIT 1", schoolId);
         List<School> schoolInfo = jdbcTemplate().query(getSql, new Object[]{},
-                (rs, i) -> new School(rs.getInt("SchoolID"), rs.getString("Name"),
-                        rs.getString("AddressCity"), rs.getString("AddressStreet"),
-                        rs.getString("AddressNumber"), rs.getString("Email"),
-                        rs.getString("Phone"))
+                (rs, i) -> new School(rs.getInt("SchoolID"), rs.getString("SchoolName"),
+                        rs.getString("SchoolAddressCity"), rs.getString("SchoolAddressStreet"),
+                        rs.getString("SchoolAddressNumber"), rs.getString("SchoolEmail"),
+                        rs.getString("SchoolPostCode"),rs.getString("SchoolPhone"))
         );
         return schoolInfo.get(0);
     }
@@ -61,7 +61,7 @@ public class SchoolQueries extends DBQueries {
             while (rs.next()) {
                 school = new School();
                 school.setSchoolID(rs.getInt("SchoolID"));
-                school.setName(rs.getString("Name"));
+                school.setSchoolName(rs.getString("Name"));
 
                 list.add(school);
             }

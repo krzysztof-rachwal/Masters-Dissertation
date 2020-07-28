@@ -37,10 +37,13 @@ public class EventQueries extends DBQueries {
             statement = connection.createStatement();
             rs = statement.executeQuery(getQuery);
             while (rs.next()) {
-                event = new Event(rs.getInt("EventID"), rs.getString("Name"),
-                        rs.getInt("TypeOfEvent"), rs.getDate("Date"), rs.getBoolean("isPublic"),
-                        rs.getBoolean("isCancelled"), rs.getString("PostCode"),
-                        rs.getString("NameOfAdviser"), rs.getString("NumberOfAttendees"),
+                event = new Event(rs.getInt("EventID"), rs.getString("EventName"),
+                        rs.getInt("TypeOfEventID"), rs.getDate("EventDateAndTime"),
+                        rs.getString("EventVenueName"),rs.getString("EventAddressCity"),
+                        rs.getString("EventAddressStreet"),rs.getString("EventAddressNumber"),
+                        rs.getString("EventVenuePostcode"),rs.getString("EventSummary"),
+                        rs.getBoolean("isPublic"), rs.getBoolean("isCancelled"),
+                        rs.getString("NameOfAdviser"), rs.getInt("NumberOfAttendees"),
                         rs.getBoolean("PromotesApprenticeships"), rs.getBoolean("PromotesWelshLanguage"),
                         rs.getBoolean("ChallangesGenderStereotypes"));
 
@@ -67,10 +70,13 @@ public class EventQueries extends DBQueries {
             rs = statement.executeQuery(getQuery);
             while (rs.next()) {
 
-                event = new Event(rs.getInt("EventID"), rs.getString("Name"),
-                        rs.getInt("TypeOfEvent"), rs.getDate("Date"), rs.getBoolean("isPublic"),
-                        rs.getBoolean("isCancelled"), rs.getString("PostCode"),
-                        rs.getString("NameOfAdviser"), rs.getString("NumberOfAttendees"),
+                event = new Event(rs.getInt("EventID"), rs.getString("EventName"),
+                        rs.getInt("TypeOfEventID"), rs.getDate("EventDateAndTime"),
+                        rs.getString("EventVenueName"),rs.getString("EventAddressCity"),
+                        rs.getString("EventAddressStreet"),rs.getString("EventAddressNumber"),
+                        rs.getString("EventVenuePostcode"),rs.getString("EventSummary"),
+                        rs.getBoolean("isPublic"), rs.getBoolean("isCancelled"),
+                        rs.getString("NameOfAdviser"), rs.getInt("NumberOfAttendees"),
                         rs.getBoolean("PromotesApprenticeships"), rs.getBoolean("PromotesWelshLanguage"),
                         rs.getBoolean("ChallangesGenderStereotypes"));
             }
@@ -96,8 +102,8 @@ public class EventQueries extends DBQueries {
             rs = statement.executeQuery(getQuery);
             while (rs.next()) {
                 event = new Event();
-                event.setTypeOfEvent(rs.getInt("TypeOfEventID"));
-                event.setTypeOfEventString(rs.getString("TypeOfEventName"));
+                event.setTypeOfEventID(rs.getInt("TypeOfEventID"));
+                event.setTypeOfEventName(rs.getString("TypeOfEventName"));
 
                 list.add(event);
             }

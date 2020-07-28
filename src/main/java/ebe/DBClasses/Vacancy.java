@@ -26,6 +26,21 @@ public class Vacancy {
     public Vacancy() {
     }
 
+    public Vacancy(int vacancyID, int employerID, String vacancyName, String vacancySummary, String vacancyLink, int typeOfVacancyID, int statusOfVacancyID, Date startOfVacancy, Date deadlineForApplication, int occupationalCodeID, int applicationMethodID, String vacancyPostcode) {
+        VacancyID = vacancyID;
+        EmployerID = employerID;
+        VacancyName = vacancyName;
+        VacancySummary = vacancySummary;
+        VacancyLink = vacancyLink;
+        TypeOfVacancyID = typeOfVacancyID;
+        StatusOfVacancyID = statusOfVacancyID;
+        StartOfVacancy = startOfVacancy;
+        DeadlineForApplication = deadlineForApplication;
+        OccupationalCodeID = occupationalCodeID;
+        ApplicationMethodID = applicationMethodID;
+        VacancyPostcode = vacancyPostcode;
+    }
+
     public Vacancy(int employerID, String vacancyName, String vacancySummary, String vacancyLink, int typeOfVacancyID, int statusOfVacancyID, Date startOfVacancy, Date deadlineForApplication, int occupationalCodeID, int applicationMethodID, String vacancyPostcode) {
         EmployerID = employerID;
         VacancyName = vacancyName;

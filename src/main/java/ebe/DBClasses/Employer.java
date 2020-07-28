@@ -37,6 +37,38 @@ public class Employer {
     public Employer() {
     }
 
+    public Employer(int employerID, int statusOfEmployerID, String employerName, String employerAddressCity, String employerAddressStreet, String employerAddressNumber, String employerPostcode, String employerEmail, String contactPersonNameSurname, String contactPersonPosition, String employerPhone, String employerWebsite, String employerTwitter, String employerFB, int numberOfEmployeesID, String companySummary, String notes, String logoLink, Boolean givesSiteExperience, Boolean givesSiteVisits, Boolean givesWorkshops, Boolean givesPresentations, Boolean attendsCareerFairs, Boolean givesWebinars, Boolean worksWithPrimaryPupils, Boolean useOfModernForeignLanguage, Boolean runsBusinessInWelsh, Boolean canDeliverToSchoolsInWelsh, Boolean hasApprenticeshipProgramme) {
+        EmployerID = employerID;
+        StatusOfEmployerID = statusOfEmployerID;
+        EmployerName = employerName;
+        EmployerAddressCity = employerAddressCity;
+        EmployerAddressStreet = employerAddressStreet;
+        EmployerAddressNumber = employerAddressNumber;
+        EmployerPostcode = employerPostcode;
+        EmployerEmail = employerEmail;
+        ContactPersonNameSurname = contactPersonNameSurname;
+        ContactPersonPosition = contactPersonPosition;
+        EmployerPhone = employerPhone;
+        EmployerWebsite = employerWebsite;
+        EmployerTwitter = employerTwitter;
+        EmployerFB = employerFB;
+        NumberOfEmployeesID = numberOfEmployeesID;
+        CompanySummary = companySummary;
+        Notes = notes;
+        LogoLink = logoLink;
+        GivesSiteExperience = givesSiteExperience;
+        GivesSiteVisits = givesSiteVisits;
+        GivesWorkshops = givesWorkshops;
+        GivesPresentations = givesPresentations;
+        AttendsCareerFairs = attendsCareerFairs;
+        GivesWebinars = givesWebinars;
+        WorksWithPrimaryPupils = worksWithPrimaryPupils;
+        UseOfModernForeignLanguage = useOfModernForeignLanguage;
+        RunsBusinessInWelsh = runsBusinessInWelsh;
+        CanDeliverToSchoolsInWelsh = canDeliverToSchoolsInWelsh;
+        HasApprenticeshipProgramme = hasApprenticeshipProgramme;
+    }
+
     public Employer(int statusOfEmployerID, String employerName, String employerAddressCity, String employerAddressStreet, String employerAddressNumber, String employerPostcode, String employerEmail, String contactPersonNameSurname, String contactPersonPosition, String employerPhone, String employerWebsite, String employerTwitter, String employerFB, int numberOfEmployeesID, String companySummary, String notes, String logoLink, Boolean givesSiteExperience, Boolean givesSiteVisits, Boolean givesWorkshops, Boolean givesPresentations, Boolean attendsCareerFairs, Boolean givesWebinars, Boolean worksWithPrimaryPupils, Boolean useOfModernForeignLanguage, Boolean runsBusinessInWelsh, Boolean canDeliverToSchoolsInWelsh, Boolean hasApprenticeshipProgramme) {
         StatusOfEmployerID = statusOfEmployerID;
         EmployerName = employerName;

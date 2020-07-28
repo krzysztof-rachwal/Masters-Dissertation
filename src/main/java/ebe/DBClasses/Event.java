@@ -28,6 +28,26 @@ public class Event {
     public Event() {
     }
 
+    public Event(int eventID, String eventName, int typeOfEventID, Date eventDateAndTime, String eventVenueName, String eventAddressCity, String eventAddressStreet, String eventAddressNumber, String eventVenuePostcode, String eventSummary, Boolean isPublic, Boolean isCancelled, String nameOfAdviser, int numberOfAttendees, Boolean promotesApprenticeships, Boolean promotesWelshLanguage, Boolean challengesGenderStereotypes) {
+        EventID = eventID;
+        EventName = eventName;
+        TypeOfEventID = typeOfEventID;
+        EventDateAndTime = eventDateAndTime;
+        EventVenueName = eventVenueName;
+        EventAddressCity = eventAddressCity;
+        EventAddressStreet = eventAddressStreet;
+        EventAddressNumber = eventAddressNumber;
+        EventVenuePostcode = eventVenuePostcode;
+        EventSummary = eventSummary;
+        this.isPublic = isPublic;
+        this.isCancelled = isCancelled;
+        NameOfAdviser = nameOfAdviser;
+        NumberOfAttendees = numberOfAttendees;
+        PromotesApprenticeships = promotesApprenticeships;
+        PromotesWelshLanguage = promotesWelshLanguage;
+        ChallengesGenderStereotypes = challengesGenderStereotypes;
+    }
+
     public Event(String eventName, int typeOfEventID, Date eventDateAndTime, String eventVenueName, String eventAddressCity, String eventAddressStreet, String eventAddressNumber, String eventVenuePostcode, String eventSummary, Boolean isPublic, Boolean isCancelled, String nameOfAdviser, int numberOfAttendees, Boolean promotesApprenticeships, Boolean promotesWelshLanguage, Boolean challengesGenderStereotypes) {
         EventName = eventName;
         TypeOfEventID = typeOfEventID;

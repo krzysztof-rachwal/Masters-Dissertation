@@ -37,18 +37,21 @@ public class EmployerQueries extends DBQueries {
             statement = connection.createStatement();
             rs = statement.executeQuery(getQuery);
             while (rs.next()) {
-                employer = new Employer(rs.getInt("EmployerID"), rs.getInt("StatusOfEmployer"),
-                        rs.getString("Name"), rs.getString("AddressCity"),
-                        rs.getString("AddressStreet"), rs.getString("AddressNumber"),
-                        rs.getString("PostCode"), rs.getString("Email"), rs.getString("Phone"),
-                        rs.getString("Website"), rs.getInt("NumberOfEmployees"),
-                        rs.getString("CompanySummary"), rs.getString("Notes"),
-                        rs.getString("LogoLink"), rs.getBoolean("GivesSiteExperience"),
-                        rs.getBoolean("GivesSiteVisits"), rs.getBoolean("GivesWorkshops"),
-                        rs.getBoolean("GivesPresentations"), rs.getBoolean("AttendsCareerFairs"),
-                        rs.getBoolean("GivesWebinars"), rs.getBoolean("WorksWithPrimaryPupils"),
-                        rs.getBoolean("UseOfModernForeignLanguage"), rs.getBoolean("RunsBusinessInWelsh"),
-                        rs.getBoolean("CanDeliverToSchoolsInWelsh"), rs.getBoolean("HasApprenticeshipProgramme"));
+                employer = new Employer(rs.getInt("EmployerID"), rs.getInt("StatusOfEmployerID"),
+                        rs.getString("EmployerName"), rs.getString("EmployerAddressCity"),
+                        rs.getString("EmployerAddressStreet"), rs.getString("EmployerAddressNumber"),
+                        rs.getString("EmployerPostcode"), rs.getString("EmployerEmail"),
+                        rs.getString("ContactPersonNameSurname"),rs.getString("ContactPersonPosition"),
+                        rs.getString("EmployerPhone"), rs.getString("EmployerWebsite"),
+                        rs.getString("EmployerTwitter"), rs.getString("EmployerFB"),
+                        rs.getInt("NumberOfEmployeesID"), rs.getString("CompanySummary"),
+                        rs.getString("Notes"), rs.getString("LogoLink"),
+                        rs.getBoolean("GivesSiteExperience"), rs.getBoolean("GivesSiteVisits"),
+                        rs.getBoolean("GivesWorkshops"), rs.getBoolean("GivesPresentations"),
+                        rs.getBoolean("AttendsCareerFairs"), rs.getBoolean("GivesWebinars"),
+                        rs.getBoolean("WorksWithPrimaryPupils"), rs.getBoolean("UseOfModernForeignLanguage"),
+                        rs.getBoolean("RunsBusinessInWelsh"), rs.getBoolean("CanDeliverToSchoolsInWelsh"),
+                        rs.getBoolean("HasApprenticeshipProgramme"));
 
                 list.add(employer);
             }
@@ -75,16 +78,20 @@ public class EmployerQueries extends DBQueries {
 
                 employer = new Employer();
                 employer.setEmployerID(rs.getInt("EmployerID"));
-                employer.setStatusOfEmployer(rs.getInt("StatusOfEmployer"));
-                employer.setName(rs.getString("Name"));
-                employer.setAddressCity(rs.getString("AddressCity"));
-                employer.setAddressStreet(rs.getString("AddressStreet"));
-                employer.setAddressNumber(rs.getString("AddressNumber"));
-                employer.setPostcode(rs.getString("PostCode"));
-                employer.setEmail(rs.getString("Email"));
-                employer.setPhone(rs.getString("Phone"));
-                employer.setWebsite(rs.getString("Website"));
-                employer.setNumberOfEmployees(rs.getInt("NumberOfEmployees"));
+                employer.setStatusOfEmployerID(rs.getInt("StatusOfEmployerID"));
+                employer.setEmployerName(rs.getString("EmployerName"));
+                employer.setEmployerAddressCity(rs.getString("EmployerAddressCity"));
+                employer.setEmployerAddressStreet(rs.getString("EmployerAddressStreet"));
+                employer.setEmployerAddressNumber(rs.getString("EmployerAddressNumber"));
+                employer.setEmployerPostcode(rs.getString("EmployerPostcode"));
+                employer.setEmployerEmail(rs.getString("EmployerEmail"));
+                employer.setContactPersonNameSurname(rs.getString("ContactPersonNameSurname"));
+                employer.setContactPersonPosition(rs.getString("ContactPersonPosition"));
+                employer.setEmployerPhone(rs.getString("EmployerPhone"));
+                employer.setEmployerWebsite(rs.getString("EmployerWebsite"));
+                employer.setEmployerTwitter(rs.getString("EmployerTwitter"));
+                employer.setEmployerFB(rs.getString("EmployerFB"));
+                employer.setNumberOfEmployeesID(rs.getInt("NumberOfEmployeesID"));
                 employer.setCompanySummary(rs.getString("CompanySummary"));
                 employer.setNotes(rs.getString("Notes"));
                 employer.setLogoLink(rs.getString("LogoLink"));
@@ -124,7 +131,7 @@ public class EmployerQueries extends DBQueries {
             while (rs.next()) {
                 employer = new Employer();
                 employer.setEmployerID(rs.getInt("EmployerID"));
-                employer.setName(rs.getString("Name"));
+                employer.setEmployerName(rs.getString("EmployerName"));
 
                 list.add(employer);
             }
@@ -142,7 +149,7 @@ public class EmployerQueries extends DBQueries {
     ///////////////////////////////////// CREATE ALL METHODS ///////////////////////////////////////////////
     //3. Create New Employer
 
-    public int createNewEmployer(int statusOfEmployer, String Name, String AddressCity, String AddressStreet, String AddressNumber,
+    public int createEmployer(int statusOfEmployer, String Name, String AddressCity, String AddressStreet, String AddressNumber,
                                  String Postcode, String email, String phone, String website, int numberOfEmployees, String companySummary,
                                  String notes, String LogoLink, Boolean givesSiteExperience, Boolean givesSiteVisits,
                                  Boolean givesWorkshops, Boolean givesPresentations, Boolean attendsCareerFairs, Boolean givesWebinars, Boolean worksWithPrimaryPupils,
