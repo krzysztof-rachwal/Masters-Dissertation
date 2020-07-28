@@ -145,6 +145,58 @@ public class EmployerQueries extends DBQueries {
         return list;
     }
 
+    // 5. Get Last Employer Created
+    public Integer getLastEmployerCreated(String employerName) throws DataAccessException {
+        String getQuery = String.format("SELECT EmployerID FROM Employer WHERE EmployerName = \"%s\" ORDER BY EmployerID DESC LIMIT 1", employerName);
+        Employer employer = null;
+        ResultSet rs = null;
+        try {
+            connection = ConnectionFactory.getConnection();
+            statement = connection.createStatement();
+            rs = statement.executeQuery(getQuery);
+            while (rs.next()) {
+
+                employer = new Employer();
+                employer.setEmployerID(rs.getInt("EmployerID"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.close(rs);
+            DBUtil.close(statement);
+            DBUtil.close(connection);
+        }
+        return employer.getEmployerID();
+    }
+
+
+    // 6. Get Posible Number of Employers
+    public List<Employer> getAllNumberOfEmployersPossible() throws DataAccessException {
+        String getQuery = "SELECT EmployeesRangeID, ApplicationMethodName FROM EmployeesRangeList";
+        List<Employer> list = new ArrayList<Employer>();
+        Employer employer = null;
+        ResultSet rs = null;
+        try {
+            connection = ConnectionFactory.getConnection();
+            statement = connection.createStatement();
+            rs = statement.executeQuery(getQuery);
+            while (rs.next()) {
+                employer = new Employer();
+                employer.setEmployerID(rs.getInt("EmployeesRangeID"));
+                employer.setNumberOfEmployeesName(rs.getString("EmployeesRangeName"));
+
+                list.add(employer);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }  finally {
+            DBUtil.close(rs);
+            DBUtil.close(statement);
+            DBUtil.close(connection);
+        }
+        return list;
+    }
+
 
     ///////////////////////////////////// CREATE ALL METHODS ///////////////////////////////////////////////
     //3. Create New Employer
