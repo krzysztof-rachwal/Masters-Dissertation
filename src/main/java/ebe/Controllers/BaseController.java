@@ -3,6 +3,7 @@ package ebe.Controllers;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ebe.DBClasses.Employer;
 import ebe.DBClasses.Event;
+import ebe.DBClasses.School;
 import ebe.DBClasses.Vacancy;
 import ebe.DBMethods.EmployerQueries;
 import ebe.DBMethods.EventQueries;
@@ -186,9 +187,26 @@ public class BaseController {
     @GetMapping("/add-events")
     public ModelAndView AddEvents(HttpSession session) {
         ModelAndView mv = new ModelAndView();
-        ObjectMapper objectMapper = new ObjectMapper();
-        // session = context.getSession();
         mv.setViewName("addEventsPage");
+
+        List<Event> eventsAllTypes;
+        List<School> schoolAllNamesAndIds;
+        List<Employer> employerAllNamesAndIds;
+
+        schoolAllNamesAndIds = SchoolQrys.getAllSchoolNamesAndIds();
+        eventsAllTypes = EventQrys.getAllTypesOfEvents();
+        employerAllNamesAndIds = EmployerQrys.getAllEmployerNamesAndIds();
+
+
+
+
+        Map<String,Object> allEvents = new HashMap<String,Object>();
+        allEvents.put("allSchoolNamesAndIds", schoolAllNamesAndIds);
+        allEvents.put("allEventTypes", eventsAllTypes);
+        allEvents.put("AllEmployerNamesAndIds", employerAllNamesAndIds);
+
+        mv.addAllObjects(allEvents);
+
         return mv;
     }
 
