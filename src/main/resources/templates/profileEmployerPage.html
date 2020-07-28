@@ -46,7 +46,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="company-name">Company name</label>
-                                    <input type="text" class="form-control input-border" id="company-name" th:value="${employer.getName()}">
+                                    <input type="text" class="form-control input-border" id="company-name" th:value="${employer.getEmployerName()}">
                                 </div>
                                 <div class="form-group">
                                     <label for="company-summary">Company summary</label>
@@ -54,19 +54,19 @@
                                 </div>
                                 <div class="form-group mt-3">
                                     <label for="no-employees" class="mt-0">No of Employees</label>
-                                    <input type="text" class="form-control input-border" id="no-employees" th:value="${employer.getNumberOfEmployees()}">
+                                    <input type="text" class="form-control input-border" id="no-employees" th:value="${employer.getNumberOfEmployeesID()}">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <label>Address</label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
-                                        <input type="text" id="street" class="form-control border-right input-sm" placeholder="Street" th:value="${employer.getAddressStreet()}">
-                                        <input type="text" id="buildingNo" class="form-control" placeholder="Building No" th:value="${employer.getAddressNumber()}">
+                                        <input type="text" id="street" class="form-control border-right input-sm" placeholder="Street" th:value="${employer.getEmployerAddressStreet()}">
+                                        <input type="text" id="buildingNo" class="form-control" placeholder="Building No" th:value="${employer.getEmployerAddressNumber()}">
                                     </div>
                                     <div class="input-group-prepend mt-1">
-                                        <input type="text" id="PostCode" class="form-control border-right" placeholder="Post Code" th:value="${employer.getPostcode()}">
-                                        <input type="text" id="city" class="form-control" placeholder="City" th:value="${employer.getAddressCity()}">
+                                        <input type="text" id="PostCode" class="form-control border-right" placeholder="Post Code" th:value="${employer.getEmployerPostcode()}">
+                                        <input type="text" id="city" class="form-control" placeholder="City" th:value="${employer.getEmployerAddressCity()}">
                                     </div>
                                 </div>
                             </div>
@@ -82,11 +82,11 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="email">Email</label>
-                                    <input type="text" class="form-control input-border"  id="email" th:value="${employer.getEmail()}">
+                                    <input type="text" class="form-control input-border"  id="email" th:value="${employer.getEmployerEmail()}">
                                 </div>
                                 <div class="form-group">
                                     <label for="tel-num">Contact number</label>
-                                    <input type="text" class="form-control input-border" id="tel-num" th:value="${employer.getPhone()}">
+                                    <input type="text" class="form-control input-border" id="tel-num" th:value="${employer.getEmployerPhone()}">
                                 </div>
 
                             </div>
@@ -97,7 +97,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="website">Website</label>
-                                    <input type="text" class="form-control input-border" id="website" th:value="${employer.getWebsite()}">
+                                    <input type="text" class="form-control input-border" id="website" th:value="${employer.getEmployerWebsite()}">
                                 </div>
                             </div>
                         </div>
@@ -347,7 +347,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <p th:text="'Are you sure you want to delete '+${employer.getName()}+' Profile Information?'"></p>
+                <p th:text="'Are you sure you want to delete '+${employer.getEmployerName()}+' Profile Information?'"></p>
                 <button type="button" class="btn buttonUpdate" th:onclick="|deleteEmployer(${employer.getEmployerID()})|">Yes</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
             </div>
@@ -357,7 +357,7 @@
 
 <div class="gel-content-container">
     <div class="container-headline my-5">
-        <span class="title-h2" th:text="${employer.getName()}"></span>
+        <span class="title-h2" th:text="${employer.getEmployerName()}"></span>
         <button type="button" id="updateEvent" data-toggle="modal" data-target="#updateModal"
                 class="buttonUpdate float-right">Update
         </button>
@@ -398,7 +398,7 @@
 
                 <div class="my-2">
                     <span class="text-h5 font-weight-bold">No of employees:</span>
-                    <span class="text-h5" th:text="${employer.getNumberOfEmployees()}"></span>
+                    <span class="text-h5" th:text="${employer.getNumberOfEmployeesID()}"></span>
                 </div>
 
                 <div class="my-2">
@@ -478,9 +478,9 @@
         <div class="row">
             <div class="col-md-4 mt-2">
                 <h4 class="font-weight-bold">Address</h4>
-                <h6 th:text="${employer.getAddressNumber()} +' '+ ${employer.getAddressStreet()}"></h6>
-                <h6 th:text="${employer.getPostcode()}"></h6>
-                <h6 th:text="${employer.getAddressCity()}"></h6>
+                <h6 th:text="${employer.getEmployerAddressNumber()} +' '+ ${employer.getEmployerAddressStreet()}"></h6>
+                <h6 th:text="${employer.getEmployerPostcode()}"></h6>
+                <h6 th:text="${employer.getEmployerAddressCity()}"></h6>
             </div>
 
             <div class="col-md-4">
@@ -490,10 +490,10 @@
                     <span>John Smith </span>
                 </div>
                 <div>
-                    <span th:text=" 'Email: ' + ${employer.getEmail()}"></span>
+                    <span th:text=" 'Email: ' + ${employer.geEmployertEmail()}"></span>
                 </div>
                 <div>
-                    <span th:text=" 'Contact Number: ' + ${employer.getPhone()}"></span>
+                    <span th:text=" 'Contact Number: ' + ${employer.getEmployerPhone()}"></span>
                 </div>
 
             </div>
@@ -504,7 +504,7 @@
                     <span class="">Twitter:</span>
                 </div>
                 <div>
-                    <span th:text=" 'Website: ' + ${employer.getWebsite()}"></span>
+                    <span th:text=" 'Website: ' + ${employer.getEmployerWebsite()}"></span>
                 </div>
             </div>
 

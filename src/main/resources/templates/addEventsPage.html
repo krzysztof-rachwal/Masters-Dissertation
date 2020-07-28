@@ -42,7 +42,7 @@
                     <div class="form-group">
                         <label for="event-type">Event type</label><br>
                         <select class="selectpicker" data-live-search="true" id="event-type">
-                            <option  th:each="event : ${allEventTypes}" th:value="${event.getTypeOfEvent()}" th:text="${event.getTypeOfEventString()}"></option>
+                            <option  th:each="event : ${allEventTypes}" th:value="${event.getTypeOfEventID()}" th:text="${event.getTypeOfEventName()}"></option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -70,13 +70,13 @@
                     <div class="form-group">
                         <label for="employers-attending">Employers Attending</label><br>
                         <select class="selectpicker" multiple data-live-search="true" id="employers-attending">
-                            <option  th:each="employer : ${AllEmployerNamesAndIds}" th:value="${employer.getEmployerID()}" th:text="${employer.getName()}"></option>
+                            <option  th:each="employer : ${AllEmployerNamesAndIds}" th:value="${employer.getEmployerID()}" th:text="${employer.getEmployerName()}"></option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="schools-attending">Schools Attending</label><br>
                         <select class="selectpicker" multiple data-live-search="true" id="schools-attending">
-                            <option  th:each="school : ${allSchoolNamesAndIds}" th:value="${school.getSchoolID()}" th:text="${school.getName()}"></option>
+                            <option  th:each="school : ${allSchoolNamesAndIds}" th:value="${school.getSchoolID()}" th:text="${school.getSchoolName()}"></option>
                         </select>
                     </div>
                 </div>

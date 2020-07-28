@@ -45,7 +45,7 @@ public class EventQueries extends DBQueries {
                         rs.getBoolean("isPublic"), rs.getBoolean("isCancelled"),
                         rs.getString("NameOfAdviser"), rs.getInt("NumberOfAttendees"),
                         rs.getBoolean("PromotesApprenticeships"), rs.getBoolean("PromotesWelshLanguage"),
-                        rs.getBoolean("ChallangesGenderStereotypes"));
+                        rs.getBoolean("ChallengesGenderStereotypes"));
 
                 list.add(event);
             }
@@ -78,7 +78,7 @@ public class EventQueries extends DBQueries {
                         rs.getBoolean("isPublic"), rs.getBoolean("isCancelled"),
                         rs.getString("NameOfAdviser"), rs.getInt("NumberOfAttendees"),
                         rs.getBoolean("PromotesApprenticeships"), rs.getBoolean("PromotesWelshLanguage"),
-                        rs.getBoolean("ChallangesGenderStereotypes"));
+                        rs.getBoolean("ChallengesGenderStereotypes"));
             }
         } catch (SQLException e) {
             e.printStackTrace();

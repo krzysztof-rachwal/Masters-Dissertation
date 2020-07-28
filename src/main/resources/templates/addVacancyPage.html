@@ -44,7 +44,7 @@
                     <div class="form-group">
                         <label for="employer-name" class="  mb-1">Employer Name</label><br>
                         <select class="selectpicker" data-live-search="true" id="employer-name">
-                            <option  th:each="employer : ${AllEmployerNamesAndIds}" th:value="${employer.getEmployerID()}" th:text="${employer.getName()}"></option>
+                            <option  th:each="employer : ${AllEmployerNamesAndIds}" th:value="${employer.getEmployerID()}" th:text="${employer.getEmployerName()}"></option>
                         </select>
                     </div>
                 </div>
@@ -94,7 +94,7 @@
                     <div class="form-group">
                         <label for="vacancy-type" class="  mb-1">Type of Vacancy</label>
                         <select class="custom-select p-2" id="vacancy-status">
-                            <option th:each="vacancyStatus : ${allVacanciesStatus}" th:value="${vacancyStatus.getStatusOfVacancy()}" th:text="${vacancyStatus.getStatusOfVacancyString()}"></option>
+                            <option th:each="vacancyStatus : ${allVacanciesStatus}" th:value="${vacancyStatus.getStatusOfVacancyID()}" th:text="${vacancyStatus.getStatusOfVacancyName()}"></option>
                         </select>
                     </div>
                 </div>
@@ -104,7 +104,7 @@
                     <div class="form-group">
                         <label for="vacancy-type" class="  mb-1">Type of Vacancy</label>
                         <select class="custom-select p-2" id="vacancy-type">
-                            <option th:each="vacancyType : ${allVacanciesTypes}" th:value="${vacancyType.getTypeOfVacancy()}" th:text="${vacancyType.getTypeOfVacancyName()}"></option>
+                            <option th:each="vacancyType : ${allVacanciesTypes}" th:value="${vacancyType.getTypeOfVacancyID()}" th:text="${vacancyType.getTypeOfVacancyName()}"></option>
                         </select>
                     </div>
                 </div>
@@ -114,7 +114,7 @@
                     <div class="form-group">
                         <label for="occup-code" class="  mb-1">Occupational Code</label>
                         <select class="custom-select p-2" id="occup-code">
-                            <option th:each="vacancyOccupationalCode : ${allVacanciesOccupationalCodes}" th:value="${vacancyOccupationalCode.getOccupationalCode()}" th:text="${vacancyOccupationalCode.getOccupationalCodeName()}"></option>
+                            <option th:each="vacancyOccupationalCode : ${allVacanciesOccupationalCodes}" th:value="${vacancyOccupationalCode.getOccupationalCodeID()}" th:text="${vacancyOccupationalCode.getOccupationalCodeName()}"></option>
                         </select>
                     </div>
                 </div>
