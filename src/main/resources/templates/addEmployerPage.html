@@ -46,7 +46,7 @@
                     <div class="form-group mt-3">
                         <label for="employer-employees-number">Number of Employees</label><br>
                         <select id="employer-employees-number">
-                            <option  th:each="employerNumberEmployees : ${allemployerNumberOfEmployees}" th:value="${employerNumberEmployees.getNumberOfEmployeesID()}" th:text="${employerNumberEmployees.getNumberOfEmployeesName()}"></option>
+                            <option  th:each="employerNumberEmployees : ${allEmployerNumberOfEmployees}" th:value="${employerNumberEmployees.getNumberOfEmployeesID()}" th:text="${employerNumberEmployees.getNumberOfEmployeesName()}"></option>
                         </select>
                     </div>
                 </div>
@@ -107,79 +107,52 @@
                 <div class="container my-3 p-0">
                     <h4>Other</h4>
                 </div>
-                <div class="col-md-8">
-                    <span class="h6">Sector Areas</span>
-                    <div class="form-check md-12" th:each="employerIndustrySector : ${allEmployerIndustrySectors}">
-                        <input type="checkbox" class="form-check-input" th:id="industry_+${employerIndustrySector.getEmployerIndustrySectorID()}">
-                        <label class="form-check-label" th:for="industry_+${employerIndustrySector.getEmployerIndustrySectorID()}" th:text="${employerIndustrySector.getEmployerIndustrySectorName()}"></label>
-                    </div>
+                <div class="col-md-6">
+                    <label for="industry-sector">Sector Areas</label><br>
+                    <select id="industry-sector"  data-width="80%" class="selectpicker" multiple data-live-search="true">
+                        <option th:each="employerIndustrySector : ${allEmployerIndustrySectors}" th:value="${employerIndustrySector.getEmployerIndustrySectorID()}" th:text="${employerIndustrySector.getEmployerIndustrySectorName()}"></option>
+                    </select>
                 </div>
-                <div class="col-md-4">
-                    <div class="col-md-12 mb-4">
-                        <span class="h6">Cooperation Type</span>
-                        <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="work-ex">
-                            <label class="form-check-label" for="work-ex">Work Experience</label>
-                        </div>
-                        <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="site-visits">
-                            <label class="form-check-label" for="site-visits">Site visits</label>
-                        </div>
-                        <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="workshops">
-                            <label class="form-check-label" for="workshops">Workshops</label>
-                        </div>
-                        <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="career">
-                            <label class="form-check-label" for="career">Career Fairs</label>
-                        </div>
-                        <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="webinars">
-                            <label class="form-check-label" for="webinars">Webinars</label>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <span class="h6">Curriculum Areas</span>
-                        <div class="form-check" th:each="employerCurriculumAreas : ${allEmployerCurriculimAreas}" >
-                            <input type="checkbox" class="form-check-input" th:id="curriculum_+${employerCurriculumAreas.getEmployerAreaOfCurriculumID()}">
-                            <label class="form-check-label" th:for="curriculum_+${employerCurriculumAreas.getEmployerAreaOfCurriculumID()}" th:text="${employerCurriculumAreas.getEmployAreaOfCurriculumName()}"></label>
-                        </div>
-                    </div>
+
+                <div class="col-md-6 mb-4">
+                    <label for="employer-cooperation-type">Cooperation Type</label><br>
+                    <select id="employer-cooperation-type" data-width="80%"   class="selectpicker" multiple data-live-search="true">
+                        <option  th:each="employerCooperationType : ${allEmployerCooperationType}" th:value="${employerCooperationType.getEmployerCooperationTypeID()}" th:text="${employerCooperationType.getEmployerCooperationTypeName()}"></option>
+                    </select>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <label for="curriculum-area">Curriculum Areas</label><br>
+                    <select id="curriculum-area" data-width="80%" class="selectpicker" multiple data-live-search="true">
+                        <option th:each="employerCurriculumAreas : ${allEmployerCurriculumAreas}" th:value="${employerCurriculumAreas.getEmployerAreaOfCurriculumID()}" th:text="${employerCurriculumAreas.getEmployAreaOfCurriculumName()}"></option>
+                    </select>
+                </div>
+
+                <div class="col-md-6 mb-4">
+                    <label for="schools-attending">Schools Preferences</label><br>
+                    <select class="selectpicker"  data-width="80%" multiple data-live-search="true" id="schools-attending">
+                        <option  th:each="school : ${allSchoolNamesAndIds}" th:value="${school.getSchoolID()}" th:text="${school.getSchoolName()}"></option>
+                    </select>
+                </div>
+
+                <div class="col-md-6 mb-4">
+                    <label for="employer-preferences">Preferences</label><br>
+                    <select class="selectpicker"  data-width="80%" multiple data-live-search="true" id="employer-preferences">
+                        <option  th:each="employerPreferences : ${allEmployerPreferences}" th:value="${employerPreferences.getEmployerPreferencesID()}" th:text="${employerPreferences.getEmployerPreferencesName()}"></option>
+                    </select>
+                </div>
+                <div class="col-md-6 mb-4 d-none" id="div-foreign-language">
+                    <label for="employer-language">Which Foreign Language?</label><br>
+                    <select class="selectpicker" multiple data-live-search="true" id="employer-language">
+                        <option  th:each="employerLanguage : ${allEmployerLanguage}" th:value="${employerLanguage.getEmployerLanguageID()}" th:text="${employerLanguage.getEmployerLanguageName()}"></option>
+                    </select>
                 </div>
             </div>
+
             <div class="row">
-                <div class="col-md-8 my-4">
-                    <div class="form-group">
-                        <div class="row d-inline">
-                            <label for="schools-attending">Schools Preferences</label><br>
-                            <select class="selectpicker" multiple data-live-search="true" id="schools-attending">
-                                <option  th:each="school : ${allSchoolNamesAndIds}" th:value="${school.getSchoolID()}" th:text="${school.getSchoolName()}"></option>
-                            </select>
-                        </div>
-                    </div>
-                    <span class="h6 mt-3">Preferences</span>
-                    <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="primary-school">
-                        <label class="form-check-label" for="primary-school">Wants to work with primary schools</label>
-                    </div>
-                    <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="apprenticeship">
-                        <label class="form-check-label" for="apprenticeship">Has apprenticeship program</label>
-                    </div>
-                    <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="welsh">
-                        <label class="form-check-label" for="welsh">Works in Welsh</label>
-                    </div>
-                    <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="foreign">
-                        <label class="form-check-label" for="foreign">Works in Foreign Language</label>
-                    </div>
-                    <div class="form-group col-md">
-                        <label for="employer-language">If yes, what languages?</label>
-                        <select class="selectpicker" multiple data-live-search="true" id="employer-language">
-                            <option  th:each="employerLanguage : ${allEmployerLanguage}" th:value="${employerLanguage.getEmployerLanguageID()}" th:text="${employerLanguage.getEmployerLanguageName()}"></option>
-                        </select>
-                    </div>
+                <div class="col-md-8 mb-4">
+
+
+
                 </div>
             </div>
             <div class="row">
@@ -217,6 +190,26 @@
 <script th:src="@{../js/employer.js}" src="../js/employer.js"></script>
 <script>
     $('.selectpicker').selectpicker();
+
+
+    $( document ).ready(function() {
+        //Show/Hide the foreign language option
+
+
+        $('select[id=employer-preferences]').change(function(){
+            if($('select[id=employer-preferences]').val()!=undefined){
+                if($('select[id=employer-preferences]').val().includes("5")){
+                    $('div[id=div-foreign-language]').removeClass('d-none')
+                }else{
+                    $('div[id=div-foreign-language]').addClass('d-none')
+                }
+            }
+        });
+
+
+
+    });
+
 </script>
 
 

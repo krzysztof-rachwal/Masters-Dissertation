@@ -92,17 +92,21 @@ public class BaseController {
         List<Employer> employer;
         List<Employer> employerLanguage;
         List<Employer> employerIndustrySectorAreas;
-        List<Employer> employerCurriculimAreas;
+        List<Employer> employerCurriculumAreas;
         List<Employer> employerLocalAuthorities;
         List<Employer> employerNumberOfEmployees;
+        List<Employer> employerCooperationType;
+        List<Employer> employerPreferences;
         List<School> schoolAllNamesAndIds;
 
         employer = EmployerQrys.getAllEmployers();
         employerLanguage = EmployerQrys.getAllLanguages();
         employerLocalAuthorities = EmployerQrys.getAllLocalAuthorities();
         employerIndustrySectorAreas = EmployerQrys.getAllIndustrySectors();
-        employerCurriculimAreas = EmployerQrys.getAllCurriculumAreas();
+        employerCurriculumAreas = EmployerQrys.getAllCurriculumAreas();
         employerNumberOfEmployees = EmployerQrys.getAllNumberOfEmployersPossible();
+        employerCooperationType = EmployerQrys.getAllCooperationTypes();
+        employerPreferences = EmployerQrys.getAllPreferences();
         schoolAllNamesAndIds = SchoolQrys.getAllSchoolNamesAndIds();
 
         Map<String,Object> allEmployer = new HashMap<String,Object>();
@@ -110,8 +114,10 @@ public class BaseController {
         allEmployer.put("allEmployerLanguage", employerLanguage);
         allEmployer.put("allEmployerLocalAuthorities", employerLocalAuthorities);
         allEmployer.put("allEmployerIndustrySectors", employerIndustrySectorAreas);
-        allEmployer.put("allEmployerCurriculimAreas", employerCurriculimAreas);
-        allEmployer.put("allemployerNumberOfEmployees", employerNumberOfEmployees);
+        allEmployer.put("allEmployerCurriculumAreas", employerCurriculumAreas);
+        allEmployer.put("allEmployerNumberOfEmployees", employerNumberOfEmployees);
+        allEmployer.put("allEmployerCooperationType", employerCooperationType);
+        allEmployer.put("allEmployerPreferences", employerPreferences);
         allEmployer.put("allSchoolNamesAndIds", schoolAllNamesAndIds);
 
         mv.addAllObjects(allEmployer);

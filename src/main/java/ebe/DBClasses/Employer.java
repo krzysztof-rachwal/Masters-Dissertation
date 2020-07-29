@@ -22,6 +22,8 @@ public class Employer {
     private String CompanySummary;
     private String Notes;
     private String LogoLink;
+
+    //Extra
     private Boolean GivesSiteExperience;
     private Boolean GivesSiteVisits;
     private Boolean GivesWorkshops;
@@ -34,7 +36,6 @@ public class Employer {
     private Boolean CanDeliverToSchoolsInWelsh;
     private Boolean HasApprenticeshipProgramme;
 
-    //Extra
     private int EmployerLanguageID;
     private String EmployerLanguageName;
     private int EmployerLocalAuthorityID;
@@ -43,9 +44,34 @@ public class Employer {
     private String EmployAreaOfCurriculumName;
     private int EmployerIndustrySectorID;
     private String EmployerIndustrySectorName;
+    private int EmployerCooperationTypeID;
+    private String EmployerCooperationTypeName;
+    private int EmployerPreferencesID;
+    private String EmployerPreferencesName;
 
 
     public Employer() {
+    }
+
+    public Employer(int employerID, int statusOfEmployerID, String employerName, String employerAddressCity, String employerAddressStreet, String employerAddressNumber, String employerPostcode, String employerEmail, String contactPersonNameSurname, String contactPersonPosition, String employerPhone, String employerWebsite, String employerTwitter, String employerFB, int numberOfEmployeesID, String companySummary, String notes, String logoLink) {
+        EmployerID = employerID;
+        StatusOfEmployerID = statusOfEmployerID;
+        EmployerName = employerName;
+        EmployerAddressCity = employerAddressCity;
+        EmployerAddressStreet = employerAddressStreet;
+        EmployerAddressNumber = employerAddressNumber;
+        EmployerPostcode = employerPostcode;
+        EmployerEmail = employerEmail;
+        ContactPersonNameSurname = contactPersonNameSurname;
+        ContactPersonPosition = contactPersonPosition;
+        EmployerPhone = employerPhone;
+        EmployerWebsite = employerWebsite;
+        EmployerTwitter = employerTwitter;
+        EmployerFB = employerFB;
+        NumberOfEmployeesID = numberOfEmployeesID;
+        CompanySummary = companySummary;
+        Notes = notes;
+        LogoLink = logoLink;
     }
 
     public Employer(int employerID, int statusOfEmployerID, String employerName, String employerAddressCity, String employerAddressStreet, String employerAddressNumber, String employerPostcode, String employerEmail, String contactPersonNameSurname, String contactPersonPosition, String employerPhone, String employerWebsite, String employerTwitter, String employerFB, int numberOfEmployeesID, String companySummary, String notes, String logoLink, Boolean givesSiteExperience, Boolean givesSiteVisits, Boolean givesWorkshops, Boolean givesPresentations, Boolean attendsCareerFairs, Boolean givesWebinars, Boolean worksWithPrimaryPupils, Boolean useOfModernForeignLanguage, Boolean runsBusinessInWelsh, Boolean canDeliverToSchoolsInWelsh, Boolean hasApprenticeshipProgramme) {
@@ -423,6 +449,39 @@ public class Employer {
 
     public void setEmployerIndustrySectorName(String employerIndustrySectorName) {
         EmployerIndustrySectorName = employerIndustrySectorName;
+    }
+
+    public int getEmployerCooperationTypeID() {
+        return EmployerCooperationTypeID;
+    }
+
+    public void setEmployerCooperationTypeID(int employerCooperationTypeID) {
+        EmployerCooperationTypeID = employerCooperationTypeID;
+    }
+
+    public String getEmployerCooperationTypeName() {
+        return EmployerCooperationTypeName;
+    }
+
+    public void setEmployerCooperationTypeName(String employerCooperationTypeName) {
+        EmployerCooperationTypeName = employerCooperationTypeName;
+    }
+
+
+    public int getEmployerPreferencesID() {
+        return EmployerPreferencesID;
+    }
+
+    public void setEmployerPreferencesID(int employerPreferencesID) {
+        EmployerPreferencesID = employerPreferencesID;
+    }
+
+    public String getEmployerPreferencesName() {
+        return EmployerPreferencesName;
+    }
+
+    public void setEmployerPreferencesName(String employerPreferencesName) {
+        EmployerPreferencesName = employerPreferencesName;
     }
 }
 

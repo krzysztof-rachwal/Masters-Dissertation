@@ -45,13 +45,7 @@ public class EmployerQueries extends DBQueries {
                         rs.getString("EmployerPhone"), rs.getString("EmployerWebsite"),
                         rs.getString("EmployerTwitter"), rs.getString("EmployerFB"),
                         rs.getInt("NumberOfEmployeesID"), rs.getString("CompanySummary"),
-                        rs.getString("Notes"), rs.getString("LogoLink"),
-                        rs.getBoolean("GivesSiteExperience"), rs.getBoolean("GivesSiteVisits"),
-                        rs.getBoolean("GivesWorkshops"), rs.getBoolean("GivesPresentations"),
-                        rs.getBoolean("AttendsCareerFairs"), rs.getBoolean("GivesWebinars"),
-                        rs.getBoolean("WorksWithPrimaryPupils"), rs.getBoolean("UseOfModernForeignLanguage"),
-                        rs.getBoolean("RunsBusinessInWelsh"), rs.getBoolean("CanDeliverToSchoolsInWelsh"),
-                        rs.getBoolean("HasApprenticeshipProgramme"));
+                        rs.getString("Notes"), rs.getString("LogoLink"));
 
                 list.add(employer);
             }
@@ -95,17 +89,6 @@ public class EmployerQueries extends DBQueries {
                 employer.setCompanySummary(rs.getString("CompanySummary"));
                 employer.setNotes(rs.getString("Notes"));
                 employer.setLogoLink(rs.getString("LogoLink"));
-                employer.setGivesSiteExperience(rs.getBoolean("GivesSiteExperience"));
-                employer.setGivesSiteVisits(rs.getBoolean("GivesSiteVisits"));
-                employer.setGivesWorkshops(rs.getBoolean("GivesWorkshops"));
-                employer.setGivesPresentations(rs.getBoolean("GivesPresentations"));
-                employer.setAttendsCareerFairs(rs.getBoolean("AttendsCareerFairs"));
-                employer.setGivesWebinars(rs.getBoolean("GivesWebinars"));
-                employer.setWorksWithPrimaryPupils(rs.getBoolean("WorksWithPrimaryPupils"));
-                employer.setUseOfModernForeignLanguage(rs.getBoolean("UseOfModernForeignLanguage"));
-                employer.setRunsBusinessInWelsh(rs.getBoolean("RunsBusinessInWelsh"));
-                employer.setCanDeliverToSchoolsInWelsh(rs.getBoolean("CanDeliverToSchoolsInWelsh"));
-                employer.setHasApprenticeshipProgramme(rs.getBoolean("HasApprenticeshipProgramme"));
 
             }
         } catch (SQLException e) {
@@ -305,11 +288,65 @@ public class EmployerQueries extends DBQueries {
         return list;
     }
 
+    //11. Get All Possible Cooperation Types
+    public List<Employer> getAllCooperationTypes() throws DataAccessException {
+        String getQuery = "SELECT CooperationTypeID, CooperationTypeName FROM CooperationTypeList";
+        List<Employer> list = new ArrayList<Employer>();
+        Employer employer = null;
+        ResultSet rs = null;
+        try {
+            connection = ConnectionFactory.getConnection();
+            statement = connection.createStatement();
+            rs = statement.executeQuery(getQuery);
+            while (rs.next()) {
+                employer = new Employer();
+                employer.setEmployerCooperationTypeID(rs.getInt("CooperationTypeID"));
+                employer.setEmployerCooperationTypeName(rs.getString("CooperationTypeName"));
+
+                list.add(employer);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }  finally {
+            DBUtil.close(rs);
+            DBUtil.close(statement);
+            DBUtil.close(connection);
+        }
+        return list;
+    }
+
+    //12. Get All Possible Preferences
+    public List<Employer> getAllPreferences() throws DataAccessException {
+        String getQuery = "SELECT PreferenceID, PreferenceName FROM PreferenceList";
+        List<Employer> list = new ArrayList<Employer>();
+        Employer employer = null;
+        ResultSet rs = null;
+        try {
+            connection = ConnectionFactory.getConnection();
+            statement = connection.createStatement();
+            rs = statement.executeQuery(getQuery);
+            while (rs.next()) {
+                employer = new Employer();
+                employer.setEmployerPreferencesID(rs.getInt("PreferenceID"));
+                employer.setEmployerPreferencesName(rs.getString("PreferenceName"));
+
+                list.add(employer);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }  finally {
+            DBUtil.close(rs);
+            DBUtil.close(statement);
+            DBUtil.close(connection);
+        }
+        return list;
+    }
+
 
 
 
     ///////////////////////////////////// CREATE ALL METHODS ///////////////////////////////////////////////
-    //11. Create New Employer
+    //13. Create New Employer
 
     public int createEmployer(int statusOfEmployer, String Name, String AddressCity, String AddressStreet, String AddressNumber,
                                  String Postcode, String email, String phone, String website, int numberOfEmployees, String companySummary,
@@ -334,7 +371,7 @@ public class EmployerQueries extends DBQueries {
     }
 
     ///////////////////////////////////// UPDATE ALL METHODS ///////////////////////////////////////////////
-    //12. Update Employer by Id
+    //14. Update Employer by Id
     public Integer updateEmployer(int employerId, int statusOfEmployer, String Name, String AddressCity, String AddressStreet, String AddressNumber,
                                   String Postcode, String email, String phone, String website, int numberOfEmployees, String companySummary,
                                   String notes, String DocumentsAndVideos, String Logo, Boolean givesSiteExperience, Boolean givesSiteVisits,
@@ -357,7 +394,7 @@ public class EmployerQueries extends DBQueries {
 
 
     ///////////////////////////////////// DELETE ALL METHODS ///////////////////////////////////////////////
-    //13. DELETE EMPLOYER by Id
+    //15. DELETE EMPLOYER by Id
     public Integer deleteEmployer(int employerId) throws DataAccessException {
         String deleteSql = String.format("DELETE FROM Employer WHERE EmployerID = '%s'",employerId);
         return jdbcTemplate().update(deleteSql);
