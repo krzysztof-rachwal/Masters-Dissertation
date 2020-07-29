@@ -87,9 +87,35 @@ public class BaseController {
     @GetMapping("/add-employer")
     public ModelAndView AddEmployer (HttpSession session) {
         ModelAndView mv = new ModelAndView();
-        ObjectMapper objectMapper = new ObjectMapper();
-        // session = context.getSession();
         mv.setViewName("addEmployerPage");
+
+        List<Employer> employer;
+        List<Employer> employerLanguage;
+        List<Employer> employerIndustrySectorAreas;
+        List<Employer> employerCurriculimAreas;
+        List<Employer> employerLocalAuthorities;
+        List<Employer> employerNumberOfEmployees;
+        List<School> schoolAllNamesAndIds;
+
+        employer = EmployerQrys.getAllEmployers();
+        employerLanguage = EmployerQrys.getAllLanguages();
+        employerLocalAuthorities = EmployerQrys.getAllLocalAuthorities();
+        employerIndustrySectorAreas = EmployerQrys.getAllIndustrySectors();
+        employerCurriculimAreas = EmployerQrys.getAllCurriculumAreas();
+        employerNumberOfEmployees = EmployerQrys.getAllNumberOfEmployersPossible();
+        schoolAllNamesAndIds = SchoolQrys.getAllSchoolNamesAndIds();
+
+        Map<String,Object> allEmployer = new HashMap<String,Object>();
+        allEmployer.put("allEmployer", employer);
+        allEmployer.put("allEmployerLanguage", employerLanguage);
+        allEmployer.put("allEmployerLocalAuthorities", employerLocalAuthorities);
+        allEmployer.put("allEmployerIndustrySectors", employerIndustrySectorAreas);
+        allEmployer.put("allEmployerCurriculimAreas", employerCurriculimAreas);
+        allEmployer.put("allemployerNumberOfEmployees", employerNumberOfEmployees);
+        allEmployer.put("allSchoolNamesAndIds", schoolAllNamesAndIds);
+
+        mv.addAllObjects(allEmployer);
+
         return mv;
     }
 
@@ -146,7 +172,6 @@ public class BaseController {
         allVacancies.put("allVacanciesOccupationalCodes", vacanciesAllOccupationalCodes);
         allVacancies.put("allVacanciesApplicationMethods", vacanciesAllApplicationMethods);
         mv.addAllObjects(allVacancies);
-
 
         return mv;
     }

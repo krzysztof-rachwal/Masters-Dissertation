@@ -67,11 +67,11 @@ public class EmployerAPI {
         }
 
         //Create the Employer
-        EmployerQrys.createEmployer(StatusOfEmployerID,EmployerName,EmployerAddressCity,EmployerAddressStreet,EmployerAddressNumber
-                EmployerPostcode,EmployerEmail,ContactPersonNameSurname,ContactPersonPosition,EmployerPhone,EmployerWebsite,
-                EmployerTwitter, EmployerFB,NumberOfEmployeesID,CompanySummary,Notes,LogoLink,GivesSiteExperience,GivesSiteVisits,
-                GivesWorkshops,GivesPresentations,AttendsCareerFairs,GivesWebinars,WorksWithPrimaryPupils,UseOfModernForeignLanguage,
-                RunsBusinessInWelsh,CanDeliverToSchoolsInWelsh,HasApprenticeshipProgramme);
+//        EmployerQrys.createEmployer(StatusOfEmployerID,EmployerName,EmployerAddressCity,EmployerAddressStreet,EmployerAddressNumber,
+//                EmployerPostcode,EmployerEmail,ContactPersonNameSurname,ContactPersonPosition,EmployerPhone,EmployerWebsite,
+//                EmployerTwitter, EmployerFB,NumberOfEmployeesID,CompanySummary,Notes,LogoLink,GivesSiteExperience,GivesSiteVisits,
+//                GivesWorkshops,GivesPresentations,AttendsCareerFairs,GivesWebinars,WorksWithPrimaryPupils,UseOfModernForeignLanguage,
+//                RunsBusinessInWelsh,CanDeliverToSchoolsInWelsh,HasApprenticeshipProgramme);
 
         //      Get Employer Created Id
         int eventId = EventQrys.getLastEventCreated(EmployerName);

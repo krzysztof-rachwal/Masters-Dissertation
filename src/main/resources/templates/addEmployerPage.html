@@ -13,6 +13,9 @@
     <link rel="stylesheet" media="all" href="https://careerswales.gov.wales/sites/default/files/css/css_yFFWPpQsZCFeHMtvOieuCWLiTEiz--tT0otLunNJdLs.css"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css"/>
+
     <link th:href="@{../css/ebe_style.css}" href="../css/ebe_style.css" rel="stylesheet" />
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
     <title>Add Employer</title>
@@ -38,11 +41,13 @@
                     </div>
                     <div class="form-group">
                         <label for="company-summary">Company summary</label>
-                        <input type="text" class="form-control input-border mt-2" id="company-summary">
+                        <textarea class="form-control input-border mt-2" id="company-summary"></textarea>
                     </div>
                     <div class="form-group mt-3">
-                        <label for="no-employees" class="mt-0">No of Employees</label>
-                        <input type="text" class="form-control input-border" id="no-employees">
+                        <label for="employer-employees-number">Number of Employees</label><br>
+                        <select id="employer-employees-number">
+                            <option  th:each="employerNumberEmployees : ${allemployerNumberOfEmployees}" th:value="${employerNumberEmployees.getNumberOfEmployeesID()}" th:text="${employerNumberEmployees.getNumberOfEmployeesName()}"></option>
+                        </select>
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -77,15 +82,20 @@
                         <label for="mob-num">Mobile number</label>
                         <input type="text" class="form-control input-border" id="mob-num">
                     </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="text" class="form-control input-border" id="email">
+                    </div>
                 </div>
+
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="twitter">Twitter</label>
                         <input type="text" class="form-control input-border" id="twitter">
                     </div>
                     <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="text" class="form-control input-border" id="email">
+                        <label for="facebook">Facebook</label>
+                        <input type="text" class="form-control input-border" id="facebook">
                     </div>
                     <div class="form-group">
                         <label for="website">Website</label>
@@ -97,77 +107,43 @@
                 <div class="container my-3 p-0">
                     <h4>Other</h4>
                 </div>
-                <div class="col-md-4 ">
+                <div class="col-md-8">
                     <span class="h6">Sector Areas</span>
-                    <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="it">
-                        <label class="form-check-label" for="it">IT</label>
-                    </div>
-                    <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="social-care">
-                        <label class="form-check-label" for="social-care">Social Care</label>
-                    </div>
-                    <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="ngo">
-                        <label class="form-check-label" for="ngo">NGO</label>
-                    </div>
-                    <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="tourism">
-                        <label class="form-check-label" for="tourism">Tourism</label>
-                    </div>
-                    <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="media">
-                        <label class="form-check-label" for="media">Media</label>
+                    <div class="form-check md-12" th:each="employerIndustrySector : ${allEmployerIndustrySectors}">
+                        <input type="checkbox" class="form-check-input" th:id="industry_+${employerIndustrySector.getEmployerIndustrySectorID()}">
+                        <label class="form-check-label" th:for="industry_+${employerIndustrySector.getEmployerIndustrySectorID()}" th:text="${employerIndustrySector.getEmployerIndustrySectorName()}"></label>
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <span class="h6">Cooperation Type</span>
-                    <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="work-ex">
-                        <label class="form-check-label" for="work-ex">Work Experience</label>
+                    <div class="col-md-12 mb-4">
+                        <span class="h6">Cooperation Type</span>
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="work-ex">
+                            <label class="form-check-label" for="work-ex">Work Experience</label>
+                        </div>
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="site-visits">
+                            <label class="form-check-label" for="site-visits">Site visits</label>
+                        </div>
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="workshops">
+                            <label class="form-check-label" for="workshops">Workshops</label>
+                        </div>
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="career">
+                            <label class="form-check-label" for="career">Career Fairs</label>
+                        </div>
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="webinars">
+                            <label class="form-check-label" for="webinars">Webinars</label>
+                        </div>
                     </div>
-                    <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="site-visits">
-                        <label class="form-check-label" for="site-visits">Site visits</label>
-                    </div>
-                    <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="workshops">
-                        <label class="form-check-label" for="workshops">Workshops</label>
-                    </div>
-                    <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="career">
-                        <label class="form-check-label" for="career">Career Fairs</label>
-                    </div>
-                    <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="webinars">
-                        <label class="form-check-label" for="webinars">Webinars</label>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <span class="h6">Curriculum Areas</span>
-                    <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="science">
-                        <label class="form-check-label" for="science">Science And Technology</label>
-                    </div>
-                    <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="health">
-                        <label class="form-check-label" for="health">Health And Wellbeing</label>
-                    </div>
-                    <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="humanities">
-                        <label class="form-check-label" for="humanities">Humanities</label>
-                    </div>
-                    <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="language">
-                        <label class="form-check-label" for="language">Language Literacy And Communication</label>
-                    </div>
-                    <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="maths">
-                        <label class="form-check-label" for="maths">Mathematics And Numeracy</label>
-                    </div>
-                    <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="expressive">
-                        <label class="form-check-label" for="expressive">Expressive Arts</label>
+                    <div class="col-md-12">
+                        <span class="h6">Curriculum Areas</span>
+                        <div class="form-check" th:each="employerCurriculumAreas : ${allEmployerCurriculimAreas}" >
+                            <input type="checkbox" class="form-check-input" th:id="curriculum_+${employerCurriculumAreas.getEmployerAreaOfCurriculumID()}">
+                            <label class="form-check-label" th:for="curriculum_+${employerCurriculumAreas.getEmployerAreaOfCurriculumID()}" th:text="${employerCurriculumAreas.getEmployAreaOfCurriculumName()}"></label>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -175,21 +151,9 @@
                 <div class="col-md-8 my-4">
                     <div class="form-group">
                         <div class="row d-inline">
-                            <label for="schools" class="mt-3 d-block">School Preferences</label>
-                            <select class="selectpicker d-block" multiple data-live-search="true" id="schools">
-                                <option value="school">Schoool</option>
-                                <option value="school">Schoool</option>
-                                <option value="school">Schoool</option>
-                                <option value="school">Schoool</option>
-                                <option value="school">Schoool</option>
-                                <option value="school">Schoool</option>
-                                <option value="school">Schoool</option>
-                                <option value="school">Schoool</option>
-                                <option value="school">Schoool</option>
-                                <option value="school">Schoool</option>
-                                <option value="school">Schoool</option>
-                                <option value="school">Schoool</option>
-                                <option value="school">Schoool</option>
+                            <label for="schools-attending">Schools Preferences</label><br>
+                            <select class="selectpicker" multiple data-live-search="true" id="schools-attending">
+                                <option  th:each="school : ${allSchoolNamesAndIds}" th:value="${school.getSchoolID()}" th:text="${school.getSchoolName()}"></option>
                             </select>
                         </div>
                     </div>
@@ -211,8 +175,10 @@
                         <label class="form-check-label" for="foreign">Works in Foreign Language</label>
                     </div>
                     <div class="form-group col-md">
-                        <label for="lang">If yes, what languages?</label>
-                        <input type="text" class="form-control input-border" id="lang">
+                        <label for="employer-language">If yes, what languages?</label>
+                        <select class="selectpicker" multiple data-live-search="true" id="employer-language">
+                            <option  th:each="employerLanguage : ${allEmployerLanguage}" th:value="${employerLanguage.getEmployerLanguageID()}" th:text="${employerLanguage.getEmployerLanguageName()}"></option>
+                        </select>
                     </div>
                 </div>
             </div>
@@ -220,108 +186,19 @@
                 <div class="col-md my-3">
                     <span class="h6">Local Authorities</span>
                     <div class="row">
-                        <div class="col-md-3">
+                        <div class="col-md-3" th:each="employerLocalAuthority : ${allEmployerLocalAuthorities}" >
                             <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="caerphilly">
-                                <label class="form-check-label" for="caerphilly">Caerphilly</label>
-                            </div>
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="cere">
-                                <label class="form-check-label" for="cere">Ceredigion</label>
-                            </div>
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="Flintshire">
-                                <label class="form-check-label" for="Flintshire">Flintshire</label>
-                            </div>
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="Merthyr">
-                                <label class="form-check-label" for="cere">Merthyr Tydfil</label>
-                            </div>
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="newport">
-                                <label class="form-check-label" for="cere">Newport</label>
-                            </div>
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="rhonnda">
-                                <label class="form-check-label" for="rhonnda">Rhondda Cynon Taf</label>
+                                <input type="checkbox" class="form-check-input"th:id="local_+${employerLocalAuthority.getEmployerLocalAuthorityID()}">
+                                <label class="form-check-label" th:for="local_+${employerLocalAuthority.getEmployerLocalAuthorityID()}"  th:text="${employerLocalAuthority.getEmployerLocalAuthorityName()}"></label>
                             </div>
                         </div>
-                        <div class="col-md-3">
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="Isle">
-                                <label class="form-check-label" for="Isle">Isle of Anglesey</label>
-                            </div>
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="Neath">
-                                <label class="form-check-label" for="Neath">Neath Port Talbot</label>
-                            </div>
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="Powys">
-                                <label class="form-check-label" for="Powys">Powys</label>
-                            </div>
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="Torfaen">
-                                <label class="form-check-label" for="Torfaen">Torfaen</label>
-                            </div>
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="Blaenau">
-                                <label class="form-check-label" for="Blaenau">Blaenau</label>
-                            </div>
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="cardiff">
-                                <label class="form-check-label" for="cardiff">Cardiff</label>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="swansea">
-                                <label class="form-check-label" for="swansea">Swansea</label>
-                            </div>
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="wrexham">
-                                <label class="form-check-label" for="wrexham">Wrexham</label>
-                            </div>
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="vale">
-                                <label class="form-check-label" for="vale">Vale of Glamorgan</label>
-                            </div>
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="bridgend">
-                                <label class="form-check-label" for="bridgend">Bridgend</label>
-                            </div>
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="carmathenshire">
-                                <label class="form-check-label" for="carmathenshire">Carmathenshire</label>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="Monmountshire">
-                                <label class="form-check-label" for="Monmountshire">Monmountshire</label>
-                            </div>
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="gwynedd">
-                                <label class="form-check-label" for="gwynedd">Gwynedd</label>
-                            </div>
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="conwy">
-                                <label class="form-check-label" for="conwy">Conwy</label>
-                            </div>
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="Denbigshire">
-                                <label class="form-check-label" for="Denbigshire">Denbigshire</label>
-                            </div>
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="pembrokeshire">
-                                <label class="form-check-label" for="pembrokeshire">pembrokeshire</label>
-                            </div>
-                        </div>
+
                     </div>
                 </div>
             </div>
         </div>
         <div class="container my-4 text-center">
-            <button type="button" class="button--secondary text-center">Add Employer</button>
+            <button type="button" class="button--secondary text-center" onclick="CreateEmployer()">Add Employer</button>
         </div>
     </form>
 </div>
@@ -334,7 +211,13 @@
 <script type="text/javascript" src="https://careerswales.gov.wales/styleguide/assets/js/gel-styleguide.js"></script>
 <script type="text/javascript" src="https://careerswales.gov.wales/styleguide/assets/js/gel-elements-loader.js"></script>
 <script type="text/javascript" src="https://careerswales.gov.wales/styleguide/assets/js/gel-elements.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+
 <script th:src="@{../js/employer.js}" src="../js/employer.js"></script>
+<script>
+    $('.selectpicker').selectpicker();
+</script>
 
 
 </body>

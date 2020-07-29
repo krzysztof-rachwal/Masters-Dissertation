@@ -34,6 +34,17 @@ public class Employer {
     private Boolean CanDeliverToSchoolsInWelsh;
     private Boolean HasApprenticeshipProgramme;
 
+    //Extra
+    private int EmployerLanguageID;
+    private String EmployerLanguageName;
+    private int EmployerLocalAuthorityID;
+    private String EmployerLocalAuthorityName;
+    private int EmployerAreaOfCurriculumID;
+    private String EmployAreaOfCurriculumName;
+    private int EmployerIndustrySectorID;
+    private String EmployerIndustrySectorName;
+
+
     public Employer() {
     }
 
@@ -346,6 +357,72 @@ public class Employer {
 
     public void setHasApprenticeshipProgramme(Boolean hasApprenticeshipProgramme) {
         HasApprenticeshipProgramme = hasApprenticeshipProgramme;
+    }
+
+
+    public int getEmployerLanguageID() {
+        return EmployerLanguageID;
+    }
+
+    public void setEmployerLanguageID(int employerLanguageID) {
+        EmployerLanguageID = employerLanguageID;
+    }
+
+    public String getEmployerLanguageName() {
+        return EmployerLanguageName;
+    }
+
+    public void setEmployerLanguageName(String employerLanguageName) {
+        EmployerLanguageName = employerLanguageName;
+    }
+
+
+    public int getEmployerLocalAuthorityID() {
+        return EmployerLocalAuthorityID;
+    }
+
+    public void setEmployerLocalAuthorityID(int employerLocalAuthorityID) {
+        EmployerLocalAuthorityID = employerLocalAuthorityID;
+    }
+
+    public String getEmployerLocalAuthorityName() {
+        return EmployerLocalAuthorityName;
+    }
+
+    public void setEmployerLocalAuthorityName(String employerLocalAuthorityName) {
+        EmployerLocalAuthorityName = employerLocalAuthorityName;
+    }
+
+    public int getEmployerAreaOfCurriculumID() {
+        return EmployerAreaOfCurriculumID;
+    }
+
+    public void setEmployerAreaOfCurriculumID(int employerAreaOfCurriculumID) {
+        EmployerAreaOfCurriculumID = employerAreaOfCurriculumID;
+    }
+
+    public String getEmployAreaOfCurriculumName() {
+        return EmployAreaOfCurriculumName;
+    }
+
+    public void setEmployAreaOfCurriculumName(String employAreaOfCurriculumName) {
+        EmployAreaOfCurriculumName = employAreaOfCurriculumName;
+    }
+
+    public int getEmployerIndustrySectorID() {
+        return EmployerIndustrySectorID;
+    }
+
+    public void setEmployerIndustrySectorID(int employerIndustrySectorID) {
+        EmployerIndustrySectorID = employerIndustrySectorID;
+    }
+
+    public String getEmployerIndustrySectorName() {
+        return EmployerIndustrySectorName;
+    }
+
+    public void setEmployerIndustrySectorName(String employerIndustrySectorName) {
+        EmployerIndustrySectorName = employerIndustrySectorName;
     }
 }
 
