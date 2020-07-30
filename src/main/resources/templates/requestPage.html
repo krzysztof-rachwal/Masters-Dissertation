@@ -42,24 +42,24 @@
         <span class="title-h2">Request</span>
         <p class="mt-3">Request an event of your choice with employers you want to attend.</p>
     </div>
-    <div class="tabs-wrapper nav-tabs">
-        <ul class="tabs js-tabs" gel-processed="processed">
-            <li class="tabs__tab js-tab tab--is-active">
-                <a gel-processed="processed" data-toggle="tab" href="#general" class="tab__link ">
-                    <strong>Request Event</strong>
-                    <span class="summary"></span></a></li>
-            <li class="tabs__tab js-tab">
-                <a class="tab__link" gel-processed="processed" data-toggle="tab" href="#sector">
-                    <strong>Request by industry sector</strong>
-                    <span class="link__summary"></span></a></li>
-            <li class="tabs__tab js-tab">
-                <a class="tab__link" gel-processed="processed" data-toggle="tab" href="#lang">
-                    <strong>Request by language</strong><span class="link__summary"></span>
-                    <span class="visually-hidden">(active tab)</span></a></li>
+    <div class="tabs-wrapper">
+        <ul class="nav nav-tabs" id="myTabs" role="tablist">
+            <li class="nav-item">
+                <a id="general-tab" href="#general" class="nav-link active" data-toggle="tab" role="tab" aria-selected="true" aria-controls="general">
+                    <strong>Request Event</strong></a>
+            </li>
+            <li class="nav-item">
+                <a id="sector-tab" class="nav-link" data-toggle="tab" href="#sector" role="tab" aria-selected="false" aria-controls="sector">
+                    <strong>Request by industry sector</strong></a>
+            </li>
+            <li class="nav-item">
+                <a id="lang-tab" class="nav-link" data-toggle="tab" href="#lang" role="tab" aria-selected="false" aria-controls="lang">
+                    <strong>Request by language</strong></a>
+            </li>
         </ul>
     </div>
-    <div class="tab-content">
-        <div id="general" class="tab-pane fade active show">
+    <div class="tab-content" id="myTabContent">
+        <div id="general" class="tab-pane fade show active" role="tabpanel" aria-labelledby="general-tab">
             <form>
                 <div class="container-fluid">
                     <div class="row">
@@ -130,14 +130,14 @@
             </form>
 
         </div>
-        <div id="lang" class="tab-pane fade tab--is-active">
+        <div id="lang" class="tab-pane fade" role="tabpanel" aria-labelledby="sector-tab">
             <form>
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-8">
                             <div class="form-group">
                                 <label for="event_name">Event Name</label>
-                                <input type="text" id="event_name" name="event_name" class="form-control input-border">
+                                <input type="text" id="event_name_sector" name="event_name" class="form-control input-border">
                             </div>
                         </div>
                     </div>
@@ -145,7 +145,7 @@
                         <div class="col-md-8">
                             <div class="form-group">
                                 <label class=" text-left" for="event_date">Event Date</label>
-                                <input type="date" id="event_date" class="form-control input-border" name="event_date">
+                                <input type="date" id="event_date_sector" class="form-control input-border" name="event_date">
                             </div>
                         </div>
                     </div>
@@ -153,7 +153,7 @@
                         <div class="col-md-8">
                             <div class="form-group mb-0">
                                 <label for="event_time">Event Time</label>
-                                <input type="time" id="event_time" class="form-control input-border" name="event_time">
+                                <input type="time" id="event_time_sector" class="form-control input-border" name="event_time">
                             </div>
                         </div>
                     </div>
@@ -164,7 +164,7 @@
                             <div class="form-group mb-0">
                                 <div class="row d-inline">
                                     <label for="event_type" class="d-block">Event Type</label>
-                                    <select id="event_type" name="event_type" class="selectpicker d-block form-control">
+                                    <select id="event_type_sector" name="event_type" class="selectpicker d-block form-control">
                                         <option value="type1">type1</option>
                                         <option value="type2">type2</option>
                                         <option value="type3">type3</option>
@@ -191,7 +191,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="event_notes">Event Notes</label>
-                                <textarea type="time" id="event_notes" class="form-control input-border border-0"
+                                <textarea type="time" id="event_notes_sector" class="form-control input-border border-0"
                                           rows="5" name="event_notes"></textarea>
                             </div>
                         </div>
@@ -203,14 +203,14 @@
             </form>
 
         </div>
-        <div id="sector" class="tab-pane fade tab--is-active">
+        <div id="sector" class="tab-pane fade" role="tabpanel" aria-labelledby="lang-tab">
             <form>
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-8">
                             <div class="form-group">
                                 <label for="event_name">Event Name</label>
-                                <input type="text" id="event_name" name="event_name" class="form-control input-border">
+                                <input type="text" id="event_name_lang" name="event_name" class="form-control input-border">
                             </div>
                         </div>
                     </div>
@@ -218,7 +218,7 @@
                         <div class="col-md-8">
                             <div class="form-group">
                                 <label class=" text-left" for="event_date">Event Date</label>
-                                <input type="date" id="event_date" class="form-control input-border" name="event_date">
+                                <input type="date" id="event_date_lang" class="form-control input-border" name="event_date">
                             </div>
                         </div>
                     </div>
@@ -226,7 +226,7 @@
                         <div class="col-md-8">
                             <div class="form-group mb-0">
                                 <label for="event_time">Event Time</label>
-                                <input type="time" id="event_time" class="form-control input-border" name="event_time">
+                                <input type="time" id="event_time_lang" class="form-control input-border" name="event_time">
                             </div>
                         </div>
                     </div>
@@ -235,7 +235,7 @@
                             <div class="form-group mb-0">
                                 <div class="row d-inline">
                                     <label for="event_type" class="d-block">Event Type</label>
-                                    <select id="event_type" name="event_type" class="selectpicker d-block form-control">
+                                    <select id="event_type_lang" name="event_type" class="selectpicker d-block form-control">
                                         <option value="type1">type1</option>
                                         <option value="type2">type2</option>
                                         <option value="type3">type3</option>
@@ -262,7 +262,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="event_notes">Event Notes</label>
-                                <textarea type="time" id="event_notes" class="form-control input-border border-0"
+                                <textarea type="time" id="event_notes_lang" class="form-control input-border border-0"
                                           rows="5" name="event_notes"></textarea>
                             </div>
                         </div>
@@ -275,7 +275,6 @@
 
         </div>
     </div>
-
 </div>
 <!--END OF MAIN CONTENT-->
 
@@ -297,7 +296,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
-
 
 <script>
     $('select').selectpicker();
