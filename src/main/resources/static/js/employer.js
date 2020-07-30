@@ -43,7 +43,7 @@ function createNewEmployer() {
         },
         success: function (data) {
             if (data === true) {
-                location.assign("/events")
+                location.assign("/employers")
             } else {
                 alert("There was an error, please try again.")
                 alert(data.responseText)

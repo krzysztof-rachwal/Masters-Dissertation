@@ -371,7 +371,7 @@ public class EmployerQueries extends DBQueries {
 
 
     // 14. Get All Employer Names and Ids
-    public List<Employer> getAllEMployerIDsAttendingEvent(int eventId) throws DataAccessException {
+    public List<Employer> getAllEmployerIDsAttendingEvent(int eventId) throws DataAccessException {
         String getQuery = String.format("SELECT EmployerID FROM INT_AttendingEmployerOnEvent WHERE EventID = \"%s\"", eventId);
 
         List<Employer> list = new ArrayList<Employer>();
@@ -398,7 +398,7 @@ public class EmployerQueries extends DBQueries {
     }
 
     // 15. Get All Employer Names and Ids
-    public List<Employer> getAllEMployerNamesAttendingEvent(List<Employer> employers) throws DataAccessException {
+    public List<Employer> getAllEmployerNamesAttendingEvent(List<Employer> employers) throws DataAccessException {
 
         List<Employer> list = new ArrayList<Employer>();
 
@@ -456,7 +456,7 @@ public class EmployerQueries extends DBQueries {
 
     }
 
-    // 17. Create a new Event
+    // 17. Create a new Employer / version 1 not complete
     public int createEvent(  String EmployerName, String EmployerAddressCity, String EmployerAddressStreet, String EmployerAddressNumber,
                              String EmployerPostcode, String EmployerEmail, String ContactPersonNameSurname, String ContactPersonPosition, String EmployerPhone,
                              String EmployerTwitter, String EmployerFB, String EmployerWebsite, int NumberOfEmployeesID, String CompanySummary,

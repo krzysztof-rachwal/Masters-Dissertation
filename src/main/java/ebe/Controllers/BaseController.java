@@ -208,9 +208,15 @@ public class BaseController {
         mv.setViewName("profileEventPage");
 
         Event event = EventQrys.getEventDetailsById(id);
+        List<School> eventSchoolsIDs = SchoolQrys.getAllSchoolIDsAttendingEvent(id);
+        List<School> eventSchoolNames = SchoolQrys.getAllSchoolNamesAttendingEvent(eventSchoolsIDs);
+        List<Employer> eventEmployerIDs = EmployerQrys.getAllEmployerIDsAttendingEvent(id);
+        List<Employer> eventEmployerNames = EmployerQrys.getAllEmployerNamesAttendingEvent(eventEmployerIDs);
 
         Map<String,Object> Event = new HashMap<String,Object>();
         Event.put("event", event);
+        Event.put("AllSchoolsNames", eventSchoolNames);
+        Event.put("AllEmployersNames", eventEmployerNames);
         mv.addAllObjects(Event);
 
 //        mv.addObject("event",event);
