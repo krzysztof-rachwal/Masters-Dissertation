@@ -48,6 +48,8 @@ public class Employer {
     private String EmployerCooperationTypeName;
     private int EmployerPreferencesID;
     private String EmployerPreferencesName;
+    private int EmployerAlumniID;
+    private String EmployerAlumniName;
 
 
     public Employer() {
@@ -482,6 +484,22 @@ public class Employer {
 
     public void setEmployerPreferencesName(String employerPreferencesName) {
         EmployerPreferencesName = employerPreferencesName;
+    }
+
+    public int getEmployerAlumniID() {
+        return EmployerAlumniID;
+    }
+
+    public void setEmployerAlumniID(int employerAlumniID) {
+        EmployerAlumniID = employerAlumniID;
+    }
+
+    public String getEmployerAlumniName() {
+        return EmployerAlumniName;
+    }
+
+    public void setEmployerAlumniName(String employerAlumniName) {
+        EmployerAlumniName = employerAlumniName;
     }
 }
 

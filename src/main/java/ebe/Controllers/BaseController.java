@@ -97,6 +97,7 @@ public class BaseController {
         List<Employer> employerNumberOfEmployees;
         List<Employer> employerCooperationType;
         List<Employer> employerPreferences;
+        List<Employer> employerAlumni;
         List<School> schoolAllNamesAndIds;
 
         employer = EmployerQrys.getAllEmployers();
@@ -107,6 +108,7 @@ public class BaseController {
         employerNumberOfEmployees = EmployerQrys.getAllNumberOfEmployersPossible();
         employerCooperationType = EmployerQrys.getAllCooperationTypes();
         employerPreferences = EmployerQrys.getAllPreferences();
+        employerAlumni = EmployerQrys.getAllPreferences();
         schoolAllNamesAndIds = SchoolQrys.getAllSchoolNamesAndIds();
 
         Map<String,Object> allEmployer = new HashMap<String,Object>();
@@ -206,7 +208,12 @@ public class BaseController {
         mv.setViewName("profileEventPage");
 
         Event event = EventQrys.getEventDetailsById(id);
-        mv.addObject("event",event);
+
+        Map<String,Object> Event = new HashMap<String,Object>();
+        Event.put("event", event);
+        mv.addAllObjects(Event);
+
+//        mv.addObject("event",event);
 
         return mv;
     }

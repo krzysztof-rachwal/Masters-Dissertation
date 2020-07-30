@@ -55,12 +55,12 @@
                     <label>Address</label>
                     <div class="input-group">
                         <div class="input-group-prepend">
-                            <input type="text" id="street" class="form-control border-right input-sm" placeholder="Street">
-                            <input type="text" id="buildingNo" class="form-control" placeholder="Building No">
+                            <input type="text" id="employer-street" class="form-control border-right input-sm" placeholder="Street">
+                            <input type="text" id="employer-number" class="form-control" placeholder="Building No">
                         </div>
                         <div class="input-group-prepend mt-1">
-                            <input type="text" id="PostCode" class="form-control border-right" placeholder="Post Code">
-                            <input type="text" id="city" class="form-control" placeholder="City">
+                            <input type="text" id="employer-postcode" class="form-control border-right" placeholder="Post Code">
+                            <input type="text" id="employer-city" class="form-control" placeholder="City">
                         </div>
                     </div>
                 </div>
@@ -75,32 +75,37 @@
                         <input type="text" class="form-control input-border" id="contact-name">
                     </div>
                     <div class="form-group">
-                        <label for="tel-num">Telephone number</label>
-                        <input type="text" class="form-control input-border" id="tel-num">
+                        <label for="contact-position">Contact Position</label>
+                        <input type="text" class="form-control input-border" id="contact-position">
                     </div>
                     <div class="form-group">
-                        <label for="mob-num">Mobile number</label>
-                        <input type="text" class="form-control input-border" id="mob-num">
+                        <label for="employer-phone">Phone number</label>
+                        <input type="text" class="form-control input-border" id="employer-phone">
                     </div>
+<!--                    <div class="form-group">-->
+<!--                        <label for="mob-num">Mobile number</label>-->
+<!--                        <input type="text" class="form-control input-border" id="employer-mobile">-->
+<!--                    </div>-->
                     <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="text" class="form-control input-border" id="email">
+                        <label for="employer-email">Email</label>
+                        <input type="text" class="form-control input-border" id="employer-email">
                     </div>
                 </div>
 
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="twitter">Twitter</label>
-                        <input type="text" class="form-control input-border" id="twitter">
+                        <label for="employer-twitter">Twitter</label>
+                        <input type="text" class="form-control input-border" id="employer-twitter">
                     </div>
                     <div class="form-group">
-                        <label for="facebook">Facebook</label>
-                        <input type="text" class="form-control input-border" id="facebook">
+                        <label for="employer-facebook">Facebook</label>
+                        <input type="text" class="form-control input-border" id="employer-facebook">
                     </div>
                     <div class="form-group">
-                        <label for="website">Website</label>
-                        <input type="text" class="form-control input-border" id="website">
+                        <label for="employer-website">Website</label>
+                        <input type="text" class="form-control input-border" id="employer-website">
                     </div>
+
                 </div>
             </div>
             <div class="row">
@@ -146,6 +151,11 @@
                         <option  th:each="employerLanguage : ${allEmployerLanguage}" th:value="${employerLanguage.getEmployerLanguageID()}" th:text="${employerLanguage.getEmployerLanguageName()}"></option>
                     </select>
                 </div>
+
+                <div class="col-md-6 mb-4" >
+                    <label for="employer-notes">Notes</label>
+                    <input type="text" class="form-control input-border" id="employer-notes">
+                </div>
                 <div class="col-md-12 my-4">
                     <label for="local-authorities">LocalAuthorities</label><br>
                     <select class="selectpicker" data-width="90%" multiple data-live-search="true" id="local-authorities">
@@ -155,7 +165,7 @@
             </div>
 
         <div class="container my-4 text-center">
-            <button type="button" class="button--secondary text-center" onclick="CreateEmployer()">Add Employer</button>
+            <button type="button" class="button--secondary text-center" onclick="createNewEmployer()">Add Employer</button>
         </div>
     </form>
 </div>

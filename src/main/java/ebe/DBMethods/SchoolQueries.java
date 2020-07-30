@@ -48,7 +48,7 @@ public class SchoolQueries extends DBQueries {
     }
 
 
-    // 1. Get All School Names and Ids
+    // 3. Get All School Names and Ids
     public List<School> getAllSchoolNamesAndIds() throws DataAccessException {
         String getQuery = "SELECT SchoolID,SchoolName FROM School";
         List<School> list = new ArrayList<School>();
@@ -75,11 +75,70 @@ public class SchoolQueries extends DBQueries {
         return list;
     }
 
+    // 4. Get All School Names and Ids
+    public List<School> getAllSchoolIDsAttendingEvent(int eventId) throws DataAccessException {
+        String getQuery = String.format("SELECT SchoolID FROM INT_AttendingSchoolOnEvent WHERE EventID = \"%s\"", eventId);
+
+        List<School> list = new ArrayList<School>();
+        School school = null;
+        ResultSet rs = null;
+        try {
+            connection = ConnectionFactory.getConnection();
+            statement = connection.createStatement();
+            rs = statement.executeQuery(getQuery);
+            while (rs.next()) {
+                school = new School();
+                school.setSchoolID(rs.getInt("SchoolID"));
+
+                list.add(school);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            DBUtil.close(rs);
+            DBUtil.close(statement);
+            DBUtil.close(connection);
+        }
+        return list;
+    }
+
+    // 5. Get All School Names and Ids
+    public List<School> getAllSchoolNamesAttendingEvent(List<School> schools) throws DataAccessException {
+
+        List<School> list = new ArrayList<School>();
+
+        for (School school : schools) {
+            String getQuery = String.format("SELECT SchoolName FROM School WHERE SchoolID = \"%s\"", school.getSchoolID());
+
+
+            School schoolName = null;
+            ResultSet rs = null;
+            try {
+                connection = ConnectionFactory.getConnection();
+                statement = connection.createStatement();
+                rs = statement.executeQuery(getQuery);
+                while (rs.next()) {
+                    schoolName = new School();
+                    schoolName.setSchoolName(rs.getString("SchoolName"));
+
+                    list.add(schoolName);
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } finally {
+                DBUtil.close(rs);
+                DBUtil.close(statement);
+                DBUtil.close(connection);
+            }
+        }
+        return list;
+    }
+
 
 
 
     ///////////////////////////////////// CREATE ALL METHODS ///////////////////////////////////////////////
-    // 1. Create a new School
+    // 6. Create a new School
     public int createNewSchool(String Name, String AddressCity, String AddressStreet,
                                Boolean AddressNumber, String Email, String Phone) throws DataAccessException {
 
@@ -90,7 +149,7 @@ public class SchoolQueries extends DBQueries {
 
     }
     ///////////////////////////////////// UPDATE ALL METHODS ///////////////////////////////////////////////
-    // 1. Update an School by Id
+    // 7. Update an School by Id
 
     public Integer updateSchool(int SchoolID,String Name, String AddressCity, String AddressStreet,
                                 Boolean AddressNumber, String Email, String Phone) throws DataAccessException {
@@ -102,7 +161,7 @@ public class SchoolQueries extends DBQueries {
     }
 
     ///////////////////////////////////// DELETE ALL METHODS ///////////////////////////////////////////////
-    // 1. Delete an School by ID
+    // 8. Delete an School by ID
 
     public Integer deleteSchool(int schoolId) throws DataAccessException {
         String deleteSql = String.format("DELETE FROM School WHERE SchoolID = '%s'",schoolId);

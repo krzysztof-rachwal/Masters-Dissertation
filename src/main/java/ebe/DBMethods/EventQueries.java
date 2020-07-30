@@ -157,7 +157,6 @@ public class EventQueries extends DBQueries {
         return jdbcTemplate().update(insertSql, EventName, TypeOfEventID, EventDateAndTime, EventVenueName, EventAddressCity,
                 EventAddressStreet, EventAddressNumber, EventVenuePostcode, EventSummary, IsPublic, IsCancelled, NameOfAdviser,
                 NumberOfAttendees, PromotesApprenticeships, PromotesWelshLanguage, ChallengesGenderStereoTypes);
-
     }
 
     // 6. Create new Employer / Event Intersection

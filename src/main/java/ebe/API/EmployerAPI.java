@@ -30,8 +30,9 @@ public class EmployerAPI {
     //1. Create Employer
     @RequestMapping(value="/api/create/employer", method= RequestMethod.GET)
     public Boolean createEmployer(
-            @RequestParam(name="StatusOfEmployerID") int StatusOfEmployerID,
+//            @RequestParam(name="StatusOfEmployerID") int StatusOfEmployerID,
             @RequestParam(name="EmployerName") String EmployerName,
+            @RequestParam(name="EmployerSummary") String CompanySummary,
             @RequestParam(name="EmployerAddressCity") String EmployerAddressCity,
             @RequestParam(name="EmployerAddressStreet") String EmployerAddressStreet,
             @RequestParam(name="EmployerAddressNumber") String EmployerAddressNumber,
@@ -44,40 +45,33 @@ public class EmployerAPI {
             @RequestParam(name="EmployerTwitter") String EmployerTwitter,
             @RequestParam(name="EmployerFB") String EmployerFB,
             @RequestParam(name="NumberOfEmployeesID") int NumberOfEmployeesID,
-            @RequestParam(name="CompanySummary") String CompanySummary,
-            @RequestParam(name="Notes") String Notes,
-            @RequestParam(name="LogoLink") String LogoLink,
-            @RequestParam(name="GivesSiteExperience") Boolean GivesSiteExperience,
-            @RequestParam(name="GivesSiteVisits") Boolean GivesSiteVisits,
-            @RequestParam(name="GivesWorkshops") Boolean GivesWorkshops,
-            @RequestParam(name="GivesPresentations") Boolean GivesPresentations,
-            @RequestParam(name="AttendsCareerFairs") Boolean AttendsCareerFairs,
-            @RequestParam(name="GivesWebinars") Boolean GivesWebinars,
-            @RequestParam(name="WorksWithPrimaryPupils") Boolean WorksWithPrimaryPupils,
-            @RequestParam(name="UseOfModernForeignLanguage") Boolean UseOfModernForeignLanguage,
-            @RequestParam(name="RunsBusinessInWelsh") Boolean RunsBusinessInWelsh,
-            @RequestParam(name="CanDeliverToSchoolsInWelsh") Boolean CanDeliverToSchoolsInWelsh,
-            @RequestParam(name="HasApprenticeshipProgramme") Boolean HasApprenticeshipProgramme,
-            @RequestParam(name="SchoolPreferences") String SchoolPreferences) throws ParseException {
 
-        ArrayList<Integer> schoolIdList = new ArrayList<Integer>();
+            @RequestParam(name="EmployerNotes") String EmployerNotes,
+//            @RequestParam(name="LogoLink") String LogoLink,
+            @RequestParam(name="EmployerSectorIndustry") String EmployerSectorIndustry,
+            @RequestParam(name="EmployerCooperationType") String EmployerCooperationType,
+            @RequestParam(name="EmployerCurriculumAreas") String EmployerCurriculumAreas,
+            @RequestParam(name="EmployerPreferences") String EmployerPreferences,
+            @RequestParam(name="EmployerLanguage") String EmployerLanguage,
+            @RequestParam(name="SchoolPreferences") String SchoolPreferences,
+            @RequestParam(name="LocalAuthorities") String LocalAuthorities) throws ParseException {
 
-        for (String schoolID : SchoolPreferences.split(",")) {
-            schoolIdList.add(Integer.parseInt(schoolID));
-        }
+//        ArrayList<Integer> schoolIdList = new ArrayList<Integer>();
+//
+//        for (String schoolID : SchoolPreferences.split(",")) {
+//            schoolIdList.add(Integer.parseInt(schoolID));
+//        }
 
         //Create the Employer
-//        EmployerQrys.createEmployer(StatusOfEmployerID,EmployerName,EmployerAddressCity,EmployerAddressStreet,EmployerAddressNumber,
-//                EmployerPostcode,EmployerEmail,ContactPersonNameSurname,ContactPersonPosition,EmployerPhone,EmployerWebsite,
-//                EmployerTwitter, EmployerFB,NumberOfEmployeesID,CompanySummary,Notes,LogoLink,GivesSiteExperience,GivesSiteVisits,
-//                GivesWorkshops,GivesPresentations,AttendsCareerFairs,GivesWebinars,WorksWithPrimaryPupils,UseOfModernForeignLanguage,
-//                RunsBusinessInWelsh,CanDeliverToSchoolsInWelsh,HasApprenticeshipProgramme);
+        EmployerQrys.createEvent(EmployerName,EmployerAddressCity,EmployerAddressStreet,EmployerAddressNumber,
+                EmployerPostcode,EmployerEmail,ContactPersonNameSurname,ContactPersonPosition,EmployerPhone,EmployerWebsite,
+                EmployerTwitter, EmployerFB,NumberOfEmployeesID,CompanySummary,EmployerNotes);
 
-        //      Get Employer Created Id
-        int eventId = EventQrys.getLastEventCreated(EmployerName);
-
-        //      Insert into the School / Event intersection table
-        EventQrys.updateSchoolEventIntersection(eventId, schoolIdList);
+//        //      Get Employer Created Id
+//        int eventId = EventQrys.getLastEventCreated(EmployerName);
+//
+//        //      Insert into the School / Event intersection table
+//        EventQrys.updateSchoolEventIntersection(eventId, schoolIdList);
 
         return true;
     }
