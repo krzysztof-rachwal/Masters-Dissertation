@@ -92,7 +92,7 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="vacancy-type" class="  mb-1">Type of Vacancy</label>
+                        <label for="vacancy-type" class="  mb-1">Status of Vacancy</label>
                         <select class="custom-select p-2" id="vacancy-status">
                             <option th:each="vacancyStatus : ${allVacanciesStatus}" th:value="${vacancyStatus.getStatusOfVacancyID()}" th:text="${vacancyStatus.getStatusOfVacancyName()}"></option>
                         </select>

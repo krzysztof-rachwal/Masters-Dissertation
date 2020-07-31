@@ -32,6 +32,7 @@ public class EmployerAPI {
     public Boolean createEmployer(
 //            @RequestParam(name="StatusOfEmployerID") int StatusOfEmployerID,
             @RequestParam(name="EmployerName") String EmployerName,
+            @RequestParam(name="EmployerStatus") int EmployerStatus,
             @RequestParam(name="EmployerSummary") String CompanySummary,
             @RequestParam(name="EmployerAddressCity") String EmployerAddressCity,
             @RequestParam(name="EmployerAddressStreet") String EmployerAddressStreet,
@@ -56,21 +57,60 @@ public class EmployerAPI {
             @RequestParam(name="SchoolPreferences") String SchoolPreferences,
             @RequestParam(name="LocalAuthorities") String LocalAuthorities) throws ParseException {
 
-//        ArrayList<Integer> schoolIdList = new ArrayList<Integer>();
-//
-//        for (String schoolID : SchoolPreferences.split(",")) {
-//            schoolIdList.add(Integer.parseInt(schoolID));
-//        }
+        ArrayList<Integer> employerCooperationTypeList = new ArrayList<Integer>();
+        ArrayList<Integer> employerIndustrySectorList = new ArrayList<Integer>();
+        ArrayList<Integer> employerPreferencesList = new ArrayList<Integer>();
+        ArrayList<Integer> employerSupportCurriculumAreaList = new ArrayList<Integer>();
+        ArrayList<Integer> employerLanguageUsedList = new ArrayList<Integer>();
+        ArrayList<Integer> employerLocalAuthorityList = new ArrayList<Integer>();
+        ArrayList<Integer> employerSchoolPreferencesList = new ArrayList<Integer>();
+
+        for (String schoolID : EmployerCooperationType.split(",")) {
+            employerCooperationTypeList.add(Integer.parseInt(schoolID));
+        }
+        for (String schoolID : EmployerSectorIndustry.split(",")) {
+            employerIndustrySectorList.add(Integer.parseInt(schoolID));
+        }
+        for (String schoolID : EmployerPreferences.split(",")) {
+            employerPreferencesList.add(Integer.parseInt(schoolID));
+        }
+        for (String schoolID : EmployerCurriculumAreas.split(",")) {
+            employerSupportCurriculumAreaList.add(Integer.parseInt(schoolID));
+        }
+        for (String schoolID : EmployerLanguage.split(",")) {
+            employerLanguageUsedList.add(Integer.parseInt(schoolID));
+        }
+        for (String schoolID : LocalAuthorities.split(",")) {
+            employerLocalAuthorityList.add(Integer.parseInt(schoolID));
+        }
+
+        for (String schoolID : SchoolPreferences.split(",")) {
+            employerSchoolPreferencesList.add(Integer.parseInt(schoolID));
+        }
 
         //Create the Employer
-        EmployerQrys.createEvent(EmployerName,EmployerAddressCity,EmployerAddressStreet,EmployerAddressNumber,
+        EmployerQrys.createEmployer(EmployerStatus,EmployerName,EmployerAddressCity,EmployerAddressStreet,EmployerAddressNumber,
                 EmployerPostcode,EmployerEmail,ContactPersonNameSurname,ContactPersonPosition,EmployerPhone,EmployerWebsite,
                 EmployerTwitter, EmployerFB,NumberOfEmployeesID,CompanySummary,EmployerNotes);
 
 //        //      Get Employer Created Id
-//        int eventId = EventQrys.getLastEventCreated(EmployerName);
+        int employerId = EmployerQrys.getLastEmployerCreated(EmployerName);
 //
-//        //      Insert into the School / Event intersection table
+        //     1. Intersection Table - Employer / Cooperation Type
+                EmployerQrys.updateEmployerCooperationIntersection(employerId, employerCooperationTypeList);
+        //     2. Intersection Table - Employer / Industry Sector
+                EmployerQrys.updateEmployerIndustrySectorIntersection(employerId, employerCooperationTypeList);
+        //     3. Intersection Table - Employer / Preferences
+                EmployerQrys.updateEmployerPreferencesIntersection(employerId, employerCooperationTypeList);
+        //     4. Intersection Table - Employer / School Preferences
+                EmployerQrys.updateSchoolEmployerSchoolPreferencesIntersection(employerId, employerCooperationTypeList);
+        //     5. Intersection Table - Employer / Support of Area of Curriculum
+                EmployerQrys.updateEmployerEmployerCurriculumAreaIntersection(employerId, employerCooperationTypeList);
+        //     6. Intersection Table - Employer / Language Used
+                EmployerQrys.updateSchoolEmployerLanguageIntersection(employerId, employerCooperationTypeList);
+        //     7. Intersection Table - Employer / Local Authority
+                EmployerQrys.updateSchoolEmployerLocalAuthoritiesIntersection(employerId, employerCooperationTypeList);
+
 //        EventQrys.updateSchoolEventIntersection(eventId, schoolIdList);
 
         return true;
