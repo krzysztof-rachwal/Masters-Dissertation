@@ -47,15 +47,15 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="event-name">Event name</label>
-                                    <input type="text" class="form-control input-border" id="event-name" th:value="${event.getName()}">
+                                    <input type="text" class="form-control input-border" id="event-name" th:value="${event.getEventName()}">
                                 </div>
                                 <div class="form-group">
                                     <label for="event-type">Event type</label>
-                                    <input type="text" class="form-control input-border" id="event-type" th:value="${event.getTypeOfEvent()}">
+                                    <input type="text" class="form-control input-border" id="event-type" th:value="${event.getTypeOfEventID()}">
                                 </div>
                                 <div class="form-group">
                                     <label for="event-date">Event date</label>
-                                    <input type="date" class="form-control input-border" id="event-date" th:value="${event.getDate()}">
+                                    <input type="date" class="form-control input-border" id="event-date" th:value="${event.getEventDateAndTime()}">
                                 </div>
                                 <div class="form-group">
                                     <label for="event-time">Event time</label>
@@ -107,9 +107,9 @@
                             <div class="form-group">
                                 <fieldset id="group3">
                                     <label>Does the event challenger gender stereotypes?</label>
-                                    <input type="radio" id="gender-yes" name="group3" value="Yes" th:checked="${event.getChallangesGenderStereotypes() == True}">
+                                    <input type="radio" id="gender-yes" name="group3" value="Yes" th:checked="${event.getChallengesGenderStereotypes() == True}">
                                     <label for="gender-yes">Yes</label>
-                                    <input type="radio" id="gender-no" name="group3" value="No" th:checked="${event.getChallangesGenderStereotypes() == False}">
+                                    <input type="radio" id="gender-no" name="group3" value="No" th:checked="${event.getChallengesGenderStereotypes() == False}">
                                     <label for="gender-no">No</label>
                                 </fieldset>
                             </div>
@@ -168,7 +168,7 @@
                 </button>
             </div>
             <div class="modal-body">
-               <p  th:text="'Are you sure you want to delete '+ ${event.getName()} + ' event?'">
+               <p  th:text="'Are you sure you want to delete '+ ${event.getEventName()} + ' event?'">
                </p>
                 <button type="button" class="btn buttonUpdate" th:onclick="|deleteEvent(${event.getEventID()})|">Yes</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
@@ -193,7 +193,7 @@
             <div class="col-md-6">
                 <div class="form-group form-inline">
                     <span class="font-weight-bold h6">Event name </span>
-                    <span class="ml-4" th:text="${event.getName()}"></span>
+                    <span class="ml-4" th:text="${event.getEventName()}"></span>
                 </div>
                 <div class="form-group form-inline">
                     <span class="font-weight-bold h6">Event Type </span>
@@ -201,7 +201,7 @@
                 </div>
                 <div class="form-group form-inline">
                     <span class="font-weight-bold h6">Event Date </span>
-                    <span class="ml-4" th:text="${event.getDate()}"></span>
+                    <span class="ml-4" th:text="${event.getEventDateAndTime()}"></span>
                 </div>
                 <div class="form-group form-inline">
                     <span class="font-weight-bold h6">Event Time </span>
@@ -210,7 +210,7 @@
 
                 <div class="form-group form-inline">
                     <span class="font-weight-bold h6">Event Venue </span>
-                    <span class="ml-4" th:text="${event.getPostCode()}"></span>
+                    <span class="ml-4" th:text="${event.getEventAddressCity()}"></span>
                 </div>
 
                 <div class="form-group form-inline">
@@ -245,7 +245,7 @@
 
                 <div class="form-group form-inline">
                     <span class="font-weight-bold h6">Does the event challenger gender stereotypes? </span>
-                    <span class="ml-4"  th:text="${event.getChallangesGenderStereotypes()}"></span>
+                    <span class="ml-4"  th:text="${event.getChallengesGenderStereotypes()}"></span>
                 </div>
             </div>
         </div>
@@ -253,21 +253,13 @@
             <div class="mb-auto p-2 col-md-6 well2">
                 <label class="font-weight-bold h6">Schools Attending</label>
                 <ul class="list-group">
-                    <li class="list-group-item">Cras justo odio</li>
-                    <li class="list-group-item">Dapibus ac facilisis in</li>
-                    <li class="list-group-item">Morbi leo risus</li>
-                    <li class="list-group-item">Porta ac consectetur ac</li>
-                    <li class="list-group-item">Vestibulum at eros</li>
+                    <li class="list-group-item" th:each="schools : ${AllSchoolsNames}" th:text="${schools.getSchoolName()}"></li>
                 </ul>
             </div>
             <div class="mb-auto p-2 col-md-6 well2">
                 <label class="font-weight-bold h6">Employers Attending</label>
                 <ul class="list-group">
-                    <li class="list-group-item">Cras justo odio</li>
-                    <li class="list-group-item">Dapibus ac facilisis in</li>
-                    <li class="list-group-item">Morbi leo risus</li>
-                    <li class="list-group-item">Porta ac consectetur ac</li>
-                    <li class="list-group-item">Vestibulum at eros</li>
+                    <li class="list-group-item" th:each="employer : ${AllEmployersNames}" th:text="${employer.getEmployerName()}"></li>
                 </ul>
             </div>
         </div>

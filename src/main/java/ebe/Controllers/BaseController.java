@@ -3,6 +3,7 @@ package ebe.Controllers;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ebe.DBClasses.Employer;
 import ebe.DBClasses.Event;
+import ebe.DBClasses.School;
 import ebe.DBClasses.Vacancy;
 import ebe.DBMethods.EmployerQueries;
 import ebe.DBMethods.EventQueries;
@@ -86,9 +87,43 @@ public class BaseController {
     @GetMapping("/add-employer")
     public ModelAndView AddEmployer (HttpSession session) {
         ModelAndView mv = new ModelAndView();
-        ObjectMapper objectMapper = new ObjectMapper();
-        // session = context.getSession();
         mv.setViewName("addEmployerPage");
+
+        List<Employer> employer;
+        List<Employer> employerLanguage;
+        List<Employer> employerIndustrySectorAreas;
+        List<Employer> employerCurriculumAreas;
+        List<Employer> employerLocalAuthorities;
+        List<Employer> employerNumberOfEmployees;
+        List<Employer> employerCooperationType;
+        List<Employer> employerPreferences;
+        List<Employer> employerAlumni;
+        List<School> schoolAllNamesAndIds;
+
+        employer = EmployerQrys.getAllEmployers();
+        employerLanguage = EmployerQrys.getAllLanguages();
+        employerLocalAuthorities = EmployerQrys.getAllLocalAuthorities();
+        employerIndustrySectorAreas = EmployerQrys.getAllIndustrySectors();
+        employerCurriculumAreas = EmployerQrys.getAllCurriculumAreas();
+        employerNumberOfEmployees = EmployerQrys.getAllNumberOfEmployersPossible();
+        employerCooperationType = EmployerQrys.getAllCooperationTypes();
+        employerPreferences = EmployerQrys.getAllPreferences();
+        employerAlumni = EmployerQrys.getAllPreferences();
+        schoolAllNamesAndIds = SchoolQrys.getAllSchoolNamesAndIds();
+
+        Map<String,Object> allEmployer = new HashMap<String,Object>();
+        allEmployer.put("allEmployer", employer);
+        allEmployer.put("allEmployerLanguage", employerLanguage);
+        allEmployer.put("allEmployerLocalAuthorities", employerLocalAuthorities);
+        allEmployer.put("allEmployerIndustrySectors", employerIndustrySectorAreas);
+        allEmployer.put("allEmployerCurriculumAreas", employerCurriculumAreas);
+        allEmployer.put("allEmployerNumberOfEmployees", employerNumberOfEmployees);
+        allEmployer.put("allEmployerCooperationType", employerCooperationType);
+        allEmployer.put("allEmployerPreferences", employerPreferences);
+        allEmployer.put("allSchoolNamesAndIds", schoolAllNamesAndIds);
+
+        mv.addAllObjects(allEmployer);
+
         return mv;
     }
 
@@ -124,9 +159,28 @@ public class BaseController {
     @GetMapping("/add-vacancy")
     public ModelAndView AddVacancy (HttpSession session) {
         ModelAndView mv = new ModelAndView();
-        ObjectMapper objectMapper = new ObjectMapper();
-        // session = context.getSession();
         mv.setViewName("addVacancyPage");
+
+        List<Employer> employerAllNamesAndIds;
+        List<Vacancy> vacanciesAllTypes;
+        List<Vacancy> vacanciesAllStatus;
+        List<Vacancy> vacanciesAllOccupationalCodes;
+        List<Vacancy> vacanciesAllApplicationMethods;
+
+        employerAllNamesAndIds = EmployerQrys.getAllEmployerNamesAndIds();
+        vacanciesAllTypes = VacancyQrys.getAllTypesOfVacancy();
+        vacanciesAllStatus = VacancyQrys.getAllStatusOfVacancy();
+        vacanciesAllOccupationalCodes = VacancyQrys.getAllOccupationalCodes();
+        vacanciesAllApplicationMethods = VacancyQrys.getAllApplicationMethods();
+
+        Map<String,Object> allVacancies = new HashMap<String,Object>();
+        allVacancies.put("AllEmployerNamesAndIds", employerAllNamesAndIds);
+        allVacancies.put("allVacanciesTypes", vacanciesAllTypes);
+        allVacancies.put("allVacanciesStatus", vacanciesAllStatus);
+        allVacancies.put("allVacanciesOccupationalCodes", vacanciesAllOccupationalCodes);
+        allVacancies.put("allVacanciesApplicationMethods", vacanciesAllApplicationMethods);
+        mv.addAllObjects(allVacancies);
+
         return mv;
     }
 
@@ -154,7 +208,18 @@ public class BaseController {
         mv.setViewName("profileEventPage");
 
         Event event = EventQrys.getEventDetailsById(id);
-        mv.addObject("event",event);
+        List<School> eventSchoolsIDs = SchoolQrys.getAllSchoolIDsAttendingEvent(id);
+        List<School> eventSchoolNames = SchoolQrys.getAllSchoolNamesAttendingEvent(eventSchoolsIDs);
+        List<Employer> eventEmployerIDs = EmployerQrys.getAllEmployerIDsAttendingEvent(id);
+        List<Employer> eventEmployerNames = EmployerQrys.getAllEmployerNamesAttendingEvent(eventEmployerIDs);
+
+        Map<String,Object> Event = new HashMap<String,Object>();
+        Event.put("event", event);
+        Event.put("AllSchoolsNames", eventSchoolNames);
+        Event.put("AllEmployersNames", eventEmployerNames);
+        mv.addAllObjects(Event);
+
+//        mv.addObject("event",event);
 
         return mv;
     }
@@ -163,9 +228,26 @@ public class BaseController {
     @GetMapping("/add-events")
     public ModelAndView AddEvents(HttpSession session) {
         ModelAndView mv = new ModelAndView();
-        ObjectMapper objectMapper = new ObjectMapper();
-        // session = context.getSession();
         mv.setViewName("addEventsPage");
+
+        List<Event> eventsAllTypes;
+        List<School> schoolAllNamesAndIds;
+        List<Employer> employerAllNamesAndIds;
+
+        schoolAllNamesAndIds = SchoolQrys.getAllSchoolNamesAndIds();
+        eventsAllTypes = EventQrys.getAllTypesOfEvents();
+        employerAllNamesAndIds = EmployerQrys.getAllEmployerNamesAndIds();
+
+
+
+
+        Map<String,Object> allEvents = new HashMap<String,Object>();
+        allEvents.put("allSchoolNamesAndIds", schoolAllNamesAndIds);
+        allEvents.put("allEventTypes", eventsAllTypes);
+        allEvents.put("AllEmployerNamesAndIds", employerAllNamesAndIds);
+
+        mv.addAllObjects(allEvents);
+
         return mv;
     }
 

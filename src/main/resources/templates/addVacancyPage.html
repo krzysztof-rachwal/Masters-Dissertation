@@ -13,8 +13,10 @@
     <link rel="stylesheet" media="all" href="https://careerswales.gov.wales/sites/default/files/css/css_yFFWPpQsZCFeHMtvOieuCWLiTEiz--tT0otLunNJdLs.css"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css"/>
+
     <link th:href="@{../css/ebe_style.css}" href="../css/ebe_style.css" rel="stylesheet" />
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
     <title>Add Vacancy</title>
 </head>
@@ -22,138 +24,134 @@
 
 <header th:replace="fragments/headerTemplate :: header"> </header>
 
-    <div class="gel-content-container">
-        <div class="container my-4">
-            <h2>Add Vacancy</h2>
-        </div>
-
-        <form>
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-8">
-                        <div class="form-group">
-                            <label for="employer-name" class="  mb-1">Employer name</label>
-                            <input type="text" class="form-control input-border" id="employer-name">
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label for="vacancy-desc" class="  mb-1">Vacancy Description</label>
-                            <textarea class="form-control mt-2" id="vacancy-desc" rows="5"></textarea>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-8">
-                        <div class="form-group">
-                            <label for="web-link" class="  mb-1">Link to website</label>
-                            <input type="text" class="form-control input-border" id="web-link">
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-8">
-                        <div class="form-group">
-                            <label for="post-code" class="  mb-1">Post Code</label>
-                            <input type="text" class="form-control input-border" id="post-code">
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-8">
-                        <div class="form-group">
-                            <label for="start-date" class="  mb-1">Start Date</label>
-                            <input type="date" class="form-control input-border" id="start-date">
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-8">
-                        <div class="form-group">
-                            <label for="closing-date" class="  mb-1">Closing Date</label>
-                            <input type="date" class="form-control input-border" id="closing-date">
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="vacancy-type" class="  mb-1">Type of Vacancy</label>
-                            <select class="custom-select p-2" id="vacancy-type">
-                                <option selected>Select</option>
-                                <option value="Employment FT">Employment FT</option>
-                                <option value="Employment PT">Employment PT</option>
-                                <option value="Apprenticeship">Apprenticeship</option>
-                                <option value="Traineeship">Traineeship</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="occup-code" class="  mb-1">Occupational Code</label>
-                            <select class="custom-select p-2" id="occup-code">
-                                <option selected>Select</option>
-                                <option value="soc">SOC</option>
-                                <option value="crci">CRCI</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="appl-method" class="  mb-1">Application methods</label>
-                            <select class="custom-select p-2" id="appl-method">
-                                <option selected>Select</option>
-                                <option value="apply-online">Apply online</option>
-                                <option value="cv">CV</option>
-                                <option value="contact-employer">Contact employer</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="container my-4 text-center">
-                    <button type="button" class="button--secondary text-center">Add Vacancy</button>
-                </div>
-            </div>
-        </form>
+<div class="gel-content-container">
+    <div class="container my-4">
+        <h2>Add Vacancy</h2>
     </div>
 
+    <form>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="form-group">
+                        <label for="vacancy-name" class="  mb-1">Vacancy name</label>
+                        <input type="text" class="form-control input-border" id="vacancy-name">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="form-group">
+                        <label for="employer-name" class="  mb-1">Employer Name</label><br>
+                        <select class="selectpicker" data-live-search="true" id="employer-name">
+                            <option  th:each="employer : ${AllEmployerNamesAndIds}" th:value="${employer.getEmployerID()}" th:text="${employer.getEmployerName()}"></option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="vacancy-summary" class="  mb-1">Vacancy Description</label>
+                        <textarea class="form-control mt-2" id="vacancy-summary" rows="5"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="form-group">
+                        <label for="web-link" class="  mb-1">Link to website</label>
+                        <input type="text" class="form-control input-border" id="web-link">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="form-group">
+                        <label for="post-code" class="  mb-1">Post Code</label>
+                        <input type="text" class="form-control input-border" id="post-code">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="form-group">
+                        <label for="start-date" class="  mb-1">Start Date</label>
+                        <input type="date" class="form-control input-border" id="start-date">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="form-group">
+                        <label for="closing-date" class="  mb-1">Closing Date</label>
+                        <input type="date" class="form-control input-border" id="closing-date">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="vacancy-type" class="  mb-1">Type of Vacancy</label>
+                        <select class="custom-select p-2" id="vacancy-status">
+                            <option th:each="vacancyStatus : ${allVacanciesStatus}" th:value="${vacancyStatus.getStatusOfVacancyID()}" th:text="${vacancyStatus.getStatusOfVacancyName()}"></option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="vacancy-type" class="  mb-1">Type of Vacancy</label>
+                        <select class="custom-select p-2" id="vacancy-type">
+                            <option th:each="vacancyType : ${allVacanciesTypes}" th:value="${vacancyType.getTypeOfVacancyID()}" th:text="${vacancyType.getTypeOfVacancyName()}"></option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="occup-code" class="  mb-1">Occupational Code</label>
+                        <select class="custom-select p-2" id="occup-code">
+                            <option th:each="vacancyOccupationalCode : ${allVacanciesOccupationalCodes}" th:value="${vacancyOccupationalCode.getOccupationalCodeID()}" th:text="${vacancyOccupationalCode.getOccupationalCodeName()}"></option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="appl-method" class="  mb-1">Application methods</label>
+                        <select class="custom-select p-2" id="appl-method">
+                            <option th:each="vacancyApplicationMethods : ${allVacanciesApplicationMethods}" th:value="${vacancyApplicationMethods.getApplicationMethodID()}" th:text="${vacancyApplicationMethods.getApplicationMethodName()}"></option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="container my-4 text-center">
+                <button type="button" class="button--secondary text-center" onclick="createVacancy()">Add Vacancy</button>
+            </div>
+        </div>
+    </form>
+</div>
 
-        <footer th:replace="fragments/footerTemplate :: footer"></footer>
 
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-                integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-                crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-                integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-                crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
-                integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
-                crossorigin="anonymous"></script>
-        <script type="text/javascript" src="https://careerswales.gov.wales/styleguide/assets/js/gel-styleguide.js"></script>
-        <script type="text/javascript"
-                src="https://careerswales.gov.wales/styleguide/assets/js/gel-elements-loader.js"></script>
-        <script type="text/javascript" src="https://careerswales.gov.wales/styleguide/assets/js/gel-elements.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+<footer th:replace="fragments/footerTemplate :: footer"></footer>
 
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://careerswales.gov.wales/styleguide/assets/js/gel-styleguide.js"></script>
+<script type="text/javascript" src="https://careerswales.gov.wales/styleguide/assets/js/gel-elements-loader.js"></script>
+<script type="text/javascript" src="https://careerswales.gov.wales/styleguide/assets/js/gel-elements.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
 
-        <script>
-            $(document).ready(function () {
-
-            });
-
-        </script>
-        <script>
-            $(document).ready(function () {
-                $('.js-example-basic-multiple').select2();
-            });
-            s
-        </script>
-
-        </body>
+<script th:src="@{../js/vacancy.js}" src="../js/vacancy.js"></script>
+<script>
+    $('.selectpicker').selectpicker();
+</script>
+</body>
 </html>
