@@ -4,16 +4,17 @@ import ebe.API.EmailAPI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
 public class EmailController {
     @Autowired
     private EmailAPI emailAPI;
 
-    @GetMapping(value = "/sendmail")
+    @GetMapping("/sendmail")
     public String sendmail() {
 
-        emailAPI.sendMail("careers.wales69@gmail.com", "Test Subject", "Test mail");
+        emailAPI.sendMail("krzysiek.rachwal@gmail.com", "Test Subject", "Test mail");
 
         return "emailsent";
     }

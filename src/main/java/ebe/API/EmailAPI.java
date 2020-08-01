@@ -20,7 +20,7 @@ public class EmailAPI {
         mailMessage.setSubject(subject);
         mailMessage.setText(message);
 
-        mailMessage.setFrom("rachwalk@cardiff.ac.uk");
+        mailMessage.setFrom("RachwalK@cardiff.ac.uk");
 
         javaMailSender.send(mailMessage);
     }
