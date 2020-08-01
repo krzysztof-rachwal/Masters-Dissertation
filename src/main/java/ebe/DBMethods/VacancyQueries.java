@@ -297,6 +297,8 @@ public class VacancyQueries extends DBQueries {
 
 
 
+
+
     ///////////////////////////////////// CREATE ALL METHODS ///////////////////////////////////////////////
     // 10. Create a new Vacancy
     public int createVacancy (int EmployerID, String VacancyName, String VacancySummary, String VacancyLink, int TypeOfVacancyID,int StatusOfVacancyID ,String StartOfVacancy,

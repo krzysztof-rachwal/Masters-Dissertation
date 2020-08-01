@@ -185,7 +185,7 @@
                 <p><strong>Type of vacancy</strong></p>
             </div>
             <div class="col-lg-9">
-                <p th:text="${vacancy.getTypeOfVacancyID()}"></p>
+                <p th:if="${vacancy.getTypeOfVacancyID()} == ${vacancyType.getTypeOfVacancyID()}" th:each="vacancyType : ${allVacanciesTypes}" th:text="${vacancyType.getTypeOfVacancyName()}"></p>
             </div>
         </div>
         <div class="row">
@@ -202,6 +202,7 @@
             </div>
             <div class="col-lg-9">
                 <p th:text="${vacancy.getDeadlineForApplication()}"></p>
+
             </div>
         </div>
         <div class="row">
@@ -209,7 +210,8 @@
                 <p><strong>Occupational code</strong></p>
             </div>
             <div class="col-lg-9">
-                <p th:text="${vacancy.getOccupationalCodeID()}"></p>
+                <p th:each="vacancyOccupationalCode : ${allVacanciesOccupationalCodes}"  th:if="${vacancy.getOccupationalCodeID()} == ${vacancyOccupationalCode.getOccupationalCodeID()}" th:value="${vacancyOccupationalCode.getOccupationalCodeID()}" th:text="${vacancyOccupationalCode.getOccupationalCodeName()}"></p>
+
             </div>
         </div>
         <div class="row">
@@ -217,7 +219,7 @@
                 <p><strong>Application method</strong></p>
             </div>
             <div class="col-lg-9">
-                <p th:text="${vacancy.getApplicationMethodID()}"></p>
+                <p th:each="vacancyApplicationMethods : ${allVacanciesApplicationMethods}" th:if="${vacancy.getApplicationMethodID()} == ${vacancyApplicationMethods.getApplicationMethodID()}" th:value="${vacancyApplicationMethods.getApplicationMethodID()}" th:text="${vacancyApplicationMethods.getApplicationMethodName()}"></p>
             </div>
         </div>
         <div class="row">
