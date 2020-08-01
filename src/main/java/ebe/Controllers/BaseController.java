@@ -4,10 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import ebe.DBClasses.Employer;
 import ebe.DBClasses.Event;
 import ebe.DBClasses.Vacancy;
-import ebe.DBMethods.EmployerQueries;
-import ebe.DBMethods.EventQueries;
-import ebe.DBMethods.SchoolQueries;
-import ebe.DBMethods.VacancyQueries;
+import ebe.DBMethods.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -29,13 +26,15 @@ public class BaseController {
     private EventQueries EventQrys;
     private SchoolQueries SchoolQrys;
     private VacancyQueries VacancyQrys;
+    private StatisticsQueries statisticsQueries;
 
     @Autowired
-    public BaseController(EmployerQueries em, EventQueries ev, SchoolQueries sc, VacancyQueries va){
+    public BaseController(EmployerQueries em, EventQueries ev, SchoolQueries sc, VacancyQueries va, StatisticsQueries sq){
         EmployerQrys = em;
         EventQrys = ev;
         SchoolQrys = sc;
         VacancyQrys = va;
+        statisticsQueries = sq;
     }
 
     @Autowired
@@ -185,9 +184,21 @@ public class BaseController {
     @GetMapping("/report")
     public ModelAndView Report(HttpSession session) {
         ModelAndView mv = new ModelAndView();
-        ObjectMapper objectMapper = new ObjectMapper();
-        // session = context.getSession();
         mv.setViewName("reportPage");
+
+        int numberOfEvents = statisticsQueries.getTotalEvents();
+        int numberOfVacancies = statisticsQueries.getTotalVacancies();
+        int numberOfPupils = statisticsQueries.getTotalPupils();
+        int numberOfEmployers = statisticsQueries.getTotalEmployers();
+        int schoolAtEvents = statisticsQueries.getSchoolsAtEvents();
+        int requestsBySchools = statisticsQueries.getRequestsBySchools();
+
+        mv.addObject("numberOfEvents",numberOfEvents);
+        mv.addObject("numberOfEmployers",numberOfEmployers);
+        mv.addObject("numberOfVacancies",numberOfVacancies);
+        mv.addObject("numberOfPupils",numberOfPupils);
+        mv.addObject("schoolAtEvents",schoolAtEvents);
+        mv.addObject("requestsBySchools",requestsBySchools);
         return mv;
     }
 
