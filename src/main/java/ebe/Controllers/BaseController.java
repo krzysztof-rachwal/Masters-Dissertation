@@ -150,8 +150,31 @@ public class BaseController {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("profileVacancyPage");
 
+
         Vacancy vacancy = VacancyQrys.getVacancyDetailsById(id);
-        mv.addObject("vacancy",vacancy);
+        Vacancy vacanciesEmployerName = VacancyQrys.getVacancyEmployerName(vacancy.getEmployerID());
+        List<Vacancy> vacanciesAllTypes;
+        List<Vacancy> vacanciesAllStatus;
+        List<Vacancy> vacanciesAllOccupationalCodes;
+        List<Vacancy> vacanciesAllApplicationMethods;
+        List<Employer> employerAllNamesAndIds;
+
+        employerAllNamesAndIds = EmployerQrys.getAllEmployerNamesAndIds();
+        vacanciesAllTypes = VacancyQrys.getAllTypesOfVacancy();
+        vacanciesAllStatus = VacancyQrys.getAllStatusOfVacancy();
+        vacanciesAllOccupationalCodes = VacancyQrys.getAllOccupationalCodes();
+        vacanciesAllApplicationMethods = VacancyQrys.getAllApplicationMethods();
+
+        Map<String,Object> allVacancies = new HashMap<String,Object>();
+
+        allVacancies.put("vacancy", vacancy);
+        allVacancies.put("vacancyEmployerName", vacanciesEmployerName);
+        allVacancies.put("AllEmployerNamesAndIds", employerAllNamesAndIds);
+        allVacancies.put("allVacanciesTypes", vacanciesAllTypes);
+        allVacancies.put("allVacanciesStatus", vacanciesAllStatus);
+        allVacancies.put("allVacanciesOccupationalCodes", vacanciesAllOccupationalCodes);
+        allVacancies.put("allVacanciesApplicationMethods", vacanciesAllApplicationMethods);
+        mv.addAllObjects(allVacancies);
 
         return mv;
     }

@@ -59,7 +59,7 @@ public class VacancyQueries extends DBQueries {
 
 
     // 2. Get Vacancy by id
-    public Vacancy getVacancyDetailsById(int vacancyId) throws DataAccessException {
+    public Vacancy  getVacancyDetailsById(int vacancyId) throws DataAccessException {
         String getQuery = String.format("SELECT * FROM Vacancy WHERE VacancyID = \"%s\" LIMIT 1", vacancyId);
         Vacancy vacancy = null;
         ResultSet rs = null;
@@ -242,7 +242,7 @@ public class VacancyQueries extends DBQueries {
         return list;
     }
 
-    // 8. Get List of ApplicationMethods Names and Ids
+    // 9. Get List of ApplicationMethods Names and Ids
     public List<Vacancy> getAllApplicationMethods() throws DataAccessException {
         String getQuery = "SELECT ApplicationMethodID, ApplicationMethodName FROM ApplicationMethodList";
         List<Vacancy> list = new ArrayList<Vacancy>();
@@ -268,6 +268,33 @@ public class VacancyQueries extends DBQueries {
         }
         return list;
     }
+
+    // 10. Get Vacancy - Employer Name
+    public Vacancy getVacancyEmployerName(int employerId) throws DataAccessException {
+        String getQuery = String.format("SELECT EmployerName FROM Employer WHERE EmployerID = \"%s\" LIMIT 1", employerId);
+
+        List<Vacancy> list = new ArrayList<Vacancy>();
+        Vacancy vacancy = null;
+        ResultSet rs = null;
+        try {
+            connection = ConnectionFactory.getConnection();
+            statement = connection.createStatement();
+            rs = statement.executeQuery(getQuery);
+            while (rs.next()) {
+                vacancy = new Vacancy();
+                vacancy.setEmployerName(rs.getString("EmployerName"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }  finally {
+            DBUtil.close(rs);
+            DBUtil.close(statement);
+            DBUtil.close(connection);
+        }
+        return vacancy;
+    }
+
+
 
 
     ///////////////////////////////////// CREATE ALL METHODS ///////////////////////////////////////////////
