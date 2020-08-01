@@ -5,6 +5,7 @@ import ebe.DBMethods.EventQueries;
 import ebe.DBMethods.SchoolQueries;
 import ebe.DBMethods.VacancyQueries;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
@@ -29,7 +30,7 @@ public class EmployerAPI {
     ///////////////////////    CREATE     ////////////////////////////////
     //1. Create Employer
     @RequestMapping(value="/api/create/employer", method= RequestMethod.GET)
-    public Boolean createEmployer(
+    public boolean createEmployer(
 //            @RequestParam(name="StatusOfEmployerID") int StatusOfEmployerID,
             @RequestParam(name="EmployerName") String EmployerName,
             @RequestParam(name="EmployerStatus") int EmployerStatus,

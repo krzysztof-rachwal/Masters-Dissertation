@@ -13,6 +13,9 @@
     <link rel="stylesheet" media="all" href="https://careerswales.gov.wales/sites/default/files/css/css_yFFWPpQsZCFeHMtvOieuCWLiTEiz--tT0otLunNJdLs.css"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css"/>
+
     <link th:href="@{../css/ebe_style.css}" href="../css/ebe_style.css" rel="stylesheet" />
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
     <title>Vacancy</title>
@@ -44,13 +47,14 @@
                                 <div class="form-group">
                                     <label for="vacancy-name">Vacancy Name</label>
                                     <input type="text" class="form-control input-border" id="vacancy-name" th:value="${vacancy.getVacancyName()}">
+                                    <input type="hidden" id="vacancy-old-name" th:value="${vacancy.getVacancyName()}"/>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="employer-name" class="mb-1">Employer Name</label><br>
-                                    <select class="selectpicker" data-live-search="true" id="employer-name" th:value="${vacancyEmployerName.getEmployerName()}">
-                                        <option  th:each="employer : ${AllEmployerNamesAndIds}" th:value="${employer.getEmployerID()}" th:text="${employer.getEmployerName()}"></option>
+                                    <select class="selectpicker" data-live-search="true" id="employer-name">
+                                        <option  th:each="employer : ${AllEmployerNamesAndIds}" th:selected="${employer.getEmployerName()} ==  ${vacancyEmployerName.getEmployerName()}" th:value="${employer.getEmployerID()}" th:text="${employer.getEmployerName()}"></option>
                                     </select>
                                 </div>
                             </div>
@@ -71,6 +75,7 @@
                                 <div class="form-group">
                                     <label for="post-code" class="mb-1">Post Code</label>
                                     <input type="text" class="form-control input-border" id="post-code" th:value="${vacancy.getVacancyPostcode()}">
+                                    <input type="hidden" id="old-post-code" th:value="${vacancy.getVacancyPostcode()}"/>
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -111,14 +116,14 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="vacancy-type" class="  mb-1">Status of Vacancy</label>
-                                    <select class="selectpicker" id="vacancy-status">
+                                    <label for="vacancy-type" class=" mb-1">Status of Vacancy</label>
+                                    <select class="selectpicker" id="vacancy-status" data-width="80%">
                                         <option th:each="vacancyStatus : ${allVacanciesStatus}" th:selected="${vacancy.getStatusOfVacancyID()} == ${vacancyStatus.getStatusOfVacancyID()}" th:value="${vacancyStatus.getStatusOfVacancyID()}" th:text="${vacancyStatus.getStatusOfVacancyName()}"></option>
                                     </select>
                                 </div>
                             </div>
                         <div class="container my-4 text-center">
-                            <button type="button" class="button--secondary text-center" onclick="UpdateVacancy()">Update Vacancy</button>
+                            <button type="button" class="button--secondary text-center" onclick="UpdateThisVacancy()">Update Vacancy</button>
                         </div>
                     </div>
                 </form>
@@ -234,8 +239,6 @@
 </div>
 
 
-
-
 <footer th:replace="fragments/footerTemplate :: footer"></footer>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
@@ -245,16 +248,12 @@
 <script type="text/javascript" src="https://careerswales.gov.wales/styleguide/assets/js/gel-styleguide.js"></script>
 <script type="text/javascript" src="https://careerswales.gov.wales/styleguide/assets/js/gel-elements-loader.js"></script>
 <script type="text/javascript" src="https://careerswales.gov.wales/styleguide/assets/js/gel-elements.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+
 <script th:src="@{../js/vacancy.js}" src="../js/vacancy.js"></script>
-
-
-
 <script>
-    $(document).ready(function () {
-        $('.js-example-basic-multiple').select2();
-    });
-    s
+    $('.selectpicker').selectpicker();
 </script>
-
 </body>
 </html>

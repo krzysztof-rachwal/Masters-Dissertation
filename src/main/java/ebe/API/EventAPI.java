@@ -5,6 +5,7 @@ import ebe.DBMethods.EventQueries;
 import ebe.DBMethods.SchoolQueries;
 import ebe.DBMethods.VacancyQueries;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
@@ -29,7 +30,7 @@ public class EventAPI {
     ///////////////////////    CREATE     ////////////////////////////////
     //1. Create Events
     @RequestMapping(value="/api/create/event", method= RequestMethod.GET)
-    public Boolean createEvent(
+    public boolean createEvent(
             @RequestParam(name="eventName") String EventName,
             @RequestParam(name="typeOfEventID") int TypeOfEventID,
             @RequestParam(name="eventDate") String EventDate,
