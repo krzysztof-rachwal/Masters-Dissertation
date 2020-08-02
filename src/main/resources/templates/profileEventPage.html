@@ -43,106 +43,132 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="event-name">Event name</label>
-                                    <input type="text" class="form-control input-border" id="event-name" th:value="${event.getEventName()}">
-                                </div>
-                                <div class="form-group">
-                                    <label for="event-type">Event type</label><br>
-                                    <select class="selectpicker" data-live-search="true" id="event-type">
-                                        <option  th:each="event : ${allEventTypes}" th:value="${event.getTypeOfEventID()}" th:text="${event.getTypeOfEventName()}"></option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="event-date">Event date</label>
-                                    <input type="date" class="form-control input-border" id="event-date" th:value="${event.getEventDateAndTime()}">
-                                </div>
-                                <div class="form-group">
-                                    <label for="event-time">Event time</label>
-                                    <input type="time" class="form-control input-border" id="event-time">
-                                </div>
-                                <div class="form-group">
-                                    <label for="event-venue">Event venue</label>
-                                    <input type="text" class="form-control input-border" th:value="${event.getEventVenueName()}" id="event-venue">
+                                    <input type="text" class="form-control input-border" th:value="${event.getEventName()}" id="event-name">
                                 </div>
                             </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="event-type">Event type</label><br>
+                                    <select class="selectpicker" data-width="80%" data-live-search="true" id="event-type">
+                                        <option  th:each="eventTypes : ${allEventTypes}"  th:selected="${eventTypes.getTypeOfEventID()} == ${event.getTypeOfEventID()}"  th:value="${eventTypes.getTypeOfEventID()}" th:text="${eventTypes.getTypeOfEventName()}"></option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6 ">
+                                <div class="form-group">
+                                    <label for="event-summary">Event Summary</label>
+                                    <textarea class=" input-border" rows="3" id="event-summary" th:placeholder="${event.getEventSummary()}"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label>Address</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <input type="text" id="event-street" class="form-control border-right input-sm" th:value="${event.getEventAddressStreet()}">
+                                        <input type="text" id="event-number" class="form-control" th:value="${event.getEventAddressNumber()}">
+                                    </div>
+                                    <div class="input-group-prepend mt-1">
+                                        <input type="text" id="event-postcode" class="form-control border-right" th:value="${event.getEventVenuePostcode()}">
+                                        <input type="text" id="event-city" class="form-control" th:value="${event.getEventAddressCity()}">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="event-date">Event date</label>
+                                    <input type="date" class="form-control input-border" id="event-date" th:value="${event.getEventDate()}">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="event-time">Event time</label>
+                                    <input type="time" class="form-control input-border" id="event-time" th:value="${event.getEventTime()}">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="event-venue">Event venue</label>
+                                    <input type="text" class="form-control input-border" id="event-venue" th:value="${event.getEventVenueName()}">
+                                </div>
+                            </div>
+
                             <div class="col-md-6 ">
                                 <div class="form-group">
                                     <label for="adviser-name">Adviser name</label>
                                     <input type="text" class="form-control input-border" id="adviser-name" th:value="${event.getNameOfAdviser()}">
                                 </div>
+                            </div>
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="no-attendees">No of Attendees</label>
                                     <input type="number" class="form-control input-border" id="no-attendees" th:value="${event.getNumberOfAttendees()}">
                                 </div>
+                            </div>
+                            <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="schools-attending">Schools Attending</label>
-                                    <input type="text" class="form-control input-border" id="schools-attending">
+                                    <label for="employers-attending">Employers Attending</label><br>
+                                    <select class="selectpicker" multiple data-live-search="true" data-width="80%" id="employers-attending" >
+                                        <option  th:each="employer : ${AllEmployerNamesAndIds}" th:selected="${EventEmployersIDs.contains(employer.getEmployerID())}" th:id="${EventEmployersIDs}" th:value="${employer.getEmployerID()}" th:text="${employer.getEmployerName()}"></option>
+                                    </select>
                                 </div>
+                            </div>
+                            <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="employers-attending">Employers Attending</label>
-                                    <input type="text" class="form-control input-border" id="employers-attending">
+                                    <label for="schools-attending">Schools Attending</label><br>
+                                    <select class="selectpicker" multiple data-live-search="true" data-width="80%" id="schools-attending">
+                                        <option  th:each="school : ${allSchoolNamesAndIds}"   th:selected="${EventSchoolsIDs.contains(school.getSchoolID())}"th:value="${school.getSchoolID()}" th:text="${school.getSchoolName()}"></option>
+                                    </select>
                                 </div>
                             </div>
-                        </div>
-                        <div class=" row flex-column pl-3">
-                            <div class="form-group">
-                                <fieldset id="group1">
-                                    <label>Can the event be conducted in Welsh?</label>
-                                    <input type="radio" id="welsh-yes" name="group1" value="Yes" th:checked="${event.getPromotesWelshLanguage() == True}">
-                                    <label for="welsh-yes">Yes</label>
-                                    <input type="radio" id="welsh-no" name="group1" value="No"th:checked="${event.getPromotesWelshLanguage() == False}">
-                                    <label for="welsh-no">No</label>
-                                </fieldset>
-                            </div>
-                            <div class="form-group">
-                                <fieldset id="group2">
-                                    <label>Does the event promote apprenticeship?</label>
-                                    <input type="radio" id="appr-yes" name="group2" value="Yes" th:checked="${event.getPromotesApprenticeships() == True}">
-                                    <label for="appr-yes">Yes</label>
-                                    <input type="radio" id="appr-no" name="group2" value="No" th:checked="${event.getPromotesApprenticeships() == False}">
-                                    <label for="appr-no">No</label>
-                                </fieldset>
-                            </div>
-                            <div class="form-group">
-                                <fieldset id="group3">
-                                    <label>Does the event challenger gender stereotypes?</label>
-                                    <input type="radio" id="gender-yes" name="group3" value="Yes" th:checked="${event.getChallengesGenderStereotypes() == True}">
-                                    <label for="gender-yes">Yes</label>
-                                    <input type="radio" id="gender-no" name="group3" value="No" th:checked="${event.getChallengesGenderStereotypes() == False}">
-                                    <label for="gender-no">No</label>
-                                </fieldset>
-                            </div>
-                        </div>
 
-                        <div class="row flex-column">
-                            <div class="mb-auto p-2 d-flex flex-column">
-                                <label>Choose employers</label>
-                                <select class="js-example-basic-multiple" name="employers[]" multiple="multiple">
-                                    <option value="Employer4">Employer1</option>
-                                    <option value="Employer4">Employer2</option>
-                                    <option value="Employer4">Employer3</option>
-                                    <option value="Employer4">Employer4</option>
-                                    <option value="Employer4">Employer5</option>
-                                    <option value="Employer4">Employer6</option>
-                                    <option value="Employer4">Employer7</option>
-                                    <option value="Employer4">Employer8</option>
-                                    <option value="Employer4">Employer9</option>
-                                    <option value="Employer4">Employer10</option>
-                                </select>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Can the event be conducted in Welsh?</label>
+                                    <select  id="conducted-welsh">
+                                        <option value="1">Yes</option>
+                                        <option value="0">No</option>
+                                    </select>
+                                </div>
                             </div>
-                            <div class="mt-auto p-2 d-flex flex-column">
-                                <label>Choose schools</label>
-                                <select class="js-example-basic-multiple" multiple="multiple" name="schools[]">
-                                    <option value="schools">School1</option>
-                                    <option value="schools">School2</option>
-                                    <option value="schools">School3</option>
-                                    <option value="schools">School4</option>
-                                    <option value="schools">School5</option>
-                                    <option value="schools">School6</option>
-                                    <option value="schools">School7</option>
-                                    <option value="schools">School8</option>
-                                    <option value="schools">School9</option>
-                                    <option value="schools">School10</option>
-                                </select>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Does the event promote apprenticeship?</label>
+                                    <select  id="promote-apprenticheship">
+                                        <option value="1">Yes</option>
+                                        <option value="0">No</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Does the event challenger gender stereotypes?</label>
+                                    <select  id="challenger-gender">
+                                        <option value="1">Yes</option>
+                                        <option value="0">No</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Is the Event going to be Public?</label>
+                                    <select  id="event-public">
+                                        <option value="1">Yes</option>
+                                        <option value="0">No</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Is the Event Cancelled?</label>
+                                    <select  id="event-cancelled">
+                                        <option value="1">Yes</option>
+                                        <option value="0">No</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
                     </div>

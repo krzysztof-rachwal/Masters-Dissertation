@@ -211,10 +211,10 @@ public class BaseController {
         List<Event> eventsAllTypes;
         List<School> schoolAllNamesAndIds;
         List<Employer> employerAllNamesAndIds;
-        List<School> eventSchoolsIDs = SchoolQrys.getAllSchoolIDsAttendingEvent(id);
-        List<School> eventSchoolNames = SchoolQrys.getAllSchoolNamesAttendingEvent(eventSchoolsIDs);
-        List<Employer> eventEmployerIDs = EmployerQrys.getAllEmployerIDsAttendingEvent(id);
-        List<Employer> eventEmployerNames = EmployerQrys.getAllEmployerNamesAttendingEvent(eventEmployerIDs);
+        List<Integer> eventSchoolsIDs = SchoolQrys.getAllSchoolIDsAttendingEvent(id);
+//        List<School> eventSchoolNames = SchoolQrys.getAllSchoolNamesAttendingEvent(eventSchoolsIDs);
+        List<Integer> eventEmployerIDs = EmployerQrys.getAllEmployerIDsAttendingEvent(id);
+//        List<Employer> eventEmployerNames = EmployerQrys.getAllEmployerNamesAttendingEvent(eventEmployerIDs);
 
 
         schoolAllNamesAndIds = SchoolQrys.getAllSchoolNamesAndIds();
@@ -223,8 +223,10 @@ public class BaseController {
 
         Map<String,Object> Event = new HashMap<String,Object>();
         Event.put("event", event);
-        Event.put("AllSchoolsNames", eventSchoolNames);
-        Event.put("AllEmployersNames", eventEmployerNames);
+//        Event.put("AllSchoolsNames", eventSchoolNames);
+        Event.put("EventSchoolsIDs", eventSchoolsIDs);
+//        Event.put("AllEmployersNames", eventEmployerNames);
+        Event.put("EventEmployersIDs", eventEmployerIDs);
         Event.put("allSchoolNamesAndIds", schoolAllNamesAndIds);
         Event.put("allEventTypes", eventsAllTypes);
         Event.put("AllEmployerNamesAndIds", employerAllNamesAndIds);

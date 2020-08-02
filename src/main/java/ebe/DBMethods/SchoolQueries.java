@@ -76,10 +76,10 @@ public class SchoolQueries extends DBQueries {
     }
 
     // 4. Get All School Names and Ids
-    public List<School> getAllSchoolIDsAttendingEvent(int eventId) throws DataAccessException {
+    public List<Integer> getAllSchoolIDsAttendingEvent(int eventId) throws DataAccessException {
         String getQuery = String.format("SELECT SchoolID FROM INT_AttendingSchoolOnEvent WHERE EventID = \"%s\"", eventId);
 
-        List<School> list = new ArrayList<School>();
+        List<Integer> list = new ArrayList<Integer>();
         School school = null;
         ResultSet rs = null;
         try {
@@ -87,10 +87,8 @@ public class SchoolQueries extends DBQueries {
             statement = connection.createStatement();
             rs = statement.executeQuery(getQuery);
             while (rs.next()) {
-                school = new School();
-                school.setSchoolID(rs.getInt("SchoolID"));
 
-                list.add(school);
+                list.add(rs.getInt("SchoolID"));
             }
         } catch (SQLException e) {
             e.printStackTrace();

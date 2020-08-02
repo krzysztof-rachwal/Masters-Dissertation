@@ -71,7 +71,7 @@ public class EventQueries extends DBQueries {
             while (rs.next()) {
 
                 event = new Event(rs.getInt("EventID"), rs.getString("EventName"),
-                        rs.getInt("TypeOfEventID"), rs.getDate("EventDateAndTime"),
+                        rs.getInt("TypeOfEventID"), rs.getDate("EventDateAndTime"),rs.getTime("EventDateAndTime"),
                         rs.getString("EventVenueName"),rs.getString("EventAddressCity"),
                         rs.getString("EventAddressStreet"),rs.getString("EventAddressNumber"),
                         rs.getString("EventVenuePostcode"),rs.getString("EventSummary"),
