@@ -11,7 +11,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @Repository
@@ -87,6 +86,28 @@ public class StatisticsQueries extends DBQueries {
             e.printStackTrace();
         }
         return evMap;
+    }
+
+    public Map<String,Integer> getEmployersBySector() throws DataAccessException{
+        String query = "SELECT count(emp.EmployerName) as empCount, ind.IndustrySectorName as sector\n" +
+                "FROM INT_EmployerIndustrySector inter \n" +
+                "INNER JOIN Employer emp ON inter.EmployerID = emp.EmployerID\n" +
+                "INNER JOIN IndustrySectorList ind ON ind.IndustrySectorID = inter.IndustrySectorID\n" +
+                "GROUP BY inter.IndustrySectorID;";
+        Map<String,Integer> empMap = new HashMap<>();
+        ResultSet rs = null;
+        try {
+            connection = ConnectionFactory.getConnection();
+            statement = connection.createStatement();
+            rs = statement.executeQuery(query);
+            while (rs.next()){
+                empMap.put(rs.getString("sector"),rs.getInt("empCount"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return empMap;
+
     }
 
 

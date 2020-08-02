@@ -194,6 +194,8 @@ public class BaseController {
         int requestsBySchools = statisticsQueries.getRequestsBySchools();
         Map<String,Integer> eventsByAdv = statisticsQueries.getEventsByAdviser();
         Map<String,Integer> eventsByType = statisticsQueries.getEventsByType();
+        Map<String,Integer> empBySector = statisticsQueries.getEmployersBySector();
+        System.out.println(empBySector.toString());
 
 
         mv.addObject("numberOfEvents",numberOfEvents);
@@ -204,6 +206,7 @@ public class BaseController {
         mv.addObject("requestsBySchools",requestsBySchools);
         mv.addObject("eventsByAdv",eventsByAdv);
         mv.addObject("eventsByType",eventsByType);
+        mv.addObject("empBySector",empBySector);
         return mv;
     }
 
