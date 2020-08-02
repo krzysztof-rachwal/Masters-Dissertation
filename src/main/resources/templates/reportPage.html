@@ -303,34 +303,21 @@
         <div class="row">
             <div class="col-md-6 well">
                 <span class="h5 mt-0 mb-4">Events by local authority</span>
-                <div class="col-md-6">
-                    <h6><span class="h4 text-info d-inline">58</span> in Cardiff</h6>
-                    <h6><span class="h4 text-info d-inline">58</span> in Cardiff</h6>
-                    <h6><span class="h4 text-info d-inline">58</span> in Cardiff</h6>
-                    <h6><span class="h4 text-info d-inline">58</span> in Cardiff</h6>
-                    <h6><span class="h4 text-info d-inline">58</span> in Cardiff</h6>
-                    <h6><span class="h4 text-info d-inline">58</span> in Cardiff</h6>
-                    <h6><span class="h4 text-info d-inline">58</span> in Cardiff</h6>
-                    <h6><span class="h4 text-info d-inline">58</span> in Cardiff</h6>
-                    <h6><span class="h4 text-info d-inline">58</span> in Cardiff</h6>
-                    <h6><span class="h4 text-info d-inline">58</span> in Cardiff</h6>
-                </div>
-                <div class="col-md-6">
-                    <h6><span class="h4 text-info d-inline">58</span> in Cardiff</h6>
-                    <h6><span class="h4 text-info d-inline">58</span> in Cardiff</h6>
-                    <h6><span class="h4 text-info d-inline">58</span> in Cardiff</h6>
-                    <h6><span class="h4 text-info d-inline">58</span> in Cardiff</h6>
-                    <h6><span class="h4 text-info d-inline">58</span> in Cardiff</h6>
-                    <h6><span class="h4 text-info d-inline">58</span> in Cardiff</h6>
-                    <h6><span class="h4 text-info d-inline">58</span> in Cardiff</h6>
-                    <h6><span class="h4 text-info d-inline">58</span> in Cardiff</h6>
-                    <h6><span class="h4 text-info d-inline">58</span> in Cardiff</h6>
-                    <h6><span class="h4 text-info d-inline">58</span> in Cardiff</h6>
+                <div th:each="key,i : ${evByLocalAuth.keySet()}">
+                    <div class="col-md-6">
+                        <h6 th:if="${i.index % 2 == 0 }"><span  class="h4 text-info d-inline"
+                                                                th:text="${evByLocalAuth.get(key)}">58</span> in
+                            <span th:text="${key}"> Cardiff</span> </h6>
+                    </div>
+                    <div class="col-md-6">
+                        <h6 th:if="${i.index % 2 != 0}"><span th:text="${evByLocalAuth.get(key)}" class="h4 text-info d-inline">58</span>
+                            <span th:text="${key}">in Cardiff</span> </h6>
+                    </div>
                 </div>
             </div>
             <div class="col-md-6 well">
                 <span class="h5 mt-0 mb-4">Events by adviser</span>
-                <div th:each="key,i: ${eventsByAdv.keySet()}">
+                <div th:each="key,i : ${eventsByAdv.keySet()}">
                     <div class="col-md-6">
                         <h6 th:if="${i.index % 2 == 0 }"><span class="h4 text-info d-inline"
                                                                th:text="${eventsByAdv.get(key)}">58</span> by <span

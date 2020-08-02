@@ -195,7 +195,8 @@ public class BaseController {
         Map<String,Integer> eventsByAdv = statisticsQueries.getEventsByAdviser();
         Map<String,Integer> eventsByType = statisticsQueries.getEventsByType();
         Map<String,Integer> empBySector = statisticsQueries.getEmployersBySector();
-        System.out.println(empBySector.toString());
+        Map<String,Integer> evByLocalAuth = statisticsQueries.getEventByLocalAuth();
+        System.out.println(evByLocalAuth.toString());
 
 
         mv.addObject("numberOfEvents",numberOfEvents);
@@ -207,6 +208,7 @@ public class BaseController {
         mv.addObject("eventsByAdv",eventsByAdv);
         mv.addObject("eventsByType",eventsByType);
         mv.addObject("empBySector",empBySector);
+        mv.addObject("evByLocalAuth",evByLocalAuth);
         return mv;
     }
 
