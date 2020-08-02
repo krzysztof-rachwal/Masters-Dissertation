@@ -59,6 +59,7 @@ function createNewEvent() {
 //2. Update Event
 function UpdateThisEvent(){
     var baseUri = "/api/update/event";
+    var eventID_url = "eventID=" + $('input[id=event-id]').val();
     var eventName_url = "eventName=" + $('input[id=event-name]').val();
     var typeOfEventID_url = "typeOfEventID=" + $('select[id=event-type]').val();
     var eventDate_url = "eventDate=" + $('input[id=event-date]').val();
@@ -80,7 +81,7 @@ function UpdateThisEvent(){
     var schoolAttending_url = "schoolAttending=" + $('select[id=schools-attending]').val();
 
 
-    var fullUri = baseUri + "?" + "&" + eventName_url+ "&" + typeOfEventID_url + "&" + eventDate_url + "&" + eventTime_url + "&"
+    var fullUri = baseUri + "?" + "&" + eventID_url + "&" + eventName_url+ "&" + typeOfEventID_url + "&" + eventDate_url + "&" + eventTime_url + "&"
         + eventVenueName_url + "&" + eventAddressCity_url  + "&" + eventAddressStreet_url  + "&" + eventAddressNumber_url + "&"
         + eventPostcode_url + "&" + eventSummary_url+ "&" + isPublic_url + "&" + isCancelled_url + "&" +nameOfAdviser_url +"&"
         + numberOfAttendees_url + "&" + promotesApprenticeships_url  + "&" + promotesWelshLanguage_url + "&" + challengesGenderStereotypes_url  + "&"

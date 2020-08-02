@@ -57,7 +57,7 @@
                             <div class="col-md-6 ">
                                 <div class="form-group">
                                     <label for="event-summary">Event Summary</label>
-                                    <textarea class=" input-border" rows="3" id="event-summary" th:placeholder="${event.getEventSummary()}"></textarea>
+                                    <textarea class=" input-border" rows="3" id="event-summary" th:text="${event.getEventSummary()}" th:value="${event.getEventSummary()}"></textarea>
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -204,6 +204,7 @@
 <div class="gel-content-container">
     <div class="container-headline mt-5">
         <span class="title-h2" th:text="${event.getEventName()}"></span>
+        <input type="hidden" th:value="${event.getEventID()}" id="event-id"/>
         <button type="button" id="updateEvent" data-toggle="modal" data-target="#updateModal"
                 class="buttonUpdate float-right">Update
         </button>
@@ -215,9 +216,9 @@
     <div class="container-fluid py-5 px-5 eventBackground">
         <div class="row">
             <div class="col-md-12">
-                <div class="form-group form-inline">
+                <div class="form-group">
                     <span class="font-weight-bold h5">Event Summary </span>
-                    <p class="" th:text="${event.getEventSummary()}"></p>
+                    <p th:text="${event.getEventSummary()}"></p>
                 </div>
             </div>
 
