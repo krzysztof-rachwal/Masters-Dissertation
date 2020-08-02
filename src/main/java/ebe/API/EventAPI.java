@@ -41,7 +41,7 @@ public class EventAPI {
             @RequestParam(name="eventPostcode") String EventPostcode,
             @RequestParam(name="eventSummary") String EventSummary,
             @RequestParam(name="isPublic") Boolean IsPublic,
-//          @RequestParam(name="isCancelled") Boolean isCancelled,
+            @RequestParam(name="isCancelled") Boolean isCancelled,
             @RequestParam(name="nameOfAdviser") String NameOfAdviser,
             @RequestParam(name="numberOfAttendees") int NumberOfAttendees,
             @RequestParam(name="promotesApprenticeships") Boolean PromotesApprenticeships,
@@ -51,7 +51,6 @@ public class EventAPI {
             @RequestParam(name="schoolAttending") String SchoolAttending) throws ParseException {
 
             //All events created start as not cancelled
-            boolean isCancelled = false;
             String EventDateAndTime = EventDate + " " + EventTime;
             ArrayList<Integer> employerIdList = new ArrayList<Integer>();
             ArrayList<Integer> schoolIdList = new ArrayList<Integer>();

@@ -9,11 +9,11 @@ function createNewEvent() {
     var eventVenueName_url = "eventVenueName=" + $('input[id=event-venue]').val();
     var eventAddressCity_url = "eventAddressCity=" + $('input[id=event-city]').val();
     var eventAddressStreet_url = "eventAddressStreet=" + $('input[id=event-street]').val();
-    var eventAddressNumber_url = "eventAddressNumber=" + $('input[id=event-street-number]').val();
+    var eventAddressNumber_url = "eventAddressNumber=" + $('input[id=event-number]').val();
     var eventPostcode_url = "eventPostcode=" + $('input[id=event-postcode]').val();
     var eventSummary_url = "eventSummary=" + $('textarea[id=event-summary]').val();
     var isPublic_url = "isPublic=" + $('select[id=event-public]').val();
-    // var isCancelled_url = "isCancelled=" + $('select[id=event-type]').val();
+    var isCancelled_url = "isCancelled=" + $('select[id=event-cancelled]').val();
     var nameOfAdviser_url = "nameOfAdviser=" + $('input[id=adviser-name]').val();
     var numberOfAttendees_url = "numberOfAttendees=" + $('input[id=no-attendees]').val();
     var promotesApprenticeships_url="promotesApprenticeships=" + $('select[id=promote-apprenticheship]').val();
@@ -25,7 +25,7 @@ function createNewEvent() {
 
     var fullUri = baseUri + "?" + "&" + eventName_url+ "&" + typeOfEventID_url + "&" + eventDate_url + "&" + eventTime_url + "&"
         + eventVenueName_url + "&" + eventAddressCity_url  + "&" + eventAddressStreet_url  + "&" + eventAddressNumber_url + "&"
-        + eventPostcode_url + "&" + eventSummary_url+ "&" + isPublic_url + "&"  + "&" +nameOfAdviser_url +"&"
+        + eventPostcode_url + "&" + eventSummary_url+ "&" + isPublic_url + "&" + isCancelled_url + "&" +nameOfAdviser_url +"&"
         + numberOfAttendees_url + "&" + promotesApprenticeships_url  + "&" + promotesWelshLanguage_url + "&" + challengesGenderStereotypes_url  + "&"
         + employerAttending_url + "&" + schoolAttending_url ;
 
