@@ -10,7 +10,9 @@ public class Event {
     private String EventName;
     private int TypeOfEventID;
     private String TypeOfEventName;
-    private @DateTimeFormat(pattern = "yyyy-MM-dd") Date EventDateAndTime ;
+    private @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date EventDateAndTime ;
+    private @DateTimeFormat(pattern = "yyyy-MM-dd") Date EventDate ;
+    private @DateTimeFormat(pattern = "HH:mm") Date EventTime ;
     private String EventVenueName;
     private String EventAddressCity;
     private String EventAddressStreet;
@@ -52,6 +54,27 @@ public class Event {
         EventName = eventName;
         TypeOfEventID = typeOfEventID;
         EventDateAndTime = eventDateAndTime;
+        EventVenueName = eventVenueName;
+        EventAddressCity = eventAddressCity;
+        EventAddressStreet = eventAddressStreet;
+        EventAddressNumber = eventAddressNumber;
+        EventVenuePostcode = eventVenuePostcode;
+        EventSummary = eventSummary;
+        this.isPublic = isPublic;
+        this.isCancelled = isCancelled;
+        NameOfAdviser = nameOfAdviser;
+        NumberOfAttendees = numberOfAttendees;
+        PromotesApprenticeships = promotesApprenticeships;
+        PromotesWelshLanguage = promotesWelshLanguage;
+        ChallengesGenderStereotypes = challengesGenderStereotypes;
+    }
+
+    public Event(int eventID, String eventName, int typeOfEventID, Date eventDate, Date eventTime, String eventVenueName, String eventAddressCity, String eventAddressStreet, String eventAddressNumber, String eventVenuePostcode, String eventSummary, Boolean isPublic, Boolean isCancelled, String nameOfAdviser, int numberOfAttendees, Boolean promotesApprenticeships, Boolean promotesWelshLanguage, Boolean challengesGenderStereotypes) {
+        EventID = eventID;
+        EventName = eventName;
+        TypeOfEventID = typeOfEventID;
+        EventDate = eventDate;
+        EventTime = eventTime;
         EventVenueName = eventVenueName;
         EventAddressCity = eventAddressCity;
         EventAddressStreet = eventAddressStreet;
@@ -209,5 +232,21 @@ public class Event {
 
     public void setChallengesGenderStereotypes(Boolean challengesGenderStereotypes) {
         ChallengesGenderStereotypes = challengesGenderStereotypes;
+    }
+
+    public Date getEventDate() {
+        return EventDate;
+    }
+
+    public void setEventDate(Date eventDate) {
+        EventDate = eventDate;
+    }
+
+    public Date getEventTime() {
+        return EventTime;
+    }
+
+    public void setEventTime(Date eventTime) {
+        EventTime = eventTime;
     }
 }

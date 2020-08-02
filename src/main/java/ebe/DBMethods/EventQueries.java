@@ -71,7 +71,7 @@ public class EventQueries extends DBQueries {
             while (rs.next()) {
 
                 event = new Event(rs.getInt("EventID"), rs.getString("EventName"),
-                        rs.getInt("TypeOfEventID"), rs.getDate("EventDateAndTime"),
+                        rs.getInt("TypeOfEventID"), rs.getDate("EventDateAndTime"),rs.getTime("EventDateAndTime"),
                         rs.getString("EventVenueName"),rs.getString("EventAddressCity"),
                         rs.getString("EventAddressStreet"),rs.getString("EventAddressNumber"),
                         rs.getString("EventVenuePostcode"),rs.getString("EventSummary"),
@@ -160,7 +160,7 @@ public class EventQueries extends DBQueries {
     }
 
     // 6. Create new Employer / Event Intersection
-    public void updateEmployerEventIntersection(int EventID, List<Integer> EmployerID) throws DataAccessException {
+    public void createEmployerEventIntersection(int EventID, List<Integer> EmployerID) throws DataAccessException {
 
         String updateSql = "INSERT INTO INT_AttendingEmployerOnEvent(EventID, EmployerID) VALUE(?,?)";
 
@@ -170,7 +170,7 @@ public class EventQueries extends DBQueries {
     }
 
     // 7. Create new School / Event Intersection
-    public void updateSchoolEventIntersection(int EventID, List<Integer> SchoolID) throws DataAccessException {
+    public void createSchoolEventIntersection(int EventID, List<Integer> SchoolID) throws DataAccessException {
 
         String updateSql = "INSERT INTO INT_AttendingSchoolOnEvent(EventID, SchoolID) VALUES(?,?)";
 
@@ -182,22 +182,48 @@ public class EventQueries extends DBQueries {
     ///////////////////////////////////// UPDATE ALL METHODS ///////////////////////////////////////////////
 
     // 8. Update an Events by Id
-    public Integer updateEvent(int EventID, String Name, int TypeOfEvent, String Date, Boolean isPublic, Boolean isCancelled, String PostCode, String NameOfAdviser,
-                               String NumberOfAttendees, Boolean PromotesApprenticeships, Boolean PromotesWelshLanguage,
-                               Boolean ChallengesGenderStereoTypes) throws DataAccessException {
+    public Integer updateEvent( int EventID, String EventName, int TypeOfEventID, String EventDateAndTime, String EventVenueName,
+                                String EventAddressCity, String EventAddressStreet, String EventAddressNumber, String EventVenuePostcode,
+                                String EventSummary, Boolean IsPublic, Boolean IsCancelled, String NameOfAdviser, int NumberOfAttendees,
+                                Boolean PromotesApprenticeships, Boolean PromotesWelshLanguage, Boolean ChallengesGenderStereoTypes) throws DataAccessException {
 
-        String updateSql = "UPDATE Event SET Name =?, TypeOfEvent =?, Date= ?, isPublic=?, isCancelled=?," +
-                "PostCode=?, NameOfAdviser=?, NumberOfAttendees=?, PromotesApprenticeships=?, PromotesWelshLanguage=?" +
-                "ChallengesGenderStereoTypes=? WHERE EventlID =?";
+        String updateSql = "UPDATE Event SET EventName =?, TypeOfEventID =?, EventDateAndTime= ?, EventVenueName=?, EventAddressCity=?," +
+                " EventAddressStreet=?, EventAddressNumber=?, EventVenuePostcode=?, EventSummary=?,  IsPublic=?, IsCancelled=?," +
+                " NameOfAdviser=?, NumberOfAttendees=?, PromotesApprenticeships=?, PromotesWelshLanguage=?, ChallengesGenderStereoTypes=? WHERE EventID =?";
 
-        return jdbcTemplate().update(updateSql, Name, TypeOfEvent, Date, isPublic, isCancelled, PostCode, NameOfAdviser,
-                NumberOfAttendees, PromotesApprenticeships, PromotesWelshLanguage,
-                ChallengesGenderStereoTypes, EventID);
+        return jdbcTemplate().update(updateSql, EventName, TypeOfEventID, EventDateAndTime,EventVenueName, EventAddressCity, EventAddressStreet,
+                EventAddressNumber, EventVenuePostcode, EventSummary, IsPublic, IsCancelled, NameOfAdviser,
+                NumberOfAttendees, PromotesApprenticeships, PromotesWelshLanguage, ChallengesGenderStereoTypes, EventID);
     }
 
+    // 9. Update new Employer / Event Intersection
+    public void updateEmployerEventIntersection(int EventID, List<Integer> EmployerID) throws DataAccessException {
+
+        String deleteSql = String.format("DELETE FROM INT_AttendingEmployerOnEvent WHERE EventID = '%s'",EventID);
+        jdbcTemplate().update(deleteSql);
+
+        String updateSql = "INSERT INTO INT_AttendingEmployerOnEvent(EventID, EmployerID) VALUE(?,?)";
+
+        for (Integer employerId : EmployerID ){
+            jdbcTemplate().update(updateSql, EventID, employerId);
+        };
+    }
+
+    // 10. Update new School / Event Intersection
+    public void updateSchoolEventIntersection(int EventID, List<Integer> SchoolID) throws DataAccessException {
+
+        String deleteSql = String.format("DELETE FROM INT_AttendingSchoolOnEvent WHERE EventID = '%s'",EventID);
+        jdbcTemplate().update(deleteSql);
+
+        String updateSql = "INSERT INTO INT_AttendingSchoolOnEvent(EventID, SchoolID) VALUES(?,?)";
+
+        for (Integer schoolId : SchoolID ){
+            jdbcTemplate().update(updateSql, EventID, schoolId);
+        };
+    }
 
     ///////////////////////////////////// DELETE ALL METHODS ///////////////////////////////////////////////
-    // 9. Delete an Event by ID
+    // 11. Delete an Event by ID
 
     public Integer deleteEvent(int eventId) throws DataAccessException {
         String deleteSql = String.format("DELETE FROM Event WHERE EventID = '%s'",eventId);

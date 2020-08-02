@@ -371,21 +371,18 @@ public class EmployerQueries extends DBQueries {
 
 
     // 14. Get All Employer Names and Ids
-    public List<Employer> getAllEmployerIDsAttendingEvent(int eventId) throws DataAccessException {
+    public List<Integer> getAllEmployerIDsAttendingEvent(int eventId) throws DataAccessException {
         String getQuery = String.format("SELECT EmployerID FROM INT_AttendingEmployerOnEvent WHERE EventID = \"%s\"", eventId);
 
-        List<Employer> list = new ArrayList<Employer>();
-        Employer employer = null;
+        List<Integer> list = new ArrayList<Integer>();
         ResultSet rs = null;
         try {
             connection = ConnectionFactory.getConnection();
             statement = connection.createStatement();
             rs = statement.executeQuery(getQuery);
             while (rs.next()) {
-                employer = new Employer();
-                employer.setEmployerID(rs.getInt("EmployerID"));
 
-                list.add(employer);
+                list.add(rs.getInt("EmployerID"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
