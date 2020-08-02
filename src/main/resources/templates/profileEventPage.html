@@ -173,7 +173,7 @@
                         </div>
                     </div>
                     <div class="container my-4 text-center">
-                        <button type="button" class="button--secondary buttonUpdateModal text-center">Update</button>
+                        <button type="button" class="button--secondary buttonUpdateModal text-center" onclick="UpdateThisEvent()">Update Event</button>
                     </div>
                 </form>
             </div>
@@ -259,20 +259,23 @@
             </div>
             <div class="col-md-6">
                 <div class="form-group">
-                    <span class="font-weight-bold h5">Can the event be condutcted in Welsh? </span>
-                    <p th:text="${event.getPromotesWelshLanguage()}"></p>
+                    <span class="font-weight-bold h5">Can the event be conducted in Welsh? </span>
+                    <p th:remove="${event.getPromotesWelshLanguage()== true}  ? none : all">Yes</p>
+                    <p th:remove="${event.getPromotesWelshLanguage()== false}  ? none : all">No</p>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
                     <span class="font-weight-bold h5">Does the event promote apprenticeship? </span>
-                    <p  th:text="${event.getPromotesApprenticeships()}"></p>
+                    <p th:remove="${event.getPromotesApprenticeships()== true}  ? none : all">Yes</p>
+                    <p th:remove="${event.getPromotesApprenticeships()== false}  ? none : all">No</p>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
                     <span class="font-weight-bold h5">Does the event challenger gender stereotypes? </span>
-                    <span  th:text="${event.getChallengesGenderStereotypes()}"></span>
+                    <p th:remove="${event.getChallengesGenderStereotypes()== true}  ? none : all">Yes</p>
+                    <p th:remove="${event.getChallengesGenderStereotypes()== false}  ? none : all">No</p>
                 </div>
             </div>
         </div>
