@@ -108,7 +108,7 @@
                                 <div class="form-group">
                                     <label for="employers-attending">Employers Attending</label><br>
                                     <select class="selectpicker" multiple data-live-search="true" data-width="80%" id="employers-attending" >
-                                        <option  th:each="employer : ${AllEmployerNamesAndIds}" th:selected="${EventEmployersIDs.contains(employer.getEmployerID())}" th:id="${EventEmployersIDs}" th:value="${employer.getEmployerID()}" th:text="${employer.getEmployerName()}"></option>
+                                        <option  th:each="employer : ${AllEmployerNamesAndIds}" th:selected="${EventEmployersIDs.contains(employer.getEmployerID())}" th:value="${employer.getEmployerID()}" th:text="${employer.getEmployerName()}"></option>
                                     </select>
                                 </div>
                             </div>
@@ -203,7 +203,7 @@
 
 <div class="gel-content-container">
     <div class="container-headline mt-5">
-        <span class="title-h2">Event</span>
+        <span class="title-h2" th:text="${event.getEventName()}"></span>
         <button type="button" id="updateEvent" data-toggle="modal" data-target="#updateModal"
                 class="buttonUpdate float-right">Update
         </button>
@@ -214,76 +214,83 @@
 
     <div class="container-fluid py-5 px-5 eventBackground">
         <div class="row">
+            <div class="col-md-12">
+                <div class="form-group form-inline">
+                    <span class="font-weight-bold h5">Event Summary </span>
+                    <p class="" th:text="${event.getEventSummary()}"></p>
+                </div>
+            </div>
+
             <div class="col-md-6">
-                <div class="form-group form-inline">
-                    <span class="font-weight-bold h6">Event name </span>
-                    <span class="ml-4" th:text="${event.getEventName()}"></span>
-                </div>
-                <div class="form-group form-inline">
-                    <span class="font-weight-bold h6">Event Type </span>
-                    <span class="ml-4">Career Fair</span>
-                </div>
-                <div class="form-group form-inline">
-                    <span class="font-weight-bold h6">Event Date </span>
-                    <span class="ml-4" th:text="${event.getEventDateAndTime()}"></span>
-                </div>
-                <div class="form-group form-inline">
-                    <span class="font-weight-bold h6">Event Time </span>
-                    <span class="ml-4">11:00</span>
-                </div>
-
-                <div class="form-group form-inline">
-                    <span class="font-weight-bold h6">Event Venue </span>
-                    <span class="ml-4" th:text="${event.getEventVenueName()}"></span>
-                </div>
-
-                <div class="form-group form-inline">
-                    <span class="font-weight-bold h6">Adviser name </span>
-                    <span class="ml-4" th:text="${event.getNameOfAdviser()}"></span>
+                <div class="form-group ">
+                    <span class="font-weight-bold h5">Event Type </span>
+                    <p th:each="eventTypes : ${allEventTypes}"  th:remove="${eventTypes.getTypeOfEventID() == event.getTypeOfEventID()} ? none : all" th:value="${eventTypes.getTypeOfEventID()}" th:text="${eventTypes.getTypeOfEventName()}"></p>
                 </div>
             </div>
             <div class="col-md-6">
-                <div class="form-group form-inline">
-                    <span class="font-weight-bold h6">No of Attendees </span>
-                    <span class="ml-4" th:text="${event.getNumberOfAttendees()}"></span>
+                <div class="form-group ">
+                    <span class="font-weight-bold h5">Event Date </span>
+                    <p th:text="${event.getEventDate()}"></p>
                 </div>
-                <div class="form-group form-inline">
-                    <span class="font-weight-bold h6">Schools Attending </span>
-                    <span class="ml-4"></span>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <span class="font-weight-bold h5">Event Time </span>
+                    <p th:text="${event.getEventTime()}"></p>
                 </div>
-
-                <div class="form-group form-inline">
-                    <span class="font-weight-bold h6">Employers Attending </span>
-                    <span class="ml-4"></span>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <span class="font-weight-bold h5">Event Venue </span>
+                    <p th:text="${event.getEventVenueName()}"></p>
                 </div>
-
-                <div class="form-group form-inline">
-                    <span class="font-weight-bold h6">Can the event be condutcted in Welsh? </span>
-                    <span class="ml-4" th:text="${event.getPromotesWelshLanguage()}"></span>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <span class="font-weight-bold h5">Adviser Name </span>
+                    <p th:text="${event.getNameOfAdviser()}"></p>
                 </div>
-
-                <div class="form-group form-inline">
-                    <span class="font-weight-bold h6">Does the event promote apprenticeship? </span>
-                    <span class="ml-4"  th:text="${event.getPromotesApprenticeships()}"></span>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <span class="font-weight-bold h5">No of Attendees </span>
+                    <p th:text="${event.getNumberOfAttendees()}"></p>
                 </div>
-
-                <div class="form-group form-inline">
-                    <span class="font-weight-bold h6">Does the event challenger gender stereotypes? </span>
-                    <span class="ml-4"  th:text="${event.getChallengesGenderStereotypes()}"></span>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <span class="font-weight-bold h5">Can the event be condutcted in Welsh? </span>
+                    <p th:text="${event.getPromotesWelshLanguage()}"></p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <span class="font-weight-bold h5">Does the event promote apprenticeship? </span>
+                    <p  th:text="${event.getPromotesApprenticeships()}"></p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <span class="font-weight-bold h5">Does the event challenger gender stereotypes? </span>
+                    <span  th:text="${event.getChallengesGenderStereotypes()}"></span>
                 </div>
             </div>
         </div>
         <div class="row pt-3">
-            <div class="mb-auto p-2 col-md-6 well2">
-                <label class="font-weight-bold h6">Schools Attending</label>
+            <div class="mb-auto p-2 col-md-6 well2 well3">
+                <label class="font-weight-bold h5">Schools Attending</label>
                 <ul class="list-group">
-                    <li class="list-group-item" th:each="schools : ${AllSchoolsNames}" th:text="${schools.getSchoolName()}"></li>
+                    <a th:each="school : ${allSchoolNamesAndIds}">
+                        <li class="list-group-item" th:remove="${EventSchoolsIDs.contains(school.getSchoolID())} ? none : all" th:text="${school.getSchoolName()}"></li>
+                    </a>
                 </ul>
             </div>
-            <div class="mb-auto p-2 col-md-6 well2">
-                <label class="font-weight-bold h6">Employers Attending</label>
+            <div class="mb-auto p-2 col-md-6 well2 well3">
+                <label class="font-weight-bold h5">Employers Attending</label>
                 <ul class="list-group">
-                    <li class="list-group-item" th:each="employer : ${AllEmployersNames}" th:text="${employer.getEmployerName()}"></li>
+                    <a th:each="employer : ${AllEmployerNamesAndIds}" th:href="@{/profile-employer(employerId=${employer.getEmployerID()})}">
+                        <li class="list-group-item"  th:remove="${EventEmployersIDs.contains(employer.getEmployerID())} ? none : all" th:text="${employer.getEmployerName()}"></li>
+                    </a>
                 </ul>
             </div>
         </div>

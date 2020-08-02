@@ -12,7 +12,7 @@ public class Event {
     private String TypeOfEventName;
     private @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date EventDateAndTime ;
     private @DateTimeFormat(pattern = "yyyy-MM-dd") Date EventDate ;
-    private @DateTimeFormat(pattern = "HH:mm:ss") Date EventTime ;
+    private @DateTimeFormat(pattern = "HH:mm") Date EventTime ;
     private String EventVenueName;
     private String EventAddressCity;
     private String EventAddressStreet;
