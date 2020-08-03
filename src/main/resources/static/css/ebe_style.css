@@ -44,7 +44,7 @@ body {
 .buttonDelete{
     background:#fff ;
     color:#007066 ;
-    border-right: 2px solid #007066;
+    border-left: 2px solid #007066;
     padding: 5px 20px !important;
 }
 

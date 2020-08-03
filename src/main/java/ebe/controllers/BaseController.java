@@ -1,4 +1,4 @@
-package ebe.Controllers;
+package ebe.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ebe.DBClasses.Employer;
@@ -14,9 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
-
 import org.springframework.stereotype.Controller;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
@@ -232,28 +230,15 @@ public class BaseController {
         mv.setViewName("profileEventPage");
 
         Event event = EventQrys.getEventDetailsById(id);
-        List<Event> eventsAllTypes;
-        List<School> schoolAllNamesAndIds;
-        List<Employer> employerAllNamesAndIds;
-        List<Integer> eventSchoolsIDs = SchoolQrys.getAllSchoolIDsAttendingEvent(id);
-//        List<School> eventSchoolNames = SchoolQrys.getAllSchoolNamesAttendingEvent(eventSchoolsIDs);
-        List<Integer> eventEmployerIDs = EmployerQrys.getAllEmployerIDsAttendingEvent(id);
-//        List<Employer> eventEmployerNames = EmployerQrys.getAllEmployerNamesAttendingEvent(eventEmployerIDs);
-
-
-        schoolAllNamesAndIds = SchoolQrys.getAllSchoolNamesAndIds();
-        eventsAllTypes = EventQrys.getAllTypesOfEvents();
-        employerAllNamesAndIds = EmployerQrys.getAllEmployerNamesAndIds();
+        List<School> eventSchoolsIDs = SchoolQrys.getAllSchoolIDsAttendingEvent(id);
+        List<School> eventSchoolNames = SchoolQrys.getAllSchoolNamesAttendingEvent(eventSchoolsIDs);
+        List<Employer> eventEmployerIDs = EmployerQrys.getAllEmployerIDsAttendingEvent(id);
+        List<Employer> eventEmployerNames = EmployerQrys.getAllEmployerNamesAttendingEvent(eventEmployerIDs);
 
         Map<String,Object> Event = new HashMap<String,Object>();
         Event.put("event", event);
-//        Event.put("AllSchoolsNames", eventSchoolNames);
-        Event.put("EventSchoolsIDs", eventSchoolsIDs);
-//        Event.put("AllEmployersNames", eventEmployerNames);
-        Event.put("EventEmployersIDs", eventEmployerIDs);
-        Event.put("allSchoolNamesAndIds", schoolAllNamesAndIds);
-        Event.put("allEventTypes", eventsAllTypes);
-        Event.put("AllEmployerNamesAndIds", employerAllNamesAndIds);
+        Event.put("AllSchoolsNames", eventSchoolNames);
+        Event.put("AllEmployersNames", eventEmployerNames);
         mv.addAllObjects(Event);
 
 //        mv.addObject("event",event);

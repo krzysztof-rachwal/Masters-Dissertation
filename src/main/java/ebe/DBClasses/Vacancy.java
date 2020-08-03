@@ -7,8 +7,9 @@ import java.util.Date;
 public class Vacancy {
 
     private int VacancyID;
-    private int EmployerID;
     private String VacancyName;
+    private int EmployerID;
+    private String EmployerName;
     private String VacancySummary;
     private String VacancyLink;
     private int  TypeOfVacancyID;
@@ -181,5 +182,13 @@ public class Vacancy {
 
     public void setVacancyPostcode(String vacancyPostcode) {
         VacancyPostcode = vacancyPostcode;
+    }
+
+    public String getEmployerName() {
+        return EmployerName;
+    }
+
+    public void setEmployerName(String employerName) {
+        EmployerName = employerName;
     }
 }

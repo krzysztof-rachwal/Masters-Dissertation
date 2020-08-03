@@ -13,9 +13,12 @@
     <link rel="stylesheet" media="all" href="https://careerswales.gov.wales/sites/default/files/css/css_yFFWPpQsZCFeHMtvOieuCWLiTEiz--tT0otLunNJdLs.css"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css"/>
+
     <link th:href="@{../css/ebe_style.css}" href="../css/ebe_style.css" rel="stylesheet" />
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
-    <title>Vacancy</title>
+    <title th:text="${vacancy.getVacancyName()}">Vacancy</title>
 </head>
 
 <header th:replace="fragments/headerTemplate :: header"></header>
@@ -25,9 +28,7 @@
 <div class="modal fade bd-example-modal-lg" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog gel-content-container" role="document">
         <div class="modal-content">
-
             <div class="modal-body">
-
                 <form>
                     <div class="container-fluid">
                         <div class="row">
@@ -37,111 +38,90 @@
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
-                            <div class="col-md-8">
-                                <div class="form-group">
-                                    <label for="employer-name" class="  mb-1">Employer name</label>
-                                    <input type="text" class="form-control input-border" id="employer-name">
-                                </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="vacancy-name">Vacancy Name</label>
+                                <input type="text" class="form-control input-border" id="vacancy-name" th:value="${vacancy.getVacancyName()}">
+                                <input type="hidden" id="vacancy-old-name" th:value="${vacancy.getVacancyName()}"/>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label for="vacancy-desc" class="  mb-1">Vacancy Description</label>
-                                    <textarea class="form-control mt-2" id="vacancy-desc" rows="5" th:text="${vacancy.getVacancySummary()}"></textarea>
-                                </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="employer-name" class="mb-1">Employer Name</label><br>
+                                <select class="selectpicker" data-live-search="true" id="employer-name">
+                                    <option  th:each="employer : ${AllEmployerNamesAndIds}" th:selected="${employer.getEmployerName()} ==  ${vacancyEmployerName.getEmployerName()}" th:value="${employer.getEmployerID()}" th:text="${employer.getEmployerName()}"></option>
+                                </select>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-8">
-                                <div class="form-group">
-                                    <label for="web-link" class="  mb-1">Link to website</label>
-                                    <input type="text" class="form-control input-border" id="web-link" th:value="${vacancy.getVacancyLink()}">
-                                </div>
+
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="vacancy-summary" class="mb-1">Vacancy Description</label>
+                                <textarea class="d-block mt-2 border-0" id="vacancy-summary" rows="5" th:text="${vacancy.getVacancySummary()}"></textarea>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-8">
-                                <div class="form-group">
-                                    <label for="post-code" class="  mb-1">Post Code</label>
-                                    <input type="text" class="form-control input-border" id="post-code" th:value="${vacancy.getVacancyPostcode()}">
-                                </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="web-link" class="mb-1">Link to website</label>
+                                <input type="text" class="form-control input-border" id="web-link" th:value="${vacancy.getVacancyLink()}">
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-8">
-                                <div class="form-group">
-                                    <label for="start-date" class="  mb-1">Start Date</label>
-                                    <input type="date" class="form-control input-border" id="start-date" th:value="${vacancy.getStartOfVacancy()}">
-                                </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="post-code" class="mb-1">Post Code</label>
+                                <input type="text" class="form-control input-border" id="post-code" th:value="${vacancy.getVacancyPostcode()}">
+                                <input type="hidden" id="old-post-code" th:value="${vacancy.getVacancyPostcode()}"/>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-8">
-                                <div class="form-group">
-                                    <label for="closing-date" class="  mb-1">Closing Date</label>
-                                    <input type="date" class="form-control input-border" id="closing-date" th:value="${vacancy.getDeadlineForApplication()}">
-                                </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="start-date" class="mb-1">Start Date</label>
+                                <input type="date" class="form-control input-border" id="start-date" th:value="${vacancy.getStartOfVacancy()}">
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="vacancy-type" class="  mb-1">Type of Vacancy</label>
-                                    <select class="custom-select p-2" id="vacancy-type">
-                                        <option value="Employment FT" th:selected="${vacancy.getTypeOfVacancyID()== 1}">Full-Time</option>
-                                        <option value="Employment PT" th:selected="${vacancy.getTypeOfVacancyID()== 2}">Part-Time </option>
-                                        <option value="Apprenticeship" th:selected="${vacancy.getTypeOfVacancyID()== 3}">Apprenticeship</option>
-                                        <option value="Traineeship" th:selected="${vacancy.getTypeOfVacancyID()== 4}">Traineeship</option>
-                                    </select>
-                                </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="closing-date" class="mb-1">Closing Date</label>
+                                <input type="date" class="form-control input-border" id="closing-date" th:value="${vacancy.getDeadlineForApplication()}">
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="occup-code" class="  mb-1">Occupational Code</label>
-                                    <select class="custom-select p-2" id="occup-code">
-                                        <option value="bfo" th:selected="${vacancy.getOccupationalCodeID()== 1}">Business and Financial Operations</option>
-                                        <option value="cm" th:selected="${vacancy.getOccupationalCodeID()== 2}">Computer and Mathematical</option>
-                                        <option value="ae" th:selected="${vacancy.getOccupationalCodeID()== 3}">Architecture and Engineering</option>
-                                        <option value="lpss" th:selected="${vacancy.getOccupationalCodeID()== 4}">Life, Physical, and Social ScienceC</option>
-                                        <option value="css" th:selected="${vacancy.getOccupationalCodeID()== 5}">Community and Social Service</option>
-                                        <option value="l" th:selected="${vacancy.getOccupationalCodeID()== 6}">Legal</option>
-                                        <option value="eil" th:selected="${vacancy.getOccupationalCodeID()== 7}">Educational Instruction and Library</option>
-                                        <option value="adesm" th:selected="${vacancy.getOccupationalCodeID()== 8}">Arts, Design, Entertainment, Sports, and Media</option>
-                                        <option value="hpt" th:selected="${vacancy.getOccupationalCodeID()== 9}">Healthcare Practitioners and Technical</option>
-                                        <option value="hs" th:selected="${vacancy.getOccupationalCodeID()== 10}">Healthcare Support</option>
-                                        <option value="ps" th:selected="${vacancy.getOccupationalCodeID()== 11}">Protective Service</option>
-                                        <option value="fpsr" th:selected="${vacancy.getOccupationalCodeID()== 12}">Food Preparation and Serving Related</option>
-                                        <option value="bgcm" th:selected="${vacancy.getOccupationalCodeID()== 13}">Building and Grounds Cleaning and Maintenance</option>
-                                        <option value="pcs" th:selected="${vacancy.getOccupationalCodeID()== 14}">Personal Care and Service</option>
-                                        <option value="sr" th:selected="${vacancy.getOccupationalCodeID()== 15}">Sales and Related</option>
-                                        <option value="oas" th:selected="${vacancy.getOccupationalCodeID()== 16}">Office and Administrative Support</option>
-                                        <option value="fff" th:selected="${vacancy.getOccupationalCodeID()== 17}">Farming, Fishing, and Forestry</option>
-                                        <option value="ce" th:selected="${vacancy.getOccupationalCodeID()== 18}">Construction and Extraction</option>
-                                        <option value="imr" th:selected="${vacancy.getOccupationalCodeID()== 19}">Installation, Maintenance, and Repair</option>
-                                        <option value="p" th:selected="${vacancy.getOccupationalCodeID()== 20}">Production</option>
-                                        <option value="tmm" th:selected="${vacancy.getOccupationalCodeID()== 21}">Transportation and Material Moving</option>
-                                        <option value="ms" th:selected="${vacancy.getOccupationalCodeID()== 22}">Military Specific</option>
-                                    </select>
-                                </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="vacancy-type" class="mb-1">Type of Vacancy</label>
+                                <select class="selectpicker" id="vacancy-type" data-width="80%">
+                                    <option th:each="vacancyType : ${allVacanciesTypes}" th:selected="${vacancy.getTypeOfVacancyID()} == ${vacancyType.getTypeOfVacancyID()}" th:value="${vacancyType.getTypeOfVacancyID()}" th:text="${vacancyType.getTypeOfVacancyName()}"></option>
+                                </select>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="appl-method" class="  mb-1">Application methods</label>
-                                    <select class="custom-select p-2" id="appl-method">
-                                        <option value="apply-online" th:selected="${vacancy.getApplicationMethodID()== 'Apply online'}">Apply Online</option>
-                                        <option value="cv" th:selected="${vacancy.getApplicationMethodID()== 'CV Contact'}">CV Contact</option>
-                                        <option value="contact-employer" th:selected="${vacancy.getApplicationMethodID()== 'Employer'}">Contact Employer</option>
-                                    </select>
-                                </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="occup-code" class="mb-1">Occupational Code</label>
+                                <select class="selectpicker" id="occup-code" data-width="80%">
+                                    <option th:each="vacancyOccupationalCode : ${allVacanciesOccupationalCodes}"  th:selected="${vacancy.getOccupationalCodeID()} == ${vacancyOccupationalCode.getOccupationalCodeID()}" th:value="${vacancyOccupationalCode.getOccupationalCodeID()}" th:text="${vacancyOccupationalCode.getOccupationalCodeName()}"></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="appl-method" class="mb-1">Application methods</label>
+                                <select class="selectpicker" id="appl-method" data-width="80%">
+                                    <option th:each="vacancyApplicationMethods : ${allVacanciesApplicationMethods}" th:selected="${vacancy.getApplicationMethodID()} == ${vacancyApplicationMethods.getApplicationMethodID()}" th:value="${vacancyApplicationMethods.getApplicationMethodID()}" th:text="${vacancyApplicationMethods.getApplicationMethodName()}"></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="vacancy-type" class=" mb-1">Status of Vacancy</label>
+                                <select class="selectpicker" id="vacancy-status" data-width="80%">
+                                    <option th:each="vacancyStatus : ${allVacanciesStatus}" th:selected="${vacancy.getStatusOfVacancyID()} == ${vacancyStatus.getStatusOfVacancyID()}" th:value="${vacancyStatus.getStatusOfVacancyID()}" th:text="${vacancyStatus.getStatusOfVacancyName()}"></option>
+                                </select>
                             </div>
                         </div>
                         <div class="container my-4 text-center">
-                            <button type="button" class="button--secondary text-center">Add Vacancy</button>
+                            <button type="button" class="button--secondary text-center" onclick="UpdateThisVacancy()">Update Vacancy</button>
                         </div>
                     </div>
                 </form>
@@ -173,9 +153,9 @@
 
 <div class="gel-content-container">
     <div class="container-headline my-5">
-            <span class="title-h2" th:text="${vacancy.getVacancyName()}"></span>
-            <button type="button"  id="updateEvent" data-toggle="modal" data-target="#updateModal" class="buttonUpdate float-right">Update</button>
-            <button type="button"  id="deleteEvent"  data-toggle="modal" data-target="#deleteModal" class="buttonDelete float-right">Delete</button>
+        <span class="title-h2" th:text="${vacancy.getVacancyName()}"></span>
+        <button type="button"  id="deleteEvent"  data-toggle="modal" data-target="#deleteModal" class="buttonDelete float-right">Delete</button>
+        <button type="button"  id="updateEvent" data-toggle="modal" data-target="#updateModal" class="buttonUpdate float-right">Update</button>
     </div>
 
     <div class="container">
@@ -184,7 +164,7 @@
                 <p><strong>Employer name</strong></p>
             </div>
             <div class="col-lg-9">
-                <p></p>
+                <p th:text="${vacancyEmployerName.getEmployerName()}"></p>
             </div>
         </div>
         <div class="row">
@@ -208,7 +188,7 @@
                 <p><strong>Type of vacancy</strong></p>
             </div>
             <div class="col-lg-9">
-                <p th:text="${vacancy.getTypeOfVacancyID()}"></p>
+                <p th:if="${vacancy.getTypeOfVacancyID()} == ${vacancyType.getTypeOfVacancyID()}" th:each="vacancyType : ${allVacanciesTypes}" th:text="${vacancyType.getTypeOfVacancyName()}"></p>
             </div>
         </div>
         <div class="row">
@@ -225,6 +205,7 @@
             </div>
             <div class="col-lg-9">
                 <p th:text="${vacancy.getDeadlineForApplication()}"></p>
+
             </div>
         </div>
         <div class="row">
@@ -232,7 +213,8 @@
                 <p><strong>Occupational code</strong></p>
             </div>
             <div class="col-lg-9">
-                <p th:text="${vacancy.getOccupationalCodeID()}"></p>
+                <p th:each="vacancyOccupationalCode : ${allVacanciesOccupationalCodes}"  th:if="${vacancy.getOccupationalCodeID()} == ${vacancyOccupationalCode.getOccupationalCodeID()}" th:value="${vacancyOccupationalCode.getOccupationalCodeID()}" th:text="${vacancyOccupationalCode.getOccupationalCodeName()}"></p>
+
             </div>
         </div>
         <div class="row">
@@ -240,7 +222,7 @@
                 <p><strong>Application method</strong></p>
             </div>
             <div class="col-lg-9">
-                <p th:text="${vacancy.getApplicationMethodID()}"></p>
+                <p th:each="vacancyApplicationMethods : ${allVacanciesApplicationMethods}" th:if="${vacancy.getApplicationMethodID()} == ${vacancyApplicationMethods.getApplicationMethodID()}" th:value="${vacancyApplicationMethods.getApplicationMethodID()}" th:text="${vacancyApplicationMethods.getApplicationMethodName()}"></p>
             </div>
         </div>
         <div class="row">
@@ -254,9 +236,6 @@
     </div>
 </div>
 
-
-
-
 <footer th:replace="fragments/footerTemplate :: footer"></footer>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
@@ -266,16 +245,12 @@
 <script type="text/javascript" src="https://careerswales.gov.wales/styleguide/assets/js/gel-styleguide.js"></script>
 <script type="text/javascript" src="https://careerswales.gov.wales/styleguide/assets/js/gel-elements-loader.js"></script>
 <script type="text/javascript" src="https://careerswales.gov.wales/styleguide/assets/js/gel-elements.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+
 <script th:src="@{../js/vacancy.js}" src="../js/vacancy.js"></script>
-
-
-
 <script>
-    $(document).ready(function () {
-        $('.js-example-basic-multiple').select2();
-    });
-    s
+    $('.selectpicker').selectpicker();
 </script>
-
 </body>
 </html>
