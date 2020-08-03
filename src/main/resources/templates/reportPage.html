@@ -362,19 +362,17 @@
             <div class="col-md-6 well">
                 <span class="h5 mt-0 mb-4">Events by type and local authority</span>
                 <div class="d-block">
-                    <label class="d-block mb-0 ">Type of event</label>
-                    <select class="selectpicker d-block">
-                        <option>Careers Fair</option>
-                        <option>Webinar</option>
-                        <option>Industry day</option>
+                    <label for="typeOfEvent" class="d-block mb-0 ">Type of event</label>
+                    <select class="selectpicker d-block" id="typeOfEvent">
+                        <option  th:each="event : ${allTypesOfEvents}" th:value="${event.getTypeOfEventID()}" th:text="${event.getTypeOfEventName()}"></option>
+
                     </select>
                 </div>
                 <div class="d-block">
-                    <label class="d-block mb-0 mt-3">Local Authority</label>
-                    <select class="selectpicker d-block">
-                        <option>Cardiff</option>
-                        <option>Swansea</option>
-                        <option>Caerphilly</option>
+                    <label for="authority" class="d-block mb-0 mt-3">Local Authority</label>
+                    <select class="selectpicker d-block" id="authority">
+                        <option  th:each="employerLocalAuthority : ${allLocalAuthorities}" th:value="${employerLocalAuthority.getEmployerLocalAuthorityID()}"  th:text="${employerLocalAuthority.getEmployerLocalAuthorityName()}"></option>
+
                     </select>
                 </div>
                 <form class="pl-0 py-3">
@@ -431,22 +429,35 @@
             <div class="col-md-6 well">
                 <span class="h5 mt-0 mb-4">Employers by local authority</span>
                 <div th:each="key,i :${empByLocalAuth.keySet()}">
-                <div class="col-md-6">
-                    <h6 th:if="${i.index % 2 == 0}">
-                        <span class="h4 text-info d-inline" th:text="${empByLocalAuth.get(key)}">58</span>
-                         in <span th:text="${key}"> Cardiff </span></h6>
-                </div>
-                <div class="col-md-6">
-                    <h6 th:if="${i.index % 2 != 0}">
-                        <span class="h4 text-info d-inline" th:text="${empByLocalAuth.get(key)}">58</span>
-                        in <span th:text="${key}"> Cardiff </span></h6>
-                </div>
+                    <div class="col-md-6">
+                        <h6 th:if="${i.index % 2 == 0}">
+                            <span class="h4 text-info d-inline" th:text="${empByLocalAuth.get(key)}">58</span>
+                            in <span th:text="${key}"> Cardiff </span></h6>
+                    </div>
+                    <div class="col-md-6">
+                        <h6 th:if="${i.index % 2 != 0}">
+                            <span class="h4 text-info d-inline" th:text="${empByLocalAuth.get(key)}">58</span>
+                            in <span th:text="${key}"> Cardiff </span></h6>
+                    </div>
                 </div>
             </div>
-
+            <div class="col-md-6 well">
+                <span class="h5 mt-0 mb-4">Schools that attended events</span>
+                <div class="d-block">
+                    <label for="school" class="d-block mb-0 ">Choose school</label>
+                    <select id="school" class="selectpicker d-block">
+                        <option th:each="school : ${allSchoolsNames}" th:value="${school.getSchoolID()}" th:text="${school.getSchoolName()}"></option>
+                    </select>
+                </div>
+                <form class="pl-0 py-3">
+                    <button type="button" id="submit" class="button--secondary">Submit</button>
+                </form>
+                <div class="d-block ">
+                    <h4 class="h4 text-info d-block gel-text-align-center">46</h4>
+                    <span class="d-block gel-text-align-center">events</span>
+                </div>
+            </div>
         </div>
-
-
     </div>
 </div>
 

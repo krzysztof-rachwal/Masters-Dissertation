@@ -3,6 +3,7 @@ package ebe.Controllers;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ebe.DBClasses.Employer;
 import ebe.DBClasses.Event;
+import ebe.DBClasses.School;
 import ebe.DBClasses.Vacancy;
 import ebe.DBMethods.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -200,6 +202,9 @@ public class BaseController {
         Map<String,Integer> schoolsOnEveLocalAuth = statisticsQueries.getSchoolsAttendingEventsByAuth();
         Map<String,Integer> empByLocalAuth = statisticsQueries.getEmpByLocalAuth();
 
+        List<School> allSchoolsNames = SchoolQrys.getAllSchoolNamesAndIds();
+        List<Event> allTypesOfEvents = EventQrys.getAllTypesOfEvents();
+        List<Employer> allLocalAuthorities = EmployerQrys.getAllLocalAuthorities();
 
         mv.addObject("numberOfEvents",numberOfEvents);
         mv.addObject("numberOfEmployers",numberOfEmployers);
@@ -214,6 +219,9 @@ public class BaseController {
         mv.addObject("pupilsByAuth",pupilsByAuth);
         mv.addObject("schoolsOnEveLocalAuth",schoolsOnEveLocalAuth);
         mv.addObject("empByLocalAuth",empByLocalAuth);
+        mv.addObject("allSchoolsNames",allSchoolsNames);
+        mv.addObject("allTypesOfEvents",allTypesOfEvents);
+        mv.addObject("allLocalAuthorities",allLocalAuthorities);
         return mv;
     }
 
