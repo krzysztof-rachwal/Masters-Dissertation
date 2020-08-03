@@ -1,4 +1,4 @@
-package ebe.controllers;
+package ebe.Controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ebe.DBClasses.Employer;
@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
+
 import org.springframework.stereotype.Controller;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;

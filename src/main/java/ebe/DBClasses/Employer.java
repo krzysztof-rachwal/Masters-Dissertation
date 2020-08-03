@@ -1,4 +1,4 @@
-package ebe.models;
+package ebe.DBClasses;
 
 public class Employer {
 

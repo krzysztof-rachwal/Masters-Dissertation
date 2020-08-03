@@ -1,6 +1,6 @@
-package ebe.jdbcRepos;
+package ebe.DBMethods;
 
-import ebe.models.Employer;
+import ebe.DBClasses.Employer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -25,7 +25,8 @@ public class EmployerQueries extends DBQueries {
         super(jdbctemplate);
     }
 
-    //  Get All Employers
+    ///////////////////////////////////// GET ALL METHODS ///////////////////////////////////////////////
+    // 1. Get All Employers
     public List<Employer> getAllEmployers() throws DataAccessException {
         String getQuery = "SELECT * FROM Employer";
         List<Employer> list = new ArrayList<Employer>();
@@ -58,7 +59,7 @@ public class EmployerQueries extends DBQueries {
         return list;
     }
 
-    //  Get Employer by Id
+    // 2. Get Employer by Id
     public Employer getEmployerDetailsById(int employerId) throws DataAccessException {
         String getQuery = String.format("SELECT * FROM Employer WHERE EmployerID = \"%s\" LIMIT 1", employerId);
         Employer employer = null;
@@ -100,7 +101,7 @@ public class EmployerQueries extends DBQueries {
         return employer;
     }
 
-    // Get all Employer Ids and Names
+    //4. Get all Employer Ids and Names
     public List<Employer> getAllEmployerNamesAndIds() throws DataAccessException {
         String getQuery = "SELECT EmployerID, EmployerName  FROM Employer";
         List<Employer> list = new ArrayList<Employer>();
@@ -127,7 +128,7 @@ public class EmployerQueries extends DBQueries {
         return list;
     }
 
-    // Get Last Employer Created
+    //5. Get Last Employer Created
     public Integer getLastEmployerCreated(String employerName) throws DataAccessException {
         String getQuery = String.format("SELECT EmployerID FROM Employer WHERE EmployerName = \"%s\" ORDER BY EmployerID DESC LIMIT 1", employerName);
         Employer employer = null;
@@ -152,7 +153,7 @@ public class EmployerQueries extends DBQueries {
     }
 
 
-    // Get Possible Number of Employers
+    //6. Get Possible Number of Employers
     public List<Employer> getAllNumberOfEmployersPossible() throws DataAccessException {
         String getQuery = "SELECT EmployeesRangeID, EmployeesRangeName FROM EmployeesRangeList";
         List<Employer> list = new ArrayList<Employer>();
@@ -206,7 +207,7 @@ public class EmployerQueries extends DBQueries {
         return list;
     }
 
-    // Get All Possible Local Authorities List
+    //8. Get All Possible Local Authorities List
     public List<Employer> getAllLocalAuthorities() throws DataAccessException {
         String getQuery = "SELECT LocalAuthorityID, LocalAuthorityName FROM LocalAuthorityList";
         List<Employer> list = new ArrayList<Employer>();
@@ -233,7 +234,7 @@ public class EmployerQueries extends DBQueries {
         return list;
     }
 
-    // Get All Possible Industry Sector List
+    //9. Get All Possible Industry Sector List
     public List<Employer> getAllIndustrySectors() throws DataAccessException {
         String getQuery = "SELECT IndustrySectorID, IndustrySectorName FROM IndustrySectorList";
         List<Employer> list = new ArrayList<Employer>();
@@ -260,7 +261,7 @@ public class EmployerQueries extends DBQueries {
         return list;
     }
 
-    // Get All Possible Curriculum Areas List
+    //10. Get All Possible Curriculum Areas List
     public List<Employer> getAllCurriculumAreas() throws DataAccessException {
         String getQuery = "SELECT AreaOfCurriculumID, AreaOfCurriculumName FROM AreaOfCurriculumList";
         List<Employer> list = new ArrayList<Employer>();
@@ -287,7 +288,7 @@ public class EmployerQueries extends DBQueries {
         return list;
     }
 
-    // Get All Possible Cooperation Types
+    //11. Get All Possible Cooperation Types
     public List<Employer> getAllCooperationTypes() throws DataAccessException {
         String getQuery = "SELECT CooperationTypeID, CooperationTypeName FROM CooperationTypeList";
         List<Employer> list = new ArrayList<Employer>();
@@ -314,7 +315,7 @@ public class EmployerQueries extends DBQueries {
         return list;
     }
 
-    // Get All Possible Preferences
+    //12. Get All Possible Preferences
     public List<Employer> getAllPreferences() throws DataAccessException {
         String getQuery = "SELECT PreferenceID, PreferenceName FROM PreferenceList";
         List<Employer> list = new ArrayList<Employer>();
@@ -341,7 +342,7 @@ public class EmployerQueries extends DBQueries {
         return list;
     }
 
-    // Get All Alumni
+    //13. Get All Alumni
     public List<Employer> getAllAlumni() throws DataAccessException {
         String getQuery = "SELECT AlumniID, AlumniNameAndSurname, AlumniSchoolID  FROM Alumni";
         List<Employer> list = new ArrayList<Employer>();
@@ -369,7 +370,7 @@ public class EmployerQueries extends DBQueries {
     }
 
 
-    // Get All Employer  Ids Attending Specific event
+    // 14. Get All Employer  Ids Attending Specific event
     public List<Employer> getAllEmployerIDsAttendingEvent(int eventId) throws DataAccessException {
         String getQuery = String.format("SELECT EmployerID FROM INT_AttendingEmployerOnEvent WHERE EventID = \"%s\"", eventId);
 
@@ -396,7 +397,7 @@ public class EmployerQueries extends DBQueries {
         return list;
     }
 
-    // Get All Employer Name Attending Specific event
+    // 15. Get All Employer Name Attending Specific event
     public List<Employer> getAllEmployerNamesAttendingEvent(List<Employer> employers) throws DataAccessException {
 
         List<Employer> list = new ArrayList<Employer>();
@@ -428,7 +429,7 @@ public class EmployerQueries extends DBQueries {
         return list;
     }
 
-    //  Get All Employer Status
+    // 16. Get All Employer Status
     public List<Employer> getAllEmployerStatus() throws DataAccessException {
 
         String getQuery = String.format("SELECT StatusOfEmployerID, StatusOfEmployerName  FROM StatusOfEmployerList");
@@ -458,7 +459,8 @@ public class EmployerQueries extends DBQueries {
     }
 
 
-    // Create New Employer
+    ///////////////////////////////////// CREATE ALL METHODS ///////////////////////////////////////////////
+    //17. Create New Employer
 
 //    public int createEmployer(int statusOfEmployer, String Name, String AddressCity, String AddressStreet, String AddressNumber,
 //                                 String Postcode, String email, String phone, String website, int numberOfEmployees, String companySummary,
@@ -482,11 +484,11 @@ public class EmployerQueries extends DBQueries {
 //
 //    }
 
-    //  Create a new Employer / version 1 not complete
+    // 18. Create a new Employer / version 1 not complete
     public int createEmployer(int StatusOfEmployerID,  String EmployerName, String EmployerAddressCity, String EmployerAddressStreet, String EmployerAddressNumber,
-                             String EmployerPostcode, String EmployerEmail, String ContactPersonNameSurname, String ContactPersonPosition, String EmployerPhone,
-                             String EmployerTwitter, String EmployerFB, String EmployerWebsite, int NumberOfEmployeesID, String CompanySummary,
-                             String Notes) throws DataAccessException {
+                              String EmployerPostcode, String EmployerEmail, String ContactPersonNameSurname, String ContactPersonPosition, String EmployerPhone,
+                              String EmployerTwitter, String EmployerFB, String EmployerWebsite, int NumberOfEmployeesID, String CompanySummary,
+                              String Notes) throws DataAccessException {
 
         String insertSql = "INSERT INTO Employer(StatusOfEmployerID, EmployerName, EmployerAddressCity, EmployerAddressStreet, EmployerAddressNumber, EmployerPostcode," +
                 " EmployerEmail,ContactPersonNameSurname,ContactPersonPosition, EmployerPhone, EmployerWebsite, EmployerTwitter, EmployerFB, NumberOfEmployeesID," +
@@ -499,7 +501,7 @@ public class EmployerQueries extends DBQueries {
     }
 
 
-    //  Create new Employer / Cooperation Type Intersection
+    // 19. Create new Employer / Cooperation Type Intersection
     public void updateEmployerCooperationIntersection(int EmployerID, List<Integer> CooperationTypeID) throws DataAccessException {
 
         String updateSql = "INSERT INTO INT_EmployerCooperationType(EmployerID, CooperationTypeID) VALUE(?,?)";
@@ -509,7 +511,7 @@ public class EmployerQueries extends DBQueries {
         };
     }
 
-    //  Create new Employer / Industry Sector
+    // 20. Create new Employer / Industry Sector
     public void updateEmployerIndustrySectorIntersection(int EmployerID, List<Integer> IndustrySectorID) throws DataAccessException {
 
         String updateSql = "INSERT INTO INT_EmployerIndustrySector(EmployerID, IndustrySectorID) VALUES(?,?)";
@@ -520,7 +522,7 @@ public class EmployerQueries extends DBQueries {
     }
 
 
-    //  Create new Employer / Preference
+    // 21. Create new Employer / Preference
     public void updateEmployerPreferencesIntersection(int EmployerID, List<Integer> PreferenceID) throws DataAccessException {
 
         String updateSql = "INSERT INTO INT_EmployerPreference(EmployerID, PreferenceID) VALUE(?,?)";
@@ -530,7 +532,7 @@ public class EmployerQueries extends DBQueries {
         };
     }
 
-    //  Create new Employer / School Preference
+    // 22. Create new Employer / School Preference
     public void updateSchoolEmployerSchoolPreferencesIntersection(int EmployerID, List<Integer> SchoolID) throws DataAccessException {
 
         String updateSql = "INSERT INTO INT_EmployerSchoolPreference(EmployerID, SchoolID) VALUES(?,?)";
@@ -540,7 +542,7 @@ public class EmployerQueries extends DBQueries {
         }
     };
 
-    //  Create new Employer / Curriculum Area
+    // 23. Create new Employer / Curriculum Area
     public void updateEmployerEmployerCurriculumAreaIntersection(int EmployerID, List<Integer> AreaOfCurriculumID) throws DataAccessException {
 
         String updateSql = "INSERT INTO INT_EmployerSupportOfAreaOfCurriculum(EmployerID, AreaOfCurriculumID) VALUE(?,?)";
@@ -550,7 +552,7 @@ public class EmployerQueries extends DBQueries {
         };
     }
 
-    //  Create new Employer / Language
+    // 24. Create new Employer / Language
     public void updateSchoolEmployerLanguageIntersection(int EmployerID, List<Integer> LanguageID) throws DataAccessException {
 
         String updateSql = "INSERT INTO INT_LanguageUsedByEmployer(EmployerID, LanguageID) VALUES(?,?)";
@@ -560,7 +562,7 @@ public class EmployerQueries extends DBQueries {
         }
     }
 
-    //  Create new Employer / Local Authorities
+    // 24. Create new Employer / Local Authorities
     public void updateSchoolEmployerLocalAuthoritiesIntersection(int EmployerID, List<Integer> LocalAuthorityID) throws DataAccessException {
 
         String updateSql = "INSERT INTO INT_LocalAuthorityEmployerCanWorkWith(EmployerID, LocalAuthorityID) VALUES(?,?)";
@@ -572,7 +574,12 @@ public class EmployerQueries extends DBQueries {
 
 
 
-    // Update Employer by Id
+
+
+
+
+    ///////////////////////////////////// UPDATE ALL METHODS ///////////////////////////////////////////////
+    //19. Update Employer by Id
     public Integer updateEmployer(int employerId, int statusOfEmployer, String Name, String AddressCity, String AddressStreet, String AddressNumber,
                                   String Postcode, String email, String phone, String website, int numberOfEmployees, String companySummary,
                                   String notes, String DocumentsAndVideos, String Logo, Boolean givesSiteExperience, Boolean givesSiteVisits,
@@ -594,7 +601,8 @@ public class EmployerQueries extends DBQueries {
     }
 
 
-    // DELETE EMPLOYER by Id
+    ///////////////////////////////////// DELETE ALL METHODS ///////////////////////////////////////////////
+    //20. DELETE EMPLOYER by Id
     public Integer deleteEmployer(int employerId) throws DataAccessException {
         String deleteSql = String.format("DELETE FROM Employer WHERE EmployerID = '%s'",employerId);
         return jdbcTemplate().update(deleteSql);

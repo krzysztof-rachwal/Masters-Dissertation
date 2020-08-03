@@ -1,4 +1,4 @@
-package ebe.jdbcRepos;
+package ebe.DBMethods;
 
 import java.sql.Connection;
 import java.sql.ResultSet;

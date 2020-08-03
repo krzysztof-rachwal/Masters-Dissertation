@@ -1,15 +1,11 @@
-package ebe.api;
+package ebe.API;
 
-import ebe.DBClasses.Vacancy;
 import ebe.DBMethods.EmployerQueries;
 import ebe.DBMethods.EventQueries;
 import ebe.DBMethods.SchoolQueries;
 import ebe.DBMethods.VacancyQueries;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpServletRequest;
 import java.text.ParseException;
 
 
@@ -30,7 +26,7 @@ public class VacancyAPI {
 
     ///////////////////////    CREATE     ////////////////////////////////
     //1. Create Vacancies
-    @RequestMapping(value="/api/create/vacancy", method= RequestMethod.GET)
+    @GetMapping(value="/api/create/vacancy")
     public boolean createVacancy(
             @RequestParam(name="EmployerID") int employerId,
             @RequestParam(name="VacancyName") String vacancyName,
@@ -52,7 +48,7 @@ public class VacancyAPI {
 
     ///////////////////////    Update     ////////////////////////////////
     //2. Update Vacancies
-    @RequestMapping(value="/api/update/vacancy", method= RequestMethod.GET)
+    @GetMapping(value="/api/update/vacancy")
     public boolean updateVacancy(
             @RequestParam(name="EmployerID") int employerId,
             @RequestParam(name="VacancyName") String vacancyName,

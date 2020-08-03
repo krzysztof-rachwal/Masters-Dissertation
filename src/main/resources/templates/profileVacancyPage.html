@@ -28,9 +28,7 @@
 <div class="modal fade bd-example-modal-lg" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog gel-content-container" role="document">
         <div class="modal-content">
-
             <div class="modal-body">
-
                 <form>
                     <div class="container-fluid">
                         <div class="row">
@@ -42,86 +40,86 @@
                             </div>
                         </div>
                     </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="vacancy-name">Vacancy Name</label>
-                                    <input type="text" class="form-control input-border" id="vacancy-name" th:value="${vacancy.getVacancyName()}">
-                                    <input type="hidden" id="vacancy-old-name" th:value="${vacancy.getVacancyName()}"/>
-                                </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="vacancy-name">Vacancy Name</label>
+                                <input type="text" class="form-control input-border" id="vacancy-name" th:value="${vacancy.getVacancyName()}">
+                                <input type="hidden" id="vacancy-old-name" th:value="${vacancy.getVacancyName()}"/>
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="employer-name" class="mb-1">Employer Name</label><br>
-                                    <select class="selectpicker" data-live-search="true" id="employer-name">
-                                        <option  th:each="employer : ${allEmployerNamesAndIds}" th:selected="${employer.getEmployerName()} ==  ${vacancyEmployerName.getEmployerName()}" th:value="${employer.getEmployerID()}" th:text="${employer.getEmployerName()}"></option>
-                                    </select>
-                                </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="employer-name" class="mb-1">Employer Name</label><br>
+                                <select class="selectpicker" data-live-search="true" id="employer-name">
+                                    <option  th:each="employer : ${AllEmployerNamesAndIds}" th:selected="${employer.getEmployerName()} ==  ${vacancyEmployerName.getEmployerName()}" th:value="${employer.getEmployerID()}" th:text="${employer.getEmployerName()}"></option>
+                                </select>
                             </div>
+                        </div>
 
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label for="vacancy-summary" class="mb-1">Vacancy Description</label>
-                                    <textarea class="d-block mt-2 border-0" id="vacancy-summary" rows="5" th:text="${vacancy.getVacancySummary()}"></textarea>
-                                </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="vacancy-summary" class="mb-1">Vacancy Description</label>
+                                <textarea class="d-block mt-2 border-0" id="vacancy-summary" rows="5" th:text="${vacancy.getVacancySummary()}"></textarea>
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="web-link" class="mb-1">Link to website</label>
-                                    <input type="text" class="form-control input-border" id="web-link" th:value="${vacancy.getVacancyLink()}">
-                                </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="web-link" class="mb-1">Link to website</label>
+                                <input type="text" class="form-control input-border" id="web-link" th:value="${vacancy.getVacancyLink()}">
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="post-code" class="mb-1">Post Code</label>
-                                    <input type="text" class="form-control input-border" id="post-code" th:value="${vacancy.getVacancyPostcode()}">
-                                    <input type="hidden" id="old-post-code" th:value="${vacancy.getVacancyPostcode()}"/>
-                                </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="post-code" class="mb-1">Post Code</label>
+                                <input type="text" class="form-control input-border" id="post-code" th:value="${vacancy.getVacancyPostcode()}">
+                                <input type="hidden" id="old-post-code" th:value="${vacancy.getVacancyPostcode()}"/>
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="start-date" class="mb-1">Start Date</label>
-                                    <input type="date" class="form-control input-border" id="start-date" th:value="${vacancy.getStartOfVacancy()}">
-                                </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="start-date" class="mb-1">Start Date</label>
+                                <input type="date" class="form-control input-border" id="start-date" th:value="${vacancy.getStartOfVacancy()}">
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="closing-date" class="mb-1">Closing Date</label>
-                                    <input type="date" class="form-control input-border" id="closing-date" th:value="${vacancy.getDeadlineForApplication()}">
-                                </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="closing-date" class="mb-1">Closing Date</label>
+                                <input type="date" class="form-control input-border" id="closing-date" th:value="${vacancy.getDeadlineForApplication()}">
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="vacancy-type" class="mb-1">Type of Vacancy</label>
-                                    <select class="selectpicker" id="vacancy-type" data-width="80%">
-                                        <option th:each="vacancyType : ${allVacanciesTypes}" th:selected="${vacancy.getTypeOfVacancyID()} == ${vacancyType.getTypeOfVacancyID()}" th:value="${vacancyType.getTypeOfVacancyID()}" th:text="${vacancyType.getTypeOfVacancyName()}"></option>
-                                    </select>
-                                </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="vacancy-type" class="mb-1">Type of Vacancy</label>
+                                <select class="selectpicker" id="vacancy-type" data-width="80%">
+                                    <option th:each="vacancyType : ${allVacanciesTypes}" th:selected="${vacancy.getTypeOfVacancyID()} == ${vacancyType.getTypeOfVacancyID()}" th:value="${vacancyType.getTypeOfVacancyID()}" th:text="${vacancyType.getTypeOfVacancyName()}"></option>
+                                </select>
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="occup-code" class="mb-1">Occupational Code</label>
-                                    <select class="selectpicker" id="occup-code" data-width="80%">
-                                        <option th:each="vacancyOccupationalCode : ${allVacanciesOccupationalCodes}"  th:selected="${vacancy.getOccupationalCodeID()} == ${vacancyOccupationalCode.getOccupationalCodeID()}" th:value="${vacancyOccupationalCode.getOccupationalCodeID()}" th:text="${vacancyOccupationalCode.getOccupationalCodeName()}"></option>
-                                    </select>
-                                </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="occup-code" class="mb-1">Occupational Code</label>
+                                <select class="selectpicker" id="occup-code" data-width="80%">
+                                    <option th:each="vacancyOccupationalCode : ${allVacanciesOccupationalCodes}"  th:selected="${vacancy.getOccupationalCodeID()} == ${vacancyOccupationalCode.getOccupationalCodeID()}" th:value="${vacancyOccupationalCode.getOccupationalCodeID()}" th:text="${vacancyOccupationalCode.getOccupationalCodeName()}"></option>
+                                </select>
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="appl-method" class="mb-1">Application methods</label>
-                                    <select class="selectpicker" id="appl-method" data-width="80%">
-                                        <option th:each="vacancyApplicationMethods : ${allVacanciesApplicationMethods}" th:selected="${vacancy.getApplicationMethodID()} == ${vacancyApplicationMethods.getApplicationMethodID()}" th:value="${vacancyApplicationMethods.getApplicationMethodID()}" th:text="${vacancyApplicationMethods.getApplicationMethodName()}"></option>
-                                    </select>
-                                </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="appl-method" class="mb-1">Application methods</label>
+                                <select class="selectpicker" id="appl-method" data-width="80%">
+                                    <option th:each="vacancyApplicationMethods : ${allVacanciesApplicationMethods}" th:selected="${vacancy.getApplicationMethodID()} == ${vacancyApplicationMethods.getApplicationMethodID()}" th:value="${vacancyApplicationMethods.getApplicationMethodID()}" th:text="${vacancyApplicationMethods.getApplicationMethodName()}"></option>
+                                </select>
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="vacancy-type" class=" mb-1">Status of Vacancy</label>
-                                    <select class="selectpicker" id="vacancy-status" data-width="80%">
-                                        <option th:each="vacancyStatus : ${allVacanciesStatus}" th:selected="${vacancy.getStatusOfVacancyID()} == ${vacancyStatus.getStatusOfVacancyID()}" th:value="${vacancyStatus.getStatusOfVacancyID()}" th:text="${vacancyStatus.getStatusOfVacancyName()}"></option>
-                                    </select>
-                                </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="vacancy-type" class=" mb-1">Status of Vacancy</label>
+                                <select class="selectpicker" id="vacancy-status" data-width="80%">
+                                    <option th:each="vacancyStatus : ${allVacanciesStatus}" th:selected="${vacancy.getStatusOfVacancyID()} == ${vacancyStatus.getStatusOfVacancyID()}" th:value="${vacancyStatus.getStatusOfVacancyID()}" th:text="${vacancyStatus.getStatusOfVacancyName()}"></option>
+                                </select>
                             </div>
+                        </div>
                         <div class="container my-4 text-center">
                             <button type="button" class="button--secondary text-center" onclick="UpdateThisVacancy()">Update Vacancy</button>
                         </div>
@@ -158,7 +156,7 @@
         <span class="title-h2" th:text="${vacancy.getVacancyName()}"></span>
         <button type="button"  id="deleteEvent"  data-toggle="modal" data-target="#deleteModal" class="buttonDelete float-right">Delete</button>
         <button type="button"  id="updateEvent" data-toggle="modal" data-target="#updateModal" class="buttonUpdate float-right">Update</button>
-     </div>
+    </div>
 
     <div class="container">
         <div class="row">
@@ -237,7 +235,6 @@
         </div>
     </div>
 </div>
-
 
 <footer th:replace="fragments/footerTemplate :: footer"></footer>
 

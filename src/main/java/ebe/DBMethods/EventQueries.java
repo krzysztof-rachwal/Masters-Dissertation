@@ -1,6 +1,7 @@
-package ebe.jdbcRepos;
+package ebe.DBMethods;
 
-import ebe.models.Event;
+import ebe.DBClasses.Event;
+import ebe.DBClasses.Vacancy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -60,7 +61,7 @@ public class EventQueries extends DBQueries {
 
     // 2. Get Event by Id
     public Event getEventDetailsById(int eventId) throws DataAccessException {
-    String getQuery = String.format("SELECT * FROM Event WHERE EventID = \"%s\" LIMIT 1", eventId);
+        String getQuery = String.format("SELECT * FROM Event WHERE EventID = \"%s\" LIMIT 1", eventId);
         Event event = null;
         ResultSet rs = null;
         try {
@@ -144,9 +145,9 @@ public class EventQueries extends DBQueries {
     ///////////////////////////////////// CREATE ALL METHODS ///////////////////////////////////////////////
     // 5. Create a new Event
     public int createEvent( String EventName, int TypeOfEventID, String EventDateAndTime, String EventVenueName,
-                           String EventAddressCity, String EventAddressStreet, String EventAddressNumber, String EventVenuePostcode,
-                           String EventSummary, Boolean IsPublic, Boolean IsCancelled, String NameOfAdviser, int NumberOfAttendees,
-                           Boolean PromotesApprenticeships, Boolean PromotesWelshLanguage, Boolean ChallengesGenderStereoTypes) throws DataAccessException {
+                            String EventAddressCity, String EventAddressStreet, String EventAddressNumber, String EventVenuePostcode,
+                            String EventSummary, Boolean IsPublic, Boolean IsCancelled, String NameOfAdviser, int NumberOfAttendees,
+                            Boolean PromotesApprenticeships, Boolean PromotesWelshLanguage, Boolean ChallengesGenderStereoTypes) throws DataAccessException {
 
         String insertSql = "INSERT INTO Event(EventName, TypeOfEventID, EventDateAndTime, EventVenueName, EventAddressCity," +
                 " EventAddressStreet, EventAddressNumber, EventVenuePostcode, EventSummary, IsPublic, IsCancelled, NameOfAdviser," +
