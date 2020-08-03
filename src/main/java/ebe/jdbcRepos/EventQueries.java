@@ -1,7 +1,6 @@
-package ebe.DBMethods;
+package ebe.jdbcRepos;
 
-import ebe.DBClasses.Event;
-import ebe.DBClasses.Vacancy;
+import ebe.models.Event;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;

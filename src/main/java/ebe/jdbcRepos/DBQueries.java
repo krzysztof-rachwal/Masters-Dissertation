@@ -1,4 +1,4 @@
-package ebe.DBMethods;
+package ebe.jdbcRepos;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;

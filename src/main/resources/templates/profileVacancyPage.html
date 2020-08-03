@@ -54,7 +54,7 @@
                                 <div class="form-group">
                                     <label for="employer-name" class="mb-1">Employer Name</label><br>
                                     <select class="selectpicker" data-live-search="true" id="employer-name">
-                                        <option  th:each="employer : ${AllEmployerNamesAndIds}" th:selected="${employer.getEmployerName()} ==  ${vacancyEmployerName.getEmployerName()}" th:value="${employer.getEmployerID()}" th:text="${employer.getEmployerName()}"></option>
+                                        <option  th:each="employer : ${allEmployerNamesAndIds}" th:selected="${employer.getEmployerName()} ==  ${vacancyEmployerName.getEmployerName()}" th:value="${employer.getEmployerID()}" th:text="${employer.getEmployerName()}"></option>
                                     </select>
                                 </div>
                             </div>

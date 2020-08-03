@@ -1,4 +1,4 @@
-package ebe.DBClasses;
+package ebe.models;
 
 import org.springframework.format.annotation.DateTimeFormat;
 

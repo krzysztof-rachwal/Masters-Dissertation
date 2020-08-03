@@ -1,4 +1,4 @@
-package ebe.DBMethods;
+package ebe.jdbcRepos;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

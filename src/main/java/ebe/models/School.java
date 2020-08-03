@@ -1,4 +1,4 @@
-package ebe.DBClasses;
+package ebe.models;
 
 public class School {
 

@@ -1,7 +1,6 @@
-package ebe.DBMethods;
+package ebe.jdbcRepos;
 
-import ebe.DBClasses.Employer;
-import ebe.DBClasses.Vacancy;
+import ebe.models.Vacancy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -12,7 +11,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -30,7 +28,7 @@ public class VacancyQueries extends DBQueries {
     // 1. Get All Vacancy
     public List<Vacancy> getAllVacancy() throws DataAccessException {
         String getQuery = "SELECT * FROM Vacancy";
-        List<Vacancy> list = new ArrayList<Vacancy>();
+        List<Vacancy> list = new ArrayList<>();
         Vacancy vacancy = null;
         ResultSet rs = null;
         try {
@@ -39,7 +37,8 @@ public class VacancyQueries extends DBQueries {
             rs = statement.executeQuery(getQuery);
             while (rs.next()) {
                 vacancy = new Vacancy(rs.getInt("VacancyID"), rs.getInt("EmployerID"),
-                        rs.getString("VacancyName"), rs.getString("VacancySummary"), rs.getString("VacancyLink"),
+                        rs.getString("VacancyName"), rs.getString("VacancySummary"),
+                        rs.getString("VacancyLink"),
                         rs.getInt("TypeOfVacancyID"), rs.getInt("StatusOfVacancyID"),
                         rs.getDate("StartOfVacancy"),rs.getDate("DeadlineForApplication"),
                         rs.getInt("OccupationalCodeID"), rs.getInt("ApplicationMethodID"),

@@ -250,13 +250,13 @@
             <div class="mb-auto p-2 col-md-6 well2">
                 <label class="font-weight-bold h6">Schools Attending</label>
                 <ul class="list-group">
-                    <li class="list-group-item" th:each="schools : ${AllSchoolsNames}" th:text="${schools.getSchoolName()}"></li>
+                    <li class="list-group-item" th:each="schools : ${allSchoolsNames}" th:text="${schools.getSchoolName()}"></li>
                 </ul>
             </div>
             <div class="mb-auto p-2 col-md-6 well2">
                 <label class="font-weight-bold h6">Employers Attending</label>
                 <ul class="list-group">
-                    <li class="list-group-item" th:each="employer : ${AllEmployersNames}" th:text="${employer.getEmployerName()}"></li>
+                    <li class="list-group-item" th:each="employer : ${allEmployersNames}" th:text="${employer.getEmployerName()}"></li>
                 </ul>
             </div>
         </div>

@@ -1,18 +1,13 @@
-package ebe.API;
+package ebe.api;
 
-import ebe.DBClasses.Vacancy;
-import ebe.DBMethods.EmployerQueries;
-import ebe.DBMethods.EventQueries;
-import ebe.DBMethods.SchoolQueries;
-import ebe.DBMethods.VacancyQueries;
+import ebe.jdbcRepos.EmployerQueries;
+import ebe.jdbcRepos.EventQueries;
+import ebe.jdbcRepos.SchoolQueries;
+import ebe.jdbcRepos.VacancyQueries;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 @RestController
 public class VacancyAPI {
