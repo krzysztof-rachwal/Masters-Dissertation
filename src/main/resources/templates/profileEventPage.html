@@ -5,24 +5,19 @@
     <meta id="_csrf" name="_csrf" th:content="${_csrf.token}"/>
     <meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}"/>
     <link rel="stylesheet" type="text/css" href="https://use.fortawesome.com/kits/747c3a74/publications/latest/eot.css">
-    <link rel="stylesheet" type="text/css"
-          href="https://use.fortawesome.com/kits/747c3a74/publications/latest/woff.css">
-    <link rel="stylesheet" type="text/css"
-          href="https://use.fortawesome.com/kits/747c3a74/publications/latest/woff2.css">
-    <link rel="stylesheet" type="text/css"
-          href="https://careerswales.gov.wales/styleguide/assets/css/gel-styleguide.css">
+    <link rel="stylesheet" type="text/css" href="https://use.fortawesome.com/kits/747c3a74/publications/latest/woff.css">
+    <link rel="stylesheet" type="text/css" href="https://use.fortawesome.com/kits/747c3a74/publications/latest/woff2.css">
+    <link rel="stylesheet" type="text/css" href="https://careerswales.gov.wales/styleguide/assets/css/gel-styleguide.css">
     <link rel="stylesheet" media="all" href="https://careerswales.gov.wales/styleguide/assets/css/gel-elements.css"/>
-    <link rel="stylesheet" media="all"
-          href="https://careerswales.gov.wales/sites/default/files/css/css_Ix2IjZRJPxhlyX0UzoOcvWoONN1wNDbQY7jrFiB85O0.css"/>
-    <link rel="stylesheet" media="all"
-          href="https://careerswales.gov.wales/sites/default/files/css/css_yFFWPpQsZCFeHMtvOieuCWLiTEiz--tT0otLunNJdLs.css"/>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" media="all" href="https://careerswales.gov.wales/sites/default/files/css/css_Ix2IjZRJPxhlyX0UzoOcvWoONN1wNDbQY7jrFiB85O0.css"/>
+    <link rel="stylesheet" media="all" href="https://careerswales.gov.wales/sites/default/files/css/css_yFFWPpQsZCFeHMtvOieuCWLiTEiz--tT0otLunNJdLs.css"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css"/>
     <link th:href="@{../css/ebe_style.css}" href="../css/ebe_style.css" rel="stylesheet"/>
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
-    <title>Events Profile</title>
+    <title th:text="${event.getEventName()}">Event</title>
 </head>
 
 <header th:replace="fragments/headerTemplate :: header">
@@ -30,7 +25,8 @@
 
 
 <!-- Modal Update -->
-<div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+     aria-hidden="true">
     <div class="modal-dialog gel-content-container" role="document">
         <div class="modal-content">
 
@@ -47,15 +43,18 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="event-name">Event name</label>
-                                    <input type="text" class="form-control input-border" id="event-name" th:value="${event.getEventName()}">
+                                    <input type="text" class="form-control input-border" id="event-name"
+                                           th:value="${event.getEventName()}">
                                 </div>
                                 <div class="form-group">
                                     <label for="event-type">Event type</label>
-                                    <input type="text" class="form-control input-border" id="event-type" th:value="${event.getTypeOfEventID()}">
+                                    <input type="text" class="form-control input-border" id="event-type"
+                                           th:value="${event.getTypeOfEventID()}">
                                 </div>
                                 <div class="form-group">
                                     <label for="event-date">Event date</label>
-                                    <input type="date" class="form-control input-border" id="event-date" th:value="${event.getEventDateAndTime()}">
+                                    <input type="date" class="form-control input-border" id="event-date"
+                                           th:value="${event.getEventDateAndTime()}">
                                 </div>
                                 <div class="form-group">
                                     <label for="event-time">Event time</label>
@@ -69,11 +68,13 @@
                             <div class="col-md-6 ">
                                 <div class="form-group">
                                     <label for="adviser-name">Adviser name</label>
-                                    <input type="text" class="form-control input-border" id="adviser-name" th:value="${event.getNameOfAdviser()}">
+                                    <input type="text" class="form-control input-border" id="adviser-name"
+                                           th:value="${event.getNameOfAdviser()}">
                                 </div>
                                 <div class="form-group">
                                     <label for="no-attendees">No of Attendees</label>
-                                    <input type="number" class="form-control input-border" id="no-attendees" th:value="${event.getNumberOfAttendees()}">
+                                    <input type="number" class="form-control input-border" id="no-attendees"
+                                           th:value="${event.getNumberOfAttendees()}">
                                 </div>
                                 <div class="form-group">
                                     <label for="schools-attending">Schools Attending</label>
@@ -89,62 +90,71 @@
                             <div class="form-group">
                                 <fieldset id="group1">
                                     <label>Can the event be conducted in Welsh?</label>
-                                    <input type="radio" id="welsh-yes" name="group1" value="Yes" th:checked="${event.getPromotesWelshLanguage() == True}">
+                                    <input type="radio" id="welsh-yes" name="group1" value="Yes"
+                                           th:checked="${event.getPromotesWelshLanguage() == True}">
                                     <label for="welsh-yes">Yes</label>
-                                    <input type="radio" id="welsh-no" name="group1" value="No"th:checked="${event.getPromotesWelshLanguage() == False}">
+                                    <input type="radio" id="welsh-no" name="group1" value="No"
+                                           th:checked="${event.getPromotesWelshLanguage() == False}">
                                     <label for="welsh-no">No</label>
                                 </fieldset>
                             </div>
                             <div class="form-group">
                                 <fieldset id="group2">
                                     <label>Does the event promote apprenticeship?</label>
-                                    <input type="radio" id="appr-yes" name="group2" value="Yes" th:checked="${event.getPromotesApprenticeships() == True}">
+                                    <input type="radio" id="appr-yes" name="group2" value="Yes"
+                                           th:checked="${event.getPromotesApprenticeships() == True}">
                                     <label for="appr-yes">Yes</label>
-                                    <input type="radio" id="appr-no" name="group2" value="No" th:checked="${event.getPromotesApprenticeships() == False}">
+                                    <input type="radio" id="appr-no" name="group2" value="No"
+                                           th:checked="${event.getPromotesApprenticeships() == False}">
                                     <label for="appr-no">No</label>
                                 </fieldset>
                             </div>
                             <div class="form-group">
                                 <fieldset id="group3">
                                     <label>Does the event challenger gender stereotypes?</label>
-                                    <input type="radio" id="gender-yes" name="group3" value="Yes" th:checked="${event.getChallengesGenderStereotypes() == True}">
+                                    <input type="radio" id="gender-yes" name="group3" value="Yes"
+                                           th:checked="${event.getChallengesGenderStereotypes() == True}">
                                     <label for="gender-yes">Yes</label>
-                                    <input type="radio" id="gender-no" name="group3" value="No" th:checked="${event.getChallengesGenderStereotypes() == False}">
+                                    <input type="radio" id="gender-no" name="group3" value="No"
+                                           th:checked="${event.getChallengesGenderStereotypes() == False}">
                                     <label for="gender-no">No</label>
                                 </fieldset>
                             </div>
                         </div>
-
                         <div class="row flex-column">
                             <div class="mb-auto p-2 d-flex flex-column">
-                                <label>Choose employers</label>
-                                <select class="js-example-basic-multiple" name="employers[]" multiple="multiple">
-                                    <option value="Employer4">Employer1</option>
-                                    <option value="Employer4">Employer2</option>
-                                    <option value="Employer4">Employer3</option>
-                                    <option value="Employer4">Employer4</option>
-                                    <option value="Employer4">Employer5</option>
-                                    <option value="Employer4">Employer6</option>
-                                    <option value="Employer4">Employer7</option>
-                                    <option value="Employer4">Employer8</option>
-                                    <option value="Employer4">Employer9</option>
-                                    <option value="Employer4">Employer10</option>
-                                </select>
+                                <div class="form-group">
+                                    <label>Choose employers</label>
+                                    <select class="selectpicker" multiple data-live-search="true">
+                                        <option value="Employer4">Employer1</option>
+                                        <option value="Employer4">Employer2</option>
+                                        <option value="Employer4">Employer3</option>
+                                        <option value="Employer4">Employer4</option>
+                                        <option value="Employer4">Employer5</option>
+                                        <option value="Employer4">Employer6</option>
+                                        <option value="Employer4">Employer7</option>
+                                        <option value="Employer4">Employer8</option>
+                                        <option value="Employer4">Employer9</option>
+                                        <option value="Employer4">Employer10</option>
+                                    </select>
+                                </div>
                             </div>
                             <div class="mt-auto p-2 d-flex flex-column">
-                                <label>Choose schools</label>
-                                <select class="js-example-basic-multiple" multiple="multiple" name="schools[]">
-                                    <option value="schools">School1</option>
-                                    <option value="schools">School2</option>
-                                    <option value="schools">School3</option>
-                                    <option value="schools">School4</option>
-                                    <option value="schools">School5</option>
-                                    <option value="schools">School6</option>
-                                    <option value="schools">School7</option>
-                                    <option value="schools">School8</option>
-                                    <option value="schools">School9</option>
-                                    <option value="schools">School10</option>
-                                </select>
+                                <div class="form-group">
+                                    <label>Choose schools</label>
+                                    <select class="selectpicker" multiple data-live-search="true">
+                                        <option value="schools">School1</option>
+                                        <option value="schools">School2</option>
+                                        <option value="schools">School3</option>
+                                        <option value="schools">School4</option>
+                                        <option value="schools">School5</option>
+                                        <option value="schools">School6</option>
+                                        <option value="schools">School7</option>
+                                        <option value="schools">School8</option>
+                                        <option value="schools">School9</option>
+                                        <option value="schools">School10</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -158,7 +168,8 @@
 </div>
 
 <!-- Modal Delete -->
-<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+     aria-hidden="true">
     <div class="modal-dialog gel-content-container" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -168,9 +179,10 @@
                 </button>
             </div>
             <div class="modal-body">
-               <p  th:text="'Are you sure you want to delete '+ ${event.getEventName()} + ' event?'">
-               </p>
-                <button type="button" class="btn buttonUpdate" th:onclick="|deleteEvent(${event.getEventID()})|">Yes</button>
+                <p th:text="'Are you sure you want to delete '+ ${event.getEventName()} + ' event?'">
+                </p>
+                <button type="button" class="btn buttonUpdate" th:onclick="|deleteEvent(${event.getEventID()})|">Yes
+                </button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
             </div>
         </div>
@@ -180,8 +192,12 @@
 <div class="gel-content-container">
     <div class="container-headline mt-5">
         <span class="title-h2">Event</span>
-        <button type="button" id="deleteEvent" data-toggle="modal" data-target="#deleteModal" class="buttonDelete float-right">Delete</button>
-        <button type="button" id="updateEvent" data-toggle="modal" data-target="#updateModal" class="buttonUpdate float-right">Update</button>
+        <button type="button" id="deleteEvent" data-toggle="modal" data-target="#deleteModal"
+                class="buttonDelete float-right">Delete
+        </button>
+        <button type="button" id="updateEvent" data-toggle="modal" data-target="#updateModal"
+                class="buttonUpdate float-right">Update
+        </button>
 
     </div>
 
@@ -237,12 +253,12 @@
 
                 <div class="form-group form-inline">
                     <span class="font-weight-bold h6">Does the event promote apprenticeship? </span>
-                    <span class="ml-4"  th:text="${event.getPromotesApprenticeships()}"></span>
+                    <span class="ml-4" th:text="${event.getPromotesApprenticeships()}"></span>
                 </div>
 
                 <div class="form-group form-inline">
                     <span class="font-weight-bold h6">Does the event challenger gender stereotypes? </span>
-                    <span class="ml-4"  th:text="${event.getChallengesGenderStereotypes()}"></span>
+                    <span class="ml-4" th:text="${event.getChallengesGenderStereotypes()}"></span>
                 </div>
             </div>
         </div>
@@ -250,13 +266,15 @@
             <div class="mb-auto p-2 col-md-6 well2">
                 <label class="font-weight-bold h6">Schools Attending</label>
                 <ul class="list-group">
-                    <li class="list-group-item" th:each="schools : ${allSchoolsNames}" th:text="${schools.getSchoolName()}"></li>
+                    <li class="list-group-item" th:each="schools : ${allSchoolsNames}"
+                        th:text="${schools.getSchoolName()}"></li>
                 </ul>
             </div>
             <div class="mb-auto p-2 col-md-6 well2">
                 <label class="font-weight-bold h6">Employers Attending</label>
                 <ul class="list-group">
-                    <li class="list-group-item" th:each="employer : ${allEmployersNames}" th:text="${employer.getEmployerName()}"></li>
+                    <li class="list-group-item" th:each="employer : ${allEmployersNames}"
+                        th:text="${employer.getEmployerName()}"></li>
                 </ul>
             </div>
         </div>
@@ -264,19 +282,26 @@
 </div>
 <footer th:replace="fragments/footerTemplate :: footer"></footer>
 
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
 <script type="text/javascript" src="https://careerswales.gov.wales/styleguide/assets/js/gel-styleguide.js"></script>
-<script type="text/javascript" src="https://careerswales.gov.wales/styleguide/assets/js/gel-elements-loader.js"></script>
+<script type="text/javascript"
+        src="https://careerswales.gov.wales/styleguide/assets/js/gel-elements-loader.js"></script>
 <script type="text/javascript" src="https://careerswales.gov.wales/styleguide/assets/js/gel-elements.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
 <script th:src="@{../js/events.js}" src="../js/events.js"></script>
 
 <script>
-    $(document).ready(function () {
-        $('.selectpicker').select2();
-    });
+    $('.selectpicker').selectpicker();
 </script>
 
 </body>
