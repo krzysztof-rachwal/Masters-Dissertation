@@ -305,13 +305,14 @@
                 <span class="h5 mt-0 mb-4">Events by local authority</span>
                 <div th:each="key,i : ${evByLocalAuth.keySet()}">
                     <div class="col-md-6">
-                        <h6 th:if="${i.index % 2 == 0 }"><span  class="h4 text-info d-inline"
-                                                                th:text="${evByLocalAuth.get(key)}">58</span> in
-                            <span th:text="${key}"> Cardiff</span> </h6>
+                        <h6 th:if="${i.index % 2 == 0 }"><span class="h4 text-info d-inline"
+                                                               th:text="${evByLocalAuth.get(key)}">58</span> in
+                            <span th:text="${key}"> Cardiff</span></h6>
                     </div>
                     <div class="col-md-6">
-                        <h6 th:if="${i.index % 2 != 0}"><span th:text="${evByLocalAuth.get(key)}" class="h4 text-info d-inline">58</span>
-                            <span th:text="${key}">in Cardiff</span> </h6>
+                        <h6 th:if="${i.index % 2 != 0}"><span th:text="${evByLocalAuth.get(key)}"
+                                                              class="h4 text-info d-inline">58</span>
+                            <span th:text="${key}">in Cardiff</span></h6>
                     </div>
                 </div>
             </div>
@@ -332,6 +333,25 @@
             </div>
         </div>
         <div class="row mt-3">
+            <div class="col-md-12 well">
+                <span class="h5 mt-0 mb-4">Employers by sector</span>
+                <div th:each="key,i : ${empBySector.keySet()}" class="mt-0">
+                    <div class="col-md-6">
+                        <h6 th:if="${i.index % 2 == 0 }" class="p-0 d-block mx-0">
+                            <span th:text="${empBySector.get(key)}" class="h4 text-info">58</span>
+                            <span th:text="${key}">Mining</span>
+                        </h6>
+                    </div>
+                    <div class="col-md-6">
+                        <h6 th:if="${i.index % 2 != 0 }" class="p-0 d-block mx-0">
+                            <span th:text="${empBySector.get(key)}" class="h4 text-info">58</span>
+                            <span th:text="${key}">Mining</span>
+                        </h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-3">
             <div class="col-md-6 well">
                 <span class="h5 mt-0 mb-4">Events by type</span>
                 <div th:each="key : ${eventsByType.keySet()}">
@@ -340,19 +360,39 @@
                 </div>
             </div>
             <div class="col-md-6 well">
-                <span class="h5 mt-0 mb-4">Employers by sector</span>
-                <div th:each="key,i : ${empBySector.keySet()}">
-                    <div class="col-md-6">
-                        <h6 th:if="${i.index % 2 == 0 }" class="mb-4">
-                            <span th:text="${empBySector.get(key)}" class="h4 text-info d-inline">58</span>
-                            <span th:text="${key}">Mining</span></h6>
-                    </div>
-                    <div class="col-md-6">
-                        <h6 th:if="${i.index % 2 != 0 }" class="mb-4">
-                            <span th:text="${empBySector.get(key)}" class="h4 text-info d-inline">58</span>
-                            <span th:text="${key}">Mining</span></h6>
-                    </div>
+                <span class="h5 mt-0 mb-4">Events by type and local authority</span>
+                <div class="d-block">
+                    <label class="d-block mb-0 ">Type of event</label>
+                    <select class="selectpicker d-block">
+                        <option>Careers Fair</option>
+                        <option>Webinar</option>
+                        <option>Industry day</option>
+                    </select>
                 </div>
+                <div class="d-block">
+                    <label class="d-block mb-0 mt-3">Local Authority</label>
+                    <select class="selectpicker d-block">
+                        <option>Cardiff</option>
+                        <option>Swansea</option>
+                        <option>Caerphilly</option>
+                    </select>
+                </div>
+                <form class="pl-0 py-3">
+                    <button type="button" id="addEmployer" class="button--secondary">Submit</button>
+                </form>
+                <div class="d-block ">
+                    <h4 class="h4 text-info d-block gel-text-align-center">46</h4>
+                    <span class="d-block gel-text-align-center">events of type _____ in ______</span>
+                </div>
+            </div>
+        </div>
+        <div class="row well d-block mt-3">
+            <span class="h4 mt-1 text-success d-flex justify-content-center" th:text="${requestsBySchools}">0</span>
+            <span class="h3 d-flex mt-0 justify-content-center">Requests by schools</span>
+            <div class="container my-4 text-center">
+                <button type="button" class="button--secondary text-center" data-toggle="modal"
+                        data-target="#viewRequests">View schools
+                </button>
             </div>
         </div>
         <div class="row mt-3">
@@ -439,42 +479,9 @@
                     <h6><span class="h4 text-info d-inline">58</span> in Cardiff</h6>
                 </div>
             </div>
-            <div class="col-md-6 well">
-                <span class="h5 mt-0 mb-4">Events by type and local authority</span>
-                <div class="d-block">
-                    <label class="d-block mb-0 ">Type of event</label>
-                    <select class="selectpicker d-block">
-                        <option>Careers Fair</option>
-                        <option>Webinar</option>
-                        <option>Industry day</option>
-                    </select>
-                </div>
-                <div class="d-block">
-                    <label class="d-block mb-0 mt-3">Local Authority</label>
-                    <select class="selectpicker d-block">
-                        <option>Cardiff</option>
-                        <option>Swansea</option>
-                        <option>Caerphilly</option>
-                    </select>
-                </div>
-                <form class="pl-0 py-3">
-                    <button type="button" id="addEmployer" class="button--secondary">Submit</button>
-                </form>
-                <div class="d-block ">
-                    <h4 class="h4 text-info d-block gel-text-align-center">46</h4>
-                    <span class="d-block gel-text-align-center">events of type _____ in ______</span>
-                </div>
-            </div>
+
         </div>
-        <div class="row well d-block mt-3">
-            <span class="h4 mt-1 counter text-success d-flex justify-content-center" data-target="60000">0</span>
-            <span class="h3 d-flex mt-0 justify-content-center">Requests by schools</span>
-            <div class="container my-4 text-center">
-                <button type="button" class="button--secondary text-center" data-toggle="modal"
-                        data-target="#viewRequests">View schools
-                </button>
-            </div>
-        </div>
+
 
 
     </div>
