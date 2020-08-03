@@ -76,10 +76,61 @@ public class BaseController {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("profileEmployerPage");
         Employer employer = EmployerQrys.getEmployerDetailsById(id);
-        mv.addObject("employer",employer);
-        //        for (Employer employer : employers) {
-        //            System.out.println(employer.getName());
-        //        }
+
+        List<Employer> employerInfo;
+        List<Employer> employerLanguage;
+        List<Integer> employerChosenLanguage;
+        List<Employer> employerIndustrySectorAreas;
+        List<Integer> employerChosenIndustrySectorAreas;
+        List<Employer> employerCurriculumAreas;
+        List<Integer> employerChosenCurriculumAreas;
+        List<Employer> employerLocalAuthorities;
+        List<Integer> employerChosenLocalAuthorities;
+        List<Employer> employerNumberOfEmployees;
+        List<Employer> employerCooperationType;
+        List<Integer> employerChosenCooperationType;
+        List<Employer> employerPreferences;
+        List<Integer> employerChosenPreferences;
+        List<Employer> employerAlumni;
+        List<School> schoolAllNamesAndIds;
+
+        employerInfo = EmployerQrys.getAllEmployers();
+        employerLanguage = EmployerQrys.getAllLanguages();
+        employerLocalAuthorities = EmployerQrys.getAllLocalAuthorities();
+        employerChosenLocalAuthorities = EmployerQrys.getChosenLocalAuthorities(employer.getEmployerID());
+
+        employerIndustrySectorAreas = EmployerQrys.getAllIndustrySectors();
+        employerChosenIndustrySectorAreas = EmployerQrys.getChosenIndustrySectors(employer.getEmployerID());
+        employerCurriculumAreas = EmployerQrys.getAllCurriculumAreas();
+        employerChosenCurriculumAreas = EmployerQrys.getChosenCurriculumAreas(employer.getEmployerID());
+        employerNumberOfEmployees = EmployerQrys.getAllNumberOfEmployersPossible();
+        employerCooperationType = EmployerQrys.getAllCooperationTypes();
+        employerChosenCooperationType = EmployerQrys.getChosenCooperationTypes(employer.getEmployerID());
+        employerPreferences = EmployerQrys.getAllPreferences();
+        employerChosenPreferences = EmployerQrys.getChosenPreferences(employer.getEmployerID());
+        employerAlumni = EmployerQrys.getAllPreferences();
+        schoolAllNamesAndIds = SchoolQrys.getAllSchoolNamesAndIds();
+
+        Map<String,Object> allEmployer = new HashMap<String,Object>();
+        allEmployer.put("employer", employer);
+        allEmployer.put("allEmployer", employerInfo);
+        allEmployer.put("allEmployerLanguage", employerLanguage);
+        allEmployer.put("allEmployerLocalAuthorities", employerLocalAuthorities);
+        allEmployer.put("allEmployerChosenLocalAuthorities", employerChosenLocalAuthorities);
+        allEmployer.put("allEmployerIndustrySectors", employerIndustrySectorAreas);
+        allEmployer.put("allEmployerChosenIndustrySectors", employerChosenIndustrySectorAreas);
+        allEmployer.put("allEmployerCurriculumAreas", employerCurriculumAreas);
+        allEmployer.put("allEmployerChosenCurriculumAreas", employerChosenCurriculumAreas);
+        allEmployer.put("allEmployerNumberOfEmployees", employerNumberOfEmployees);
+        allEmployer.put("allEmployerCooperationType", employerCooperationType);
+        allEmployer.put("allEmployerChosenCooperationType", employerChosenCooperationType);
+        allEmployer.put("allEmployerPreferences", employerPreferences);
+        allEmployer.put("allEmployerChosenPreferences", employerChosenPreferences);
+        allEmployer.put("allSchoolNamesAndIds", schoolAllNamesAndIds);
+
+        mv.addAllObjects(allEmployer);
+
+
         return mv;
     }
 

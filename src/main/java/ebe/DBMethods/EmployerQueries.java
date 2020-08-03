@@ -234,7 +234,30 @@ public class EmployerQueries extends DBQueries {
         return list;
     }
 
-    //9. Get All Possible Industry Sector List
+    //9. Intersection - Get Chosen Local Authorities
+    public List<Integer> getChosenLocalAuthorities(int EmployerID) throws DataAccessException {
+        String getQuery = String.format("SELECT LocalAuthorityID FROM INT_LocalAuthorityEmployerCanWorkWith WHERE EmployerID = \"%s\"", EmployerID);
+
+        List<Integer> list = new ArrayList<Integer>();
+        ResultSet rs = null;
+        try {
+            connection = ConnectionFactory.getConnection();
+            statement = connection.createStatement();
+            rs = statement.executeQuery(getQuery);
+            while (rs.next()) {
+                list.add(rs.getInt("LocalAuthorityID"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }  finally {
+            DBUtil.close(rs);
+            DBUtil.close(statement);
+            DBUtil.close(connection);
+        }
+        return list;
+    }
+
+    //10. Get All Possible Industry Sector List
     public List<Employer> getAllIndustrySectors() throws DataAccessException {
         String getQuery = "SELECT IndustrySectorID, IndustrySectorName FROM IndustrySectorList";
         List<Employer> list = new ArrayList<Employer>();
@@ -250,6 +273,29 @@ public class EmployerQueries extends DBQueries {
                 employer.setEmployerIndustrySectorName(rs.getString("IndustrySectorName"));
 
                 list.add(employer);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }  finally {
+            DBUtil.close(rs);
+            DBUtil.close(statement);
+            DBUtil.close(connection);
+        }
+        return list;
+    }
+
+    //9. Intersection - Get Chosen Industry Sectors
+    public List<Integer> getChosenIndustrySectors(int EmployerID) throws DataAccessException {
+        String getQuery = String.format("SELECT IndustrySectorID FROM INT_EmployerIndustrySector WHERE EmployerID = \"%s\"", EmployerID);
+
+        List<Integer> list = new ArrayList<Integer>();
+        ResultSet rs = null;
+        try {
+            connection = ConnectionFactory.getConnection();
+            statement = connection.createStatement();
+            rs = statement.executeQuery(getQuery);
+            while (rs.next()) {
+                list.add(rs.getInt("IndustrySectorID"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -288,7 +334,31 @@ public class EmployerQueries extends DBQueries {
         return list;
     }
 
-    //11. Get All Possible Cooperation Types
+
+    //11. Intersection - Get Chosen Curriculum Areas
+    public List<Integer> getChosenCurriculumAreas(int EmployerID) throws DataAccessException {
+        String getQuery = String.format("SELECT AreaOfCurriculumID FROM INT_EmployerSupportOfAreaOfCurriculum WHERE EmployerID = \"%s\"", EmployerID);
+
+        List<Integer> list = new ArrayList<Integer>();
+        ResultSet rs = null;
+        try {
+            connection = ConnectionFactory.getConnection();
+            statement = connection.createStatement();
+            rs = statement.executeQuery(getQuery);
+            while (rs.next()) {
+                list.add(rs.getInt("AreaOfCurriculumID"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }  finally {
+            DBUtil.close(rs);
+            DBUtil.close(statement);
+            DBUtil.close(connection);
+        }
+        return list;
+    }
+
+    //12. Get All Possible Cooperation Types
     public List<Employer> getAllCooperationTypes() throws DataAccessException {
         String getQuery = "SELECT CooperationTypeID, CooperationTypeName FROM CooperationTypeList";
         List<Employer> list = new ArrayList<Employer>();
@@ -304,6 +374,29 @@ public class EmployerQueries extends DBQueries {
                 employer.setEmployerCooperationTypeName(rs.getString("CooperationTypeName"));
 
                 list.add(employer);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }  finally {
+            DBUtil.close(rs);
+            DBUtil.close(statement);
+            DBUtil.close(connection);
+        }
+        return list;
+    }
+
+    //11. Intersection - Get Chosen Cooperation Types
+    public List<Integer> getChosenCooperationTypes(int EmployerID) throws DataAccessException {
+        String getQuery = String.format("SELECT CooperationTypeID FROM INT_EmployerCooperationType WHERE EmployerID = \"%s\"", EmployerID);
+
+        List<Integer> list = new ArrayList<Integer>();
+        ResultSet rs = null;
+        try {
+            connection = ConnectionFactory.getConnection();
+            statement = connection.createStatement();
+            rs = statement.executeQuery(getQuery);
+            while (rs.next()) {
+                list.add(rs.getInt("CooperationTypeID"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -342,7 +435,30 @@ public class EmployerQueries extends DBQueries {
         return list;
     }
 
-    //13. Get All Alumni
+    //13. Intersection - Get Chosen Preferences
+    public List<Integer> getChosenPreferences(int EmployerID) throws DataAccessException {
+        String getQuery = String.format("SELECT PreferenceID FROM INT_EmployerPreference WHERE EmployerID = \"%s\"", EmployerID);
+
+        List<Integer> list = new ArrayList<Integer>();
+        ResultSet rs = null;
+        try {
+            connection = ConnectionFactory.getConnection();
+            statement = connection.createStatement();
+            rs = statement.executeQuery(getQuery);
+            while (rs.next()) {
+                list.add(rs.getInt("PreferenceID"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }  finally {
+            DBUtil.close(rs);
+            DBUtil.close(statement);
+            DBUtil.close(connection);
+        }
+        return list;
+    }
+
+    //14. Get All Alumni
     public List<Employer> getAllAlumni() throws DataAccessException {
         String getQuery = "SELECT AlumniID, AlumniNameAndSurname, AlumniSchoolID  FROM Alumni";
         List<Employer> list = new ArrayList<Employer>();
@@ -368,6 +484,32 @@ public class EmployerQueries extends DBQueries {
         }
         return list;
     }
+
+//    //15. Intersection - Get Chosen Alumni
+//    public List<Integer> getChosenAlumni(int EmployerID) throws DataAccessException {
+//        String getQuery = String.format("SELECT PreferenceID FROM INT_EmployerPreference WHERE EmployerID = \"%s\"", EmployerID);
+//
+//        List<Integer> list = new ArrayList<Integer>();
+//        ResultSet rs = null;
+//        try {
+//            connection = ConnectionFactory.getConnection();
+//            statement = connection.createStatement();
+//            rs = statement.executeQuery(getQuery);
+//            while (rs.next()) {
+//                list.add(rs.getInt("PreferenceID"));
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }  finally {
+//            DBUtil.close(rs);
+//            DBUtil.close(statement);
+//            DBUtil.close(connection);
+//        }
+//        return list;
+//    }
+
+
+
 
 
     // 14. Get All Employer Names and Ids
