@@ -40,7 +40,7 @@ public class StatisticsQueries extends DBQueries {
     }
 
     public int getSchoolsAtEvents() throws DataAccessException {
-        return jdbcTemplate().queryForObject("SELECT COUNT(*) FROM INT_AttendingSchoolOnEvent WHERE EventID=3;",
+        return jdbcTemplate().queryForObject("SELECT COUNT(*) FROM INT_AttendingSchoolOnEvent;",
                 new Object[]{}, Integer.class);
     }
 
