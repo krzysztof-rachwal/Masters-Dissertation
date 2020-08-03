@@ -571,6 +571,33 @@ public class EmployerQueries extends DBQueries {
         return list;
     }
 
+    // 16. Get Employer Preferences - School
+    public List<Integer> getEmployerSchoolPreferences(int employerId) throws DataAccessException {
+
+        String getQuery = String.format("SELECT SchoolID FROM INT_EmployerSchoolPreference WHERE EmployerID = \"%s\"", employerId);
+
+        List<Integer> list = new ArrayList<Integer>();
+        ResultSet rs = null;
+        try {
+            connection = ConnectionFactory.getConnection();
+            statement = connection.createStatement();
+            rs = statement.executeQuery(getQuery);
+            while (rs.next()) {
+                list.add(rs.getInt("SchoolID"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            DBUtil.close(rs);
+            DBUtil.close(statement);
+            DBUtil.close(connection);
+        }
+        return list;
+    }
+
+
+
+
 
 
     ///////////////////////////////////// CREATE ALL METHODS ///////////////////////////////////////////////

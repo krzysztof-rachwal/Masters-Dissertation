@@ -146,7 +146,7 @@
                                 <div class="col-md-6 mb-4">
                                     <label for="schools-attending">Schools Preferences</label><br>
                                     <select class="selectpicker"  data-width="80%" multiple data-live-search="true" id="schools-attending">
-                                        <option  th:each="school : ${allSchoolNamesAndIds}" th:value="${school.getSchoolID()}" th:text="${school.getSchoolName()}"></option>
+                                        <option  th:each="school : ${allSchoolNamesAndIds}"  th:selected="${allEmployerSchoolPreferences.contains(school.getSchoolID())}" th:value="${school.getSchoolID()}" th:text="${school.getSchoolName()}"></option>
                                     </select>
                                 </div>
 
@@ -176,7 +176,6 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
                     <div class="container my-4 text-center">
                         <button type="button" class="button--secondary text-center">Update Employer</button>
                     </div>
@@ -378,11 +377,7 @@
     <div class="col-md-12 my-4">
         <h3>School Preferences</h3>
         <ul>
-            <li>Gwernyfed</li>
-            <li>Ysgol Gyfun Gwyr</li>
-            <li>Olchfa School</li>
-            <li>Ysgol Glantaf</li>
-            <li>Ysgol y Preseli</li>
+            <li th:each="school : ${allSchoolNamesAndIds}"  th:remove="${allEmployerSchoolPreferences.contains(school.getSchoolID())} ? none : all" th:text="${school.getSchoolName()}"></li>
         </ul>
     </div>
 
