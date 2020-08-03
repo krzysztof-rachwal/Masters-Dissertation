@@ -192,8 +192,8 @@
                 </button>
             </div>
             <div class="modal-body">
-               <p  th:text="'Are you sure you want to delete '+ ${event.getEventName()} + ' event?'">
-               </p>
+                <p  th:text="'Are you sure you want to delete '+ ${event.getEventName()} + ' event?'">
+                </p>
                 <button type="button" class="btn buttonUpdate" th:onclick="|deleteEvent(${event.getEventID()})|">Yes</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
             </div>

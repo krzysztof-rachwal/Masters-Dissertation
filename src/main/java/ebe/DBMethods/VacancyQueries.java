@@ -1,6 +1,5 @@
 package ebe.DBMethods;
 
-import ebe.DBClasses.Employer;
 import ebe.DBClasses.Vacancy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -12,7 +11,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -59,7 +57,7 @@ public class VacancyQueries extends DBQueries {
 
 
     // 2. Get Vacancy by id
-    public Vacancy getVacancyDetailsById(int vacancyId) throws DataAccessException {
+    public Vacancy  getVacancyDetailsById(int vacancyId) throws DataAccessException {
         String getQuery = String.format("SELECT * FROM Vacancy WHERE VacancyID = \"%s\" LIMIT 1", vacancyId);
         Vacancy vacancy = null;
         ResultSet rs = null;
@@ -242,7 +240,7 @@ public class VacancyQueries extends DBQueries {
         return list;
     }
 
-    // 8. Get List of ApplicationMethods Names and Ids
+    // 9. Get List of ApplicationMethods Names and Ids
     public List<Vacancy> getAllApplicationMethods() throws DataAccessException {
         String getQuery = "SELECT ApplicationMethodID, ApplicationMethodName FROM ApplicationMethodList";
         List<Vacancy> list = new ArrayList<Vacancy>();
@@ -269,6 +267,52 @@ public class VacancyQueries extends DBQueries {
         return list;
     }
 
+    // 10. Get Vacancy - Employer Name
+    public Vacancy getVacancyEmployerName(int employerId) throws DataAccessException {
+        String getQuery = String.format("SELECT EmployerName FROM Employer WHERE EmployerID = \"%s\" LIMIT 1", employerId);
+
+        List<Vacancy> list = new ArrayList<Vacancy>();
+        Vacancy vacancy = null;
+        ResultSet rs = null;
+        try {
+            connection = ConnectionFactory.getConnection();
+            statement = connection.createStatement();
+            rs = statement.executeQuery(getQuery);
+            while (rs.next()) {
+                vacancy = new Vacancy();
+                vacancy.setEmployerName(rs.getString("EmployerName"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }  finally {
+            DBUtil.close(rs);
+            DBUtil.close(statement);
+            DBUtil.close(connection);
+        }
+        return vacancy;
+    }
+
+    // 10. Update Vacancy Id by Giving Name and PostCode
+    public Integer getVacancyIdByNameAndPostCode(String vacancyName, String vacancyPostCode) throws DataAccessException {
+        String updateQuery = String.format("SELECT VacancyID FROM Vacancy WHERE (VacancyName = \"%s\" AND VacancyPostcode = \"%s\")", vacancyName,vacancyPostCode);
+        ResultSet rs = null;
+        int vacancyId = 0;
+        try {
+            connection = ConnectionFactory.getConnection();
+            statement = connection.createStatement();
+            rs = statement.executeQuery(updateQuery);
+            while (rs.next()) {
+                vacancyId = rs.getInt("VacancyID");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }  finally {
+            DBUtil.close(rs);
+            DBUtil.close(statement);
+            DBUtil.close(connection);
+        }
+        return vacancyId;
+    }
 
     ///////////////////////////////////// CREATE ALL METHODS ///////////////////////////////////////////////
     // 10. Create a new Vacancy
@@ -287,14 +331,14 @@ public class VacancyQueries extends DBQueries {
     ///////////////////////////////////// UPDATE ALL METHODS ///////////////////////////////////////////////
     // 11. Update an Vacancy by Id
 
-    public Integer updateVacancy(int VacancyID, int EmployerID, String VacancyTitle, String Details, String Link, int TypeOfVacancy,int StatusOfVacancy ,Date StartOfVacancy,
-                                 Date ClosingDate, int OccupationalCode, String ApplicationMethod, String Postcode) throws DataAccessException {
+    public Integer updateVacancy(int VacancyID,int EmployerID, String VacancyName, String VacancySummary, String VacancyLink, int TypeOfVacancyID,int StatusOfVacancyID ,String StartOfVacancy,
+                                 String DeadlineForApplication, int OccupationalCodeID, String ApplicationMethodID, String VacancyPostcode) throws DataAccessException {
 
-        String updateSql = "UPDATE Vacancy SET EmployerID =?, VacancyTitle=?, Details = ?, Link =?, TypeOfVacancy=?, StatusOfVacancy=?," +
-                "StartOfVacancy=?, ClosingDate=?, OccupationalCode=?, ApplicationMethod=?, Postcode=?  WHERE VacancyID =?";
+        String updateSql = "UPDATE Vacancy SET EmployerID=?, VacancyName=?, VacancySummary=?, VacancyLink=?, TypeOfVacancyID=?, StatusOfVacancyID=?," +
+                "StartOfVacancy=?, DeadlineForApplication=?, OccupationalCodeID=?, ApplicationMethodID=?, VacancyPostcode=?  WHERE VacancyID =?";
 
-        return jdbcTemplate().update(updateSql,EmployerID, VacancyTitle, Details, Link, TypeOfVacancy,StatusOfVacancy,
-                StartOfVacancy, ClosingDate, OccupationalCode, ApplicationMethod, Postcode, VacancyID);
+        return jdbcTemplate().update(updateSql,EmployerID, VacancyName, VacancySummary, VacancyLink, TypeOfVacancyID, StatusOfVacancyID,
+                StartOfVacancy, DeadlineForApplication, OccupationalCodeID, ApplicationMethodID, VacancyPostcode, VacancyID);
     }
 
     ///////////////////////////////////// DELETE ALL METHODS ///////////////////////////////////////////////

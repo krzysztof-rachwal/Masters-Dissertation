@@ -151,13 +151,20 @@
                         <option  th:each="employerLanguage : ${allEmployerLanguage}" th:value="${employerLanguage.getEmployerLanguageID()}" th:text="${employerLanguage.getEmployerLanguageName()}"></option>
                     </select>
                 </div>
+                <div class="col-md-6 mb-4">
+                    <label for="employer-status">Employer Status</label><br>
+                    <select class="selectpicker"  data-width="80%"  data-live-search="true" id="employer-status">
+                        <option  th:each="employerStatus : ${ allEmployerStatus}" th:value="${employerStatus.getStatusOfEmployerID()}" th:text="${employerStatus.getStatusOfEmployerName()}"></option>
+                    </select>
+                </div>
 
                 <div class="col-md-6 mb-4" >
                     <label for="employer-notes">Notes</label>
                     <input type="text" class="form-control input-border" id="employer-notes">
                 </div>
+
                 <div class="col-md-12 my-4">
-                    <label for="local-authorities">LocalAuthorities</label><br>
+                    <label for="local-authorities">Local Authorities</label><br>
                     <select class="selectpicker" data-width="90%" multiple data-live-search="true" id="local-authorities">
                         <option  th:each="employerLocalAuthority : ${allEmployerLocalAuthorities}" th:value="${employerLocalAuthority.getEmployerLocalAuthorityID()}"  th:text="${employerLocalAuthority.getEmployerLocalAuthorityName()}"></option>
                     </select>
@@ -205,7 +212,6 @@
     });
 
 </script>
-
 
 </body>
 </html>
