@@ -26,7 +26,7 @@ public class VacancyAPI {
 
     ///////////////////////    CREATE     ////////////////////////////////
     //1. Create Vacancies
-    @RequestMapping(value="/api/create/vacancy", method= RequestMethod.GET)
+    @GetMapping(value="/api/create/vacancy")
     public boolean createVacancy(
             @RequestParam(name="EmployerID") int employerId,
             @RequestParam(name="VacancyName") String vacancyName,
@@ -48,7 +48,7 @@ public class VacancyAPI {
 
     ///////////////////////    Update     ////////////////////////////////
     //2. Update Vacancies
-    @RequestMapping(value="/api/update/vacancy", method= RequestMethod.GET)
+    @GetMapping(value="/api/update/vacancy")
     public boolean updateVacancy(
             @RequestParam(name="EmployerID") int employerId,
             @RequestParam(name="VacancyName") String vacancyName,

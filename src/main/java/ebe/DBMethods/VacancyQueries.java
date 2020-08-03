@@ -1,6 +1,5 @@
 package ebe.DBMethods;
 
-import ebe.DBClasses.Employer;
 import ebe.DBClasses.Vacancy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -12,7 +11,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -297,16 +295,14 @@ public class VacancyQueries extends DBQueries {
     // 10. Update Vacancy Id by Giving Name and PostCode
     public Integer getVacancyIdByNameAndPostCode(String vacancyName, String vacancyPostCode) throws DataAccessException {
         String updateQuery = String.format("SELECT VacancyID FROM Vacancy WHERE (VacancyName = \"%s\" AND VacancyPostcode = \"%s\")", vacancyName,vacancyPostCode);
-        List<Vacancy> list = new ArrayList<Vacancy>();
-        Vacancy vacancy = null;
         ResultSet rs = null;
+        int vacancyId = 0;
         try {
             connection = ConnectionFactory.getConnection();
             statement = connection.createStatement();
             rs = statement.executeQuery(updateQuery);
             while (rs.next()) {
-                vacancy = new Vacancy();
-                vacancy.setVacancyID(rs.getInt("VacancyID"));
+                vacancyId = rs.getInt("VacancyID");
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -315,12 +311,8 @@ public class VacancyQueries extends DBQueries {
             DBUtil.close(statement);
             DBUtil.close(connection);
         }
-        return vacancy.getVacancyID();
+        return vacancyId;
     }
-
-
-
-
 
     ///////////////////////////////////// CREATE ALL METHODS ///////////////////////////////////////////////
     // 10. Create a new Vacancy
