@@ -133,6 +133,69 @@ public class StatisticsQueries extends DBQueries {
         return eveMap;
     }
 
+    public Map<String, Integer> getTotalPupilsByAuth() throws DataAccessException {
+        String query = "SELECT sum(eve.NumberOfAttendees)  as numberOfAttendees, la.LocalAuthorityName as authName\n" +
+                "From Event eve \n" +
+                "INNER JOIN PostcodeList pc ON pc.PostcodeName = eve.EventVenuePostcode\n" +
+                "INNER JOIN LocalAuthorityList la ON la.LocalAuthorityID = pc.LocalAuthorityID\n" +
+                "GROUP BY 2;";
+        Map<String, Integer> pupilsMap = new HashMap<>();
+        ResultSet rs = null;
+        try {
+            connection = ConnectionFactory.getConnection();
+            statement = connection.createStatement();
+            rs = statement.executeQuery(query);
+            while (rs.next()) {
+                pupilsMap.put(rs.getString("authName"), rs.getInt("numberOfAttendees"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return pupilsMap;
+    }
+
+    public Map<String, Integer> getSchoolsAttendingEventsByAuth() throws DataAccessException {
+        String query = "SELECT COUNT(sc.SchoolId) as schoolCount, la.LocalAuthorityName as authName\n" +
+                "FROM INT_AttendingSchoolOnEvent sc\n" +
+                "INNER JOIN Event eve ON eve.EventID = sc.EventID\n" +
+                "INNER JOIN PostcodeList pc ON pc.PostcodeName = eve.EventVenuePostcode\n" +
+                "INNER JOIN LocalAuthorityList la ON la.LocalAuthorityID = pc.LocalAuthorityID\n" +
+                "GROUP BY 2;";
+        Map<String, Integer> schoolMap = new HashMap<>();
+        ResultSet rs = null;
+        try {
+            connection = ConnectionFactory.getConnection();
+            statement = connection.createStatement();
+            rs = statement.executeQuery(query);
+            while (rs.next()) {
+                schoolMap.put(rs.getString("authName"), rs.getInt("schoolCount"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return schoolMap;
+    }
+
+    public Map<String, Integer> getEmpByLocalAuth() throws DataAccessException {
+        String query = "SELECT count(inter.EmployerID) empCount, la.LocalAuthorityName as authName\n" +
+                "FROM INT_LocalAuthorityEmployerCanWorkWith inter\n" +
+                "INNER JOIN LocalAuthorityList la ON inter.LocalAuthorityID = la.LocalAuthorityID\n" +
+                "GROUP BY 2;";
+        Map<String, Integer> empMap = new HashMap<>();
+        ResultSet rs = null;
+        try {
+            connection = ConnectionFactory.getConnection();
+            statement = connection.createStatement();
+            rs = statement.executeQuery(query);
+            while (rs.next()) {
+                empMap.put(rs.getString("authName"), rs.getInt("empCount"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return empMap;
+    }
+
 
 }
 

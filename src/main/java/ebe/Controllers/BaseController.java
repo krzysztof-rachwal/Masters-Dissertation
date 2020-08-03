@@ -196,7 +196,9 @@ public class BaseController {
         Map<String,Integer> eventsByType = statisticsQueries.getEventsByType();
         Map<String,Integer> empBySector = statisticsQueries.getEmployersBySector();
         Map<String,Integer> evByLocalAuth = statisticsQueries.getEventByLocalAuth();
-        System.out.println(evByLocalAuth.toString());
+        Map<String,Integer> pupilsByAuth = statisticsQueries.getTotalPupilsByAuth();
+        Map<String,Integer> schoolsOnEveLocalAuth = statisticsQueries.getSchoolsAttendingEventsByAuth();
+        Map<String,Integer> empByLocalAuth = statisticsQueries.getEmpByLocalAuth();
 
 
         mv.addObject("numberOfEvents",numberOfEvents);
@@ -209,6 +211,9 @@ public class BaseController {
         mv.addObject("eventsByType",eventsByType);
         mv.addObject("empBySector",empBySector);
         mv.addObject("evByLocalAuth",evByLocalAuth);
+        mv.addObject("pupilsByAuth",pupilsByAuth);
+        mv.addObject("schoolsOnEveLocalAuth",schoolsOnEveLocalAuth);
+        mv.addObject("empByLocalAuth",empByLocalAuth);
         return mv;
     }
 
