@@ -395,23 +395,22 @@ public class EmployerQueries extends DBQueries {
     }
 
     // 15. Get All Employer Name Attending Specific event
-    public List<Employer> getAllEmployerNamesAttendingEvent(List<Employer> employers) throws DataAccessException {
+    public List<String> getAllEmployerNamesAttendingEvent(List<Integer> employersID) throws DataAccessException {
 
-        List<Employer> list = new ArrayList<Employer>();
+        List<String> list = new ArrayList<String>();
 
-        for (Employer employer : employers) {
-            String getQuery = String.format("SELECT EmployerName FROM Employer WHERE EmployerID = \"%s\"", employer.getEmployerID());
+        for (Integer employer : employersID) {
+            String getQuery = String.format("SELECT EmployerName FROM Employer WHERE EmployerID = \"%s\"", employer);
 
 
-            Employer employerName = null;
             ResultSet rs = null;
             try {
                 connection = ConnectionFactory.getConnection();
                 statement = connection.createStatement();
                 rs = statement.executeQuery(getQuery);
                 while (rs.next()) {
-                    employerName = new Employer();
-                    employerName.setEmployerName(rs.getString("EmployerName"));
+                    String employerName;
+                    employerName = rs.getString("EmployerName");
 
                     list.add(employerName);
                 }

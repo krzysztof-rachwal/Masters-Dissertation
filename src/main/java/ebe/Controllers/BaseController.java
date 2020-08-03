@@ -14,9 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
-
 import org.springframework.stereotype.Controller;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
@@ -60,12 +58,41 @@ public class BaseController {
 
         ModelAndView mv = new ModelAndView();
         mv.setViewName("searchEmployerPage");
-        List<Employer> employers;
-        employers = EmployerQrys.getAllEmployers();
+        List<Employer> employer;
+        List<Employer> employerLanguage;
+        List<Employer> employerIndustrySectorAreas;
+        List<Employer> employerCurriculumAreas;
+        List<Employer> employerLocalAuthorities;
+        List<Employer> employerNumberOfEmployees;
+        List<Employer> employerCooperationType;
+        List<Employer> employerPreferences;
+        List<Employer> employerStatus;
+        List<School> schoolAllNamesAndIds;
 
-        Map<String,Object> allEmployers = new HashMap<String,Object>();
-        allEmployers.put("allEmployers", employers);
-        mv.addAllObjects(allEmployers);
+        employer = EmployerQrys.getAllEmployers();
+        employerLanguage = EmployerQrys.getAllLanguages();
+        employerLocalAuthorities = EmployerQrys.getAllLocalAuthorities();
+        employerIndustrySectorAreas = EmployerQrys.getAllIndustrySectors();
+        employerCurriculumAreas = EmployerQrys.getAllCurriculumAreas();
+        employerNumberOfEmployees = EmployerQrys.getAllNumberOfEmployersPossible();
+        employerCooperationType = EmployerQrys.getAllCooperationTypes();
+        employerPreferences = EmployerQrys.getAllPreferences();
+        employerStatus = EmployerQrys.getAllEmployerStatus();
+        schoolAllNamesAndIds = SchoolQrys.getAllSchoolNamesAndIds();
+
+
+        Map<String,Object> allEmployer = new HashMap<String,Object>();
+        allEmployer.put("allEmployers", employer);
+        allEmployer.put("allEmployerLanguage", employerLanguage);
+        allEmployer.put("allEmployerLocalAuthorities", employerLocalAuthorities);
+        allEmployer.put("allEmployerIndustrySectors", employerIndustrySectorAreas);
+        allEmployer.put("allEmployerCurriculumAreas", employerCurriculumAreas);
+        allEmployer.put("allEmployerNumberOfEmployees", employerNumberOfEmployees);
+        allEmployer.put("allEmployerCooperationType", employerCooperationType);
+        allEmployer.put("allEmployerPreferences", employerPreferences);
+        allEmployer.put("allEmployerStatus", employerStatus);
+        allEmployer.put("allSchoolNamesAndIds", schoolAllNamesAndIds);
+        mv.addAllObjects(allEmployer);
 
         return mv;
     }
@@ -232,28 +259,15 @@ public class BaseController {
         mv.setViewName("profileEventPage");
 
         Event event = EventQrys.getEventDetailsById(id);
-        List<Event> eventsAllTypes;
-        List<School> schoolAllNamesAndIds;
-        List<Employer> employerAllNamesAndIds;
         List<Integer> eventSchoolsIDs = SchoolQrys.getAllSchoolIDsAttendingEvent(id);
-//        List<School> eventSchoolNames = SchoolQrys.getAllSchoolNamesAttendingEvent(eventSchoolsIDs);
+        List<String> eventSchoolNames = SchoolQrys.getAllSchoolNamesAttendingEvent(eventSchoolsIDs);
         List<Integer> eventEmployerIDs = EmployerQrys.getAllEmployerIDsAttendingEvent(id);
-//        List<Employer> eventEmployerNames = EmployerQrys.getAllEmployerNamesAttendingEvent(eventEmployerIDs);
-
-
-        schoolAllNamesAndIds = SchoolQrys.getAllSchoolNamesAndIds();
-        eventsAllTypes = EventQrys.getAllTypesOfEvents();
-        employerAllNamesAndIds = EmployerQrys.getAllEmployerNamesAndIds();
+        List<String> eventEmployerNames = EmployerQrys.getAllEmployerNamesAttendingEvent(eventEmployerIDs);
 
         Map<String,Object> Event = new HashMap<String,Object>();
         Event.put("event", event);
-//        Event.put("AllSchoolsNames", eventSchoolNames);
-        Event.put("EventSchoolsIDs", eventSchoolsIDs);
-//        Event.put("AllEmployersNames", eventEmployerNames);
-        Event.put("EventEmployersIDs", eventEmployerIDs);
-        Event.put("allSchoolNamesAndIds", schoolAllNamesAndIds);
-        Event.put("allEventTypes", eventsAllTypes);
-        Event.put("AllEmployerNamesAndIds", employerAllNamesAndIds);
+        Event.put("AllSchoolsNames", eventSchoolNames);
+        Event.put("AllEmployersNames", eventEmployerNames);
         mv.addAllObjects(Event);
 
 //        mv.addObject("event",event);
