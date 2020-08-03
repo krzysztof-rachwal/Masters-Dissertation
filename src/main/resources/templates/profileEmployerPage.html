@@ -154,6 +154,7 @@
                                     <label for="employer-preferences">Preferences</label><br>
                                     <select class="selectpicker"  data-width="80%" multiple data-live-search="true" id="employer-preferences">
                                         <option  th:each="employerPreferences : ${allEmployerPreferences}" th:selected="${allEmployerChosenPreferences.contains(employerPreferences.getEmployerPreferencesID())}" th:value="${employerPreferences.getEmployerPreferencesID()}" th:text="${employerPreferences.getEmployerPreferencesName()}"></option>
+                                        <option  th:each="employerPreferences : ${allEmployerPreferences}" th:selected="${allEmployerChosenPreferences.contains(employerPreferences.getEmployerPreferencesID())}" th:value="${employerPreferences.getEmployerPreferencesID()}" th:text="${employerPreferences.getEmployerPreferencesName()}"></option>
                                     </select>
                                 </div>
                                 <div class="col-md-6 mb-4 d-none" id="div-foreign-language">
@@ -224,12 +225,11 @@
                         <h4>Company Summary</h4>
                         <p th:text="${employer.getCompanySummary()}"></p>
                     </div>
-                </div>
-                <div class="row">
                     <div class="col-md-12">
                         <h4>Notes</h4>
                         <p th:text="${employer.getNotes()}"></p>
                     </div>
+
                 </div>
             </div>
         </div>
@@ -237,64 +237,67 @@
         <div class="row my-5">
 
             <div class="col-md-4 well ">
-
                 <div class="my-2">
-                    <span class="text-h5 font-weight-bold">Sector:</span>
-                    <span class="text-h5" >IT</span>
-                </div>
-
-                <div class="my-2">
-                    <span class="text-h5 font-weight-bold">No of employees:</span>
-                    <span class="text-h5" th:text="${employer.getNumberOfEmployeesID()}"></span>
-                </div>
-
-                <div class="my-2">
-                    <span class="text-h5 font-weight-bold">Works with primary schools:</span>
-                    <span class="text-h5" th:text="${employer.getWorksWithPrimaryPupils()}"></span>
-                </div>
-
-                <div class="my-2">
-                    <span class="text-h5 font-weight-bold">Works in foreign languages:</span>
-                    <span class="text-h5" th:text="${employer.getUseOfModernForeignLanguage()}"></span>
-                </div>
-
-                <div class="my-2">
-                    <span class="text-h5 font-weight-bold">Works in Welsh:</span>
-                    <span class="text-h5" th:text="${employer.getRunsBusinessInWelsh()}"></span>
-                </div>
-
-                <div class="my-2">
-                    <span class="text-h5 font-weight-bold">Deliver in Welsh:</span>
-                    <span class="text-h5" th:text="${employer.getCanDeliverToSchoolsInWelsh()}"></span>
-                </div>
-
-                <div class="my-2">
-                    <span class="text-h5 font-weight-bold">Has Apprenticeship programme:</span>
-                    <span class="text-h5" th:text="${employer.getHasApprenticeshipProgramme()}"></span>
+                    <h6 class=" font-weight-bold">Sectors:</h6>
+                    <ul>
+                        <li class="my-2" th:each="employerIndustrySector : ${allEmployerIndustrySectors}" th:remove="${allEmployerChosenIndustrySectors.contains(employerIndustrySector.getEmployerIndustrySectorID())} ? none : all" th:text="${employerIndustrySector.getEmployerIndustrySectorName()}"></li>
+                    </ul>
                 </div>
             </div>
 
             <div class="col-md-4 well">
-                <h6 class="font-weight-bold">Coperation Types</h6>
+                <h6 class="font-weight-bold">Cooperation Types:</h6>
                 <ul>
-                    <li class="my-2" th:classappend="${ employer.getGivesWebinars()} == true ? visible : d-none">Webinars / digital presentations</li>
-                    <li class="my-2" th:classappend="${ employer.getAttendsCareerFairs()} == true ? visible : d-none">Industry days / careers fairs</li>
-                    <li class="my-2" th:classappend="${ employer.getGivesSiteExperience()} == true ? visible : d-none">Work Experience</li>
-                    <li class="my-2" th:classappend="${ employer.getGivesSiteVisits()} == true ? visible : d-none">Site visits</li>
-                    <li class="my-2" th:classappend="${ employer.getGivesWorkshops()} == true ? visible : d-none">Workshops (school based)</li>
-                    <li class="my-2" th:classappend="${ employer.getGivesPresentations()} == true ? visible : d-none">Presentations</li>
+                    <li class="my-2" th:each="employerCooperationType : ${allEmployerCooperationType}" th:remove="${allEmployerChosenCooperationType.contains(employerCooperationType.getEmployerCooperationTypeID())} ? none : all"  th:text="${employerCooperationType.getEmployerCooperationTypeName()}"></li>
                 </ul>
             </div>
 
-            <div class="col-md-3 well">
-                <h6 class="font-weight-bold">Curriculum Areas</h6>
+            <div class="col-md-4 well">
+                <h6 class="font-weight-bold">Curriculum Areas:</h6>
                 <ul>
-                    <li class="my-2 d-none">Science And Technology</li>
-                    <li class="my-2 d-none">Health And Wellbeing</li>
-                    <li class="my-2">Humanities</li>
+                    <li class="my-2 " th:each="employerCurriculumAreas : ${allEmployerCurriculumAreas}" th:remove="${allEmployerChosenCurriculumAreas.contains(employerCurriculumAreas.getEmployerAreaOfCurriculumID())} ? none : all"  th:text="${employerCurriculumAreas.getEmployAreaOfCurriculumName()}"></li>
                 </ul>
             </div>
+
         </div>
+
+        <div class="row mb-4">
+            <div class="my-2 col-md-4">
+                <span class="text-h5 font-weight-bold">Number of employees:</span>
+                <span class="text-h5" th:text="${employer.getNumberOfEmployeesID()}"></span>
+            </div>
+
+            <div class="my-2 col-md-4">
+                <span class="text-h5 font-weight-bold">Works with primary schools:</span>
+                <span class="text-h5" th:remove="${allEmployerChosenPreferences.contains(1)}  ? none : all">Yes</span>
+                <span class="text-h5" th:remove="${allEmployerChosenPreferences.contains(1)}  ? all : none">No</span>
+            </div>
+
+            <div class="my-2 col-md-4">
+                <span class="text-h5 font-weight-bold">Works in foreign languages:</span>
+                <span class="text-h5" th:remove="${allEmployerChosenPreferences.contains(5)}  ? none : all">Yes</span>
+                <span class="text-h5" th:remove="${allEmployerChosenPreferences.contains(5)}  ? all : none">No</span>
+            </div>
+
+            <div class="my-2 col-md-4">
+                <span class="text-h5 font-weight-bold">Works in Welsh:</span>
+                <span class="text-h5" th:remove="${allEmployerChosenPreferences.contains(2)}  ? none : all">Yes</span>
+                <span class="text-h5" th:remove="${allEmployerChosenPreferences.contains(2)}  ? all : none">No</span>
+            </div>
+
+            <div class="my-2 col-md-4">
+                <span class="text-h5 font-weight-bold">Deliver in Welsh:</span>
+                <span class="text-h5" th:remove="${allEmployerChosenPreferences.contains(3)}  ? none : all">Yes</span>
+                <span class="text-h5" th:remove="${allEmployerChosenPreferences.contains(3)}  ? all : none">No</span>
+            </div>
+
+            <div class="my-2 col-md-4">
+                <span class="text-h5 font-weight-bold">Has Apprenticeship programme:</span>
+                <span class="text-h5" th:remove="${allEmployerChosenPreferences.contains(4)}  ? none : all">Yes</span>
+                <span class="text-h5" th:remove="${allEmployerChosenPreferences.contains(4)}  ? all : none">No</span>
+            </div>
+        </div>
+
     </div>
 
     <div class="row">
@@ -303,7 +306,7 @@
         <div class="col"></div>
     </div>
 
-    <div class="col-md-12">
+    <div class="col-md-12my-4">
         <h3>Alumni</h3>
         <ul>
             <li>James Howell</li>
@@ -320,7 +323,7 @@
         <div class="col"></div>
     </div>
 
-    <div class="col-md-12">
+    <div class="col-md-12 my-4">
         <h3>Employer Info</h3>
         <div class="row">
             <div class="col-md-4 mt-2">
@@ -333,8 +336,10 @@
             <div class="col-md-4">
                 <h4 class="font-weight-bold">Contact</h4>
                 <div>
-                    <span>Name:</span>
-                    <span>John Smith </span>
+                    <span  th:text=" 'Name: ' + ${employer.getContactPersonNameSurname()}"></span>
+                </div>
+                <div>
+                    <span  th:text=" 'Position: ' + ${employer.getContactPersonPosition()}"></span>
                 </div>
                 <div>
                     <span th:text=" 'Email: ' + ${employer.getEmployerEmail()}"></span>
@@ -342,16 +347,22 @@
                 <div>
                     <span th:text=" 'Contact Number: ' + ${employer.getEmployerPhone()}"></span>
                 </div>
-
             </div>
 
             <div class="col-md-4">
                 <h4 class="font-weight-bold">Social Media</h4>
                 <div>
-                    <span class="">Twitter:</span>
+                    <span th:text=" 'Twitter: '"></span>
+                    <a th:href="@{'https://'+${employer.getEmployerTwitter()}}" th:text="${employer.getEmployerTwitter()}"></a>
+
                 </div>
                 <div>
-                    <span th:text=" 'Website: ' + ${employer.getEmployerWebsite()}"></span>
+                    <span th:text=" 'Facebook: '"></span>
+                    <a th:href="@{'https://'+${employer.getEmployerFB()}}" th:text="${employer.getEmployerFB()}"></a>
+                </div>
+                <div>
+                    <span th:text=" 'Website: '"></span>
+                    <a th:href="@{'https://'+${employer.getEmployerWebsite()}}" th:text="${employer.getEmployerWebsite()}"></a>
                 </div>
             </div>
 
@@ -364,7 +375,7 @@
         <div class="col"></div>
     </div>
 
-    <div class="col-md-12">
+    <div class="col-md-12 my-4">
         <h3>School Preferences</h3>
         <ul>
             <li>Gwernyfed</li>
@@ -381,7 +392,7 @@
         <div class="col"></div>
     </div>
 
-    <div class="col-md-12">
+    <div class="col-md-12 my-4">
         <h3>Employer Documents</h3>
         <ul>
             <li>flyer1.pdf</li>
@@ -395,7 +406,7 @@
         <div class="col"></div>
     </div>
 
-    <div class="col-md-12">
+    <div class="col-md-12 my-4">
         <h3>Employer Videos</h3>
         <ul>
             <li>https://www.youtube.com/watch?v=8yAlRupcfds</li>
