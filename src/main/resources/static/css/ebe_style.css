@@ -139,6 +139,9 @@ a {
     font-weight: 500;
     line-height: 1.2;
 }
+.well3{
+    border: solid 10px white;
+}
 
 .typoWhite{
     color: white !important;
