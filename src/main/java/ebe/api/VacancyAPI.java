@@ -1,8 +1,5 @@
 package ebe.api;
 
-import ebe.jdbcRepos.EmployerQueries;
-import ebe.jdbcRepos.EventQueries;
-import ebe.jdbcRepos.SchoolQueries;
 import ebe.jdbcRepos.VacancyQueries;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -10,23 +7,18 @@ import org.springframework.web.bind.annotation.*;
 import java.text.ParseException;
 
 @RestController
+@RequestMapping(path = "/api")
 public class VacancyAPI {
-    private EmployerQueries EmployerQrys;
-    private EventQueries EventQrys;
-    private SchoolQueries SchoolQrys;
-    private VacancyQueries VacancyQrys;
+    private VacancyQueries vacancyQueries;
 
     @Autowired
-    public VacancyAPI(EmployerQueries em, EventQueries ev, SchoolQueries sc, VacancyQueries va){
-        EmployerQrys = em;
-        EventQrys = ev;
-        SchoolQrys = sc;
-        VacancyQrys = va;
+    public VacancyAPI(VacancyQueries va){
+
+        vacancyQueries = va;
     }
 
-    ///////////////////////    CREATE     ////////////////////////////////
-    //1. Create Vacancies
-    @RequestMapping(value="/api/create/vacancy", method= RequestMethod.GET)
+    // Create Vacancies
+    @GetMapping(value="/create/vacancy")
     public boolean createVacancy(
             @RequestParam(name="EmployerID") int employerId,
             @RequestParam(name="VacancyName") String vacancyName,
@@ -40,15 +32,13 @@ public class VacancyAPI {
             @RequestParam(name="ApplicationMethodID") String applicationMethodID,
             @RequestParam(name="VacancyPostcode") String vacancyPostCode) throws ParseException {
 
-         return 1 == VacancyQrys.createVacancy(employerId,vacancyName,vacancySummary,vacancyLink,typeOfVacancyID,
+         return 1 == vacancyQueries.createVacancy(employerId,vacancyName,vacancySummary,vacancyLink,typeOfVacancyID,
                  StatusOfVacancyID, startOfVacancy,deadlineForApplication,occupationalCodeID,applicationMethodID,
                  vacancyPostCode);
-
     }
 
-    ///////////////////////    Update     ////////////////////////////////
-    //2. Update Vacancies
-    @RequestMapping(value="/api/update/vacancy", method= RequestMethod.GET)
+    // Update Vacancies
+    @GetMapping(value="/update/vacancy")
     public boolean updateVacancy(
             @RequestParam(name="EmployerID") int employerId,
             @RequestParam(name="VacancyName") String vacancyName,
@@ -64,17 +54,16 @@ public class VacancyAPI {
             @RequestParam(name="VacancyPostcode") String vacancyPostCode,
             @RequestParam(name="VacancyOldPostcode") String vacancyOldPostCode) throws ParseException {
 
-        int vacancyId = VacancyQrys.getVacancyIdByNameAndPostCode(vacancyOldName,vacancyOldPostCode);
-        return 1 == VacancyQrys.updateVacancy(vacancyId,employerId,vacancyName,vacancySummary,vacancyLink,typeOfVacancyID,
+        int vacancyId = vacancyQueries.getVacancyIdByNameAndPostCode(vacancyOldName,vacancyOldPostCode);
+        return 1 == vacancyQueries.updateVacancy(vacancyId,employerId,vacancyName,vacancySummary,vacancyLink,typeOfVacancyID,
                 StatusOfVacancyID, startOfVacancy,deadlineForApplication,occupationalCodeID,applicationMethodID,
                 vacancyPostCode);
     }
 
-    ///////////////////////    DELETE     ////////////////////////////////
-    //3. Delete Events
-    @DeleteMapping("api/delete/vacancy")
+    // Delete Vacancy
+    @DeleteMapping("/delete/vacancy")
     public boolean deleteVacancies(@RequestParam(value="vacancyId") Integer vacancyId){
-        if (VacancyQrys.deleteVacancy(vacancyId) == 1) {
+        if (vacancyQueries.deleteVacancy(vacancyId) == 1) {
             return true;
         } else {
             return false;

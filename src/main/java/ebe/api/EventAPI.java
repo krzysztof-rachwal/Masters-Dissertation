@@ -11,24 +11,18 @@ import java.text.ParseException;
 import java.util.ArrayList;
 
 @RestController
+@RequestMapping(path = "/api")
 public class EventAPI {
 
-    private EmployerQueries EmployerQrys;
-    private EventQueries EventQrys;
-    private SchoolQueries SchoolQrys;
-    private VacancyQueries VacancyQrys;
+    private EventQueries eventQueries;
 
     @Autowired
     public EventAPI(EmployerQueries em, EventQueries ev, SchoolQueries sc, VacancyQueries va){
-        EmployerQrys = em;
-        EventQrys = ev;
-        SchoolQrys = sc;
-        VacancyQrys = va;
+        eventQueries = ev;
     }
 
-    ///////////////////////    CREATE     ////////////////////////////////
-    //1. Create Events
-    @RequestMapping(value="/api/create/event", method= RequestMethod.GET)
+    // Create Events
+    @GetMapping(value="/create/event")
     public boolean createEvent(
             @RequestParam(name="eventName") String EventName,
             @RequestParam(name="typeOfEventID") int TypeOfEventID,
@@ -64,27 +58,27 @@ public class EventAPI {
             }
 
             //Create the Event
-            EventQrys.createEvent(EventName, TypeOfEventID, EventDateAndTime,  EventVenueName,  EventAddressCity,
+            eventQueries.createEvent(EventName, TypeOfEventID, EventDateAndTime,  EventVenueName,  EventAddressCity,
                     EventAddressStreet, EventAddressNumber, EventPostcode, EventSummary, IsPublic, isCancelled, NameOfAdviser,
                     NumberOfAttendees,  PromotesApprenticeships,  PromotesWelshLanguage,ChallengesGenderStereotypes);
 
     //      Get Event Created Id
-            int eventId = EventQrys.getLastEventCreated(EventName);
+            int eventId = eventQueries.getLastEventCreated(EventName);
 
     //      Insert into the Employer / Event intersection table
-            EventQrys.updateEmployerEventIntersection(eventId,employerIdList);
+            eventQueries.updateEmployerEventIntersection(eventId,employerIdList);
 
     //      Insert into the School / Event intersection table
-            EventQrys.updateSchoolEventIntersection(eventId, schoolIdList);
+            eventQueries.updateSchoolEventIntersection(eventId, schoolIdList);
 
             return true;
     }
-    ///////////////////////    DELETE     ////////////////////////////////
-    //2. Delete Events
+
+    // Delete Events
     @DeleteMapping("api/delete/event")
     public boolean deleteEvents(@RequestParam(value="eventId") Integer eventId){
 
-        if (EventQrys.deleteEvent(eventId) == 1) {
+        if (eventQueries.deleteEvent(eventId) == 1) {
             return true;
         } else {
             return false;
