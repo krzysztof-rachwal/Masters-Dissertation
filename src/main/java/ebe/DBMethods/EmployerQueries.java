@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Repository
@@ -100,6 +101,136 @@ public class EmployerQueries extends DBQueries {
         }
         return employer;
     }
+
+    public List<Integer> getFilteredEmployersIds(List<Integer> IndustrySectors,
+                                                 List<Integer> LocalAuthorities, List<Integer> AreasOfCurriculum,
+                                                 List<Integer> Languages, List<Integer> SchoolPreferences, List<Integer> EmployerPreferences,
+                                                 List<Integer> CooperationTypes, List<Integer> AlumniSchools ) throws DataAccessException {
+
+        List<Integer> ids = new ArrayList<>();
+        connection = ConnectionFactory.getConnection();
+
+        // return only live employers
+        int StatusOfEmployer = 1;
+
+        ResultSet rs = null;
+
+        List<List<Integer>> listOfFilters = Arrays.asList(IndustrySectors, LocalAuthorities, AreasOfCurriculum,
+                Languages, SchoolPreferences, EmployerPreferences, CooperationTypes, AlumniSchools);
+
+//        List<Integer> listOfSingleAttributes = Arrays.asList(NumberOfEmployees, StatusOfEmployer);
+//
+//        List<Integer> listOfBooleans = Arrays.asList(WorkExperience, SiteVisits,
+//                SchoolWorkshop, Presentations, CareerFairs, Webinars, WorksWithPrimaries, RunsBusinessInWelsh,
+//                DeliversInWelsh,HasApprenticeships);
+
+        List<String> listOfSQL = Arrays.asList("SELECT eis.EmployerID FROM INT_EmployerIndustrySector AS eis",
+                "SELECT la.EmployerID FROM INT_LocalAuthorityEmployerCanWorkWith as la",
+                "SELECT ac.EmployerID FROM INT_EmployerSupportOfAreaOfCurriculum as ac",
+                "SELECT l.EmployerID FROM INT_LanguageUsedByEmployer as l",
+                "SELECT sp.EmployerID FROM INT_EmployerSchoolPreference as sp",
+                "SELECT ep.EmployerID FROM INT_EmployerPreference as ep",
+                "SELECT ct.EmployerID FROM INT_EmployerCooperationType as ct",
+                "SELECT ae.EmployerID FROM INT_AlumniWorkingForEmployer AS ae WHERE ae.AlumniID IN (SELECT a.AlumniID FROM Alumni AS a");
+
+        List<String> listOfExtensions = Arrays.asList("eis.IndustrySectorID = ", "la.LocalAuthorityID = ", "ac.AreaOfCurriculumID = ",
+                "l.LanguageID = ", "sp.SchoolID = ", "ep.PreferenceID = ", "ct.CooperationTypeID = ", "a.AlumniSchoolID = ");
+
+        List<String> generatedSQL = new ArrayList<>();
+
+        // Prepare Queries
+        for(int i = 0; i < listOfFilters.size(); ++i){
+            if (listOfFilters.get(i).size() != 0){
+                listOfSQL.set(i,listOfSQL.get(i).concat(" WHERE "));
+            } else {
+                listOfSQL.set(i,listOfSQL.get(i).concat(""));
+            }
+
+            String Extension = "";
+            for (int k = 0; k < listOfFilters.get(i).size(); ++k) {
+                Extension = Extension.concat(listOfExtensions.get(i) + listOfFilters.get(i).get(k) + " ");
+                if (k != listOfFilters.get(i).size()-1){
+                    Extension = Extension.concat("OR ");
+                } else {
+                    // Trap for AlumniSchool to close the statement
+                    if (i == listOfFilters.size()-1){
+                        Extension = Extension.concat(")");
+                    }
+                    Extension = Extension.concat("");
+                }
+            }
+            generatedSQL.add(listOfSQL.get(i)+Extension);
+        }
+
+        // If AlumniSchool is empty, add ")" to the string in order to close statement
+        if (listOfFilters.get(listOfFilters.size()-1).size() == 0){
+            generatedSQL.set(listOfFilters.size()-1,generatedSQL.get(generatedSQL.size()-1).concat(")"));
+        }
+//        System.out.println(generatedSQL);
+
+        String finalSQL = "SELECT distinct EmployerID FROM Employer WHERE EmployerID IN ";
+        for (int i = 0; i < generatedSQL.size(); ++i){
+            finalSQL = finalSQL.concat("( " + generatedSQL.get(i) + ") ");
+            if (i != generatedSQL.size()-1){
+                finalSQL = finalSQL.concat(" AND EmployerID IN ");
+            } else{
+                finalSQL = finalSQL.concat("");
+            }
+        }
+
+//        List<String> intValuesListofSQLQuery = Arrays.asList(" e.NumberOfEmployeesID = ", " e.StatusOfEmployerID = ");
+//
+//        List<String> singleValueslistOfSQLQuery = Arrays.asList(
+//                " e.GivesSiteExperience = "," e.GivesSiteVisits = "," e.GivesWorkshops = " , " e.GivesPresentations = ",
+//                " e.AttendsCareerFairs = ", " e.GivesWebinars = ", " e.WorksWithPrimaryPupils = ", " e.RunsBusinessInWelsh = ",
+//                " e.CanDeliverToSchoolsInWelsh = ", " e.HasApprenticeshipProgramme = ");
+//
+//        // Build SQL for single value attributes
+//        String booleanSQL = "AND EmployerID IN ( SELECT e.EmployerID FROM Employer AS e ";
+//
+//        // If at least one single value attribute is selected
+//        if (listOfBooleans.contains(1)){
+//            booleanSQL = booleanSQL.concat(" WHERE ");
+//        }
+//
+//        for (int i = 0; i < listOfBooleans.size(); ++i){
+//            if (listOfBooleans.get(i) == 1 ){
+//                booleanSQL = booleanSQL.concat(singleValueslistOfSQLQuery.get(i) + listOfBooleans.get(i));
+//
+//                if ( i != listOfBooleans.size()-1){
+//                    booleanSQL = booleanSQL.concat(" AND ");
+//                } else {
+//                    booleanSQL = booleanSQL.concat(")");
+//                }
+//            }
+//        }
+//
+//        String intValuesSQL = "WHERE EmployerID IN ( SELECT e.EmployerID FROM Employer AS e WHERE e.StatusOfEmployerID = " + StatusOfEmployer;
+//        if (NumberOfEmployees != 0){
+//            intValuesSQL = intValuesSQL.concat(" AND e.NumberOfEmployeesID = " + NumberOfEmployees + " ));");
+//        } else {
+//            intValuesSQL = intValuesSQL.concat("));");
+//        }
+//
+//        String SQL = finalSQL + booleanSQL + intValuesSQL;
+//
+        System.out.println(finalSQL);
+
+        try {
+            statement = connection.createStatement();
+            rs = statement.executeQuery(finalSQL);
+            while (rs.next()) {
+                ids.add(rs.getInt("EmployerID"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.close(rs);
+        }
+
+        return ids;
+    }
+
 
     //4. Get all Employer Ids and Names
     public List<Employer> getAllEmployerNamesAndIds() throws DataAccessException {

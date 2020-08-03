@@ -17,6 +17,7 @@ import org.springframework.web.servlet.view.RedirectView;
 import org.springframework.stereotype.Controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -93,6 +94,10 @@ public class BaseController {
         allEmployer.put("allEmployerStatus", employerStatus);
         allEmployer.put("allSchoolNamesAndIds", schoolAllNamesAndIds);
         mv.addAllObjects(allEmployer);
+
+        List<Integer> employersId = EmployerQrys.getFilteredEmployersIds(Arrays.asList(),Arrays.asList(),Arrays.asList(),Arrays.asList(),Arrays.asList(),Arrays.asList(),Arrays.asList(),Arrays.asList());
+        System.out.println("Employers to show: " + employersId.size());
+
 
         return mv;
     }
