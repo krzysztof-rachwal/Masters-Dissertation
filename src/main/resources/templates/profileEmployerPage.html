@@ -188,36 +188,41 @@
                                     <h4>Alumni</h4>
                                 </div>
                                 <div class="col-md-12"  th:each="alumni : ${allEmployerAlumni}" >
-                                    <div class="col-md-6">
-                                        <label >Name</label>
-                                        <input type="text" class="form-control input-border" th:id="${alumni.getEmployerAlumniID()}" name="change-alumni-name" th:value="${alumni.getEmployerAlumniName()}">
+                                    <div class="col-md-6 my-2">
+                                        <label >Full Name</label>
+                                        <input type="text" class="form-control input-border" th:id="${alumni.getEmployerAlumniID()}" name="update-employer-alumni-name" th:value="${alumni.getEmployerAlumniName()}" >
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-6 my-2">
                                         <label >School</label>
-                                        <select class="selectpicker" data-width="90%"  data-live-search="true" name="change-alumni-school">
-                                            <option  type="text" class="form-control input-border"  th:each="school : ${allSchoolNamesAndIds}"  th:selected="${alumni.getEmployerAlumniSchoolID() == school.getSchoolID()} ? none : all" th:text="${school.getSchoolName()}"></option>
+                                        <select class="selectpicker" data-width="90%"  data-live-search="true" name="update-employer-alumni-school">
+                                            <option  type="text" class="form-control input-border"  th:each="school : ${allSchoolNamesAndIds}"  th:selected="${alumni.getEmployerAlumniSchoolID() == school.getSchoolID()}"  th:value="${school.getSchoolID()}" th:text="${school.getSchoolName()}"></option>
                                         </select>
                                     </div>
                                 </div>
+                            </div>
+
+                            <div class="row mt-5">
                                 <!-- 1. Alumni -->
-                                <div class="col-md-6">
-                                    <label >Name</label>
-                                    <input type="text" class="form-control input-border" name="employer-alumni-name">
-                                </div>
-                                <div class="col-md-6">
-                                    <label >School</label>
-                                    <select class="selectpicker" data-width="90%"  data-live-search="true" name="employer-alumni-school">
-                                        <option  type="text" class="form-control input-border"  th:each="school : ${allSchoolNamesAndIds}" th:value="${school.getSchoolID()}"  th:text="${school.getSchoolName()}"></option>
-                                    </select>
+                                <div class="col-md-12">
+                                    <div class="col-md-6">
+                                        <label >Full Name</label>
+                                        <input type="text" class="form-control input-border" name="create-employer-alumni-name">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label >School</label>
+                                        <select class="selectpicker" data-width="90%"  data-live-search="true" name="create-employer-alumni-school">
+                                            <option  type="text" class="form-control input-border"  th:each="school : ${allSchoolNamesAndIds}" th:value="${school.getSchoolID()}"  th:text="${school.getSchoolName()}"></option>
+                                        </select>
+                                    </div>
                                 </div>
                                 <!-- 2. Alumni -->
                                 <div class="col-md-6 d-none">
                                     <label >Name</label>
-                                    <input type="text" class="form-control input-border" name="employer-alumni-name">
+                                    <input type="text" class="form-control input-border" name="create-employer-alumni-name">
                                 </div>
                                 <div class="col-md-6 d-none">
                                     <label >School</label>
-                                    <input type="text" class="form-control input-border" name="employer-alumni-school">
+                                <input type="text" class="form-control input-border" name="create-employer-alumni-school">
                                 </div>
                                 <!-- 3. Alumni -->
                                 <div class="col-md-6 d-none">
@@ -397,8 +402,8 @@
         <h3>Alumni</h3>
         <ul>
             <li  th:each="alumni : ${allEmployerAlumni}" >
-                <span th:text="'Name:' +${alumni.getEmployerAlumniName()}"></span>
-                <span th:each="school : ${allSchoolNamesAndIds}"  th:remove="${alumni.getEmployerAlumniSchoolID() == school.getSchoolID()} ? none : all" th:text="${school.getSchoolName()}"></span>
+                <span class="mr-4" th:text="'Name: ' +${alumni.getEmployerAlumniName()}"></span>
+                <span th:each="school : ${allSchoolNamesAndIds}"   th:remove="${alumni.getEmployerAlumniSchoolID() == school.getSchoolID()} ? none : all" th:text="'School:  ' +${school.getSchoolName()}"></span>
             </li>
         </ul>
     </div>

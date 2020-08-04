@@ -87,16 +87,30 @@ function updateThisEmployer() {
     var EmployerLanguage_url = "EmployerLanguage=" + $('select[id=employer-language]').val();
     var SchoolPreferences_url = "SchoolPreferences=" + $('select[id=schools-attending]').val()
     var localAuthorities_url = "LocalAuthorities=" + $('select[id=local-authorities]').val();
-    var EmployerAlumniName_url = "EmployerAlumniName=" + $('input[name=employer-alumni-name]').val();
-    var EmployerAlumniSchoolID_url = "EmployerAlumniSchoolID=" + $('select[name=employer-alumni-school]').val();
+    var createEmployerAlumniName_url = "CreateEmployerAlumniName=" + $('input[name=create-employer-alumni-name]').val();
+    var createEmployerAlumniSchoolID_url = "CreateEmployerAlumniSchoolID=" + $('select[name=create-employer-alumni-school]').val();
 
+    var update_alumni_id = [];
+    var update_alumni_name = [];
+    var update_alumni_school = [];
+    $("input[name='update-employer-alumni-name']").each(function() {update_alumni_name.push($(this).val()); update_alumni_id.push($(this).attr("id"))});
+    $("select[name='update-employer-alumni-school']").each(function() {update_alumni_school.push($(this).val());});
+
+    var updateEmployerAlumniID_url = "UpdateEmployerAlumniID=" + update_alumni_id;
+    var updateEmployerAlumniName_url = "UpdateEmployerAlumniName=" + update_alumni_name;
+    var updateEmployerAlumniSchoolID_url = "UpdateEmployerAlumniSchoolID=" +update_alumni_school;
+
+    if ($('input[name=update-employer-alumni-name]').attr("id")=== undefined){updateEmployerAlumniID_url = "UpdateEmployerAlumniID="}
+    if ($('input[name=update-employer-alumni-name]').val() === undefined){updateEmployerAlumniName_url = "UpdateEmployerAlumniName="}
+    if ($('select[name=update-employer-alumni-school]').val()=== undefined){updateEmployerAlumniSchoolID_url = "UpdateEmployerAlumniSchoolID="}
 
     var fullUri = baseUri + "?" + "&" + EmployerID_url + "&" + EmployerName_url+ "&" + EmployerStatus_url + "&" + EmployerSummary_url + "&" + EmployerAddressCity_url + "&" + EmployerAddressStreet_url + "&"
         + EmployerAddressNumber_url + "&" + EmployerPostcode_url  + "&" + EmployerEmail_url  + "&" + ContactPersonNameSurname_url + "&"
         + ContactPersonPosition_url + "&" + EmployerPhone_url+ "&" + EmployerWebsite_url + "&"  + "&" +EmployerTwitter_url +"&"
         + EmployerFB_url + "&" + NumberOfEmployeesID_url  + "&" + EmployerNotes_url + "&" + EmployerSectorIndustry_url  + "&"
-        + EmployerCooperationType_url + "&" + EmployerCurriculumAreas_url + "&" + EmployerPreferences_url+ "&" + EmployerLanguage_url+ "&"
-        + "&" + SchoolPreferences_url + "&"+ localAuthorities_url + "&" + EmployerAlumniName_url + "&" + EmployerAlumniSchoolID_url;
+        + EmployerCooperationType_url + "&" + EmployerCurriculumAreas_url + "&" + EmployerPreferences_url+ "&" + EmployerLanguage_url +  "&"
+        + SchoolPreferences_url + "&"+ localAuthorities_url + "&" + createEmployerAlumniName_url + "&" + createEmployerAlumniSchoolID_url + "&"
+        + updateEmployerAlumniName_url + "&" + updateEmployerAlumniSchoolID_url + "&" + updateEmployerAlumniID_url;
 
     var token = $("meta[name='_csrf']").attr("content");    // Used to bypass Spring Boot's CSRF protocol     -- Solution taken from 'https://stackoverflow.com/questions/34747437/use-of-spring-csrf-with-ajax-rest-call-and-html-page-with-thymeleaf' on Nov 26th 2019
     var header = $("meta[name='_csrf_header']").attr("content");    // Used to bypass Spring Boot's CSRF protocol

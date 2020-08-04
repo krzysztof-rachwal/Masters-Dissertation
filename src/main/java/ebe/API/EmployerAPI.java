@@ -11,6 +11,8 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
+
+
 @RestController
 public class EmployerAPI {
     private EmployerQueries EmployerQrys;
@@ -163,8 +165,11 @@ public class EmployerAPI {
             @RequestParam(name="EmployerLanguage") String EmployerLanguage,
             @RequestParam(name="SchoolPreferences") String SchoolPreferences,
             @RequestParam(name="LocalAuthorities") String LocalAuthorities,
-            @RequestParam(name="EmployerAlumniName") String EmployerAlumniName,
-            @RequestParam(name="EmployerAlumniSchoolID") String EmployerAlumniSchoolID) throws ParseException {
+            @RequestParam(name="CreateEmployerAlumniName", required = false) String CreateEmployerAlumniName,
+            @RequestParam(name="CreateEmployerAlumniSchoolID", required = false) String CreateEmployerAlumniSchoolID,
+            @RequestParam(name="UpdateEmployerAlumniID", required = false) String UpdateEmployerAlumniID,
+            @RequestParam(name="UpdateEmployerAlumniName", required = false) String UpdateEmployerAlumniName,
+            @RequestParam(name="UpdateEmployerAlumniSchoolID", required = false) String UpdateEmployerAlumniSchoolID) throws ParseException {
 
         System.out.println("-------------------------------------------------");
         System.out.println("esi: " + EmployerSectorIndustry + "ect: " + EmployerCooperationType + " eca: " + EmployerCurriculumAreas
@@ -178,8 +183,11 @@ public class EmployerAPI {
         ArrayList<Integer> employerLanguageUsedList = new ArrayList<Integer>();
         ArrayList<Integer> employerLocalAuthorityList = new ArrayList<Integer>();
         ArrayList<Integer> employerSchoolPreferencesList = new ArrayList<Integer>();
-        ArrayList<String> employeAlumniNameList = new ArrayList<String>();
-        ArrayList<Integer> employerAlumniSchoolIDList = new ArrayList<Integer>();
+        ArrayList<String> createEmployerAlumniNameList = new ArrayList<String>();
+        ArrayList<Integer> createEmployerAlumniSchoolIDList = new ArrayList<Integer>();
+        ArrayList<Integer> updateEmployerAlumniIDList = new ArrayList<Integer>();
+        ArrayList<String> updateEmployerAlumniNameList = new ArrayList<String>();
+        ArrayList<Integer> updateEmployerAlumniSchoolIDList = new ArrayList<Integer>();
 
         if(EmployerCooperationType.length() != 0){
             for (String employerID : EmployerCooperationType.split(",")) {
@@ -208,7 +216,7 @@ public class EmployerAPI {
                 employerSchoolPreferencesList.add(Integer.parseInt(employerID));
             }
         }
-
+        System.out.println(employerSchoolPreferencesList);
         if(EmployerLanguage.length() != 0) {
             for (String employerID : EmployerLanguage.split(",")) {
                 employerLanguageUsedList.add(Integer.parseInt(employerID));
@@ -220,15 +228,39 @@ public class EmployerAPI {
             }
         }
 
-        if(EmployerAlumniName.length() != 0) {
-            for (String employerID : EmployerAlumniName.split(",")) {
-                employeAlumniNameList.add(employerID);
-                System.out.println(employeAlumniNameList);
+        if(CreateEmployerAlumniName.length() != 0) {
+            for (String employerID : CreateEmployerAlumniName.split(",")) {
+                createEmployerAlumniNameList.add(employerID);
+                System.out.println(createEmployerAlumniNameList);
             }
         }
-        if(EmployerAlumniSchoolID.length() != 0){
-            for (String employerID : EmployerAlumniSchoolID.split(",")) {
-                employerAlumniSchoolIDList.add(Integer.parseInt(employerID));
+        System.out.println("Lengh e: " + UpdateEmployerAlumniSchoolID.length());
+        if(CreateEmployerAlumniSchoolID!= "0"){
+            for (String employerID : CreateEmployerAlumniSchoolID.split(",")) {
+                createEmployerAlumniSchoolIDList.add(Integer.parseInt(employerID));
+            }
+        }
+
+
+        if(UpdateEmployerAlumniID!= "") {
+            for (String employerID : UpdateEmployerAlumniID.split(",")) {
+                System.out.println(UpdateEmployerAlumniID);
+                updateEmployerAlumniIDList.add(Integer.parseInt(employerID));
+
+            }
+        }
+
+        if(UpdateEmployerAlumniName != "") {
+            for (String employerID : UpdateEmployerAlumniName.split(",")) {
+                updateEmployerAlumniNameList.add(employerID);
+
+            }
+        }
+        System.out.println(updateEmployerAlumniIDList);
+        System.out.println(updateEmployerAlumniNameList);
+        if(UpdateEmployerAlumniSchoolID != ""){
+            for (String employerID : UpdateEmployerAlumniSchoolID.split(",")) {
+                updateEmployerAlumniSchoolIDList.add(Integer.parseInt(employerID));
             }
         }
 
@@ -273,16 +305,24 @@ public class EmployerAPI {
             EmployerQrys.updateSchoolEmployerLocalAuthoritiesIntersection(EmployerID, employerLocalAuthorityList);
         }
 
+        System.out.println("Lengh e: " + UpdateEmployerAlumniSchoolID.length());
+        if(updateEmployerAlumniIDList.size() !=0 ) {
+            System.out.println("Alumni School: "+UpdateEmployerAlumniSchoolID.length());
+            //      8.  Update Alumni
+            EmployerQrys.updateAlumni(updateEmployerAlumniNameList, updateEmployerAlumniSchoolIDList, updateEmployerAlumniIDList);
+        }
 
-        //      8.  Create Alumni
-        EmployerQrys.createAlumni(employeAlumniNameList, employerAlumniSchoolIDList);
+        if(CreateEmployerAlumniName.length()!=0) {
+            //      9.  Create Alumni
+            EmployerQrys.createAlumni(createEmployerAlumniNameList, createEmployerAlumniSchoolIDList);
 
-        //      9.  Get Alumni IDs
-        ArrayList<Integer> AlumniIdList =  EmployerQrys.getAllAlumniIDFromEmployer(employeAlumniNameList,employerAlumniSchoolIDList );
-        System.out.println("..........  AlumniIdList: " + AlumniIdList);
+            //      10.  Get Alumni IDs
+            ArrayList<Integer> AlumniIdList = EmployerQrys.getAllAlumniIDFromEmployer(createEmployerAlumniNameList, createEmployerAlumniSchoolIDList);
+            System.out.println("..........  AlumniIdList: " + AlumniIdList);
 
-        //      10.  Intersection Table - Employer / Alumni
-        EmployerQrys.createEmployerAlumniIntersection(EmployerID, AlumniIdList);
+            //      11.  Create Intersection Table - Employer / Alumni
+            EmployerQrys.createEmployerAlumniIntersection(EmployerID, AlumniIdList);
+        }
 
         return true;
     }

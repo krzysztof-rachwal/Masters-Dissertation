@@ -760,8 +760,18 @@ public class EmployerQueries extends DBQueries {
             String updateSql = "INSERT INTO Alumni(AlumniNameAndSurname, AlumniSchoolID) VALUES(?,?)";
             jdbcTemplate().update(updateSql, AlumniName.get(i), SchoolID.get(i));
         }
-
     }
+
+    // 38. Create new Employer /  Alumni Intersection
+    public void createEmployerAlumniIntersection(int EmployerID, ArrayList<Integer> Alumni) throws DataAccessException {
+
+        String updateSql = "INSERT INTO INT_AlumniWorkingForEmployer(AlumniID, EmployerID) VALUES(?,?)";
+        for (Integer alumniID : Alumni) {
+            System.out.println("employerID: " + EmployerID + "AlumniID: " + alumniID);
+            jdbcTemplate().update(updateSql,alumniID,EmployerID);
+        }
+    }
+
 
 
     ///////////////////////////////////// UPDATE ALL METHODS ///////////////////////////////////////////////
@@ -865,21 +875,34 @@ public class EmployerQueries extends DBQueries {
     }
 
     // 38. Update new Employer /  Alumni Intersection
-    public void createEmployerAlumniIntersection(int EmployerID, ArrayList<Integer> Alumni) throws DataAccessException {
-        String deleteSql = String.format("DELETE FROM INT_AlumniWorkingForEmployer WHERE EmployerID = '%s'",EmployerID);
-        jdbcTemplate().update(deleteSql);
+    public void updateEmployerAlumniIntersection(int EmployerID, ArrayList<Integer> AlumniID) throws DataAccessException {
+//            String deleteSql = String.format("DELETE FROM INT_AlumniWorkingForEmployer WHERE EmployerID = \"%s\"",EmployerID);
+//            jdbcTemplate().update(deleteSql);
 
-        String updateSql = "INSERT INTO INT_AlumniWorkingForEmployer(AlumniID, EmployerID) VALUES(?,?)";
-        for (Integer alumniID : Alumni) {
-            System.out.println("employerID: " + EmployerID + "AlumniID: " + alumniID);
-            jdbcTemplate().update(updateSql,alumniID,EmployerID);
+//        String updateSql = "INSERT INTO INT_AlumniWorkingForEmployer(AlumniID, EmployerID) VALUES(?,?)";
+        for (int i = 0; i < AlumniID.size(); i++) {
+            String updateSql = String.format("INSERT INTO INT_AlumniWorkingForEmployer(AlumniID,EmployerID) VALUES(\"%s\",\"%s\")", AlumniID.get(i),EmployerID);
+            System.out.println("AlumniID: " + AlumniID.get(i) + "EmployerID: " + EmployerID);
+//            jdbcTemplate().update(updateSql,AlumniID.get(i),EmployerID);
+            jdbcTemplate().update(updateSql);
         }
     }
 
+    // 38. Update Alumni
+    public void updateAlumni(ArrayList<String> AlumniName,ArrayList<Integer> SchoolID, ArrayList<Integer> AlumniID) throws DataAccessException {
 
-
-
-
+//        for(int i = 0; i < AlumniID.size(); i++) {
+//            String deleteSql = String.format("DELETE FROM Alumni WHERE AlumniID = '%s'", AlumniID.get(i));
+//            jdbcTemplate().update(deleteSql);
+//        }
+        System.out.println("entrei no updateAlumni");
+        System.out.println("alumniName: " + AlumniName + " schooldID: " + SchoolID + " AlumniID: " + AlumniID);
+        for(int i = 0; i < AlumniID.size(); i++){
+            System.out.println("AlumniName: "+AlumniName.get(i) + " SchoolID: " + SchoolID.get(i));
+            String updateSql = "UPDATE Alumni SET AlumniNameAndSurname = ?, AlumniSchoolID = ? WHERE AlumniID=?";
+            jdbcTemplate().update(updateSql, AlumniName.get(i), SchoolID.get(i),AlumniID.get(i));
+        }
+    }
 
 
     ///////////////////////////////////// DELETE ALL METHODS ///////////////////////////////////////////////
