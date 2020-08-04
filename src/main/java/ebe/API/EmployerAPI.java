@@ -64,27 +64,26 @@ public class EmployerAPI {
         ArrayList<Integer> employerLocalAuthorityList = new ArrayList<Integer>();
         ArrayList<Integer> employerSchoolPreferencesList = new ArrayList<Integer>();
 
-        for (String schoolID : EmployerCooperationType.split(",")) {
-            employerCooperationTypeList.add(Integer.parseInt(schoolID));
+        if(EmployerCooperationType.length() != 0){
+            for (String employerID : EmployerCooperationType.split(",")) {
+                employerCooperationTypeList.add(Integer.parseInt(employerID));
+            }
         }
-        for (String schoolID : EmployerSectorIndustry.split(",")) {
-            employerIndustrySectorList.add(Integer.parseInt(schoolID));
+        if(EmployerSectorIndustry.length() != 0){
+            for (String employerID : EmployerSectorIndustry.split(",")) {
+                employerIndustrySectorList.add(Integer.parseInt(employerID));
+            }
         }
-        for (String schoolID : EmployerPreferences.split(",")) {
-            employerPreferencesList.add(Integer.parseInt(schoolID));
-        }
-        for (String schoolID : EmployerCurriculumAreas.split(",")) {
-            employerSupportCurriculumAreaList.add(Integer.parseInt(schoolID));
-        }
-        for (String schoolID : EmployerLanguage.split(",")) {
-            employerLanguageUsedList.add(Integer.parseInt(schoolID));
-        }
-        for (String schoolID : LocalAuthorities.split(",")) {
-            employerLocalAuthorityList.add(Integer.parseInt(schoolID));
+        if(EmployerPreferences.length() != 0){
+            for (String employerID : EmployerPreferences.split(",")) {
+                employerPreferencesList.add(Integer.parseInt(employerID));
+            }
         }
 
-        for (String schoolID : SchoolPreferences.split(",")) {
-            employerSchoolPreferencesList.add(Integer.parseInt(schoolID));
+        if(EmployerCurriculumAreas.length() != 0){
+            for (String employerID : EmployerCurriculumAreas.split(",")) {
+                employerSupportCurriculumAreaList.add(Integer.parseInt(employerID));
+            }
         }
 
         //Create the Employer
@@ -93,23 +92,42 @@ public class EmployerAPI {
                 EmployerTwitter, EmployerFB,NumberOfEmployeesID,CompanySummary,EmployerNotes);
 
         //      Get Employer Created Id
-        int employerId = EmployerQrys.getLastEmployerCreated(EmployerName);
-//
-        //     1. Intersection Table - Employer / Cooperation Type
-        EmployerQrys.updateEmployerCooperationIntersection(employerId, employerCooperationTypeList);
-        //     2. Intersection Table - Employer / Industry Sector
-        EmployerQrys.updateEmployerIndustrySectorIntersection(employerId, employerCooperationTypeList);
-        //     3. Intersection Table - Employer / Preferences
-        EmployerQrys.updateEmployerPreferencesIntersection(employerId, employerCooperationTypeList);
-        //     4. Intersection Table - Employer / School Preferences
-        EmployerQrys.updateSchoolEmployerSchoolPreferencesIntersection(employerId, employerCooperationTypeList);
-        //     5. Intersection Table - Employer / Support of Area of Curriculum
-        EmployerQrys.updateEmployerEmployerCurriculumAreaIntersection(employerId, employerCooperationTypeList);
-        //     6. Intersection Table - Employer / Language Used
-        EmployerQrys.updateSchoolEmployerLanguageIntersection(employerId, employerCooperationTypeList);
-        //     7. Intersection Table - Employer / Local Authority
-        EmployerQrys.updateSchoolEmployerLocalAuthoritiesIntersection(employerId, employerCooperationTypeList);
+        int EmployerID = EmployerQrys.getLastEmployerCreated(EmployerName);
 
+        //     1. Intersection Table - Employer / Cooperation Type
+        if(EmployerCooperationType.length() != 0) {
+            EmployerQrys.createEmployerCooperationIntersection(EmployerID, employerCooperationTypeList);
+        }
+
+        //     2. Intersection Table - Employer / Industry Sector
+        if(EmployerSectorIndustry.length() != 0) {
+            EmployerQrys.createEmployerIndustrySectorIntersection(EmployerID, employerIndustrySectorList);
+        }
+
+        //     3. Intersection Table - Employer / Preferences
+        if(EmployerPreferences.length() != 0) {
+            EmployerQrys.createEmployerPreferencesIntersection(EmployerID, employerPreferencesList);
+        }
+
+        //     4. Intersection Table - Employer / School Preferences
+        if(SchoolPreferences.length() != 0) {
+            EmployerQrys.createSchoolEmployerSchoolPreferencesIntersection(EmployerID, employerSchoolPreferencesList);
+        }
+
+        //     5. Intersection Table - Employer / Support of Area of Curriculum
+        if(EmployerCurriculumAreas.length() != 0) {
+            EmployerQrys.createEmployerEmployerCurriculumAreaIntersection(EmployerID, employerSupportCurriculumAreaList);
+        }
+
+        //     6. Intersection Table - Employer / Language Used
+        if(EmployerLanguage.length() != 0) {
+            EmployerQrys.createSchoolEmployerLanguageIntersection(EmployerID, employerLanguageUsedList);
+        }
+
+        //     7. Intersection Table - Employer / Local Authority
+        if(LocalAuthorities.length() != 0) {
+            EmployerQrys.createSchoolEmployerLocalAuthoritiesIntersection(EmployerID, employerLocalAuthorityList);
+        }
         return true;
     }
 
@@ -145,22 +163,99 @@ public class EmployerAPI {
             @RequestParam(name="SchoolPreferences") String SchoolPreferences,
             @RequestParam(name="LocalAuthorities") String LocalAuthorities) throws ParseException {
 
-//        ArrayList<Integer> schoolIdList = new ArrayList<Integer>();
-//
-//        for (String schoolID : SchoolPreferences.split(",")) {
-//            schoolIdList.add(Integer.parseInt(schoolID));
-//        }
+        System.out.println("-------------------------------------------------");
+        System.out.println("esi: " + EmployerSectorIndustry + "ect: " + EmployerCooperationType + " eca: " + EmployerCurriculumAreas
+        + " ep: " +EmployerPreferences
+        + " el: " + EmployerLanguage + " sp: " + SchoolPreferences + " la: " + LocalAuthorities );
+
+        ArrayList<Integer> employerCooperationTypeList = new ArrayList<Integer>();
+        ArrayList<Integer> employerIndustrySectorList = new ArrayList<Integer>();
+        ArrayList<Integer> employerPreferencesList = new ArrayList<Integer>();
+        ArrayList<Integer> employerSupportCurriculumAreaList = new ArrayList<Integer>();
+        ArrayList<Integer> employerLanguageUsedList = new ArrayList<Integer>();
+        ArrayList<Integer> employerLocalAuthorityList = new ArrayList<Integer>();
+        ArrayList<Integer> employerSchoolPreferencesList = new ArrayList<Integer>();
+
+        if(EmployerCooperationType.length() != 0){
+            for (String employerID : EmployerCooperationType.split(",")) {
+                employerCooperationTypeList.add(Integer.parseInt(employerID));
+            }
+        }
+        if(EmployerSectorIndustry.length() != 0){
+            for (String employerID : EmployerSectorIndustry.split(",")) {
+                employerIndustrySectorList.add(Integer.parseInt(employerID));
+            }
+        }
+        if(EmployerPreferences.length() != 0){
+            for (String employerID : EmployerPreferences.split(",")) {
+            employerPreferencesList.add(Integer.parseInt(employerID));
+            }
+        }
+
+        if(EmployerCurriculumAreas.length() != 0){
+            for (String employerID : EmployerCurriculumAreas.split(",")) {
+                employerSupportCurriculumAreaList.add(Integer.parseInt(employerID));
+            }
+        }
+
+        if(SchoolPreferences.length() != 0){
+            for (String employerID : SchoolPreferences.split(",")) {
+                employerSchoolPreferencesList.add(Integer.parseInt(employerID));
+                System.out.println(employerSchoolPreferencesList);
+            }
+        }
+
+        if(EmployerLanguage.length() != 0) {
+            for (String employerID : EmployerLanguage.split(",")) {
+                employerLanguageUsedList.add(Integer.parseInt(employerID));
+            }
+        }
+        if(LocalAuthorities.length() != 0){
+            for (String employerID : LocalAuthorities.split(",")) {
+                employerLocalAuthorityList.add(Integer.parseInt(employerID));
+            }
+        }
 
         //Update the Employer
         EmployerQrys.updateEmployer(EmployerID,StatusOfEmployerID,EmployerName,EmployerAddressCity,EmployerAddressStreet,EmployerAddressNumber,
                 EmployerPostcode,EmployerEmail,ContactPersonNameSurname,ContactPersonPosition,EmployerPhone,EmployerWebsite,
                 EmployerTwitter, EmployerFB,NumberOfEmployeesID,CompanySummary,EmployerNotes);
 
-//        //      Get Employer Created Id
-//        int eventId = EventQrys.getLastEventCreated(EmployerName);
-//
-//        //      Insert into the School / Event intersection table
-//        EventQrys.updateSchoolEventIntersection(eventId, schoolIdList);
+
+        //     1. Intersection Table - Employer / Cooperation Type
+        if(EmployerCooperationType.length() != 0) {
+            EmployerQrys.updateEmployerCooperationIntersection(EmployerID, employerCooperationTypeList);
+        }
+
+        //     2. Intersection Table - Employer / Industry Sector
+        if(EmployerSectorIndustry.length() != 0) {
+            EmployerQrys.updateEmployerIndustrySectorIntersection(EmployerID, employerIndustrySectorList);
+        }
+
+        //     3. Intersection Table - Employer / Preferences
+        if(EmployerPreferences.length() != 0) {
+            EmployerQrys.updateEmployerPreferencesIntersection(EmployerID, employerPreferencesList);
+        }
+
+        //     4. Intersection Table - Employer / School Preferences
+        if(SchoolPreferences.length() != 0) {
+            EmployerQrys.updateSchoolEmployerSchoolPreferencesIntersection(EmployerID, employerSchoolPreferencesList);
+        }
+
+        //     5. Intersection Table - Employer / Support of Area of Curriculum
+        if(EmployerCurriculumAreas.length() != 0) {
+            EmployerQrys.updateEmployerEmployerCurriculumAreaIntersection(EmployerID, employerSupportCurriculumAreaList);
+        }
+
+        //     6. Intersection Table - Employer / Language Used
+        if(EmployerLanguage.length() != 0) {
+            EmployerQrys.updateSchoolEmployerLanguageIntersection(EmployerID, employerLanguageUsedList);
+        }
+
+        //     7. Intersection Table - Employer / Local Authority
+        if(LocalAuthorities.length() != 0) {
+            EmployerQrys.updateSchoolEmployerLocalAuthoritiesIntersection(EmployerID, employerLocalAuthorityList);
+        }
 
         return true;
     }

@@ -8,11 +8,11 @@ function createNewEmployer() {
     var EmployerAddressStreet_url = "EmployerAddressStreet=" + $('input[id=employer-street]').val();
     var EmployerAddressNumber_url = "EmployerAddressNumber=" + $('input[id=employer-number]').val();
     var EmployerPostcode_url = "EmployerPostcode=" + $('input[id=employer-postcode]').val();
-    var EmployerEmail_url = "EmployerEmail=" + $('input[id=event-city]').val();
+    var EmployerEmail_url = "EmployerEmail=" + $('input[id=employer-email]').val();
     var ContactPersonNameSurname_url = "ContactPersonNameSurname=" + $('input[id=contact-name]').val();
     var ContactPersonPosition_url = "ContactPersonPosition=" + $('input[id=contact-position]').val();
     var EmployerPhone_url = "EmployerPhone=" + $('input[id=employer-phone]').val();
-    var EmployerWebsite_url = "EmployerWebsite=" + $('textarea[id=employer-website]').val();
+    var EmployerWebsite_url = "EmployerWebsite=" + $('input[id=employer-website]').val();
     var EmployerTwitter_url = "EmployerTwitter=" + $('input[id=employer-twitter]').val();
     var EmployerFB_url = "EmployerFB=" + $('input[id=employer-facebook]').val();
     var NumberOfEmployeesID_url = "NumberOfEmployeesID=" + $('select[id=employer-employees-number]').val();
@@ -31,7 +31,7 @@ function createNewEmployer() {
         + ContactPersonPosition_url + "&" + EmployerPhone_url+ "&" + EmployerWebsite_url + "&"  + "&" +EmployerTwitter_url +"&"
         + EmployerFB_url + "&" + NumberOfEmployeesID_url  + "&" + EmployerNotes_url + "&" + EmployerSectorIndustry_url  + "&"
         + EmployerCooperationType_url + "&" + EmployerCurriculumAreas_url + "&" + EmployerPreferences_url+ "&" + EmployerLanguage_url+ "&"
-        + EmployerCurriculumAreas_url + "&" + SchoolPreferences_url + "&"+ localAuthorities_url ;
+        + "&" + SchoolPreferences_url + "&"+ localAuthorities_url ;
 
     var token = $("meta[name='_csrf']").attr("content");    // Used to bypass Spring Boot's CSRF protocol     -- Solution taken from 'https://stackoverflow.com/questions/34747437/use-of-spring-csrf-with-ajax-rest-call-and-html-page-with-thymeleaf' on Nov 26th 2019
     var header = $("meta[name='_csrf_header']").attr("content");    // Used to bypass Spring Boot's CSRF protocol
@@ -71,11 +71,11 @@ function updateThisEmployer() {
     var EmployerAddressStreet_url = "EmployerAddressStreet=" + $('input[id=employer-street]').val();
     var EmployerAddressNumber_url = "EmployerAddressNumber=" + $('input[id=employer-number]').val();
     var EmployerPostcode_url = "EmployerPostcode=" + $('input[id=employer-postcode]').val();
-    var EmployerEmail_url = "EmployerEmail=" + $('input[id=event-city]').val();
+    var EmployerEmail_url = "EmployerEmail=" + $('input[id=employer-email]').val();
     var ContactPersonNameSurname_url = "ContactPersonNameSurname=" + $('input[id=contact-name]').val();
     var ContactPersonPosition_url = "ContactPersonPosition=" + $('input[id=contact-position]').val();
     var EmployerPhone_url = "EmployerPhone=" + $('input[id=employer-phone]').val();
-    var EmployerWebsite_url = "EmployerWebsite=" + $('textarea[id=employer-website]').val();
+    var EmployerWebsite_url = "EmployerWebsite=" + $('input[id=employer-website]').val();
     var EmployerTwitter_url = "EmployerTwitter=" + $('input[id=employer-twitter]').val();
     var EmployerFB_url = "EmployerFB=" + $('input[id=employer-facebook]').val();
     var NumberOfEmployeesID_url = "NumberOfEmployeesID=" + $('select[id=employer-employees-number]').val();
@@ -94,7 +94,7 @@ function updateThisEmployer() {
         + ContactPersonPosition_url + "&" + EmployerPhone_url+ "&" + EmployerWebsite_url + "&"  + "&" +EmployerTwitter_url +"&"
         + EmployerFB_url + "&" + NumberOfEmployeesID_url  + "&" + EmployerNotes_url + "&" + EmployerSectorIndustry_url  + "&"
         + EmployerCooperationType_url + "&" + EmployerCurriculumAreas_url + "&" + EmployerPreferences_url+ "&" + EmployerLanguage_url+ "&"
-        + EmployerCurriculumAreas_url + "&" + SchoolPreferences_url + "&"+ localAuthorities_url ;
+        + "&" + SchoolPreferences_url + "&"+ localAuthorities_url ;
 
     var token = $("meta[name='_csrf']").attr("content");    // Used to bypass Spring Boot's CSRF protocol     -- Solution taken from 'https://stackoverflow.com/questions/34747437/use-of-spring-csrf-with-ajax-rest-call-and-html-page-with-thymeleaf' on Nov 26th 2019
     var header = $("meta[name='_csrf_header']").attr("content");    // Used to bypass Spring Boot's CSRF protocol

@@ -60,7 +60,7 @@
                                 <div class="form-group">
                                     <label for="employer-employees-number">Number of Employees</label><br>
                                     <select id="employer-employees-number">
-                                        <option  th:each="employerNumberEmployees : ${allEmployerNumberOfEmployees}" th:selected="${employerNumberEmployees.getNumberOfEmployeesID()} == ${employer.getEmployerAddressNumber()}" th:value="${employerNumberEmployees.getNumberOfEmployeesID()}" th:text="${employerNumberEmployees.getNumberOfEmployeesName()}"></option>
+                                        <option  th:each="employerNumberEmployees : ${allEmployerNumberOfEmployees}" th:selected="${employerNumberEmployees.getNumberOfEmployeesID() == employer.getNumberOfEmployeesID()}"  th:value="${employerNumberEmployees.getNumberOfEmployeesID()}" th:text="${employerNumberEmployees.getNumberOfEmployeesName()}"></option>
                                     </select>
                                 </div>
                                 <label>Address</label>
@@ -124,7 +124,7 @@
                                     <h4>Other</h4>
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="industry-sector">Sector Areas</label><br>
+                                    <label for="industry-sector">Industry Sector</label><br>
                                     <select id="industry-sector"  data-width="80%" class="selectpicker" multiple data-live-search="true">
                                         <option th:each="employerIndustrySector : ${allEmployerIndustrySectors}" th:selected="${allEmployerChosenIndustrySectors.contains(employerIndustrySector.getEmployerIndustrySectorID())}" th:value="${employerIndustrySector.getEmployerIndustrySectorID()}" th:text="${employerIndustrySector.getEmployerIndustrySectorName()}"></option>
                                     </select>
@@ -153,7 +153,6 @@
                                 <div class="col-md-6 mb-4">
                                     <label for="employer-preferences">Preferences</label><br>
                                     <select class="selectpicker"  data-width="80%" multiple data-live-search="true" id="employer-preferences">
-                                        <option  th:each="employerPreferences : ${allEmployerPreferences}" th:selected="${allEmployerChosenPreferences.contains(employerPreferences.getEmployerPreferencesID())}" th:value="${employerPreferences.getEmployerPreferencesID()}" th:text="${employerPreferences.getEmployerPreferencesName()}"></option>
                                         <option  th:each="employerPreferences : ${allEmployerPreferences}" th:selected="${allEmployerChosenPreferences.contains(employerPreferences.getEmployerPreferencesID())}" th:value="${employerPreferences.getEmployerPreferencesID()}" th:text="${employerPreferences.getEmployerPreferencesName()}"></option>
                                     </select>
                                 </div>
@@ -276,7 +275,7 @@
         <div class="row mb-4">
             <div class="my-2 col-md-4">
                 <span class="text-h5 font-weight-bold">Number of employees:</span>
-                <span class="text-h5" th:text="${employer.getNumberOfEmployeesID()}"></span>
+                <span class="text-h5" th:each="employerNumberEmployees : ${allEmployerNumberOfEmployees}" th:remove="${employerNumberEmployees.getNumberOfEmployeesID() == employer.getNumberOfEmployeesID()} ? none : all"   th:text="${employerNumberEmployees.getNumberOfEmployeesName()}"></span>
             </div>
 
             <div class="my-2 col-md-4">
