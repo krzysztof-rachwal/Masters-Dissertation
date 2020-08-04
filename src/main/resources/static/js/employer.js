@@ -87,6 +87,8 @@ function updateThisEmployer() {
     var EmployerLanguage_url = "EmployerLanguage=" + $('select[id=employer-language]').val();
     var SchoolPreferences_url = "SchoolPreferences=" + $('select[id=schools-attending]').val()
     var localAuthorities_url = "LocalAuthorities=" + $('select[id=local-authorities]').val();
+    var EmployerAlumniName_url = "EmployerAlumniName=" + $('input[name=employer-alumni-name]').val();
+    var EmployerAlumniSchoolID_url = "EmployerAlumniSchoolID=" + $('select[name=employer-alumni-school]').val();
 
 
     var fullUri = baseUri + "?" + "&" + EmployerID_url + "&" + EmployerName_url+ "&" + EmployerStatus_url + "&" + EmployerSummary_url + "&" + EmployerAddressCity_url + "&" + EmployerAddressStreet_url + "&"
@@ -94,7 +96,7 @@ function updateThisEmployer() {
         + ContactPersonPosition_url + "&" + EmployerPhone_url+ "&" + EmployerWebsite_url + "&"  + "&" +EmployerTwitter_url +"&"
         + EmployerFB_url + "&" + NumberOfEmployeesID_url  + "&" + EmployerNotes_url + "&" + EmployerSectorIndustry_url  + "&"
         + EmployerCooperationType_url + "&" + EmployerCurriculumAreas_url + "&" + EmployerPreferences_url+ "&" + EmployerLanguage_url+ "&"
-        + "&" + SchoolPreferences_url + "&"+ localAuthorities_url ;
+        + "&" + SchoolPreferences_url + "&"+ localAuthorities_url + "&" + EmployerAlumniName_url + "&" + EmployerAlumniSchoolID_url;
 
     var token = $("meta[name='_csrf']").attr("content");    // Used to bypass Spring Boot's CSRF protocol     -- Solution taken from 'https://stackoverflow.com/questions/34747437/use-of-spring-csrf-with-ajax-rest-call-and-html-page-with-thymeleaf' on Nov 26th 2019
     var header = $("meta[name='_csrf_header']").attr("content");    // Used to bypass Spring Boot's CSRF protocol

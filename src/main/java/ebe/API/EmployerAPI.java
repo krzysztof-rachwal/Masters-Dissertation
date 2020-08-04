@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 public class EmployerAPI {
@@ -161,7 +162,9 @@ public class EmployerAPI {
             @RequestParam(name="EmployerPreferences") String EmployerPreferences,
             @RequestParam(name="EmployerLanguage") String EmployerLanguage,
             @RequestParam(name="SchoolPreferences") String SchoolPreferences,
-            @RequestParam(name="LocalAuthorities") String LocalAuthorities) throws ParseException {
+            @RequestParam(name="LocalAuthorities") String LocalAuthorities,
+            @RequestParam(name="EmployerAlumniName") String EmployerAlumniName,
+            @RequestParam(name="EmployerAlumniSchoolID") String EmployerAlumniSchoolID) throws ParseException {
 
         System.out.println("-------------------------------------------------");
         System.out.println("esi: " + EmployerSectorIndustry + "ect: " + EmployerCooperationType + " eca: " + EmployerCurriculumAreas
@@ -175,6 +178,8 @@ public class EmployerAPI {
         ArrayList<Integer> employerLanguageUsedList = new ArrayList<Integer>();
         ArrayList<Integer> employerLocalAuthorityList = new ArrayList<Integer>();
         ArrayList<Integer> employerSchoolPreferencesList = new ArrayList<Integer>();
+        ArrayList<String> employeAlumniNameList = new ArrayList<String>();
+        ArrayList<Integer> employerAlumniSchoolIDList = new ArrayList<Integer>();
 
         if(EmployerCooperationType.length() != 0){
             for (String employerID : EmployerCooperationType.split(",")) {
@@ -201,7 +206,6 @@ public class EmployerAPI {
         if(SchoolPreferences.length() != 0){
             for (String employerID : SchoolPreferences.split(",")) {
                 employerSchoolPreferencesList.add(Integer.parseInt(employerID));
-                System.out.println(employerSchoolPreferencesList);
             }
         }
 
@@ -213,6 +217,18 @@ public class EmployerAPI {
         if(LocalAuthorities.length() != 0){
             for (String employerID : LocalAuthorities.split(",")) {
                 employerLocalAuthorityList.add(Integer.parseInt(employerID));
+            }
+        }
+
+        if(EmployerAlumniName.length() != 0) {
+            for (String employerID : EmployerAlumniName.split(",")) {
+                employeAlumniNameList.add(employerID);
+                System.out.println(employeAlumniNameList);
+            }
+        }
+        if(EmployerAlumniSchoolID.length() != 0){
+            for (String employerID : EmployerAlumniSchoolID.split(",")) {
+                employerAlumniSchoolIDList.add(Integer.parseInt(employerID));
             }
         }
 
@@ -256,6 +272,17 @@ public class EmployerAPI {
         if(LocalAuthorities.length() != 0) {
             EmployerQrys.updateSchoolEmployerLocalAuthoritiesIntersection(EmployerID, employerLocalAuthorityList);
         }
+
+
+        //      8.  Create Alumni
+        EmployerQrys.createAlumni(employeAlumniNameList, employerAlumniSchoolIDList);
+
+        //      9.  Get Alumni IDs
+        ArrayList<Integer> AlumniIdList =  EmployerQrys.getAllAlumniIDFromEmployer(employeAlumniNameList,employerAlumniSchoolIDList );
+        System.out.println("..........  AlumniIdList: " + AlumniIdList);
+
+        //      10.  Intersection Table - Employer / Alumni
+        EmployerQrys.createEmployerAlumniIntersection(EmployerID, AlumniIdList);
 
         return true;
     }

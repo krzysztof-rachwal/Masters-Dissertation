@@ -182,6 +182,82 @@
                                     </select>
                                 </div>
                             </div>
+
+                            <div class="row">
+                                <div class="container my-3 p-0">
+                                    <h4>Alumni</h4>
+                                </div>
+                                <div class="col-md-12"  th:each="alumni : ${allEmployerAlumni}" >
+                                    <div class="col-md-6">
+                                        <label >Name</label>
+                                        <input type="text" class="form-control input-border" th:id="${alumni.getEmployerAlumniID()}" name="change-alumni-name" th:value="${alumni.getEmployerAlumniName()}">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label >School</label>
+                                        <select class="selectpicker" data-width="90%"  data-live-search="true" name="change-alumni-school">
+                                            <option  type="text" class="form-control input-border"  th:each="school : ${allSchoolNamesAndIds}"  th:selected="${alumni.getEmployerAlumniSchoolID() == school.getSchoolID()} ? none : all" th:text="${school.getSchoolName()}"></option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <!-- 1. Alumni -->
+                                <div class="col-md-6">
+                                    <label >Name</label>
+                                    <input type="text" class="form-control input-border" name="employer-alumni-name">
+                                </div>
+                                <div class="col-md-6">
+                                    <label >School</label>
+                                    <select class="selectpicker" data-width="90%"  data-live-search="true" name="employer-alumni-school">
+                                        <option  type="text" class="form-control input-border"  th:each="school : ${allSchoolNamesAndIds}" th:value="${school.getSchoolID()}"  th:text="${school.getSchoolName()}"></option>
+                                    </select>
+                                </div>
+                                <!-- 2. Alumni -->
+                                <div class="col-md-6 d-none">
+                                    <label >Name</label>
+                                    <input type="text" class="form-control input-border" name="employer-alumni-name">
+                                </div>
+                                <div class="col-md-6 d-none">
+                                    <label >School</label>
+                                    <input type="text" class="form-control input-border" name="employer-alumni-school">
+                                </div>
+                                <!-- 3. Alumni -->
+                                <div class="col-md-6 d-none">
+                                    <label >Name</label>
+                                    <input type="text" class="form-control input-border" id="employer-alumni-name-3">
+                                </div>
+                                <div class="col-md-6 d-none">
+                                    <label >School</label>
+                                    <input type="text" class="form-control input-border" id="employer-alumni-school-3">
+                                </div>
+                                <!-- 4. Alumni -->
+                                <div class="col-md-6 d-none">
+                                    <label >Name</label>
+                                    <input type="text" class="form-control input-border" id="employer-alumni-name-4">
+                                </div>
+                                <div class="col-md-6 d-none">
+                                    <label >School</label>
+                                    <input type="text" class="form-control input-border" id="employer-alumni-school-4">
+                                </div>
+                                <!-- 5. Alumni -->
+                                <div class="col-md-6 d-none">
+                                    <label >Name</label>
+                                    <input type="text" class="form-control input-border" id="employer-alumni-name-5">
+                                </div>
+                                <div class="col-md-6 d-none">
+                                    <label >School</label>
+                                    <input type="text" class="form-control input-border" id="employer-alumni-school-5">
+                                </div>
+                                <!-- 6. Alumni -->
+                                <div class="col-md-6 d-none">
+                                    <label >Name</label>
+                                    <input type="text" class="form-control input-border" id="employer-alumni-name-6">
+                                </div>
+                                <div class="col-md-6 d-none">
+                                    <label >School</label>
+                                    <input type="text" class="form-control input-border" id="employer-alumni-school-6">
+                                </div>
+                            </div>
+                        </div>
+
                         </div>
                     <div class="container my-4 text-center">
                         <button type="button" class="button--secondary text-center" onclick="updateThisEmployer()">Update Employer</button>
@@ -320,11 +396,10 @@
     <div class="col-md-12my-4">
         <h3>Alumni</h3>
         <ul>
-            <li>James Howell</li>
-            <li>Daniel Morrison</li>
-            <li>Caroline Wallace</li>
-            <li>Michael Stanton</li>
-            <li>Evelyn Klein</li>
+            <li  th:each="alumni : ${allEmployerAlumni}" >
+                <span th:text="'Name:' +${alumni.getEmployerAlumniName()}"></span>
+                <span th:each="school : ${allSchoolNamesAndIds}"  th:remove="${alumni.getEmployerAlumniSchoolID() == school.getSchoolID()} ? none : all" th:text="${school.getSchoolName()}"></span>
+            </li>
         </ul>
     </div>
 

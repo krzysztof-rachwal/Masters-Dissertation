@@ -91,7 +91,8 @@ public class BaseController {
         List<Integer> employerChosenCooperationType;
         List<Employer> employerPreferences;
         List<Integer> employerChosenPreferences;
-        List<Employer> employerAlumni;
+        List<Integer> employerAlumni;
+        List<Employer> employerAlumniNamesAndSchoolID;
         List<Employer> employerStatus;
         List<School> schoolAllNamesAndIds;
         List<Integer> employerSchoolPreferences;
@@ -110,7 +111,8 @@ public class BaseController {
         employerChosenCooperationType = EmployerQrys.getChosenCooperationTypes(employer.getEmployerID());
         employerPreferences = EmployerQrys.getAllPreferences();
         employerChosenPreferences = EmployerQrys.getChosenPreferences(employer.getEmployerID());
-        employerAlumni = EmployerQrys.getAllPreferences();
+        employerAlumni = EmployerQrys.getAllAlumni(employer.getEmployerID());
+        employerAlumniNamesAndSchoolID = EmployerQrys.getAllAlumniNamesAndSchoolID(employerAlumni);
         schoolAllNamesAndIds = SchoolQrys.getAllSchoolNamesAndIds();
         employerStatus = EmployerQrys.getAllEmployerStatus();
         employerSchoolPreferences = EmployerQrys.getEmployerSchoolPreferences(employer.getEmployerID());
@@ -129,6 +131,7 @@ public class BaseController {
         allEmployer.put("allEmployerCooperationType", employerCooperationType);
         allEmployer.put("allEmployerChosenCooperationType", employerChosenCooperationType);
         allEmployer.put("allEmployerPreferences", employerPreferences);
+        allEmployer.put("allEmployerAlumni",employerAlumniNamesAndSchoolID);
         allEmployer.put("allEmployerChosenPreferences", employerChosenPreferences);
         allEmployer.put("allSchoolNamesAndIds", schoolAllNamesAndIds);
         allEmployer.put("allEmployerStatus",employerStatus);
@@ -156,7 +159,6 @@ public class BaseController {
         List<Employer> employerCooperationType;
         List<Employer> employerPreferences;
         List<Employer> employerStatus;
-        List<Employer> employerAlumni;
         List<School> schoolAllNamesAndIds;
 
         employer = EmployerQrys.getAllEmployers();
@@ -169,6 +171,7 @@ public class BaseController {
         employerPreferences = EmployerQrys.getAllPreferences();
         employerStatus = EmployerQrys.getAllEmployerStatus();
         schoolAllNamesAndIds = SchoolQrys.getAllSchoolNamesAndIds();
+
 
         Map<String,Object> allEmployer = new HashMap<String,Object>();
         allEmployer.put("allEmployer", employer);
