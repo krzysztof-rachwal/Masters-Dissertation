@@ -168,6 +168,14 @@
                                     <label for="employer-notes">Notes</label>
                                     <input type="text" class="form-control input-border" id="employer-notes" th:value="${employer.getNotes()}">
                                 </div>
+
+                                <div class="col-md-6 mb-4" >
+                                    <label for="employer-status">Employer Status</label>
+                                    <select class="selectpicker" data-width="80%" id="employer-status">
+                                        <option  th:each="employerStatus : ${allEmployerStatus}" th:value="${employerStatus.getStatusOfEmployerID()}" th:selected="${employerStatus.getStatusOfEmployerID() == employer.getStatusOfEmployerID()}" th:text="${employerStatus.getStatusOfEmployerName()}"></option>
+                                    </select>
+                                </div>
+
                                 <div class="col-md-12 my-4">
                                     <label for="local-authorities">LocalAuthorities</label><br>
                                     <select class="selectpicker" data-width="90%" multiple data-live-search="true" id="local-authorities">
@@ -177,7 +185,7 @@
                             </div>
                         </div>
                     <div class="container my-4 text-center">
-                        <button type="button" class="button--secondary text-center" onclick="UpdateThisEmployer()">Update Employer</button>
+                        <button type="button" class="button--secondary text-center" onclick="updateThisEmployer()">Update Employer</button>
                     </div>
                 </form>
 
@@ -209,6 +217,7 @@
 <div class="gel-content-container">
     <div class="container-headline my-5">
         <span class="title-h2" th:text="${employer.getEmployerName()}"></span>
+        <input type="hidden" id="employer-id" th:value="${employer.getEmployerID()}" />
         <button type="button" id="deleteEvent" data-toggle="modal" data-target="#deleteModal" class="buttonDelete float-right">Delete</button>
         <button type="button" id="updateEvent" data-toggle="modal" data-target="#updateModal" class="buttonUpdate float-right">Update</button>
     </div>
@@ -227,6 +236,10 @@
                     <div class="col-md-12">
                         <h4>Notes</h4>
                         <p th:text="${employer.getNotes()}"></p>
+                    </div>
+                    <div class="col-md-12">
+                        <h4>Employer Status</h4>
+                        <p th:each="employerStatus : ${allEmployerStatus}"  th:remove="${employerStatus.getStatusOfEmployerID() == employer.getStatusOfEmployerID()} ? none : all" th:text="${employerStatus.getStatusOfEmployerName()}"></p>
                     </div>
 
                 </div>
