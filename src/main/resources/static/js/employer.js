@@ -1,6 +1,7 @@
 //1. Create Employer
 function createNewEmployer() {
     var baseUri = "/api/create/employer";
+    var EmployerStatus_url ="StatusOfEmployerID=" + $('select[id=employer-status]').val();
     var EmployerName_url = "EmployerName=" + $('input[id=company-name]').val();
     var EmployerSummary_url = "EmployerSummary=" + $('textarea[id=company-summary]').val();
     var EmployerAddressCity_url = "EmployerAddressCity=" + $('select[id=employer-city]').val();
@@ -25,7 +26,7 @@ function createNewEmployer() {
     var localAuthorities_url = "LocalAuthorities=" + $('select[id=local-authorities]').val();
 
 
-    var fullUri = baseUri + "?" + "&" + EmployerName_url+ "&" + EmployerSummary_url + "&" + EmployerAddressCity_url + "&" + EmployerAddressStreet_url + "&"
+    var fullUri = baseUri + "?" + "&" + EmployerName_url+ "&" + EmployerStatus_url + "&" + EmployerSummary_url + "&" + EmployerAddressCity_url + "&" + EmployerAddressStreet_url + "&"
         + EmployerAddressNumber_url + "&" + EmployerPostcode_url  + "&" + EmployerEmail_url  + "&" + ContactPersonNameSurname_url + "&"
         + ContactPersonPosition_url + "&" + EmployerPhone_url+ "&" + EmployerWebsite_url + "&"  + "&" +EmployerTwitter_url +"&"
         + EmployerFB_url + "&" + NumberOfEmployeesID_url  + "&" + EmployerNotes_url + "&" + EmployerSectorIndustry_url  + "&"

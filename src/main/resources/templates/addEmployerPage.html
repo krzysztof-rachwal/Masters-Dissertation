@@ -147,7 +147,7 @@
                 </div>
                 <div class="col-md-6 mb-4 d-none" id="div-foreign-language">
                     <label for="employer-language">Which Foreign Language?</label><br>
-                    <select class="selectpicker" data-width="80%" multiple data-live-search="true" id="employer-language">
+                    <select class="selectpicker" data-width="80%" multiple id="employer-language">
                         <option  th:each="employerLanguage : ${allEmployerLanguage}" th:value="${employerLanguage.getEmployerLanguageID()}" th:text="${employerLanguage.getEmployerLanguageName()}"></option>
                     </select>
                 </div>
@@ -156,6 +156,13 @@
                     <label for="employer-notes">Notes</label>
                     <input type="text" class="form-control input-border" id="employer-notes">
                 </div>
+                <div class="col-md-6 mb-4" >
+                    <label for="employer-status">Employer Status</label>
+                    <select class="selectpicker" data-width="80%" id="employer-status">
+                        <option  th:each="employerStatus : ${allEmployerStatus}" th:value="${employerStatus.getStatusOfEmployerID()}" th:text="${employerStatus.getStatusOfEmployerName()}"></option>
+                    </select>
+                </div>
+
                 <div class="col-md-12 my-4">
                     <label for="local-authorities">LocalAuthorities</label><br>
                     <select class="selectpicker" data-width="90%" multiple data-live-search="true" id="local-authorities">

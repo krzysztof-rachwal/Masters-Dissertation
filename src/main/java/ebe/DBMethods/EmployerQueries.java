@@ -595,6 +595,35 @@ public class EmployerQueries extends DBQueries {
         return list;
     }
 
+    // 16. Get Employer Preferences - School
+    public List<Employer>  getAllEmployerStatus() throws DataAccessException {
+
+        String getQuery = String.format("SELECT StatusOfEmployerID, StatusOfEmployerName FROM StatusOfEmployerList");
+
+        List<Employer> list = new ArrayList<Employer>();
+        Employer employer = null;
+        ResultSet rs = null;
+        try {
+            connection = ConnectionFactory.getConnection();
+            statement = connection.createStatement();
+            rs = statement.executeQuery(getQuery);
+            while (rs.next()) {
+                employer = new Employer();
+                employer.setStatusOfEmployerID(rs.getInt("StatusOfEmployerID"));
+                employer.setStatusOfEmployerName(rs.getString("StatusOfEmployerName"));
+
+                list.add(employer);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            DBUtil.close(rs);
+            DBUtil.close(statement);
+            DBUtil.close(connection);
+        }
+        return list;
+    }
+
 
 
 
@@ -603,40 +632,40 @@ public class EmployerQueries extends DBQueries {
     ///////////////////////////////////// CREATE ALL METHODS ///////////////////////////////////////////////
     //16. Create New Employer
 
-    public int createEmployer(int statusOfEmployer, String Name, String AddressCity, String AddressStreet, String AddressNumber,
-                                 String Postcode, String email, String phone, String website, int numberOfEmployees, String companySummary,
-                                 String notes, String LogoLink, Boolean givesSiteExperience, Boolean givesSiteVisits,
-                                 Boolean givesWorkshops, Boolean givesPresentations, Boolean attendsCareerFairs, Boolean givesWebinars, Boolean worksWithPrimaryPupils,
-                                 Boolean useOfModernForeignLanguage, Boolean runsBusinessInWelsh, Boolean canDeliverToSchoolsInWelsh, Boolean hasApprenticeshipProgramme,
-                                 int schoolPreferences) throws DataAccessException {
-
-        String insertSql = "INSERT INTO Employer Employer(statusOfEmployer, Name, AddressCity, AddressStreet, AddressNumber," +
-                "                                   Postcode, email, phone, website, numberOfEmployees,  companySummary, notes, LogoLink, " +
-                "                                   Logo, givesSiteExperience, givesSiteVisits, givesWorkshops, givesPresentations, attendsCareerFairs," +
-                "                                   givesWebinars,  worksWithPrimaryPupils, useOfModernForeignLanguage, runsBusinessInWelsh, canDeliverToSchoolsInWelsh," +
-                "                                   hasApprenticeshipProgramme, schoolPreferences)" +
-                "                                  VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-
-        return jdbcTemplate().update(insertSql, statusOfEmployer, Name, AddressCity, AddressStreet, AddressNumber,
-                Postcode, email, phone, website, numberOfEmployees, companySummary, notes, LogoLink,
-                givesSiteExperience, givesSiteVisits, givesWorkshops, givesPresentations, attendsCareerFairs,
-                givesWebinars, worksWithPrimaryPupils, useOfModernForeignLanguage, runsBusinessInWelsh, canDeliverToSchoolsInWelsh,
-                hasApprenticeshipProgramme, schoolPreferences);
-
-    }
+//    public int createEmployer(int statusOfEmployer, String Name, String AddressCity, String AddressStreet, String AddressNumber,
+//                                 String Postcode, String email, String phone, String website, int numberOfEmployees, String companySummary,
+//                                 String notes, String LogoLink, Boolean givesSiteExperience, Boolean givesSiteVisits,
+//                                 Boolean givesWorkshops, Boolean givesPresentations, Boolean attendsCareerFairs, Boolean givesWebinars, Boolean worksWithPrimaryPupils,
+//                                 Boolean useOfModernForeignLanguage, Boolean runsBusinessInWelsh, Boolean canDeliverToSchoolsInWelsh, Boolean hasApprenticeshipProgramme,
+//                                 int schoolPreferences) throws DataAccessException {
+//
+//        String insertSql = "INSERT INTO Employer Employer(statusOfEmployer, Name, AddressCity, AddressStreet, AddressNumber," +
+//                "                                   Postcode, email, phone, website, numberOfEmployees,  companySummary, notes, LogoLink, " +
+//                "                                   Logo, givesSiteExperience, givesSiteVisits, givesWorkshops, givesPresentations, attendsCareerFairs," +
+//                "                                   givesWebinars,  worksWithPrimaryPupils, useOfModernForeignLanguage, runsBusinessInWelsh, canDeliverToSchoolsInWelsh," +
+//                "                                   hasApprenticeshipProgramme, schoolPreferences)" +
+//                "                                  VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+//
+//        return jdbcTemplate().update(insertSql, statusOfEmployer, Name, AddressCity, AddressStreet, AddressNumber,
+//                Postcode, email, phone, website, numberOfEmployees, companySummary, notes, LogoLink,
+//                givesSiteExperience, givesSiteVisits, givesWorkshops, givesPresentations, attendsCareerFairs,
+//                givesWebinars, worksWithPrimaryPupils, useOfModernForeignLanguage, runsBusinessInWelsh, canDeliverToSchoolsInWelsh,
+//                hasApprenticeshipProgramme, schoolPreferences);
+//
+//    }
 
     // 17. Create a new Employer / version 1 not complete
-    public int createEvent(  String EmployerName, String EmployerAddressCity, String EmployerAddressStreet, String EmployerAddressNumber,
+    public int createEmployer( int StatusOfEmployerID, String EmployerName, String EmployerAddressCity, String EmployerAddressStreet, String EmployerAddressNumber,
                              String EmployerPostcode, String EmployerEmail, String ContactPersonNameSurname, String ContactPersonPosition, String EmployerPhone,
                              String EmployerTwitter, String EmployerFB, String EmployerWebsite, int NumberOfEmployeesID, String CompanySummary,
                              String Notes) throws DataAccessException {
 
-        String insertSql = "INSERT INTO Employer( EmployerName, EmployerAddressCity, EmployerAddressStreet, EmployerAddressNumber, EmployerPostcode," +
+        String insertSql = "INSERT INTO Employer( StatusOfEmployerID, EmployerName, EmployerAddressCity, EmployerAddressStreet, EmployerAddressNumber, EmployerPostcode," +
                 " EmployerEmail,ContactPersonNameSurname,ContactPersonPosition, EmployerPhone, EmployerWebsite, EmployerTwitter, EmployerFB, NumberOfEmployeesID," +
                 "  CompanySummary, Notes)" +
-                " VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                " VALUES(?, ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
-        return jdbcTemplate().update(insertSql, EmployerName, EmployerAddressCity, EmployerAddressStreet, EmployerAddressNumber,
+        return jdbcTemplate().update(insertSql, StatusOfEmployerID, EmployerName, EmployerAddressCity, EmployerAddressStreet, EmployerAddressNumber,
                 EmployerPostcode, EmployerEmail, ContactPersonNameSurname, ContactPersonPosition, EmployerPhone, EmployerWebsite,
                 EmployerTwitter, EmployerFB, NumberOfEmployeesID, CompanySummary, Notes);
     }
