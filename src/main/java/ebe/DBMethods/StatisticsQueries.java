@@ -196,7 +196,62 @@ public class StatisticsQueries extends DBQueries {
         return empMap;
     }
 
+    public int getEventsByAuthAndTypeOfEvent(int eventId, int authId) throws DataAccessException{
+        String query = String.format("SELECT count(eve.EventID) FROM Event eve INNER JOIN PostcodeList pc ON pc.PostcodeName = eve.EventVenuePostcode " +
+                "INNER JOIN LocalAuthorityList la ON la.LocalAuthorityID = pc.LocalAuthorityID " +
+                "INNER JOIN TypeOfEventList evType ON evType.TypeOfEventID = eve.TypeOfEventID "+
+                "WHERE evType.TypeOfEventID = \"%s \" AND la.LocalAuthorityID = \"%s\" ;", eventId,authId);
+        ResultSet rs = null;
+        int eventNumber = 0;
+        try {
+            connection = ConnectionFactory.getConnection();
+            statement = connection.createStatement();
+            rs = statement.executeQuery(query);
+            while (rs.next()) {
+              eventNumber = rs.getInt("count(eve.EventID)");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return eventNumber;
+    }
 
+    public int getSchoolsThatAttendedEvents(int schoolID) throws DataAccessException{
+        String query = String.format("SELECT count(inter.SchoolID) " +
+                "FROM INT_AttendingSchoolOnEvent inter " +
+                "WHERE SchoolID = \"%s\";", schoolID);
+        ResultSet rs = null;
+        int schoolsOnEvents = 0;
+        try {
+            connection = ConnectionFactory.getConnection();
+            statement = connection.createStatement();
+            rs = statement.executeQuery(query);
+            while (rs.next()) {
+                schoolsOnEvents = rs.getInt("count(inter.SchoolID)");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return schoolsOnEvents;
+    }
+
+    public Map<String,Integer> getSchoolsAndRequests(){
+        String query = "SELECT SchoolName, SchoolNumberOfRequest\n" +
+                "FROM School;";
+        Map<String, Integer> schoolMap = new HashMap<>();
+        ResultSet rs = null;
+        try {
+            connection = ConnectionFactory.getConnection();
+            statement = connection.createStatement();
+            rs = statement.executeQuery(query);
+            while (rs.next()) {
+                schoolMap.put(rs.getString("SchoolName"), rs.getInt("SchoolNumberOfRequest"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return schoolMap;
+    }
 }
 
 

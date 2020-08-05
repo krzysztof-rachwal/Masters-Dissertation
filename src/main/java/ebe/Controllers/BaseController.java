@@ -7,8 +7,7 @@ import ebe.DBClasses.School;
 import ebe.DBClasses.Vacancy;
 import ebe.DBMethods.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -184,7 +183,9 @@ public class BaseController {
     /////////5th - Header Menu (Report) /////////
     //11. Report
     @GetMapping("/report")
-    public ModelAndView Report(HttpSession session) {
+    public ModelAndView Report(/*@RequestParam(required = false,name="typeEvent") Integer typeID,
+                               @RequestParam(required = false,name = "localAuth") Integer authID,*/
+                               HttpSession session) {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("reportPage");
 
@@ -194,6 +195,7 @@ public class BaseController {
         int numberOfEmployers = statisticsQueries.getTotalEmployers();
         int schoolAtEvents = statisticsQueries.getSchoolsAtEvents();
         int requestsBySchools = statisticsQueries.getRequestsBySchools();
+
         Map<String,Integer> eventsByAdv = statisticsQueries.getEventsByAdviser();
         Map<String,Integer> eventsByType = statisticsQueries.getEventsByType();
         Map<String,Integer> empBySector = statisticsQueries.getEmployersBySector();
@@ -201,6 +203,7 @@ public class BaseController {
         Map<String,Integer> pupilsByAuth = statisticsQueries.getTotalPupilsByAuth();
         Map<String,Integer> schoolsOnEveLocalAuth = statisticsQueries.getSchoolsAttendingEventsByAuth();
         Map<String,Integer> empByLocalAuth = statisticsQueries.getEmpByLocalAuth();
+        Map<String,Integer> schoolAndRequests = statisticsQueries.getSchoolsAndRequests();
 
         List<School> allSchoolsNames = SchoolQrys.getAllSchoolNamesAndIds();
         List<Event> allTypesOfEvents = EventQrys.getAllTypesOfEvents();
@@ -222,6 +225,8 @@ public class BaseController {
         mv.addObject("allSchoolsNames",allSchoolsNames);
         mv.addObject("allTypesOfEvents",allTypesOfEvents);
         mv.addObject("allLocalAuthorities",allLocalAuthorities);
+        mv.addObject("schoolAndRequests",schoolAndRequests);
+
         return mv;
     }
 
