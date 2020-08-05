@@ -912,4 +912,9 @@ public class EmployerQueries extends DBQueries {
         return jdbcTemplate().update(deleteSql);
     }
 
+    public Integer deleteAlumni(int alumniID) throws DataAccessException {
+        String deleteSql = String.format("DELETE FROM Alumni WHERE AlumniID = '%s'",alumniID);
+        return jdbcTemplate().update(deleteSql);
+    }
+
 }

@@ -183,11 +183,11 @@
                                 </div>
                             </div>
 
-                            <div class="row">
+                            <div class="row" id="alumniInfo">
                                 <div class="container my-3 p-0">
                                     <h4>Alumni</h4>
                                 </div>
-                                <div class="col-md-12"  th:each="alumni : ${allEmployerAlumni}" >
+                                <div class="col-md-12 "  th:each="alumni : ${allEmployerAlumni}"  th:value="${'bananas_'+alumni.getEmployerAlumniID()}">
                                     <div class="col-md-5 my-2 px-0">
                                         <label >Full Name</label><br>
                                         <input type="text" class="form-control input-border" th:id="${alumni.getEmployerAlumniID()}" name="update-employer-alumni-name" th:value="${alumni.getEmployerAlumniName()}" >
@@ -199,7 +199,7 @@
                                         </select>
                                     </div>
                                     <div class="col-md-2 mt-5 px-0 pr-5">
-                                        <button type="button" class="close">
+                                        <button type="button" class="close" onclick="deleteAlumni($(this))" th:value="${alumni.getEmployerAlumniID()}"  th:id="'butao_'+${alumni.getEmployerAlumniID()}">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
@@ -220,55 +220,9 @@
                                         </select>
                                     </div>
                                 </div>
-                                <!-- 2. Alumni -->
-                                <div class="col-md-6 d-none">
-                                    <label >Name</label>
-                                    <input type="text" class="form-control input-border" name="create-employer-alumni-name">
-                                </div>
-                                <div class="col-md-6 d-none">
-                                    <label >School</label>
-                                <input type="text" class="form-control input-border" name="create-employer-alumni-school">
-                                </div>
-                                <!-- 3. Alumni -->
-                                <div class="col-md-6 d-none">
-                                    <label >Name</label>
-                                    <input type="text" class="form-control input-border" id="employer-alumni-name-3">
-                                </div>
-                                <div class="col-md-6 d-none">
-                                    <label >School</label>
-                                    <input type="text" class="form-control input-border" id="employer-alumni-school-3">
-                                </div>
-                                <!-- 4. Alumni -->
-                                <div class="col-md-6 d-none">
-                                    <label >Name</label>
-                                    <input type="text" class="form-control input-border" id="employer-alumni-name-4">
-                                </div>
-                                <div class="col-md-6 d-none">
-                                    <label >School</label>
-                                    <input type="text" class="form-control input-border" id="employer-alumni-school-4">
-                                </div>
-                                <!-- 5. Alumni -->
-                                <div class="col-md-6 d-none">
-                                    <label >Name</label>
-                                    <input type="text" class="form-control input-border" id="employer-alumni-name-5">
-                                </div>
-                                <div class="col-md-6 d-none">
-                                    <label >School</label>
-                                    <input type="text" class="form-control input-border" id="employer-alumni-school-5">
-                                </div>
-                                <!-- 6. Alumni -->
-                                <div class="col-md-6 d-none">
-                                    <label >Name</label>
-                                    <input type="text" class="form-control input-border" id="employer-alumni-name-6">
-                                </div>
-                                <div class="col-md-6 d-none">
-                                    <label >School</label>
-                                    <input type="text" class="form-control input-border" id="employer-alumni-school-6">
-                                </div>
                             </div>
                         </div>
 
-                        </div>
                     <div class="container my-4 text-center">
                         <button type="button" class="button--secondary text-center" onclick="updateThisEmployer()">Update Employer</button>
                     </div>
@@ -406,9 +360,9 @@
     <div class="col-md-12my-4">
         <h3>Alumni</h3>
         <ul>
-            <li  th:each="alumni : ${allEmployerAlumni}" >
-                <span class="col-md-3" th:utext="'<b>Name:</b> ' +${alumni.getEmployerAlumniName()}"></span>
-                <span class="col-md-9" th:each="school : ${allSchoolNamesAndIds}"   th:remove="${alumni.getEmployerAlumniSchoolID() == school.getSchoolID()} ? none : all" th:utext="'<b>School:</b>  ' +${school.getSchoolName()}"></span>
+            <li  th:each="alumni : ${allEmployerAlumni}" class="col-md-12" >
+                <span class="col-md-4" th:utext="'<b>Name:</b> ' +${alumni.getEmployerAlumniName()}"></span>
+                <span class="col-md-8" th:each="school : ${allSchoolNamesAndIds}"   th:remove="${alumni.getEmployerAlumniSchoolID() == school.getSchoolID()} ? none : all" th:utext="'<b>School:</b>  ' +${school.getSchoolName()}"></span>
             </li>
         </ul>
     </div>

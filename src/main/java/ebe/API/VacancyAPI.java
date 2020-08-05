@@ -44,6 +44,7 @@ public class VacancyAPI {
             @RequestParam(name="ApplicationMethodID") String applicationMethodID,
             @RequestParam(name="VacancyPostcode") String vacancyPostCode) throws ParseException {
 
+
          return 1 == VacancyQrys.createVacancy(employerId,vacancyName,vacancySummary,vacancyLink,typeOfVacancyID,
                  StatusOfVacancyID, startOfVacancy,deadlineForApplication,occupationalCodeID,applicationMethodID,
                  vacancyPostCode);
