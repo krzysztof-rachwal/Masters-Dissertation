@@ -16,7 +16,10 @@ import java.util.List;
 @Repository
 public class EmployerQueries extends DBQueries {
 
-
+    private static final String EMPLOYER_ID = "EmployerID";
+    private static final String EMPLOYER_STATUS_ID = "StatusOfEmployerID";
+    private static final String EMPLOYER_NAME = "EmployerName";
+    private static final String ALUMNI_ID = "AlumniID";
     private Connection connection;
     private Statement statement;
 
@@ -29,7 +32,7 @@ public class EmployerQueries extends DBQueries {
     // 1. Get All Employers
     public List<Employer> getAllEmployers() throws DataAccessException {
         String getQuery = "SELECT * FROM Employer";
-        List<Employer> list = new ArrayList<Employer>();
+        List<Employer> list = new ArrayList<>();
         Employer employer = null;
         ResultSet rs = null;
         try {
@@ -37,8 +40,8 @@ public class EmployerQueries extends DBQueries {
             statement = connection.createStatement();
             rs = statement.executeQuery(getQuery);
             while (rs.next()) {
-                employer = new Employer(rs.getInt("EmployerID"), rs.getInt("StatusOfEmployerID"),
-                        rs.getString("EmployerName"), rs.getString("EmployerAddressCity"),
+                employer = new Employer(rs.getInt(EMPLOYER_ID), rs.getInt(EMPLOYER_STATUS_ID),
+                        rs.getString(EMPLOYER_NAME), rs.getString("EmployerAddressCity"),
                         rs.getString("EmployerAddressStreet"), rs.getString("EmployerAddressNumber"),
                         rs.getString("EmployerPostcode"), rs.getString("EmployerEmail"),
                         rs.getString("ContactPersonNameSurname"),rs.getString("ContactPersonPosition"),
@@ -71,9 +74,9 @@ public class EmployerQueries extends DBQueries {
             while (rs.next()) {
 
                 employer = new Employer();
-                employer.setEmployerID(rs.getInt("EmployerID"));
-                employer.setStatusOfEmployerID(rs.getInt("StatusOfEmployerID"));
-                employer.setEmployerName(rs.getString("EmployerName"));
+                employer.setEmployerID(rs.getInt(EMPLOYER_ID));
+                employer.setStatusOfEmployerID(rs.getInt(EMPLOYER_STATUS_ID));
+                employer.setEmployerName(rs.getString(EMPLOYER_NAME));
                 employer.setEmployerAddressCity(rs.getString("EmployerAddressCity"));
                 employer.setEmployerAddressStreet(rs.getString("EmployerAddressStreet"));
                 employer.setEmployerAddressNumber(rs.getString("EmployerAddressNumber"));
@@ -101,11 +104,11 @@ public class EmployerQueries extends DBQueries {
         return employer;
     }
 
-    //4. Get all Employer Ids and Names
+    //3. Get all Employer Ids and Names
     public List<Employer> getAllEmployerNamesAndIds() throws DataAccessException {
-        String getQuery = "SELECT EmployerID, EmployerName  FROM Employer";
-        List<Employer> list = new ArrayList<Employer>();
-        Employer employer = null;
+        String getQuery = "SELECT EmployerID, EmployerName FROM Employer";
+        List<Employer> list = new ArrayList<>();
+        Employer employer;
         ResultSet rs = null;
         try {
             connection = ConnectionFactory.getConnection();
@@ -113,8 +116,8 @@ public class EmployerQueries extends DBQueries {
             rs = statement.executeQuery(getQuery);
             while (rs.next()) {
                 employer = new Employer();
-                employer.setEmployerID(rs.getInt("EmployerID"));
-                employer.setEmployerName(rs.getString("EmployerName"));
+                employer.setEmployerID(rs.getInt(EMPLOYER_ID));
+                employer.setEmployerName(rs.getString(EMPLOYER_NAME));
 
                 list.add(employer);
             }
@@ -128,7 +131,7 @@ public class EmployerQueries extends DBQueries {
         return list;
     }
 
-    //5. Get Last Employer Created
+    //4. Get Last Employer Created
     public Integer getLastEmployerCreated(String employerName) throws DataAccessException {
         String getQuery = String.format("SELECT EmployerID FROM Employer WHERE EmployerName = \"%s\" ORDER BY EmployerID DESC LIMIT 1", employerName);
         Employer employer = null;
@@ -138,9 +141,8 @@ public class EmployerQueries extends DBQueries {
             statement = connection.createStatement();
             rs = statement.executeQuery(getQuery);
             while (rs.next()) {
-
                 employer = new Employer();
-                employer.setEmployerID(rs.getInt("EmployerID"));
+                employer.setEmployerID(rs.getInt(EMPLOYER_ID));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -149,15 +151,17 @@ public class EmployerQueries extends DBQueries {
             DBUtil.close(statement);
             DBUtil.close(connection);
         }
+
+        //check if employer is not null
         return employer.getEmployerID();
     }
 
 
-    //6. Get Possible Number of Employers
+    //5. Get Possible Number of Employers
     public List<Employer> getAllNumberOfEmployersPossible() throws DataAccessException {
         String getQuery = "SELECT EmployeesRangeID, EmployeesRangeName FROM EmployeesRangeList";
-        List<Employer> list = new ArrayList<Employer>();
-        Employer employer = null;
+        List<Employer> list = new ArrayList<>();
+        Employer employer;
         ResultSet rs = null;
         try {
             connection = ConnectionFactory.getConnection();
@@ -180,10 +184,10 @@ public class EmployerQueries extends DBQueries {
         return list;
     }
 
-    //7. Get All Possible Language List
+    //6. Get All Possible Language List
     public List<Employer> getAllLanguages() throws DataAccessException {
         String getQuery = "SELECT LanguageID, LanguageName FROM LanguageList";
-        List<Employer> list = new ArrayList<Employer>();
+        List<Employer> list = new ArrayList<>();
         Employer employer = null;
         ResultSet rs = null;
         try {
@@ -207,10 +211,10 @@ public class EmployerQueries extends DBQueries {
         return list;
     }
 
-    //8. Get All Possible Local Authorities List
+    //7. Get All Possible Local Authorities List
     public List<Employer> getAllLocalAuthorities() throws DataAccessException {
         String getQuery = "SELECT LocalAuthorityID, LocalAuthorityName FROM LocalAuthorityList";
-        List<Employer> list = new ArrayList<Employer>();
+        List<Employer> list = new ArrayList<>();
         Employer employer = null;
         ResultSet rs = null;
         try {
@@ -234,10 +238,33 @@ public class EmployerQueries extends DBQueries {
         return list;
     }
 
+    //8. Intersection - Get Chosen Local Authorities
+    public List<Integer> getChosenLocalAuthorities(int employerID) throws DataAccessException {
+        String getQuery = String.format("SELECT LocalAuthorityID FROM INT_LocalAuthorityEmployerCanWorkWith WHERE EmployerID = \"%s\"", employerID);
+
+        List<Integer> list = new ArrayList<>();
+        ResultSet rs = null;
+        try {
+            connection = ConnectionFactory.getConnection();
+            statement = connection.createStatement();
+            rs = statement.executeQuery(getQuery);
+            while (rs.next()) {
+                list.add(rs.getInt("LocalAuthorityID"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }  finally {
+            DBUtil.close(rs);
+            DBUtil.close(statement);
+            DBUtil.close(connection);
+        }
+        return list;
+    }
+
     //9. Get All Possible Industry Sector List
     public List<Employer> getAllIndustrySectors() throws DataAccessException {
         String getQuery = "SELECT IndustrySectorID, IndustrySectorName FROM IndustrySectorList";
-        List<Employer> list = new ArrayList<Employer>();
+        List<Employer> list = new ArrayList<>();
         Employer employer = null;
         ResultSet rs = null;
         try {
@@ -261,10 +288,33 @@ public class EmployerQueries extends DBQueries {
         return list;
     }
 
-    //10. Get All Possible Curriculum Areas List
+    //10. Intersection - Get Chosen Industry Sectors
+    public List<Integer> getChosenIndustrySectors(int employerID) throws DataAccessException {
+        String getQuery = String.format("SELECT IndustrySectorID FROM INT_EmployerIndustrySector WHERE EmployerID = \"%s\"", employerID);
+
+        List<Integer> list = new ArrayList<>();
+        ResultSet rs = null;
+        try {
+            connection = ConnectionFactory.getConnection();
+            statement = connection.createStatement();
+            rs = statement.executeQuery(getQuery);
+            while (rs.next()) {
+                list.add(rs.getInt("IndustrySectorID"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }  finally {
+            DBUtil.close(rs);
+            DBUtil.close(statement);
+            DBUtil.close(connection);
+        }
+        return list;
+    }
+
+    //11. Get All Possible Curriculum Areas List
     public List<Employer> getAllCurriculumAreas() throws DataAccessException {
         String getQuery = "SELECT AreaOfCurriculumID, AreaOfCurriculumName FROM AreaOfCurriculumList";
-        List<Employer> list = new ArrayList<Employer>();
+        List<Employer> list = new ArrayList<>();
         Employer employer = null;
         ResultSet rs = null;
         try {
@@ -288,10 +338,34 @@ public class EmployerQueries extends DBQueries {
         return list;
     }
 
-    //11. Get All Possible Cooperation Types
+
+    //12. Intersection - Get Chosen Curriculum Areas
+    public List<Integer> getChosenCurriculumAreas(int employerID) throws DataAccessException {
+        String getQuery = String.format("SELECT AreaOfCurriculumID FROM INT_EmployerSupportOfAreaOfCurriculum WHERE EmployerID = \"%s\"", employerID);
+
+        List<Integer> list = new ArrayList<>();
+        ResultSet rs = null;
+        try {
+            connection = ConnectionFactory.getConnection();
+            statement = connection.createStatement();
+            rs = statement.executeQuery(getQuery);
+            while (rs.next()) {
+                list.add(rs.getInt("AreaOfCurriculumID"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }  finally {
+            DBUtil.close(rs);
+            DBUtil.close(statement);
+            DBUtil.close(connection);
+        }
+        return list;
+    }
+
+    //13. Get All Possible Cooperation Types
     public List<Employer> getAllCooperationTypes() throws DataAccessException {
         String getQuery = "SELECT CooperationTypeID, CooperationTypeName FROM CooperationTypeList";
-        List<Employer> list = new ArrayList<Employer>();
+        List<Employer> list = new ArrayList<>();
         Employer employer = null;
         ResultSet rs = null;
         try {
@@ -315,10 +389,33 @@ public class EmployerQueries extends DBQueries {
         return list;
     }
 
-    //12. Get All Possible Preferences
+    //14. Intersection - Get Chosen Cooperation Types
+    public List<Integer> getChosenCooperationTypes(int employerID) throws DataAccessException {
+        String getQuery = String.format("SELECT CooperationTypeID FROM INT_EmployerCooperationType WHERE EmployerID = \"%s\";", employerID);
+
+        List<Integer> list = new ArrayList<>();
+        ResultSet rs = null;
+        try {
+            connection = ConnectionFactory.getConnection();
+            statement = connection.createStatement();
+            rs = statement.executeQuery(getQuery);
+            while (rs.next()) {
+                list.add(rs.getInt("CooperationTypeID"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }  finally {
+            DBUtil.close(rs);
+            DBUtil.close(statement);
+            DBUtil.close(connection);
+        }
+        return list;
+    }
+
+    //15. Get All Possible Preferences
     public List<Employer> getAllPreferences() throws DataAccessException {
-        String getQuery = "SELECT PreferenceID, PreferenceName FROM PreferenceList";
-        List<Employer> list = new ArrayList<Employer>();
+        String getQuery = "SELECT PreferenceID, PreferenceName FROM PreferenceList;";
+        List<Employer> list = new ArrayList<>();
         Employer employer = null;
         ResultSet rs = null;
         try {
@@ -342,22 +439,18 @@ public class EmployerQueries extends DBQueries {
         return list;
     }
 
-    //13. Get All Alumni
-    public List<Employer> getAllAlumni() throws DataAccessException {
-        String getQuery = "SELECT AlumniID, AlumniNameAndSurname, AlumniSchoolID  FROM Alumni";
-        List<Employer> list = new ArrayList<Employer>();
-        Employer employer = null;
+    //16. Intersection - Get Chosen Preferences
+    public List<Integer> getChosenPreferences(int employerID) throws DataAccessException {
+        String getQuery = String.format("SELECT PreferenceID FROM INT_EmployerPreference WHERE EmployerID = \"%s\";", employerID);
+
+        List<Integer> list = new ArrayList<>();
         ResultSet rs = null;
         try {
             connection = ConnectionFactory.getConnection();
             statement = connection.createStatement();
             rs = statement.executeQuery(getQuery);
             while (rs.next()) {
-                employer = new Employer();
-                employer.setEmployerAlumniID(rs.getInt("AlumniID"));
-                employer.setEmployerAlumniName(rs.getString("AlumniNameAndSurname"));
-
-                list.add(employer);
+                list.add(rs.getInt("PreferenceID"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -369,20 +462,73 @@ public class EmployerQueries extends DBQueries {
         return list;
     }
 
+    //17. Get All Alumni From  Employer - Intersection
+    public List<Integer> getAllAlumni(int employerID) throws DataAccessException {
+        String getQuery = String.format("SELECT AlumniID FROM INT_AlumniWorkingForEmployer WHERE EmployerID = \"%s\"", employerID);
 
-    // 14. Get All Employer Names and Ids
-    public List<Integer> getAllEmployerIDsAttendingEvent(int eventId) throws DataAccessException {
-        String getQuery = String.format("SELECT EmployerID FROM INT_AttendingEmployerOnEvent WHERE EventID = \"%s\"", eventId);
-
-        List<Integer> list = new ArrayList<Integer>();
+        List<Integer> list = new ArrayList<>();
         ResultSet rs = null;
         try {
             connection = ConnectionFactory.getConnection();
             statement = connection.createStatement();
             rs = statement.executeQuery(getQuery);
             while (rs.next()) {
+                list.add(rs.getInt(ALUMNI_ID));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }  finally {
+            DBUtil.close(rs);
+            DBUtil.close(statement);
+            DBUtil.close(connection);
+        }
+        return list;
+    }
 
-                list.add(rs.getInt("EmployerID"));
+    //18. Get Alumni Name By AlumniID
+    public List<Employer> getAllAlumniNamesAndSchoolID(List<Integer> alumniList) throws DataAccessException {
+
+        List<Employer> list = new ArrayList<>();
+        Employer employer = null;
+        ResultSet rs = null;
+        for (Integer alumni : alumniList) {
+            System.out.println("Inside of query we have alumniID has: " + alumni );
+            String getQuery = String.format("SELECT *  FROM Alumni WHERE AlumniID = \"%s\";", alumni);
+            try {
+                connection = ConnectionFactory.getConnection();
+                statement = connection.createStatement();
+                rs = statement.executeQuery(getQuery);
+                while (rs.next()) {
+                    employer = new Employer();
+                    employer.setEmployerAlumniID(rs.getInt(ALUMNI_ID));
+                    employer.setEmployerAlumniName(rs.getString("AlumniNameAndSurname"));
+                    employer.setEmployerAlumniSchoolID(rs.getInt("AlumniSchoolID"));
+
+                    list.add(employer);
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } finally {
+                DBUtil.close(rs);
+                DBUtil.close(statement);
+                DBUtil.close(connection);
+            }
+        }
+        return list;
+    }
+
+    // 18. Get All Employer Names and Ids
+    public List<Integer> getAllEmployerIDsAttendingEvent(int eventId) throws DataAccessException {
+        String getQuery = String.format("SELECT EmployerID FROM INT_AttendingEmployerOnEvent WHERE EventID = \"%s\";", eventId);
+
+        List<Integer> list = new ArrayList<>();
+        ResultSet rs = null;
+        try {
+            connection = ConnectionFactory.getConnection();
+            statement = connection.createStatement();
+            rs = statement.executeQuery(getQuery);
+            while (rs.next()) {
+                list.add(rs.getInt(EMPLOYER_ID));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -394,14 +540,13 @@ public class EmployerQueries extends DBQueries {
         return list;
     }
 
-    // 15. Get All Employer Name Attending Specific event
+    // 19. Get All Employer Names and Ids
     public List<Employer> getAllEmployerNamesAttendingEvent(List<Employer> employers) throws DataAccessException {
 
-        List<Employer> list = new ArrayList<Employer>();
+        List<Employer> list = new ArrayList<>();
 
         for (Employer employer : employers) {
-            String getQuery = String.format("SELECT EmployerName FROM Employer WHERE EmployerID = \"%s\"", employer.getEmployerID());
-
+            String getQuery = String.format("SELECT EmployerName FROM Employer WHERE EmployerID = \"%s\";", employer.getEmployerID());
 
             Employer employerName = null;
             ResultSet rs = null;
@@ -411,7 +556,7 @@ public class EmployerQueries extends DBQueries {
                 rs = statement.executeQuery(getQuery);
                 while (rs.next()) {
                     employerName = new Employer();
-                    employerName.setEmployerName(rs.getString("EmployerName"));
+                    employerName.setEmployerName(rs.getString(EMPLOYER_NAME));
 
                     list.add(employerName);
                 }
@@ -426,12 +571,36 @@ public class EmployerQueries extends DBQueries {
         return list;
     }
 
-    // 16. Get All Employer Status
-    public List<Employer> getAllEmployerStatus() throws DataAccessException {
+    // 20. Get Employer Preferences - School
+    public List<Integer> getEmployerSchoolPreferences(int employerId) throws DataAccessException {
 
-        String getQuery = String.format("SELECT StatusOfEmployerID, StatusOfEmployerName  FROM StatusOfEmployerList");
+        String getQuery = String.format("SELECT SchoolID FROM INT_EmployerSchoolPreference WHERE EmployerID = \"%s\";", employerId);
 
-        List<Employer> list = new ArrayList<Employer>();
+        List<Integer> list = new ArrayList<>();
+        ResultSet rs = null;
+        try {
+            connection = ConnectionFactory.getConnection();
+            statement = connection.createStatement();
+            rs = statement.executeQuery(getQuery);
+            while (rs.next()) {
+                list.add(rs.getInt("SchoolID"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            DBUtil.close(rs);
+            DBUtil.close(statement);
+            DBUtil.close(connection);
+        }
+        return list;
+    }
+
+    // 21. Get Employer Preferences - School
+    public List<Employer>  getAllEmployerStatus() throws DataAccessException {
+
+        String getQuery = "SELECT StatusOfEmployerID, StatusOfEmployerName FROM StatusOfEmployerList";
+
+        List<Employer> list = new ArrayList<>();
         Employer employer = null;
         ResultSet rs = null;
         try {
@@ -440,7 +609,7 @@ public class EmployerQueries extends DBQueries {
             rs = statement.executeQuery(getQuery);
             while (rs.next()) {
                 employer = new Employer();
-                employer.setStatusOfEmployerID(rs.getInt("StatusOfEmployerID"));
+                employer.setStatusOfEmployerID(rs.getInt(EMPLOYER_STATUS_ID));
                 employer.setStatusOfEmployerName(rs.getString("StatusOfEmployerName"));
 
                 list.add(employer);
@@ -455,153 +624,287 @@ public class EmployerQueries extends DBQueries {
         return list;
     }
 
+    // 21. Get Alumni ID By Alumni Name
+    public List<Integer>  getAllAlumniIDFromEmployer(List<String> alumniName, List<Integer>alumniSchoolID) throws DataAccessException {
 
-    ///////////////////////////////////// CREATE ALL METHODS ///////////////////////////////////////////////
-    //17. Create New Employer
+        ArrayList<Integer> list = new ArrayList<>();
 
-//    public int createEmployer(int statusOfEmployer, String Name, String AddressCity, String AddressStreet, String AddressNumber,
-//                                 String Postcode, String email, String phone, String website, int numberOfEmployees, String companySummary,
-//                                 String notes, String LogoLink, Boolean givesSiteExperience, Boolean givesSiteVisits,
-//                                 Boolean givesWorkshops, Boolean givesPresentations, Boolean attendsCareerFairs, Boolean givesWebinars, Boolean worksWithPrimaryPupils,
-//                                 Boolean useOfModernForeignLanguage, Boolean runsBusinessInWelsh, Boolean canDeliverToSchoolsInWelsh, Boolean hasApprenticeshipProgramme,
-//                                 int schoolPreferences) throws DataAccessException {
-//
-//        String insertSql = "INSERT INTO Employer Employer(statusOfEmployer, Name, AddressCity, AddressStreet, AddressNumber," +
-//                "                                   Postcode, email, phone, website, numberOfEmployees,  companySummary, notes, LogoLink, " +
-//                "                                   Logo, givesSiteExperience, givesSiteVisits, givesWorkshops, givesPresentations, attendsCareerFairs," +
-//                "                                   givesWebinars,  worksWithPrimaryPupils, useOfModernForeignLanguage, runsBusinessInWelsh, canDeliverToSchoolsInWelsh," +
-//                "                                   hasApprenticeshipProgramme, schoolPreferences)" +
-//                "                                  VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-//
-//        return jdbcTemplate().update(insertSql, statusOfEmployer, Name, AddressCity, AddressStreet, AddressNumber,
-//                Postcode, email, phone, website, numberOfEmployees, companySummary, notes, LogoLink,
-//                givesSiteExperience, givesSiteVisits, givesWorkshops, givesPresentations, attendsCareerFairs,
-//                givesWebinars, worksWithPrimaryPupils, useOfModernForeignLanguage, runsBusinessInWelsh, canDeliverToSchoolsInWelsh,
-//                hasApprenticeshipProgramme, schoolPreferences);
-//
-//    }
+        for(int i = 0; i < alumniName.size(); i++) {
+            String getQuery = String.format("SELECT AlumniID FROM Alumni WHERE AlumniNameAndSurname = \"%s\" AND AlumniSchoolID = \"%s\";",
+                    alumniName.get(i), alumniSchoolID.get(i));
 
-    // 18. Create a new Employer / version 1 not complete
-    public int createEmployer(int StatusOfEmployerID,  String EmployerName, String EmployerAddressCity, String EmployerAddressStreet, String EmployerAddressNumber,
-                              String EmployerPostcode, String EmployerEmail, String ContactPersonNameSurname, String ContactPersonPosition, String EmployerPhone,
-                              String EmployerTwitter, String EmployerFB, String EmployerWebsite, int NumberOfEmployeesID, String CompanySummary,
-                              String Notes) throws DataAccessException {
+            ResultSet rs = null;
+            try {
+                connection = ConnectionFactory.getConnection();
+                statement = connection.createStatement();
+                rs = statement.executeQuery(getQuery);
+                while (rs.next()) {
+
+                    list.add(rs.getInt(ALUMNI_ID));
+
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } finally {
+                DBUtil.close(rs);
+                DBUtil.close(statement);
+                DBUtil.close(connection);
+            }
+
+        }
+        return list;
+    }
+
+
+    // 22. Create a new Employer / version 1 not complete
+    public int createEmployer( int statusOfEmployerID, String employerName,
+                               String employerAddressCity, String employerAddressStreet,
+                               String employerAddressNumber, String employerPostcode,
+                               String employerEmail, String contactPersonNameSurname, String contactPersonPosition, String employerPhone,
+                               String employerTwitter, String employerFB, String employerWebsite, int numberOfEmployeesID, String companySummary,
+                               String notes) throws DataAccessException {
 
         String insertSql = "INSERT INTO Employer(StatusOfEmployerID, EmployerName, EmployerAddressCity, EmployerAddressStreet, EmployerAddressNumber, EmployerPostcode," +
                 " EmployerEmail,ContactPersonNameSurname,ContactPersonPosition, EmployerPhone, EmployerWebsite, EmployerTwitter, EmployerFB, NumberOfEmployeesID," +
                 "  CompanySummary, Notes)" +
                 " VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
-        return jdbcTemplate().update(insertSql,StatusOfEmployerID, EmployerName, EmployerAddressCity, EmployerAddressStreet, EmployerAddressNumber,
-                EmployerPostcode, EmployerEmail, ContactPersonNameSurname, ContactPersonPosition, EmployerPhone, EmployerWebsite,
-                EmployerTwitter, EmployerFB, NumberOfEmployeesID, CompanySummary, Notes);
+        return jdbcTemplate().update(insertSql, statusOfEmployerID, employerName, employerAddressCity, employerAddressStreet, employerAddressNumber,
+                employerPostcode, employerEmail, contactPersonNameSurname, contactPersonPosition, employerPhone, employerWebsite,
+                employerTwitter, employerFB, numberOfEmployeesID, companySummary, notes);
     }
 
-
-    // 19. Create new Employer / Cooperation Type Intersection
-    public void updateEmployerCooperationIntersection(int EmployerID, List<Integer> CooperationTypeID) throws DataAccessException {
+    // 24. Create new Employer / Cooperation Type Intersection
+    public void createEmployerCooperationIntersection(int employerID, List<Integer> cooperationTypeID) throws DataAccessException {
 
         String updateSql = "INSERT INTO INT_EmployerCooperationType(EmployerID, CooperationTypeID) VALUE(?,?)";
 
-        for (Integer cooperationTypeId : CooperationTypeID ){
-            jdbcTemplate().update(updateSql, EmployerID, cooperationTypeId);
-        };
+        for (Integer cooperationTypeId : cooperationTypeID ){
+            jdbcTemplate().update(updateSql, employerID, cooperationTypeId);
+        }
     }
 
-    // 20. Create new Employer / Industry Sector
-    public void updateEmployerIndustrySectorIntersection(int EmployerID, List<Integer> IndustrySectorID) throws DataAccessException {
+    // 25. Create new Employer / Industry Sector
+    public void createEmployerIndustrySectorIntersection(int employerID, List<Integer> industrySectorID) throws DataAccessException {
 
         String updateSql = "INSERT INTO INT_EmployerIndustrySector(EmployerID, IndustrySectorID) VALUES(?,?)";
 
-        for (Integer industrySectorId : IndustrySectorID) {
-            jdbcTemplate().update(updateSql, EmployerID, industrySectorId);
+        for (Integer industrySectorId : industrySectorID) {
+            jdbcTemplate().update(updateSql, employerID, industrySectorId);
         }
     }
 
 
-    // 21. Create new Employer / Preference
-    public void updateEmployerPreferencesIntersection(int EmployerID, List<Integer> PreferenceID) throws DataAccessException {
+    // 26. Create new Employer / Preference
+    public void createEmployerPreferencesIntersection(int employerID, List<Integer> preferenceID) throws DataAccessException {
 
         String updateSql = "INSERT INTO INT_EmployerPreference(EmployerID, PreferenceID) VALUE(?,?)";
 
-        for (Integer preferencesId : PreferenceID ){
-            jdbcTemplate().update(updateSql, EmployerID, preferencesId);
-        };
+        for (Integer preferencesId : preferenceID ){
+            jdbcTemplate().update(updateSql, employerID, preferencesId);
+        }
     }
 
-    // 22. Create new Employer / School Preference
-    public void updateSchoolEmployerSchoolPreferencesIntersection(int EmployerID, List<Integer> SchoolID) throws DataAccessException {
+    // 27. Create new Employer / School Preference
+    public void createSchoolEmployerSchoolPreferencesIntersection(int employerID, List<Integer> schoolID) throws DataAccessException {
 
         String updateSql = "INSERT INTO INT_EmployerSchoolPreference(EmployerID, SchoolID) VALUES(?,?)";
 
-        for (Integer schoolId : SchoolID) {
-            jdbcTemplate().update(updateSql, EmployerID, schoolId);
+        for (Integer schoolId : schoolID) {
+            jdbcTemplate().update(updateSql, employerID, schoolId);
         }
-    };
+    }
 
-    // 23. Create new Employer / Curriculum Area
-    public void updateEmployerEmployerCurriculumAreaIntersection(int EmployerID, List<Integer> AreaOfCurriculumID) throws DataAccessException {
+    // 28. Create new Employer / Curriculum Area
+    public void createEmployerEmployerCurriculumAreaIntersection(int employerID, List<Integer> areaOfCurriculumID) throws DataAccessException {
 
         String updateSql = "INSERT INTO INT_EmployerSupportOfAreaOfCurriculum(EmployerID, AreaOfCurriculumID) VALUE(?,?)";
 
-        for (Integer areaOfCurriculumId : AreaOfCurriculumID ){
-            jdbcTemplate().update(updateSql, EmployerID, areaOfCurriculumId);
-        };
+        for (Integer areaOfCurriculumId : areaOfCurriculumID ) {
+            jdbcTemplate().update(updateSql, employerID, areaOfCurriculumId);
+        }
     }
 
-    // 24. Create new Employer / Language
-    public void updateSchoolEmployerLanguageIntersection(int EmployerID, List<Integer> LanguageID) throws DataAccessException {
+    // 29. Create new Employer / Language
+    public void createSchoolEmployerLanguageIntersection(int employerID, List<Integer> languageID) throws DataAccessException {
 
         String updateSql = "INSERT INTO INT_LanguageUsedByEmployer(EmployerID, LanguageID) VALUES(?,?)";
 
-        for (Integer languageId : LanguageID) {
-            jdbcTemplate().update(updateSql, EmployerID, languageId);
+        for (Integer languageId : languageID) {
+            jdbcTemplate().update(updateSql, employerID, languageId);
         }
     }
 
-    // 24. Create new Employer / Local Authorities
-    public void updateSchoolEmployerLocalAuthoritiesIntersection(int EmployerID, List<Integer> LocalAuthorityID) throws DataAccessException {
+    // 30. Create new Employer / Local Authorities
+    public void createSchoolEmployerLocalAuthoritiesIntersection(int employerID, List<Integer> localAuthorityID) throws DataAccessException {
 
         String updateSql = "INSERT INTO INT_LocalAuthorityEmployerCanWorkWith(EmployerID, LocalAuthorityID) VALUES(?,?)";
 
-        for (Integer localAuthoritiesId : LocalAuthorityID) {
-            jdbcTemplate().update(updateSql, EmployerID, localAuthoritiesId);
+        for (Integer localAuthoritiesId : localAuthorityID) {
+            jdbcTemplate().update(updateSql, employerID, localAuthoritiesId);
         }
     }
 
 
+    // 38. Create Alumni
+    public void createAlumni(List<String> alumniName, List<Integer> schoolID) throws DataAccessException {
+
+        for(int i = 0; i < alumniName.size(); i++){
+            String updateSql = "INSERT INTO Alumni(AlumniNameAndSurname, AlumniSchoolID) VALUES(?,?)";
+            jdbcTemplate().update(updateSql, alumniName.get(i), schoolID.get(i));
+        }
+    }
+
+    // 38. Create new Employer /  Alumni Intersection
+    public void createEmployerAlumniIntersection(int employerID, List<Integer> alumni) throws DataAccessException {
+
+        String updateSql = "INSERT INTO INT_AlumniWorkingForEmployer(AlumniID, EmployerID) VALUES(?,?)";
+        for (Integer alumniID : alumni) {
+            System.out.println("employerID: " + employerID + "AlumniID: " + alumniID);
+            jdbcTemplate().update(updateSql,alumniID,employerID);
+        }
+    }
 
 
+    //31. Update Employer by Id
+    public Integer updateEmployer( int employerID, int statusOfEmployerID, String employerName, String employerAddressCity, String employerAddressStreet, String employerAddressNumber,
+                                   String employerPostcode, String employerEmail, String contactPersonNameSurname, String contactPersonPosition, String employerPhone, String employerWebsite,
+                                   String employerTwitter, String employerFB, int numberOfEmployeesID, String companySummary, String notes) throws DataAccessException {
+
+        String updateSql = "UPDATE Employer SET StatusOfEmployerID =?, EmployerName = ?, EmployerAddressCity =?, EmployerAddressStreet=?, EmployerAddressNumber=?," +
+                "EmployerPostcode=?, EmployerEmail=?, ContactPersonNameSurname=?, ContactPersonPosition=?, EmployerPhone=?, EmployerWebsite=?, EmployerTwitter=?," +
+                "EmployerFB=?, NumberOfEmployeesID=?,  CompanySummary=?, Notes=? WHERE EmployerID =?";
+
+        return jdbcTemplate().update(updateSql, statusOfEmployerID, employerName, employerAddressCity, employerAddressStreet, employerAddressNumber,
+                employerPostcode, employerEmail, contactPersonNameSurname, contactPersonPosition, employerPhone, employerWebsite, employerTwitter,
+                employerFB, numberOfEmployeesID, companySummary, notes, employerID);
+    }
+
+    // 32. Update new Employer / Cooperation Type Intersection
+    public void updateEmployerCooperationIntersection(int employerID, List<Integer> cooperationTypeID) throws DataAccessException {
+        String deleteSql = String.format("DELETE FROM INT_EmployerCooperationType WHERE EmployerID = '%s'",employerID);
+        jdbcTemplate().update(deleteSql);
+
+        String updateSql = "INSERT INTO INT_EmployerCooperationType(EmployerID, CooperationTypeID) VALUE(?,?)";
+
+        for (Integer cooperationTypeId : cooperationTypeID ){
+            jdbcTemplate().update(updateSql, employerID, cooperationTypeId);
+        }
+    }
+
+    // 33. Update new Employer / Industry Sector
+    public void updateEmployerIndustrySectorIntersection(int employerID, List<Integer> industrySectorID) throws DataAccessException {
+        String deleteSql = String.format("DELETE FROM INT_EmployerIndustrySector WHERE EmployerID = '%s'",employerID);
+        jdbcTemplate().update(deleteSql);
+
+        String updateSql = "INSERT INTO INT_EmployerIndustrySector(EmployerID, IndustrySectorID) VALUES(?,?)";
+
+        for (Integer industrySectorId : industrySectorID) {
+            jdbcTemplate().update(updateSql, employerID, industrySectorId);
+        }
+    }
 
 
+    // 34. Update new Employer / Preference
+    public void updateEmployerPreferencesIntersection(int employerID, List<Integer> preferenceID) throws DataAccessException {
+        String deleteSql = String.format("DELETE FROM INT_EmployerPreference WHERE EmployerID = '%s'",employerID);
+        jdbcTemplate().update(deleteSql);
 
-    ///////////////////////////////////// UPDATE ALL METHODS ///////////////////////////////////////////////
-    //19. Update Employer by Id
-    public Integer updateEmployer(int employerId, int statusOfEmployer, String Name, String AddressCity, String AddressStreet, String AddressNumber,
-                                  String Postcode, String email, String phone, String website, int numberOfEmployees, String companySummary,
-                                  String notes, String DocumentsAndVideos, String Logo, Boolean givesSiteExperience, Boolean givesSiteVisits,
-                                  Boolean givesWorkshops, Boolean givesPresentations, Boolean attendsCareerFairs, Boolean givesWebinars, Boolean worksWithPrimaryPupils,
-                                  Boolean useOfModernForeignLanguage, Boolean runsBusinessInWelsh, Boolean canDeliverToSchoolsInWelsh, Boolean hasApprenticeshipProgramme,
-                                  int schoolPreferences) throws DataAccessException {
+        String updateSql = "INSERT INTO INT_EmployerPreference(EmployerID, PreferenceID) VALUE(?,?)";
 
-        String updateSql = "UPDATE Employer SET StatusOfEmployer =?, Name = ?, AddressCity =?, AddressStreet=?, AddressNumber=?," +
-                "Postcode=?, Email=?, Phone=?, Website=?, NumberOfEmployees=?,  CompanySummary=?, Notes=?, LogoLink=?" +
-                "Logo=?, GivesSiteExperience=?, GivesSiteVisits=?, GivesWorkshops=?, GivesPresentations=?, AttendsCareerFairs=?," +
-                "GivesWebinars=?,  WorksWithPrimaryPupils=?, UseOfModernForeignLanguage=?, RunsBusinessInWelsh=?, CanDeliverToSchoolsInWelsh=?," +
-                "HasApprenticeshipProgramme=?, SchoolPreferences=? WHERE EmployerID =?";
+        for (Integer preferencesId : preferenceID ){
+            jdbcTemplate().update(updateSql, employerID, preferencesId);
+        }
+    }
 
-        return jdbcTemplate().update(updateSql, statusOfEmployer, Name, AddressCity, AddressStreet, AddressNumber,
-                Postcode, email, phone, website, numberOfEmployees, companySummary, notes, DocumentsAndVideos,
-                Logo, givesSiteExperience, givesSiteVisits, givesWorkshops, givesPresentations, attendsCareerFairs,
-                givesWebinars, worksWithPrimaryPupils, useOfModernForeignLanguage, runsBusinessInWelsh, canDeliverToSchoolsInWelsh,
-                hasApprenticeshipProgramme, schoolPreferences, employerId);
+    // 35. Update new Employer / School Preference
+    public void updateSchoolEmployerSchoolPreferencesIntersection(int employerID, List<Integer> schoolID) throws DataAccessException {
+        String deleteSql = String.format("DELETE FROM INT_EmployerSchoolPreference WHERE EmployerID = '%s'",employerID);
+        jdbcTemplate().update(deleteSql);
+
+        String updateSql = "INSERT INTO INT_EmployerSchoolPreference(EmployerID, SchoolID) VALUES(?,?)";
+
+        for (Integer schoolId : schoolID) {
+            jdbcTemplate().update(updateSql, employerID, schoolId);
+        }
+    }
+
+    // 36. Update new Employer / Curriculum Area
+    public void updateEmployerEmployerCurriculumAreaIntersection(int employerID, List<Integer> areaOfCurriculumID) throws DataAccessException {
+        String deleteSql = String.format("DELETE FROM INT_EmployerSupportOfAreaOfCurriculum WHERE EmployerID = '%s'",employerID);
+        jdbcTemplate().update(deleteSql);
+
+        String updateSql = "INSERT INTO INT_EmployerSupportOfAreaOfCurriculum(EmployerID, AreaOfCurriculumID) VALUE(?,?)";
+
+        for (Integer areaOfCurriculumId : areaOfCurriculumID ){
+            jdbcTemplate().update(updateSql, employerID, areaOfCurriculumId);
+        }
+    }
+
+    // 37. Update new Employer / Language
+    public void updateSchoolEmployerLanguageIntersection(int employerID, List<Integer> languageID) throws DataAccessException {
+        String deleteSql = String.format("DELETE FROM INT_LanguageUsedByEmployer WHERE EmployerID = '%s'",employerID);
+        jdbcTemplate().update(deleteSql);
+
+        String updateSql = "INSERT INTO INT_LanguageUsedByEmployer(EmployerID, LanguageID) VALUES(?,?)";
+
+        for (Integer languageId : languageID) {
+            jdbcTemplate().update(updateSql, employerID, languageId);
+        }
+    }
+
+    // 38. Update new Employer / Local Authorities
+    public void updateSchoolEmployerLocalAuthoritiesIntersection(int employerID, List<Integer> localAuthorityID) throws DataAccessException {
+        String deleteSql = String.format("DELETE FROM INT_LocalAuthorityEmployerCanWorkWith WHERE EmployerID = '%s'",employerID);
+        jdbcTemplate().update(deleteSql);
+
+        String updateSql = "INSERT INTO INT_LocalAuthorityEmployerCanWorkWith(EmployerID, LocalAuthorityID) VALUES(?,?)";
+
+        for (Integer localAuthoritiesId : localAuthorityID) {
+            jdbcTemplate().update(updateSql, employerID, localAuthoritiesId);
+        }
+    }
+
+    // 38. Update new Employer /  Alumni Intersection
+    public void updateEmployerAlumniIntersection(int employerID, List<Integer> alumniID) throws DataAccessException {
+//            String deleteSql = String.format("DELETE FROM INT_AlumniWorkingForEmployer WHERE EmployerID = \"%s\"",EmployerID);
+//            jdbcTemplate().update(deleteSql);
+
+//        String updateSql = "INSERT INTO INT_AlumniWorkingForEmployer(AlumniID, EmployerID) VALUES(?,?)";
+        for (int i = 0; i < alumniID.size(); i++) {
+            String updateSql = String.format("INSERT INTO INT_AlumniWorkingForEmployer(AlumniID,EmployerID) VALUES(\"%s\",\"%s\")", alumniID.get(i),employerID);
+            System.out.println("AlumniID: " + alumniID.get(i) + "EmployerID: " + employerID);
+//            jdbcTemplate().update(updateSql,AlumniID.get(i),EmployerID);
+            jdbcTemplate().update(updateSql);
+        }
+    }
+
+    // 38. Update Alumni
+    public void updateAlumni(List<String> alumniName, List<Integer> schoolID, List<Integer> alumniID) throws DataAccessException {
+
+//        for(int i = 0; i < AlumniID.size(); i++) {
+//            String deleteSql = String.format("DELETE FROM Alumni WHERE AlumniID = '%s'", AlumniID.get(i));
+//            jdbcTemplate().update(deleteSql);
+//        }
+        System.out.println("entrei no updateAlumni");
+        System.out.println("alumniName: " + alumniName + " schooldID: " + schoolID + " AlumniID: " + alumniID);
+        for(int i = 0; i < alumniID.size(); i++){
+            System.out.println("AlumniName: "+alumniName.get(i) + " SchoolID: " + schoolID.get(i));
+            String updateSql = "UPDATE Alumni SET AlumniNameAndSurname = ?, AlumniSchoolID = ? WHERE AlumniID=?";
+            jdbcTemplate().update(updateSql, alumniName.get(i), schoolID.get(i),alumniID.get(i));
+        }
     }
 
 
     ///////////////////////////////////// DELETE ALL METHODS ///////////////////////////////////////////////
-    //20. DELETE EMPLOYER by Id
+    //39. DELETE EMPLOYER by Id
     public Integer deleteEmployer(int employerId) throws DataAccessException {
         String deleteSql = String.format("DELETE FROM Employer WHERE EmployerID = '%s'",employerId);
+        return jdbcTemplate().update(deleteSql);
+    }
+
+    public Integer deleteAlumni(int alumniID) throws DataAccessException {
+        String deleteSql = String.format("DELETE FROM Alumni WHERE AlumniID = '%s'",alumniID);
         return jdbcTemplate().update(deleteSql);
     }
 

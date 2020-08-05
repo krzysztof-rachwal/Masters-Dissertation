@@ -101,12 +101,12 @@ public class SchoolQueries extends DBQueries {
     }
 
     // 5. Get All School Names and Ids
-    public List<School> getAllSchoolNamesAttendingEvent(List<School> schools) throws DataAccessException {
+    public List<School> getAllSchoolNamesAttendingEvent(List<Integer> schools) throws DataAccessException {
 
         List<School> list = new ArrayList<School>();
 
-        for (School school : schools) {
-            String getQuery = String.format("SELECT SchoolName FROM School WHERE SchoolID = \"%s\"", school.getSchoolID());
+        for (Integer schoolID : schools) {
+            String getQuery = String.format("SELECT SchoolName FROM School WHERE SchoolID = \"%s\"", schoolID);
 
 
             School schoolName = null;
@@ -153,7 +153,7 @@ public class SchoolQueries extends DBQueries {
                                 Boolean AddressNumber, String Email, String Phone) throws DataAccessException {
 
         String updateSql = "UPDATE School SET Name =?, AddressCity = ?, AddressStreet =?, AddressNumber=?," +
-                           "AddressNumber=?, Email=?, Phone=?  WHERE SchoolID =?";
+                "AddressNumber=?, Email=?, Phone=?  WHERE SchoolID =?";
 
         return jdbcTemplate().update(updateSql, Name, AddressCity, AddressStreet, AddressNumber, Email, Phone, SchoolID);
     }
