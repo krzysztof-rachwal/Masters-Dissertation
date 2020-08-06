@@ -522,6 +522,7 @@ public class EmployerQueries extends DBQueries {
         String getQuery = String.format("SELECT EmployerID FROM INT_AttendingEmployerOnEvent WHERE EventID = \"%s\";", eventId);
 
         List<Integer> list = new ArrayList<>();
+        Employer employer = null;
         ResultSet rs = null;
         try {
             connection = ConnectionFactory.getConnection();
@@ -661,8 +662,8 @@ public class EmployerQueries extends DBQueries {
                                String employerAddressCity, String employerAddressStreet,
                                String employerAddressNumber, String employerPostcode,
                                String employerEmail, String contactPersonNameSurname, String contactPersonPosition, String employerPhone,
-                               String employerTwitter, String employerFB, String employerWebsite, int numberOfEmployeesID, String companySummary,
-                               String notes) throws DataAccessException {
+                             String employerTwitter, String employerFB, String employerWebsite, int numberOfEmployeesID, String companySummary,
+                             String notes) throws DataAccessException {
 
         String insertSql = "INSERT INTO Employer(StatusOfEmployerID, EmployerName, EmployerAddressCity, EmployerAddressStreet, EmployerAddressNumber, EmployerPostcode," +
                 " EmployerEmail,ContactPersonNameSurname,ContactPersonPosition, EmployerPhone, EmployerWebsite, EmployerTwitter, EmployerFB, NumberOfEmployeesID," +
@@ -768,8 +769,8 @@ public class EmployerQueries extends DBQueries {
 
     //31. Update Employer by Id
     public Integer updateEmployer( int employerID, int statusOfEmployerID, String employerName, String employerAddressCity, String employerAddressStreet, String employerAddressNumber,
-                                   String employerPostcode, String employerEmail, String contactPersonNameSurname, String contactPersonPosition, String employerPhone, String employerWebsite,
-                                   String employerTwitter, String employerFB, int numberOfEmployeesID, String companySummary, String notes) throws DataAccessException {
+                                  String employerPostcode, String employerEmail, String contactPersonNameSurname, String contactPersonPosition, String employerPhone, String employerWebsite,
+                                  String employerTwitter, String employerFB, int numberOfEmployeesID, String companySummary, String notes) throws DataAccessException {
 
         String updateSql = "UPDATE Employer SET StatusOfEmployerID =?, EmployerName = ?, EmployerAddressCity =?, EmployerAddressStreet=?, EmployerAddressNumber=?," +
                 "EmployerPostcode=?, EmployerEmail=?, ContactPersonNameSurname=?, ContactPersonPosition=?, EmployerPhone=?, EmployerWebsite=?, EmployerTwitter=?," +

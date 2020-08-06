@@ -51,7 +51,7 @@ public class Employer {
     private int EmployerAlumniID;
     private String EmployerAlumniName;
     private int EmployerAlumniSchoolID;
-
+    private String EmployerAlumniSchoolName;
 
     public Employer() {
     }

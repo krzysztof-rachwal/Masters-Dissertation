@@ -172,38 +172,38 @@ function deleteEmployer(employerId) {
 }
 
 
-//4. Delete Alumni
+    //4. Delete Alumni
 
-function deleteAlumni(alumniID) {
-    let baseUri = "/api/delete/employer/alumni";
-    let alumniId_url = "alumniID=" + alumniID.val();
-    let fullUri = baseUri + "?" + alumniId_url;
+    function deleteAlumni(alumniID) {
+        let baseUri = "/api/delete/employer/alumni";
+        let alumniId_url = "alumniID=" + alumniID.val();
+        let fullUri = baseUri + "?" + alumniId_url;
 
-    let token = $("meta[name='_csrf']").attr("content");    // Used to bypass Spring Boot's CSRF protocol     -- Solution taken from 'https://stackoverflow.com/questions/34747437/use-of-spring-csrf-with-ajax-rest-call-and-html-page-with-thymeleaf' on Nov 26th 2019
-    let header = $("meta[name='_csrf_header']").attr("content");    // Used to bypass Spring Boot's CSRF protocol
+        let token = $("meta[name='_csrf']").attr("content");    // Used to bypass Spring Boot's CSRF protocol     -- Solution taken from 'https://stackoverflow.com/questions/34747437/use-of-spring-csrf-with-ajax-rest-call-and-html-page-with-thymeleaf' on Nov 26th 2019
+        let header = $("meta[name='_csrf_header']").attr("content");    // Used to bypass Spring Boot's CSRF protocol
 
 
-    $.ajax({
-        type: "DELETE", url: fullUri,
-        beforeSend: function (xhr) {
-            xhr.setRequestHeader(header, token);
-        },
-        success: function (data) {
-            if (data === true) {
-                // location.reload();
-                // alumniID.closest(".alumniInfo").load();
-                // alumniInfo
-                alumniID.parent().parent().remove();;
-            } else {
-                alert("There was an error, please try again.")
-                alert(data.responseText)
-                alert(data)
+        $.ajax({
+            type: "DELETE", url: fullUri,
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader(header, token);
+            },
+            success: function (data) {
+                if (data === true) {
+                    // location.reload();
+                    // alumniID.closest(".alumniInfo").load();
+                    // alumniInfo
+                    alumniID.parent().parent().remove();;
+                } else {
+                    alert("There was an error, please try again.")
+                    alert(data.responseText)
+                    alert(data)
+                }
+            },
+            error: function (data) {
+                alert("FAIL");
+                alert(data.responseText);
             }
-        },
-        error: function (data) {
-            alert("FAIL");
-            alert(data.responseText);
-        }
 
-    });
+        });
 }

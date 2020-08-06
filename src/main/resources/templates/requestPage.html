@@ -80,11 +80,9 @@
                         <div class="col-md-7">
                             <div class="form-group mb-0">
                                 <div class="row d-inline">
-                                    <label for="event_type" class="d-block">Event Type</label>
-                                    <select id="event_type" name="event_type" class="selectpicker d-block form-control">
-                                        <option value="type1">type1</option>
-                                        <option value="type2">type2</option>
-                                        <option value="type3">type3</option>
+                                    <label for="event-type" class="d-block">Event Type</label>
+                                    <select class="selectpicker" data-width="80%" data-live-search="true" id="event-type">
+                                        <option th:each="event : ${allEventTypes}" th:value="${event.getTypeOfEventID()}" th:text="${event.getTypeOfEventName()}"></option>
                                     </select>
                                 </div>
                             </div>
@@ -153,11 +151,9 @@
                         <div class="col-md-7">
                             <div class="form-group mb-0">
                                 <div class="row d-inline">
-                                    <label for="event_type" class="d-block">Event Type</label>
-                                    <select id="event_type_sector" name="event_type" class="selectpicker d-block form-control">
-                                        <option value="type1">type1</option>
-                                        <option value="type2">type2</option>
-                                        <option value="type3">type3</option>
+                                    <label for="event-type2" class="d-block">Event Type</label>
+                                    <select class="selectpicker" data-width="80%" data-live-search="true" id="event-type2">
+                                        <option th:each="event : ${allEventTypes}" th:value="${event.getTypeOfEventID()}" th:text="${event.getTypeOfEventName()}"></option>
                                     </select>
                                 </div>
                             </div>
@@ -224,11 +220,9 @@
                         <div class="col-md-7">
                             <div class="form-group mb-0">
                                 <div class="row d-inline">
-                                    <label for="event_type" class="d-block">Event Type</label>
-                                    <select id="event_type_lang" name="event_type" class="selectpicker d-block form-control">
-                                        <option value="type1">type1</option>
-                                        <option value="type2">type2</option>
-                                        <option value="type3">type3</option>
+                                    <label for="event-type3" class="d-block">Event Type</label>
+                                    <select class="selectpicker" data-width="80%" data-live-search="true" id="event-type3">
+                                        <option th:each="event : ${allEventTypes}" th:value="${event.getTypeOfEventID()}" th:text="${event.getTypeOfEventName()}"></option>
                                     </select>
                                 </div>
                             </div>
@@ -278,15 +272,9 @@
 <script type="text/javascript" src="https://careerswales.gov.wales/styleguide/assets/js/gel-elements.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
-<script type="text/javascript" src="https://careerswales.gov.wales/styleguide/assets/js/gel-elements-loader.js"></script>
-<script type="text/javascript" src="https://careerswales.gov.wales/styleguide/assets/js/gel-elements.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
 
 <script>
-    $('select').selectpicker();
+    $('selectpicker').selectpicker();
 </script>
 </body>
 </html>
