@@ -2,77 +2,100 @@ package ebe.DBClasses;
 
 public class School {
 
-    private int schoolID;
-    private String schoolName;
-    private String description;
-    private String locationCity;
-    private String locationStreet;
-    private String locationNumber;
-    private String locationPostcode;
+    private int SchoolID;
+    private String SchoolName;
+    private String SchoolAddressCity;
+    private String SchoolAddressStreet;
+    private String SchoolAddressNumber;
+    private String SchoolPostCode;
+    private String SchoolEmail;
+    private String SchoolPhone;
 
-    public School(int schoolID, String schoolName, String description, String locationCity, String locationStreet, String locationNumber, String locationPostcode) {
-        this.schoolID = schoolID;
-        this.schoolName = schoolName;
-        this.description = description;
-        this.locationCity = locationCity;
-        this.locationStreet = locationStreet;
-        this.locationNumber = locationNumber;
-        this.locationPostcode = locationPostcode;
+    public School() {
+    }
+
+    public School(int schoolID, String schoolName, String schoolAddressCity, String schoolAddressStreet, String schoolAddressNumber, String schoolPostCode, String schoolEmail, String schoolPhone) {
+        SchoolID = schoolID;
+        SchoolName = schoolName;
+        SchoolAddressCity = schoolAddressCity;
+        SchoolAddressStreet = schoolAddressStreet;
+        SchoolAddressNumber = schoolAddressNumber;
+        SchoolPostCode = schoolPostCode;
+        SchoolEmail = schoolEmail;
+        SchoolPhone = schoolPhone;
+    }
+
+    public School(String schoolName, String schoolAddressCity, String schoolAddressStreet, String schoolAddressNumber, String schoolPostCode, String schoolEmail, String schoolPhone) {
+        SchoolName = schoolName;
+        SchoolAddressCity = schoolAddressCity;
+        SchoolAddressStreet = schoolAddressStreet;
+        SchoolAddressNumber = schoolAddressNumber;
+        SchoolPostCode = schoolPostCode;
+        SchoolEmail = schoolEmail;
+        SchoolPhone = schoolPhone;
     }
 
     public int getSchoolID() {
-        return schoolID;
+        return SchoolID;
     }
 
     public void setSchoolID(int schoolID) {
-        this.schoolID = schoolID;
+        SchoolID = schoolID;
     }
 
     public String getSchoolName() {
-        return schoolName;
+        return SchoolName;
     }
 
     public void setSchoolName(String schoolName) {
-        this.schoolName = schoolName;
+        SchoolName = schoolName;
     }
 
-    public String getDescription() {
-        return description;
+    public String getSchoolAddressCity() {
+        return SchoolAddressCity;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setSchoolAddressCity(String schoolAddressCity) {
+        SchoolAddressCity = schoolAddressCity;
     }
 
-    public String getLocationCity() {
-        return locationCity;
+    public String getSchoolAddressStreet() {
+        return SchoolAddressStreet;
     }
 
-    public void setLocationCity(String locationCity) {
-        this.locationCity = locationCity;
+    public void setSchoolAddressStreet(String schoolAddressStreet) {
+        SchoolAddressStreet = schoolAddressStreet;
     }
 
-    public String getLocationStreet() {
-        return locationStreet;
+    public String getSchoolAddressNumber() {
+        return SchoolAddressNumber;
     }
 
-    public void setLocationStreet(String locationStreet) {
-        this.locationStreet = locationStreet;
+    public void setSchoolAddressNumber(String schoolAddressNumber) {
+        SchoolAddressNumber = schoolAddressNumber;
     }
 
-    public String getLocationNumber() {
-        return locationNumber;
+    public String getSchoolPostCode() {
+        return SchoolPostCode;
     }
 
-    public void setLocationNumber(String locationNumber) {
-        this.locationNumber = locationNumber;
+    public void setSchoolPostCode(String schoolPostCode) {
+        SchoolPostCode = schoolPostCode;
     }
 
-    public String getLocationPostcode() {
-        return locationPostcode;
+    public String getSchoolEmail() {
+        return SchoolEmail;
     }
 
-    public void setLocationPostcode(String locationPostcode) {
-        this.locationPostcode = locationPostcode;
+    public void setSchoolEmail(String schoolEmail) {
+        SchoolEmail = schoolEmail;
+    }
+
+    public String getSchoolPhone() {
+        return SchoolPhone;
+    }
+
+    public void setSchoolPhone(String schoolPhone) {
+        SchoolPhone = schoolPhone;
     }
 }

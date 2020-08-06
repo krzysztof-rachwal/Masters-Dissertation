@@ -16,30 +16,68 @@
     <link th:href="@{../css/ebe_style.css}" href="../css/ebe_style.css" rel="stylesheet" />
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
-    <title>Contact Us</title>
+    <title>Get in Touch</title>
 </head>
 
 <body>
 
-<header th:replace="fragments/headerTemplate :: header">
-</header>
+<header th:replace="fragments/headerTemplate :: header"></header>
 
-<!--MAIN CONTENT-->
 <div class="gel-content-container">
-    <h1>Contact Us</h1>
+    <div class="container mt-5">
+        <h2 class="title-h2">Get in Touch</h2>
+    </div>
+
     <form>
-        <label for="name">Name*:</label><br>
-        <input type="text" id="name" name="name"><br><br>
-        <label for="email">Email*:</label><br>
-        <input type="text" id="email" name="email"><br><br>
-        <label for="subject">Subject*:</label><br>
-        <input type="text" id="subject" name="subject"><br><br>
-        <label for="message">Message*:</label><br>
-        <textarea id="message" name="message" rows="10" cols="30"></textarea><br><br>
-        <input class="button" type="submit" value="Submit">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="form-group">
+                        <label for="name">Name*</label>
+                        <input type="text" id="name" class="form-control input-border" name="name">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="form-group">
+                        <label for="email">Email*</label>
+                        <input type="text" id="email" class="form-control input-border" name="email">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="form-group">
+                        <label for="postCode">Post Code*</label>
+                        <input type="text" id="postCode" class="form-control input-border" name="postCode">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="form-group">
+                        <label for="subject">Subject*</label>
+                        <input type="text" id="subject" class="form-control input-border" name="subject">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="form-group">
+                        <label for="message">Message*</label><br>
+                        <textarea id="message" name="message" class="form-control input-border" rows="10" cols="30"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container mb-4 mt-5 text-center">
+            <button type="button" class="button--secondary text-center">Submit</button>
+        </div>
     </form>
 </div>
-<!--END OF MAIN CONTENT-->
+
 <footer th:replace="fragments/footerTemplate :: footer"></footer>
 
 <script type="text/javascript" src="https://careerswales.gov.wales/styleguide//assets/js/jquery-3.0.0.min.js"></script>

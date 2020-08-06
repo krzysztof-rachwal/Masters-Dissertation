@@ -13,348 +13,205 @@
     <link rel="stylesheet" media="all" href="https://careerswales.gov.wales/sites/default/files/css/css_yFFWPpQsZCFeHMtvOieuCWLiTEiz--tT0otLunNJdLs.css"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css"/>
+
     <link th:href="@{../css/ebe_style.css}" href="../css/ebe_style.css" rel="stylesheet" />
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
-    <title>Add employer</title>
-
+    <title>Add Employer</title>
 </head>
 
 <header th:replace="fragments/headerTemplate :: header">
 </header>
 
-    <div class="gel-content-container">
-        <div class="container my-4">
-            <h2>Add Employer</h2>
-        </div>
-        <form>
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="container my-3 p-0">
-                        <h4>Personal Info</h4>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="company-name">Company name</label>
-                            <input type="text" class="form-control input-border" id="company-name">
-                        </div>
-                        <div class="form-group">
-                            <label for="company-summary">Company summary</label>
-                            <input type="text" class="form-control input-border mt-2" id="company-summary">
-                        </div>
-                        <div class="form-group mt-3">
-                            <label for="no-employees" class="mt-0">No of Employees</label>
-                            <input type="text" class="form-control input-border" id="no-employees">
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <label>Address</label>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <input type="text" id="street" class="form-control border-right input-sm" placeholder="Street">
-                                <input type="text" id="buildingNo" class="form-control" placeholder="Building No">
-                            </div>
-                            <div class="input-group-prepend mt-1">
-                                <input type="text" id="PostCode" class="form-control border-right" placeholder="Post Code">
-                                <input type="text"  id="city" class="form-control" placeholder="City">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="container my-3 p-0">
-                        <h4>Contact Info</h4>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="contact-name">Contact Name</label>
-                            <input type="text" class="form-control input-border" id="contact-name">
-                        </div>
-                        <div class="form-group">
-                            <label for="tel-num">Telephone number</label>
-                            <input type="text" class="form-control input-border" id="tel-num">
-                        </div>
-                        <div class="form-group">
-                            <label for="mob-num">Mobile number</label>
-                            <input type="text" class="form-control input-border" id="mob-num">
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="twitter">Twitter</label>
-                            <input type="text" class="form-control input-border" id="twitter">
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="text" class="form-control input-border" id="email">
-                        </div>
-                        <div class="form-group">
-                            <label for="website">Website</label>
-                            <input type="text" class="form-control input-border" id="website">
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="container my-3 p-0">
-                        <h4>Other</h4>
-                    </div>
-                    <div class="col-md-4 ">
-                        <span class="h6">Sector Areas</span>
-                        <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="it">
-                            <label class="form-check-label" for="it">IT</label>
-                        </div>
-                        <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="social-care">
-                            <label class="form-check-label" for="social-care">Social Care</label>
-                        </div>
-                        <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="ngo">
-                            <label class="form-check-label" for="ngo">NGO</label>
-                        </div>
-                        <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="tourism">
-                            <label class="form-check-label" for="tourism">Tourism</label>
-                        </div>
-                        <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="media">
-                            <label class="form-check-label" for="media">Media</label>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <span class="h6">Cooperation Type</span>
-                        <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="work-ex">
-                            <label class="form-check-label" for="work-ex">Work Experience</label>
-                        </div>
-                        <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="site-visits">
-                            <label class="form-check-label" for="site-visits">Site visits</label>
-                        </div>
-                        <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="workshops">
-                            <label class="form-check-label" for="workshops">Workshops</label>
-                        </div>
-                        <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="career">
-                            <label class="form-check-label" for="career">Career Fairs</label>
-                        </div>
-                        <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="webinars">
-                            <label class="form-check-label" for="webinars">Webinars</label>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <span class="h6">Curriculum Areas</span>
-                        <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="science">
-                            <label class="form-check-label" for="science">Science And Technology</label>
-                        </div>
-                        <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="health">
-                            <label class="form-check-label" for="health">Health And Wellbeing</label>
-                        </div>
-                        <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="humanities">
-                            <label class="form-check-label" for="humanities">Humanities</label>
-                        </div>
-                        <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="language">
-                            <label class="form-check-label" for="language">Language Literacy And Communication</label>
-                        </div>
-                        <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="maths">
-                            <label class="form-check-label" for="maths">Mathematics And Numeracy</label>
-                        </div>
-                        <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="expressive">
-                            <label class="form-check-label" for="expressive">Expressive Arts</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-8 my-4">
-                        <div class="form-group">
-                            <label for="schools" class="mt-3">School Preferences</label>
-                            <select class="custom-select p-2 mb-3" id="schools">
-                                <option selected>Select</option>
-                                <option value="school">Schoool</option>
-                                <option value="school">Schoool</option>
-                                <option value="school">Schoool</option>
-                                <option value="school">Schoool</option>
-                                <option value="school">Schoool</option>
-                                <option value="school">Schoool</option>
-                                <option value="school">Schoool</option>
-                                <option value="school">Schoool</option>
-                                <option value="school">Schoool</option>
-                                <option value="school">Schoool</option>
-                                <option value="school">Schoool</option>
-                                <option value="school">Schoool</option>
-                                <option value="school">Schoool</option>
-                            </select>
-                        </div>
-                        <span class="h6 mt-3">Preferences</span>
-                        <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="primary-school">
-                            <label class="form-check-label" for="primary-school">Wants to work with primary schools</label>
-                        </div>
-                        <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="apprenticeship">
-                            <label class="form-check-label" for="apprenticeship">Has apprenticeship program</label>
-                        </div>
-                        <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="welsh">
-                            <label class="form-check-label" for="welsh">Works in Welsh</label>
-                        </div>
-                        <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="foreign">
-                            <label class="form-check-label" for="foreign">Works in Foreign Language</label>
-                        </div>
-                        <div class="form-group col-md">
-                            <label for="lang">If yes, what languages?</label>
-                            <input type="text" class="form-control input-border" id="lang">
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md my-3">
-                        <span class="h6">Local Authorities</span>
-                        <div class="row">
-                            <div class="col-md-3">
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="caerphilly">
-                                    <label class="form-check-label" for="caerphilly">Caerphilly</label>
-                                </div>
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="cere">
-                                    <label class="form-check-label" for="cere">Ceredigion</label>
-                                </div>
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="Flintshire">
-                                    <label class="form-check-label" for="Flintshire">Flintshire</label>
-                                </div>
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="Merthyr">
-                                    <label class="form-check-label" for="cere">Merthyr Tydfil</label>
-                                </div>
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="newport">
-                                    <label class="form-check-label" for="cere">Newport</label>
-                                </div>
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="rhonnda">
-                                    <label class="form-check-label" for="rhonnda">Rhondda Cynon Taf</label>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="Isle">
-                                    <label class="form-check-label" for="Isle">Isle of Anglesey</label>
-                                </div>
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="Neath">
-                                    <label class="form-check-label" for="Neath">Neath Port Talbot</label>
-                                </div>
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="Powys">
-                                    <label class="form-check-label" for="Powys">Powys</label>
-                                </div>
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="Torfaen">
-                                    <label class="form-check-label" for="Torfaen">Torfaen</label>
-                                </div>
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="Blaenau">
-                                    <label class="form-check-label" for="Blaenau">Blaenau</label>
-                                </div>
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="cardiff">
-                                    <label class="form-check-label" for="cardiff">Cardiff</label>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="swansea">
-                                    <label class="form-check-label" for="swansea">Swansea</label>
-                                </div>
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="wrexham">
-                                    <label class="form-check-label" for="wrexham">Wrexham</label>
-                                </div>
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="vale">
-                                    <label class="form-check-label" for="vale">Vale of Glamorgan</label>
-                                </div>
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="bridgend">
-                                    <label class="form-check-label" for="bridgend">Bridgend</label>
-                                </div>
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="carmathenshire">
-                                    <label class="form-check-label" for="carmathenshire">Carmathenshire</label>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="Monmountshire">
-                                    <label class="form-check-label" for="Monmountshire">Monmountshire</label>
-                                </div>
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="gwynedd">
-                                    <label class="form-check-label" for="gwynedd">Gwynedd</label>
-                                </div>
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="conwy">
-                                    <label class="form-check-label" for="conwy">Conwy</label>
-                                </div>
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="Denbigshire">
-                                    <label class="form-check-label" for="Denbigshire">Denbigshire</label>
-                                </div>
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="pembrokeshire">
-                                    <label class="form-check-label" for="pembrokeshire">pembrokeshire</label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="container my-4 text-center">
-                <button type="button" class="button--secondary text-center">Add Employer</button>
-            </div>
-        </form>
+<div class="gel-content-container">
+    <div class="container my-4">
+        <h2>Add Employer</h2>
     </div>
-    <footer th:replace="fragments/footerTemplate :: footer"></footer>
+    <form>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="container my-3 p-0">
+                    <h4>Personal Info</h4>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="company-name">Company name</label>
+                        <input type="text" class="form-control input-border" id="company-name">
+                    </div>
+                    <div class="form-group">
+                        <label for="company-summary">Company summary</label>
+                        <textarea class="input-border"  rows="3" id="company-summary"></textarea>
+                    </div>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-            crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-            crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
-            integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
-            crossorigin="anonymous"></script>
-    <script type="text/javascript" src="https://careerswales.gov.wales/styleguide/assets/js/gel-styleguide.js"></script>
-    <script type="text/javascript"
-            src="https://careerswales.gov.wales/styleguide/assets/js/gel-elements-loader.js"></script>
-    <script type="text/javascript" src="https://careerswales.gov.wales/styleguide/assets/js/gel-elements.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="employer-employees-number">Number of Employees</label><br>
+                        <select id="employer-employees-number">
+                            <option  th:each="employerNumberEmployees : ${allEmployerNumberOfEmployees}" th:value="${employerNumberEmployees.getNumberOfEmployeesID()}" th:text="${employerNumberEmployees.getNumberOfEmployeesName()}"></option>
+                        </select>
+                    </div>
+                    <label>Address</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <input type="text" id="employer-street" class="form-control border-right input-sm" placeholder="Street">
+                            <input type="text" id="employer-number" class="form-control" placeholder="Building No">
+                        </div>
+                        <div class="input-group-prepend mt-1">
+                            <input type="text" id="employer-postcode" class="form-control border-right" placeholder="Post Code">
+                            <input type="text" id="employer-city" class="form-control" placeholder="City">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="container my-3 p-0">
+                    <h4>Contact Info</h4>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="contact-name">Contact Name</label>
+                        <input type="text" class="form-control input-border" id="contact-name">
+                    </div>
+                    <div class="form-group">
+                        <label for="contact-position">Contact Position</label>
+                        <input type="text" class="form-control input-border" id="contact-position">
+                    </div>
+                    <div class="form-group">
+                        <label for="employer-phone">Phone number</label>
+                        <input type="text" class="form-control input-border" id="employer-phone">
+                    </div>
+<!--                    <div class="form-group">-->
+<!--                        <label for="mob-num">Mobile number</label>-->
+<!--                        <input type="text" class="form-control input-border" id="employer-mobile">-->
+<!--                    </div>-->
+                    <div class="form-group">
+                        <label for="employer-email">Email</label>
+                        <input type="text" class="form-control input-border" id="employer-email">
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="employer-twitter">Twitter</label>
+                        <input type="text" class="form-control input-border" id="employer-twitter">
+                    </div>
+                    <div class="form-group">
+                        <label for="employer-facebook">Facebook</label>
+                        <input type="text" class="form-control input-border" id="employer-facebook">
+                    </div>
+                    <div class="form-group">
+                        <label for="employer-website">Website</label>
+                        <input type="text" class="form-control input-border" id="employer-website">
+                    </div>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="container my-3 p-0">
+                    <h4>Other</h4>
+                </div>
+                <div class="col-md-6">
+                    <label for="industry-sector">Sector Areas</label><br>
+                    <select id="industry-sector"  data-width="80%" class="selectpicker" multiple data-live-search="true">
+                        <option th:each="employerIndustrySector : ${allEmployerIndustrySectors}" th:value="${employerIndustrySector.getEmployerIndustrySectorID()}" th:text="${employerIndustrySector.getEmployerIndustrySectorName()}"></option>
+                    </select>
+                </div>
+
+                <div class="col-md-6 mb-4">
+                    <label for="employer-cooperation-type">Cooperation Type</label><br>
+                    <select id="employer-cooperation-type" data-width="80%"   class="selectpicker" multiple data-live-search="true">
+                        <option  th:each="employerCooperationType : ${allEmployerCooperationType}" th:value="${employerCooperationType.getEmployerCooperationTypeID()}" th:text="${employerCooperationType.getEmployerCooperationTypeName()}"></option>
+                    </select>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <label for="curriculum-area">Curriculum Areas</label><br>
+                    <select id="curriculum-area" data-width="80%" class="selectpicker" multiple data-live-search="true">
+                        <option th:each="employerCurriculumAreas : ${allEmployerCurriculumAreas}" th:value="${employerCurriculumAreas.getEmployerAreaOfCurriculumID()}" th:text="${employerCurriculumAreas.getEmployAreaOfCurriculumName()}"></option>
+                    </select>
+                </div>
+
+                <div class="col-md-6 mb-4">
+                    <label for="schools-attending">Schools Preferences</label><br>
+                    <select class="selectpicker"  data-width="80%" multiple data-live-search="true" id="schools-attending">
+                        <option  th:each="school : ${allSchoolNamesAndIds}" th:value="${school.getSchoolID()}" th:text="${school.getSchoolName()}"></option>
+                    </select>
+                </div>
+
+                <div class="col-md-6 mb-4">
+                    <label for="employer-preferences">Preferences</label><br>
+                    <select class="selectpicker"  data-width="80%" multiple data-live-search="true" id="employer-preferences">
+                        <option  th:each="employerPreferences : ${allEmployerPreferences}" th:value="${employerPreferences.getEmployerPreferencesID()}" th:text="${employerPreferences.getEmployerPreferencesName()}"></option>
+                    </select>
+                </div>
+                <div class="col-md-6 mb-4 d-none" id="div-foreign-language">
+                    <label for="employer-language">Which Foreign Language?</label><br>
+                    <select class="selectpicker" data-width="80%" multiple id="employer-language">
+                        <option  th:each="employerLanguage : ${allEmployerLanguage}" th:value="${employerLanguage.getEmployerLanguageID()}" th:text="${employerLanguage.getEmployerLanguageName()}"></option>
+                    </select>
+                </div>
+
+                <div class="col-md-6 mb-4" >
+                    <label for="employer-notes">Notes</label>
+                    <input type="text" class="form-control input-border" id="employer-notes">
+                </div>
+
+                <div class="col-md-6 mb-4" >
+                    <label for="employer-status">Employer Status</label>
+                    <select class="selectpicker" data-width="80%" id="employer-status">
+                        <option  th:each="employerStatus : ${allEmployerStatus}" th:value="${employerStatus.getStatusOfEmployerID()}" th:text="${employerStatus.getStatusOfEmployerName()}"></option>
+                    </select>
+                </div>
+
+                <div class="col-md-12 my-4">
+                    <label for="local-authorities">Local Authorities</label><br>
+                    <select class="selectpicker" data-width="90%" multiple data-live-search="true" id="local-authorities">
+                        <option  th:each="employerLocalAuthority : ${allEmployerLocalAuthorities}" th:value="${employerLocalAuthority.getEmployerLocalAuthorityID()}"  th:text="${employerLocalAuthority.getEmployerLocalAuthorityName()}"></option>
+                    </select>
+                </div>
+            </div>
+
+        <div class="container my-4 text-center">
+            <button type="button" class="button--secondary text-center" onclick="createNewEmployer()">Add Employer</button>
+        </div>
+    </form>
+</div>
+
+<footer th:replace="fragments/footerTemplate :: footer"></footer>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://careerswales.gov.wales/styleguide/assets/js/gel-styleguide.js"></script>
+<script type="text/javascript" src="https://careerswales.gov.wales/styleguide/assets/js/gel-elements-loader.js"></script>
+<script type="text/javascript" src="https://careerswales.gov.wales/styleguide/assets/js/gel-elements.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+
+<script th:src="@{../js/employer.js}" src="../js/employer.js"></script>
+<script>
+    $('.selectpicker').selectpicker();
 
 
-    <script>
-        $(document).ready(function () {
+    $( document ).ready(function() {
+        //Show/Hide the foreign language option
 
+
+        $('select[id=employer-preferences]').change(function(){
+            if($('select[id=employer-preferences]').val()!=undefined){
+                if($('select[id=employer-preferences]').val().includes("5")){
+                    $('div[id=div-foreign-language]').removeClass('d-none')
+                }else{
+                    $('div[id=div-foreign-language]').addClass('d-none')
+                }
+            }
         });
 
-    </script>
-    <script>
-        $(document).ready(function () {
-            $('.js-example-basic-multiple').select2();
-        });
-        s
-    </script>
+    });
 
-    </body>
+</script>
+
+</body>
 </html>
