@@ -353,9 +353,15 @@ public class BaseController {
     @GetMapping("/request")
     public ModelAndView Request(HttpSession session) {
         ModelAndView mv = new ModelAndView();
+        mv.setViewName("requestPage");
+
         ObjectMapper objectMapper = new ObjectMapper();
         // session = context.getSession();
-        mv.setViewName("requestPage");
+
+        List<Event> eventsAllTypes;
+        eventsAllTypes = EventQrys.getAllTypesOfEvents();
+
+        mv.addObject("allEventTypes",eventsAllTypes);
         return mv;
     }
 
