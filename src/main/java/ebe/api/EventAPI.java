@@ -29,7 +29,7 @@ public class EventAPI {
     ///////////////////////    CREATE     ////////////////////////////////
     //1. Create Events
     @RequestMapping(value="/api/create/event", method= RequestMethod.GET)
-    public Boolean createEvent(
+    public boolean createEvent(
             @RequestParam(name="eventName") String EventName,
             @RequestParam(name="typeOfEventID") int TypeOfEventID,
             @RequestParam(name="eventDate") String EventDate,
@@ -50,10 +50,10 @@ public class EventAPI {
             @RequestParam(name="employerAttending") String EmployerAttending,
             @RequestParam(name="schoolAttending") String SchoolAttending) throws ParseException {
 
-        //All events created start as not cancelled
-        String EventDateAndTime = EventDate + " " + EventTime;
-        ArrayList<Integer> employerIdList = new ArrayList<Integer>();
-        ArrayList<Integer> schoolIdList = new ArrayList<Integer>();
+            //All events created start as not cancelled
+            String EventDateAndTime = EventDate + " " + EventTime;
+            ArrayList<Integer> employerIdList = new ArrayList<Integer>();
+            ArrayList<Integer> schoolIdList = new ArrayList<Integer>();
 
         for (String employerID : EmployerAttending.split(",")) {
             employerIdList.add(Integer.parseInt(employerID));
@@ -70,11 +70,11 @@ public class EventAPI {
         //      Get Event Created Id
         int eventId = EventQrys.getLastEventCreated(EventName);
 
-        //      Insert into the Employer / Event intersection table
-        EventQrys.createEmployerEventIntersection(eventId,employerIdList);
+    //      Insert into the Employer / Event intersection table
+            EventQrys.createEmployerEventIntersection(eventId,employerIdList);
 
-        //      Insert into the School / Event intersection table
-        EventQrys.createSchoolEventIntersection(eventId, schoolIdList);
+    //      Insert into the School / Event intersection table
+            EventQrys.createSchoolEventIntersection(eventId, schoolIdList);
 
         return true;
     }
