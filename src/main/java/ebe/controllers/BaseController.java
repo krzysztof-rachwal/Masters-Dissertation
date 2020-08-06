@@ -335,6 +335,9 @@ public class BaseController {
         eventsAllTypes = EventQrys.getAllTypesOfEvents();
         employerAllNamesAndIds = EmployerQrys.getAllEmployerNamesAndIds();
 
+
+
+
         Map<String,Object> allEvents = new HashMap<String,Object>();
         allEvents.put("allSchoolNamesAndIds", schoolAllNamesAndIds);
         allEvents.put("allEventTypes", eventsAllTypes);
