@@ -136,7 +136,7 @@
                 <br>
 
                 <!-- Cards -->
-                <div class="list-employers">
+                <div class="list-events">
                     <div class="gel-content-row"  th:each="event : ${allEvents}">
                         <article class="card js-card card--style-icon card--100" gel-processed="processed"  th:id="${event.getEventID()}">
                             <a th:href="@{/profile-event(eventId=${event.getEventID()})}" class="card__inner" gel-processed="processed" title="Link to Card heading and link title">
