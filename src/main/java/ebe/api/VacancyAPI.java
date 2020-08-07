@@ -47,7 +47,7 @@ public class VacancyAPI {
     }
 
     ///////////////////////    Update     ////////////////////////////////
-    //2. Update Vacancies
+    //3. Update Vacancies
     @GetMapping(value="/api/update/vacancy")
     public boolean updateVacancy(
             @RequestParam(name="EmployerID") int employerId,
@@ -71,7 +71,7 @@ public class VacancyAPI {
     }
 
     ///////////////////////    DELETE     ////////////////////////////////
-    //2. Delete Vacancy
+    //4. Delete Vacancy
     @DeleteMapping("api/delete/vacancy")
     public boolean deleteVacancies(@RequestParam(value="vacancyId") Integer vacancyId){
         if (VacancyQrys.deleteVacancy(vacancyId) == 1) {
@@ -80,4 +80,5 @@ public class VacancyAPI {
             return false;
         }
     }
+
 }
