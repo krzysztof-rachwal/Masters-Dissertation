@@ -1,14 +1,11 @@
-package ebe.Controllers;
+package ebe.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ebe.DBClasses.Employer;
 import ebe.DBClasses.Event;
 import ebe.DBClasses.School;
 import ebe.DBClasses.Vacancy;
-import ebe.DBMethods.EmployerQueries;
-import ebe.DBMethods.EventQueries;
-import ebe.DBMethods.SchoolQueries;
-import ebe.DBMethods.VacancyQueries;
+import ebe.DBMethods.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -18,7 +15,6 @@ import org.springframework.stereotype.Controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,13 +26,15 @@ public class BaseController {
     private EventQueries EventQrys;
     private SchoolQueries SchoolQrys;
     private VacancyQueries VacancyQrys;
+    private StatisticsQueries statisticsQueries;
 
     @Autowired
-    public BaseController(EmployerQueries em, EventQueries ev, SchoolQueries sc, VacancyQueries va){
+    public BaseController(EmployerQueries em, EventQueries ev, SchoolQueries sc, VacancyQueries va, StatisticsQueries sq){
         EmployerQrys = em;
         EventQrys = ev;
         SchoolQrys = sc;
         VacancyQrys = va;
+        statisticsQueries = sq;
     }
 
     @Autowired
@@ -423,6 +421,41 @@ public class BaseController {
         ObjectMapper objectMapper = new ObjectMapper();
         // session = context.getSession();
         mv.setViewName("contactUsPage");
+        return mv;
+    }
+
+
+    //13. CWS home page
+//    @GetMapping("/homecws")
+//    public ModelAndView homeCWS(){
+//        ModelAndView mv = new ModelAndView();
+//        mv.setViewName("homepageCWS");
+//
+//        int numberOfEvents = statisticsQueries.getTotalEvents();
+//        int numberOfVacancies = statisticsQueries.getTotalVacancies();
+//        int numberOfPupils = statisticsQueries.getTotalPupils();
+//        int numberOfEmployers = statisticsQueries.getTotalEmployers();
+//        int schoolAtEvents = statisticsQueries.getSchoolsAtEvents();
+//        int requestsBySchools = statisticsQueries.getRequestsBySchools();
+//
+//        mv.addObject("numberOfEvents",numberOfEvents);
+//        mv.addObject("numberOfEmployers",numberOfEmployers);
+//        mv.addObject("numberOfVacancies",numberOfVacancies);
+//        mv.addObject("numberOfPupils",numberOfPupils);
+//        mv.addObject("schoolAtEvents",schoolAtEvents);
+//        mv.addObject("requestsBySchools",requestsBySchools);
+//
+//        return mv;
+//    }
+
+    @GetMapping("/homecws")
+    public ModelAndView homeTeach(){
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("homepageTeacher");
+        //using a random schoolID as we will have to get it from authorization level
+        List<Event> recommendedEvents = statisticsQueries.getEventsForSchool(5);
+
+        mv.addObject("recommendedEvents",recommendedEvents);
         return mv;
     }
 
