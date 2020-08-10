@@ -238,15 +238,9 @@
             <div class="col-md-6 well">
                 <span class="h5 mt-0 mb-4">Employers by local authority</span>
                 <div th:each="key,i :${empByLocalAuth.keySet()}">
-                    <div class="col-md-6">
-                        <h6 th:if="${i.index % 2 == 0}">
-                            <span class="h4 text-info d-inline" th:text="${empByLocalAuth.get(key)}">58</span>
-                            in <span th:text="${key}"> Cardiff </span></h6>
-                    </div>
-                    <div class="col-md-6">
-                        <h6 th:if="${i.index % 2 != 0}">
-                            <span class="h4 text-info d-inline" th:text="${empByLocalAuth.get(key)}">58</span>
-                            in <span th:text="${key}"> Cardiff </span></h6>
+                    <div class="col-md-6 mb-2">
+                        <span class="h4 text-info d-inline" th:text="${empByLocalAuth.get(key)} + ' in '"></span>
+                        <span th:text="${key}"></span >
                     </div>
                 </div>
             </div>
