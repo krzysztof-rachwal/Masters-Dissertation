@@ -5,13 +5,9 @@ import ebe.DBClasses.Employer;
 import ebe.DBClasses.Event;
 import ebe.DBClasses.School;
 import ebe.DBClasses.Vacancy;
-import ebe.DBMethods.EmployerQueries;
-import ebe.DBMethods.EventQueries;
-import ebe.DBMethods.SchoolQueries;
-import ebe.DBMethods.VacancyQueries;
+import ebe.DBMethods.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -19,6 +15,7 @@ import org.springframework.stereotype.Controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,13 +27,15 @@ public class BaseController {
     private EventQueries EventQrys;
     private SchoolQueries SchoolQrys;
     private VacancyQueries VacancyQrys;
+    private StatisticsQueries statisticsQueries;
 
     @Autowired
-    public BaseController(EmployerQueries em, EventQueries ev, SchoolQueries sc, VacancyQueries va){
+    public BaseController(EmployerQueries em, EventQueries ev, SchoolQueries sc, VacancyQueries va, StatisticsQueries sq){
         EmployerQrys = em;
         EventQrys = ev;
         SchoolQrys = sc;
         VacancyQrys = va;
+        statisticsQueries = sq;
     }
 
     @Autowired
@@ -368,11 +367,50 @@ public class BaseController {
     /////////5th - Header Menu (Report) /////////
     //11. Report
     @GetMapping("/report")
-    public ModelAndView Report(HttpSession session) {
+    public ModelAndView Report(/*@RequestParam(required = false,name="typeEvent") Integer typeID,
+                               @RequestParam(required = false,name = "localAuth") Integer authID,*/
+                               HttpSession session) {
         ModelAndView mv = new ModelAndView();
-        ObjectMapper objectMapper = new ObjectMapper();
-        // session = context.getSession();
         mv.setViewName("reportPage");
+
+        int numberOfEvents = statisticsQueries.getTotalEvents();
+        int numberOfVacancies = statisticsQueries.getTotalVacancies();
+        int numberOfPupils = statisticsQueries.getTotalPupils();
+        int numberOfEmployers = statisticsQueries.getTotalEmployers();
+        int schoolAtEvents = statisticsQueries.getSchoolsAtEvents();
+        int requestsBySchools = statisticsQueries.getRequestsBySchools();
+
+        Map<String,Integer> eventsByAdv = statisticsQueries.getEventsByAdviser();
+        Map<String,Integer> eventsByType = statisticsQueries.getEventsByType();
+        Map<String,Integer> empBySector = statisticsQueries.getEmployersBySector();
+        Map<String,Integer> evByLocalAuth = statisticsQueries.getEventByLocalAuth();
+        Map<String,Integer> pupilsByAuth = statisticsQueries.getTotalPupilsByAuth();
+        Map<String,Integer> schoolsOnEveLocalAuth = statisticsQueries.getSchoolsAttendingEventsByAuth();
+        Map<String,Integer> empByLocalAuth = statisticsQueries.getEmpByLocalAuth();
+        Map<String,Integer> schoolAndRequests = statisticsQueries.getSchoolsAndRequests();
+
+        List<School> allSchoolsNames = SchoolQrys.getAllSchoolNamesAndIds();
+        List<Event> allTypesOfEvents = EventQrys.getAllTypesOfEvents();
+        List<Employer> allLocalAuthorities = EmployerQrys.getAllLocalAuthorities();
+
+        mv.addObject("numberOfEvents",numberOfEvents);
+        mv.addObject("numberOfEmployers",numberOfEmployers);
+        mv.addObject("numberOfVacancies",numberOfVacancies);
+        mv.addObject("numberOfPupils",numberOfPupils);
+        mv.addObject("schoolAtEvents",schoolAtEvents);
+        mv.addObject("requestsBySchools",requestsBySchools);
+        mv.addObject("eventsByAdv",eventsByAdv);
+        mv.addObject("eventsByType",eventsByType);
+        mv.addObject("empBySector",empBySector);
+        mv.addObject("evByLocalAuth",evByLocalAuth);
+        mv.addObject("pupilsByAuth",pupilsByAuth);
+        mv.addObject("schoolsOnEveLocalAuth",schoolsOnEveLocalAuth);
+        mv.addObject("empByLocalAuth",empByLocalAuth);
+        mv.addObject("allSchoolsNames",allSchoolsNames);
+        mv.addObject("allTypesOfEvents",allTypesOfEvents);
+        mv.addObject("allLocalAuthorities",allLocalAuthorities);
+        mv.addObject("schoolAndRequests",schoolAndRequests);
+
         return mv;
     }
 
