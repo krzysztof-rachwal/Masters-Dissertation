@@ -425,6 +425,25 @@ public class BaseController {
         return mv;
     }
 
+    //13. CWS home page
+    @GetMapping("/homecws")
+    public ModelAndView homeCWS(){
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("homepageCWS");
+
+        return mv;
+    }
+
+//    @GetMapping("/homecws")
+//    public ModelAndView homeTeach(){
+//        ModelAndView mv = new ModelAndView();
+//        mv.setViewName("homepageTeacher");
+//        //using a random schoolID as we will have to get it from authorization level
+//        List<Event> recommendedEvents = statisticsQueries.getEventsForSchool(5);
+//
+//        mv.addObject("recommendedEvents",recommendedEvents);
+//        return mv;
+//    }
 
     @GetMapping("/error")
     public RedirectView ErrorPage() {
