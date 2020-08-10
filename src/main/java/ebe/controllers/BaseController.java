@@ -5,7 +5,10 @@ import ebe.DBClasses.Employer;
 import ebe.DBClasses.Event;
 import ebe.DBClasses.School;
 import ebe.DBClasses.Vacancy;
-import ebe.DBMethods.*;
+import ebe.DBMethods.EmployerQueries;
+import ebe.DBMethods.EventQueries;
+import ebe.DBMethods.SchoolQueries;
+import ebe.DBMethods.VacancyQueries;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -27,15 +30,13 @@ public class BaseController {
     private EventQueries EventQrys;
     private SchoolQueries SchoolQrys;
     private VacancyQueries VacancyQrys;
-    private StatisticsQueries statisticsQueries;
 
     @Autowired
-    public BaseController(EmployerQueries em, EventQueries ev, SchoolQueries sc, VacancyQueries va, StatisticsQueries sq){
+    public BaseController(EmployerQueries em, EventQueries ev, SchoolQueries sc, VacancyQueries va){
         EmployerQrys = em;
         EventQrys = ev;
         SchoolQrys = sc;
         VacancyQrys = va;
-        statisticsQueries = sq;
     }
 
     @Autowired
@@ -425,25 +426,6 @@ public class BaseController {
         return mv;
     }
 
-    //13. CWS home page
-    @GetMapping("/homecws")
-    public ModelAndView homeCWS(){
-        ModelAndView mv = new ModelAndView();
-        mv.setViewName("homepageCWS");
-
-        return mv;
-    }
-
-//    @GetMapping("/homecws")
-//    public ModelAndView homeTeach(){
-//        ModelAndView mv = new ModelAndView();
-//        mv.setViewName("homepageTeacher");
-//        //using a random schoolID as we will have to get it from authorization level
-//        List<Event> recommendedEvents = statisticsQueries.getEventsForSchool(5);
-//
-//        mv.addObject("recommendedEvents",recommendedEvents);
-//        return mv;
-//    }
 
     @GetMapping("/error")
     public RedirectView ErrorPage() {
