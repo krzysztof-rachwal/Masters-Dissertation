@@ -333,7 +333,7 @@
                                         </div>
                                     </div>
                                     <div class="content__body">
-                                        <div class="body__title" th:text="${employer.getName()}"></div>
+                                        <div class="body__title" th:text="${employer.getEmployerName()}"></div>
                                         <div class="body__body" th:text="${employer.getCompanySummary()}"></div>
                                     </div>
                                 </div>
@@ -342,11 +342,8 @@
                     </div>
                 </div>
             </div>
-
-
         </div>
     </div>
-
 </div>
 
 <footer th:replace="fragments/footerTemplate :: footer"></footer>
