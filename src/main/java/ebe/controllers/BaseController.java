@@ -5,10 +5,7 @@ import ebe.DBClasses.Employer;
 import ebe.DBClasses.Event;
 import ebe.DBClasses.School;
 import ebe.DBClasses.Vacancy;
-import ebe.DBMethods.EmployerQueries;
-import ebe.DBMethods.EventQueries;
-import ebe.DBMethods.SchoolQueries;
-import ebe.DBMethods.VacancyQueries;
+import ebe.DBMethods.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -30,13 +27,15 @@ public class BaseController {
     private EventQueries EventQrys;
     private SchoolQueries SchoolQrys;
     private VacancyQueries VacancyQrys;
+    private StatisticsQueries statisticsQueries;
 
     @Autowired
-    public BaseController(EmployerQueries em, EventQueries ev, SchoolQueries sc, VacancyQueries va){
+    public BaseController(EmployerQueries em, EventQueries ev, SchoolQueries sc, VacancyQueries va, StatisticsQueries sq){
         EmployerQrys = em;
         EventQrys = ev;
         SchoolQrys = sc;
         VacancyQrys = va;
+        statisticsQueries = sq;
     }
 
     @Autowired
@@ -335,6 +334,9 @@ public class BaseController {
         eventsAllTypes = EventQrys.getAllTypesOfEvents();
         employerAllNamesAndIds = EmployerQrys.getAllEmployerNamesAndIds();
 
+
+
+
         Map<String,Object> allEvents = new HashMap<String,Object>();
         allEvents.put("allSchoolNamesAndIds", schoolAllNamesAndIds);
         allEvents.put("allEventTypes", eventsAllTypes);
@@ -384,6 +386,25 @@ public class BaseController {
         return mv;
     }
 
+    //13. CWS home page
+    @GetMapping("/homecws")
+    public ModelAndView homeCWS(){
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("homepageCWS");
+
+        return mv;
+    }
+
+//    @GetMapping("/homecws")
+//    public ModelAndView homeTeach(){
+//        ModelAndView mv = new ModelAndView();
+//        mv.setViewName("homepageTeacher");
+//        //using a random schoolID as we will have to get it from authorization level
+//        List<Event> recommendedEvents = statisticsQueries.getEventsForSchool(5);
+//
+//        mv.addObject("recommendedEvents",recommendedEvents);
+//        return mv;
+//    }
 
     @GetMapping("/error")
     public RedirectView ErrorPage() {
