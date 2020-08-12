@@ -20,7 +20,7 @@ function createVacancy() {
 
     var token = $("meta[name='_csrf']").attr("content");    // Used to bypass Spring Boot's CSRF protocol     -- SOlution taken from 'https://stackoverflow.com/questions/34747437/use-of-spring-csrf-with-ajax-rest-call-and-html-page-with-thymeleaf' on Nov 26th 2019
     var header = $("meta[name='_csrf_header']").attr("content");    // Used to bypass Spring Boot's CSRF protocol
-    console.log(fullUri)
+    console.log(fullUri);
 
     $.ajax({
         type: "GET", url: fullUri,
@@ -29,10 +29,11 @@ function createVacancy() {
         },
         success: function (data) {
             if (data === true) {
+                localStorage.setItem("objectAdded","true");
                 location.assign("/vacancies")
             } else {
-                alert("There was an error, please try again.")
-                alert(data.responseText)
+                alert("There was an error, please try again.");
+                alert(data.responseText);
                 alert(data)
             }
         },
@@ -42,9 +43,7 @@ function createVacancy() {
             alert(data.toString());
         }
     });
-
 };
-
 
 //2. Update Vacancy
 function UpdateThisVacancy() {
@@ -127,4 +126,4 @@ function deleteVacancy(vacancyId) {
     });
 }
 // For the Vacancy Name selector
-$('.selectpicker').selectpicker();
+// $('.selectpicker').selectpicker();

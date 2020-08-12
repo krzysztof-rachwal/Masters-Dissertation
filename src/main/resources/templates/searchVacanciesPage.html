@@ -31,6 +31,13 @@
             </a>
         </div>
 
+        <div id="success_message" class="alert alert-success alert-dismissible fade d-none" role="alert">
+            <strong>Success!</strong> The vacancy was created!
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+
         <div class="flex-container">
             <div class="col-lg-3">
                 <div class="mb-3">
@@ -154,7 +161,18 @@
 <script type="text/javascript" src="https://careerswales.gov.wales/styleguide/assets/js/gel-elements-loader.js"></script>
 <script type="text/javascript" src="https://careerswales.gov.wales/styleguide/assets/js/gel-elements.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+<script th:src="@{../js/vacancy.js}" src="../js/vacancy.js"></script>
+<script>
+     objectAdded = localStorage.getItem("objectAdded");
 
+    if (objectAdded === "true"){
+        console.log("is the object added " + objectAdded)
+        document.getElementById('success_message').classList.remove('d-none')
+        document.getElementById('success_message').classList.add('show')
+        localStorage.clear()
+    }
+
+</script>
 <script>
     $(document).ready(function() {
         $("#addVacancy").hover(function(){
@@ -162,9 +180,7 @@
         },
             function(){$(this).removeClass("typoWhite")})
     });
-
 </script>
-
 </body>
 </html>
 
