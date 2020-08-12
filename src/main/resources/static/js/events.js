@@ -148,28 +148,28 @@ function deleteEvent(eventId) {
 // 4.Search Events
 function searchEvents(){
     // 4.1 Get the value from Search input
-    val = $('#vacancy-search').val()
+    val = $('#event-search').val()
 
     //4.2  If value is null exit the function
     if (val==""){
-        $(".vacancy-card").removeClass("d-none")
+        $(".event-card").removeClass("d-none")
     }
 
     //4.3 Transform the first letters in a word to uppercase
     let val2 = UpperCaseHelper(val)
 
     //4.4 Remove class vacancy found - to restart the "search"
-    $(".vacancy-found").removeClass("vacancy-found")
-    $(".vacancy-card").removeClass("d-none")
+    $(".event-found").removeClass("event-found")
+    $(".event-card").removeClass("d-none")
 
     //4.5 Add classes for the right values
-    $(".list-vacancies").find(".searchable:contains('"+val2+"')").closest(".vacancy-card").addClass("vacancy-found")
+    $(".list-events").find(".searchable:contains('"+val2+"')").closest(".event-card").addClass("event-found")
 
     //4.6 Remove the cards
-    $(".list-vacancies").find(".searchable:not(:contains('"+val2+"'))").closest(".vacancy-card").addClass("d-none")
+    $(".list-events").find(".searchable:not(:contains('"+val2+"'))").closest(".event-card").addClass("d-none")
 
     //4.7 Show the "Right" Card
-    $(".vacancy-found").removeClass("d-none")
+    $(".event-found").removeClass("d-none")
 
 }
 
