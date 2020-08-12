@@ -1,4 +1,4 @@
-package ebe.controllers;
+package ebe.Controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ebe.DBClasses.Employer;
@@ -230,10 +230,10 @@ public class BaseController {
         mv.setViewName("profileEventPage");
 
         Event event = EventQrys.getEventDetailsById(id);
-        List<School> eventSchoolsIDs = SchoolQrys.getAllSchoolIDsAttendingEvent(id);
-        List<School> eventSchoolNames = SchoolQrys.getAllSchoolNamesAttendingEvent(eventSchoolsIDs);
-        List<Employer> eventEmployerIDs = EmployerQrys.getAllEmployerIDsAttendingEvent(id);
-        List<Employer> eventEmployerNames = EmployerQrys.getAllEmployerNamesAttendingEvent(eventEmployerIDs);
+        List<Integer> eventSchoolsIDs = SchoolQrys.getAllSchoolIDsAttendingEvent(id);
+        List<String> eventSchoolNames = SchoolQrys.getAllSchoolNamesAttendingEvent(eventSchoolsIDs);
+        List<Integer> eventEmployerIDs = EmployerQrys.getAllEmployerIDsAttendingEvent(id);
+        List<String> eventEmployerNames = EmployerQrys.getAllEmployerNamesAttendingEvent(eventEmployerIDs);
 
         Map<String,Object> Event = new HashMap<String,Object>();
         Event.put("event", event);

@@ -17,7 +17,6 @@ import org.springframework.web.servlet.view.RedirectView;
 import org.springframework.stereotype.Controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -59,45 +58,12 @@ public class BaseController {
 
         ModelAndView mv = new ModelAndView();
         mv.setViewName("searchEmployerPage");
-        List<Employer> employer;
-        List<Employer> employerLanguage;
-        List<Employer> employerIndustrySectorAreas;
-        List<Employer> employerCurriculumAreas;
-        List<Employer> employerLocalAuthorities;
-        List<Employer> employerNumberOfEmployees;
-        List<Employer> employerCooperationType;
-        List<Employer> employerPreferences;
-        List<Employer> employerStatus;
-        List<School> schoolAllNamesAndIds;
+        List<Employer> employers;
+        employers = EmployerQrys.getAllEmployers();
 
-        employer = EmployerQrys.getAllEmployers();
-        employerLanguage = EmployerQrys.getAllLanguages();
-        employerLocalAuthorities = EmployerQrys.getAllLocalAuthorities();
-        employerIndustrySectorAreas = EmployerQrys.getAllIndustrySectors();
-        employerCurriculumAreas = EmployerQrys.getAllCurriculumAreas();
-        employerNumberOfEmployees = EmployerQrys.getAllNumberOfEmployersPossible();
-        employerCooperationType = EmployerQrys.getAllCooperationTypes();
-        employerPreferences = EmployerQrys.getAllPreferences();
-        employerStatus = EmployerQrys.getAllEmployerStatus();
-        schoolAllNamesAndIds = SchoolQrys.getAllSchoolNamesAndIds();
-
-
-        Map<String,Object> allEmployer = new HashMap<String,Object>();
-        allEmployer.put("allEmployers", employer);
-        allEmployer.put("allEmployerLanguage", employerLanguage);
-        allEmployer.put("allEmployerLocalAuthorities", employerLocalAuthorities);
-        allEmployer.put("allEmployerIndustrySectors", employerIndustrySectorAreas);
-        allEmployer.put("allEmployerCurriculumAreas", employerCurriculumAreas);
-        allEmployer.put("allEmployerNumberOfEmployees", employerNumberOfEmployees);
-        allEmployer.put("allEmployerCooperationType", employerCooperationType);
-        allEmployer.put("allEmployerPreferences", employerPreferences);
-        allEmployer.put("allEmployerStatus", employerStatus);
-        allEmployer.put("allSchoolNamesAndIds", schoolAllNamesAndIds);
-        mv.addAllObjects(allEmployer);
-
-        List<Integer> employersId = EmployerQrys.getFilteredEmployersIds(Arrays.asList(),Arrays.asList(),Arrays.asList(),Arrays.asList(),Arrays.asList(),Arrays.asList(),Arrays.asList(),Arrays.asList());
-        System.out.println("Employers to show: " + employersId.size());
-
+        Map<String,Object> allEmployers = new HashMap<String,Object>();
+        allEmployers.put("allEmployers", employers);
+        mv.addAllObjects(allEmployers);
 
         return mv;
     }

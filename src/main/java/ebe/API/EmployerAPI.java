@@ -10,8 +10,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 @RestController
 public class EmployerAPI {
@@ -119,93 +117,6 @@ public class EmployerAPI {
         return true;
     }
 
-    ///////////////////////    FILTER     ////////////////////////////////
-    @RequestMapping("api/filter/employer")
-    public List<Integer> filterEmployers(@RequestParam(name="EmployerSectorIndustry") String EmployerSectorIndustry,
-                                         @RequestParam(name="EmployerCooperationType") String EmployerCooperationType,
-                                         @RequestParam(name="EmployerCurriculumAreas") String EmployerCurriculumAreas,
-                                         @RequestParam(name="EmployerPreferences") String EmployerPreferences,
-                                         @RequestParam(name="EmployerLanguage") String EmployerLanguage,
-                                         @RequestParam(name="SchoolPreferences") String SchoolPreferences,
-                                         @RequestParam(name="LocalAuthorities") String LocalAuthorities){
-
-        List<Integer> filteredEmployerIDs = new ArrayList<Integer>();
-
-        List<Integer> employerCooperationTypeList = new ArrayList<Integer>();
-        List<Integer> employerIndustrySectorList = new ArrayList<Integer>();
-        List<Integer> employerPreferencesList = new ArrayList<Integer>();
-        List<Integer> employerSupportCurriculumAreaList = new ArrayList<Integer>();
-        List<Integer> employerLanguageUsedList = new ArrayList<Integer>();
-        List<Integer> employerLocalAuthorityList = new ArrayList<Integer>();
-        List<Integer> employerSchoolPreferencesList = new ArrayList<Integer>();
-
-        if (!EmployerCooperationType.equals("")) {
-            for (String cooperationTypeID : EmployerCooperationType.split(",")) {
-                employerCooperationTypeList.add(Integer.parseInt(cooperationTypeID));
-            }
-        }  else{
-            employerCooperationTypeList = Arrays.asList();
-        }
-
-        if (!EmployerSectorIndustry.equals("")) {
-            for (String sectorIndustryID : EmployerSectorIndustry.split(",")) {
-                employerIndustrySectorList.add(Integer.parseInt(sectorIndustryID));
-            }
-        } else {
-            employerIndustrySectorList = Arrays.asList();
-        }
-
-        if (!EmployerPreferences.equals("")) {
-            for (String employerPreferenceID : EmployerPreferences.split(",")) {
-                employerPreferencesList.add(Integer.parseInt(employerPreferenceID));
-            }
-        } else {
-            employerPreferencesList = Arrays.asList();
-        }
-
-        if (!EmployerCurriculumAreas.equals("")) {
-            for (String areaOfCurriculumID : EmployerCurriculumAreas.split(",")) {
-                employerSupportCurriculumAreaList.add(Integer.parseInt(areaOfCurriculumID));
-            }
-        } else {
-            employerSupportCurriculumAreaList = Arrays.asList();
-        }
-
-        if (!EmployerLanguage.equals("")) {
-            for (String languageID : EmployerLanguage.split(",")) {
-                employerLanguageUsedList.add(Integer.parseInt(languageID));
-            }
-        } else {
-            employerLanguageUsedList = Arrays.asList();
-        }
-
-        if (!LocalAuthorities.equals("")) {
-            for (String localAuthorityID : LocalAuthorities.split(",")) {
-                employerLocalAuthorityList.add(Integer.parseInt(localAuthorityID));
-            }
-        } else {
-            employerLocalAuthorityList = Arrays.asList();
-        }
-
-        if (!SchoolPreferences.equals("")) {
-            for (String schoolID : SchoolPreferences.split(",")) {
-                employerSchoolPreferencesList.add(Integer.parseInt(schoolID));
-            }
-        } else {
-            employerSchoolPreferencesList = Arrays.asList();
-        }
-
-        // There should be AlumniList as well, once implemented. In function below I call empty Arrays.asList() to fill this place.
-
-        filteredEmployerIDs = EmployerQrys.getFilteredEmployersIds(employerIndustrySectorList, employerLocalAuthorityList,
-                employerSupportCurriculumAreaList, employerLanguageUsedList,
-                employerSchoolPreferencesList, employerPreferencesList, employerCooperationTypeList, Arrays.asList());
-
-
-
-        return filteredEmployerIDs;
-
-    }
     ///////////////////////    DELETE     ////////////////////////////////
     //2. Delete Employer
     @DeleteMapping("api/delete/employer")
