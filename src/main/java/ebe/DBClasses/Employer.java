@@ -50,7 +50,8 @@ public class Employer {
     private String EmployerPreferencesName;
     private int EmployerAlumniID;
     private String EmployerAlumniName;
-
+    private int EmployerAlumniSchoolID;
+    private String EmployerAlumniSchoolName;
 
     public Employer() {
     }
@@ -500,6 +501,14 @@ public class Employer {
 
     public void setEmployerAlumniName(String employerAlumniName) {
         EmployerAlumniName = employerAlumniName;
+    }
+
+    public int getEmployerAlumniSchoolID() {
+        return EmployerAlumniSchoolID;
+    }
+
+    public void setEmployerAlumniSchoolID(int employerAlumniSchoolID) {
+        EmployerAlumniSchoolID = employerAlumniSchoolID;
     }
 }
 

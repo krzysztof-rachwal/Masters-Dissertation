@@ -71,7 +71,7 @@ public class VacancyAPI {
     }
 
     ///////////////////////    DELETE     ////////////////////////////////
-    //3. Delete Events
+    //2. Delete Vacancy
     @DeleteMapping("api/delete/vacancy")
     public boolean deleteVacancies(@RequestParam(value="vacancyId") Integer vacancyId){
         if (VacancyQrys.deleteVacancy(vacancyId) == 1) {

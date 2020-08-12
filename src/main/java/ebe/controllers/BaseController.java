@@ -5,13 +5,9 @@ import ebe.DBClasses.Employer;
 import ebe.DBClasses.Event;
 import ebe.DBClasses.School;
 import ebe.DBClasses.Vacancy;
-import ebe.DBMethods.EmployerQueries;
-import ebe.DBMethods.EventQueries;
-import ebe.DBMethods.SchoolQueries;
-import ebe.DBMethods.VacancyQueries;
+import ebe.DBMethods.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 import org.springframework.stereotype.Controller;
@@ -28,13 +24,15 @@ public class BaseController {
     private EventQueries EventQrys;
     private SchoolQueries SchoolQrys;
     private VacancyQueries VacancyQrys;
+    private StatisticsQueries statisticsQueries;
 
     @Autowired
-    public BaseController(EmployerQueries em, EventQueries ev, SchoolQueries sc, VacancyQueries va){
+    public BaseController(EmployerQueries em, EventQueries ev, SchoolQueries sc, VacancyQueries va, StatisticsQueries sq){
         EmployerQrys = em;
         EventQrys = ev;
         SchoolQrys = sc;
         VacancyQrys = va;
+        statisticsQueries = sq;
     }
 
     @Autowired
@@ -74,10 +72,71 @@ public class BaseController {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("profileEmployerPage");
         Employer employer = EmployerQrys.getEmployerDetailsById(id);
-        mv.addObject("employer",employer);
-        //        for (Employer employer : employers) {
-        //            System.out.println(employer.getName());
-        //        }
+
+        List<Employer> employerInfo;
+        List<Employer> employerLanguage;
+        List<Integer> employerChosenLanguage;
+        List<Employer> employerIndustrySectorAreas;
+        List<Integer> employerChosenIndustrySectorAreas;
+        List<Employer> employerCurriculumAreas;
+        List<Integer> employerChosenCurriculumAreas;
+        List<Employer> employerLocalAuthorities;
+        List<Integer> employerChosenLocalAuthorities;
+        List<Employer> employerNumberOfEmployees;
+        List<Employer> employerCooperationType;
+        List<Integer> employerChosenCooperationType;
+        List<Employer> employerPreferences;
+        List<Integer> employerChosenPreferences;
+        List<Integer> employerAlumni;
+        List<Employer> employerAlumniNamesAndSchoolID;
+        List<Employer> employerStatus;
+        List<School> schoolAllNamesAndIds;
+        List<Integer> employerSchoolPreferences;
+
+        employerInfo = EmployerQrys.getAllEmployers();
+        employerLanguage = EmployerQrys.getAllLanguages();
+        employerLocalAuthorities = EmployerQrys.getAllLocalAuthorities();
+        employerChosenLocalAuthorities = EmployerQrys.getChosenLocalAuthorities(employer.getEmployerID());
+
+        employerIndustrySectorAreas = EmployerQrys.getAllIndustrySectors();
+        employerChosenIndustrySectorAreas = EmployerQrys.getChosenIndustrySectors(employer.getEmployerID());
+        employerCurriculumAreas = EmployerQrys.getAllCurriculumAreas();
+        employerChosenCurriculumAreas = EmployerQrys.getChosenCurriculumAreas(employer.getEmployerID());
+        employerNumberOfEmployees = EmployerQrys.getAllNumberOfEmployersPossible();
+        employerCooperationType = EmployerQrys.getAllCooperationTypes();
+        employerChosenCooperationType = EmployerQrys.getChosenCooperationTypes(employer.getEmployerID());
+        employerPreferences = EmployerQrys.getAllPreferences();
+        employerChosenPreferences = EmployerQrys.getChosenPreferences(employer.getEmployerID());
+        employerAlumni = EmployerQrys.getAllAlumni(employer.getEmployerID());
+        employerAlumniNamesAndSchoolID = EmployerQrys.getAllAlumniNamesAndSchoolID(employerAlumni);
+        schoolAllNamesAndIds = SchoolQrys.getAllSchoolNamesAndIds();
+        employerStatus = EmployerQrys.getAllEmployerStatus();
+        employerSchoolPreferences = EmployerQrys.getEmployerSchoolPreferences(employer.getEmployerID());
+
+        Map<String,Object> allEmployer = new HashMap<String,Object>();
+        allEmployer.put("employer", employer);
+        allEmployer.put("allEmployer", employerInfo);
+        allEmployer.put("allEmployerLanguage", employerLanguage);
+        allEmployer.put("allEmployerLocalAuthorities", employerLocalAuthorities);
+        allEmployer.put("allEmployerChosenLocalAuthorities", employerChosenLocalAuthorities);
+        allEmployer.put("allEmployerIndustrySectors", employerIndustrySectorAreas);
+        allEmployer.put("allEmployerChosenIndustrySectors", employerChosenIndustrySectorAreas);
+        allEmployer.put("allEmployerCurriculumAreas", employerCurriculumAreas);
+        allEmployer.put("allEmployerChosenCurriculumAreas", employerChosenCurriculumAreas);
+        allEmployer.put("allEmployerNumberOfEmployees", employerNumberOfEmployees);
+        allEmployer.put("allEmployerCooperationType", employerCooperationType);
+        allEmployer.put("allEmployerChosenCooperationType", employerChosenCooperationType);
+        allEmployer.put("allEmployerPreferences", employerPreferences);
+        allEmployer.put("allEmployerAlumni",employerAlumniNamesAndSchoolID);
+        allEmployer.put("allEmployerChosenPreferences", employerChosenPreferences);
+        allEmployer.put("allSchoolNamesAndIds", schoolAllNamesAndIds);
+        allEmployer.put("allEmployerStatus",employerStatus);
+        allEmployer.put("allEmployerSchoolPreferences", employerSchoolPreferences);
+
+
+        mv.addAllObjects(allEmployer);
+
+
         return mv;
     }
 
@@ -118,7 +177,7 @@ public class BaseController {
         allEmployer.put("allEmployerNumberOfEmployees", employerNumberOfEmployees);
         allEmployer.put("allEmployerCooperationType", employerCooperationType);
         allEmployer.put("allEmployerPreferences", employerPreferences);
-        allEmployer.put("allEmployerStatus", employerStatus);
+        allEmployer.put("allEmployerStatus",employerStatus);
         allEmployer.put("allSchoolNamesAndIds", schoolAllNamesAndIds);
 
         mv.addAllObjects(allEmployer);
@@ -147,7 +206,6 @@ public class BaseController {
     public ModelAndView Vacancy(@RequestParam(value="vacancyId")int id) {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("profileVacancyPage");
-
 
         Vacancy vacancy = VacancyQrys.getVacancyDetailsById(id);
         Vacancy vacanciesEmployerName = VacancyQrys.getVacancyEmployerName(vacancy.getEmployerID());
@@ -278,20 +336,65 @@ public class BaseController {
     @GetMapping("/request")
     public ModelAndView Request(HttpSession session) {
         ModelAndView mv = new ModelAndView();
+        mv.setViewName("requestPage");
+
         ObjectMapper objectMapper = new ObjectMapper();
         // session = context.getSession();
-        mv.setViewName("requestPage");
+
+        List<Event> eventsAllTypes;
+        eventsAllTypes = EventQrys.getAllTypesOfEvents();
+
+        mv.addObject("allEventTypes",eventsAllTypes);
         return mv;
     }
 
     /////////5th - Header Menu (Report) /////////
     //11. Report
     @GetMapping("/report")
-    public ModelAndView Report(HttpSession session) {
+    public ModelAndView Report(/*@RequestParam(required = false,name="typeEvent") Integer typeID,
+                               @RequestParam(required = false,name = "localAuth") Integer authID,*/
+            HttpSession session) {
         ModelAndView mv = new ModelAndView();
-        ObjectMapper objectMapper = new ObjectMapper();
-        // session = context.getSession();
         mv.setViewName("reportPage");
+
+        int numberOfEvents = statisticsQueries.getTotalEvents();
+        int numberOfVacancies = statisticsQueries.getTotalVacancies();
+        int numberOfPupils = statisticsQueries.getTotalPupils();
+        int numberOfEmployers = statisticsQueries.getTotalEmployers();
+        int schoolAtEvents = statisticsQueries.getSchoolsAtEvents();
+        int requestsBySchools = statisticsQueries.getRequestsBySchools();
+
+        Map<String,Integer> eventsByAdv = statisticsQueries.getEventsByAdviser();
+        Map<String,Integer> eventsByType = statisticsQueries.getEventsByType();
+        Map<String,Integer> empBySector = statisticsQueries.getEmployersBySector();
+        Map<String,Integer> evByLocalAuth = statisticsQueries.getEventByLocalAuth();
+        Map<String,Integer> pupilsByAuth = statisticsQueries.getTotalPupilsByAuth();
+        Map<String,Integer> schoolsOnEveLocalAuth = statisticsQueries.getSchoolsAttendingEventsByAuth();
+        Map<String,Integer> empByLocalAuth = statisticsQueries.getEmpByLocalAuth();
+        Map<String,Integer> schoolAndRequests = statisticsQueries.getSchoolsAndRequests();
+
+        List<School> allSchoolsNames = SchoolQrys.getAllSchoolNamesAndIds();
+        List<Event> allTypesOfEvents = EventQrys.getAllTypesOfEvents();
+        List<Employer> allLocalAuthorities = EmployerQrys.getAllLocalAuthorities();
+
+        mv.addObject("numberOfEvents",numberOfEvents);
+        mv.addObject("numberOfEmployers",numberOfEmployers);
+        mv.addObject("numberOfVacancies",numberOfVacancies);
+        mv.addObject("numberOfPupils",numberOfPupils);
+        mv.addObject("schoolAtEvents",schoolAtEvents);
+        mv.addObject("requestsBySchools",requestsBySchools);
+        mv.addObject("eventsByAdv",eventsByAdv);
+        mv.addObject("eventsByType",eventsByType);
+        mv.addObject("empBySector",empBySector);
+        mv.addObject("evByLocalAuth",evByLocalAuth);
+        mv.addObject("pupilsByAuth",pupilsByAuth);
+        mv.addObject("schoolsOnEveLocalAuth",schoolsOnEveLocalAuth);
+        mv.addObject("empByLocalAuth",empByLocalAuth);
+        mv.addObject("allSchoolsNames",allSchoolsNames);
+        mv.addObject("allTypesOfEvents",allTypesOfEvents);
+        mv.addObject("allLocalAuthorities",allLocalAuthorities);
+        mv.addObject("schoolAndRequests",schoolAndRequests);
+
         return mv;
     }
 
@@ -303,6 +406,41 @@ public class BaseController {
         ObjectMapper objectMapper = new ObjectMapper();
         // session = context.getSession();
         mv.setViewName("contactUsPage");
+        return mv;
+    }
+
+
+    //13. CWS home page
+//    @GetMapping("/homecws")
+//    public ModelAndView homeCWS(){
+//        ModelAndView mv = new ModelAndView();
+//        mv.setViewName("homepageCWS");
+//
+//        int numberOfEvents = statisticsQueries.getTotalEvents();
+//        int numberOfVacancies = statisticsQueries.getTotalVacancies();
+//        int numberOfPupils = statisticsQueries.getTotalPupils();
+//        int numberOfEmployers = statisticsQueries.getTotalEmployers();
+//        int schoolAtEvents = statisticsQueries.getSchoolsAtEvents();
+//        int requestsBySchools = statisticsQueries.getRequestsBySchools();
+//
+//        mv.addObject("numberOfEvents",numberOfEvents);
+//        mv.addObject("numberOfEmployers",numberOfEmployers);
+//        mv.addObject("numberOfVacancies",numberOfVacancies);
+//        mv.addObject("numberOfPupils",numberOfPupils);
+//        mv.addObject("schoolAtEvents",schoolAtEvents);
+//        mv.addObject("requestsBySchools",requestsBySchools);
+//
+//        return mv;
+//    }
+
+    @GetMapping("/homecws")
+    public ModelAndView homeTeach(){
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("homepageTeacher");
+        //using a random schoolID as we will have to get it from authorization level
+        List<Event> recommendedEvents = statisticsQueries.getEventsForSchool(5);
+
+        mv.addObject("recommendedEvents",recommendedEvents);
         return mv;
     }
 
