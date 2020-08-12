@@ -183,8 +183,6 @@ function sortByName(){
         switching = false;
         list = $('div[name=event-card-title]')
 
-        // b = list.closest(".vacancy-card");
-
         // Loop through all list-items:
         for (i = 0; i < (list.length - 1); i++) {
             // start by saying there should be no switching:

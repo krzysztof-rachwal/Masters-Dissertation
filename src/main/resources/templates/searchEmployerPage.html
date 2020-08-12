@@ -312,9 +312,9 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text input-border">Sort By:</span>
                             </div>
-                            <select class="form-control input-border">
-                                <option selected="selected">Date</option>
-                                <option>Name</option>
+                            <select class="form-control input-border selectpicker" name="employer-sort-by">
+                                <option value="Date">Date</option>
+                                <option value="Name">Name</option>
                             </select>
                         </div>
                     </div>
@@ -348,7 +348,7 @@
                                         </div>
                                     </div>
                                     <div class="content__body">
-                                        <div class="body__title searchable" th:text="${#strings.capitalize(employer.getEmployerName())}"></div>
+                                        <div class="body__title searchable"  name="employer-card-title" th:text="${#strings.capitalize(employer.getEmployerName())}"></div>
                                         <div class="body__body searchable" th:text="${#strings.capitalize(employer.getCompanySummary())}"></div>
                                     </div>
                                 </div>
