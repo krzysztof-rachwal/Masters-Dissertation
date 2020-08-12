@@ -5,7 +5,11 @@ body {
 }
 
 .text-info{
-    color: #007066!important;
+    color: #01778a!important;
+}
+
+.text-success{
+    color: #d1368b!important;
 }
 
 .container-fluid, form, .modal-body, .well {
