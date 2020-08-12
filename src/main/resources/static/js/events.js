@@ -148,7 +148,7 @@ function deleteEvent(eventId) {
 // 4.Search Events
 function searchEvents(){
     // 4.1 Get the value from Search input
-    val = $('#event-search').val()
+    let val = $('#event-search').val()
 
     //4.2  If value is null exit the function
     if (val==""){

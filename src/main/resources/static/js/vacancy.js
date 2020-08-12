@@ -132,7 +132,7 @@ function deleteVacancy(vacancyId) {
 // 4.Search Vacancy
 function searchVacancy(){
     // 4.1 Get the value from Search input
-    val = $('#vacancy-search').val()
+    let val = $('#vacancy-search').val()
 
     //4.2  If value is null exit the function
     if (val==""){
