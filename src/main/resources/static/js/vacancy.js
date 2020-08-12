@@ -29,7 +29,7 @@ function createVacancy() {
         },
         success: function (data) {
             if (data === true) {
-                localStorage.setItem("objectAdded","true");
+                localStorage.setItem("vacAdded","true");
                 location.assign("/vacancies")
             } else {
                 alert("There was an error, please try again.");
