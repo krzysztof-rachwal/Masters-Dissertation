@@ -40,6 +40,7 @@ function createNewEvent() {
         },
         success: function (data) {
             if (data === true) {
+                localStorage.setItem("eventAdded","true");
                 location.assign("/events")
             } else {
                 alert("There was an error, please try again.")
