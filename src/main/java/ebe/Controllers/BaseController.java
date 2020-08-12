@@ -15,7 +15,6 @@ import org.springframework.stereotype.Controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -369,7 +368,7 @@ public class BaseController {
     @GetMapping("/report")
     public ModelAndView Report(/*@RequestParam(required = false,name="typeEvent") Integer typeID,
                                @RequestParam(required = false,name = "localAuth") Integer authID,*/
-                               HttpSession session) {
+            HttpSession session) {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("reportPage");
 
@@ -422,6 +421,41 @@ public class BaseController {
         ObjectMapper objectMapper = new ObjectMapper();
         // session = context.getSession();
         mv.setViewName("contactUsPage");
+        return mv;
+    }
+
+
+    //13. CWS home page
+//    @GetMapping("/homecws")
+//    public ModelAndView homeCWS(){
+//        ModelAndView mv = new ModelAndView();
+//        mv.setViewName("homepageCWS");
+//
+//        int numberOfEvents = statisticsQueries.getTotalEvents();
+//        int numberOfVacancies = statisticsQueries.getTotalVacancies();
+//        int numberOfPupils = statisticsQueries.getTotalPupils();
+//        int numberOfEmployers = statisticsQueries.getTotalEmployers();
+//        int schoolAtEvents = statisticsQueries.getSchoolsAtEvents();
+//        int requestsBySchools = statisticsQueries.getRequestsBySchools();
+//
+//        mv.addObject("numberOfEvents",numberOfEvents);
+//        mv.addObject("numberOfEmployers",numberOfEmployers);
+//        mv.addObject("numberOfVacancies",numberOfVacancies);
+//        mv.addObject("numberOfPupils",numberOfPupils);
+//        mv.addObject("schoolAtEvents",schoolAtEvents);
+//        mv.addObject("requestsBySchools",requestsBySchools);
+//
+//        return mv;
+//    }
+
+    @GetMapping("/homecws")
+    public ModelAndView homeTeach(){
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("homepageTeacher");
+        //using a random schoolID as we will have to get it from authorization level
+        List<Event> recommendedEvents = statisticsQueries.getEventsForSchool(5);
+
+        mv.addObject("recommendedEvents",recommendedEvents);
         return mv;
     }
 
