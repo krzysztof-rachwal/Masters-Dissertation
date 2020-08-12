@@ -156,9 +156,8 @@ function searchEvents(){
     }
 
     //4.3 Transform the first letters in a word to uppercase
-    let val2 = UpperCaseHelper(val)
-
-    //4.4 Remove class vacancy found - to restart the "search"
+    let val2 = val.charAt(0).toUpperCase()+ val.slice(1);
+    //4.4 Remove class event found - to restart the "search"
     $(".event-found").removeClass("event-found")
     $(".event-card").removeClass("d-none")
 
@@ -173,17 +172,88 @@ function searchEvents(){
 
 }
 
-// 5. Makes all first letters uppercase
-function UpperCaseHelper(str) {
-    var splitStr = str.toLowerCase().split(' ');
-    for (var i = 0; i < splitStr.length; i++) {
-        // You do not need to check if i is larger than splitStr length, as your for does that for you
-        // Assign it back to the array
-        splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
+// 5. Sort Events by Name
+function sortByName(){
+    var list, i, switching, shouldSwitch;
+    switching = true;
+    /* Make a loop that will continue until
+    no switching has been done: */
+    while (switching) {
+        // start by saying: no switching is done:
+        switching = false;
+        list = $('div[name=event-card-title]')
+
+        // b = list.closest(".vacancy-card");
+
+        // Loop through all list-items:
+        for (i = 0; i < (list.length - 1); i++) {
+            // start by saying there should be no switching:
+            shouldSwitch = false;
+            /* check if the next item should
+            switch place with the current item: */
+            if (list[i].innerHTML.toLowerCase() > list[i + 1].innerHTML.toLowerCase()) {
+                /* if next item is alphabetically
+                lower than current item, mark as a switch
+                and break the loop: */
+                shouldSwitch = true;
+                break;
+            }
+        }
+        if (shouldSwitch) {
+            /* If a switch has been marked, make the switch
+            and mark the switch as done: */
+            list[i].closest(".event-card").before(list[i + 1].closest(".event-card"));
+            switching = true;
+        }
     }
-    // Directly return the joined string
-    return splitStr.join(' ');
+
 }
+
+// 6. Sort Vacancy by Date
+function sortByDate() {
+    var list = $('input[name=event-card-date]').val()
+
+    // Loop through all list-items:
+    for (i = 0; i < (list.length - 1); i++) {
+        var listCompare1 = list[i].innerHTML.split("-");
+
+        for (j = 0; j < (list.length - 1); j++) {
+            var listCompare2 = list[j].innerHTML.split("-");
+
+            if (listCompare1[0] < listCompare2[0]) {
+                // alert(" Part 1 ---- listCompare1: " + listCompare1 + " listCompare2: " + listCompare2)
+                list[i].closest(".event-card").before(list[j].closest(".event-card"));
+            }
+
+            if (listCompare1[0] == listCompare2[0] && listCompare1[1] < listCompare2[1]) {
+                // alert("Part 2 --- listCompare1: " + listCompare1 + " listCompare2: " + listCompare2)
+                list[i].closest(".event-card").before(list[j].closest(".event-card"));
+            }
+            if (listCompare1[0] == listCompare2[0] && listCompare1[1] == listCompare2[1] && listCompare1[2] < listCompare2[2]) {
+                // alert("Part 3 --- listCompare1: " + listCompare1 + " listCompare2: " + listCompare2)
+                list[i].closest(".event-card").before(list[j].closest(".event-card"));
+            }
+
+
+            // if (list[i].textContent > list[j].textContent) {
+            //     list[i].closest(".vacancy-card").before(list[j].closest(".vacancy-card"));
+            // }
+        }
+    }
+}
+
+//7. On document Ready
+$( document ).ready(function() {
+    $("select[name=event-sort-by]").change(function(){
+        if($(this).val()=="Name"){
+            sortByName();
+        }
+        if($(this).val()=="Date"){
+            sortByDate();
+        }
+
+    });
+});
 
 
 // For the Event Name selector

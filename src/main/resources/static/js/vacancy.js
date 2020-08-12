@@ -140,7 +140,7 @@ function searchVacancy(){
     }
 
     //4.3 Transform the first letters in a word to uppercase
-    let val2 = UpperCaseHelper(val)
+    let val2 = val.charAt(0).toUpperCase() + val.slice(1);
 
     //4.4 Remove class vacancy found - to restart the "search"
     $(".vacancy-found").removeClass("vacancy-found")
@@ -157,19 +157,7 @@ function searchVacancy(){
 
 }
 
-// 5. Makes all first letters uppercase
-function UpperCaseHelper(str) {
-    var splitStr = str.toLowerCase().split(' ');
-    for (var i = 0; i < splitStr.length; i++) {
-        // You do not need to check if i is larger than splitStr length, as your for does that for you
-        // Assign it back to the array
-        splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
-    }
-    // Directly return the joined string
-    return splitStr.join(' ');
-}
-
-// 6. Sort Vacancy by Name
+// 5. Sort Vacancy by Name
 function sortByName(){
     var list, i, switching, shouldSwitch;
     switching = true;
@@ -206,7 +194,7 @@ function sortByName(){
 
 }
 
-// 7. Sort Vacancy by Date
+// 6. Sort Vacancy by Date
 function sortByDate() {
     var list = $('h5[name=vacancy-card-date]')
 
@@ -239,7 +227,7 @@ function sortByDate() {
     }
 }
 
-//8. On document Ready
+//7. On document Ready
 $( document ).ready(function() {
     $("select[name=vacancy-sort-by]").change(function(){
         if($(this).val()=="Name"){
