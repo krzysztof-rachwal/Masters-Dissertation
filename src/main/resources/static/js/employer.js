@@ -43,6 +43,7 @@ function createNewEmployer() {
         },
         success: function (data) {
             if (data === true) {
+                localStorage.setItem("empAdded","true");
                 location.assign("/employers")
             } else {
                 alert("There was an error, please try again.")
