@@ -145,6 +145,46 @@ function deleteEvent(eventId) {
     });
 }
 
+// 4.Search Events
+function searchEvents(){
+    // 4.1 Get the value from Search input
+    val = $('#vacancy-search').val()
+
+    //4.2  If value is null exit the function
+    if (val==""){
+        $(".vacancy-card").removeClass("d-none")
+    }
+
+    //4.3 Transform the first letters in a word to uppercase
+    let val2 = UpperCaseHelper(val)
+
+    //4.4 Remove class vacancy found - to restart the "search"
+    $(".vacancy-found").removeClass("vacancy-found")
+    $(".vacancy-card").removeClass("d-none")
+
+    //4.5 Add classes for the right values
+    $(".list-vacancies").find(".searchable:contains('"+val2+"')").closest(".vacancy-card").addClass("vacancy-found")
+
+    //4.6 Remove the cards
+    $(".list-vacancies").find(".searchable:not(:contains('"+val2+"'))").closest(".vacancy-card").addClass("d-none")
+
+    //4.7 Show the "Right" Card
+    $(".vacancy-found").removeClass("d-none")
+
+}
+
+// 5. Makes all first letters uppercase
+function UpperCaseHelper(str) {
+    var splitStr = str.toLowerCase().split(' ');
+    for (var i = 0; i < splitStr.length; i++) {
+        // You do not need to check if i is larger than splitStr length, as your for does that for you
+        // Assign it back to the array
+        splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
+    }
+    // Directly return the joined string
+    return splitStr.join(' ');
+}
+
 
 // For the Event Name selector
 $('.selectpicker').selectpicker();

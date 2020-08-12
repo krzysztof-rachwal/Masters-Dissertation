@@ -4,7 +4,7 @@ function createVacancy() {
     var baseUri = "/api/create/vacancy";
     var employerID_url = "EmployerID=" + $('select[id=employer-name]').val();
     var vacancyName_url = "VacancyName=" + $('input[id=vacancy-name]').val();
-    var vacancylink_url = "VacancyLink=" + $('input[id=web-link]').val();
+    var vacancyLink_url = "VacancyLink=" + $('input[id=web-link]').val();
     var vacancySummary = "VacancySummary=" + $('textarea[id=vacancy-summary]').val();
     var typeOfVacancyID_url = "TypeOfVacancyID=" + $('select[id=vacancy-type]').val();
     var statusOfVacancyID_url="StatusOfVacancyID=" + $('select[id=vacancy-status]').val();
@@ -14,7 +14,7 @@ function createVacancy() {
     var applicationMethodID_url = "ApplicationMethodID=" + $('select[id=appl-method]').val();
     var vacancyPostcode_url = "VacancyPostcode=" + $('input[id=post-code]').val();
 
-    var fullUri = baseUri + "?" + "&" + employerID_url+ "&" + vacancyName_url + "&" + vacancylink_url
+    var fullUri = baseUri + "?" + "&" + employerID_url+ "&" + vacancyName_url + "&" + vacancyLink_url
         + "&" + vacancySummary + "&" + typeOfVacancyID_url  + "&" + "&" + statusOfVacancyID_url  + "&" + startOfVacancy_url + "&"
         + deadlineForApplication_url + "&" + occupationalCodeID_url+ "&" + applicationMethodID_url + "&" + vacancyPostcode_url  ;
 
@@ -128,6 +128,7 @@ function deleteVacancy(vacancyId) {
 }
 
 
+
 // 4.Search Vacancy
 function searchVacancy(){
     // 4.1 Get the value from Search input
@@ -168,6 +169,42 @@ function UpperCaseHelper(str) {
     return splitStr.join(' ');
 }
 
+// 6. Sort Vacancy by Name
+function sortByName(){
+    var list, i, switching, shouldSwitch;
+    switching = true;
+    /* Make a loop that will continue until
+    no switching has been done: */
+    while (switching) {
+        // start by saying: no switching is done:
+        switching = false;
+        list = $('div[name=vacancy-card-title]')
+
+        // b = list.closest(".vacancy-card");
+
+        // Loop through all list-items:
+        for (i = 0; i < (list.length - 1); i++) {
+            // start by saying there should be no switching:
+            shouldSwitch = false;
+            /* check if the next item should
+            switch place with the current item: */
+            if (list[i].innerHTML.toLowerCase() > list[i + 1].innerHTML.toLowerCase()) {
+                /* if next item is alphabetically
+                lower than current item, mark as a switch
+                and break the loop: */
+                shouldSwitch = true;
+                break;
+            }
+        }
+        if (shouldSwitch) {
+            /* If a switch has been marked, make the switch
+            and mark the switch as done: */
+            list[i].closest(".vacancy-card").before(list[i + 1].closest(".vacancy-card"));
+            switching = true;
+        }
+    }
+
+}
 
 // 7. Sort Vacancy by Date
 function sortByDate() {
