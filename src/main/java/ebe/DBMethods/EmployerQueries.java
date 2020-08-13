@@ -1023,7 +1023,7 @@ public class EmployerQueries extends DBQueries {
 //
 //        String SQL = finalSQL + booleanSQL + intValuesSQL;
 //
-        System.out.println(finalSQL);
+//        System.out.println(finalSQL);
 
         try {
             statement = connection.createStatement();

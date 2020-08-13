@@ -94,10 +94,6 @@ public class BaseController {
 
         mv.addAllObjects(allEmployers);
 
-        List<Integer> employersId = EmployerQrys.getFilteredEmployersIds(Arrays.asList(),Arrays.asList(),Arrays.asList(),Arrays.asList(),Arrays.asList(),Arrays.asList(),Arrays.asList(),Arrays.asList());
-        System.out.println("Employers to show: " + employersId.size());
-
-
         return mv;
     }
 

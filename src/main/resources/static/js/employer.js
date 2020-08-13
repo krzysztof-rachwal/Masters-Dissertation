@@ -209,8 +209,8 @@ function deleteEmployer(employerId) {
 
 function hideEmployers(ids){
 
-    $(".card").removeClass("d-none");
-    $(".card").addClass("d-none");
+    $(".employer-card").removeClass("d-none");
+    $(".employer-card").addClass("d-none");
 
 
     for (i = 0; i < ids.length; i++) {
@@ -250,7 +250,7 @@ function filterEmployers() {
         },
         success: function (data) {
             hideEmployers(data);
-            // console.log(data);
+            console.log(data);
         },
         error: function (data) {
             alert("FAIL");
