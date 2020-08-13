@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -58,12 +59,44 @@ public class BaseController {
 
         ModelAndView mv = new ModelAndView();
         mv.setViewName("searchEmployerPage");
+
         List<Employer> employers;
+        List<Employer> employerLanguage;
+        List<Employer> employerIndustrySectorAreas;
+        List<Employer> employerCurriculumAreas;
+        List<Employer> employerLocalAuthorities;
+        List<Employer> employerNumberOfEmployees;
+        List<Employer> employerCooperationType;
+        List<Employer> employerPreferences;
+        List<School> schoolAllNamesAndIds;
+
         employers = EmployerQrys.getAllEmployers();
+        employerLanguage = EmployerQrys.getAllLanguages();
+        employerLocalAuthorities = EmployerQrys.getAllLocalAuthorities();
+        employerIndustrySectorAreas = EmployerQrys.getAllIndustrySectors();
+        employerCurriculumAreas = EmployerQrys.getAllCurriculumAreas();
+        employerNumberOfEmployees = EmployerQrys.getAllNumberOfEmployersPossible();
+        employerCooperationType = EmployerQrys.getAllCooperationTypes();
+        employerPreferences = EmployerQrys.getAllPreferences();
+        schoolAllNamesAndIds = SchoolQrys.getAllSchoolNamesAndIds();
 
         Map<String,Object> allEmployers = new HashMap<String,Object>();
+
         allEmployers.put("allEmployers", employers);
+        allEmployers.put("allEmployerLanguage", employerLanguage);
+        allEmployers.put("allEmployerLocalAuthorities", employerLocalAuthorities);
+        allEmployers.put("allEmployerIndustrySectors", employerIndustrySectorAreas);
+        allEmployers.put("allEmployerCurriculumAreas", employerCurriculumAreas);
+        allEmployers.put("allEmployerNumberOfEmployees", employerNumberOfEmployees);
+        allEmployers.put("allEmployerCooperationType", employerCooperationType);
+        allEmployers.put("allEmployerPreferences", employerPreferences);
+        allEmployers.put("allSchoolNamesAndIds", schoolAllNamesAndIds);
+
         mv.addAllObjects(allEmployers);
+
+        List<Integer> employersId = EmployerQrys.getFilteredEmployersIds(Arrays.asList(),Arrays.asList(),Arrays.asList(),Arrays.asList(),Arrays.asList(),Arrays.asList(),Arrays.asList(),Arrays.asList());
+        System.out.println("Employers to show: " + employersId.size());
+
 
         return mv;
     }
