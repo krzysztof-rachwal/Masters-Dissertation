@@ -36,43 +36,43 @@
     <div class="flex-container">
         <div class="col-lg-3">
             <div class="mb-3">
-                <label for="industry-sector">Sector Areas</label><br>
-                <select id="industry-sector"  data-width="80%" class="selectpicker" multiple data-live-search="true">
+                               <label for="industry-sector">Sector Areas</label><br>
+                <select id="industry-sector"  data-width="100%" class="selectpicker" multiple data-live-search="true">
                     <option th:each="employerIndustrySector : ${allEmployerIndustrySectors}" th:value="${employerIndustrySector.getEmployerIndustrySectorID()}" th:text="${employerIndustrySector.getEmployerIndustrySectorName()}"></option>
                 </select>
             </div>
 
             <div class="mb-3">
                 <label for="employer-cooperation-type">Cooperation Type</label><br>
-                <select id="employer-cooperation-type" data-width="80%"   class="selectpicker" multiple data-live-search="true">
+                <select id="employer-cooperation-type" data-width="100%"   class="selectpicker" multiple data-live-search="true">
                     <option  th:each="employerCooperationType : ${allEmployerCooperationType}" th:value="${employerCooperationType.getEmployerCooperationTypeID()}" th:text="${employerCooperationType.getEmployerCooperationTypeName()}"></option>
                 </select>
             </div>
 
             <div class="mb-3">
                 <label for="curriculum-area">Curriculum Areas</label><br>
-                <select id="curriculum-area" data-width="80%" class="selectpicker" multiple data-live-search="true">
+                <select id="curriculum-area" data-width="100%" class="selectpicker" multiple data-live-search="true">
                     <option th:each="employerCurriculumAreas : ${allEmployerCurriculumAreas}" th:value="${employerCurriculumAreas.getEmployerAreaOfCurriculumID()}" th:text="${employerCurriculumAreas.getEmployAreaOfCurriculumName()}"></option>
                 </select>
             </div>
 
             <div class="mb-3">
                 <label for="schools-attending">Schools Preferences</label><br>
-                <select class="selectpicker"  data-width="80%" multiple data-live-search="true" id="schools-attending">
+                <select class="selectpicker"  data-width="100%" multiple data-live-search="true" id="schools-attending">
                     <option  th:each="school : ${allSchoolNamesAndIds}" th:value="${school.getSchoolID()}" th:text="${school.getSchoolName()}"></option>
                 </select>
             </div>
 
             <div class="mb-3">
                 <label for="employer-preferences">Preferences</label><br>
-                <select class="selectpicker"  data-width="80%" multiple data-live-search="true" id="employer-preferences">
+                <select class="selectpicker"  data-width="100%" multiple data-live-search="true" id="employer-preferences">
                     <option  th:each="employerPreferences : ${allEmployerPreferences}" th:value="${employerPreferences.getEmployerPreferencesID()}" th:text="${employerPreferences.getEmployerPreferencesName()}"></option>
                 </select>
             </div>
 
             <div class="mb-3">
                 <label for="employer-language">Foreign Language</label><br>
-                <select class="selectpicker" data-width="80%" multiple data-live-search="true" id="employer-language">
+                <select class="selectpicker" data-width="100%" multiple data-live-search="true" id="employer-language">
                     <option  th:each="employerLanguage : ${allEmployerLanguage}" th:value="${employerLanguage.getEmployerLanguageID()}" th:text="${employerLanguage.getEmployerLanguageName()}"></option>
                 </select>
             </div>
@@ -87,7 +87,7 @@
 
                 <div class="form-group">
                     <label for="local-authorities">Local Authorities</label><br>
-                    <select class="selectpicker" data-width="90%" multiple data-live-search="true" id="local-authorities">
+                    <select class="selectpicker" data-width="100%" multiple data-live-search="true" id="local-authorities">
                         <option  th:each="employerLocalAuthority : ${allEmployerLocalAuthorities}" th:value="${employerLocalAuthority.getEmployerLocalAuthorityID()}"  th:text="${employerLocalAuthority.getEmployerLocalAuthorityName()}"></option>
                     </select>
                 </div>
