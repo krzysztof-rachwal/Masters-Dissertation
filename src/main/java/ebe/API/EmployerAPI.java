@@ -288,7 +288,6 @@ public class EmployerAPI {
         }
 
         if(createEmployerAlumniName.length()!=0) {
-            System.out.println("-----------------------------enter on create");
             System.out.println(createEmployerAlumniName.length());
             //      9.  Create Alumni
             employerQueries.createAlumni(createEmployerAlumniNameList, createEmployerAlumniSchoolIDList);
