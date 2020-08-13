@@ -94,16 +94,30 @@ function updateThisEmployer() {
     let update_alumni_id = [];
     let update_alumni_name = [];
     let update_alumni_school = [];
-    $("input[name='update-employer-alumni-name']").each(function() {update_alumni_name.push($(this).val()); update_alumni_id.push($(this).attr("id"))});
-    $("select[name='update-employer-alumni-school']").each(function() {update_alumni_school.push($(this).val());});
+
+    // Update Alumni Name and Id
+    $("input[name='update-employer-alumni-name']").each(function() {
+        update_alumni_name.push($(this).val());
+        update_alumni_id.push($(this).attr("id"))
+    });
+    // Update Alumni School
+    $("select[name='update-employer-alumni-school']").each(function() {
+        update_alumni_school.push($(this).val());
+    });
 
     let updateEmployerAlumniID_url = "UpdateEmployerAlumniID=" + update_alumni_id;
     let updateEmployerAlumniName_url = "UpdateEmployerAlumniName=" + update_alumni_name;
     let updateEmployerAlumniSchoolID_url = "UpdateEmployerAlumniSchoolID=" +update_alumni_school;
 
-    if ($('input[name=update-employer-alumni-name]').attr("id")=== undefined){updateEmployerAlumniID_url = "UpdateEmployerAlumniID="}
-    if ($('input[name=update-employer-alumni-name]').val() === undefined){updateEmployerAlumniName_url = "UpdateEmployerAlumniName="}
-    if ($('select[name=update-employer-alumni-school]').val()=== undefined){updateEmployerAlumniSchoolID_url = "UpdateEmployerAlumniSchoolID="}
+    if ($('input[name=update-employer-alumni-name]').attr("id")=== undefined){
+        updateEmployerAlumniID_url = "UpdateEmployerAlumniID="
+    }
+    if ($('input[name=update-employer-alumni-name]').val() === undefined){
+        updateEmployerAlumniName_url = "UpdateEmployerAlumniName="
+    }
+    if ($('select[name=update-employer-alumni-school]').val()=== undefined){
+        updateEmployerAlumniSchoolID_url = "UpdateEmployerAlumniSchoolID="
+    }
 
     let fullUri = baseUri + "?" + "&" + EmployerID_url + "&" + EmployerName_url+ "&" + EmployerStatus_url + "&" + EmployerSummary_url + "&" + EmployerAddressCity_url + "&" + EmployerAddressStreet_url + "&"
         + EmployerAddressNumber_url + "&" + EmployerPostcode_url  + "&" + EmployerEmail_url  + "&" + ContactPersonNameSurname_url + "&"

@@ -170,7 +170,7 @@ public class EmployerAPI {
         ArrayList<String> updateEmployerAlumniNameList = new ArrayList<>();
         ArrayList<Integer> updateEmployerAlumniSchoolIDList = new ArrayList<>();
 
-        if(employerCooperationType.length() != 0){
+         if(employerCooperationType.length() != 0){
             for (String empID : employerCooperationType.split(",")) {
                 employerCooperationTypeList.add(Integer.parseInt(empID));
             }
@@ -277,18 +277,19 @@ public class EmployerAPI {
             employerQueries.updateSchoolEmployerLanguageIntersection(employerID, employerLanguageUsedList);
         }
 
-        //     7. Intersection Table - Employer / Local Authority
+         //     7. Intersection Table - Employer / Local Authority
         if(localAuthorities.length() != 0) {
             employerQueries.updateSchoolEmployerLocalAuthoritiesIntersection(employerID, employerLocalAuthorityList);
         }
 
-        if(updateEmployerAlumniIDList.isEmpty() ) {
+        if(!updateEmployerAlumniIDList.isEmpty()) {
             //      8.  Update Alumni
             employerQueries.updateAlumni(updateEmployerAlumniNameList, updateEmployerAlumniSchoolIDList, updateEmployerAlumniIDList);
         }
 
         if(createEmployerAlumniName.length()!=0) {
             System.out.println(createEmployerAlumniName.length());
+
             //      9.  Create Alumni
             employerQueries.createAlumni(createEmployerAlumniNameList, createEmployerAlumniSchoolIDList);
 
