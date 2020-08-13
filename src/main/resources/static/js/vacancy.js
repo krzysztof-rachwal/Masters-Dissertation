@@ -78,7 +78,9 @@ function UpdateThisVacancy() {
         },
         success: function (data) {
             if (data === true) {
-                location.assign("/vacancies")
+                localStorage.setItem("vacancyUpdated","true")
+                // location.assign("/vacancies")
+                location.reload()
             } else {
                 alert("There was an error, please try again.")
                 alert(data.responseText)

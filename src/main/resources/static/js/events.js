@@ -99,7 +99,9 @@ function UpdateThisEvent(){
         },
         success: function (data) {
             if (data === true) {
-                location.assign("/events")
+                localStorage.setItem("eventUpdated", 'true')
+                // location.assign("/events")
+                location.reload()
             } else {
                 alert("There was an error, please try again.")
                 alert(data.responseText)
@@ -148,4 +150,4 @@ function deleteEvent(eventId) {
 
 
 // For the Event Name selector
-$('.selectpicker').selectpicker();
+// $('.selectpicker').selectpicker();

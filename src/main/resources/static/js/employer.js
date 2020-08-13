@@ -125,6 +125,7 @@ function updateThisEmployer() {
         success: function (data) {
             if (data === true) {
                 // location.assign("/employers")
+                localStorage.setItem("employerUpdated","true")
                 location.reload();
             } else {
                 alert("There was an error, please try again.")
