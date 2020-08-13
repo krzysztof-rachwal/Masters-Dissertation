@@ -26,6 +26,13 @@
 </header>
 
 <div class="gel-content-container">
+    <div id="success_message" class="alert alert-success alert-dismissible fade d-none" role="alert">
+        <strong>Success!</strong> The event has been created!
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
     <div class="container-headline my-5">
         <span class="title-h2">Events</span>
         <a href="/add-events">
@@ -197,7 +204,31 @@
 
 <script th:src="@{../js/events.js}" src="../js/events.js"></script>
 <script>
-    $('.selectpicker').selectpicker();
+    eventAdded = localStorage.getItem("eventAdded");
+
+    if (eventAdded === "true"){
+        console.log("is the object added " + eventAdded)
+        document.getElementById('success_message').classList.remove('d-none')
+        document.getElementById('success_message').classList.add('show')
+        $("#success_message").fadeTo(2000, 500).slideUp(500, function() {
+            $("#success_message").slideUp(500);
+        });
+        localStorage.clear()
+    }
+
+    eventDeleted = localStorage.getItem("eventDeleted");
+
+    if (eventDeleted === "true"){
+        console.log("is the object deleted " + eventDeleted)
+        document.getElementById('success_message').innerHTML = 'The event is deleted!';
+        document.getElementById('success_message').classList.remove('d-none')
+        document.getElementById('success_message').classList.add('show')
+        $("#success_message").fadeTo(2000, 500).slideUp(500, function() {
+            $("#success_message").slideUp(500);
+        });
+        localStorage.clear()
+    }
+
 </script>
 
 </body>

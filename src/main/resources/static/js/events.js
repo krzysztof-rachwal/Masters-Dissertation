@@ -40,6 +40,7 @@ function createNewEvent() {
         },
         success: function (data) {
             if (data === true) {
+                localStorage.setItem("eventAdded","true");
                 location.assign("/events")
             } else {
                 alert("There was an error, please try again.")
@@ -98,7 +99,9 @@ function UpdateThisEvent(){
         },
         success: function (data) {
             if (data === true) {
-                location.assign("/events")
+                localStorage.setItem("eventUpdated", 'true')
+                // location.assign("/events")
+                location.reload()
             } else {
                 alert("There was an error, please try again.")
                 alert(data.responseText)
@@ -130,6 +133,7 @@ function deleteEvent(eventId) {
         },
         success: function (data) {
             if (data === true) {
+                localStorage.setItem("eventDeleted", "true")
                 location.assign("/events")
             } else {
                 alert("There was an error, please try again.")
@@ -284,4 +288,4 @@ $( document ).ready(function() {
 
 
 // For the Event Name selector
-$('.selectpicker').selectpicker();
+// $('.selectpicker').selectpicker();

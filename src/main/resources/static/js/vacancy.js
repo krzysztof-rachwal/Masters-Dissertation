@@ -20,7 +20,7 @@ function createVacancy() {
 
     var token = $("meta[name='_csrf']").attr("content");    // Used to bypass Spring Boot's CSRF protocol     -- SOlution taken from 'https://stackoverflow.com/questions/34747437/use-of-spring-csrf-with-ajax-rest-call-and-html-page-with-thymeleaf' on Nov 26th 2019
     var header = $("meta[name='_csrf_header']").attr("content");    // Used to bypass Spring Boot's CSRF protocol
-    console.log(fullUri)
+    console.log(fullUri);
 
     $.ajax({
         type: "GET", url: fullUri,
@@ -29,10 +29,11 @@ function createVacancy() {
         },
         success: function (data) {
             if (data === true) {
+                localStorage.setItem("vacAdded","true");
                 location.assign("/vacancies")
             } else {
-                alert("There was an error, please try again.")
-                alert(data.responseText)
+                alert("There was an error, please try again.");
+                alert(data.responseText);
                 alert(data)
             }
         },
@@ -42,9 +43,7 @@ function createVacancy() {
             alert(data.toString());
         }
     });
-
 };
-
 
 //2. Update Vacancy
 function UpdateThisVacancy() {
@@ -79,7 +78,9 @@ function UpdateThisVacancy() {
         },
         success: function (data) {
             if (data === true) {
-                location.assign("/vacancies")
+                localStorage.setItem("vacancyUpdated","true")
+                // location.assign("/vacancies")
+                location.reload()
             } else {
                 alert("There was an error, please try again.")
                 alert(data.responseText)
@@ -112,6 +113,7 @@ function deleteVacancy(vacancyId) {
         },
         success: function (data) {
             if (data === true) {
+                localStorage.setItem("vacancyDeleted", "true")
                 location.assign("/vacancies")
             } else {
                 alert("There was an error, please try again.")
@@ -272,4 +274,4 @@ $( document ).ready(function() {
 
 
 // For the Vacancy Name selector
-$('.selectpicker').selectpicker();
+// $('.selectpicker').selectpicker();

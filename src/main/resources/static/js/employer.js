@@ -43,6 +43,7 @@ function createNewEmployer() {
         },
         success: function (data) {
             if (data === true) {
+                localStorage.setItem("empAdded","true");
                 location.assign("/employers")
             } else {
                 alert("There was an error, please try again.")
@@ -124,6 +125,7 @@ function updateThisEmployer() {
         success: function (data) {
             if (data === true) {
                 // location.assign("/employers")
+                localStorage.setItem("employerUpdated","true")
                 location.reload();
             } else {
                 alert("There was an error, please try again.")
@@ -157,6 +159,7 @@ function deleteEmployer(employerId) {
         },
         success: function (data) {
             if (data === true) {
+                localStorage.setItem("employerDeleted", "true")
                 location.assign("/employers")
             } else {
                 alert("There was an error, please try again.")
