@@ -13,7 +13,9 @@
     <link rel="stylesheet" media="all" href="https://careerswales.gov.wales/sites/default/files/css/css_yFFWPpQsZCFeHMtvOieuCWLiTEiz--tT0otLunNJdLs.css"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css"/>
+
     <link th:href="@{../css/ebe_style.css}" href="../css/ebe_style.css" rel="stylesheet" />
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
     <title>Employers</title>
@@ -103,11 +105,11 @@
                 <div class="row">
                     <!-- Search -->
                     <div class="input-group col-8">
-                        <input type="text" class="form-control input-border" placeholder="Search">
+                        <input type="text" class="form-control input-border" onkeydown="searchEmployer()" id="employer-search"  placeholder="Search">
                         <div class="input-group-append">
-                                <span class="input-group-text input-border">
-                                    <i class="fa fa-search"></i>
-                                </span>
+                            <button class="input-group-text input-border" onclick="searchEmployer()">
+                                <i class="fa fa-search"></i>
+                            </button>
                         </div>
                     </div>
 
@@ -118,9 +120,9 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text input-border">Sort By:</span>
                             </div>
-                            <select class="form-control input-border">
-                                <option selected="selected">Date</option>
-                                <option>Name</option>
+                            <select class="form-control input-border selectpicker" name="employer-sort-by">
+                                <option value="Date">Date</option>
+                                <option value="Name">Name</option>
                             </select>
                         </div>
                     </div>
@@ -131,9 +133,22 @@
                 <!-- Cards -->
 
                 <div  class="list-employers">
-                    <div class="gel-content-row" th:each="employer : ${allEmployers}"  >
-                        <article class="card js-card card--style-icon card--100" gel-processed="processed" th:id="${employer.getEmployerID()}">
-                            <a th:href="@{/profile-employer(employerId=${employer.getEmployerID()})}" class="card__inner" gel-processed="processed" title="Link to Card heading and link title">
+                    <div class="gel-content-row employer-card" th:each="employer : ${allEmployers}"  th:id="${employer.getEmployerID()}">
+                        <input type="hidden" class="searchable" th:value="${employer.getEmployerAddressCity()}">
+                        <input type="hidden" class="searchable" th:value="${employer.getEmployerAddressStreet()}">
+                        <input type="hidden" class="searchable" th:value="${employer.getEmployerAddressNumber()}">
+                        <input type="hidden" class="searchable" th:value="${employer.getEmployerPostcode()}">
+                        <input type="hidden" class="searchable" th:value="${employer.getEmployerEmail()}">
+                        <input type="hidden" class="searchable" th:value="${#strings.capitalize(employer.getContactPersonNameSurname())}">
+                        <input type="hidden" class="searchable" th:value="${#strings.capitalize(employer.getContactPersonPosition())}">
+                        <input type="hidden" class="searchable" th:value="${employer.getEmployerPhone()}">
+                        <input type="hidden" class="searchable" th:value="${employer.getEmployerWebsite()}">
+                        <input type="hidden" class="searchable" th:value="${employer.getEmployerTwitter()}">
+                        <input type="hidden" class="searchable" th:value="${employer.getEmployerFB()}">
+                        <input type="hidden" class="searchable" th:value="${#strings.capitalize(employer.getContactPersonNameSurname())}">
+                        <input type="hidden" class="searchable" th:value="${#strings.capitalize(employer.getNotes())}">
+                        <article class="card js-card card--style-icon card--100" gel-processed="processed">
+                            <a th:href="@{/profile-employer(employerId=${employer.getEmployerID()})}" class="card__inner" gel-processed="processed">
                                 <div class="card__content">
                                     <div class="content__image">
                                         <div>
@@ -141,8 +156,8 @@
                                         </div>
                                     </div>
                                     <div class="content__body">
-                                        <div class="body__title" th:text="${employer.getEmployerName()}"></div>
-                                        <div class="body__body" th:text="${employer.getCompanySummary()}"></div>
+                                        <div class="body__title searchable"  name="employer-card-title" th:text="${#strings.capitalize(employer.getEmployerName())}"></div>
+                                        <div class="body__body searchable" th:text="${#strings.capitalize(employer.getCompanySummary())}"></div>
                                     </div>
                                 </div>
                             </a>
@@ -156,6 +171,9 @@
 
 <footer th:replace="fragments/footerTemplate :: footer"></footer>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 <script type="text/javascript" src="https://careerswales.gov.wales/styleguide/assets/js/gel-styleguide.js"></script>
 <script type="text/javascript" src="https://careerswales.gov.wales/styleguide/assets/js/gel-elements-loader.js"></script>
@@ -163,6 +181,8 @@
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
 <script type="application/javascript;charset=utf-8" src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/i18n/defaults-*.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
 
 <script th:src="@{../js/employer.js}" src="../js/employer.js"></script>
 
@@ -177,7 +197,7 @@
         });
     });
 
-
+    $('.selectpicker').selectpicker();
 
 </script>
 

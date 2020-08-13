@@ -173,7 +173,6 @@ function deleteEmployer(employerId) {
 
 
     //4. Delete Alumni
-
     function deleteAlumni(alumniID) {
         let baseUri = "/api/delete/employer/alumni";
         let alumniId_url = "alumniID=" + alumniID.val();
@@ -207,8 +206,6 @@ function deleteEmployer(employerId) {
 
         });
 }
-
-// 5. HideEmployers
 
 function hideEmployers(ids){
 
@@ -264,3 +261,114 @@ function filterEmployers() {
 
 
 }
+
+// 4.Search Employer
+function searchEmployer(){
+    // 4.1 Get the value from Search input
+     let val = $('#employer-search').val()
+
+    //4.2  If value is null exit the function
+    if (val==""){
+        $(".employer-card").removeClass("d-none")
+    }
+
+    //4.3 Transform the first letters in a word to uppercase
+    let val2 = val.charAt(0).toUpperCase() + val.slice(1);
+
+    //4.4 Remove class vacancy found - to restart the "search"
+    $(".employer-found").removeClass("employer-found")
+    $(".employer-card").removeClass("d-none")
+
+    //4.5 Add classes for the right values
+    $(".list-employers").find(".searchable:contains('"+val2+"')").closest(".employer-card").addClass("employer-found")
+
+    //4.6 Remove the cards
+    $(".list-employers").find(".searchable:not(:contains('"+val2+"'))").closest(".employer-card").addClass("d-none")
+
+    //4.7 Show the "Right" Card
+    $(".employer-found").removeClass("d-none")
+
+}
+
+// 5. Sort Events by Name
+function sortByName(){
+    var list, i, switching, shouldSwitch;
+    switching = true;
+    /* Make a loop that will continue until
+    no switching has been done: */
+    while (switching) {
+        // start by saying: no switching is done:
+        switching = false;
+        list = $('div[name=employer-card-title]')
+
+        // Loop through all list-items:
+        for (i = 0; i < (list.length - 1); i++) {
+            // start by saying there should be no switching:
+            shouldSwitch = false;
+            /* check if the next item should
+            switch place with the current item: */
+            if (list[i].innerHTML.toLowerCase() > list[i + 1].innerHTML.toLowerCase()) {
+                /* if next item is alphabetically
+                lower than current item, mark as a switch
+                and break the loop: */
+                shouldSwitch = true;
+                break;
+            }
+        }
+        if (shouldSwitch) {
+            /* If a switch has been marked, make the switch
+            and mark the switch as done: */
+            list[i].closest(".employer-card").before(list[i + 1].closest(".employer-card"));
+            switching = true;
+        }
+    }
+
+}
+
+// 6. Sort Vacancy by Date
+function sortByDate() {
+    let list = $('input[name=employer]').val()
+
+    // Loop through all list-items:
+    for (i = 0; i < (list.length - 1); i++) {
+        let listCompare1 = list[i].innerHTML.split("-");
+
+        for (j = 0; j < (list.length - 1); j++) {
+            let listCompare2 = list[j].innerHTML.split("-");
+
+            if (listCompare1[0] < listCompare2[0]) {
+                // alert(" Part 1 ---- listCompare1: " + listCompare1 + " listCompare2: " + listCompare2)
+                list[i].closest(".employer-card").before(list[j].closest(".employer-card"));
+            }
+
+            if (listCompare1[0] == listCompare2[0] && listCompare1[1] < listCompare2[1]) {
+                // alert("Part 2 --- listCompare1: " + listCompare1 + " listCompare2: " + listCompare2)
+                list[i].closest(".employer-card").before(list[j].closest(".employer-card"));
+            }
+            if (listCompare1[0] == listCompare2[0] && listCompare1[1] == listCompare2[1] && listCompare1[2] < listCompare2[2]) {
+                // alert("Part 3 --- listCompare1: " + listCompare1 + " listCompare2: " + listCompare2)
+                list[i].closest(".employer-card").before(list[j].closest(".employer-card"));
+            }
+
+        }
+    }
+}
+
+//7. On document Ready
+$( document ).ready(function() {
+    $("select[name=employer-sort-by]").change(function(){
+        if($(this).val()=="Name"){
+            sortByName();
+        }
+
+
+        if($(this).val()=="Date"){
+            sortByDate();
+        }
+
+    });
+});
+
+
+// For the Employer Name selector
+$('.selectpicker').selectpicker();
