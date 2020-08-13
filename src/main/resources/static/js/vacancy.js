@@ -113,6 +113,7 @@ function deleteVacancy(vacancyId) {
         },
         success: function (data) {
             if (data === true) {
+                localStorage.setItem("vacancyDeleted", "true")
                 location.assign("/vacancies")
             } else {
                 alert("There was an error, please try again.")

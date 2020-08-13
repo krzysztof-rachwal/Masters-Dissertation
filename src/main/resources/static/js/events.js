@@ -133,6 +133,7 @@ function deleteEvent(eventId) {
         },
         success: function (data) {
             if (data === true) {
+                localStorage.setItem("eventDeleted", "true")
                 location.assign("/events")
             } else {
                 alert("There was an error, please try again.")

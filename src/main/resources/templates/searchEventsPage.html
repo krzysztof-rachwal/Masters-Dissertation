@@ -197,6 +197,19 @@
         localStorage.clear()
     }
 
+    eventDeleted = localStorage.getItem("eventDeleted");
+
+    if (eventDeleted === "true"){
+        console.log("is the object deleted " + eventDeleted)
+        document.getElementById('success_message').innerHTML = 'The event is deleted!';
+        document.getElementById('success_message').classList.remove('d-none')
+        document.getElementById('success_message').classList.add('show')
+        $("#success_message").fadeTo(2000, 500).slideUp(500, function() {
+            $("#success_message").slideUp(500);
+        });
+        localStorage.clear()
+    }
+
 </script>
 
 </body>

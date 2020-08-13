@@ -159,6 +159,7 @@ function deleteEmployer(employerId) {
         },
         success: function (data) {
             if (data === true) {
+                localStorage.setItem("employerDeleted", "true")
                 location.assign("/employers")
             } else {
                 alert("There was an error, please try again.")
