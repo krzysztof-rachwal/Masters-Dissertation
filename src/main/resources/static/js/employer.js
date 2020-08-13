@@ -272,14 +272,14 @@ function sortByName(){
 
 // 6. Sort Vacancy by Date
 function sortByDate() {
-    var list = $('input[name=employer]').val()
+    let list = $('input[name=employer]').val()
 
     // Loop through all list-items:
     for (i = 0; i < (list.length - 1); i++) {
-        var listCompare1 = list[i].innerHTML.split("-");
+        let listCompare1 = list[i].innerHTML.split("-");
 
         for (j = 0; j < (list.length - 1); j++) {
-            var listCompare2 = list[j].innerHTML.split("-");
+            let listCompare2 = list[j].innerHTML.split("-");
 
             if (listCompare1[0] < listCompare2[0]) {
                 // alert(" Part 1 ---- listCompare1: " + listCompare1 + " listCompare2: " + listCompare2)
@@ -295,10 +295,6 @@ function sortByDate() {
                 list[i].closest(".employer-card").before(list[j].closest(".employer-card"));
             }
 
-
-            // if (list[i].textContent > list[j].textContent) {
-            //     list[i].closest(".vacancy-card").before(list[j].closest(".vacancy-card"));
-            // }
         }
     }
 }
@@ -309,6 +305,8 @@ $( document ).ready(function() {
         if($(this).val()=="Name"){
             sortByName();
         }
+
+
         if($(this).val()=="Date"){
             sortByDate();
         }

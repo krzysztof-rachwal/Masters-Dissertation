@@ -129,8 +129,11 @@
                                 <span class="input-group-text input-border">Sort By:</span>
                             </div>
                             <select class="form-control input-border selectpicker" name="event-sort-by">
-                                <option selected="selected" value="Date">Date</option>
-                                <option value="Name">Name</option>
+                                <option selected="selected" value="Featured">Featured</option>
+                                <option value="NameUp">Name Asc</option>
+                                <option value="NameDown">Name Desc</option>
+                                <option value="DateUp">Date Asc</option>
+                                <option value="DateDown">Date Desc</option>
                             </select>
                         </div>
                     </div>
@@ -142,7 +145,6 @@
                 <!-- Cards -->
                 <div class="list-events">
                     <div class="gel-content-row event-card"  th:each="event : ${allEvents}" th:id="${event.getEventID()}">
-                        <input type="hidden" class="searchable" name="event-card-date" th:value="${event.getEventDateAndTime()}">
                         <input type="hidden" class="searchable" th:value="${#strings.capitalize(event.getEventVenueName())}">
                         <input type="hidden" class="searchable" th:value="${#strings.capitalize(event.getEventAddressCity())}">
                         <input type="hidden" class="searchable" th:value="${#strings.capitalize(event.getEventAddressStreet())}">
@@ -162,7 +164,10 @@
                                     </div>
                                     <div class="content__body">
                                         <div class="body__title searchable" name="event-card-title" th:text="${#strings.capitalize(event.getEventName())}"></div>
-                                        <div class="body__body searchable" name="event-card-summary" th:text="${event.getEventSummary()} "></div>
+                                        <div class="body__body searchable">
+                                            <h5 class="searchable" name="event-card-date" th:text="${event.getEventDateAndTime()}"></h5>
+                                            <h5 class="searchable" name="event-card-summary" th:text="${event.getEventSummary()} "></h5>
+                                        </div>
                                     </div>
                                 </div>
                             </a>

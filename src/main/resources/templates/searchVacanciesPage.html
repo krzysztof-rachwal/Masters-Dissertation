@@ -109,8 +109,11 @@
                                 <span class="input-group-text input-border">Sort By:</span>
                             </div>
                             <select class="form-control input-border selectpicker" name="vacancy-sort-by">
-                                <option selected="selected" value="Date">Date</option>
-                                <option value="Name">Name</option>
+                                <option selected="selected" value="Featured">Featured</option>
+                                <option value="NameUp">Name Asc</option>
+                                <option value="NameDown">Name Desc</option>
+                                <option value="DateUp">Date Asc</option>
+                                <option value="DateDown">Date Desc</option>
                             </select>
                         </div>
                     </div>
@@ -138,6 +141,7 @@
                                         <div class="body__body">
                                             <h5 th:each=" employer : ${AllEmployerNamesAndIds}" class="searchable" th:remove="${employer.getEmployerID() == vacancy.getEmployerID()} ? none : all" th:text="${#strings.capitalize(employer.getEmployerName())}"></h5>
                                             <h5 th:text="${vacancy.getDeadlineForApplication()}" name="vacancy-card-date"  class="searchable"></h5>
+                                            <h5 th:text="${#strings.capitalize(vacancy.getVacancySummary())}" name="vacancy-card-date"  class="searchable"></h5>
                                         </div>
                                     </div>
                                 </div>

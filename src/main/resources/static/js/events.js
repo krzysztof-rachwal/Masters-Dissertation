@@ -173,7 +173,7 @@ function searchEvents(){
 }
 
 // 5. Sort Events by Name
-function sortByName(){
+function sortByName(type){
     var list, i, switching, shouldSwitch;
     switching = true;
     /* Make a loop that will continue until
@@ -189,12 +189,24 @@ function sortByName(){
             shouldSwitch = false;
             /* check if the next item should
             switch place with the current item: */
-            if (list[i].innerHTML.toLowerCase() > list[i + 1].innerHTML.toLowerCase()) {
-                /* if next item is alphabetically
-                lower than current item, mark as a switch
-                and break the loop: */
-                shouldSwitch = true;
-                break;
+            if (type =="up") {
+                if (list[i].innerHTML.toLowerCase() > list[i + 1].innerHTML.toLowerCase()) {
+                    /* if next item is alphabetically
+                    lower than current item, mark as a switch
+                    and break the loop: */
+                    shouldSwitch = true;
+                    break;
+                }
+            }
+
+            if (type =="down") {
+                if (list[i].innerHTML.toLowerCase() < list[i + 1].innerHTML.toLowerCase()) {
+                    /* if next item is alphabetically
+                    lower than current item, mark as a switch
+                    and break the loop: */
+                    shouldSwitch = true;
+                    break;
+                }
             }
         }
         if (shouldSwitch) {
@@ -208,34 +220,42 @@ function sortByName(){
 }
 
 // 6. Sort Vacancy by Date
-function sortByDate() {
-    var list = $('input[name=event-card-date]').val()
+function sortByDate(type) {
+    let list = $('h5[name=event-card-date]').val()
 
     // Loop through all list-items:
     for (i = 0; i < (list.length - 1); i++) {
-        var listCompare1 = list[i].innerHTML.split("-");
+        let listCompare1 = list[i].innerHTML.split("-");
 
         for (j = 0; j < (list.length - 1); j++) {
-            var listCompare2 = list[j].innerHTML.split("-");
+            let listCompare2 = list[j].innerHTML.split("-");
+            if(type=="down") {
+                if (listCompare1[0] < listCompare2[0]) {
+                    list[i].closest(".event-card").before(list[j].closest(".event-card"));
+                }
 
-            if (listCompare1[0] < listCompare2[0]) {
-                // alert(" Part 1 ---- listCompare1: " + listCompare1 + " listCompare2: " + listCompare2)
-                list[i].closest(".event-card").before(list[j].closest(".event-card"));
+                if (listCompare1[0] == listCompare2[0] && listCompare1[1] < listCompare2[1]) {
+                    list[i].closest(".event-card").before(list[j].closest(".event-card"));
+                }
+                if (listCompare1[0] == listCompare2[0] && listCompare1[1] == listCompare2[1] && listCompare1[2] < listCompare2[2]) {
+                    list[i].closest(".event-card").before(list[j].closest(".event-card"));
+                }
             }
+            if(type=="up"){
+                if (listCompare1[0] > listCompare2[0]) {
+                    // alert(" Part 1 ---- listCompare1: " + listCompare1 + " listCompare2: " + listCompare2)
+                    list[i].closest(".event-card").before(list[j].closest(".event-card"));
+                }
 
-            if (listCompare1[0] == listCompare2[0] && listCompare1[1] < listCompare2[1]) {
-                // alert("Part 2 --- listCompare1: " + listCompare1 + " listCompare2: " + listCompare2)
-                list[i].closest(".event-card").before(list[j].closest(".event-card"));
+                if (listCompare1[0] == listCompare2[0] && listCompare1[1] > listCompare2[1]) {
+                    // alert("Part 2 --- listCompare1: " + listCompare1 + " listCompare2: " + listCompare2)
+                    list[i].closest(".event-card").before(list[j].closest(".event-card"));
+                }
+                if (listCompare1[0] == listCompare2[0] && listCompare1[1] == listCompare2[1] && listCompare1[2] > listCompare2[2]) {
+                    // alert("Part 3 --- listCompare1: " + listCompare1 + " listCompare2: " + listCompare2)
+                    list[i].closest(".event-card").before(list[j].closest(".event-card"));
+                }
             }
-            if (listCompare1[0] == listCompare2[0] && listCompare1[1] == listCompare2[1] && listCompare1[2] < listCompare2[2]) {
-                // alert("Part 3 --- listCompare1: " + listCompare1 + " listCompare2: " + listCompare2)
-                list[i].closest(".event-card").before(list[j].closest(".event-card"));
-            }
-
-
-            // if (list[i].textContent > list[j].textContent) {
-            //     list[i].closest(".vacancy-card").before(list[j].closest(".vacancy-card"));
-            // }
         }
     }
 }
@@ -243,11 +263,20 @@ function sortByDate() {
 //7. On document Ready
 $( document ).ready(function() {
     $("select[name=event-sort-by]").change(function(){
-        if($(this).val()=="Name"){
-            sortByName();
+        if($(this).val()=="NameUp"){
+            sortByName("up");
         }
-        if($(this).val()=="Date"){
-            sortByDate();
+
+        if($(this).val()=="NameDown"){
+            sortByName("down");
+        }
+
+        if($(this).val()=="DateUp"){
+            sortByDate("up");
+        }
+
+        if($(this).val()=="DateDown"){
+            sortByDate("down");
         }
 
     });
