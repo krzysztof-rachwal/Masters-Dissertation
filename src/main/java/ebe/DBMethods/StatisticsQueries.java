@@ -1,5 +1,6 @@
 package ebe.DBMethods;
 
+import ebe.DBClasses.Event;
 import ebe.DBClasses.School;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -10,7 +11,9 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Repository
@@ -252,6 +255,61 @@ public class StatisticsQueries extends DBQueries {
         }
         return schoolMap;
     }
+
+    private int getLocalAuthID(int schoolID){
+        String query = String.format("select la.LocalAuthorityID as schoolAuthorityID " +
+                "FROM School sc " +
+                "INNER JOIN PostcodeList pc ON pc.PostcodeName = sc.SchoolPostcode " +
+                "INNER JOIN LocalAuthorityList la ON la.LocalAuthorityID = pc.LocalAuthorityID " +
+                "WHERE sc.SchoolID = \"%s\"; ", schoolID);
+        int localAuthID = 0;
+        ResultSet rs;
+        try {
+            connection = ConnectionFactory.getConnection();
+            statement = connection.createStatement();
+            rs = statement.executeQuery(query);
+            while (rs.next()) {
+                localAuthID = rs.getInt("schoolAuthorityID");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return localAuthID;
+    }
+
+    public List<Event> getEventsForSchool(int schoolID){
+        int localAuthID = getLocalAuthID(schoolID);
+        String query = String.format("select eve.* " +
+                "From Event eve " +
+                "WHERE eve.EventVenuePostcode IN (SELECT PostcodeName " +
+                "FROM PostcodeList " +
+                "WHERE LocalAuthorityID = \"%s\");", localAuthID);
+        List<Event> events = new ArrayList<>();
+        ResultSet rs;
+        Event event;
+        try {
+            connection = ConnectionFactory.getConnection();
+            statement = connection.createStatement();
+            rs = statement.executeQuery(query);
+            while (rs.next()) {
+                event = new Event(rs.getInt("EventID"), rs.getString("EventName"),
+                        rs.getInt("TypeOfEventID"), rs.getDate("EventDateAndTime"),
+                        rs.getString("EventVenueName"),rs.getString("EventAddressCity"),
+                        rs.getString("EventAddressStreet"),rs.getString("EventAddressNumber"),
+                        rs.getString("EventVenuePostcode"),rs.getString("EventSummary"),
+                        rs.getBoolean("isPublic"), rs.getBoolean("isCancelled"),
+                        rs.getString("NameOfAdviser"), rs.getInt("NumberOfAttendees"),
+                        rs.getBoolean("PromotesApprenticeships"), rs.getBoolean("PromotesWelshLanguage"),
+                        rs.getBoolean("ChallengesGenderStereotypes"));
+
+                events.add(event);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return events;
+    }
+
 }
 
 

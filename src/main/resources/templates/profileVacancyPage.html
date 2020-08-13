@@ -175,10 +175,10 @@
         </div>
         <div class="row">
             <div class="col-lg-3">
-                <p><strong>Vacancy description</strong></p>
+                <p><strong>Vacancy Summary</strong></p>
             </div>
             <div class="col-lg-9">
-                <p th:text="${vacancy.getVacancySummary()}"></p>
+                <p th:text="${#strings.capitalize(vacancy.getVacancySummary())}"></p>
             </div>
         </div>
         <div class="row">
@@ -186,7 +186,7 @@
                 <p><strong>Link to website</strong></p>
             </div>
             <div class="col-lg-9">
-                <p th:text="${vacancy.getVacancyLink()}"></p>
+                <a th:href="@{'https://'+${vacancy.getVacancyLink()}}" th:text="${vacancy.getVacancyLink()}"></a>
             </div>
         </div>
         <div class="row">

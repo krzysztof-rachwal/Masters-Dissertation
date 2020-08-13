@@ -13,9 +13,12 @@
     <link rel="stylesheet" media="all" href="https://careerswales.gov.wales/sites/default/files/css/css_yFFWPpQsZCFeHMtvOieuCWLiTEiz--tT0otLunNJdLs.css"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css"/>
+
     <link th:href="@{../css/ebe_style.css}" href="../css/ebe_style.css" rel="stylesheet" />
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
-    <title>Events Search</title>
+    <title>Events</title>
 </head>
 
 <body>
@@ -117,11 +120,11 @@
                 <div class="row">
                     <!-- Search -->
                     <div class="input-group col-8">
-                        <input type="text" class="form-control input-border" placeholder="Search">
+                        <input type="text" class="form-control input-border" onkeydown="searchEvents()" id="event-search"  placeholder="Search">
                         <div class="input-group-append">
-                                <span class="input-group-text input-border">
-                                    <i class="fa fa-search"></i>
-                                </span>
+                            <button class="input-group-text input-border" onclick="searchEvents()">
+                                <i class="fa fa-search"></i>
+                            </button>
                         </div>
                     </div>
 
@@ -132,21 +135,34 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text input-border">Sort By:</span>
                             </div>
-                            <select class="form-control input-border">
-                                <option selected="selected">Date</option>
-                                <option>Name</option>
+                            <select class="form-control input-border selectpicker" name="event-sort-by">
+                                <option selected="selected" value="Featured">Featured</option>
+                                <option value="NameUp">Name Asc</option>
+                                <option value="NameDown">Name Desc</option>
+                                <option value="DateUp">Date Asc</option>
+                                <option value="DateDown">Date Desc</option>
                             </select>
                         </div>
                     </div>
+
                 </div>
 
                 <br>
 
                 <!-- Cards -->
-                <div class="list-employers">
-                    <div class="gel-content-row"  th:each="event : ${allEvents}">
-                        <article class="card js-card card--style-icon card--100" gel-processed="processed"  th:id="${event.getEventID()}">
-                            <a th:href="@{/profile-event(eventId=${event.getEventID()})}" class="card__inner" gel-processed="processed" title="Link to Card heading and link title">
+                <div class="list-events">
+                    <div class="gel-content-row event-card"  th:each="event : ${allEvents}" th:id="${event.getEventID()}">
+                        <input type="hidden" class="searchable" th:value="${#strings.capitalize(event.getEventVenueName())}">
+                        <input type="hidden" class="searchable" th:value="${#strings.capitalize(event.getEventAddressCity())}">
+                        <input type="hidden" class="searchable" th:value="${#strings.capitalize(event.getEventAddressStreet())}">
+                        <input type="hidden" class="searchable" th:value="${#strings.capitalize(event.getEventAddressNumber())}">
+                        <input type="hidden" class="searchable" th:value="${#strings.capitalize(event.getEventVenuePostcode())}">
+                        <input type="hidden" class="searchable" th:value="${#strings.capitalize(event.getNameOfAdviser())}">
+                        <input type="hidden" class="searchable" th:value="${#strings.capitalize(event.getEventVenuePostcode())}">
+                        <input type="hidden" class="searchable" th:value="${#strings.capitalize(event.getEventVenuePostcode())}">
+
+                        <article class="card js-card card--style-icon card--100" gel-processed="processed">
+                            <a th:href="@{/profile-event(eventId=${event.getEventID()})}" class="card__inner" gel-processed="processed">
                                 <div class="card__content">
                                     <div class="content__image">
                                         <div>
@@ -154,8 +170,11 @@
                                         </div>
                                     </div>
                                     <div class="content__body">
-                                        <div class="body__title" th:text="${event.getEventName()}"></div>
-                                        <div class="body__body" th:text="${event.getEventSummary()} "></div>
+                                        <div class="body__title searchable" name="event-card-title" th:text="${#strings.capitalize(event.getEventName())}"></div>
+                                        <div class="body__body searchable">
+                                            <h5 class="searchable" name="event-card-date" th:text="${event.getEventDateAndTime()}"></h5>
+                                            <h5 class="searchable" name="event-card-summary" th:text="${event.getEventSummary()} "></h5>
+                                        </div>
                                     </div>
                                 </div>
                             </a>
@@ -182,8 +201,8 @@
 <script type="text/javascript" src="https://careerswales.gov.wales/styleguide/assets/js/gel-elements.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
-<script th:src="@{../js/events.js}" src="../js/events.js"></script>
 
+<script th:src="@{../js/events.js}" src="../js/events.js"></script>
 <script>
     eventAdded = localStorage.getItem("eventAdded");
 
