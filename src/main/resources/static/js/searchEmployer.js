@@ -1,3 +1,16 @@
+// 0. HideEmployers
+
+function hideEmployers(ids){
+
+    $(".card").removeClass("d-none");
+    $(".card").addClass("d-none");
+
+
+    for (i = 0; i < ids.length; i++) {
+        $("#"+ids[i]).removeClass("d-none");
+    }
+}
+
 
 //1. FilterEmployers
 function filterEmployers() {
@@ -29,7 +42,8 @@ function filterEmployers() {
             xhr.setRequestHeader(header, token);
         },
         success: function (data) {
-            console.log(data);
+            hideEmployers(data);
+            // console.log(data);
         },
         error: function (data) {
             alert("FAIL");
