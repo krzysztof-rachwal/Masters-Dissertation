@@ -139,6 +139,7 @@ public class BaseController {
 
         employerInfo = EmployerQrys.getAllEmployers();
         employerLanguage = EmployerQrys.getAllLanguages();
+        employerChosenLanguage = EmployerQrys.getEmployerLanguages(id);
         employerLocalAuthorities = EmployerQrys.getAllLocalAuthorities();
         employerChosenLocalAuthorities = EmployerQrys.getChosenLocalAuthorities(employer.getEmployerID());
 
@@ -161,6 +162,9 @@ public class BaseController {
         allEmployer.put("employer", employer);
         allEmployer.put("allEmployer", employerInfo);
         allEmployer.put("allEmployerLanguage", employerLanguage);
+        allEmployer.put("allEmployerLanguagePreference",employerChosenLanguage);
+        System.out.println("------------------------------------------");
+        System.out.println(employerChosenLanguage);
         allEmployer.put("allEmployerLocalAuthorities", employerLocalAuthorities);
         allEmployer.put("allEmployerChosenLocalAuthorities", employerChosenLocalAuthorities);
         allEmployer.put("allEmployerIndustrySectors", employerIndustrySectorAreas);
