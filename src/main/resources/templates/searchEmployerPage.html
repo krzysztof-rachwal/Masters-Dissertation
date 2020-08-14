@@ -194,7 +194,7 @@
         console.log("is the object added " + empAdded)
         document.getElementById('success_message').classList.remove('d-none')
         document.getElementById('success_message').classList.add('show')
-        $("#success_message").fadeTo(2000, 500).slideUp(500, function() {
+        $("#success_message").fadeTo(3000, 500).slideUp(500, function() {
             $("#success_message").slideUp(500);
         });
         localStorage.clear()
@@ -204,10 +204,10 @@
 
     if (employerDeleted === "true"){
         console.log("is the object deleted " + empAdded)
-        document.getElementById('success_message').innerHTML = 'The employer is deleted!'
+        document.getElementById('success_message').innerHTML = "<strong> Success! </strong>" + 'The employer is deleted!';
         document.getElementById('success_message').classList.remove('d-none')
         document.getElementById('success_message').classList.add('show')
-        $("#success_message").fadeTo(2000, 500).slideUp(500, function() {
+        $("#success_message").fadeTo(3000, 500).slideUp(500, function() {
             $("#success_message").slideUp(500);
         });
         localStorage.clear()
