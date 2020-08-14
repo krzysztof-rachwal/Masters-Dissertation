@@ -271,19 +271,19 @@ function searchEmployer(){
      let val = $('#employer-search').val()
 
     //4.2  If value is null exit the function
-    if (val==""){
-        $(".employer-card").removeClass("d-none")
-    }
+    // if (val==""){
+    //     $(".employer-card").removeClass("d-none")
+    // }
 
     //4.3 Transform the first letters in a word to uppercase
     let val2 = val.charAt(0).toUpperCase() + val.slice(1);
 
     //4.4 Remove class vacancy found - to restart the "search"
     $(".employer-found").removeClass("employer-found")
-    $(".employer-card").removeClass("d-none")
+    // $(".employer-card").removeClass("d-none")
 
     //4.5 Add classes for the right values
-    $(".list-employers").find(".searchable:contains('"+val2+"')").closest(".employer-card").addClass("employer-found")
+    $(".list-employers").find(".searchable:contains('"+val2+"')").not(".d-none").closest(".employer-card").addClass("employer-found")
 
     //4.6 Remove the cards
     $(".list-employers").find(".searchable:not(:contains('"+val2+"'))").closest(".employer-card").addClass("d-none")
