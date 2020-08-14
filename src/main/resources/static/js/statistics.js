@@ -20,7 +20,7 @@ function getEventsByAuthAndType(){
         success: function (data) {
             if (data != null) {
                 console.log(data)
-                $("#eventAuthResult").text(data);
+                $("#eventAuthResult").text(data + "\nevents");
                 // location.assign("/report")
             } else {
                 alert("There was an error, please try again.")
@@ -55,7 +55,7 @@ function getEventsBySchool() {
         success: function (data) {
             if (data != null) {
                 console.log(data)
-                $("#eveBySchoolResult").text(data);
+                $("#eveBySchoolResult").text(data + "\nevents");
                 // location.assign("/report")
             } else {
                 alert("There was an error, please try again.")
