@@ -222,11 +222,21 @@ public class BaseController {
     public ModelAndView SearchVacancies(HttpSession session) {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("searchVacanciesPage");
-        List<Vacancy> vacancies;
-        vacancies = VacancyQrys.getAllVacancy();
 
-        Map<String,Object> allVacancies = new HashMap<String,Object>();
+        List<Vacancy> vacancies;
+        List<Vacancy> vacanciesAllTypes;
+        List<Vacancy> vacanciesAllOccupationalCodes;
+
+        vacancies = VacancyQrys.getAllVacancy();
+        vacanciesAllTypes = VacancyQrys.getAllTypesOfVacancy();
+        vacanciesAllOccupationalCodes = VacancyQrys.getAllOccupationalCodes();
+
+        Map<String,Object> allVacancies = new HashMap<>();
+
         allVacancies.put("allVacancies", vacancies);
+        allVacancies.put("allVacanciesTypes", vacanciesAllTypes);
+        allVacancies.put("allVacanciesOccupationalCodes", vacanciesAllOccupationalCodes);
+
         mv.addAllObjects(allVacancies);
 
         return mv;

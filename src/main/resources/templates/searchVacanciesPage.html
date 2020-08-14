@@ -45,53 +45,21 @@
     <div class="flex-container">
         <div class="col-lg-3">
             <div class="mb-3">
-                <h6>TYPE</h6>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="ind1">
-                    <label class="form-check-label" for="ind1">
-                        Full-time
-                    </label>
-                </div>
-
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="ind2">
-                    <label class="form-check-label" for="ind2">
-                        Part-time
-                    </label>
-                </div>
-
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="ind3">
-                    <label class="form-check-label" for="ind3">
-                        Apprenticeship
-                    </label>
-                </div>
-
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="ind4">
-                    <label class="form-check-label" for="ind4">
-                        Traineeship
-                    </label>
-                </div>
-
+                <label for="vacancy-type" class="  mb-1">Type of Vacancy</label>
+                <select class="custom-select p-2" id="vacancy-type">
+                    <option th:each="vacancyType : ${allVacanciesTypes}" th:value="${vacancyType.getTypeOfVacancyID()}" th:text="${vacancyType.getTypeOfVacancyName()}"></option>
+                </select>
             </div>
 
             <div class="mb-3">
-                <h6>OCCUPATION</h6>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="schoolId1">
-                    <label class="form-check-label" for="schoolId1">
-                        SOC
-                    </label>
-                </div>
-
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="schoolId2">
-                    <label class="form-check-label" for="schoolId2">
-                        CRCI
-                    </label>
-                </div>
+                <label for="occup-code" class="  mb-1">Occupational Area</label>
+                <select class="custom-select p-2" id="occup-code">
+                    <option th:each="vacancyOccupationalCode : ${allVacanciesOccupationalCodes}" th:value="${vacancyOccupationalCode.getOccupationalCodeID()}" th:text="${vacancyOccupationalCode.getOccupationalCodeName()}"></option>
+                </select>
             </div>
+            <a href="#">
+                <button type="button" id="filterButton" class="button--secondary w-100 text-center">Filter</button>
+            </a>
         </div>
 
 

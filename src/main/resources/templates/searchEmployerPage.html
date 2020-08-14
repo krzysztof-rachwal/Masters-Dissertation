@@ -45,7 +45,7 @@
     <div class="flex-container">
         <div class="col-lg-3">
             <div class="mb-3">
-                               <label for="industry-sector">Sector Areas</label><br>
+                <label for="industry-sector">Sector Areas</label><br>
                 <select id="industry-sector"  data-width="100%" class="selectpicker" multiple data-live-search="true">
                     <option th:each="employerIndustrySector : ${allEmployerIndustrySectors}" th:value="${employerIndustrySector.getEmployerIndustrySectorID()}" th:text="${employerIndustrySector.getEmployerIndustrySectorName()}"></option>
                 </select>
