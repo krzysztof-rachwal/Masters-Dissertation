@@ -116,9 +116,9 @@ public class StatisticsQueries extends DBQueries {
     }
 
     public Map<String, Integer> getEventByLocalAuth() throws DataAccessException {
-        String query = "SELECT count(eve.EventID) as eveCount, la.LocalAuthorityName as authName, la.LocalAuthorityID, eve.EventVenuePostcode " +
+        String query = "SELECT count(eve.EventID) as eveCount, la.LocalAuthorityName as authName " +
                 "FROM Event eve " +
-                "INNER JOIN PostcodeList pc ON  eve.EventVenuePostcode LIKE concat('%', pc.PostcodeName) " +
+                "INNER JOIN PostcodeList pc ON  eve.EventVenuePostcode LIKE concat('%',pc.PostcodeName,'%') " +
                 "INNER JOIN LocalAuthorityList la ON la.LocalAuthorityID = pc.LocalAuthorityID " +
                 "GROUP BY 2;";
         Map<String, Integer> eveMap = new HashMap<>();
