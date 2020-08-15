@@ -493,13 +493,9 @@
     employerUpdated = localStorage.getItem("employerUpdated");
 
     if (employerUpdated === "true"){
-        console.log("is the object added " + employerUpdated)
-        document.getElementById('success_message').classList.remove('d-none')
-        document.getElementById('success_message').classList.add('show')
-        $("#success_message").fadeTo(3000, 500).slideUp(500, function() {
-            $("#success_message").slideUp(500);
-        });
-        localStorage.clear()
+        $('#success_message').removeClass('d-none')
+        $("#success_message").fadeTo(1500, 1);
+        setTimeout(function(){$("#success_message").fadeTo(1500, 0); },5000);
     }
 
 </script>
