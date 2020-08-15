@@ -282,8 +282,8 @@ public class StatisticsQueries extends DBQueries {
         int localAuthID = getLocalAuthID(schoolID);
         String query = String.format("select eve.* " +
                 "From Event eve " +
-                "WHERE eve.EventVenuePostcode IN (" +
-                "SELECT SUBSTRING_INDEX(`PostcodeName`, ' ', 1) AS postcode " +
+                "WHERE SUBSTRING_INDEX(eve.EventVenuePostcode, ' ', 1) IN " +
+                "(SELECT PostcodeName AS postcode " +
                 "FROM PostcodeList " +
                 "WHERE LocalAuthorityID = \"%s\");", localAuthID);
         List<Event> events = new ArrayList<>();
