@@ -1,22 +1,29 @@
 package ebe.API;
 
 import ebe.DBMethods.EmployerQueries;
+import ebe.DBMethods.EventQueries;
+import ebe.DBMethods.SchoolQueries;
+import ebe.DBMethods.VacancyQueries;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 @RestController
 public class EmployerAPI {
 
-    private EmployerQueries employerQueries;
+    private EmployerQueries EmployerQrys;
+    private EventQueries EventQrys;
+    private SchoolQueries SchoolQrys;
+    private VacancyQueries VacancyQrys;
 
     @Autowired
-    public EmployerAPI(EmployerQueries em){
-        employerQueries = em;
+    public EmployerAPI(EmployerQueries em, EventQueries ev, SchoolQueries sc, VacancyQueries va){
+        EmployerQrys = em;
+        EventQrys = ev;
+        SchoolQrys = sc;
+        VacancyQrys = va;
     }
 
     //1. Create Employer
@@ -101,50 +108,50 @@ public class EmployerAPI {
 
         // ---------------------------
         //3. Create the Employer
-        int createVal = employerQueries.createEmployer(statusOfEmployerID,employerName,employerAddressCity,employerAddressStreet,employerAddressNumber,
+        int createVal = EmployerQrys.createEmployer(statusOfEmployerID,employerName,employerAddressCity,employerAddressStreet,employerAddressNumber,
                 employerPostcode,employerEmail,contactPersonNameSurname,contactPersonPosition,employerPhone,employerWebsite,
                 employerTwitter, employerFB,numberOfEmployeesID,companySummary,employerNotes);
 
         // ---------------------------
         //4. Get Employer Created Id
-        int employerID = employerQueries.getLastEmployerCreated(employerName);
+        int employerID = EmployerQrys.getLastEmployerCreated(employerName);
 
         // ---------------------------
         //5. Fill Intersections
 
         //     5.1. Intersection Table - Employer / Cooperation Type
         if(employerCooperationType.length() != 0) {
-            employerQueries.createEmployerCooperationIntersection(employerID, employerCooperationTypeList);
+            EmployerQrys.createEmployerCooperationIntersection(employerID, employerCooperationTypeList);
         }
 
         //     5.2. Intersection Table - Employer / Industry Sector
         if(employerSectorIndustry.length() != 0) {
-            employerQueries.createEmployerIndustrySectorIntersection(employerID, employerIndustrySectorList);
+            EmployerQrys.createEmployerIndustrySectorIntersection(employerID, employerIndustrySectorList);
         }
 
         //     5.3. Intersection Table - Employer / Preferences
         if(employerPreferences.length() != 0) {
-            employerQueries.createEmployerPreferencesIntersection(employerID, employerPreferencesList);
+            EmployerQrys.createEmployerPreferencesIntersection(employerID, employerPreferencesList);
         }
 
         //     5.4. Intersection Table - Employer / School Preferences
         if(schoolPreferences.length() != 0) {
-            employerQueries.createSchoolEmployerSchoolPreferencesIntersection(employerID, employerSchoolPreferencesList);
+            EmployerQrys.createSchoolEmployerSchoolPreferencesIntersection(employerID, employerSchoolPreferencesList);
         }
 
         //     5.5. Intersection Table - Employer / Support of Area of Curriculum
         if(employerCurriculumAreas.length() != 0) {
-            employerQueries.createEmployerEmployerCurriculumAreaIntersection(employerID, employerSupportCurriculumAreaList);
+            EmployerQrys.createEmployerEmployerCurriculumAreaIntersection(employerID, employerSupportCurriculumAreaList);
         }
 
         //     5.6. Intersection Table - Employer / Language Used
         if(employerLanguage.length() != 0) {
-            employerQueries.createSchoolEmployerLanguageIntersection(employerID, employerLanguageUsedList);
+            EmployerQrys.createSchoolEmployerLanguageIntersection(employerID, employerLanguageUsedList);
         }
 
         //     5.7. Intersection Table - Employer / Local Authority
         if(localAuthorities.length() != 0) {
-            employerQueries.createSchoolEmployerLocalAuthoritiesIntersection(employerID, employerLocalAuthorityList);
+            EmployerQrys.createSchoolEmployerLocalAuthoritiesIntersection(employerID, employerLocalAuthorityList);
         }
         return createVal == 1;
     }
@@ -271,7 +278,7 @@ public class EmployerAPI {
 
         // ---------------------------
         //3. Update the Employer
-        int updateVal = employerQueries.updateEmployer(employerID,statusOfEmployerID,employerName,employerAddressCity,employerAddressStreet,employerAddressNumber,
+        int updateVal = EmployerQrys.updateEmployer(employerID,statusOfEmployerID,employerName,employerAddressCity,employerAddressStreet,employerAddressNumber,
                 employerPostcode,employerEmail,contactPersonNameSurname,contactPersonPosition,employerPhone,employerWebsite,
                 employerTwitter, employerFB,numberOfEmployeesID,companySummary,employerNotes);
 
@@ -280,51 +287,51 @@ public class EmployerAPI {
 
         //     4.1. Intersection Table - Employer / Cooperation Type
         if(employerCooperationType.length() != 0) {
-            employerQueries.updateEmployerCooperationIntersection(employerID, employerCooperationTypeList);
+            EmployerQrys.updateEmployerCooperationIntersection(employerID, employerCooperationTypeList);
         }
 
         //     4.2. Intersection Table - Employer / Industry Sector
         if(employerSectorIndustry.length() != 0) {
-            employerQueries.updateEmployerIndustrySectorIntersection(employerID, employerIndustrySectorList);
+            EmployerQrys.updateEmployerIndustrySectorIntersection(employerID, employerIndustrySectorList);
         }
 
         //     4.3. Intersection Table - Employer / Preferences
         if(employerPreferences.length() != 0) {
-            employerQueries.updateEmployerPreferencesIntersection(employerID, employerPreferencesList);
+            EmployerQrys.updateEmployerPreferencesIntersection(employerID, employerPreferencesList);
         }
 
         //     4.4. Intersection Table - Employer / School Preferences
         if(schoolPreferences.length() != 0) {
-            employerQueries.updateSchoolEmployerSchoolPreferencesIntersection(employerID, employerSchoolPreferencesList);
+            EmployerQrys.updateSchoolEmployerSchoolPreferencesIntersection(employerID, employerSchoolPreferencesList);
         }
 
         //     4.5. Intersection Table - Employer / Support of Area of Curriculum
         if(employerCurriculumAreas.length() != 0) {
-            employerQueries.updateEmployerEmployerCurriculumAreaIntersection(employerID, employerSupportCurriculumAreaList);
+            EmployerQrys.updateEmployerEmployerCurriculumAreaIntersection(employerID, employerSupportCurriculumAreaList);
         }
 
         //     4.6. Intersection Table - Employer / Language Used
         if(employerLanguage.length() != 0) {
-            employerQueries.updateSchoolEmployerLanguageIntersection(employerID, employerLanguageUsedList);
+            EmployerQrys.updateSchoolEmployerLanguageIntersection(employerID, employerLanguageUsedList);
         }
 
          //     4.7. Intersection Table - Employer / Local Authority
         if(localAuthorities.length() != 0) {
-            employerQueries.updateSchoolEmployerLocalAuthoritiesIntersection(employerID, employerLocalAuthorityList);
+            EmployerQrys.updateSchoolEmployerLocalAuthoritiesIntersection(employerID, employerLocalAuthorityList);
         }
 
         //      4.8.  Update Alumni
         if(!updateEmployerAlumniIDList.isEmpty()) {
-            employerQueries.updateAlumni(updateEmployerAlumniNameList, updateEmployerAlumniSchoolIDList, updateEmployerAlumniIDList);
+            EmployerQrys.updateAlumni(updateEmployerAlumniNameList, updateEmployerAlumniSchoolIDList, updateEmployerAlumniIDList);
         }
 
         if(createEmployerAlumniName.length()!=0) {
             //      4.9.  Create Alumni
-            employerQueries.createAlumni(createEmployerAlumniNameList, createEmployerAlumniSchoolIDList);
+            EmployerQrys.createAlumni(createEmployerAlumniNameList, createEmployerAlumniSchoolIDList);
             //      4.10.  Get Alumni IDs
-            List<Integer> alumniIdList = employerQueries.getAllAlumniIDFromEmployer(createEmployerAlumniNameList, createEmployerAlumniSchoolIDList);
+            List<Integer> alumniIdList = EmployerQrys.getAllAlumniIDFromEmployer(createEmployerAlumniNameList, createEmployerAlumniSchoolIDList);
             //      4.11.  Create Intersection Table - Employer / Alumni
-            employerQueries.createEmployerAlumniIntersection(employerID, alumniIdList);
+            EmployerQrys.createEmployerAlumniIntersection(employerID, alumniIdList);
         }
 
         return updateVal == 1;
@@ -333,7 +340,7 @@ public class EmployerAPI {
     //3. Delete Employer
     @DeleteMapping("api/delete/employer")
     public boolean deleteEmployers(@RequestParam(value="employerId") Integer employerId){
-        if (employerQueries.deleteEmployer(employerId) == 1) {
+        if (EmployerQrys.deleteEmployer(employerId) == 1) {
             return true;
         } else {
             return false;
@@ -343,7 +350,7 @@ public class EmployerAPI {
     //4. Delete Alumni
     @DeleteMapping("/api/delete/employer/alumni")
     public boolean deleteAlumni(@RequestParam(value="alumniID") Integer alumniID){
-        if (employerQueries.deleteAlumni(alumniID) == 1) {
+        if (EmployerQrys.deleteAlumni(alumniID) == 1) {
             return true;
         } else {
             return false;
@@ -352,6 +359,7 @@ public class EmployerAPI {
 
     ///////////////////////    FILTER     ////////////////////////////////
     @RequestMapping("api/filter/employer")
+    //5. Filter Employers
     public List<Integer> filterEmployers(@RequestParam(name="EmployerSectorIndustry") String EmployerSectorIndustry,
                                          @RequestParam(name="EmployerCooperationType") String EmployerCooperationType,
                                          @RequestParam(name="EmployerCurriculumAreas") String EmployerCurriculumAreas,
@@ -427,16 +435,31 @@ public class EmployerAPI {
         }
 
         // There should be AlumniList as well, once implemented. In function below I call empty Arrays.asList() to fill this place.
-
-        filteredEmployerIDs = employerQueries.getFilteredEmployersIds(employerIndustrySectorList, employerLocalAuthorityList,
+        filteredEmployerIDs = EmployerQrys.getFilteredEmployersIds(employerIndustrySectorList, employerLocalAuthorityList,
                 employerSupportCurriculumAreaList, employerLanguageUsedList,
                 employerSchoolPreferencesList, employerPreferencesList, employerCooperationTypeList, Arrays.asList());
 
-
-
         return filteredEmployerIDs;
-
     }
 
+    ///////////////////////    SORT BY     ////////////////////////////////
+    @GetMapping("api/employer/sortBy")
+    public List<Integer> SortBy(@RequestParam(value="sortBy") String sortBy){
+
+        List<Integer> orderEmployerIds = new ArrayList<Integer>();
+        if(sortBy.equals("ASC")){
+            orderEmployerIds = EmployerQrys.sortByEmployerByNameASC();
+            System.out.println("-----------------------------------------------------");
+            System.out.println(orderEmployerIds);
+        }
+
+        if(sortBy.equals("DESC")){
+            orderEmployerIds = EmployerQrys.sortByEmployerByNameDESC();
+        }
+        Map<String,Object> allEmployers = new HashMap<String,Object>();
+
+        allEmployers.put("allEmployers", orderEmployerIds);
+        return orderEmployerIds;
+    }
 
 }

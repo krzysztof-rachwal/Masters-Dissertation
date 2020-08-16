@@ -1018,6 +1018,49 @@ public class EmployerQueries extends DBQueries {
 
         return ids;
     }
+    ///////////////////////////////////// SORT BY METHODS ///////////////////////////////////////////////
 
+    //49. Get Employers order by name (ASC)
+    public List<Integer> sortByEmployerByNameASC() throws DataAccessException {
+        String getQuery = "SELECT * FROM Employer ORDER BY EmployerName ASC";
+        List<Integer> list = new ArrayList<>();
+        ResultSet rs = null;
+        try {
+            connection = ConnectionFactory.getConnection();
+            statement = connection.createStatement();
+            rs = statement.executeQuery(getQuery);
+            while (rs.next()) {
+                list.add(rs.getInt("EmployerID"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.close(rs);
+            DBUtil.close(statement);
+            DBUtil.close(connection);
+        }
+        return list;
+    }
 
+    //50. Get Employers order by name (DESC)
+    public List<Integer> sortByEmployerByNameDESC() throws DataAccessException {
+        String getQuery = "SELECT * FROM Employer ORDER BY EmployerName DESC";
+        List<Integer> list = new ArrayList<>();
+        ResultSet rs = null;
+        try {
+            connection = ConnectionFactory.getConnection();
+            statement = connection.createStatement();
+            rs = statement.executeQuery(getQuery);
+            while (rs.next()) {
+                list.add(rs.getInt("EmployerID"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.close(rs);
+            DBUtil.close(statement);
+            DBUtil.close(connection);
+        }
+        return list;
+    }
 }
