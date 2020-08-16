@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Repository
@@ -348,4 +349,17 @@ public class VacancyQueries extends DBQueries {
         String deleteSql = String.format("DELETE FROM Vacancy WHERE VacancyID = '%s'",vacancyId);
         return jdbcTemplate().update(deleteSql);
     }
+
+    ///////////////////////////////////// FILTER METHODS ///////////////////////////////////////////////
+
+    public List<Integer> getFilteredEmployersIds(int typeOfVacancy,
+                                                 int occupationalCode){
+        List<Integer> ids = new ArrayList<>();
+        connection = ConnectionFactory.getConnection();
+        return ids;
+    }
+
+    List<String> intValuesListofSQLQuery = Arrays.asList(" e.NumberOfEmployeesID = ", " e.StatusOfEmployerID = ");
+
 }
+
