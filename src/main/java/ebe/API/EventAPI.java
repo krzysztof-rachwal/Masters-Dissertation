@@ -51,11 +51,14 @@ public class EventAPI {
             @RequestParam(name="employerAttending") String EmployerAttending,
             @RequestParam(name="schoolAttending") String SchoolAttending) throws ParseException {
 
-        //All events created start as not cancelled
+        // ---------------------------
+        //1. Create the ArrayList that are going to be used to populate the database
         String EventDateAndTime = EventDate + " " + EventTime;
         ArrayList<Integer> employerIdList = new ArrayList<Integer>();
         ArrayList<Integer> schoolIdList = new ArrayList<Integer>();
 
+        // ---------------------------
+        //2. Populate the ArrayList
         for (String employerID : EmployerAttending.split(",")) {
             employerIdList.add(Integer.parseInt(employerID));
         }
@@ -63,7 +66,8 @@ public class EventAPI {
             schoolIdList.add(Integer.parseInt(schoolID));
         }
 
-        //Create the Event
+        // ---------------------------
+        //3. Create the Event
         EventQrys.createEvent(EventName, TypeOfEventID, EventDateAndTime,  EventVenueName,  EventAddressCity,
                 EventAddressStreet, EventAddressNumber, EventPostcode, EventSummary, IsPublic, isCancelled, NameOfAdviser,
                 NumberOfAttendees,  PromotesApprenticeships,  PromotesWelshLanguage,ChallengesGenderStereotypes);
@@ -106,11 +110,14 @@ public class EventAPI {
             @RequestParam(name="employerAttending") String EmployerAttending,
             @RequestParam(name="schoolAttending") String SchoolAttending) throws ParseException {
 
-        //All events created start as not cancelled
+        // ---------------------------
+        //1. Create the ArrayList that are going to be used to populate the database
         String EventDateAndTime = EventDate + " " + EventTime;
         ArrayList<Integer> employerIdList = new ArrayList<Integer>();
         ArrayList<Integer> schoolIdList = new ArrayList<Integer>();
 
+        // ---------------------------
+        //2. Populate the ArrayList
         for (String employerID : EmployerAttending.split(",")) {
             employerIdList.add(Integer.parseInt(employerID));
         }
@@ -118,12 +125,13 @@ public class EventAPI {
             schoolIdList.add(Integer.parseInt(schoolID));
         }
 
-        //Update the Event
+        // ---------------------------
+        //3. Update the Event
         EventQrys.updateEvent(EventID, EventName, TypeOfEventID, EventDateAndTime,  EventVenueName,  EventAddressCity,
                 EventAddressStreet, EventAddressNumber, EventPostcode, EventSummary, IsPublic, isCancelled, NameOfAdviser,
                 NumberOfAttendees,  PromotesApprenticeships,  PromotesWelshLanguage,ChallengesGenderStereotypes);
 
-//
+
         //      Insert into the Employer / Event intersection table
         EventQrys.updateEmployerEventIntersection(EventID,employerIdList);
 

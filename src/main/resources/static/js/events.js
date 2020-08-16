@@ -71,13 +71,15 @@ function UpdateThisEvent(){
     var eventAddressNumber_url = "eventAddressNumber=" + $('input[id=event-number]').val();
     var eventPostcode_url = "eventPostcode=" + $('input[id=event-postcode]').val();
     var eventSummary_url = "eventSummary=" + $('textarea[id=event-summary]').val();
-    var isPublic_url = "isPublic=" + $('select[id=event-public]').val();
-    var isCancelled_url = "isCancelled=" + $('select[id=event-cancelled]').val();
     var nameOfAdviser_url = "nameOfAdviser=" + $('input[id=adviser-name]').val();
     var numberOfAttendees_url = "numberOfAttendees=" + $('input[id=no-attendees]').val();
+
+    var isPublic_url = "isPublic=" + $('select[id=event-public]').val();
+    var isCancelled_url = "isCancelled=" + $('select[id=event-cancelled]').val();
     var promotesApprenticeships_url="promotesApprenticeships=" + $('select[id=promote-apprenticheship]').val();
     var promotesWelshLanguage_url = "promotesWelshLanguage=" + $('select[id=conducted-welsh]').val();
     var challengesGenderStereotypes_url = "challengesGenderStereotypes=" + $('select[id=challenger-gender]').val();
+
     var employerAttending_url = "employerAttending=" + $('select[id=employers-attending]').val();
     var schoolAttending_url = "schoolAttending=" + $('select[id=schools-attending]').val();
 
