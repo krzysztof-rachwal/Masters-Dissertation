@@ -207,12 +207,9 @@
     eventAdded = localStorage.getItem("eventAdded");
 
     if (eventAdded === "true"){
-        console.log("is the object added " + eventAdded)
-        document.getElementById('success_message').classList.remove('d-none')
-        document.getElementById('success_message').classList.add('show')
-        $("#success_message").fadeTo(2000, 500).slideUp(500, function() {
-            $("#success_message").slideUp(500);
-        });
+        $('#success_message').removeClass('d-none')
+        $("#success_message").fadeTo(1500, 1);
+        setTimeout(function(){$("#success_message").fadeTo(1500, 0); },5000);
         localStorage.clear()
     }
 
@@ -220,10 +217,10 @@
 
     if (eventDeleted === "true"){
         console.log("is the object deleted " + eventDeleted)
-        document.getElementById('success_message').innerHTML = 'The event is deleted!';
+        document.getElementById('success_message').innerHTML =  "<strong> Success! </strong>" + 'The event was deleted!';
         document.getElementById('success_message').classList.remove('d-none')
         document.getElementById('success_message').classList.add('show')
-        $("#success_message").fadeTo(2000, 500).slideUp(500, function() {
+        $("#success_message").fadeTo(3000, 500).slideUp(500, function() {
             $("#success_message").slideUp(500);
         });
         localStorage.clear()

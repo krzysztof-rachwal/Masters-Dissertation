@@ -322,12 +322,9 @@
     eventUpdated = localStorage.getItem("eventUpdated");
 
     if (eventUpdated === "true"){
-        console.log("is the object added " + eventUpdated)
-        document.getElementById('success_message').classList.remove('d-none')
-        document.getElementById('success_message').classList.add('show')
-        $("#success_message").fadeTo(2000, 500).slideUp(500, function() {
-            $("#success_message").slideUp(500);
-        });
+        $('#success_message').removeClass('d-none')
+        $("#success_message").fadeTo(1500, 1);
+        setTimeout(function(){$("#success_message").fadeTo(1500, 0); },5000);
         localStorage.clear()
     }
 
