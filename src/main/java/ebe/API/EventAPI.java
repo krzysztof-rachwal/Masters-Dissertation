@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 public class EventAPI {
@@ -150,6 +151,32 @@ public class EventAPI {
         } else {
             return false;
         }
+    }
+
+    ///////////////////////    SORT BY     ////////////////////////////////
+    @GetMapping("api/event/sortBy")
+    public List<Integer> SortBy(@RequestParam(value="sortBy") String sortBy,
+                                @RequestParam(value="orderBy") String orderBy){
+
+        List<Integer> orderEventIds = new ArrayList<Integer>();
+
+        if(sortBy.equals("Name") && orderBy.equals("ASC")){
+            orderEventIds = EventQrys.sortByEventByNameASC();
+        }
+
+        if(sortBy.equals("Name") && orderBy.equals("DESC")){
+            orderEventIds = EventQrys.sortByEventByNameDESC();
+        }
+
+        if(sortBy.equals("Date") && orderBy.equals("ASC")){
+            orderEventIds = EventQrys.sortByEventByDateASC();
+        }
+
+        if(sortBy.equals("Date") && orderBy.equals("DESC")){
+            orderEventIds = EventQrys.sortByEventByDateDESC();
+        }
+
+        return orderEventIds;
     }
 
 }

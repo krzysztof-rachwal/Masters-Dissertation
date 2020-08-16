@@ -447,18 +447,16 @@ public class EmployerAPI {
     public List<Integer> SortBy(@RequestParam(value="sortBy") String sortBy){
 
         List<Integer> orderEmployerIds = new ArrayList<Integer>();
+
+
+
         if(sortBy.equals("ASC")){
-            orderEmployerIds = EmployerQrys.sortByEmployerByNameASC();
-            System.out.println("-----------------------------------------------------");
-            System.out.println(orderEmployerIds);
+            orderEmployerIds = EmployerQrys.sortByEmployerByNameASC();;
         }
 
         if(sortBy.equals("DESC")){
             orderEmployerIds = EmployerQrys.sortByEmployerByNameDESC();
         }
-        Map<String,Object> allEmployers = new HashMap<String,Object>();
-
-        allEmployers.put("allEmployers", orderEmployerIds);
         return orderEmployerIds;
     }
 

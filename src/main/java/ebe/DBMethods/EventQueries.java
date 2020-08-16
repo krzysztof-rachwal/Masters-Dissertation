@@ -231,4 +231,98 @@ public class EventQueries extends DBQueries {
         String deleteSql = String.format("DELETE FROM Event WHERE EventID = '%s'",eventId);
         return jdbcTemplate().update(deleteSql);
     }
+
+    ///////////////////////////////////// SORT BY METHODS ///////////////////////////////////////////////
+
+    //12. Get Events order by name (ASC)
+    public List<Integer> sortByEventByNameASC() throws DataAccessException {
+
+        String getQuery = "SELECT * FROM Event ORDER BY EventName ASC ;";
+        System.out.println(getQuery);
+        List<Integer> list = new ArrayList<>();
+        ResultSet rs = null;
+        try {
+            connection = ConnectionFactory.getConnection();
+            statement = connection.createStatement();
+            rs = statement.executeQuery(getQuery);
+            while (rs.next()) {
+                list.add(rs.getInt("EventID"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.close(rs);
+            DBUtil.close(statement);
+            DBUtil.close(connection);
+        }
+        return list;
+    }
+
+    //13. Get Events order by name (DESC)
+    public List<Integer> sortByEventByNameDESC() throws DataAccessException {
+        String getQuery = "SELECT * FROM Event ORDER BY EventName DESC";
+        List<Integer> list = new ArrayList<>();
+        ResultSet rs = null;
+        try {
+            connection = ConnectionFactory.getConnection();
+            statement = connection.createStatement();
+            rs = statement.executeQuery(getQuery);
+            while (rs.next()) {
+                list.add(rs.getInt("EventID"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.close(rs);
+            DBUtil.close(statement);
+            DBUtil.close(connection);
+        }
+        return list;
+    }
+
+    //14. Get Events order by date (ASC)
+    public List<Integer> sortByEventByDateASC() throws DataAccessException {
+
+        String getQuery = "SELECT * FROM Event ORDER BY EventDateAndTime ASC ;";
+        System.out.println(getQuery);
+        List<Integer> list = new ArrayList<>();
+        ResultSet rs = null;
+        try {
+            connection = ConnectionFactory.getConnection();
+            statement = connection.createStatement();
+            rs = statement.executeQuery(getQuery);
+            while (rs.next()) {
+                list.add(rs.getInt("EmployerID"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.close(rs);
+            DBUtil.close(statement);
+            DBUtil.close(connection);
+        }
+        return list;
+    }
+
+    //15. Get Events order by date (DESC)
+    public List<Integer> sortByEventByDateDESC() throws DataAccessException {
+        String getQuery = "SELECT * FROM Event ORDER BY EventDateAndTime DESC";
+        List<Integer> list = new ArrayList<>();
+        ResultSet rs = null;
+        try {
+            connection = ConnectionFactory.getConnection();
+            statement = connection.createStatement();
+            rs = statement.executeQuery(getQuery);
+            while (rs.next()) {
+                list.add(rs.getInt("EmployerID"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.close(rs);
+            DBUtil.close(statement);
+            DBUtil.close(connection);
+        }
+        return list;
+    }
 }

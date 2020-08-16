@@ -252,11 +252,11 @@ function searchEmployer(){
 
 }
 
-//5. SortEmployerName
+//5. Sort Employers By Name
 function sortByName(type) {
 
-    var baseUri = "api/employer/sortBy";
-    var sortBy_url = "sortBy=" + type ;
+    let baseUri = "api/employer/sortBy";
+    let sortBy_url = "sortBy=" + type ;
 
     var fullUri = baseUri + "?" + "&" + sortBy_url
     var token = $("meta[name='_csrf']").attr("content");    // Used to bypass Spring Boot's CSRF protocol     -- Solution taken from 'https://stackoverflow.com/questions/34747437/use-of-spring-csrf-with-ajax-rest-call-and-html-page-with-thymeleaf' on Nov 26th 2019
@@ -273,7 +273,6 @@ function sortByName(type) {
         },
         success: function (data) {
             sortEmployers(data);
-            console.log(data);
         },
         error: function (data) {
             alert("FAIL");
@@ -283,7 +282,7 @@ function sortByName(type) {
     });
 }
 
-// 6. sortEmployers
+// 6. sort Employers
 function sortEmployers(ids){
 
     for (i = 0; i < ids.length; i++) {

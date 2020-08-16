@@ -1022,7 +1022,9 @@ public class EmployerQueries extends DBQueries {
 
     //49. Get Employers order by name (ASC)
     public List<Integer> sortByEmployerByNameASC() throws DataAccessException {
-        String getQuery = "SELECT * FROM Employer ORDER BY EmployerName ASC";
+
+        String getQuery = "SELECT * FROM Employer ORDER BY EmployerName ASC ;";
+        System.out.println(getQuery);
         List<Integer> list = new ArrayList<>();
         ResultSet rs = null;
         try {
