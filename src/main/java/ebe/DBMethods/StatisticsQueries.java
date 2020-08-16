@@ -116,11 +116,11 @@ public class StatisticsQueries extends DBQueries {
     }
 
     public Map<String, Integer> getEventByLocalAuth() throws DataAccessException {
-        String query = "SELECT count(eve.EventID) as eveCount, la.LocalAuthorityName as authName\n" +
-                "FROM Event eve\n" +
-                "INNER JOIN PostcodeList pc ON pc.PostcodeName = eve.EventVenuePostcode\n" +
-                "INNER JOIN LocalAuthorityList la ON la.LocalAuthorityID = pc.LocalAuthorityID\n" +
-                "GROUP BY 2;  ";
+        String query = "SELECT count(eve.EventID) as eveCount, la.LocalAuthorityName as authName, la.LocalAuthorityID " +
+                "FROM Event eve " +
+                "INNER JOIN PostcodeList pc ON eve.EventVenuePostcode LIKE concat(SUBSTRING_INDEX(pc.PostcodeName, ' ', 1),' %') " +
+                "INNER JOIN LocalAuthorityList la ON la.LocalAuthorityID = pc.LocalAuthorityID " +
+                "GROUP BY 2; ";
         Map<String, Integer> eveMap = new HashMap<>();
         ResultSet rs = null;
         try {
@@ -137,9 +137,9 @@ public class StatisticsQueries extends DBQueries {
     }
 
     public Map<String, Integer> getTotalPupilsByAuth() throws DataAccessException {
-        String query = "SELECT sum(eve.NumberOfAttendees)  as numberOfAttendees, la.LocalAuthorityName as authName\n" +
-                "From Event eve \n" +
-                "INNER JOIN PostcodeList pc ON pc.PostcodeName = eve.EventVenuePostcode\n" +
+        String query = "SELECT sum(eve.NumberOfAttendees)  as numberOfAttendees, la.LocalAuthorityName as authName " +
+                "From Event eve " +
+                "INNER JOIN PostcodeList pc on eve.EventVenuePostcode LIKE concat(SUBSTRING_INDEX(pc.PostcodeName, ' ', 1),' %') " +
                 "INNER JOIN LocalAuthorityList la ON la.LocalAuthorityID = pc.LocalAuthorityID\n" +
                 "GROUP BY 2;";
         Map<String, Integer> pupilsMap = new HashMap<>();
@@ -158,11 +158,11 @@ public class StatisticsQueries extends DBQueries {
     }
 
     public Map<String, Integer> getSchoolsAttendingEventsByAuth() throws DataAccessException {
-        String query = "SELECT COUNT(sc.SchoolId) as schoolCount, la.LocalAuthorityName as authName\n" +
-                "FROM INT_AttendingSchoolOnEvent sc\n" +
-                "INNER JOIN Event eve ON eve.EventID = sc.EventID\n" +
-                "INNER JOIN PostcodeList pc ON pc.PostcodeName = eve.EventVenuePostcode\n" +
-                "INNER JOIN LocalAuthorityList la ON la.LocalAuthorityID = pc.LocalAuthorityID\n" +
+        String query = "SELECT COUNT(sc.SchoolID) as schoolCount, la.LocalAuthorityName as authName " +
+                "FROM INT_AttendingSchoolOnEvent sc " +
+                "INNER JOIN Event eve ON eve.EventID = sc.EventID  " +
+                "INNER JOIN PostcodeList pc on eve.EventVenuePostcode LIKE concat(SUBSTRING_INDEX(pc.PostcodeName, ' ', 1),' %') " +
+                "INNER JOIN LocalAuthorityList la ON la.LocalAuthorityID = pc.LocalAuthorityID " +
                 "GROUP BY 2;";
         Map<String, Integer> schoolMap = new HashMap<>();
         ResultSet rs = null;
@@ -180,9 +180,9 @@ public class StatisticsQueries extends DBQueries {
     }
 
     public Map<String, Integer> getEmpByLocalAuth() throws DataAccessException {
-        String query = "SELECT count(inter.EmployerID) empCount, la.LocalAuthorityName as authName\n" +
+        String query = "SELECT count(inter.EmployerID) empCount, la.LocalAuthorityName as authName " +
                 "FROM INT_LocalAuthorityEmployerCanWorkWith inter\n" +
-                "INNER JOIN LocalAuthorityList la ON inter.LocalAuthorityID = la.LocalAuthorityID\n" +
+                "INNER JOIN LocalAuthorityList la ON inter.LocalAuthorityID = la.LocalAuthorityID " +
                 "GROUP BY 2;";
         Map<String, Integer> empMap = new HashMap<>();
         ResultSet rs = null;
@@ -200,10 +200,11 @@ public class StatisticsQueries extends DBQueries {
     }
 
     public int getEventsByAuthAndTypeOfEvent(int eventId, int authId) throws DataAccessException{
-        String query = String.format("SELECT count(eve.EventID) FROM Event eve INNER JOIN PostcodeList pc ON pc.PostcodeName = eve.EventVenuePostcode " +
+        String query = String.format("SELECT count(eve.EventID) FROM Event eve " +
+                "INNER JOIN PostcodeList pc on eve.EventVenuePostcode LIKE concat(SUBSTRING_INDEX(pc.PostcodeName, ' ', 1),' %%')" +
                 "INNER JOIN LocalAuthorityList la ON la.LocalAuthorityID = pc.LocalAuthorityID " +
-                "INNER JOIN TypeOfEventList evType ON evType.TypeOfEventID = eve.TypeOfEventID "+
-                "WHERE evType.TypeOfEventID = \"%s \" AND la.LocalAuthorityID = \"%s\" ;", eventId,authId);
+                "INNER JOIN TypeOfEventList evType ON evType.TypeOfEventID = eve.TypeOfEventID " +
+                "WHERE evType.TypeOfEventID = \"%s\" AND la.LocalAuthorityID = \"%s\";", eventId,authId);
         ResultSet rs = null;
         int eventNumber = 0;
         try {
@@ -259,7 +260,7 @@ public class StatisticsQueries extends DBQueries {
     private int getLocalAuthID(int schoolID){
         String query = String.format("select la.LocalAuthorityID as schoolAuthorityID " +
                 "FROM School sc " +
-                "INNER JOIN PostcodeList pc ON pc.PostcodeName = sc.SchoolPostcode " +
+                "INNER JOIN PostcodeList pc ON pc.PostcodeName LIKE CONCAT('%%',sc.SchoolPostcode) " +
                 "INNER JOIN LocalAuthorityList la ON la.LocalAuthorityID = pc.LocalAuthorityID " +
                 "WHERE sc.SchoolID = \"%s\"; ", schoolID);
         int localAuthID = 0;
@@ -281,7 +282,8 @@ public class StatisticsQueries extends DBQueries {
         int localAuthID = getLocalAuthID(schoolID);
         String query = String.format("select eve.* " +
                 "From Event eve " +
-                "WHERE eve.EventVenuePostcode IN (SELECT PostcodeName " +
+                "WHERE SUBSTRING_INDEX(eve.EventVenuePostcode, ' ', 1) IN " +
+                "(SELECT PostcodeName AS postcode " +
                 "FROM PostcodeList " +
                 "WHERE LocalAuthorityID = \"%s\");", localAuthID);
         List<Event> events = new ArrayList<>();
