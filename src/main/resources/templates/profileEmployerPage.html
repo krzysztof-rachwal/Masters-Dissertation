@@ -358,10 +358,9 @@
 
             <div class="my-2 col-md-12"th:remove="${allEmployerChosenPreferences.contains(5)}  ? none : all" >
                 <span class="text-h5 font-weight-bold">Foreign languages:</span>
-                <span th:each="employerLanguage, i : ${allEmployerLanguage}">
-                    <span  th:remove="${allEmployerLanguagePreference.contains(employerLanguage.getEmployerLanguageID())} ? none : all" th:text="${employerLanguage.getEmployerLanguageName()} +' '"></span>
-                    <span  th:remove="${i.index +1 < allEmployerLanguagePreference.size()} ? none : all">,</span>
-
+                <span th:each="employerLanguage,i : ${allEmployerLanguage}"  >
+                    <span  th:remove="${allEmployerLanguagePreference.contains(employerLanguage.getEmployerLanguageID())} ? none : all"  th:text="${employerLanguage.getEmployerLanguageName()} +' '"></span>
+                    <span th:value="${i}" th:remove="${i.count < allEmployerLanguagePreference.get(allEmployerLanguagePreference.size()-1)  && allEmployerLanguagePreference.contains(employerLanguage.getEmployerLanguageID())} ? none : all">,</span>
                 </span>
 
             </div>
