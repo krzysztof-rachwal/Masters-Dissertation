@@ -352,14 +352,28 @@ public class VacancyQueries extends DBQueries {
 
     ///////////////////////////////////// FILTER METHODS ///////////////////////////////////////////////
 
-    public List<Integer> getFilteredEmployersIds(int typeOfVacancy,
+    public List<Integer> getFilteredVacanciesIds(int typeOfVacancy,
                                                  int occupationalCode){
         List<Integer> ids = new ArrayList<>();
         connection = ConnectionFactory.getConnection();
+
+
+        List<String> intValuesListofSQLQuery = Arrays.asList(" e.typeOfVacancyID = ", " e.occupationalCodeID = ");
+
+        String SQL = "SELECT distinct VacancyID FROM Vacancy WHERE VacancyID IN ";
+
+        for(int i = 0; i < intValuesListofSQLQuery.size(); ++i){
+
+        }
+
+        if ( typeOfVacancy != 0 || occupationalCode != 0 ){
+            SQL = SQL.concat("WHERE VacancyID IN ");
+        }
+
         return ids;
     }
 
-    List<String> intValuesListofSQLQuery = Arrays.asList(" e.NumberOfEmployeesID = ", " e.StatusOfEmployerID = ");
+
 
 }
 
