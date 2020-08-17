@@ -240,10 +240,14 @@ public class BaseController {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("searchVacanciesPage");
         List<Vacancy> vacancies;
+        List<Employer> employerAllNamesAndIds;
+
         vacancies = VacancyQrys.getAllVacancy();
+        employerAllNamesAndIds = EmployerQrys.getAllEmployerNamesAndIds();
 
         Map<String,Object> allVacancies = new HashMap<String,Object>();
         allVacancies.put("allVacancies", vacancies);
+        allVacancies.put("AllEmployerNamesAndIds", employerAllNamesAndIds);
         mv.addAllObjects(allVacancies);
 
         return mv;
