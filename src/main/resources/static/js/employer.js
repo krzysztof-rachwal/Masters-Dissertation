@@ -94,16 +94,30 @@ function updateThisEmployer() {
     let update_alumni_id = [];
     let update_alumni_name = [];
     let update_alumni_school = [];
-    $("input[name='update-employer-alumni-name']").each(function() {update_alumni_name.push($(this).val()); update_alumni_id.push($(this).attr("id"))});
-    $("select[name='update-employer-alumni-school']").each(function() {update_alumni_school.push($(this).val());});
+
+    // Update Alumni Name and Id
+    $("input[name='update-employer-alumni-name']").each(function() {
+        update_alumni_name.push($(this).val());
+        update_alumni_id.push($(this).attr("id"))
+    });
+    // Update Alumni School
+    $("select[name='update-employer-alumni-school']").each(function() {
+        update_alumni_school.push($(this).val());
+    });
 
     let updateEmployerAlumniID_url = "UpdateEmployerAlumniID=" + update_alumni_id;
     let updateEmployerAlumniName_url = "UpdateEmployerAlumniName=" + update_alumni_name;
     let updateEmployerAlumniSchoolID_url = "UpdateEmployerAlumniSchoolID=" +update_alumni_school;
 
-    if ($('input[name=update-employer-alumni-name]').attr("id")=== undefined){updateEmployerAlumniID_url = "UpdateEmployerAlumniID="}
-    if ($('input[name=update-employer-alumni-name]').val() === undefined){updateEmployerAlumniName_url = "UpdateEmployerAlumniName="}
-    if ($('select[name=update-employer-alumni-school]').val()=== undefined){updateEmployerAlumniSchoolID_url = "UpdateEmployerAlumniSchoolID="}
+    if ($('input[name=update-employer-alumni-name]').attr("id")=== undefined){
+        updateEmployerAlumniID_url = "UpdateEmployerAlumniID="
+    }
+    if ($('input[name=update-employer-alumni-name]').val() === undefined){
+        updateEmployerAlumniName_url = "UpdateEmployerAlumniName="
+    }
+    if ($('select[name=update-employer-alumni-school]').val()=== undefined){
+        updateEmployerAlumniSchoolID_url = "UpdateEmployerAlumniSchoolID="
+    }
 
     let fullUri = baseUri + "?" + "&" + EmployerID_url + "&" + EmployerName_url+ "&" + EmployerStatus_url + "&" + EmployerSummary_url + "&" + EmployerAddressCity_url + "&" + EmployerAddressStreet_url + "&"
         + EmployerAddressNumber_url + "&" + EmployerPostcode_url  + "&" + EmployerEmail_url  + "&" + ContactPersonNameSurname_url + "&"
@@ -210,19 +224,75 @@ function deleteEmployer(employerId) {
         });
 }
 
-function hideEmployers(ids){
+// 4.Search Employer
+function searchEmployer(){
+    // 4.1 Get the value from Search input
+     let val = $('#employer-search').val()
 
-    $(".employer-card").removeClass("d-none");
-    $(".employer-card").addClass("d-none");
+    //4.2  If value is null exit the function
+    if (val==""){
+        $(".employer-card").removeClass("d-none")
+    }
 
+    //4.3 Transform the first letters in a word to uppercase
+    let val2 = val.charAt(0).toUpperCase() + val.slice(1);
+
+    //4.4 Remove class vacancy found - to restart the "search"
+    $(".employer-found").removeClass("employer-found")
+    $(".employer-card").removeClass("d-none")
+
+    //4.5 Add classes for the right values
+    $(".list-employers").find(".searchable:contains('"+val2+"')").closest(".employer-card").addClass("employer-found")
+
+    //4.6 Remove the cards
+    $(".list-employers").find(".searchable:not(:contains('"+val2+"'))").closest(".employer-card").addClass("d-none")
+
+    //4.7 Show the "Right" Card
+    $(".employer-found").removeClass("d-none")
+
+}
+
+//5. Sort Employers By Name
+function sortEmployerByName(type, order) {
+
+    let baseUri = "api/employer/sortBy";
+    let orderBy_url = "orderBy=" + order ;
+    let sortBy_url = "sortBy=" + type ;
+
+    var fullUri = baseUri + "?" + "&" + orderBy_url + "&" + sortBy_url
+    var token = $("meta[name='_csrf']").attr("content");    // Used to bypass Spring Boot's CSRF protocol     -- Solution taken from 'https://stackoverflow.com/questions/34747437/use-of-spring-csrf-with-ajax-rest-call-and-html-page-with-thymeleaf' on Nov 26th 2019
+    var header = $("meta[name='_csrf_header']").attr("content");    // Used to bypass Spring Boot's CSRF protocol
+
+    console.log(fullUri)
+
+    $.ajax({
+        type: "GET",
+        url: fullUri,
+        dataType: 'json',
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader(header, token);
+        },
+        success: function (data) {
+            sortEmployers(data);
+        },
+        error: function (data) {
+            alert("FAIL");
+            alert(data.responseText);
+            alert(data.toString());
+        }
+    });
+}
+
+// 6. sort Employers
+function sortEmployers(ids){
 
     for (i = 0; i < ids.length; i++) {
-        $("#"+ids[i]).removeClass("d-none");
+        $("#"+ids[i]).closest(".employer-card").before( $("#"+ids[i+1]).closest(".employer-card"));
     }
 }
 
 
-//6. FilterEmployers
+//7. FilterEmployers
 function filterEmployers() {
 
     var baseUri = "/api/filter/employer";
@@ -261,117 +331,26 @@ function filterEmployers() {
             alert(data.toString());
         }
     });
-
-
 }
 
-// 4.Search Employer
-function searchEmployer(){
-    // 4.1 Get the value from Search input
-     let val = $('#employer-search').val()
+// 8. Hide Employer
+function hideEmployers(ids){
 
-    //4.2  If value is null exit the function
-    if (val==""){
-        $(".employer-card").removeClass("d-none")
-    }
+    $(".employer-card").removeClass("d-none");
+    $(".employer-card").addClass("d-none");
 
-    //4.3 Transform the first letters in a word to uppercase
-    let val2 = val.charAt(0).toUpperCase() + val.slice(1);
-
-    //4.4 Remove class vacancy found - to restart the "search"
-    $(".employer-found").removeClass("employer-found")
-    $(".employer-card").removeClass("d-none")
-
-    //4.5 Add classes for the right values
-    $(".list-employers").find(".searchable:contains('"+val2+"')").closest(".employer-card").addClass("employer-found")
-
-    //4.6 Remove the cards
-    $(".list-employers").find(".searchable:not(:contains('"+val2+"'))").closest(".employer-card").addClass("d-none")
-
-    //4.7 Show the "Right" Card
-    $(".employer-found").removeClass("d-none")
-
-}
-
-// 5. Sort Events by Name
-function sortByName(){
-    var list, i, switching, shouldSwitch;
-    switching = true;
-    /* Make a loop that will continue until
-    no switching has been done: */
-    while (switching) {
-        // start by saying: no switching is done:
-        switching = false;
-        list = $('div[name=employer-card-title]')
-
-        // Loop through all list-items:
-        for (i = 0; i < (list.length - 1); i++) {
-            // start by saying there should be no switching:
-            shouldSwitch = false;
-            /* check if the next item should
-            switch place with the current item: */
-            if (list[i].innerHTML.toLowerCase() > list[i + 1].innerHTML.toLowerCase()) {
-                /* if next item is alphabetically
-                lower than current item, mark as a switch
-                and break the loop: */
-                shouldSwitch = true;
-                break;
-            }
-        }
-        if (shouldSwitch) {
-            /* If a switch has been marked, make the switch
-            and mark the switch as done: */
-            list[i].closest(".employer-card").before(list[i + 1].closest(".employer-card"));
-            switching = true;
-        }
-    }
-
-}
-
-// 6. Sort Vacancy by Date
-function sortByDate() {
-    let list = $('input[name=employer]').val()
-
-    // Loop through all list-items:
-    for (i = 0; i < (list.length - 1); i++) {
-        let listCompare1 = list[i].innerHTML.split("-");
-
-        for (j = 0; j < (list.length - 1); j++) {
-            let listCompare2 = list[j].innerHTML.split("-");
-
-            if (listCompare1[0] < listCompare2[0]) {
-                // alert(" Part 1 ---- listCompare1: " + listCompare1 + " listCompare2: " + listCompare2)
-                list[i].closest(".employer-card").before(list[j].closest(".employer-card"));
-            }
-
-            if (listCompare1[0] == listCompare2[0] && listCompare1[1] < listCompare2[1]) {
-                // alert("Part 2 --- listCompare1: " + listCompare1 + " listCompare2: " + listCompare2)
-                list[i].closest(".employer-card").before(list[j].closest(".employer-card"));
-            }
-            if (listCompare1[0] == listCompare2[0] && listCompare1[1] == listCompare2[1] && listCompare1[2] < listCompare2[2]) {
-                // alert("Part 3 --- listCompare1: " + listCompare1 + " listCompare2: " + listCompare2)
-                list[i].closest(".employer-card").before(list[j].closest(".employer-card"));
-            }
-
-        }
+    for (i = 0; i < ids.length; i++) {
+        $("#"+ids[i]).removeClass("d-none");
     }
 }
 
-//7. On document Ready
+
+//9. On document Ready
 $( document ).ready(function() {
     $("select[name=employer-sort-by]").change(function(){
-        if($(this).val()=="Name"){
-            sortByName();
-        }
-
-
-        if($(this).val()=="Date"){
-            sortByDate();
-        }
-
+        sortEmployerByName($(this).val(),$(this).children(":selected").attr("data-val"));
     });
 });
 
-
-// For the Employer Name selector
-$('.selectpicker').selectpicker();
+// // For the Employer Name selector
+// $('.selectpicker').selectpicker();

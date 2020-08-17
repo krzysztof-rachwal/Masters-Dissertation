@@ -159,7 +159,7 @@
                                 <div class="col-md-6 mb-4 d-none" id="div-foreign-language">
                                     <label for="employer-language">Which Foreign Language?</label><br>
                                     <select class="selectpicker" data-width="80%" multiple data-live-search="true" id="employer-language">
-                                        <option  th:each="employerLanguage : ${allEmployerLanguage}" th:value="${employerLanguage.getEmployerLanguageID()}" th:text="${employerLanguage.getEmployerLanguageName()}"></option>
+                                        <option  th:each="employerLanguage : ${allEmployerLanguage}" th:selected="${allEmployerLanguagePreference.contains(employerLanguage.getEmployerLanguageID())}"  th:value="${employerLanguage.getEmployerLanguageID()}" th:text="${employerLanguage.getEmployerLanguageName()}"></option>
                                     </select>
                                 </div>
 
@@ -333,12 +333,6 @@
             </div>
 
             <div class="my-2 col-md-4">
-                <span class="text-h5 font-weight-bold">Works in foreign languages:</span>
-                <span class="text-h5" th:remove="${allEmployerChosenPreferences.contains(5)}  ? none : all">Yes</span>
-                <span class="text-h5" th:remove="${allEmployerChosenPreferences.contains(5)}  ? all : none">No</span>
-            </div>
-
-            <div class="my-2 col-md-4">
                 <span class="text-h5 font-weight-bold">Works in Welsh:</span>
                 <span class="text-h5" th:remove="${allEmployerChosenPreferences.contains(2)}  ? none : all">Yes</span>
                 <span class="text-h5" th:remove="${allEmployerChosenPreferences.contains(2)}  ? all : none">No</span>
@@ -354,6 +348,21 @@
                 <span class="text-h5 font-weight-bold">Has Apprenticeship programme:</span>
                 <span class="text-h5" th:remove="${allEmployerChosenPreferences.contains(4)}  ? none : all">Yes</span>
                 <span class="text-h5" th:remove="${allEmployerChosenPreferences.contains(4)}  ? all : none">No</span>
+            </div>
+
+            <div class="my-2 col-md-4">
+                <span class="text-h5 font-weight-bold">Works in foreign languages:</span>
+                <span class="text-h5" name="employer-language-checker" th:remove="${allEmployerChosenPreferences.contains(5)}  ? none : all">Yes</span>
+                <span class="text-h5" th:remove="${allEmployerChosenPreferences.contains(5)}  ? all : none">No</span>
+            </div>
+
+            <div class="my-2 col-md-12"th:remove="${allEmployerChosenPreferences.contains(5)}  ? none : all" >
+                <span class="text-h5 font-weight-bold">Foreign languages:</span>
+                <span th:each="employerLanguage,i : ${allEmployerLanguage}"  >
+                    <span  th:remove="${allEmployerLanguagePreference.contains(employerLanguage.getEmployerLanguageID())} ? none : all"  th:text="${employerLanguage.getEmployerLanguageName()} +' '"></span>
+                    <span th:value="${i}" th:remove="${i.count < allEmployerLanguagePreference.get(allEmployerLanguagePreference.size()-1)  && allEmployerLanguagePreference.contains(employerLanguage.getEmployerLanguageID())} ? none : all">,</span>
+                </span>
+
             </div>
         </div>
 
@@ -513,6 +522,9 @@
                 }
             }
         });
+        if( $("span[name=employer-language-checker]").text() =="Yes"){
+            $('div[id=div-foreign-language]').removeClass('d-none')
+        }
 
     });
 

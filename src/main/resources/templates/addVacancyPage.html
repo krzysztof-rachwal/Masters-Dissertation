@@ -34,7 +34,7 @@
             <div class="row">
                 <div class="col-md-8">
                     <div class="form-group">
-                        <label for="vacancy-name" class="  mb-1">Vacancy name</label>
+                        <label for="vacancy-name" class="  mb-1">Vacancy Name</label>
                         <input type="text" class="form-control input-border" id="vacancy-name">
                     </div>
                 </div>
@@ -122,7 +122,7 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="appl-method" class="  mb-1">Application methods</label>
+                        <label for="appl-method" class="  mb-1">Application Methods</label>
                         <select class="custom-select p-2" id="appl-method">
                             <option th:each="vacancyApplicationMethods : ${allVacanciesApplicationMethods}" th:value="${vacancyApplicationMethods.getApplicationMethodID()}" th:text="${vacancyApplicationMethods.getApplicationMethodName()}"></option>
                         </select>

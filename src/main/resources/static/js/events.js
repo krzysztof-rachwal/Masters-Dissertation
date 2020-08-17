@@ -71,13 +71,15 @@ function UpdateThisEvent(){
     var eventAddressNumber_url = "eventAddressNumber=" + $('input[id=event-number]').val();
     var eventPostcode_url = "eventPostcode=" + $('input[id=event-postcode]').val();
     var eventSummary_url = "eventSummary=" + $('textarea[id=event-summary]').val();
-    var isPublic_url = "isPublic=" + $('select[id=event-public]').val();
-    var isCancelled_url = "isCancelled=" + $('select[id=event-cancelled]').val();
     var nameOfAdviser_url = "nameOfAdviser=" + $('input[id=adviser-name]').val();
     var numberOfAttendees_url = "numberOfAttendees=" + $('input[id=no-attendees]').val();
+
+    var isPublic_url = "isPublic=" + $('select[id=event-public]').val();
+    var isCancelled_url = "isCancelled=" + $('select[id=event-cancelled]').val();
     var promotesApprenticeships_url="promotesApprenticeships=" + $('select[id=promote-apprenticheship]').val();
     var promotesWelshLanguage_url = "promotesWelshLanguage=" + $('select[id=conducted-welsh]').val();
     var challengesGenderStereotypes_url = "challengesGenderStereotypes=" + $('select[id=challenger-gender]').val();
+
     var employerAttending_url = "employerAttending=" + $('select[id=employers-attending]').val();
     var schoolAttending_url = "schoolAttending=" + $('select[id=schools-attending]').val();
 
@@ -176,113 +178,49 @@ function searchEvents(){
 
 }
 
-// 5. Sort Events by Name
-function sortByName(type){
-    var list, i, switching, shouldSwitch;
-    switching = true;
-    /* Make a loop that will continue until
-    no switching has been done: */
-    while (switching) {
-        // start by saying: no switching is done:
-        switching = false;
-        list = $('div[name=event-card-title]')
+//5. Sort Event By Name and Date
+function sortEventsByNameAndDate(type, order) {
 
-        // Loop through all list-items:
-        for (i = 0; i < (list.length - 1); i++) {
-            // start by saying there should be no switching:
-            shouldSwitch = false;
-            /* check if the next item should
-            switch place with the current item: */
-            if (type =="up") {
-                if (list[i].innerHTML.toLowerCase() > list[i + 1].innerHTML.toLowerCase()) {
-                    /* if next item is alphabetically
-                    lower than current item, mark as a switch
-                    and break the loop: */
-                    shouldSwitch = true;
-                    break;
-                }
-            }
+    let baseUri = "api/event/sortBy";
+    let orderBy_url = "orderBy=" + order ;
+    let sortBy_url = "sortBy=" + type ;
 
-            if (type =="down") {
-                if (list[i].innerHTML.toLowerCase() < list[i + 1].innerHTML.toLowerCase()) {
-                    /* if next item is alphabetically
-                    lower than current item, mark as a switch
-                    and break the loop: */
-                    shouldSwitch = true;
-                    break;
-                }
-            }
+    var fullUri = baseUri + "?" + "&" + orderBy_url + "&" + sortBy_url
+    var token = $("meta[name='_csrf']").attr("content");    // Used to bypass Spring Boot's CSRF protocol     -- Solution taken from 'https://stackoverflow.com/questions/34747437/use-of-spring-csrf-with-ajax-rest-call-and-html-page-with-thymeleaf' on Nov 26th 2019
+    var header = $("meta[name='_csrf_header']").attr("content");    // Used to bypass Spring Boot's CSRF protocol
+
+    console.log(fullUri)
+
+    $.ajax({
+        type: "GET",
+        url: fullUri,
+        dataType: 'json',
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader(header, token);
+        },
+        success: function (data) {
+            sortEvents(data);
+        },
+        error: function (data) {
+            alert("FAIL");
+            alert(data.responseText);
+            alert(data.toString());
         }
-        if (shouldSwitch) {
-            /* If a switch has been marked, make the switch
-            and mark the switch as done: */
-            list[i].closest(".event-card").before(list[i + 1].closest(".event-card"));
-            switching = true;
-        }
-    }
-
+    });
 }
 
-// 6. Sort Vacancy by Date
-function sortByDate(type) {
-    let list = $('h5[name=event-card-date]').val()
+// 6. sortEvents
+function sortEvents(ids){
 
-    // Loop through all list-items:
-    for (i = 0; i < (list.length - 1); i++) {
-        let listCompare1 = list[i].innerHTML.split("-");
-
-        for (j = 0; j < (list.length - 1); j++) {
-            let listCompare2 = list[j].innerHTML.split("-");
-            if(type=="down") {
-                if (listCompare1[0] < listCompare2[0]) {
-                    list[i].closest(".event-card").before(list[j].closest(".event-card"));
-                }
-
-                if (listCompare1[0] == listCompare2[0] && listCompare1[1] < listCompare2[1]) {
-                    list[i].closest(".event-card").before(list[j].closest(".event-card"));
-                }
-                if (listCompare1[0] == listCompare2[0] && listCompare1[1] == listCompare2[1] && listCompare1[2] < listCompare2[2]) {
-                    list[i].closest(".event-card").before(list[j].closest(".event-card"));
-                }
-            }
-            if(type=="up"){
-                if (listCompare1[0] > listCompare2[0]) {
-                    // alert(" Part 1 ---- listCompare1: " + listCompare1 + " listCompare2: " + listCompare2)
-                    list[i].closest(".event-card").before(list[j].closest(".event-card"));
-                }
-
-                if (listCompare1[0] == listCompare2[0] && listCompare1[1] > listCompare2[1]) {
-                    // alert("Part 2 --- listCompare1: " + listCompare1 + " listCompare2: " + listCompare2)
-                    list[i].closest(".event-card").before(list[j].closest(".event-card"));
-                }
-                if (listCompare1[0] == listCompare2[0] && listCompare1[1] == listCompare2[1] && listCompare1[2] > listCompare2[2]) {
-                    // alert("Part 3 --- listCompare1: " + listCompare1 + " listCompare2: " + listCompare2)
-                    list[i].closest(".event-card").before(list[j].closest(".event-card"));
-                }
-            }
-        }
+    for (i = 0; i < ids.length; i++) {
+        $("#"+ids[i]).closest(".event-card").before( $("#"+ids[i+1]).closest(".event-card"));
     }
 }
 
 //7. On document Ready
 $( document ).ready(function() {
     $("select[name=event-sort-by]").change(function(){
-        if($(this).val()=="NameUp"){
-            sortByName("up");
-        }
-
-        if($(this).val()=="NameDown"){
-            sortByName("down");
-        }
-
-        if($(this).val()=="DateUp"){
-            sortByDate("up");
-        }
-
-        if($(this).val()=="DateDown"){
-            sortByDate("down");
-        }
-
+        sortEventsByNameAndDate($(this).val(),$(this).children(":selected").attr("data-val"));
     });
 });
 
