@@ -312,6 +312,27 @@ public class StatisticsQueries extends DBQueries {
         return events;
     }
 
+    public List<String> getAllEventsAdvisors() {
+
+        String SQL = "SELECT distinct NameOfAdviser FROM Event;";
+        List<String> advisors = new ArrayList<>();
+        ResultSet rs;
+
+        try {
+            connection = ConnectionFactory.getConnection();
+            statement = connection.createStatement();
+            rs = statement.executeQuery(SQL);
+            while (rs.next()) {
+                advisors.add(rs.getString("NameOfAdviser"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return advisors;
+
+    }
+
 }
 
 

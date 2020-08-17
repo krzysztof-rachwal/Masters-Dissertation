@@ -15,7 +15,6 @@ import org.springframework.stereotype.Controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -318,11 +317,19 @@ public class BaseController {
     public ModelAndView SearchEvents(HttpSession session) {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("searchEventsPage");
+
         List<Event> events;
+        List<Event> eventsAllTypes;
+        List<String> advisors;
+
         events = EventQrys.getAllEvents();
+        eventsAllTypes = EventQrys.getAllTypesOfEvents();
+        advisors = statisticsQueries.getAllEventsAdvisors();
 
         Map<String,Object> allEvents = new HashMap<String,Object>();
         allEvents.put("allEvents", events);
+        allEvents.put("allEventTypes", eventsAllTypes);
+        allEvents.put("allAdvisorsNames", advisors);
         mv.addAllObjects(allEvents);
 
         return mv;

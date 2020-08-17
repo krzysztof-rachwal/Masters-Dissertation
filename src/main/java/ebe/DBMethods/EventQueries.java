@@ -278,4 +278,10 @@ public class EventQueries extends DBQueries {
         return list;
     }
 
+    public List<Integer> filterEvents(List<Integer> typeOfEventList, List<String> nameOfAdviserList, int promotesApprenticeships, int promotesWelshLanguage, int challengesGenderStereotypes) {
+        List<Integer> ids = new ArrayList<>();
+
+
+        return ids;
+    }
 }

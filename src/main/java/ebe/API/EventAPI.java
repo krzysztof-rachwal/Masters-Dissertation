@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -168,6 +169,53 @@ public class EventAPI {
         }
 
         return orderEventIds;
+    }
+
+    ///////////////////////    FILTER     ////////////////////////////////
+    @GetMapping("api/event/filter")
+    public List<Integer> filterEvents(@RequestParam(value="typeOfEventID") String typeOfEventID,
+                                @RequestParam(value="nameOfAdviser") String nameOfAdviser,
+                                      @RequestParam(value="eventPreferences") String eventPreferences){
+
+        List<Integer> typeOfEventList = new ArrayList<Integer>();
+        List<String> nameOfAdviserList = new ArrayList<String>();
+        int PromotesApprenticeships = 0;
+        int PromotesWelshLanguage = 0;
+        int ChallengesGenderStereotypes = 0;
+
+        if (!typeOfEventID.equals("")) {
+            for (String typeOfEvent : typeOfEventID.split(",")) {
+                typeOfEventList.add(Integer.parseInt(typeOfEvent));
+            }
+        }  else{
+            typeOfEventList = Arrays.asList();
+        }
+
+        if (!nameOfAdviser.equals("")) {
+            for (String name : nameOfAdviser.split(",")) {
+                nameOfAdviserList.add(name);
+            }
+        }  else{
+            nameOfAdviserList = Arrays.asList();
+        }
+
+        if (!eventPreferences.equals("")) {
+            for (String preference : eventPreferences.split(",")) {
+                if (preference.equals("1")) {
+                    PromotesApprenticeships = 1;
+                } else if (preference.equals("2")) {
+                    PromotesWelshLanguage = 1;
+                } else if (preference.equals("3")) {
+                    ChallengesGenderStereotypes = 1;
+                }
+            }
+        }
+
+
+        List<Integer> ids = EventQrys.filterEvents(typeOfEventList, nameOfAdviserList,
+                PromotesApprenticeships, PromotesWelshLanguage,  ChallengesGenderStereotypes);
+
+        return ids;
     }
 
 }
