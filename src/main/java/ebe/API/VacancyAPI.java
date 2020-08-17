@@ -7,6 +7,8 @@ import ebe.DBMethods.VacancyQueries;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @RestController
@@ -71,7 +73,7 @@ public class VacancyAPI {
     }
 
     ///////////////////////    DELETE     ////////////////////////////////
-    //2. Delete Vacancy
+    //3. Delete Vacancy
     @DeleteMapping("api/delete/vacancy")
     public boolean deleteVacancies(@RequestParam(value="vacancyId") Integer vacancyId){
         if (VacancyQrys.deleteVacancy(vacancyId) == 1) {
@@ -79,5 +81,24 @@ public class VacancyAPI {
         } else {
             return false;
         }
+    }
+
+    ///////////////////////    SORT BY     ////////////////////////////////
+    @GetMapping("api/vacancy/sortBy")
+    public List<Integer> SortBy(@RequestParam(value="sortBy") String sortBy,
+                                @RequestParam(value="orderBy") String orderBy){
+
+        List<Integer> orderVacancyIds = new ArrayList<Integer>();
+
+        if(sortBy.equals("Name")){
+            orderVacancyIds = VacancyQrys.sortByVacancyByName(orderBy);
+        }
+
+        if(sortBy.equals("Date")){
+            orderVacancyIds = VacancyQrys.sortByVacancyByDate(orderBy);
+        }
+
+
+        return orderVacancyIds;
     }
 }
