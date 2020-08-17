@@ -43,50 +43,18 @@
     <div class="flex-container">
         <div class="col-lg-3">
             <div class="mb-3">
-                <h6>TYPE OF EVENT</h6>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="ind1">
-                    <label class="form-check-label" for="ind1">
-                        Activate
-                    </label>
-                </div>
-
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="ind2">
-                    <label class="form-check-label" for="ind2">
-                        World of Work
-                    </label>
-                </div>
-
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="ind3">
-                    <label class="form-check-label" for="ind3">
-                        High Impact Event
-                    </label>
-                </div>
-
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="ind5">
-                    <label class="form-check-label" for="ind5">
-                        Webinar/Virtual Event
-                    </label>
-                </div>
-
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="ind6">
-                    <label class="form-check-label" for="ind6">
-                        Digital Presentation
-                    </label>
-                </div>
+                <label for="event-type">Event type</label><br>
+                <select class="selectpicker" multiple data-live-search="true" data-width="80% " id="event-type">
+                    <option  th:each="eventTypes : ${allEventTypes}"  th:selected="${eventTypes.getTypeOfEventID()} == ${eventTypes.getTypeOfEventID()}"  th:value="${eventTypes.getTypeOfEventID()}" th:text="${eventTypes.getTypeOfEventName()}"></option>
+                </select>
             </div>
 
             <div class="mb-3">
-                <h6>DATE</h6>
-                <div>
-                    <input class="form-control" type="date" value="" id="date">
-                </div>
+                <label for="event-type">Name of Advisor</label><br>
+                <select class="selectpicker" multiple data-live-search="true" data-width="80%"  id="advisor-name">
+                    <option  th:each="eventTypes : ${allEventTypes}"  th:selected="${eventTypes.getTypeOfEventID()} == ${eventTypes.getTypeOfEventID()}"  th:value="${eventTypes.getTypeOfEventID()}" th:text="${eventTypes.getTypeOfEventName()}"></option>
+                </select>
             </div>
-
 
             <div class="mb-3">
                 <div class="form-check">

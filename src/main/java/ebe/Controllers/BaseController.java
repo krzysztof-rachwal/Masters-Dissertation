@@ -319,10 +319,14 @@ public class BaseController {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("searchEventsPage");
         List<Event> events;
+        List<Event> eventsAllTypes;
+
         events = EventQrys.getAllEvents();
+        eventsAllTypes = EventQrys.getAllTypesOfEvents();
 
         Map<String,Object> allEvents = new HashMap<String,Object>();
         allEvents.put("allEvents", events);
+        allEvents.put("allEventTypes", eventsAllTypes);
         mv.addAllObjects(allEvents);
 
         return mv;
