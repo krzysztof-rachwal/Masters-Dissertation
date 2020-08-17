@@ -117,6 +117,9 @@
                             <button class="input-group-text input-border" onclick="searchEmployer()">
                                 <i class="fa fa-search"></i>
                             </button>
+                            <button class="tooltip-button input-group-text" id="tooltip" data-toggle="tooltip" data-placement="top" data-html="true" data-original-title= "Search By:<br>-Employer Name<br>-Employer City<br>-Employer PostCode<br>-Contact Person<br>-Contact Person Position<br>-Notes">
+                                <i class="fa fa-info-circle"></i>
+                            </button>
                         </div>
                     </div>
 
@@ -142,19 +145,6 @@
 
                 <div  class="list-employers">
                     <div class="gel-content-row employer-card" th:each="employer : ${allEmployers}"  th:id="${employer.getEmployerID()}">
-                        <input type="hidden" class="searchable" th:value="${employer.getEmployerAddressCity()}">
-                        <input type="hidden" class="searchable" th:value="${employer.getEmployerAddressStreet()}">
-                        <input type="hidden" class="searchable" th:value="${employer.getEmployerAddressNumber()}">
-                        <input type="hidden" class="searchable" th:value="${employer.getEmployerPostcode()}">
-                        <input type="hidden" class="searchable" th:value="${employer.getEmployerEmail()}">
-                        <input type="hidden" class="searchable" th:value="${#strings.capitalize(employer.getContactPersonNameSurname())}">
-                        <input type="hidden" class="searchable" th:value="${#strings.capitalize(employer.getContactPersonPosition())}">
-                        <input type="hidden" class="searchable" th:value="${employer.getEmployerPhone()}">
-                        <input type="hidden" class="searchable" th:value="${employer.getEmployerWebsite()}">
-                        <input type="hidden" class="searchable" th:value="${employer.getEmployerTwitter()}">
-                        <input type="hidden" class="searchable" th:value="${employer.getEmployerFB()}">
-                        <input type="hidden" class="searchable" th:value="${#strings.capitalize(employer.getContactPersonNameSurname())}">
-                        <input type="hidden" class="searchable" th:value="${#strings.capitalize(employer.getNotes())}">
                         <article class="card js-card card--style-icon card--100" gel-processed="processed">
                             <a th:href="@{/profile-employer(employerId=${employer.getEmployerID()})}" class="card__inner" gel-processed="processed">
                                 <div class="card__content">
@@ -166,6 +156,12 @@
                                     <div class="content__body">
                                         <div class="body__title searchable"  name="employer-card-title" th:text="${#strings.capitalize(employer.getEmployerName())}"></div>
                                         <div class="body__body searchable" th:text="${#strings.capitalize(employer.getCompanySummary())}"></div>
+
+                                        <h5 class="searchable d-none" th:text="${employer.getEmployerAddressCity()}"></h5>
+                                        <h5 class="searchable d-none" th:text="${employer.getEmployerPostcode()}"></h5>
+                                        <h5 class="searchable d-none" th:text="${#strings.capitalize(employer.getContactPersonNameSurname())}"></h5>
+                                        <h5 class="searchable d-none" th:text="${#strings.capitalize(employer.getContactPersonPosition())}"></h5>
+                                        <h5 class="searchable d-none" th:text="${#strings.capitalize(employer.getNotes())}"></h5>
                                     </div>
                                 </div>
                             </a>
@@ -219,7 +215,16 @@
         $('#filterButton').click(function(){
             filterEmployers();
         });
+
+        $("#tooltip").hover(function(){
+                $(this).tooltip('show')
+            },
+            function(){
+                $(this).tooltip('hide')
+            }
+        )
     });
+
 
     $('.selectpicker').selectpicker();
 

@@ -106,6 +106,10 @@
                             <button class="input-group-text input-border" onclick="searchVacancy()">
                                 <i class="fa fa-search"></i>
                             </button>
+                            <button class="tooltip-button input-group-text" id="tooltip" data-toggle="tooltip" data-placement="top" data-html="true" data-original-title= "Search By:<br>-Vacancy Name <br>-Vacancy PostCode<br>-Employer Name <br>-Application Deadline">
+                                <i class="fa fa-info-circle"></i>
+                            </button>
+
                         </div>
                     </div>
 
@@ -133,11 +137,8 @@
 
                 <div class="list-vacancies">
                     <div class="gel-content-row vacancy-card" th:each="vacancy : ${allVacancies}" th:id="${vacancy.getVacancyID()}">
-                        <input type="hidden" class="searchable" th:value="${vacancy.getStartOfVacancy()}">
-                        <input type="hidden" class="searchable" th:value="${#strings.capitalize(vacancy.getVacancyPostcode())}">
                         <article class="card js-card card--style-icon card--100" gel-processed="processed">
                             <a th:href="@{/profile-vacancy(vacancyId=${vacancy.getVacancyID()})}" class="card__inner" gel-processed="processed" >
-
                                 <div class="card__content">
                                     <div class="content__image">
                                         <div>
@@ -150,6 +151,9 @@
                                             <h5 th:each=" employer : ${AllEmployerNamesAndIds}" class="searchable" th:remove="${employer.getEmployerID() == vacancy.getEmployerID()} ? none : all" th:text="${#strings.capitalize(employer.getEmployerName())}"></h5>
                                             <h5 th:text="${vacancy.getDeadlineForApplication()}" name="vacancy-card-date"  class="searchable"></h5>
                                             <h5 th:text="${#strings.capitalize(vacancy.getVacancySummary())}" name="vacancy-card-date"  class="searchable"></h5>
+                                            <!-- Hidden Data -->
+                                            <h5  class="searchable d-none" th:text="${#strings.capitalize(vacancy.getVacancyPostcode())}"></h5>
+
                                         </div>
                                     </div>
                                 </div>
@@ -183,7 +187,18 @@
         $("#addVacancy").hover(function(){
                 $(this).addClass("typoWhite")
             },
-            function(){$(this).removeClass("typoWhite")})
+            function(){
+                $(this).removeClass("typoWhite")
+            }
+        )
+
+        $("#tooltip").hover(function(){
+                $(this).tooltip('show')
+            },
+            function(){
+                $(this).tooltip('hide')
+            }
+        )
     });
 </script>
 <script>
