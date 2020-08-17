@@ -224,6 +224,16 @@ $( document ).ready(function() {
     });
 });
 
+function hideEvents(ids){
+
+    $(".event-card").removeClass("d-none");
+    $(".event-card").addClass("d-none");
+
+    for (i = 0; i < ids.length; i++) {
+        $("#"+ids[i]).removeClass("d-none");
+    }
+}
+
 //8.
 function filterEvents() {
     var baseUri = "/api/event/filter";
@@ -246,7 +256,7 @@ function filterEvents() {
             xhr.setRequestHeader(header, token);
         },
         success: function (data) {
-            // hideEvents(data);
+            hideEvents(data);
             console.log(data);
         },
         error: function (data) {

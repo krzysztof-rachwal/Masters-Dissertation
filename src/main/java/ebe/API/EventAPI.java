@@ -174,7 +174,7 @@ public class EventAPI {
     ///////////////////////    FILTER     ////////////////////////////////
     @GetMapping("api/event/filter")
     public List<Integer> filterEvents(@RequestParam(value="typeOfEventID") String typeOfEventID,
-                                @RequestParam(value="nameOfAdviser") String nameOfAdviser,
+                                      @RequestParam(value="nameOfAdviser") String nameOfAdviser,
                                       @RequestParam(value="eventPreferences") String eventPreferences){
 
         List<Integer> typeOfEventList = new ArrayList<Integer>();
@@ -210,7 +210,6 @@ public class EventAPI {
                 }
             }
         }
-
 
         List<Integer> ids = EventQrys.filterEvents(typeOfEventList, nameOfAdviserList,
                 PromotesApprenticeships, PromotesWelshLanguage,  ChallengesGenderStereotypes);

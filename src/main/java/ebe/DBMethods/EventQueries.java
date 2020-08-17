@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Repository
@@ -280,8 +281,87 @@ public class EventQueries extends DBQueries {
 
     public List<Integer> filterEvents(List<Integer> typeOfEventList, List<String> nameOfAdviserList, int promotesApprenticeships, int promotesWelshLanguage, int challengesGenderStereotypes) {
         List<Integer> ids = new ArrayList<>();
+        connection = ConnectionFactory.getConnection();
+        ResultSet rs = null;
 
+        String SQL = "SELECT distinct EventID FROM Event WHERE EventID IN ";
+        String SQL2 = "(SELECT EventID FROM Event ";
+        if (!typeOfEventList.isEmpty()){
+            SQL2 = SQL2.concat(" WHERE ");
+            for (int i = 0; i < typeOfEventList.size(); ++i){
+                SQL2 = SQL2.concat(" Event.TypeOfEventID = " + typeOfEventList.get(i));
+                if (i != typeOfEventList.size() - 1){
+                    SQL2 = SQL2.concat(" OR ");
+                }
+            }
+        }
 
+        SQL2 = SQL2.concat(") AND EventID IN ");
+
+        String SQL3 = "(SELECT EventID FROM Event ";
+        if (!nameOfAdviserList.isEmpty()){
+            SQL3 = SQL3.concat(" WHERE ");
+            for (int i = 0; i < nameOfAdviserList.size(); ++i){
+                SQL3 = SQL3.concat(" Event.NameOfAdviser = " + "\"" + nameOfAdviserList.get(i) + "\"" );
+                if (i != nameOfAdviserList.size() - 1){
+                    SQL3 = SQL3.concat(" OR ");
+                }
+            }
+        }
+
+        SQL3 = SQL3.concat(")");
+
+        String SQL4 = "";
+
+        List<Integer> booleanFilters = Arrays.asList(promotesApprenticeships, promotesWelshLanguage, challengesGenderStereotypes);
+
+        List<String> SQLStatements = Arrays.asList(" PromotesApprenticeships = "," PromotesWelshLanguage = "," ChallengesGenderStereotypes = ");
+
+        if (booleanFilters.contains(1)){
+            SQL4 = SQL4.concat(" AND (");
+            for (int i = 0; i < booleanFilters.size(); ++i){
+                if (booleanFilters.get(i) == 1){
+                    SQL4 = SQL4.concat(SQLStatements.get(i) + booleanFilters.get(i));
+                    if (i+1 < booleanFilters.size() || i+2 < booleanFilters.size()){
+                        if (booleanFilters.get(i+1) == 1 ){
+                            SQL4 = SQL4.concat(" OR ");
+                        } else if (i+2 < booleanFilters.size()){
+                            if (booleanFilters.get(i+2) == 1 ) {
+                                SQL4 = SQL4.concat(" OR ");
+                            }
+                        }
+                    }
+                }
+            }
+            SQL4 = SQL4.concat(");");
+        }
+
+//        if(promotesApprenticeships != 0){
+//            SQL4 = SQL4.concat(" PromotesApprenticeships = " + promotesApprenticeships);
+//        }
+//        if (promotesWelshLanguage != 0){
+//            SQL4 = SQL4.concat(" PromotesWelshLanguage = " + promotesWelshLanguage);
+//        }
+//        if (challengesGenderStereotypes != 0){
+//            SQL4 = SQL4.concat(" ChallengesGenderStereotypes = " + challengesGenderStereotypes);
+//        }
+//
+//        SQL4 = SQL4.concat(";");
+        String finalSQL = SQL+SQL2+SQL3+SQL4;
+
+//        System.out.println(finalSQL);
+
+        try {
+            statement = connection.createStatement();
+            rs = statement.executeQuery(finalSQL);
+            while (rs.next()) {
+                ids.add(rs.getInt("EventID"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.close(rs);
+        }
         return ids;
     }
 }
