@@ -186,48 +186,11 @@
 <script type="text/javascript" src="https://careerswales.gov.wales/styleguide/assets/js/gel-elements-loader.js"></script>
 <script type="text/javascript" src="https://careerswales.gov.wales/styleguide/assets/js/gel-elements.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
 <script th:src="@{../js/employer.js}" src="../js/employer.js"></script>
 <script>
-    empAdded = localStorage.getItem("empAdded");
-
-    if (empAdded === "true"){
-        console.log("is the object added " + empAdded)
-        document.getElementById('success_message').classList.remove('d-none')
-        document.getElementById('success_message').classList.add('show')
-        $("#success_message").fadeTo(2000, 500).slideUp(500, function() {
-            $("#success_message").slideUp(500);
-        });
-        localStorage.clear()
-    }
-
-    employerDeleted = localStorage.getItem("employerDeleted");
-
-    if (employerDeleted === "true"){
-        console.log("is the object deleted " + empAdded)
-        document.getElementById('success_message').innerHTML = 'The employer is deleted!'
-        document.getElementById('success_message').classList.remove('d-none')
-        document.getElementById('success_message').classList.add('show')
-        $("#success_message").fadeTo(2000, 500).slideUp(500, function() {
-            $("#success_message").slideUp(500);
-        });
-        localStorage.clear()
-    }
-
-</script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
-<script>
-
-
     $('select').selectpicker();
-
-    $(document).ready(function(){
-        $('#filterButton').click(function(){
-            filterEmployers();
-        });
-    });
-
     $('.selectpicker').selectpicker();
-
 </script>
 </body>
 </html>

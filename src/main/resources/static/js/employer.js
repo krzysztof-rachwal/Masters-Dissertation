@@ -357,6 +357,32 @@ function sortByDate() {
     }
 }
 
+empAdded = localStorage.getItem("empAdded");
+
+if (empAdded === "true"){
+    console.log("is the object added " + empAdded)
+    document.getElementById('success_message').classList.remove('d-none')
+    document.getElementById('success_message').classList.add('show')
+    $("#success_message").fadeTo(2000, 500).slideUp(500, function() {
+        $("#success_message").slideUp(500);
+    });
+    localStorage.clear()
+}
+
+employerDeleted = localStorage.getItem("employerDeleted");
+
+if (employerDeleted === "true"){
+    console.log("is the object deleted " + empAdded)
+    document.getElementById('success_message').innerHTML = 'The employer is deleted!'
+    document.getElementById('success_message').classList.remove('d-none')
+    document.getElementById('success_message').classList.add('show')
+    $("#success_message").fadeTo(2000, 500).slideUp(500, function() {
+        $("#success_message").slideUp(500);
+    });
+    localStorage.clear()
+}
+
+
 //7. On document Ready
 $( document ).ready(function() {
     $("select[name=employer-sort-by]").change(function(){
@@ -369,6 +395,12 @@ $( document ).ready(function() {
             sortByDate();
         }
 
+    });
+});
+
+$(document).ready(function(){
+    $('#filterButton').click(function(){
+        filterEmployers();
     });
 });
 
