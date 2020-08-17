@@ -516,7 +516,6 @@ public class EmployerQueries extends DBQueries {
         Employer employer = null;
         ResultSet rs = null;
         for (Integer alumni : alumniList) {
-            System.out.println("Inside of query we have alumniID has: " + alumni );
             String getQuery = String.format("SELECT *  FROM Alumni WHERE AlumniID = \"%s\";", alumni);
             try {
                 connection = ConnectionFactory.getConnection();
@@ -785,7 +784,6 @@ public class EmployerQueries extends DBQueries {
 
         String updateSql = "INSERT INTO INT_AlumniWorkingForEmployer(AlumniID, EmployerID) VALUES(?,?)";
         for (Integer alumniID : alumni) {
-            System.out.println("employerID: " + employerID + "AlumniID: " + alumniID);
             jdbcTemplate().update(updateSql,alumniID,employerID);
         }
     }
@@ -898,8 +896,6 @@ public class EmployerQueries extends DBQueries {
 //        String updateSql = "INSERT INTO INT_AlumniWorkingForEmployer(AlumniID, EmployerID) VALUES(?,?)";
         for (int i = 0; i < alumniID.size(); i++) {
             String updateSql = String.format("INSERT INTO INT_AlumniWorkingForEmployer(AlumniID,EmployerID) VALUES(\"%s\",\"%s\")", alumniID.get(i),employerID);
-            System.out.println("AlumniID: " + alumniID.get(i) + "EmployerID: " + employerID);
-//            jdbcTemplate().update(updateSql,AlumniID.get(i),EmployerID);
             jdbcTemplate().update(updateSql);
         }
     }
@@ -911,10 +907,7 @@ public class EmployerQueries extends DBQueries {
 //            String deleteSql = String.format("DELETE FROM Alumni WHERE AlumniID = '%s'", AlumniID.get(i));
 //            jdbcTemplate().update(deleteSql);
 //        }
-        System.out.println("entrei no updateAlumni");
-        System.out.println("alumniName: " + alumniName + " schooldID: " + schoolID + " AlumniID: " + alumniID);
         for(int i = 0; i < alumniID.size(); i++){
-            System.out.println("AlumniName: "+alumniName.get(i) + " SchoolID: " + schoolID.get(i));
             String updateSql = "UPDATE Alumni SET AlumniNameAndSurname = ?, AlumniSchoolID = ? WHERE AlumniID=?";
             jdbcTemplate().update(updateSql, alumniName.get(i), schoolID.get(i),alumniID.get(i));
         }
@@ -1020,34 +1013,10 @@ public class EmployerQueries extends DBQueries {
     }
     ///////////////////////////////////// SORT BY METHODS ///////////////////////////////////////////////
 
-    //49. Get Employers order by name (ASC)
-    public List<Integer> sortByEmployerByNameASC() throws DataAccessException {
-
-        String getQuery = "SELECT * FROM Employer ORDER BY EmployerName ASC ;";
-        System.out.println(getQuery);
-        List<Integer> list = new ArrayList<>();
-        ResultSet rs = null;
-        try {
-            connection = ConnectionFactory.getConnection();
-            statement = connection.createStatement();
-            rs = statement.executeQuery(getQuery);
-            while (rs.next()) {
-                list.add(rs.getInt("EmployerID"));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            DBUtil.close(rs);
-            DBUtil.close(statement);
-            DBUtil.close(connection);
-        }
-        return list;
-    }
-
-    //50. Get Employers order by name (DESC)
-    public List<Integer> sortByEmployerByNameDESC() throws DataAccessException {
-        String getQuery = "SELECT * FROM Employer ORDER BY EmployerName DESC";
-        List<Integer> list = new ArrayList<>();
+    //49. Get Employers order by name
+    public List<Integer> sortByEmployerByName(String type) throws DataAccessException {
+        String getQuery = String.format("SELECT * FROM Employer ORDER BY EmployerName %s;", type);
+         List<Integer> list = new ArrayList<>();
         ResultSet rs = null;
         try {
             connection = ConnectionFactory.getConnection();

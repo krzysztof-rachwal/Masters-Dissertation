@@ -253,12 +253,13 @@ function searchEmployer(){
 }
 
 //5. Sort Employers By Name
-function sortByName(type) {
+function sortEmployerByName(type, order) {
 
     let baseUri = "api/employer/sortBy";
+    let orderBy_url = "orderBy=" + order ;
     let sortBy_url = "sortBy=" + type ;
 
-    var fullUri = baseUri + "?" + "&" + sortBy_url
+    var fullUri = baseUri + "?" + "&" + orderBy_url + "&" + sortBy_url
     var token = $("meta[name='_csrf']").attr("content");    // Used to bypass Spring Boot's CSRF protocol     -- Solution taken from 'https://stackoverflow.com/questions/34747437/use-of-spring-csrf-with-ajax-rest-call-and-html-page-with-thymeleaf' on Nov 26th 2019
     var header = $("meta[name='_csrf_header']").attr("content");    // Used to bypass Spring Boot's CSRF protocol
 
@@ -347,12 +348,9 @@ function hideEmployers(ids){
 //9. On document Ready
 $( document ).ready(function() {
     $("select[name=employer-sort-by]").change(function(){
-        if($(this).val()=="Name"){
-            sortByName($(this).children(":selected").attr("data-val"));
-        }
+        sortEmployerByName($(this).val(),$(this).children(":selected").attr("data-val"));
     });
 });
-
 
 // // For the Employer Name selector
 // $('.selectpicker').selectpicker();

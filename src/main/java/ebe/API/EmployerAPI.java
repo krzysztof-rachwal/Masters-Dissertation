@@ -444,19 +444,15 @@ public class EmployerAPI {
 
     ///////////////////////    SORT BY     ////////////////////////////////
     @GetMapping("api/employer/sortBy")
-    public List<Integer> SortBy(@RequestParam(value="sortBy") String sortBy){
+    public List<Integer> SortBy(@RequestParam(value="sortBy") String sortBy,
+                                @RequestParam(value="orderBy") String orderBy){
 
         List<Integer> orderEmployerIds = new ArrayList<Integer>();
 
-
-
-        if(sortBy.equals("ASC")){
-            orderEmployerIds = EmployerQrys.sortByEmployerByNameASC();;
+        if(sortBy.equals("Name")){
+            orderEmployerIds = EmployerQrys.sortByEmployerByName(orderBy);
         }
 
-        if(sortBy.equals("DESC")){
-            orderEmployerIds = EmployerQrys.sortByEmployerByNameDESC();
-        }
         return orderEmployerIds;
     }
 

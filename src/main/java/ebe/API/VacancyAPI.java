@@ -90,21 +90,14 @@ public class VacancyAPI {
 
         List<Integer> orderVacancyIds = new ArrayList<Integer>();
 
-        if(sortBy.equals("Name") && orderBy.equals("ASC")){
-            orderVacancyIds = VacancyQrys.sortByVacancyByNameASC();
+        if(sortBy.equals("Name")){
+            orderVacancyIds = VacancyQrys.sortByVacancyByName(orderBy);
         }
 
-        if(sortBy.equals("Name") && orderBy.equals("DESC")){
-            orderVacancyIds = VacancyQrys.sortByVacancyByNameDESC();
+        if(sortBy.equals("Date")){
+            orderVacancyIds = VacancyQrys.sortByVacancyByDate(orderBy);
         }
 
-        if(sortBy.equals("Date") && orderBy.equals("ASC")){
-            orderVacancyIds = VacancyQrys.sortByVacancyByDateASC();
-        }
-
-        if(sortBy.equals("Date") && orderBy.equals("DESC")){
-            orderVacancyIds = VacancyQrys.sortByVacancyByDateDESC();
-        }
 
         return orderVacancyIds;
     }

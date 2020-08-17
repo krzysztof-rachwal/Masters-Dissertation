@@ -234,11 +234,9 @@ public class EventQueries extends DBQueries {
 
     ///////////////////////////////////// SORT BY METHODS ///////////////////////////////////////////////
 
-    //12. Get Events order by name (ASC)
-    public List<Integer> sortByEventByNameASC() throws DataAccessException {
-
-        String getQuery = "SELECT * FROM Event ORDER BY EventName ASC ;";
-        System.out.println(getQuery);
+    //12. Get Events order by name
+    public List<Integer> sortByEventByName(String type) throws DataAccessException {
+        String getQuery = String.format("SELECT * FROM Event ORDER BY EventName %s;", type);
         List<Integer> list = new ArrayList<>();
         ResultSet rs = null;
         try {
@@ -258,9 +256,9 @@ public class EventQueries extends DBQueries {
         return list;
     }
 
-    //13. Get Events order by name (DESC)
-    public List<Integer> sortByEventByNameDESC() throws DataAccessException {
-        String getQuery = "SELECT * FROM Event ORDER BY EventName DESC;";
+    //13. Get Events order by date
+    public List<Integer> sortByEventByDate(String type) throws DataAccessException {
+        String getQuery = String.format("SELECT * FROM Event ORDER BY EventDateAndTime %s;", type);
         List<Integer> list = new ArrayList<>();
         ResultSet rs = null;
         try {
@@ -280,49 +278,4 @@ public class EventQueries extends DBQueries {
         return list;
     }
 
-    //14. Get Events order by date (ASC)
-    public List<Integer> sortByEventByDateASC() throws DataAccessException {
-
-        String getQuery = "SELECT * FROM Event ORDER BY EventDateAndTime ASC ;";
-        System.out.println(getQuery);
-        List<Integer> list = new ArrayList<>();
-        ResultSet rs = null;
-        try {
-            connection = ConnectionFactory.getConnection();
-            statement = connection.createStatement();
-            rs = statement.executeQuery(getQuery);
-            while (rs.next()) {
-                list.add(rs.getInt("EventID"));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            DBUtil.close(rs);
-            DBUtil.close(statement);
-            DBUtil.close(connection);
-        }
-        return list;
-    }
-
-    //15. Get Events order by date (DESC)
-    public List<Integer> sortByEventByDateDESC() throws DataAccessException {
-        String getQuery = "SELECT * FROM Event ORDER BY EventDateAndTime DESC;";
-        List<Integer> list = new ArrayList<>();
-        ResultSet rs = null;
-        try {
-            connection = ConnectionFactory.getConnection();
-            statement = connection.createStatement();
-            rs = statement.executeQuery(getQuery);
-            while (rs.next()) {
-                list.add(rs.getInt("EventID"));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            DBUtil.close(rs);
-            DBUtil.close(statement);
-            DBUtil.close(connection);
-        }
-        return list;
-    }
 }

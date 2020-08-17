@@ -159,20 +159,12 @@ public class EventAPI {
                                 @RequestParam(value="orderBy") String orderBy){
 
         List<Integer> orderEventIds = new ArrayList<Integer>();
-        if(sortBy.equals("Name") && orderBy.equals("ASC")){
-            orderEventIds = EventQrys.sortByEventByNameASC();
+        if(sortBy.equals("Name")){
+            orderEventIds = EventQrys.sortByEventByName(orderBy);
         }
 
-        if(sortBy.equals("Name") && orderBy.equals("DESC")){
-            orderEventIds = EventQrys.sortByEventByNameDESC();
-        }
-
-        if(sortBy.equals("Date") && orderBy.equals("ASC")){
-            orderEventIds = EventQrys.sortByEventByDateASC();
-        }
-
-        if(sortBy.equals("Date") && orderBy.equals("DESC")){
-            orderEventIds = EventQrys.sortByEventByDateDESC();
+        if(sortBy.equals("Date")){
+            orderEventIds = EventQrys.sortByEventByDate(orderBy);
         }
 
         return orderEventIds;
