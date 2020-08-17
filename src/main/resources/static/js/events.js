@@ -179,7 +179,7 @@ function searchEvents(){
 }
 
 //5. Sort Event By Name and Date
-function sortEvent(type, order) {
+function sortEventsByNameAndDate(type, order) {
 
     let baseUri = "api/event/sortBy";
     let orderBy_url = "orderBy=" + order ;
@@ -220,7 +220,7 @@ function sortEvents(ids){
 //7. On document Ready
 $( document ).ready(function() {
     $("select[name=event-sort-by]").change(function(){
-            sortEvent($(this).val(),$(this).children(":selected").attr("data-val"));
+        sortEventsByNameAndDate($(this).val(),$(this).children(":selected").attr("data-val"));
     });
 });
 

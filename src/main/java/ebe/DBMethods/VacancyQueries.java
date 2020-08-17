@@ -348,4 +348,98 @@ public class VacancyQueries extends DBQueries {
         String deleteSql = String.format("DELETE FROM Vacancy WHERE VacancyID = '%s'",vacancyId);
         return jdbcTemplate().update(deleteSql);
     }
+
+    ///////////////////////////////////// SORT BY METHODS ///////////////////////////////////////////////
+
+    //12. Get Vacancy order by name (ASC)
+    public List<Integer> sortByVacancyByNameASC() throws DataAccessException {
+
+        String getQuery = "SELECT * FROM Vacancy ORDER BY VacancyName ASC ;";
+        System.out.println(getQuery);
+        List<Integer> list = new ArrayList<>();
+        ResultSet rs = null;
+        try {
+            connection = ConnectionFactory.getConnection();
+            statement = connection.createStatement();
+            rs = statement.executeQuery(getQuery);
+            while (rs.next()) {
+                list.add(rs.getInt("VacancyID"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.close(rs);
+            DBUtil.close(statement);
+            DBUtil.close(connection);
+        }
+        return list;
+    }
+
+    //13. Get Vacancy order by name (DESC)
+    public List<Integer> sortByVacancyByNameDESC() throws DataAccessException {
+        String getQuery = "SELECT * FROM Vacancy ORDER BY VacancyName DESC;";
+        List<Integer> list = new ArrayList<>();
+        ResultSet rs = null;
+        try {
+            connection = ConnectionFactory.getConnection();
+            statement = connection.createStatement();
+            rs = statement.executeQuery(getQuery);
+            while (rs.next()) {
+                list.add(rs.getInt("VacancyID"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.close(rs);
+            DBUtil.close(statement);
+            DBUtil.close(connection);
+        }
+        return list;
+    }
+
+    //14. Get Vacancy order by date (ASC)
+    public List<Integer> sortByVacancyByDateASC() throws DataAccessException {
+
+        String getQuery = "SELECT * FROM Vacancy ORDER BY DeadlineForApplication ASC ;";
+        System.out.println(getQuery);
+        List<Integer> list = new ArrayList<>();
+        ResultSet rs = null;
+        try {
+            connection = ConnectionFactory.getConnection();
+            statement = connection.createStatement();
+            rs = statement.executeQuery(getQuery);
+            while (rs.next()) {
+                list.add(rs.getInt("VacancyID"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.close(rs);
+            DBUtil.close(statement);
+            DBUtil.close(connection);
+        }
+        return list;
+    }
+
+    //15. Get Vacancy order by date (DESC)
+    public List<Integer> sortByVacancyByDateDESC() throws DataAccessException {
+        String getQuery = "SELECT * FROM Vacancy ORDER BY DeadlineForApplication DESC;";
+        List<Integer> list = new ArrayList<>();
+        ResultSet rs = null;
+        try {
+            connection = ConnectionFactory.getConnection();
+            statement = connection.createStatement();
+            rs = statement.executeQuery(getQuery);
+            while (rs.next()) {
+                list.add(rs.getInt("VacancyID"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.close(rs);
+            DBUtil.close(statement);
+            DBUtil.close(connection);
+        }
+        return list;
+    }
 }

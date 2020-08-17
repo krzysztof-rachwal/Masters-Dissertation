@@ -135,7 +135,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text input-border">Sort By:</span>
                             </div>
-                            <select class="form-control input-border selectpicker" name="employer-sort-by">
+                            <select class="form-control input-border selectpicker" name="event-sort-by">
                                 <option selected="selected" value="Featured">Featured</option>
                                 <option value="Name" data-val="DESC">Name (ASC)</option>
                                 <option value="Name" data-val="ASC">Name (DESC)</option>
@@ -227,6 +227,8 @@
         });
         localStorage.clear()
     }
+
+    $('.selectpicker').selectpicker();
 
 </script>
 

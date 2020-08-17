@@ -100,7 +100,7 @@
 
                 <div class="row">
                     <!-- Search -->
-                    <div class="input-group col-8">
+                    <div class="input-group col-7">
                         <input type="text" class="form-control input-border" onkeydown="searchVacancy()" id="vacancy-search"  placeholder="Search">
                         <div class="input-group-append">
                             <button class="input-group-text input-border" onclick="searchVacancy()">
@@ -111,17 +111,17 @@
 
 
                     <!-- Sorted by-->
-                    <div class="col-4">
+                    <div class="col-5">
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text input-border">Sort By:</span>
                             </div>
                             <select class="form-control input-border selectpicker" name="vacancy-sort-by">
                                 <option selected="selected" value="Featured">Featured</option>
-                                <option value="NameUp">Name Asc</option>
-                                <option value="NameDown">Name Desc</option>
-                                <option value="DateUp">Date Asc</option>
-                                <option value="DateDown">Date Desc</option>
+                                <option value="Name" data-val="DESC">Name (ASC)</option>
+                                <option value="Name" data-val="ASC">Name (DESC)</option>
+                                <option value="Date" data-val="DESC">Date (ASC)</option>
+                                <option value="Date" data-val="ASC">Date (DESC)</option>
                             </select>
                         </div>
                     </div>
@@ -132,7 +132,7 @@
                 <!-- Cards -->
 
                 <div class="list-vacancies">
-                    <div class="gel-content-row vacancy-card" th:each="vacancy : ${allVacancies}" th:id="'vacancy_'+${vacancy.getVacancyID()}">
+                    <div class="gel-content-row vacancy-card" th:each="vacancy : ${allVacancies}" th:id="${vacancy.getVacancyID()}">
                         <input type="hidden" class="searchable" th:value="${vacancy.getStartOfVacancy()}">
                         <input type="hidden" class="searchable" th:value="${#strings.capitalize(vacancy.getVacancyPostcode())}">
                         <article class="card js-card card--style-icon card--100" gel-processed="processed">
@@ -211,6 +211,8 @@
          });
          localStorage.clear()
      }
+
+     $('.selectpicker').selectpicker();
 
 </script>
 </body>

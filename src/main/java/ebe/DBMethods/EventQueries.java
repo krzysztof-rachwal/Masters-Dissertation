@@ -260,7 +260,7 @@ public class EventQueries extends DBQueries {
 
     //13. Get Events order by name (DESC)
     public List<Integer> sortByEventByNameDESC() throws DataAccessException {
-        String getQuery = "SELECT * FROM Event ORDER BY EventName DESC";
+        String getQuery = "SELECT * FROM Event ORDER BY EventName DESC;";
         List<Integer> list = new ArrayList<>();
         ResultSet rs = null;
         try {
@@ -292,7 +292,7 @@ public class EventQueries extends DBQueries {
             statement = connection.createStatement();
             rs = statement.executeQuery(getQuery);
             while (rs.next()) {
-                list.add(rs.getInt("EmployerID"));
+                list.add(rs.getInt("EventID"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -306,7 +306,7 @@ public class EventQueries extends DBQueries {
 
     //15. Get Events order by date (DESC)
     public List<Integer> sortByEventByDateDESC() throws DataAccessException {
-        String getQuery = "SELECT * FROM Event ORDER BY EventDateAndTime DESC";
+        String getQuery = "SELECT * FROM Event ORDER BY EventDateAndTime DESC;";
         List<Integer> list = new ArrayList<>();
         ResultSet rs = null;
         try {
@@ -314,7 +314,7 @@ public class EventQueries extends DBQueries {
             statement = connection.createStatement();
             rs = statement.executeQuery(getQuery);
             while (rs.next()) {
-                list.add(rs.getInt("EmployerID"));
+                list.add(rs.getInt("EventID"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
