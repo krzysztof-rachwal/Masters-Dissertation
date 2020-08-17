@@ -75,32 +75,32 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="event-date">Event date</label>
+                                    <label for="event-date">Event Date</label>
                                     <input type="date" class="form-control input-border" id="event-date" th:value="${event.getEventDate()}">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="event-time">Event time</label>
-                                    <input type="time" class="form-control input-border" id="event-time" th:value="${event.getEventTime()}">
+                                    <label for="event-time">Event Time</label>
+                                    <input type="time" class="form-control input-border" id="event-time" th:value="${#dates.format(event.getEventTime(),'HH:mm')}">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="event-venue">Event venue</label>
+                                    <label for="event-venue">Event Venue</label>
                                     <input type="text" class="form-control input-border" id="event-venue" th:value="${event.getEventVenueName()}">
                                 </div>
                             </div>
 
                             <div class="col-md-6 ">
                                 <div class="form-group">
-                                    <label for="adviser-name">Adviser name</label>
+                                    <label for="adviser-name">Adviser Name</label>
                                     <input type="text" class="form-control input-border" id="adviser-name" th:value="${event.getNameOfAdviser()}">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="no-attendees">No of Attendees</label>
+                                    <label for="no-attendees">Number of Attendees</label>
                                     <input type="number" class="form-control input-border" id="no-attendees" th:value="${event.getNumberOfAttendees()}">
                                 </div>
                             </div>
@@ -125,8 +125,8 @@
                                 <div class="form-group">
                                     <label>Can the event be conducted in Welsh?</label>
                                     <select  id="conducted-welsh">
-                                        <option value="1">Yes</option>
-                                        <option value="0">No</option>
+                                        <option value="1" th:selected="${event.getPromotesWelshLanguage()== true}">Yes</option>
+                                        <option value="0" th:selected="${event.getPromotesWelshLanguage()== false}">No</option>
                                     </select>
                                 </div>
                             </div>
@@ -135,8 +135,8 @@
                                 <div class="form-group">
                                     <label>Does the event promote apprenticeship?</label>
                                     <select  id="promote-apprenticheship">
-                                        <option value="1">Yes</option>
-                                        <option value="0">No</option>
+                                        <option value="1" th:selected="${event.getPromotesApprenticeships() == true}">Yes</option>
+                                        <option value="0" th:selected="${event.getPromotesApprenticeships() == false}">No</option>
                                     </select>
                                 </div>
                             </div>
@@ -145,8 +145,8 @@
                                 <div class="form-group">
                                     <label>Does the event challenger gender stereotypes?</label>
                                     <select  id="challenger-gender">
-                                        <option value="1">Yes</option>
-                                        <option value="0">No</option>
+                                        <option value="1" th:selected="${event.getChallengesGenderStereotypes() == true}">Yes</option>
+                                        <option value="0" th:selected="${event.getChallengesGenderStereotypes()== false}">No</option>
                                     </select>
                                 </div>
                             </div>
@@ -155,8 +155,8 @@
                                 <div class="form-group">
                                     <label>Is the Event going to be Public?</label>
                                     <select  id="event-public">
-                                        <option value="1">Yes</option>
-                                        <option value="0">No</option>
+                                        <option value="1" th:selected="${event.getPublic()== true}">Yes</option>
+                                        <option value="0" th:selected="${event.getPublic()== false}">No</option>
                                     </select>
                                 </div>
                             </div>
@@ -165,8 +165,8 @@
                                 <div class="form-group">
                                     <label>Is the Event Cancelled?</label>
                                     <select  id="event-cancelled">
-                                        <option value="1">Yes</option>
-                                        <option value="0">No</option>
+                                        <option value="1" th:selected="${event.getCancelled()== true}">Yes</option>
+                                        <option value="0" th:selected="${event.getCancelled()== false}">No</option>
                                     </select>
                                 </div>
                             </div>
@@ -240,7 +240,7 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <span class="font-weight-bold h5">Event Time </span>
-                    <p th:text="${event.getEventTime()}"></p>
+                    <p th:text="${#dates.format(event.getEventTime(),'HH:mm')}"></p>
                 </div>
             </div>
             <div class="col-md-6">
@@ -251,13 +251,19 @@
             </div>
             <div class="col-md-6">
                 <div class="form-group">
+                    <span class="font-weight-bold h5">Event Address </span>
+                    <p th:text="${event.getEventAddressNumber()} +', ' + ${event.getEventAddressStreet()} +', ' + ${event.getEventAddressCity()} "></p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
                     <span class="font-weight-bold h5">Adviser Name </span>
                     <p th:text="${event.getNameOfAdviser()}"></p>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
-                    <span class="font-weight-bold h5">No of Attendees </span>
+                    <span class="font-weight-bold h5">Number of Attendees </span>
                     <p th:text="${event.getNumberOfAttendees()}"></p>
                 </div>
             </div>
@@ -280,6 +286,20 @@
                     <span class="font-weight-bold h5">Does the event challenger gender stereotypes? </span>
                     <p th:remove="${event.getChallengesGenderStereotypes()== true}  ? none : all">Yes</p>
                     <p th:remove="${event.getChallengesGenderStereotypes()== false}  ? none : all">No</p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <span class="font-weight-bold h5">Is the Event Public? </span>
+                    <p th:remove="${event.getPublic()== true}  ? none : all">Yes</p>
+                    <p th:remove="${event.getPublic()== false}  ? none : all">No</p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <span class="font-weight-bold h5">Is the Event Cancelled? </span>
+                    <p th:remove="${event.getCancelled()== true}  ? none : all">Yes</p>
+                    <p th:remove="${event.getCancelled()== false}  ? none : all">No</p>
                 </div>
             </div>
         </div>
@@ -322,12 +342,9 @@
     eventUpdated = localStorage.getItem("eventUpdated");
 
     if (eventUpdated === "true"){
-        console.log("is the object added " + eventUpdated)
-        document.getElementById('success_message').classList.remove('d-none')
-        document.getElementById('success_message').classList.add('show')
-        $("#success_message").fadeTo(2000, 500).slideUp(500, function() {
-            $("#success_message").slideUp(500);
-        });
+        $('#success_message').removeClass('d-none')
+        $("#success_message").fadeTo(1500, 1);
+        setTimeout(function(){$("#success_message").fadeTo(1500, 0); },5000);
         localStorage.clear()
     }
 

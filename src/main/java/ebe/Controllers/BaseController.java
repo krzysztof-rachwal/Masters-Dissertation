@@ -46,9 +46,22 @@ public class BaseController {
     @GetMapping("/")
     public ModelAndView HomePage(HttpSession session) {
         ModelAndView mv = new ModelAndView();
-        ObjectMapper objectMapper = new ObjectMapper();
-        // session = context.getSession();
-        mv.setViewName("searchEmployerPage");
+        mv.setViewName("homepageCWS");
+
+        int numberOfEvents = statisticsQueries.getTotalEvents();
+        int numberOfVacancies = statisticsQueries.getTotalVacancies();
+        int numberOfPupils = statisticsQueries.getTotalPupils();
+        int numberOfEmployers = statisticsQueries.getTotalEmployers();
+        int schoolAtEvents = statisticsQueries.getSchoolsAtEvents();
+        int requestsBySchools = statisticsQueries.getRequestsBySchools();
+
+        mv.addObject("numberOfEvents",numberOfEvents);
+        mv.addObject("numberOfEmployers",numberOfEmployers);
+        mv.addObject("numberOfVacancies",numberOfVacancies);
+        mv.addObject("numberOfPupils",numberOfPupils);
+        mv.addObject("schoolAtEvents",schoolAtEvents);
+        mv.addObject("requestsBySchools",requestsBySchools);
+
         return mv;
     };
 
@@ -126,6 +139,7 @@ public class BaseController {
 
         employerInfo = EmployerQrys.getAllEmployers();
         employerLanguage = EmployerQrys.getAllLanguages();
+        employerChosenLanguage = EmployerQrys.getEmployerLanguages(id);
         employerLocalAuthorities = EmployerQrys.getAllLocalAuthorities();
         employerChosenLocalAuthorities = EmployerQrys.getChosenLocalAuthorities(employer.getEmployerID());
 
@@ -148,6 +162,9 @@ public class BaseController {
         allEmployer.put("employer", employer);
         allEmployer.put("allEmployer", employerInfo);
         allEmployer.put("allEmployerLanguage", employerLanguage);
+        allEmployer.put("allEmployerLanguagePreference",employerChosenLanguage);
+        System.out.println("------------------------------------------");
+        System.out.println(employerChosenLanguage);
         allEmployer.put("allEmployerLocalAuthorities", employerLocalAuthorities);
         allEmployer.put("allEmployerChosenLocalAuthorities", employerChosenLocalAuthorities);
         allEmployer.put("allEmployerIndustrySectors", employerIndustrySectorAreas);
@@ -454,30 +471,30 @@ public class BaseController {
     }
 
 
-    //13. CWS home page
-//    @GetMapping("/homecws")
-//    public ModelAndView homeCWS(){
-//        ModelAndView mv = new ModelAndView();
-//        mv.setViewName("homepageCWS");
-//
-//        int numberOfEvents = statisticsQueries.getTotalEvents();
-//        int numberOfVacancies = statisticsQueries.getTotalVacancies();
-//        int numberOfPupils = statisticsQueries.getTotalPupils();
-//        int numberOfEmployers = statisticsQueries.getTotalEmployers();
-//        int schoolAtEvents = statisticsQueries.getSchoolsAtEvents();
-//        int requestsBySchools = statisticsQueries.getRequestsBySchools();
-//
-//        mv.addObject("numberOfEvents",numberOfEvents);
-//        mv.addObject("numberOfEmployers",numberOfEmployers);
-//        mv.addObject("numberOfVacancies",numberOfVacancies);
-//        mv.addObject("numberOfPupils",numberOfPupils);
-//        mv.addObject("schoolAtEvents",schoolAtEvents);
-//        mv.addObject("requestsBySchools",requestsBySchools);
-//
-//        return mv;
-//    }
-
+//    13. CWS home page
     @GetMapping("/homecws")
+    public ModelAndView homeCWS(){
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("homepageCWS");
+
+        int numberOfEvents = statisticsQueries.getTotalEvents();
+        int numberOfVacancies = statisticsQueries.getTotalVacancies();
+        int numberOfPupils = statisticsQueries.getTotalPupils();
+        int numberOfEmployers = statisticsQueries.getTotalEmployers();
+        int schoolAtEvents = statisticsQueries.getSchoolsAtEvents();
+        int requestsBySchools = statisticsQueries.getRequestsBySchools();
+
+        mv.addObject("numberOfEvents",numberOfEvents);
+        mv.addObject("numberOfEmployers",numberOfEmployers);
+        mv.addObject("numberOfVacancies",numberOfVacancies);
+        mv.addObject("numberOfPupils",numberOfPupils);
+        mv.addObject("schoolAtEvents",schoolAtEvents);
+        mv.addObject("requestsBySchools",requestsBySchools);
+
+        return mv;
+    }
+
+    @GetMapping("/homeTeacher")
     public ModelAndView homeTeach(){
         ModelAndView mv = new ModelAndView();
         mv.setViewName("homepageTeacher");

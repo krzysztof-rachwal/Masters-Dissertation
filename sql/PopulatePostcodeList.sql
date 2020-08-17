@@ -190,3 +190,4 @@ INSERT INTO `PostcodeList` (`PostcodeID`,`PostcodeName`,`LocalAuthorityID`) VALU
 INSERT INTO `PostcodeList` (`PostcodeID`,`PostcodeName`,`LocalAuthorityID`) VALUES (229,"CF72",6);
 INSERT INTO `PostcodeList` (`PostcodeID`,`PostcodeName`,`LocalAuthorityID`) VALUES (230,"SA4",21);
 INSERT INTO `PostcodeList` (`PostcodeID`,`PostcodeName`,`LocalAuthorityID`) VALUES (231,"LL12",22);
+INSERT INTO `PostcodeList` (`PostcodeID`,`PostcodeName`,`LocalAuthorityID`) VALUES (232,"NP44",14);

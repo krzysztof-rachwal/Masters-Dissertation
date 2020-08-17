@@ -89,7 +89,6 @@ public class VacancyQueries extends DBQueries {
         String getQuery = String.format("SELECT TypeOfVacancyID FROM TypeOfVacancyList WHERE TypeOfVacancyName = \"%s\" LIMIT 1", vacancyType);
         Vacancy vacancy = null;
         ResultSet rs = null;
-        System.out.println(vacancyType);
         try {
             connection = ConnectionFactory.getConnection();
             statement = connection.createStatement();
@@ -106,7 +105,6 @@ public class VacancyQueries extends DBQueries {
             DBUtil.close(statement);
             DBUtil.close(connection);
         }
-        System.out.println(vacancy.getTypeOfVacancyID());
         return vacancy.getTypeOfVacancyID();
     }
 
@@ -115,7 +113,6 @@ public class VacancyQueries extends DBQueries {
         String getQuery = String.format("OccupationalCodeID \"%s\" LIMIT 1", occupationalCode);
         Vacancy vacancy = null;
         ResultSet rs = null;
-        System.out.println(occupationalCode);
         try {
             connection = ConnectionFactory.getConnection();
             statement = connection.createStatement();
@@ -347,5 +344,53 @@ public class VacancyQueries extends DBQueries {
     public Integer deleteVacancy(int vacancyId) throws DataAccessException {
         String deleteSql = String.format("DELETE FROM Vacancy WHERE VacancyID = '%s'",vacancyId);
         return jdbcTemplate().update(deleteSql);
+    }
+
+    ///////////////////////////////////// SORT BY METHODS ///////////////////////////////////////////////
+
+    //12. Get Vacancy order by name
+    public List<Integer> sortByVacancyByName(String type) throws DataAccessException {
+        String getQuery = String.format("SELECT * FROM Vacancy ORDER BY VacancyName %s;", type);
+        List<Integer> list = new ArrayList<>();
+        ResultSet rs = null;
+        try {
+            connection = ConnectionFactory.getConnection();
+            statement = connection.createStatement();
+            rs = statement.executeQuery(getQuery);
+            while (rs.next()) {
+                list.add(rs.getInt("VacancyID"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.close(rs);
+            DBUtil.close(statement);
+            DBUtil.close(connection);
+        }
+        return list;
+    }
+
+
+
+    //13. Get Vacancy order by date
+    public List<Integer> sortByVacancyByDate(String type) throws DataAccessException {
+        String getQuery = String.format("SELECT * FROM Vacancy ORDER BY DeadlineForApplication %s;", type);
+        List<Integer> list = new ArrayList<>();
+        ResultSet rs = null;
+        try {
+            connection = ConnectionFactory.getConnection();
+            statement = connection.createStatement();
+            rs = statement.executeQuery(getQuery);
+            while (rs.next()) {
+                list.add(rs.getInt("VacancyID"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.close(rs);
+            DBUtil.close(statement);
+            DBUtil.close(connection);
+        }
+        return list;
     }
 }

@@ -119,7 +119,7 @@
 
                 <div class="row">
                     <!-- Search -->
-                    <div class="input-group col-8">
+                    <div class="input-group col-7">
                         <input type="text" class="form-control input-border" onkeydown="searchEvents()" id="event-search"  placeholder="Search">
                         <div class="input-group-append">
                             <button class="input-group-text input-border" onclick="searchEvents()">
@@ -130,21 +130,20 @@
 
 
                     <!-- Sorted by-->
-                    <div class="col-4">
+                    <div class="col-5">
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text input-border">Sort By:</span>
                             </div>
                             <select class="form-control input-border selectpicker" name="event-sort-by">
                                 <option selected="selected" value="Featured">Featured</option>
-                                <option value="NameUp">Name Asc</option>
-                                <option value="NameDown">Name Desc</option>
-                                <option value="DateUp">Date Asc</option>
-                                <option value="DateDown">Date Desc</option>
+                                <option value="Name" data-val="DESC">Name (ASC)</option>
+                                <option value="Name" data-val="ASC">Name (DESC)</option>
+                                <option value="Date" data-val="DESC">Date (ASC)</option>
+                                <option value="Date" data-val="ASC">Date (DESC)</option>
                             </select>
                         </div>
                     </div>
-
                 </div>
 
                 <br>
@@ -207,12 +206,9 @@
     eventAdded = localStorage.getItem("eventAdded");
 
     if (eventAdded === "true"){
-        console.log("is the object added " + eventAdded)
-        document.getElementById('success_message').classList.remove('d-none')
-        document.getElementById('success_message').classList.add('show')
-        $("#success_message").fadeTo(2000, 500).slideUp(500, function() {
-            $("#success_message").slideUp(500);
-        });
+        $('#success_message').removeClass('d-none')
+        $("#success_message").fadeTo(1500, 1);
+        setTimeout(function(){$("#success_message").fadeTo(1500, 0); },5000);
         localStorage.clear()
     }
 
@@ -220,14 +216,16 @@
 
     if (eventDeleted === "true"){
         console.log("is the object deleted " + eventDeleted)
-        document.getElementById('success_message').innerHTML = 'The event is deleted!';
+        document.getElementById('success_message').innerHTML =  "<strong> Success! </strong>" + 'The event was deleted!';
         document.getElementById('success_message').classList.remove('d-none')
         document.getElementById('success_message').classList.add('show')
-        $("#success_message").fadeTo(2000, 500).slideUp(500, function() {
+        $("#success_message").fadeTo(3000, 500).slideUp(500, function() {
             $("#success_message").slideUp(500);
         });
         localStorage.clear()
     }
+
+    $('.selectpicker').selectpicker();
 
 </script>
 
