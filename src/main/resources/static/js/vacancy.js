@@ -250,6 +250,48 @@ function sortByDate(type) {
     }
 }
 
+function hideVacancies(ids){
+
+    $(".vacancy-card").removeClass("d-none");
+    $(".vacancy-card").addClass("d-none");
+
+    for (i = 0; i < ids.length; i++) {
+        $("#vacancy_"+ids[i]).removeClass("d-none");
+    }
+}
+
+function filterVacancies() {
+
+    var baseUri = "/api/filter/vacancy";
+    var typeOfVacancyID_url = "typeOfVacancyID=" + $('select[id=vacancy-type]').val();
+    var occupationalCodeID_url = "occupationalCodeID=" + $('select[id=occup-code]').val();
+
+    var fullUri = baseUri + "?" + "&" + typeOfVacancyID_url  + "&" + occupationalCodeID_url ;
+
+    var token = $("meta[name='_csrf']").attr("content");    // Used to bypass Spring Boot's CSRF protocol     -- Solution taken from 'https://stackoverflow.com/questions/34747437/use-of-spring-csrf-with-ajax-rest-call-and-html-page-with-thymeleaf' on Nov 26th 2019
+    var header = $("meta[name='_csrf_header']").attr("content");    // Used to bypass Spring Boot's CSRF protocol
+
+
+    $.ajax({
+        type: "GET",
+        url: fullUri,
+        dataType: 'json',
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader(header, token);
+        },
+        success: function (data) {
+            hideVacancies(data);
+          },
+        error: function (data) {
+            alert("FAIL");
+            alert(data.responseText);
+            alert(data.toString());
+        }
+    });
+
+
+}
+
 //7. On document Ready
 $( document ).ready(function() {
     $("select[name=vacancy-sort-by]").change(function(){

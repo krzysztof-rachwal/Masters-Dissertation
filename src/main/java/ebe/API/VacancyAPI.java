@@ -1,4 +1,4 @@
-package ebe.api;
+package ebe.API;
 
 import ebe.DBMethods.EmployerQueries;
 import ebe.DBMethods.EventQueries;
@@ -7,6 +7,9 @@ import ebe.DBMethods.VacancyQueries;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 
 @RestController
@@ -79,5 +82,37 @@ public class VacancyAPI {
         } else {
             return false;
         }
+    }
+
+    ///////////////////////    FILTER     ////////////////////////////////
+
+    @RequestMapping("api/filter/vacancy")
+    public List<Integer> filterVacancies(@RequestParam(name="typeOfVacancyID") String typeOfVacancyID,
+                                         @RequestParam(name="occupationalCodeID") String occupationalCodeID){
+
+        List<Integer> filteredVacancyIDs = new ArrayList<Integer>();
+
+        List<Integer> typeOfVacancyIDList = new ArrayList<Integer>();
+        List<Integer> occupationalCodeIDList = new ArrayList<Integer>();
+
+        if (!typeOfVacancyID.equals("")) {
+            for (String typeOfVacancy : typeOfVacancyID.split(",")) {
+                typeOfVacancyIDList.add(Integer.parseInt(typeOfVacancy));
+            }
+        }  else{
+            typeOfVacancyIDList = Arrays.asList();
+        }
+
+        if (!occupationalCodeID.equals("")) {
+            for (String occupationalCode : occupationalCodeID.split(",")) {
+                occupationalCodeIDList.add(Integer.parseInt(occupationalCode));
+            }
+        } else {
+            occupationalCodeIDList = Arrays.asList();
+        }
+
+        filteredVacancyIDs =  VacancyQrys.getFilteredVacanciesIds(typeOfVacancyIDList, occupationalCodeIDList);
+        return filteredVacancyIDs;
+
     }
 }

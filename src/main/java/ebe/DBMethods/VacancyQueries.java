@@ -352,22 +352,48 @@ public class VacancyQueries extends DBQueries {
 
     ///////////////////////////////////// FILTER METHODS ///////////////////////////////////////////////
 
-    public List<Integer> getFilteredVacanciesIds(int typeOfVacancy,
-                                                 int occupationalCode){
+    public List<Integer> getFilteredVacanciesIds(List<Integer> typeOfVacancyID,
+                                                 List<Integer> occupationalCodeID){
         List<Integer> ids = new ArrayList<>();
         connection = ConnectionFactory.getConnection();
+        ResultSet rs = null;
 
+        List<List<Integer>> listOfFilters = Arrays.asList(typeOfVacancyID, occupationalCodeID);
 
-        List<String> intValuesListofSQLQuery = Arrays.asList(" e.typeOfVacancyID = ", " e.occupationalCodeID = ");
+        List<String> listOfAttributes = Arrays.asList("typeOfVacancyID", "occupationalCodeID");
 
-        String SQL = "SELECT distinct VacancyID FROM Vacancy WHERE VacancyID IN ";
+        String SQL = "SELECT distinct VacancyID FROM Vacancy ";
 
-        for(int i = 0; i < intValuesListofSQLQuery.size(); ++i){
-
+        if (!typeOfVacancyID.isEmpty() || !occupationalCodeID.isEmpty()){
+            SQL = SQL.concat(" WHERE ");
         }
 
-        if ( typeOfVacancy != 0 || occupationalCode != 0 ){
-            SQL = SQL.concat("WHERE VacancyID IN ");
+        for (int k = 0; k < listOfFilters.size(); ++k){
+            if(!listOfFilters.get(k).isEmpty()){
+                SQL = SQL.concat(" VacancyID IN (SELECT VacancyID FROM Vacancy WHERE ");
+                for (int i = 0; i < listOfFilters.get(k).size(); ++i){
+                    SQL = SQL.concat(listOfAttributes.get(k) + " = " + listOfFilters.get(k).get(i));
+                    if (i != listOfFilters.get(k).size() - 1){
+                        SQL = SQL.concat(" OR ");
+                    }
+                }
+                SQL = SQL.concat(")");
+                if (k != listOfFilters.size() - 1 && !listOfFilters.get(k+1).isEmpty()){
+                    SQL = SQL.concat(" AND ");
+                }
+            }
+        }
+
+        try {
+            statement = connection.createStatement();
+            rs = statement.executeQuery(SQL);
+            while (rs.next()) {
+                ids.add(rs.getInt("VacancyID"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.close(rs);
         }
 
         return ids;

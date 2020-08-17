@@ -41,19 +41,20 @@
             </a>
         </div>
 
+<!--    FILTERS -->
 
     <div class="flex-container">
         <div class="col-lg-3">
             <div class="mb-3">
                 <label for="vacancy-type" class="  mb-1">Type of Vacancy</label>
-                <select class="custom-select p-2" id="vacancy-type">
+                <select class="selectpicker" data-width="100%" multiple data-live-search="true"  id="vacancy-type">
                     <option th:each="vacancyType : ${allVacanciesTypes}" th:value="${vacancyType.getTypeOfVacancyID()}" th:text="${vacancyType.getTypeOfVacancyName()}"></option>
                 </select>
             </div>
 
             <div class="mb-3">
                 <label for="occup-code" class="  mb-1">Occupational Area</label>
-                <select class="custom-select p-2" id="occup-code">
+                <select class="selectpicker" data-width="100%" multiple data-live-search="true" id="occup-code">
                     <option th:each="vacancyOccupationalCode : ${allVacanciesOccupationalCodes}" th:value="${vacancyOccupationalCode.getOccupationalCodeID()}" th:text="${vacancyOccupationalCode.getOccupationalCodeName()}"></option>
                 </select>
             </div>
@@ -144,7 +145,6 @@
 <script type="text/javascript" src="https://careerswales.gov.wales/styleguide/assets/js/gel-elements-loader.js"></script>
 <script type="text/javascript" src="https://careerswales.gov.wales/styleguide/assets/js/gel-elements.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
 <script th:src="@{../js/vacancy.js}" src="../js/vacancy.js"></script>
 <script>
     $(document).ready(function() {
@@ -180,6 +180,18 @@
          localStorage.clear()
      }
 
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+<script>
+
+    $('select').selectpicker();
+    $('.selectpicker').selectpicker();
+
+    $(document).ready(function(){
+        $('#filterButton').click(function(){
+            filterVacancies();
+        });
+    });
 </script>
 </body>
 </html>
