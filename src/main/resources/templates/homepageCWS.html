@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta id="_csrf" name="_csrf" th:content="${_csrf.token}"/>
+    <meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}"/>
+    <link rel="stylesheet" type="text/css" href="https://use.fortawesome.com/kits/747c3a74/publications/latest/eot.css">
+    <link rel="stylesheet" type="text/css"
+          href="https://use.fortawesome.com/kits/747c3a74/publications/latest/woff.css">
+    <link rel="stylesheet" type="text/css"
+          href="https://use.fortawesome.com/kits/747c3a74/publications/latest/woff2.css">
+    <link rel="stylesheet" type="text/css"
+          href="https://careerswales.gov.wales/styleguide/assets/css/gel-styleguide.css">
+    <link rel="stylesheet" media="all" href="https://careerswales.gov.wales/styleguide/assets/css/gel-elements.css"/>
+    <link rel="stylesheet" media="all"
+          href="https://careerswales.gov.wales/sites/default/files/css/css_Ix2IjZRJPxhlyX0UzoOcvWoONN1wNDbQY7jrFiB85O0.css"/>
+    <link rel="stylesheet" media="all"
+          href="https://careerswales.gov.wales/sites/default/files/css/css_yFFWPpQsZCFeHMtvOieuCWLiTEiz--tT0otLunNJdLs.css"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link th:href="@{../css/ebe_style.css}" href="../css/ebe_style.css" rel="stylesheet"/>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <title>Home</title>
+</head>
+<body>
+
+<header th:replace="fragments/headerTemplate :: header"></header>
+<div class="gel-content-container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="container-headline my-5">
+                <span class="title-h2">Quicklinks</span>
+            </div>
+            <div class="d-block">
+                <a href="/add-employer" class="button nbutton--icon d-block">Add new Employer</a>
+                <a href="/add-vacancy" class="button button--icon d-block">Add new Vacancy</a>
+                <a href="/add-events" class="button button--icon d-block">Add new Event</a>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col"></div>
+        <hr class="col-md-9 float-center my-2 thin">
+        <div class="col"></div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="container-headline mb-5">
+                <span class="title-h2">Statistics</span>
+            </div>
+            <div class="container-fluid eventBackground">
+                <div class="row">
+                    <div class="card-group mt-4 mb-4">
+                        <div class="card">
+                            <div class="card-body p-2">
+                                <h4 class="card-title gel-text-align-center text-success font-weight-bold"
+                                    th:text="${numberOfEvents}"></h4>
+                                <span class="h5 gel-text-align-center mt-0">Events hosted</span>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-body p-2">
+                                <h4 class="card-title gel-text-align-center text-info font-weight-bold"
+                                    th:text="${numberOfEmployers}"></h4>
+                                <span class="h5 gel-text-align-center mt-0">Employers</span>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-body p-2">
+                                <h4 class="card-title gel-text-align-center text-success font-weight-bold"
+                                    th:text="${numberOfVacancies}"></h4>
+                                <span class="h5 gel-text-align-center mt-0">Vacancies</span>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-body p-2">
+                                <h4 class="card-title gel-text-align-center text-info font-weight-bold"
+                                    th:text="${requestsBySchools}"></h4>
+                                <span class="h5 gel-text-align-center mt-0">Requests by schools</span>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-body p-2">
+                                <h4 class="card-title gel-text-align-center text-success font-weight-bold"
+                                    th:text="${schoolAtEvents}"></h4>
+                                <span class="h5 gel-text-align-center mt-0">Schools at events</span>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-body p-2">
+                                <h4 class="card-title gel-text-align-center text-info font-weight-bold"
+                                    th:text="${numberOfPupils}"></h4>
+                                <span class="h5 gel-text-align-center mt-0">Total pupils</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer th:replace="fragments/footerTemplate :: footer"></footer>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://careerswales.gov.wales/styleguide/assets/js/gel-styleguide.js"></script>
+<script type="text/javascript"
+        src="https://careerswales.gov.wales/styleguide/assets/js/gel-elements-loader.js"></script>
+<script type="text/javascript" src="https://careerswales.gov.wales/styleguide/assets/js/gel-elements.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/i18n/defaults-*.min.js"></script>
+<script>
+    const counters = document.querySelectorAll('.counter');
+    const speed = 150; // The lower the slower
+
+    counters.forEach(counter => {
+        const updateCount = () => {
+            const target = +counter.getAttribute('data-target');
+            const count = +counter.innerText;
+
+            // Lower inc to slow and higher to slow
+            const inc = target / speed;
+
+            // console.log(inc);
+            // console.log(count);
+
+            // Check if target is reached
+            if (count < target) {
+                // Add inc to count and output in counter
+                counter.innerText = count + inc;
+                // Call function every ms
+                setTimeout(updateCount, 1);
+            } else {
+                counter.innerText = target;
+            }
+        };
+
+        updateCount();
+    });
+</script>
+</body>
+</html>

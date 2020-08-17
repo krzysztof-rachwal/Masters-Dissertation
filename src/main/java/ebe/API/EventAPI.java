@@ -51,10 +51,10 @@ public class EventAPI {
             @RequestParam(name="employerAttending") String EmployerAttending,
             @RequestParam(name="schoolAttending") String SchoolAttending) throws ParseException {
 
-            //All events created start as not cancelled
-            String EventDateAndTime = EventDate + " " + EventTime;
-            ArrayList<Integer> employerIdList = new ArrayList<Integer>();
-            ArrayList<Integer> schoolIdList = new ArrayList<Integer>();
+        //All events created start as not cancelled
+        String EventDateAndTime = EventDate + " " + EventTime;
+        ArrayList<Integer> employerIdList = new ArrayList<Integer>();
+        ArrayList<Integer> schoolIdList = new ArrayList<Integer>();
 
         for (String employerID : EmployerAttending.split(",")) {
             employerIdList.add(Integer.parseInt(employerID));
@@ -71,11 +71,11 @@ public class EventAPI {
         //      Get Event Created Id
         int eventId = EventQrys.getLastEventCreated(EventName);
 
-    //      Insert into the Employer / Event intersection table
-            EventQrys.createEmployerEventIntersection(eventId,employerIdList);
+        //      Insert into the Employer / Event intersection table
+        EventQrys.createEmployerEventIntersection(eventId,employerIdList);
 
-    //      Insert into the School / Event intersection table
-            EventQrys.createSchoolEventIntersection(eventId, schoolIdList);
+        //      Insert into the School / Event intersection table
+        EventQrys.createSchoolEventIntersection(eventId, schoolIdList);
 
         return true;
     }
@@ -133,7 +133,7 @@ public class EventAPI {
         return true;
     }
     ///////////////////////    DELETE     ////////////////////////////////
-    //2. Delete Events
+    //3. Delete Events
     @DeleteMapping("api/delete/event")
     public boolean deleteEvents(@RequestParam(value="eventId") Integer eventId){
 

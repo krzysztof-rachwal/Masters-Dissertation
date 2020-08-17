@@ -90,6 +90,8 @@ public class EventQueries extends DBQueries {
         return event;
     }
 
+
+
     // 3. Get List of Event Types Names and Ids
     public List<Event> getAllTypesOfEvents() throws DataAccessException {
         String getQuery = "SELECT * FROM TypeOfEventList";

@@ -1,4 +1,4 @@
-package ebe.API;
+package ebe.api;
 
 import ebe.DBMethods.EmployerQueries;
 import ebe.DBMethods.EventQueries;
