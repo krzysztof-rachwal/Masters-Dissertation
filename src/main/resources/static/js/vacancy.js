@@ -314,6 +314,45 @@ $( document ).ready(function() {
     });
 });
 
+vacAdded = localStorage.getItem("vacAdded");
+
+if (vacAdded === "true"){
+    console.log("is the object added " + vacAdded)
+    document.getElementById('success_message').classList.remove('d-none')
+    document.getElementById('success_message').classList.add('show');
+    localStorage.clear()
+    $("#success_message").fadeTo(2000, 500).slideUp(500, function() {
+        $("#success_message").slideUp(500);
+    });
+}
+
+vacancyDeleted = localStorage.getItem("vacancyDeleted");
+
+if (vacancyDeleted === "true"){
+    console.log("is the object deleted " + vacancyDeleted)
+    document.getElementById('success_message').innerHTML = 'The vacancy is deleted!'
+    document.getElementById('success_message').classList.remove('d-none')
+    document.getElementById('success_message').classList.add('show')
+    $("#success_message").fadeTo(2000, 500).slideUp(500, function() {
+        $("#success_message").slideUp(500);
+    });
+    localStorage.clear()
+}
+
+
+$(document).ready(function(){
+    $('#filterButton').click(function(){
+        filterVacancies();
+    });
+});
+
+$(document).ready(function() {
+    $("#addVacancy").hover(function(){
+            $(this).addClass("typoWhite")
+        },
+        function(){$(this).removeClass("typoWhite")})
+});
+
 
 // For the Vacancy Name selector
 // $('.selectpicker').selectpicker();
