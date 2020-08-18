@@ -77,7 +77,7 @@
                 <div class="row">
                     <!-- Search -->
                     <div class="input-group col-7">
-                        <input type="text" class="form-control input-border" onkeydown="searchEvents()" id="event-search"  placeholder="Search">
+                        <input type="text" class="form-control input-border" onkeyup="searchEvents()" id="event-search"  placeholder="Search">
                         <div class="input-group-append">
                             <button class="input-group-text input-border" onclick="searchEvents()">
                                 <i class="fa fa-search"></i>
@@ -110,7 +110,7 @@
 
                 <!-- Cards -->
                 <div class="list-events">
-                    <div class="gel-content-row event-card"  th:each="event : ${allEvents}" th:id="${event.getEventID()}">
+                    <div class="gel-content-row event-card event-found event-filtered"  th:each="event : ${allEvents}" th:id="${event.getEventID()}">
                         <article class="card js-card card--style-icon card--100" gel-processed="processed">
                             <a th:href="@{/profile-event(eventId=${event.getEventID()})}" class="card__inner" gel-processed="processed">
                                 <div class="card__content">
