@@ -224,6 +224,85 @@ $( document ).ready(function() {
     });
 });
 
+//8. Hide Events
+function hideEvents(ids){
 
-// For the Event Name selector
-// $('.selectpicker').selectpicker();
+    $(".event-card").removeClass("d-none");
+    $(".event-card").addClass("d-none");
+
+    for (i = 0; i < ids.length; i++) {
+        $("#"+ids[i]).removeClass("d-none");
+    }
+}
+
+//9. Filter Events
+function filterEvents() {
+    var baseUri = "/api/event/filter";
+    var typeOfEventID_url = "typeOfEventID=" + $('select[id=event-type]').val();
+    var nameOfAdviser_url = "nameOfAdviser=" + $('select[id=event-advisor]').val();
+    var eventPreferences_url = "eventPreferences=" + $('select[id=event-preference]').val();
+
+    var fullUri = baseUri + "?" + "&" + typeOfEventID_url + "&" + nameOfAdviser_url+ "&" + eventPreferences_url;
+
+    var token = $("meta[name='_csrf']").attr("content");    // Used to bypass Spring Boot's CSRF protocol     -- Solution taken from 'https://stackoverflow.com/questions/34747437/use-of-spring-csrf-with-ajax-rest-call-and-html-page-with-thymeleaf' on Nov 26th 2019
+    var header = $("meta[name='_csrf_header']").attr("content");    // Used to bypass Spring Boot's CSRF protocol
+
+    console.log(fullUri)
+
+    $.ajax({
+        type: "GET",
+        url: fullUri,
+        dataType: 'json',
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader(header, token);
+        },
+        success: function (data) {
+            hideEvents(data);
+            console.log(data);
+        },
+        error: function (data) {
+            alert("FAIL");
+            alert(data.responseText);
+            alert(data.toString());
+        }
+    });
+}
+
+//10. Feedback - Add Event
+eventAdded = localStorage.getItem("eventAdded");
+
+if (eventAdded === "true"){
+    $('#success_message').removeClass('d-none')
+    $("#success_message").fadeTo(1500, 1);
+    setTimeout(function(){$("#success_message").fadeTo(1500, 0); },5000);
+    localStorage.clear()
+}
+
+//11. Feedback - Remove Event
+eventDeleted = localStorage.getItem("eventDeleted");
+
+if (eventDeleted === "true"){
+    console.log("is the object deleted " + eventDeleted)
+    document.getElementById('success_message').innerHTML =  "<strong> Success! </strong>" + 'The event was deleted!';
+    document.getElementById('success_message').classList.remove('d-none')
+    document.getElementById('success_message').classList.add('show')
+    $("#success_message").fadeTo(3000, 500).slideUp(500, function() {
+        $("#success_message").slideUp(500);
+    });
+    localStorage.clear()
+}
+
+//12. Document ready
+$(document).ready(function(){
+    $('#filterButton').click(function(){
+        filterEvents();
+    });
+
+    $("#tooltip").hover(function(){
+            $(this).tooltip('show')
+        },
+        function(){
+            $(this).tooltip('hide')
+        }
+    )
+});

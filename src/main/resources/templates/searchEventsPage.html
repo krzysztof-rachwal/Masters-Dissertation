@@ -43,76 +43,33 @@
     <div class="flex-container">
         <div class="col-lg-3">
             <div class="mb-3">
-                <h6>TYPE OF EVENT</h6>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="ind1">
-                    <label class="form-check-label" for="ind1">
-                        Activate
-                    </label>
-                </div>
-
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="ind2">
-                    <label class="form-check-label" for="ind2">
-                        World of Work
-                    </label>
-                </div>
-
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="ind3">
-                    <label class="form-check-label" for="ind3">
-                        High Impact Event
-                    </label>
-                </div>
-
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="ind5">
-                    <label class="form-check-label" for="ind5">
-                        Webinar/Virtual Event
-                    </label>
-                </div>
-
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="ind6">
-                    <label class="form-check-label" for="ind6">
-                        Digital Presentation
-                    </label>
-                </div>
+                <label for="event-type">Event Type</label><br>
+                <select class="selectpicker" data-width="100%" multiple data-live-search="true" id="event-type">
+                    <option  th:each="event : ${allEventTypes}" th:value="${event.getTypeOfEventID()}" th:text="${event.getTypeOfEventName()}"></option>
+                </select>
             </div>
 
             <div class="mb-3">
-                <h6>DATE</h6>
-                <div>
-                    <input class="form-control" type="date" value="" id="date">
-                </div>
+                <label>Name of Advisor</label><br>
+                <select class="selectpicker" data-width="100%" multiple data-live-search="true" id="event-advisor">
+                    <option  th:each="advisor : ${allAdvisorsNames}" th:value="${advisor}" th:text="${advisor}"></option>
+                </select>
             </div>
-
 
             <div class="mb-3">
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="defaultChe1">
-                    <label class="form-check-label" for="defaultChe1">
-                        Promotes apprenticeship
-                    </label>
-                </div>
-
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="defaultChe2">
-                    <label class="form-check-label" for="defaultChe2">
-                        Works in Welsh
-                    </label>
-                </div>
-
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="defaultChe3">
-                    <label class="form-check-label" for="defaultChe3">
-                        Challenges gender stereotypes
-                    </label>
-                </div>
+                <label>Event Preference</label><br>
+                <select class="selectpicker" data-width="100%" multiple id="event-preference">
+                    <option  value="1" >Promotes apprenticeship</option>
+                    <option  value="2" >Conducted in Welsh</option>
+                    <option  value="3" >Challenges gender stereotypes</option>
+                </select>
             </div>
+
+            <a href="#">
+                <button type="button" id="filterButton" class="button--secondary w-100 text-center">Filter</button>
+            </a>
 
         </div>
-
 
         <div class="col-lg-9" style="border-left: grey 1px solid">
             <div class="gel-content-container">
@@ -203,41 +160,7 @@
 
 <script th:src="@{../js/events.js}" src="../js/events.js"></script>
 <script>
-    eventAdded = localStorage.getItem("eventAdded");
-
-    if (eventAdded === "true"){
-        $('#success_message').removeClass('d-none')
-        $("#success_message").fadeTo(1500, 1);
-        setTimeout(function(){$("#success_message").fadeTo(1500, 0); },5000);
-        localStorage.clear()
-    }
-
-    eventDeleted = localStorage.getItem("eventDeleted");
-
-    if (eventDeleted === "true"){
-        console.log("is the object deleted " + eventDeleted)
-        document.getElementById('success_message').innerHTML =  "<strong> Success! </strong>" + 'The event was deleted!';
-        document.getElementById('success_message').classList.remove('d-none')
-        document.getElementById('success_message').classList.add('show')
-        $("#success_message").fadeTo(3000, 500).slideUp(500, function() {
-            $("#success_message").slideUp(500);
-        });
-        localStorage.clear()
-    }
-
-
-    $(document).ready(function() {
-        $("#tooltip").hover(function(){
-                $(this).tooltip('show')
-            },
-            function(){
-                $(this).tooltip('hide')
-            }
-        )
-    });
-
     $('.selectpicker').selectpicker();
-
 </script>
 
 </body>
