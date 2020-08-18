@@ -229,26 +229,17 @@ function searchEmployer(){
     // 4.1 Get the value from Search input
     let val = $('#employer-search').val()
 
-    //4.2  If value is null exit the function
-    if (val==""){
-        $(".employer-card").removeClass("d-none")
-    }
-
-    //4.3 Transform the first letters in a word to uppercase
+    //4.2 Transform the first letters in a word to uppercase
     let val2 = val.charAt(0).toUpperCase() + val.slice(1);
 
-    //4.4 Remove class vacancy found - to restart the "search"
+    //4.3 Remove class employer found - to restart the "search"
     $(".employer-found").removeClass("employer-found")
-    $(".employer-card").removeClass("d-none")
 
-    //4.5 Add classes for the right values
+    //4.4 Add classes for the right values
     $(".list-employers").find(".searchable:contains('"+val2+"')").closest(".employer-card").addClass("employer-found")
 
-    //4.6 Remove the cards
-    $(".list-employers").find(".searchable:not(:contains('"+val2+"'))").closest(".employer-card").addClass("d-none")
-
-    //4.7 Show the "Right" Card
-    $(".employer-found").removeClass("d-none")
+    //4.5 Trigger function classChange which manages the d-none attribute distribution
+    $(".employer-found").trigger('classChange');
 
 }
 
@@ -336,12 +327,17 @@ function filterEmployers() {
 // 8. Hide Employer
 function hideEmployers(ids){
 
-    $(".employer-card").removeClass("d-none");
-    $(".employer-card").addClass("d-none");
+    // remove previous filtering
+    $(".employer-filtered").removeClass("employer-filtered");
 
+    // add .employer-filtered class to indicate which filtering results
     for (i = 0; i < ids.length; i++) {
-        $("#"+ids[i]).removeClass("d-none");
+        $("#"+ids[i]).addClass("employer-filtered");
     }
+
+    // trigger function classChange which manages the d-none attribute distribution
+    $(".employer-filtered").trigger('classChange');
+
 }
 
 //9. Feedback - Add Employer
@@ -379,6 +375,12 @@ $( document ).ready(function() {
 
     $('#filterButton').click(function(){
         filterEmployers();
+    });
+
+    // Function classChange which is called whenever new .employer-filtered or .employer-found appears.
+    $('.employer-card').on('classChange', function() {
+        $(".employer-card").addClass("d-none");
+        $('.employer-filtered.employer-found').removeClass('d-none');
     });
 
     $("#tooltip").hover(function(){
