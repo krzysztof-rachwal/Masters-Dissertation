@@ -39,12 +39,12 @@
                     <strong>Request Event</strong>
                 </a>
             </li>
-            <li class="tabs__tab js-tab tab--first" tabindex="-1">
+            <li class="tabs__tab js-tab" tabindex="-1">
                 <a id="sector-tab" class="tab__link" data-toggle="tab" href="#sector" role="tab" aria-selected="false" aria-controls="sector">
                     <strong>Request by industry sector</strong>
                 </a>
             </li>
-            <li class="tabs__tab js-tab tab--first" tabindex="-1">
+            <li class="tabs__tab js-tab" tabindex="-1">
                 <a id="lang-tab" class="tab__link" data-toggle="tab" href="#lang" role="tab" aria-selected="false" aria-controls="lang">
                     <strong>Request by language</strong>
                 </a>
@@ -284,6 +284,7 @@
     $( document ).ready(function() {
         $(".tab__link").click(function(){
             $(".tab__link").removeClass("tab--is-active")
+            $(".tab__link").removeClass("active")
             $(this).addClass("tab--is-active")
         });
     });
