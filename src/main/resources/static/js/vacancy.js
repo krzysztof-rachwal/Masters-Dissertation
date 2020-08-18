@@ -136,26 +136,18 @@ function searchVacancy(){
     // 4.1 Get the value from Search input
     let val = $('#vacancy-search').val()
 
-    //4.2  If value is null exit the function
-    if (val==""){
-        $(".vacancy-card").removeClass("d-none")
-    }
-
-    //4.3 Transform the first letters in a word to uppercase
+    //4.2 Transform the first letters in a word to uppercase
     let val2 = val.charAt(0).toUpperCase() + val.slice(1);
 
-    //4.4 Remove class vacancy found - to restart the "search"
+    //4.3 Remove class vacancy found - to restart the "search"
     $(".vacancy-found").removeClass("vacancy-found")
-    $(".vacancy-card").removeClass("d-none")
 
-    //4.5 Add classes for the right values
+    //4.4 Add classes for the right values
     $(".list-vacancies").find(".searchable:contains('"+val2+"')").closest(".vacancy-card").addClass("vacancy-found")
 
-    //4.6 Remove the cards
-    $(".list-vacancies").find(".searchable:not(:contains('"+val2+"'))").closest(".vacancy-card").addClass("d-none")
+    //4.5 Trigger function classChange which manages the d-none attribute distribution
+    $(".vacancy-found").trigger('classChange');
 
-    //4.7 Show the "Right" Card
-    $(".vacancy-found").removeClass("d-none")
 
 }
 
@@ -202,12 +194,16 @@ function sortVacancies(ids){
 // 7. Hide Vacancies
 function hideVacancies(ids){
 
-    $(".vacancy-card").removeClass("d-none");
-    $(".vacancy-card").addClass("d-none");
+    // remove previous filtering
+    $(".vacancy-filtered").removeClass("vacancy-filtered");
 
+    // add .vacancy-filtered class to indicate which filtering results
     for (i = 0; i < ids.length; i++) {
-        $("#"+ids[i]).removeClass("d-none");
+        $("#"+ids[i]).addClass("vacancy-filtered");
     }
+
+    // trigger function classChange which manages the d-none attribute distribution
+    $(".vacancy-filtered").trigger('classChange');
 }
 
 // 8. Filter Vacancies
@@ -279,6 +275,12 @@ $( document ).ready(function() {
 
     $('#filterButton').click(function(){
         filterVacancies();
+    });
+
+    // Function classChange which is called whenever new .vacancy-filtered or .vacancy-found appears.
+    $('.vacancy-card').on('classChange', function() {
+        $(".vacancy-card").addClass("d-none");
+        $('.vacancy-filtered.vacancy-found').removeClass('d-none');
     });
 
     $("#addVacancy").hover(function(){
