@@ -169,3 +169,8 @@ ul{
     right: 5px;
     width: 260px;
 }
+
+.tooltip-button{
+    background: transparent;
+    border: transparent;
+}
