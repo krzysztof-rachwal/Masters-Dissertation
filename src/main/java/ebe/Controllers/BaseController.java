@@ -239,15 +239,25 @@ public class BaseController {
     public ModelAndView SearchVacancies(HttpSession session) {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("searchVacanciesPage");
+
         List<Vacancy> vacancies;
+        List<Vacancy> vacanciesAllTypes;
         List<Employer> employerAllNamesAndIds;
+        List<Vacancy> vacanciesAllOccupationalCodes;
 
         vacancies = VacancyQrys.getAllVacancy();
+        vacanciesAllTypes = VacancyQrys.getAllTypesOfVacancy();
+        vacanciesAllOccupationalCodes = VacancyQrys.getAllOccupationalCodes();
         employerAllNamesAndIds = EmployerQrys.getAllEmployerNamesAndIds();
 
-        Map<String,Object> allVacancies = new HashMap<String,Object>();
+
+        Map<String,Object> allVacancies = new HashMap<>();
+
         allVacancies.put("allVacancies", vacancies);
         allVacancies.put("AllEmployerNamesAndIds", employerAllNamesAndIds);
+        allVacancies.put("allVacanciesTypes", vacanciesAllTypes);
+        allVacancies.put("allVacanciesOccupationalCodes", vacanciesAllOccupationalCodes);
+
         mv.addAllObjects(allVacancies);
 
         return mv;
@@ -475,7 +485,7 @@ public class BaseController {
     }
 
 
-//    13. CWS home page
+    //    13. CWS home page
     @GetMapping("/homecws")
     public ModelAndView homeCWS(){
         ModelAndView mv = new ModelAndView();

@@ -1,4 +1,4 @@
-package ebe.api;
+package ebe.API;
 
 import ebe.DBMethods.EmployerQueries;
 import ebe.DBMethods.EventQueries;
@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -83,21 +84,52 @@ public class VacancyAPI {
         }
     }
 
+    ///////////////////////    FILTER     ////////////////////////////////
+    //4. Filter Vacancy
+    @RequestMapping("api/filter/vacancy")
+    public List<Integer> filterVacancies(@RequestParam(name="typeOfVacancyID") String typeOfVacancyID,
+                                         @RequestParam(name="occupationalCodeID") String occupationalCodeID){
+
+        List<Integer> filteredVacancyIDs = new ArrayList<Integer>();
+
+        List<Integer> typeOfVacancyIDList = new ArrayList<Integer>();
+        List<Integer> occupationalCodeIDList = new ArrayList<Integer>();
+
+        if (!typeOfVacancyID.equals("")) {
+            for (String typeOfVacancy : typeOfVacancyID.split(",")) {
+                typeOfVacancyIDList.add(Integer.parseInt(typeOfVacancy));
+            }
+        }  else{
+            typeOfVacancyIDList = Arrays.asList();
+        }
+
+        if (!occupationalCodeID.equals("")) {
+            for (String occupationalCode : occupationalCodeID.split(",")) {
+                occupationalCodeIDList.add(Integer.parseInt(occupationalCode));
+            }
+        } else {
+            occupationalCodeIDList = Arrays.asList();
+        }
+
+        filteredVacancyIDs =  VacancyQrys.getFilteredVacanciesIds(typeOfVacancyIDList, occupationalCodeIDList);
+        return filteredVacancyIDs;
+    }
+
     ///////////////////////    SORT BY     ////////////////////////////////
+    // 5. Sort By Vacancy
     @GetMapping("api/vacancy/sortBy")
     public List<Integer> SortBy(@RequestParam(value="sortBy") String sortBy,
-                                @RequestParam(value="orderBy") String orderBy){
+                                @RequestParam(value="orderBy") String orderBy) {
 
         List<Integer> orderVacancyIds = new ArrayList<Integer>();
 
-        if(sortBy.equals("Name")){
+        if (sortBy.equals("Name")) {
             orderVacancyIds = VacancyQrys.sortByVacancyByName(orderBy);
         }
 
-        if(sortBy.equals("Date")){
+        if (sortBy.equals("Date")) {
             orderVacancyIds = VacancyQrys.sortByVacancyByDate(orderBy);
         }
-
 
         return orderVacancyIds;
     }

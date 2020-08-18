@@ -189,45 +189,45 @@ function deleteEmployer(employerId) {
 }
 
 
-    //4. Delete Alumni
-    function deleteAlumni(alumniID) {
-        let baseUri = "/api/delete/employer/alumni";
-        let alumniId_url = "alumniID=" + alumniID.val();
-        let fullUri = baseUri + "?" + alumniId_url;
+//4. Delete Alumni
+function deleteAlumni(alumniID) {
+    let baseUri = "/api/delete/employer/alumni";
+    let alumniId_url = "alumniID=" + alumniID.val();
+    let fullUri = baseUri + "?" + alumniId_url;
 
-        let token = $("meta[name='_csrf']").attr("content");    // Used to bypass Spring Boot's CSRF protocol     -- Solution taken from 'https://stackoverflow.com/questions/34747437/use-of-spring-csrf-with-ajax-rest-call-and-html-page-with-thymeleaf' on Nov 26th 2019
-        let header = $("meta[name='_csrf_header']").attr("content");    // Used to bypass Spring Boot's CSRF protocol
+    let token = $("meta[name='_csrf']").attr("content");    // Used to bypass Spring Boot's CSRF protocol     -- Solution taken from 'https://stackoverflow.com/questions/34747437/use-of-spring-csrf-with-ajax-rest-call-and-html-page-with-thymeleaf' on Nov 26th 2019
+    let header = $("meta[name='_csrf_header']").attr("content");    // Used to bypass Spring Boot's CSRF protocol
 
 
-        $.ajax({
-            type: "DELETE", url: fullUri,
-            beforeSend: function (xhr) {
-                xhr.setRequestHeader(header, token);
-            },
-            success: function (data) {
-                if (data === true) {
-                    // location.reload();
-                    // alumniID.closest(".alumniInfo").load();
-                    // alumniInfo
-                    alumniID.parent().parent().remove();;
-                } else {
-                    alert("There was an error, please try again.")
-                    alert(data.responseText)
-                    alert(data)
-                }
-            },
-            error: function (data) {
-                alert("FAIL");
-                alert(data.responseText);
+    $.ajax({
+        type: "DELETE", url: fullUri,
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader(header, token);
+        },
+        success: function (data) {
+            if (data === true) {
+                // location.reload();
+                // alumniID.closest(".alumniInfo").load();
+                // alumniInfo
+                alumniID.parent().parent().remove();;
+            } else {
+                alert("There was an error, please try again.")
+                alert(data.responseText)
+                alert(data)
             }
+        },
+        error: function (data) {
+            alert("FAIL");
+            alert(data.responseText);
+        }
 
-        });
+    });
 }
 
 // 4.Search Employer
 function searchEmployer(){
     // 4.1 Get the value from Search input
-     let val = $('#employer-search').val()
+    let val = $('#employer-search').val()
 
     //4.2  If value is null exit the function
     if (val==""){
@@ -344,13 +344,49 @@ function hideEmployers(ids){
     }
 }
 
+//9. Feedback - Add Employer
+empAdded = localStorage.getItem("empAdded");
 
-//9. On document Ready
+if (empAdded === "true"){
+    console.log("is the object added " + empAdded)
+    document.getElementById('success_message').classList.remove('d-none')
+    document.getElementById('success_message').classList.add('show')
+    $("#success_message").fadeTo(2000, 500).slideUp(500, function() {
+        $("#success_message").slideUp(500);
+    });
+    localStorage.clear()
+}
+
+//10. Feedback - Remove Employer
+employerDeleted = localStorage.getItem("employerDeleted");
+
+if (employerDeleted === "true"){
+    console.log("is the object deleted " + empAdded)
+    document.getElementById('success_message').innerHTML = 'The employer is deleted!'
+    document.getElementById('success_message').classList.remove('d-none')
+    document.getElementById('success_message').classList.add('show')
+    $("#success_message").fadeTo(2000, 500).slideUp(500, function() {
+        $("#success_message").slideUp(500);
+    });
+    localStorage.clear()
+}
+
+//11. Document on Ready
 $( document ).ready(function() {
     $("select[name=employer-sort-by]").change(function(){
         sortEmployerByName($(this).val(),$(this).children(":selected").attr("data-val"));
     });
+
+    $('#filterButton').click(function(){
+        filterEmployers();
+    });
+
+    $("#tooltip").hover(function(){
+            $(this).tooltip('show')
+        },
+        function(){
+            $(this).tooltip('hide')
+        }
+    );
 });
 
-// // For the Employer Name selector
-// $('.selectpicker').selectpicker();

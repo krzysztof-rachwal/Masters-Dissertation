@@ -25,73 +25,42 @@
 <header th:replace="fragments/headerTemplate :: header">
 </header>
 
-    <div class="gel-content-container">
+<div class="gel-content-container">
 
-        <div id="success_message" class="alert alert-success alert-dismissible fade d-none" role="alert">
-            <strong>Success!</strong> The vacancy has been created!
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
+    <div id="success_message" class="alert alert-success alert-dismissible fade d-none" role="alert">
+        <strong>Success!</strong> The vacancy has been created!
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
 
-        <div class="container-headline my-5">
-            <span class="title-h2">Vacancies</span>
-            <a href="/add-vacancy">
-                <button type="button"  id="addVacancy" class="button--secondary float-right">Add Vacancy</button>
-            </a>
-        </div>
+    <div class="container-headline my-5">
+        <span class="title-h2">Vacancies</span>
+        <a href="/add-vacancy">
+            <button type="button"  id="addVacancy" class="button--secondary float-right">Add Vacancy</button>
+        </a>
+    </div>
 
+    <!--    FILTERS -->
 
     <div class="flex-container">
         <div class="col-lg-3">
             <div class="mb-3">
-                <h6>TYPE</h6>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="ind1">
-                    <label class="form-check-label" for="ind1">
-                        Full-time
-                    </label>
-                </div>
-
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="ind2">
-                    <label class="form-check-label" for="ind2">
-                        Part-time
-                    </label>
-                </div>
-
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="ind3">
-                    <label class="form-check-label" for="ind3">
-                        Apprenticeship
-                    </label>
-                </div>
-
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="ind4">
-                    <label class="form-check-label" for="ind4">
-                        Traineeship
-                    </label>
-                </div>
-
+                <label for="vacancy-type" class="  mb-1">Type of Vacancy</label>
+                <select class="selectpicker" data-width="100%" multiple data-live-search="true"  id="vacancy-type">
+                    <option th:each="vacancyType : ${allVacanciesTypes}" th:value="${vacancyType.getTypeOfVacancyID()}" th:text="${vacancyType.getTypeOfVacancyName()}"></option>
+                </select>
             </div>
 
             <div class="mb-3">
-                <h6>OCCUPATION</h6>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="schoolId1">
-                    <label class="form-check-label" for="schoolId1">
-                        SOC
-                    </label>
-                </div>
-
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="schoolId2">
-                    <label class="form-check-label" for="schoolId2">
-                        CRCI
-                    </label>
-                </div>
+                <label for="occup-code" class="  mb-1">Occupational Area</label>
+                <select class="selectpicker" data-width="100%" multiple data-live-search="true" id="occup-code">
+                    <option th:each="vacancyOccupationalCode : ${allVacanciesOccupationalCodes}" th:value="${vacancyOccupationalCode.getOccupationalCodeID()}" th:text="${vacancyOccupationalCode.getOccupationalCodeName()}"></option>
+                </select>
             </div>
+            <a href="#">
+                <button type="button" id="filterButton" class="button--secondary w-100 text-center">Filter</button>
+            </a>
         </div>
 
 
@@ -182,49 +151,9 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
 <script th:src="@{../js/vacancy.js}" src="../js/vacancy.js"></script>
+
 <script>
-    $(document).ready(function() {
-        $("#addVacancy").hover(function(){
-                $(this).addClass("typoWhite")
-            },
-            function(){
-                $(this).removeClass("typoWhite")
-            }
-        )
-
-        $("#tooltip").hover(function(){
-                $(this).tooltip('show')
-            },
-            function(){
-                $(this).tooltip('hide')
-            }
-        )
-    });
-</script>
-<script>
-     vacAdded = localStorage.getItem("vacAdded");
-
-    if (vacAdded === "true"){
-        $('#success_message').removeClass('d-none')
-        $("#success_message").fadeTo(1500, 1);
-        setTimeout(function(){$("#success_message").fadeTo(1500, 0); },5000);
-    }
-
-     vacancyDeleted = localStorage.getItem("vacancyDeleted");
-
-     if (vacancyDeleted === "true"){
-         console.log("is the object deleted " + vacancyDeleted)
-         document.getElementById('success_message').innerHTML =  "<strong> Success! </strong>" + 'The vacancy was deleted!'
-         document.getElementById('success_message').classList.remove('d-none')
-         document.getElementById('success_message').classList.add('show')
-         $("#success_message").fadeTo(3000, 500).slideUp(500, function() {
-             $("#success_message").slideUp(500);
-         });
-         localStorage.clear()
-     }
-
-     $('.selectpicker').selectpicker();
-
+    $('.selectpicker').selectpicker();
 </script>
 </body>
 </html>

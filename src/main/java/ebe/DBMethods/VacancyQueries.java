@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Repository
@@ -346,9 +347,59 @@ public class VacancyQueries extends DBQueries {
         return jdbcTemplate().update(deleteSql);
     }
 
+    ///////////////////////////////////// FILTER METHODS ///////////////////////////////////////////////
+
+    // 12. Get Filter Vacancy ids
+    public List<Integer> getFilteredVacanciesIds(List<Integer> typeOfVacancyID,
+                                                 List<Integer> occupationalCodeID){
+        List<Integer> ids = new ArrayList<>();
+        connection = ConnectionFactory.getConnection();
+        ResultSet rs = null;
+
+        List<List<Integer>> listOfFilters = Arrays.asList(typeOfVacancyID, occupationalCodeID);
+
+        List<String> listOfAttributes = Arrays.asList("typeOfVacancyID", "occupationalCodeID");
+
+        String SQL = "SELECT distinct VacancyID FROM Vacancy ";
+
+        if (!typeOfVacancyID.isEmpty() || !occupationalCodeID.isEmpty()){
+            SQL = SQL.concat(" WHERE ");
+        }
+
+        for (int k = 0; k < listOfFilters.size(); ++k){
+            if(!listOfFilters.get(k).isEmpty()){
+                SQL = SQL.concat(" VacancyID IN (SELECT VacancyID FROM Vacancy WHERE ");
+                for (int i = 0; i < listOfFilters.get(k).size(); ++i){
+                    SQL = SQL.concat(listOfAttributes.get(k) + " = " + listOfFilters.get(k).get(i));
+                    if (i != listOfFilters.get(k).size() - 1){
+                        SQL = SQL.concat(" OR ");
+                    }
+                }
+                SQL = SQL.concat(")");
+                if (k != listOfFilters.size() - 1 && !listOfFilters.get(k+1).isEmpty()){
+                    SQL = SQL.concat(" AND ");
+                }
+            }
+        }
+
+        try {
+            statement = connection.createStatement();
+            rs = statement.executeQuery(SQL);
+            while (rs.next()) {
+                ids.add(rs.getInt("VacancyID"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.close(rs);
+        }
+        return ids;
+    }
+
+
     ///////////////////////////////////// SORT BY METHODS ///////////////////////////////////////////////
 
-    //12. Get Vacancy order by name
+    //13. Get Vacancy order by name
     public List<Integer> sortByVacancyByName(String type) throws DataAccessException {
         String getQuery = String.format("SELECT * FROM Vacancy ORDER BY VacancyName %s;", type);
         List<Integer> list = new ArrayList<>();
@@ -371,8 +422,7 @@ public class VacancyQueries extends DBQueries {
     }
 
 
-
-    //13. Get Vacancy order by date
+    //14. Get Vacancy order by date
     public List<Integer> sortByVacancyByDate(String type) throws DataAccessException {
         String getQuery = String.format("SELECT * FROM Vacancy ORDER BY DeadlineForApplication %s;", type);
         List<Integer> list = new ArrayList<>();
@@ -393,4 +443,6 @@ public class VacancyQueries extends DBQueries {
         }
         return list;
     }
+
 }
+

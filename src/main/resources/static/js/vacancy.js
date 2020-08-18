@@ -199,13 +199,98 @@ function sortVacancies(ids){
     }
 }
 
-//7. On document Ready
+// 7. Hide Vacancies
+function hideVacancies(ids){
+
+    $(".vacancy-card").removeClass("d-none");
+    $(".vacancy-card").addClass("d-none");
+
+    for (i = 0; i < ids.length; i++) {
+        $("#vacancy_"+ids[i]).removeClass("d-none");
+    }
+}
+
+// 8. Filter Vacancies
+function filterVacancies() {
+
+    var baseUri = "/api/filter/vacancy";
+    var typeOfVacancyID_url = "typeOfVacancyID=" + $('select[id=vacancy-type]').val();
+    var occupationalCodeID_url = "occupationalCodeID=" + $('select[id=occup-code]').val();
+
+    var fullUri = baseUri + "?" + "&" + typeOfVacancyID_url  + "&" + occupationalCodeID_url ;
+
+    var token = $("meta[name='_csrf']").attr("content");    // Used to bypass Spring Boot's CSRF protocol     -- Solution taken from 'https://stackoverflow.com/questions/34747437/use-of-spring-csrf-with-ajax-rest-call-and-html-page-with-thymeleaf' on Nov 26th 2019
+    var header = $("meta[name='_csrf_header']").attr("content");    // Used to bypass Spring Boot's CSRF protocol
+
+
+    $.ajax({
+        type: "GET",
+        url: fullUri,
+        dataType: 'json',
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader(header, token);
+        },
+        success: function (data) {
+            hideVacancies(data);
+          },
+        error: function (data) {
+            alert("FAIL");
+            alert(data.responseText);
+            alert(data.toString());
+        }
+    });
+}
+
+//9. Feedback - Add Vacancy
+vacAdded = localStorage.getItem("vacAdded");
+
+if (vacAdded === "true"){
+    console.log("is the object added " + vacAdded)
+    document.getElementById('success_message').classList.remove('d-none')
+    document.getElementById('success_message').classList.add('show');
+    localStorage.clear()
+    $("#success_message").fadeTo(2000, 500).slideUp(500, function() {
+        $("#success_message").slideUp(500);
+    });
+}
+
+//10. Feedback - Remove Vacancy
+vacancyDeleted = localStorage.getItem("vacancyDeleted");
+
+if (vacancyDeleted === "true"){
+    console.log("is the object deleted " + vacancyDeleted)
+    document.getElementById('success_message').innerHTML = 'The vacancy is deleted!'
+    document.getElementById('success_message').classList.remove('d-none')
+    document.getElementById('success_message').classList.add('show')
+    $("#success_message").fadeTo(2000, 500).slideUp(500, function() {
+        $("#success_message").slideUp(500);
+    });
+    localStorage.clear()
+}
+
+//10. On document Ready
 $( document ).ready(function() {
     $("select[name=vacancy-sort-by]").change(function(){
         sortVacanciesByNameAndDate($(this).val(),$(this).children(":selected").attr("data-val"));
     });
+
+    $('#filterButton').click(function(){
+        filterVacancies();
+    });
+
+    $("#addVacancy").hover(function(){
+            $(this).addClass("typoWhite")
+        },
+        function(){
+            $(this).removeClass("typoWhite")
+        }
+    )
+
+    $("#tooltip").hover(function(){
+            $(this).tooltip('show')
+        },
+        function(){
+            $(this).tooltip('hide')
+        }
+    )
 });
-
-
-// For the Vacancy Name selector
-// $('.selectpicker').selectpicker();
