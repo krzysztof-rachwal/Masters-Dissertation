@@ -206,7 +206,7 @@ function hideVacancies(ids){
     $(".vacancy-card").addClass("d-none");
 
     for (i = 0; i < ids.length; i++) {
-        $("#vacancy_"+ids[i]).removeClass("d-none");
+        $("#"+ids[i]).removeClass("d-none");
     }
 }
 
@@ -223,6 +223,8 @@ function filterVacancies() {
     var header = $("meta[name='_csrf_header']").attr("content");    // Used to bypass Spring Boot's CSRF protocol
 
 
+    console.log(fullUri);
+
     $.ajax({
         type: "GET",
         url: fullUri,
@@ -232,6 +234,7 @@ function filterVacancies() {
         },
         success: function (data) {
             hideVacancies(data);
+            console.log(data);
           },
         error: function (data) {
             alert("FAIL");
