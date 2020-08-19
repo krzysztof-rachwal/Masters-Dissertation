@@ -118,7 +118,7 @@
                                         <div class="body__title searchable" name="vacancy-card-title" th:text="${vacancy.getVacancyName()}"></div>
                                         <div class="body__body">
                                             <h5 th:each=" employer : ${AllEmployerNamesAndIds}" class="searchable" th:remove="${employer.getEmployerID() == vacancy.getEmployerID()} ? none : all" th:text="${#strings.capitalize(employer.getEmployerName())}"></h5>
-                                            <h5 th:text="${vacancy.getDeadlineForApplication()}" name="vacancy-card-date"  class="searchable"></h5>
+                                            <h5 th:text="${#dates.format(vacancy.getDeadlineForApplication(),'dd-MM-yyyy')}" name="vacancy-card-date"  class="searchable"></h5>
                                             <h5 th:text="${#strings.capitalize(vacancy.getVacancySummary())}" name="vacancy-card-date"  class="searchable"></h5>
                                             <!-- Hidden Data -->
                                             <h5  class="searchable d-none" th:text="${#strings.capitalize(vacancy.getVacancyPostcode())}"></h5>

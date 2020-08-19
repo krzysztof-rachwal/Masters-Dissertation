@@ -122,7 +122,7 @@
                                     <div class="content__body">
                                         <div class="body__title searchable" name="event-card-title" th:text="${#strings.capitalize(event.getEventName())}"></div>
                                         <div class="body__body searchable">
-                                            <h5 class="searchable" name="event-card-date" th:text="${event.getEventDateAndTime()}"></h5>
+                                            <h5 class="searchable" name="event-card-date" th:text="${#dates.format(event.getEventDateAndTime(),'dd-MM-yyyy')}"></h5>
                                             <h5 class="searchable" name="event-card-summary" th:text="${event.getEventSummary()} "></h5>
 
                                             <!-- Hidden Data -->

@@ -76,7 +76,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="event-date">Event Date</label>
-                                    <input type="date" class="form-control input-border" id="event-date" th:value="${event.getEventDate()}">
+                                    <input type="date" class="form-control input-border" id="event-date" th:value="${#dates.format(event.getEventDate(),'dd-MM-yyyy')}">
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -234,7 +234,8 @@
             <div class="col-md-6">
                 <div class="form-group ">
                     <span class="font-weight-bold h5">Event Date </span>
-                    <p th:text="${event.getEventDate()}"></p>
+                    <p th:text="${#dates.format(event.getEventDate(),'dd-MM-yyyy')}"></p>
+
                 </div>
             </div>
             <div class="col-md-6">
