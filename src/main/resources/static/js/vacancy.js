@@ -136,18 +136,14 @@ function searchVacancy(){
     // 4.1 Get the value from Search input
     let val = $('#vacancy-search').val()
 
-    //4.2 Transform the first letters in a word to uppercase
-    let val2 = val.charAt(0).toUpperCase() + val.slice(1);
-
-    //4.3 Remove class vacancy found - to restart the "search"
+    //4.2 Remove class vacancy found - to restart the "search"
     $(".vacancy-found").removeClass("vacancy-found")
 
-    //4.4 Add classes for the right values
-    $(".list-vacancies").find(".searchable:contains('"+val2+"')").closest(".vacancy-card").addClass("vacancy-found")
+    //4.3 Add classes for the right values
+    $(".list-vacancies").find(".searchable:contains('"+val+"')").closest(".vacancy-card").addClass("vacancy-found")
 
-    //4.5 Trigger function classChange which manages the d-none attribute distribution
+    //4.4 Trigger function classChange which manages the d-none attribute distribution
     $(".vacancy-found").trigger('classChange');
-
 
 }
 
@@ -298,4 +294,13 @@ $( document ).ready(function() {
             $(this).tooltip('hide')
         }
     )
+
+    // Overwriting contains to be case insensitive, found at :
+    // https://css-tricks.com/snippets/jquery/make-jquery-contains-case-insensitive/
+    $.expr[":"].contains = $.expr.createPseudo(function(arg) {
+        return function( elem ) {
+            return $(elem).text().toUpperCase().indexOf(arg.toUpperCase()) >= 0;
+        };
+    });
+
 });
