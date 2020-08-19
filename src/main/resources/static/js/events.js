@@ -272,9 +272,11 @@ function filterEvents() {
 eventAdded = localStorage.getItem("eventAdded");
 
 if (eventAdded === "true"){
-    $('#success_message').removeClass('d-none')
+    $('#success_message').removeClass('d-none').addClass('show');
     $("#success_message").fadeTo(1500, 1);
-    setTimeout(function(){$("#success_message").fadeTo(1500, 0); },5000);
+    setTimeout(function(){
+        $("#success_message").fadeTo(1500, 0);
+    },5000);
     localStorage.clear()
 }
 
@@ -282,13 +284,12 @@ if (eventAdded === "true"){
 eventDeleted = localStorage.getItem("eventDeleted");
 
 if (eventDeleted === "true"){
-    console.log("is the object deleted " + eventDeleted)
-    document.getElementById('success_message').innerHTML =  "<strong> Success! </strong>" + 'The event was deleted!';
-    document.getElementById('success_message').classList.remove('d-none')
-    document.getElementById('success_message').classList.add('show')
-    $("#success_message").fadeTo(3000, 500).slideUp(500, function() {
-        $("#success_message").slideUp(500);
-    });
+    $('#success_message').innerHTML =  "<strong> Success! </strong>" + 'The event was deleted!';
+    $('#success_message').removeClass('d-none').addClass('show');
+    $("#success_message").fadeTo(1500, 1);
+    setTimeout(function(){
+        $("#success_message").fadeTo(1500, 0);
+    },5000);
     localStorage.clear()
 }
 

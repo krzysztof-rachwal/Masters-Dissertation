@@ -32,13 +32,13 @@ public class VacancyAPI {
     @GetMapping(value="/api/create/vacancy")
     public boolean createVacancy(
             @RequestParam(name="EmployerID") int employerId,
-            @RequestParam(name="VacancyName") String vacancyName,
+            @RequestParam(name="VacancyName", required = true) String vacancyName,
             @RequestParam(name="VacancyLink") String vacancyLink,
-            @RequestParam(name="VacancySummary") String vacancySummary,
+            @RequestParam(name="VacancySummary", required = true) String vacancySummary,
             @RequestParam(name="TypeOfVacancyID") int typeOfVacancyID,
             @RequestParam(name="StatusOfVacancyID") int StatusOfVacancyID,
-            @RequestParam(name="StartOfVacancy") String startOfVacancy,
-            @RequestParam(name="DeadlineForApplication") String deadlineForApplication,
+            @RequestParam(name="StartOfVacancy", required = true) String startOfVacancy,
+            @RequestParam(name="DeadlineForApplication", required = true) String deadlineForApplication,
             @RequestParam(name="OccupationalCodeID") int occupationalCodeID,
             @RequestParam(name="ApplicationMethodID") String applicationMethodID,
             @RequestParam(name="VacancyPostcode") String vacancyPostCode) throws ParseException {

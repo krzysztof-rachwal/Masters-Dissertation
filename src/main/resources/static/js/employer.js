@@ -348,12 +348,11 @@ function hideEmployers(ids){
 empAdded = localStorage.getItem("empAdded");
 
 if (empAdded === "true"){
-    console.log("is the object added " + empAdded)
-    document.getElementById('success_message').classList.remove('d-none')
-    document.getElementById('success_message').classList.add('show')
-    $("#success_message").fadeTo(2000, 500).slideUp(500, function() {
-        $("#success_message").slideUp(500);
-    });
+    $('#success_message').removeClass('d-none').addClass('show');
+    $("#success_message").fadeTo(1500, 1);
+    setTimeout(function(){
+        $("#success_message").fadeTo(1500, 0);
+    },5000);
     localStorage.clear()
 }
 
@@ -361,13 +360,12 @@ if (empAdded === "true"){
 employerDeleted = localStorage.getItem("employerDeleted");
 
 if (employerDeleted === "true"){
-    console.log("is the object deleted " + empAdded)
     document.getElementById('success_message').innerHTML = 'The employer is deleted!'
-    document.getElementById('success_message').classList.remove('d-none')
-    document.getElementById('success_message').classList.add('show')
-    $("#success_message").fadeTo(2000, 500).slideUp(500, function() {
-        $("#success_message").slideUp(500);
-    });
+    $('#success_message').removeClass('d-none').addClass('show');
+    $("#success_message").fadeTo(1500, 1);
+    setTimeout(function(){
+        $("#success_message").fadeTo(1500, 0);
+    },5000);
     localStorage.clear()
 }
 

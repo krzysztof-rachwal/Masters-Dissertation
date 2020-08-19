@@ -23,10 +23,18 @@ function createVacancy() {
     console.log(fullUri);
 
     // 1. validation
-    validateForm($('input[id=vacancy-name]'),$('textarea[id=vacancy-summary]'),$('input[id=start-date]'),$('input[id=closing-date]'),$('input[id=post-code]'));
+    let verifier
+    verifier = validateForm($('input[id=vacancy-name]'),$('textarea[id=vacancy-summary]'),$('input[id=start-date]'),$('input[id=closing-date]'),$('input[id=post-code]'));
 
-    alert("2.")
-
+    if(!verifier){
+        $('#failed_message_text').text("The Form was not filled properly.");
+        $('#failed_message').removeClass('d-none').addClass('show');
+        $("#failed_message").fadeTo(1500, 1);
+        setTimeout(function(){
+            $("#failed_message").fadeTo(1500, 0);
+        },5000);
+        return
+    }
 
 
     $.ajax({
@@ -45,9 +53,14 @@ function createVacancy() {
             }
         },
         error: function (data) {
-            alert("FAIL");
-            alert(data.responseText);
-            alert(data.toString());
+            $('#failed_message_text').text("Something went wrong with the submission.");
+            $('#failed_message').removeClass('d-none').addClass('show');
+            $("#failed_message").fadeTo(1500, 1);
+            setTimeout(function(){
+                $("#failed_message").fadeTo(1500, 0);
+            },5000);
+            console.log(data.responseText);
+
         }
     });
 };
@@ -255,46 +268,57 @@ function filterVacancies() {
 vacAdded = localStorage.getItem("vacAdded");
 
 if (vacAdded === "true"){
-    console.log("is the object added " + vacAdded)
-    document.getElementById('success_message').classList.remove('d-none')
-    document.getElementById('success_message').classList.add('show');
+    $('#success_message').removeClass('d-none').addClass('show');
     localStorage.clear()
-    $("#success_message").fadeTo(2000, 500).slideUp(500, function() {
-        $("#success_message").slideUp(500);
-    });
+    $("#success_message").fadeTo(1500, 1);
+    setTimeout(function(){
+        $("#success_message").fadeTo(1500, 0);
+    },5000);
 }
 
 //10. Feedback - Remove Vacancy
 vacancyDeleted = localStorage.getItem("vacancyDeleted");
 
 if (vacancyDeleted === "true"){
-    console.log("is the object deleted " + vacancyDeleted)
-    document.getElementById('success_message').innerHTML = 'The vacancy is deleted!'
-    document.getElementById('success_message').classList.remove('d-none')
-    document.getElementById('success_message').classList.add('show')
-    $("#success_message").fadeTo(2000, 500).slideUp(500, function() {
-        $("#success_message").slideUp(500);
-    });
+    $('#success_message').innerHTML =  "<strong> Success! </strong>" +'The vacancy is deleted!'
+    $('#success_message').removeClass('d-none').addClass('show');
+    $("#success_message").fadeTo(1500, 1);
+    setTimeout(function(){
+        $("#success_message").fadeTo(1500, 0);
+    },5000);
     localStorage.clear()
 }
 
+//11. Validation Funcrion
 function validateForm(vacancyName,vacancyDescription,startDate,endDate,postCode){
-    if(vacancyName.val()===""){
-        vacancyName.addClass("is-invalid ")
+
+    let verifier = true;
+    let attributesArray = [vacancyName,vacancyDescription,startDate,endDate]
+
+    // 11.1 Remove the Valid/Invalid class
+    $(".form-control").removeClass("is-invalid ").removeClass("is-valid ")
+    $(".selectpicker").removeClass("is-invalid ").removeClass("is-valid ")
+
+    // 11.2 Add The Valid class to all elements
+    $(".form-control").add("is-valid ")
+    $(".selectpicker").add("is-valid ")
+
+    for(let i = 0; i < attributesArray.length; i++){
+        if(attributesArray[i].val()===""){
+            // 11.3 Remove The Valid/Invalid class
+            attributesArray[i].removeClass("is-invalid ").removeClass("is-valid ")
+            // 11.4 Add the Invalid class
+            attributesArray[i].addClass("is-invalid ")
+            console.log(attributesArray[i])
+            verifier = false
+        }
     }
-
-    if(vacancyDescription.val()===""){
-        vacancyName.addClass("is-invalid ")
-    }
-
-
-    alert("ola :)")
-
+    return verifier;
 }
 
 
 
-//10. On document Ready
+//12. On document Ready
 $( document ).ready(function() {
     $("select[name=vacancy-sort-by]").change(function(){
         sortVacanciesByNameAndDate($(this).val(),$(this).children(":selected").attr("data-val"));
