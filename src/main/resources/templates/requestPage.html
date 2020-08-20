@@ -91,12 +91,11 @@
                             </div>
                             <div class="form-group">
                                 <label for="event-guests">Guest(s)</label>
-                                <select class="selectpicker form-control w-100" multiple data-live-search="true"
+                                <select class="selectpicker form-control"  multiple data-live-search="true"
                                         id="event-guests">
-                                    <option value="guest1">Guest 1</option>
-                                    <option value="guest2">Guest 2</option>
-                                    <option value="guest3">Guest 3</option>
-                                    <option value="guest4">Guest 4</option>
+                                    <option th:each="emp : ${allEmployers}"
+                                            th:value="${emp.getEmployerID()}"
+                                            th:text="${emp.getEmployerName()}"></option>
                                 </select>
                             </div>
                         </div>
@@ -148,13 +147,12 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="language">Language</label><br>
+                                <label for="language">Language</label>
                                 <select class="selectpicker form-control" multiple data-live-search="true"
                                         id="language">
-                                    <option value="guest1">English</option>
-                                    <option value="guest2">Welsh</option>
-                                    <option value="guest3">French</option>
-                                    <option value="guest4">Spanish</option>
+                                    <option th:each="lang : ${allLanguages}"
+                                            th:value="${lang.getEmployerLanguageID()}"
+                                            th:text="${lang.getEmployerLanguageName()}"></option>
                                 </select>
                             </div>
                         </div>
@@ -204,35 +202,35 @@
                                             th:value="${event.getTypeOfEventID()}"
                                             th:text="${event.getTypeOfEventName()}"></option>
                                 </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="sectorPRef">Sector</label>
+                                <select class="selectpicker form-control" multiple data-live-search="true"
+                                        id="sectorPref">
+                                    <option th:each="employerIndustrySector : ${allIndustrySectors}"
+                                            th:value="${employerIndustrySector.getEmployerIndustrySectorID()}"
+                                            th:text="${employerIndustrySector.getEmployerIndustrySectorName()}"></option>
+
+                                </select>
+                            </div>
                         </div>
+                    </div>
+                    <div class="col-md-12 mt-3">
                         <div class="form-group">
-                            <label for="sectorPRef">Sector</label><br>
-                            <select class="selectpicker form-control w-100" multiple data-live-search="true"
-                                    id="sectorPref">
-                                <option value="guest1">Sector</option>
-                                <option value="guest1">Sector</option>
-                                <option value="guest1">Sector</option>
-                                <option value="guest1">Sector</option>
-                            </select>
+                            <label for="event_notes">Event Notes</label>
+                            <textarea type="time" id="event_notes_lang" class="form-control input-border border-0"
+                                      rows="5" name="event_notes"></textarea>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="container mt-5 mb-4 text-center">
+                            <button type="button" class="button--secondary text-center">Request</button>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-12 mt-3">
-                    <div class="form-group">
-                        <label for="event_notes">Event Notes</label>
-                        <textarea type="time" id="event_notes_lang" class="form-control input-border border-0"
-                                  rows="5" name="event_notes"></textarea>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="container mt-5 mb-4 text-center">
-                        <button type="button" class="button--secondary text-center">Request</button>
-                    </div>
-                </div>
+            </form>
         </div>
-        </form>
     </div>
-</div>
 </div>
 <!--END OF MAIN CONTENT-->
 
@@ -265,8 +263,6 @@
             $(this).addClass("tab--is-active")
         });
     });
-
-
 </script>
 </body>
 </html>

@@ -425,9 +425,19 @@ public class BaseController {
         // session = context.getSession();
 
         List<Event> eventsAllTypes;
+        List<Employer> employerIndustrySectorAreas;
+        List<Employer> employerLanguage;
+        List<Employer> employers;
+
+        employers = EmployerQrys.getAllEmployers();
+        employerLanguage = EmployerQrys.getAllLanguages();
         eventsAllTypes = EventQrys.getAllTypesOfEvents();
+        employerIndustrySectorAreas = EmployerQrys.getAllIndustrySectors();
 
         mv.addObject("allEventTypes",eventsAllTypes);
+        mv.addObject("allIndustrySectors",employerIndustrySectorAreas);
+        mv.addObject("allLanguages",employerLanguage);
+        mv.addObject("allEmployers",employers);
         return mv;
     }
 
@@ -526,7 +536,6 @@ public class BaseController {
         mv.addObject("recommendedEvents",recommendedEvents);
         return mv;
     }
-
 
     @GetMapping("/error")
     public RedirectView ErrorPage() {
