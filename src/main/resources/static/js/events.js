@@ -156,25 +156,14 @@ function searchEvents(){
     // 4.1 Get the value from Search input
     let val = $('#event-search').val()
 
-    //4.2  If value is null exit the function
-    if (val==""){
-        $(".event-card").removeClass("d-none")
-    }
-
-    //4.3 Transform the first letters in a word to uppercase
-    let val2 = val.charAt(0).toUpperCase()+ val.slice(1);
-    //4.4 Remove class event found - to restart the "search"
+    //4.2 Remove class event found - to restart the "search"
     $(".event-found").removeClass("event-found")
-    $(".event-card").removeClass("d-none")
 
-    //4.5 Add classes for the right values
-    $(".list-events").find(".searchable:contains('"+val2+"')").closest(".event-card").addClass("event-found")
+    //4.3 Add classes for the right values
+    $(".list-events").find(".searchable:contains('"+val+"')").closest(".event-card").addClass("event-found")
 
-    //4.6 Remove the cards
-    $(".list-events").find(".searchable:not(:contains('"+val2+"'))").closest(".event-card").addClass("d-none")
-
-    //4.7 Show the "Right" Card
-    $(".event-found").removeClass("d-none")
+    //4.4 Trigger function classChange which manages the d-none attribute distribution
+    $(".event-found").trigger('classChange');
 
 }
 
@@ -227,12 +216,16 @@ $( document ).ready(function() {
 //8. Hide Events
 function hideEvents(ids){
 
-    $(".event-card").removeClass("d-none");
-    $(".event-card").addClass("d-none");
+    // remove previous filtering
+    $(".event-filtered").removeClass("event-filtered");
 
+    // add .event-filtered class to indicate which filtering results
     for (i = 0; i < ids.length; i++) {
-        $("#"+ids[i]).removeClass("d-none");
+        $("#"+ids[i]).addClass("event-filtered");
     }
+
+    // trigger function classChange which manages the d-none attribute distribution
+    $(".event-filtered").trigger('classChange');
 }
 
 //9. Filter Events
@@ -298,6 +291,12 @@ $(document).ready(function(){
         filterEvents();
     });
 
+    // Function classChange which is called whenever new .event-filtered or .event-found appears.
+    $('.event-card').on('classChange', function() {
+        $(".event-card").addClass("d-none");
+        $('.event-filtered.event-found').removeClass('d-none');
+    });
+
     $("#tooltip").hover(function(){
             $(this).tooltip('show')
         },
@@ -305,4 +304,12 @@ $(document).ready(function(){
             $(this).tooltip('hide')
         }
     )
+
+    // Overwriting contains to be case insensitive, found at :
+    // https://css-tricks.com/snippets/jquery/make-jquery-contains-case-insensitive/
+    $.expr[":"].contains = $.expr.createPseudo(function(arg) {
+        return function( elem ) {
+            return $(elem).text().toUpperCase().indexOf(arg.toUpperCase()) >= 0;
+        };
+    });
 });
