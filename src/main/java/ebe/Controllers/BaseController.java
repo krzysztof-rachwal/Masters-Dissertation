@@ -40,6 +40,11 @@ public class BaseController {
     @Autowired
     private HttpServletRequest context; // this will provide the current instance of HttpServletRequest
 
+//    @GetMapping()
+//    public String login() {
+//        return "You are logged in";
+//    }
+
 
     // HomePage
     @GetMapping("/")
