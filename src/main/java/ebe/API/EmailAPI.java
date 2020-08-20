@@ -13,15 +13,14 @@ public class EmailAPI {
         this.javaMailSender = javaMailSender;
     }
 
-    public void sendMail(String toEmail, String subject, String message) {
+    public void sendMail(String fromEmail, String subject, String message) {
 
         var mailMessage = new SimpleMailMessage();
 
-        mailMessage.setTo(toEmail);
+        mailMessage.setTo("carrers.wales69@gmail.com");
         mailMessage.setSubject(subject);
         mailMessage.setText(message);
-
-        mailMessage.setFrom("carrers.wales69@gmail.com");
+        mailMessage.setFrom(fromEmail);
 
         javaMailSender.send(mailMessage);
     }

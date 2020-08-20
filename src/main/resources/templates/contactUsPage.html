@@ -28,7 +28,7 @@
         <h2 class="title-h2">Contact Us</h2>
     </div>
 
-    <form>
+    <form th:action="@{/sendemail}" th:object="${email}" method="post">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-8">
@@ -49,7 +49,7 @@
             <div class="row">
                 <div class="col-md-8">
                     <div class="form-group">
-                        <label for="postCode">Post Code*</label>
+                        <label for="postCode">Postcode*</label>
                         <input type="text" id="postCode" class="form-control input-border" name="postCode">
                     </div>
                 </div>
@@ -73,7 +73,7 @@
             </div>
         </div>
         <div class="container mb-4 mt-5 text-center">
-            <button type="button" class="button--secondary text-center">Submit</button>
+            <button type="submit" value="Submit" class="button--secondary text-center">Submit</button>
         </div>
     </form>
 </div>
