@@ -253,6 +253,73 @@
     </div>
 </div>
 
+<!-- Modal Request -->
+<div class="modal fade bd-example-modal-lg" id="requestEmployer" tabindex="-1" role="dialog"
+     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog gel-content-container" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="modal-center">
+                    <div class="container-fluid">
+                        <div class="container my-3 p-0">
+                            <h4 class="modal-title float-left">Request <span th:text="${employer.getEmployerName()}"> Employer</span> </h4>
+                            <button type="button" class="close float-right" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    </div>
+                    <form>
+                        <div class="container-fluid">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="event_name">Event Name</label>
+                                    <input type="text" id="event_name" name="event_name" class="form-control input-border">
+                                </div>
+                                <div class="form-group">
+                                    <label class=" text-left" for="event_date">Event Date</label>
+                                    <input type="date" id="event_date" class="form-control input-border" name="event_date">
+                                </div>
+                                <div class="form-group mb-0">
+                                    <label for="event_time">Event Time</label>
+                                    <input type="time" id="event_time" class="form-control input-border" name="event_time">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="event-type">Event Type</label>
+                                        <select class="selectpicker w-100" data-live-search="true" id="event-type">
+                                            <option th:each="event : ${allEventTypes}" th:value="${event.getTypeOfEventID()}"
+                                                    th:text="${event.getTypeOfEventName()}"></option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="event-guests">Guest</label>
+                                        <input class="w-100" th:value="${employer.getEmployerName()}" id="event-guests" disabled="disabled"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12 mt-3">
+                                <div class="form-group">
+                                    <label for="event_notes">Event Notes</label>
+                                    <textarea type="time" id="event_notes" class="form-control input-border border-0"
+                                              rows="5" name="event_notes"></textarea>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="container mt-5 mb-4 text-center">
+                                    <button type="button" class="button--secondary text-center">Request</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <div class="gel-content-container">
     <div id="success_message" class="alert alert-success alert-dismissible fade d-none" role="alert">
         <strong>Success!</strong> The employer has been updated!
@@ -478,7 +545,9 @@
     </div>
 
     <div class="text-center mt-2">
-        <input class="button" type="submit" value="Request Employer">
+        <button type="button" class="button button--primary text-center" data-toggle="modal"
+                data-target="#requestEmployer">Request Employer
+        </button>
     </div>
 </div>
 
