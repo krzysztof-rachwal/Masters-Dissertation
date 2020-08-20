@@ -41,19 +41,21 @@ public class BaseController {
     @Autowired
     private HttpServletRequest context; // this will provide the current instance of HttpServletRequest
 
-//    @GetMapping()
-//    public String login() {
-//        return "You are logged in";
+//    @GetMapping("/test")
+//    public String test (){
+//        return "redirect:/";
 //    }
-
 
     // HomePage
     @GetMapping("/")
-    public ModelAndView HomePage( @AuthenticationPrincipal(expression = "claims['email']") String email) {
+    public ModelAndView HomePage( @AuthenticationPrincipal(expression = "claims['email']") String email,
+                                  @AuthenticationPrincipal(expression = "claims['name']") String name) {
         ModelAndView mv = new ModelAndView();
+
         mv.setViewName("homepageCWS");
 
         System.out.println(email);
+        System.out.println(name);
 
         int numberOfEvents = statisticsQueries.getTotalEvents();
         int numberOfVacancies = statisticsQueries.getTotalVacancies();
