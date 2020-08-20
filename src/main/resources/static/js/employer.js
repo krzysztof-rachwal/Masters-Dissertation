@@ -1,5 +1,20 @@
 //1. Create Employer
 function createNewEmployer() {
+
+    // 1.1. validation
+    let verifier
+    verifier = validateForm();
+    // 1.2. Error Message
+    if(!verifier){
+        $('#failed_message_text').text("The Form was not filled properly.");
+        $('#failed_message').removeClass('d-none').addClass('show');
+        $("#failed_message").fadeTo(1500, 1);
+        setTimeout(function(){
+            $("#failed_message").fadeTo(1500, 0);
+        },5000);
+        return
+    }
+
     let baseUri = "/api/create/employer";
     let EmployerStatus_url ="StatusOfEmployerID=" + $('select[id=employer-status]').val();
     let EmployerName_url = "EmployerName=" + $('input[id=company-name]').val();
@@ -52,15 +67,34 @@ function createNewEmployer() {
             }
         },
         error: function (data) {
-            alert("FAIL");
-            alert(data.responseText);
-            alert(data.toString());
+            $('#failed_message_text').text("Something went wrong with the submission.");
+            $('#failed_message').removeClass('d-none').addClass('show');
+            $("#failed_message").fadeTo(1500, 1);
+            setTimeout(function(){
+                $("#failed_message").fadeTo(1500, 0);
+            },5000);
+            console.log(data.responseText);
         }
     });
 };
 
 //2. Update Employer
 function updateThisEmployer() {
+
+    // 2.1. validation
+    let verifier
+    verifier = validateForm();
+    // 2.2. Error Message
+    if(!verifier){
+        $('#failed_message_text').text("The Form was not filled properly.");
+        $('#failed_message').removeClass('d-none').addClass('show');
+        $("#failed_message").fadeTo(1500, 1);
+        setTimeout(function(){
+            $("#failed_message").fadeTo(1500, 0);
+        },5000);
+        return
+    }
+
     let baseUri = "/api/update/employer";
     let EmployerID_url ="EmployerID=" + $('input[id=employer-id]').val();
     let EmployerStatus_url ="StatusOfEmployerID=" + $('select[id=employer-status]').val();
@@ -148,9 +182,13 @@ function updateThisEmployer() {
             }
         },
         error: function (data) {
-            alert("FAIL");
-            alert(data.responseText);
-            alert(data.toString());
+            $('#failed_message_text').text("Something went wrong with the submission.");
+            $('#failed_message').removeClass('d-none').addClass('show');
+            $("#failed_message").fadeTo(1500, 1);
+            setTimeout(function(){
+                $("#failed_message").fadeTo(1500, 0);
+            },5000);
+            console.log(data.responseText);
         }
     });
 
@@ -369,7 +407,55 @@ if (employerDeleted === "true"){
     localStorage.clear()
 }
 
-//11. Document on Ready
+//12. Validation Function
+function validateForm(){
+
+    let verifier = true;
+    let attributesArray = $(".form-required")
+
+    // 11.1 Remove the Valid/Invalid class
+    $(".form-required").removeClass("is-invalid ").removeClass("is-valid ")
+    $(".selectpicker").removeClass("is-invalid ").removeClass("is-valid ")
+
+    // 11.2 Add The Valid class to all elements
+    $(".selectpicker").add("is-valid ")
+
+    // 11.3 Validate inputs
+    for (let i = 0; i < attributesArray.length; i++) {
+        if (attributesArray[i].value === "") {
+            // 11.3.1 Remove The Valid/Invalid class
+            attributesArray[i].classList.remove("is-invalid")
+            attributesArray[i].classList.remove("is-valid")
+            // 11.3.2 Add the Invalid class
+            attributesArray[i].classList.add("is-invalid")
+            console.log(attributesArray[i])
+            verifier = false
+        } else {
+            // attributesArray[i].classList.add("is-valid")
+        }
+    }
+
+    // 11.4 Change variable data to selectpickers
+    attributesArray = $(".selectpicker")
+
+    //11.5 Validate selectpickers
+    for (let i = 0; i < attributesArray.length; i++) {
+        if (attributesArray[i].value === "") {
+            // 11.5.1 Remove The Valid/Invalid class
+            attributesArray[i].classList.remove("is-invalid")
+            attributesArray[i].classList.remove("is-valid")
+            // 11.5.2 Add the Invalid class
+            attributesArray[i].parentNode.classList.add("is-invalid")
+            console.log(attributesArray[i])
+            verifier = false
+        } else {
+            // attributesArray[i].parentNode.classList.add("is-valid")
+        }
+    }
+    return verifier;
+}
+
+//12. Document on Ready
 $( document ).ready(function() {
     $("select[name=employer-sort-by]").change(function(){
         sortEmployerByName($(this).val(),$(this).children(":selected").attr("data-val"));

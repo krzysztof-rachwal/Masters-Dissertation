@@ -1,6 +1,21 @@
 
 //1. Create Vacancy
 function createVacancy() {
+
+    // 1.1. validation
+    let verifier
+    verifier = validateForm();
+    // 1.2. Error Message
+    if(!verifier){
+        $('#failed_message_text').text("The Form was not filled properly.");
+        $('#failed_message').removeClass('d-none').addClass('show');
+        $("#failed_message").fadeTo(1500, 1);
+        setTimeout(function(){
+            $("#failed_message").fadeTo(1500, 0);
+        },5000);
+        return
+    }
+
     let baseUri = "/api/create/vacancy";
     let employerID_url = "EmployerID=" + $('select[id=employer-name]').val();
     let vacancyName_url = "VacancyName=" + $('input[id=vacancy-name]').val();
@@ -21,21 +36,6 @@ function createVacancy() {
     let token = $("meta[name='_csrf']").attr("content");    // Used to bypass Spring Boot's CSRF protocol     -- Solution taken from 'https://stackoverflow.com/questions/34747437/use-of-spring-csrf-with-ajax-rest-call-and-html-page-with-thymeleaf' on Nov 26th 2019
     let header = $("meta[name='_csrf_header']").attr("content");    // Used to bypass Spring Boot's CSRF protocol
     console.log(fullUri);
-
-    // 1.1. validation
-    let verifier
-    verifier = validateForm();
-    // 1.2. Error Message
-    if(!verifier){
-        $('#failed_message_text').text("The Form was not filled properly.");
-        $('#failed_message').removeClass('d-none').addClass('show');
-        $("#failed_message").fadeTo(1500, 1);
-        setTimeout(function(){
-            $("#failed_message").fadeTo(1500, 0);
-        },5000);
-        return
-    }
-
 
     $.ajax({
         type: "GET", url: fullUri,
@@ -66,6 +66,21 @@ function createVacancy() {
 
 //2. Update Vacancy
 function UpdateThisVacancy() {
+
+    // 2.1. validation
+    let verifier
+    verifier = validateForm();
+    // 2.2. Error Message
+    if(!verifier){
+        $('#failed_message_text').text("The Form was not filled properly.");
+        $('#failed_message').removeClass('d-none').addClass('show');
+        $("#failed_message").fadeTo(1500, 1);
+        setTimeout(function(){
+            $("#failed_message").fadeTo(1500, 0);
+        },5000);
+        return
+    }
+
     var baseUri = "/api/update/vacancy";
     var employerID_url = "EmployerID=" + $('select[id=employer-name]').val();
     var vacancyName_url = "VacancyName=" + $('input[id=vacancy-name]').val();
@@ -89,20 +104,6 @@ function UpdateThisVacancy() {
     var token = $("meta[name='_csrf']").attr("content");    // Used to bypass Spring Boot's CSRF protocol     -- SOlution taken from 'https://stackoverflow.com/questions/34747437/use-of-spring-csrf-with-ajax-rest-call-and-html-page-with-thymeleaf' on Nov 26th 2019
     var header = $("meta[name='_csrf_header']").attr("content");    // Used to bypass Spring Boot's CSRF protocol
     console.log(fullUri)
-
-    // 2.1. validation
-    let verifier
-    verifier = validateForm();
-    // 2.2. Error Message
-    if(!verifier){
-        $('#failed_message_text').text("The Form was not filled properly.");
-        $('#failed_message').removeClass('d-none').addClass('show');
-        $("#failed_message").fadeTo(1500, 1);
-        setTimeout(function(){
-            $("#failed_message").fadeTo(1500, 0);
-        },5000);
-        return
-    }
 
     $.ajax({
         type: "GET", url: fullUri,

@@ -1,6 +1,21 @@
 
 //1. Create Event
 function createNewEvent() {
+
+    // 1.1. validation
+    let verifier
+    verifier = validateForm();
+    // 1.2. Error Message
+    if(!verifier){
+        $('#failed_message_text').text("The Form was not filled properly.");
+        $('#failed_message').removeClass('d-none').addClass('show');
+        $("#failed_message").fadeTo(1500, 1);
+        setTimeout(function(){
+            $("#failed_message").fadeTo(1500, 0);
+        },5000);
+        return
+    }
+
     var baseUri = "/api/create/event";
     var eventName_url = "eventName=" + $('input[id=event-name]').val();
     var typeOfEventID_url = "typeOfEventID=" + $('select[id=event-type]').val();
@@ -22,7 +37,6 @@ function createNewEvent() {
     var employerAttending_url = "employerAttending=" + $('select[id=employers-attending]').val();
     var schoolAttending_url = "schoolAttending=" + $('select[id=schools-attending]').val();
 
-
     var fullUri = baseUri + "?" + "&" + eventName_url+ "&" + typeOfEventID_url + "&" + eventDate_url + "&" + eventTime_url + "&"
         + eventVenueName_url + "&" + eventAddressCity_url  + "&" + eventAddressStreet_url  + "&" + eventAddressNumber_url + "&"
         + eventPostcode_url + "&" + eventSummary_url+ "&" + isPublic_url + "&" + isCancelled_url + "&" +nameOfAdviser_url +"&"
@@ -32,22 +46,6 @@ function createNewEvent() {
     var token = $("meta[name='_csrf']").attr("content");    // Used to bypass Spring Boot's CSRF protocol     -- Solution taken from 'https://stackoverflow.com/questions/34747437/use-of-spring-csrf-with-ajax-rest-call-and-html-page-with-thymeleaf' on Nov 26th 2019
     var header = $("meta[name='_csrf_header']").attr("content");    // Used to bypass Spring Boot's CSRF protocol
     console.log(fullUri)
-
-    // 1.1. validation
-    let verifier
-    verifier = validateForm();
-    // 1.2. Error Message
-    if(!verifier){
-        $('#failed_message_text').text("The Form was not filled properly.");
-        $('#failed_message').removeClass('d-none').addClass('show');
-        $("#failed_message").fadeTo(1500, 1);
-        setTimeout(function(){
-            $("#failed_message").fadeTo(1500, 0);
-        },5000);
-        return
-    }
-
-
 
     $.ajax({
         type: "GET", url: fullUri,
@@ -79,6 +77,20 @@ function createNewEvent() {
 
 //2. Update Event
 function UpdateThisEvent(){
+    // 2.1. validation
+    let verifier
+    verifier = validateForm();
+    // 2.2. Error Message
+    if(!verifier){
+        $('#failed_message_text').text("The Form was not filled properly.");
+        $('#failed_message').removeClass('d-none').addClass('show');
+        $("#failed_message").fadeTo(1500, 1);
+        setTimeout(function(){
+            $("#failed_message").fadeTo(1500, 0);
+        },5000);
+        return
+    }
+
     var baseUri = "/api/update/event";
     var eventID_url = "eventID=" + $('input[id=event-id]').val();
     var eventName_url = "eventName=" + $('input[id=event-name]').val();
@@ -113,22 +125,6 @@ function UpdateThisEvent(){
     var token = $("meta[name='_csrf']").attr("content");    // Used to bypass Spring Boot's CSRF protocol     -- Solution taken from 'https://stackoverflow.com/questions/34747437/use-of-spring-csrf-with-ajax-rest-call-and-html-page-with-thymeleaf' on Nov 26th 2019
     var header = $("meta[name='_csrf_header']").attr("content");    // Used to bypass Spring Boot's CSRF protocol
     console.log(fullUri)
-
-    // 2.1. validation
-    let verifier
-    verifier = validateForm();
-    // 2.2. Error Message
-    if(!verifier){
-        $('#failed_message_text').text("The Form was not filled properly.");
-        $('#failed_message').removeClass('d-none').addClass('show');
-        $("#failed_message").fadeTo(1500, 1);
-        setTimeout(function(){
-            $("#failed_message").fadeTo(1500, 0);
-        },5000);
-        return
-    }
-
-
 
     $.ajax({
         type: "GET", url: fullUri,
