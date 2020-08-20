@@ -30,5 +30,6 @@ DROP TABLE IF EXISTS PreferenceList;
 DROP TABLE IF EXISTS TypeOfEventList;
 DROP TABLE IF EXISTS ApplicationMethodList;
 DROP TABLE IF EXISTS CooperationTypeList;
+DROP TABLE IF EXISTS CWSMemberList;
 
 

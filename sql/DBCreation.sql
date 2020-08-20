@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS `c1976275_Spring_DB`.`School` (
   `SchoolPostcode` MEDIUMTEXT NULL DEFAULT NULL,
   `SchoolEmail` MEDIUMTEXT NULL DEFAULT NULL,
   `SchoolPhone` MEDIUMTEXT NULL DEFAULT NULL,
-  `SchoolNumberOfRequest` INT NULL,
+  `SchoolNumberOfRequest` INT(11) NULL DEFAULT NULL,
   PRIMARY KEY (`SchoolID`))
 ENGINE = InnoDB
 AUTO_INCREMENT = 301
@@ -74,6 +74,18 @@ CREATE TABLE IF NOT EXISTS `c1976275_Spring_DB`.`AreaOfCurriculumList` (
   `AreaOfCurriculumID` INT(11) NOT NULL AUTO_INCREMENT,
   `AreaOfCurriculumName` MEDIUMTEXT NULL DEFAULT NULL,
   PRIMARY KEY (`AreaOfCurriculumID`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 7
+DEFAULT CHARACTER SET = latin1;
+
+
+-- -----------------------------------------------------
+-- Table `c1976275_Spring_DB`.`CooperationTypeList`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `c1976275_Spring_DB`.`CooperationTypeList` (
+  `CooperationTypeID` INT(11) NOT NULL AUTO_INCREMENT,
+  `CooperationTypeName` MEDIUMTEXT NULL DEFAULT NULL,
+  PRIMARY KEY (`CooperationTypeID`))
 ENGINE = InnoDB
 AUTO_INCREMENT = 7
 DEFAULT CHARACTER SET = latin1;
@@ -285,6 +297,28 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
+-- Table `c1976275_Spring_DB`.`INT_EmployerCooperationType`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `c1976275_Spring_DB`.`INT_EmployerCooperationType` (
+  `EmployerID` INT(11) NOT NULL,
+  `CooperationTypeID` INT(11) NOT NULL,
+  PRIMARY KEY (`EmployerID`, `CooperationTypeID`),
+  INDEX `CooperationEmployer_idx` (`CooperationTypeID` ASC),
+  CONSTRAINT `CooperationEmployer`
+    FOREIGN KEY (`CooperationTypeID`)
+    REFERENCES `c1976275_Spring_DB`.`CooperationTypeList` (`CooperationTypeID`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `EmployerCooperation`
+    FOREIGN KEY (`EmployerID`)
+    REFERENCES `c1976275_Spring_DB`.`Employer` (`EmployerID`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
+
+
+-- -----------------------------------------------------
 -- Table `c1976275_Spring_DB`.`IndustrySectorList`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `c1976275_Spring_DB`.`IndustrySectorList` (
@@ -312,6 +346,40 @@ CREATE TABLE IF NOT EXISTS `c1976275_Spring_DB`.`INT_EmployerIndustrySector` (
   CONSTRAINT `IndustryEmployer`
     FOREIGN KEY (`IndustrySectorID`)
     REFERENCES `c1976275_Spring_DB`.`IndustrySectorList` (`IndustrySectorID`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
+
+
+-- -----------------------------------------------------
+-- Table `c1976275_Spring_DB`.`PreferenceList`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `c1976275_Spring_DB`.`PreferenceList` (
+  `PreferenceID` INT(11) NOT NULL AUTO_INCREMENT,
+  `PreferenceName` MEDIUMTEXT NULL DEFAULT NULL,
+  PRIMARY KEY (`PreferenceID`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 6
+DEFAULT CHARACTER SET = latin1;
+
+
+-- -----------------------------------------------------
+-- Table `c1976275_Spring_DB`.`INT_EmployerPreference`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `c1976275_Spring_DB`.`INT_EmployerPreference` (
+  `EmployerID` INT(11) NOT NULL,
+  `PreferenceID` INT(11) NOT NULL,
+  PRIMARY KEY (`EmployerID`, `PreferenceID`),
+  INDEX `PreferenceEmployer_idx` (`PreferenceID` ASC),
+  CONSTRAINT `EmployerPreference`
+    FOREIGN KEY (`EmployerID`)
+    REFERENCES `c1976275_Spring_DB`.`Employer` (`EmployerID`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `PreferenceEmployer`
+    FOREIGN KEY (`PreferenceID`)
+    REFERENCES `c1976275_Spring_DB`.`PreferenceList` (`PreferenceID`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB
@@ -370,7 +438,7 @@ CREATE TABLE IF NOT EXISTS `c1976275_Spring_DB`.`LanguageList` (
   `LanguageName` VARCHAR(255) NULL DEFAULT NULL,
   PRIMARY KEY (`LanguageID`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 5
+AUTO_INCREMENT = 6
 DEFAULT CHARACTER SET = latin1;
 
 
@@ -457,7 +525,7 @@ CREATE TABLE IF NOT EXISTS `c1976275_Spring_DB`.`PostcodeList` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
-AUTO_INCREMENT = 45
+AUTO_INCREMENT = 232
 DEFAULT CHARACTER SET = latin1;
 
 
@@ -536,66 +604,17 @@ ENGINE = InnoDB
 AUTO_INCREMENT = 101
 DEFAULT CHARACTER SET = latin1;
 
+
 -- -----------------------------------------------------
--- Table `c1976275_Spring_DB`.`CooperationTypeList`
+-- Table `c1976275_Spring_DB`.`CWSMemberList`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `c1976275_Spring_DB`.`CooperationTypeList` (
-  `CooperationTypeID` INT NOT NULL AUTO_INCREMENT,
-  `CooperationTypeName` MEDIUMTEXT NULL,
-  PRIMARY KEY (`CooperationTypeID`))
+CREATE TABLE IF NOT EXISTS `c1976275_Spring_DB`.`CWSMemberList` (
+  `CWSMemberID` INT NOT NULL AUTO_INCREMENT,
+  `CWSNameSurname` MEDIUMTEXT NULL,
+  `CWSEmail` MEDIUMTEXT NULL,
+  PRIMARY KEY (`CWSMemberID`))
 ENGINE = InnoDB;
 
-
--- -----------------------------------------------------
--- Table `c1976275_Spring_DB`.`INT_EmployerCooperationType`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `c1976275_Spring_DB`.`INT_EmployerCooperationType` (
-  `EmployerID` INT NOT NULL,
-  `CooperationTypeID` INT NOT NULL,
-  PRIMARY KEY (`EmployerID`, `CooperationTypeID`),
-  INDEX `CooperationEmployer_idx` (`CooperationTypeID` ASC),
-  CONSTRAINT `EmployerCooperation`
-    FOREIGN KEY (`EmployerID`)
-    REFERENCES `c1976275_Spring_DB`.`Employer` (`EmployerID`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE,
-  CONSTRAINT `CooperationEmployer`
-    FOREIGN KEY (`CooperationTypeID`)
-    REFERENCES `c1976275_Spring_DB`.`CooperationTypeList` (`CooperationTypeID`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `c1976275_Spring_DB`.`PreferenceList`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `c1976275_Spring_DB`.`PreferenceList` (
-  `PreferenceID` INT NOT NULL AUTO_INCREMENT,
-  `PreferenceName` MEDIUMTEXT NULL,
-  PRIMARY KEY (`PreferenceID`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `c1976275_Spring_DB`.`INT_EmployerPreference`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `c1976275_Spring_DB`.`INT_EmployerPreference` (
-  `EmployerID` INT NOT NULL,
-  `PreferenceID` INT NOT NULL,
-  PRIMARY KEY (`EmployerID`, `PreferenceID`),
-  INDEX `PreferenceEmployer_idx` (`PreferenceID` ASC),
-  CONSTRAINT `EmployerPreference`
-    FOREIGN KEY (`EmployerID`)
-    REFERENCES `c1976275_Spring_DB`.`Employer` (`EmployerID`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE,
-  CONSTRAINT `PreferenceEmployer`
-    FOREIGN KEY (`PreferenceID`)
-    REFERENCES `c1976275_Spring_DB`.`PreferenceList` (`PreferenceID`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE)
-ENGINE = InnoDB;
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
