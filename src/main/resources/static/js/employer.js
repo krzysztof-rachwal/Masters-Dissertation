@@ -420,7 +420,7 @@ function validateForm(){
     // 11.2 Add The Valid class to all elements
     $(".selectpicker").add("is-valid ")
 
-    // 11.3 Validate inputs
+    // 11.3 Validate inputs(Empty)
     for (let i = 0; i < attributesArray.length; i++) {
         if (attributesArray[i].value === "") {
             // 11.3.1 Remove The Valid/Invalid class
@@ -446,12 +446,24 @@ function validateForm(){
             attributesArray[i].classList.remove("is-valid")
             // 11.5.2 Add the Invalid class
             attributesArray[i].parentNode.classList.add("is-invalid")
-            console.log(attributesArray[i])
             verifier = false
         } else {
             // attributesArray[i].parentNode.classList.add("is-valid")
         }
     }
+
+    // 11.6 Validate Input(Email)
+    // 11.6.1 Set the RegEx and test it
+    const emailValidation = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    let emailVal = emailValidation.test($("#employer-email").val());
+    // 11.6.2 Verify if it's needed to put an invalid class
+    if(!emailVal){
+        $("#employer-email").removeClass("is-invalid").removeClass("is-valid")
+        $("#employer-email").addClass("is-invalid")
+    }
+
+    //11.7 Exception
+    $('select[name=create-employer-alumni-school]').parent().removeClass("is-invalid");
     return verifier;
 }
 

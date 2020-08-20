@@ -165,7 +165,7 @@ ul{
 .alert{
     bottom: 0px;
     position: fixed;
-    z-index: 100;
+    z-index: 1060;
     right: 5px;
     width: 260px;
 }

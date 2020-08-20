@@ -54,14 +54,15 @@
 
                 </div>
                 <div class="col-md-6">
-                    <div class="group-input">
+                    <div class="form-group">
                         <label for="employer-employees-number">Number of Employees</label><br>
-                        <select id="employer-employees-number">
+                        <select id="employer-employees-number"  data-width="80%" class="selectpicker">
                             <option  th:each="employerNumberEmployees : ${allEmployerNumberOfEmployees}" th:value="${employerNumberEmployees.getNumberOfEmployeesID()}" th:text="${employerNumberEmployees.getNumberOfEmployeesName()}"></option>
                         </select>
                     </div>
+
                     <label>Address</label>
-                    <div class="input-group">
+                    <div class="group-input">
                         <div class="input-group-prepend">
                             <input type="text" id="employer-street" class="form-control border-right input-sm form-required" placeholder="Street">
                             <input type="text" id="employer-number" class="form-control" placeholder="Building No">

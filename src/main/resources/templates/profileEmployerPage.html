@@ -48,30 +48,30 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="company-name">Company name</label>
-                                    <input type="text" class="form-control input-border" id="company-name" th:value="${employer.getEmployerName()}">
+                                    <input type="text" class="form-control form-required" id="company-name" th:value="${employer.getEmployerName()}">
                                 </div>
                                 <div class="form-group">
                                     <label for="company-summary">Company summary</label>
-                                    <textarea class="input-border"  rows="3" id="company-summary" th:text="${employer.getCompanySummary()}" th:value="${employer.getCompanySummary()}"></textarea>
+                                    <textarea class="form-required"  rows="3" id="company-summary" th:text="${employer.getCompanySummary()}" th:value="${employer.getCompanySummary()}"></textarea>
                                 </div>
                             </div>
 
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="employer-employees-number">Number of Employees</label><br>
-                                    <select id="employer-employees-number">
+                                    <select id="employer-employees-number" data-width="80%" class="selectpicker">
                                         <option  th:each="employerNumberEmployees : ${allEmployerNumberOfEmployees}" th:selected="${employerNumberEmployees.getNumberOfEmployeesID() == employer.getNumberOfEmployeesID()}"  th:value="${employerNumberEmployees.getNumberOfEmployeesID()}" th:text="${employerNumberEmployees.getNumberOfEmployeesName()}"></option>
                                     </select>
                                 </div>
                                 <label>Address</label>
-                                <div class="input-group">
+                                <div class="group-input">
                                     <div class="input-group-prepend">
-                                        <input type="text" id="employer-street" class="form-control border-right input-sm" th:value="${employer.getEmployerAddressStreet()}">
+                                        <input type="text" id="employer-street" class="form-control border-right input-sm form-required" th:value="${employer.getEmployerAddressStreet()}">
                                         <input type="text" id="employer-number" class="form-control" th:value="${employer.getEmployerAddressNumber()}">
                                     </div>
                                     <div class="input-group-prepend mt-1">
-                                        <input type="text" id="employer-postcode" class="form-control border-right" th:value="${employer.getEmployerPostcode()}">
-                                        <input type="text" id="employer-city" class="form-control" th:value="${employer.getEmployerAddressCity()}">
+                                        <input type="text" id="employer-postcode" class="form-control border-right form-required" th:value="${employer.getEmployerPostcode()}">
+                                        <input type="text" id="employer-city" class="form-control form-required" th:value="${employer.getEmployerAddressCity()}">
                                     </div>
                                 </div>
                             </div>
@@ -83,15 +83,15 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="contact-name">Contact Name</label>
-                                        <input type="text" class="form-control input-border" id="contact-name" th:value="${employer.getContactPersonNameSurname()}">
+                                        <input type="text" class="form-control form-required" id="contact-name" th:value="${employer.getContactPersonNameSurname()}">
                                     </div>
                                     <div class="form-group">
                                         <label for="contact-position">Contact Position</label>
-                                        <input type="text" class="form-control input-border" id="contact-position" th:value="${employer.getContactPersonPosition()}">
+                                        <input type="text" class="form-control form-required" id="contact-position" th:value="${employer.getContactPersonPosition()}">
                                     </div>
                                     <div class="form-group">
                                         <label for="employer-phone">Phone number</label>
-                                        <input type="text" class="form-control input-border" id="employer-phone" th:value="${employer.getEmployerPhone()}">
+                                        <input type="text" class="form-control form-required" id="employer-phone" th:value="${employer.getEmployerPhone()}">
                                     </div>
                                     <!--                    <div class="form-group">-->
                                     <!--                        <label for="mob-num">Mobile number</label>-->
@@ -99,7 +99,7 @@
                                     <!--                    </div>-->
                                     <div class="form-group">
                                         <label for="employer-email">Email</label>
-                                        <input type="text" class="form-control input-border" id="employer-email" th:value="${employer.getEmployerEmail()}">
+                                        <input type="text" class="form-control form-required" id="employer-email" th:value="${employer.getEmployerEmail()}">
                                     </div>
                                 </div>
 
@@ -132,7 +132,7 @@
 
                                 <div class="col-md-6 mb-4">
                                     <label for="employer-cooperation-type">Cooperation Type</label><br>
-                                    <select id="employer-cooperation-type" data-width="80%"   class="selectpicker" multiple data-live-search="true">
+                                    <select id="employer-cooperation-type" data-width="80%" class="selectpicker" multiple data-live-search="true">
                                         <option  th:each="employerCooperationType : ${allEmployerCooperationType}" th:selected="${allEmployerChosenCooperationType.contains(employerCooperationType.getEmployerCooperationTypeID())}" th:value="${employerCooperationType.getEmployerCooperationTypeID()}" th:text="${employerCooperationType.getEmployerCooperationTypeName()}"></option>
                                     </select>
                                 </div>
@@ -187,7 +187,7 @@
                                 <div class="container my-3 p-0">
                                     <h4>Alumni</h4>
                                 </div>
-                                <div class="col-md-12 "  th:each="alumni : ${allEmployerAlumni}"  th:value="${'bananas_'+alumni.getEmployerAlumniID()}">
+                                <div class="col-md-12 " th:each="alumni : ${allEmployerAlumni}"  th:value="${'bananas_'+alumni.getEmployerAlumniID()}">
                                     <div class="col-md-5 my-2 px-0">
                                         <label >Full Name</label><br>
                                         <input type="text" class="form-control input-border" th:id="${alumni.getEmployerAlumniID()}" name="update-employer-alumni-name" th:value="${alumni.getEmployerAlumniName()}" >
@@ -254,12 +254,22 @@
 </div>
 
 <div class="gel-content-container">
+    <!-- Success Message -->
     <div id="success_message" class="alert alert-success alert-dismissible fade d-none" role="alert">
         <strong>Success!</strong> The employer has been updated!
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
+
+    <!-- Failed Message    -->
+    <div id="failed_message" class="alert alert-danger alert-dismissible fade d-none" role="alert">
+        <strong>Failed!</strong> <span id="failed_message_text"></span>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
 
     <div class="container-headline my-5">
         <span class="title-h2" th:text="${employer.getEmployerName()}"></span>
