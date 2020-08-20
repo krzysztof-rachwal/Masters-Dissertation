@@ -7,6 +7,7 @@ import ebe.DBClasses.School;
 import ebe.DBClasses.Vacancy;
 import ebe.DBMethods.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
@@ -48,9 +49,11 @@ public class BaseController {
 
     // HomePage
     @GetMapping("/")
-    public ModelAndView HomePage(HttpSession session) {
+    public ModelAndView HomePage( @AuthenticationPrincipal(expression = "claims['email']") String email) {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("homepageCWS");
+
+        System.out.println(email);
 
         int numberOfEvents = statisticsQueries.getTotalEvents();
         int numberOfVacancies = statisticsQueries.getTotalVacancies();
