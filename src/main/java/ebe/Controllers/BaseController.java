@@ -135,6 +135,8 @@ public class BaseController {
         List<Employer> employerStatus;
         List<School> schoolAllNamesAndIds;
         List<Integer> employerSchoolPreferences;
+        List<Event> eventsAllTypes;
+
 
         employerInfo = EmployerQrys.getAllEmployers();
         employerLanguage = EmployerQrys.getAllLanguages();
@@ -156,6 +158,7 @@ public class BaseController {
         schoolAllNamesAndIds = SchoolQrys.getAllSchoolNamesAndIds();
         employerStatus = EmployerQrys.getAllEmployerStatus();
         employerSchoolPreferences = EmployerQrys.getEmployerSchoolPreferences(employer.getEmployerID());
+        eventsAllTypes = EventQrys.getAllTypesOfEvents();
 
         Map<String,Object> allEmployer = new HashMap<String,Object>();
         allEmployer.put("employer", employer);
@@ -179,11 +182,9 @@ public class BaseController {
         allEmployer.put("allSchoolNamesAndIds", schoolAllNamesAndIds);
         allEmployer.put("allEmployerStatus",employerStatus);
         allEmployer.put("allEmployerSchoolPreferences", employerSchoolPreferences);
-
+        allEmployer.put("allEventTypes", eventsAllTypes);
 
         mv.addAllObjects(allEmployer);
-
-
         return mv;
     }
 
@@ -424,9 +425,19 @@ public class BaseController {
         // session = context.getSession();
 
         List<Event> eventsAllTypes;
+        List<Employer> employerIndustrySectorAreas;
+        List<Employer> employerLanguage;
+        List<Employer> employers;
+
+        employers = EmployerQrys.getAllEmployers();
+        employerLanguage = EmployerQrys.getAllLanguages();
         eventsAllTypes = EventQrys.getAllTypesOfEvents();
+        employerIndustrySectorAreas = EmployerQrys.getAllIndustrySectors();
 
         mv.addObject("allEventTypes",eventsAllTypes);
+        mv.addObject("allIndustrySectors",employerIndustrySectorAreas);
+        mv.addObject("allLanguages",employerLanguage);
+        mv.addObject("allEmployers",employers);
         return mv;
     }
 
@@ -525,7 +536,6 @@ public class BaseController {
         mv.addObject("recommendedEvents",recommendedEvents);
         return mv;
     }
-
 
     @GetMapping("/error")
     public RedirectView ErrorPage() {
