@@ -453,6 +453,7 @@ function validateForm(){
     }
 
     // 11.6 Validate Input(Email)
+
     // 11.6.1 Set the RegEx and test it
     const emailValidation = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     let emailVal = emailValidation.test($("#employer-email").val());
@@ -462,7 +463,19 @@ function validateForm(){
         $("#employer-email").addClass("is-invalid")
     }
 
-    //11.7 Exception
+    // 11.7 Validate Input(Phone)
+
+    // 11.7.1 Set the RegEx and test it
+    const phoneValidation = /^(\(?(?:0(?:0|11)\)?[\s-]?\(?|\+)(44)\)?[\s-]?)?\(?0?(?:\)[\s-]?)?([0-9]\d{7,12}\)?[\d\s-]+)((?:x|ext\.?|\#)\d{3,4})?$/;
+
+    let phoneVal = phoneValidation.test($("#employer-phone").val());
+    // 11.7.2 Verify if it's needed to put an invalid class
+    if(!phoneVal){
+        $("#employer-phone").removeClass("is-invalid").removeClass("is-valid")
+        $("#employer-phone").addClass("is-invalid")
+    }
+
+    //11.8 Exception
     $('select[name=create-employer-alumni-school]').parent().removeClass("is-invalid");
     return verifier;
 }
