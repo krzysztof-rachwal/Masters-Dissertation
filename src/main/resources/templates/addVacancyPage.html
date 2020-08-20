@@ -42,14 +42,14 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="vacancy-name" class="mb-1">Vacancy Name</label>
-                        <input type="text" class="form-control w-100" id="vacancy-name">
+                        <input type="text" class="form-control w-80 form-required" id="vacancy-name">
                     </div>
                 </div>
 
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="employer-name" class="mb-1">Employer Name</label><br>
-                        <select class="selectpicker" data-width="100%" data-live-search="true" id="employer-name">
+                        <select class="selectpicker" data-width="80%" data-live-search="true" id="employer-name">
                             <option  th:each="employer : ${AllEmployerNamesAndIds}" th:value="${employer.getEmployerID()}" th:text="${employer.getEmployerName()}"></option>
                         </select>
                     </div>
@@ -57,26 +57,22 @@
             </div>
 
             <div class="row mb-4">
-                <div class="col-md-12">
+                <div class="col-md-6">
                     <div class="form-group">
                         <label for="vacancy-summary" class="mb-1">Vacancy Description</label>
-                        <textarea class="form-control" id="vacancy-summary" rows="5"></textarea>
+                        <textarea class="form-required" id="vacancy-summary" rows="5"></textarea>
                     </div>
                 </div>
-            </div>
 
-            <div class="row mb-4">
+
                 <div class="col-md-6">
-                    <div class="form-group">
+                    <div class="form-group pb-3">
                         <label for="web-link" class="mb-1">Link to website</label>
-                        <input type="text" class="form-control w-100" id="web-link">
+                        <input type="text" class="form-control w-80" id="web-link">
                     </div>
-                </div>
-
-                <div class="col-md-6">
                     <div class="form-group">
                         <label for="post-code" class="mb-1">Post Code</label>
-                        <input type="text" class="form-control w-100" id="post-code">
+                        <input type="text" class="form-control w-80 form-required" id="post-code">
                     </div>
                 </div>
             </div>
@@ -85,14 +81,14 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="start-date" class="mb-1">Start Date</label>
-                        <input type="date" class="form-control w-100" id="start-date">
+                        <input type="date" class="form-control w-80 form-required" id="start-date">
                     </div>
                 </div>
 
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="closing-date" class="mb-1">Closing Date</label>
-                        <input type="date" class="form-control w-100" id="closing-date">
+                        <input type="date" class="form-control w-80 form-required" id="closing-date">
                     </div>
                 </div>
             </div>
@@ -100,7 +96,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="vacancy-type" class="mb-1">Status of Vacancy</label><br>
-                        <select class="selectpicker"  data-width="100%" id="vacancy-status">
+                        <select class="selectpicker" data-width="80%" id="vacancy-status">
                             <option th:each="vacancyStatus : ${allVacanciesStatus}" th:value="${vacancyStatus.getStatusOfVacancyID()}" th:text="${vacancyStatus.getStatusOfVacancyName()}"></option>
                         </select>
                     </div>
@@ -109,7 +105,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="vacancy-type" class="mb-1">Type of Vacancy</label><br>
-                        <select class="selectpicker"  data-width="100%" id="vacancy-type">
+                        <select class="selectpicker" data-width="80%" id="vacancy-type">
                             <option th:each="vacancyType : ${allVacanciesTypes}" th:value="${vacancyType.getTypeOfVacancyID()}" th:text="${vacancyType.getTypeOfVacancyName()}"></option>
                         </select>
                     </div>
@@ -118,7 +114,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="occup-code" class="mb-1">Occupational Code</label><br>
-                        <select class="selectpicker"   data-width="100%" id="occup-code">
+                        <select class="selectpicker" data-width="80%" id="occup-code">
                             <option th:each="vacancyOccupationalCode : ${allVacanciesOccupationalCodes}" th:value="${vacancyOccupationalCode.getOccupationalCodeID()}" th:text="${vacancyOccupationalCode.getOccupationalCodeName()}"></option>
                         </select>
                     </div>
@@ -127,7 +123,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="appl-method" class="mb-1">Application Methods</label><br>
-                        <select class="selectpicker"   data-width="100%" id="appl-method">
+                        <select class="selectpicker" data-width="80%" id="appl-method">
                             <option th:each="vacancyApplicationMethods : ${allVacanciesApplicationMethods}" th:value="${vacancyApplicationMethods.getApplicationMethodID()}" th:text="${vacancyApplicationMethods.getApplicationMethodName()}"></option>
                         </select>
                     </div>

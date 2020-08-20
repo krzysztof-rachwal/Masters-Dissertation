@@ -33,6 +33,22 @@ function createNewEvent() {
     var header = $("meta[name='_csrf_header']").attr("content");    // Used to bypass Spring Boot's CSRF protocol
     console.log(fullUri)
 
+    // 1.1. validation
+    let verifier
+    verifier = validateForm($('input[id=vacancy-name]'),$('textarea[id=vacancy-summary]'),$('input[id=start-date]'),$('input[id=closing-date]'),$('input[id=post-code]'));
+    // 1.2. Error Message
+    if(!verifier){
+        $('#failed_message_text').text("The Form was not filled properly.");
+        $('#failed_message').removeClass('d-none').addClass('show');
+        $("#failed_message").fadeTo(1500, 1);
+        setTimeout(function(){
+            $("#failed_message").fadeTo(1500, 0);
+        },5000);
+        return
+    }
+
+
+
     $.ajax({
         type: "GET", url: fullUri,
         beforeSend: function (xhr) {
@@ -49,9 +65,13 @@ function createNewEvent() {
             }
         },
         error: function (data) {
-            alert("FAIL");
-            alert(data.responseText);
-            alert(data.toString());
+            $('#failed_message_text').text("Something went wrong with the submission.");
+            $('#failed_message').removeClass('d-none').addClass('show');
+            $("#failed_message").fadeTo(1500, 1);
+            setTimeout(function(){
+                $("#failed_message").fadeTo(1500, 0);
+            },5000);
+            console.log(data.responseText);
         }
     });
 
@@ -93,6 +113,22 @@ function UpdateThisEvent(){
     var token = $("meta[name='_csrf']").attr("content");    // Used to bypass Spring Boot's CSRF protocol     -- Solution taken from 'https://stackoverflow.com/questions/34747437/use-of-spring-csrf-with-ajax-rest-call-and-html-page-with-thymeleaf' on Nov 26th 2019
     var header = $("meta[name='_csrf_header']").attr("content");    // Used to bypass Spring Boot's CSRF protocol
     console.log(fullUri)
+
+    // 2.1. validation
+    let verifier
+    verifier = validateForm($('input[id=vacancy-name]'),$('textarea[id=vacancy-summary]'),$('input[id=start-date]'),$('input[id=closing-date]'),$('input[id=post-code]'));
+    // 2.2. Error Message
+    if(!verifier){
+        $('#failed_message_text').text("The Form was not filled properly.");
+        $('#failed_message').removeClass('d-none').addClass('show');
+        $("#failed_message").fadeTo(1500, 1);
+        setTimeout(function(){
+            $("#failed_message").fadeTo(1500, 0);
+        },5000);
+        return
+    }
+
+
 
     $.ajax({
         type: "GET", url: fullUri,
@@ -144,10 +180,14 @@ function deleteEvent(eventId) {
             }
         },
         error: function (data) {
-            alert("FAIL");
-            alert(data.responseText);
+            $('#failed_message_text').text("Something went wrong with the submission.");
+            $('#failed_message').removeClass('d-none').addClass('show');
+            $("#failed_message").fadeTo(1500, 1);
+            setTimeout(function(){
+                $("#failed_message").fadeTo(1500, 0);
+            },5000);
+            console.log(data.responseText);
         }
-
     });
 }
 
@@ -293,7 +333,35 @@ if (eventDeleted === "true"){
     localStorage.clear()
 }
 
-//12. Document ready
+//12. Validation Function
+function validateForm(vacancyName,vacancyDescription,startDate,endDate,postCode){
+
+    let verifier = true;
+    let attributesArray = [vacancyName,vacancyDescription,startDate,endDate]
+
+    // 11.1 Remove the Valid/Invalid class
+    $(".form-control").removeClass("is-invalid ").removeClass("is-valid ")
+    $(".selectpicker").removeClass("is-invalid ").removeClass("is-valid ")
+
+    // 11.2 Add The Valid class to all elements
+    $(".form-control").add("is-valid ")
+    $(".selectpicker").add("is-valid ")
+
+    for(let i = 0; i < attributesArray.length; i++){
+        if(attributesArray[i].val()===""){
+            // 11.3 Remove The Valid/Invalid class
+            attributesArray[i].removeClass("is-invalid ").removeClass("is-valid ")
+            // 11.4 Add the Invalid class
+            attributesArray[i].addClass("is-invalid ")
+            console.log(attributesArray[i])
+            verifier = false
+        }
+    }
+    return verifier;
+}
+
+
+//13. Document ready
 $(document).ready(function(){
     $('#filterButton').click(function(){
         filterEvents();
