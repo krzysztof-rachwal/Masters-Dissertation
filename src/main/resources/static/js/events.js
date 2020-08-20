@@ -354,17 +354,36 @@ function validateForm(){
     // 11.2 Add The Valid class to all elements
     $(".selectpicker").add("is-valid ")
 
-    for(let i = 0; i < attributesArray.length; i++){
-        if(attributesArray[i].value===""){
-            // 11.3 Remove The Valid/Invalid class
+        // 11.3 Validate inputs
+        for (let i = 0; i < attributesArray.length; i++) {
+            if (attributesArray[i].value === "") {
+                // 11.3.1 Remove The Valid/Invalid class
+                attributesArray[i].classList.remove("is-invalid")
+                attributesArray[i].classList.remove("is-valid")
+                // 11.3.2 Add the Invalid class
+                attributesArray[i].classList.add("is-invalid")
+                console.log(attributesArray[i])
+                verifier = false
+            } else {
+                // attributesArray[i].classList.add("is-valid")
+            }
+        }
+
+    // 11.4 Change variable data to selectpickers
+    attributesArray = $(".selectpicker")
+
+    //11.5 Validate selectpickers
+    for (let i = 0; i < attributesArray.length; i++) {
+        if (attributesArray[i].value === "") {
+            // 11.5.1 Remove The Valid/Invalid class
             attributesArray[i].classList.remove("is-invalid")
             attributesArray[i].classList.remove("is-valid")
-            // 11.4 Add the Invalid class
-            attributesArray[i].classList.add("is-invalid")
+            // 11.5.2 Add the Invalid class
+            attributesArray[i].parentNode.classList.add("is-invalid")
             console.log(attributesArray[i])
             verifier = false
-        }else{
-            attributesArray[i].classList.add("is-valid")
+        } else {
+            // attributesArray[i].parentNode.classList.add("is-valid")
         }
     }
     return verifier;
