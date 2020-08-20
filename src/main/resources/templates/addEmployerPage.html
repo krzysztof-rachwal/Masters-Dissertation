@@ -54,7 +54,7 @@
 
                 </div>
                 <div class="col-md-6">
-                    <div class="form-group">
+                    <div class="group-input">
                         <label for="employer-employees-number">Number of Employees</label><br>
                         <select id="employer-employees-number">
                             <option  th:each="employerNumberEmployees : ${allEmployerNumberOfEmployees}" th:value="${employerNumberEmployees.getNumberOfEmployeesID()}" th:text="${employerNumberEmployees.getNumberOfEmployeesName()}"></option>
