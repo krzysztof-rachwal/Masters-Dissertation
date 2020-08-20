@@ -415,7 +415,7 @@ function validateForm(){
 
     // 11.1 Remove the Valid/Invalid class
     $(".form-required").removeClass("is-invalid ").removeClass("is-valid ")
-    $(".selectpicker").removeClass("is-invalid ").removeClass("is-valid ")
+    $(".selectpicker").parent().removeClass("is-invalid").removeClass("is-valid ")
 
     // 11.2 Add The Valid class to all elements
     $(".selectpicker").add("is-valid ")
@@ -475,7 +475,19 @@ function validateForm(){
         $("#employer-phone").addClass("is-invalid")
     }
 
-    //11.8 Exception
+
+    // 11.8 Validate Input(PostCode)
+
+    // 11.8.1 Set the RegEx and test it
+    let postCodeVal = /[a-z][a-z]\d\d\s\d[a-z][a-z]|[a-z][a-z]\d\s\d[a-z][a-z]|[a-z]\d\s\d[a-z][a-z]|[a-z][a-z]\d[a-z]\s\d[a-z][a-z]|[a-z]\d\d\s\d[a-z][a-z]/i.test($("#employer-postcode").val());
+    // let postCodeVal = postCodeValidation.test($("#employer-postcode").val());
+    // 11.8.2 Verify if it's needed to put an invalid class
+    if(!postCodeVal){
+        $("#employer-postcode").removeClass("is-invalid").removeClass("is-valid")
+        $("#employer-postcode").addClass("is-invalid")
+    }
+
+    //11.9 Exception
     $('select[name=create-employer-alumni-school]').parent().removeClass("is-invalid");
     return verifier;
 }

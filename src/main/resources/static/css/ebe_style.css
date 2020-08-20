@@ -189,3 +189,11 @@ ul{
     align-items: stretch;
     width: 80%;
 }
+
+.text-area-w-80{
+    width:80% !important;
+}
+
+.search-box{
+    border: solid 1px gainsboro !important;
+}

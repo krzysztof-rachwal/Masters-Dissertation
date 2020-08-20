@@ -345,7 +345,7 @@ function validateForm(){
 
     // 11.1 Remove the Valid/Invalid class
     $(".form-required").removeClass("is-invalid ").removeClass("is-valid ")
-    $(".selectpicker").removeClass("is-invalid ").removeClass("is-valid ")
+    $(".selectpicker").parent().removeClass("is-invalid").removeClass("is-valid ")
 
     // 11.2 Add The Valid class to all elements
     $(".selectpicker").add("is-valid ")
@@ -381,6 +381,17 @@ function validateForm(){
         } else {
             // attributesArray[i].parentNode.classList.add("is-valid")
         }
+    }
+
+    // 11.6 Validate Input(PostCode)
+
+    // 11.6.1 Set the RegEx and test it
+    let postCodeVal = /[a-z][a-z]\d\d\s\d[a-z][a-z]|[a-z][a-z]\d\s\d[a-z][a-z]|[a-z]\d\s\d[a-z][a-z]|[a-z][a-z]\d[a-z]\s\d[a-z][a-z]|[a-z]\d\d\s\d[a-z][a-z]/i.test($("#event-postcode").val());
+    // let postCodeVal = postCodeValidation.test($("#employer-postcode").val());
+    // 11.6.2 Verify if it's needed to put an invalid class
+    if(!postCodeVal){
+        $("#event-postcode").removeClass("is-invalid").removeClass("is-valid")
+        $("#event-postcode").addClass("is-invalid")
     }
     return verifier;
 }

@@ -314,7 +314,7 @@ function validateForm(){
 
     // 11.1 Remove the Valid/Invalid class
     $(".form-required").removeClass("is-invalid ").removeClass("is-valid ")
-    $(".selectpicker").removeClass("is-invalid ").removeClass("is-valid ")
+    $(".selectpicker").parent().removeClass("is-invalid").removeClass("is-valid ")
 
     // 11.2 Add The Valid class to all elements
     $(".selectpicker").add("is-valid ")
