@@ -128,7 +128,6 @@ function UpdateThisVacancy() {
                 $("#failed_message").fadeTo(1500, 0);
             },5000);
             console.log(data.responseText);
-
         }
     });
 

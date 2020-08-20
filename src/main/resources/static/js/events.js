@@ -35,7 +35,7 @@ function createNewEvent() {
 
     // 1.1. validation
     let verifier
-    verifier = validateForm($('input[id=vacancy-name]'),$('textarea[id=vacancy-summary]'),$('input[id=start-date]'),$('input[id=closing-date]'),$('input[id=post-code]'));
+    verifier = validateForm();
     // 1.2. Error Message
     if(!verifier){
         $('#failed_message_text').text("The Form was not filled properly.");
@@ -116,7 +116,7 @@ function UpdateThisEvent(){
 
     // 2.1. validation
     let verifier
-    verifier = validateForm($('input[id=vacancy-name]'),$('textarea[id=vacancy-summary]'),$('input[id=start-date]'),$('input[id=closing-date]'),$('input[id=post-code]'));
+    verifier = validateForm();
     // 2.2. Error Message
     if(!verifier){
         $('#failed_message_text').text("The Form was not filled properly.");
@@ -147,9 +147,13 @@ function UpdateThisEvent(){
             }
         },
         error: function (data) {
-            alert("FAIL");
-            alert(data.responseText);
-            alert(data.toString());
+            $('#failed_message_text').text("Something went wrong with the submission.");
+            $('#failed_message').removeClass('d-none').addClass('show');
+            $("#failed_message").fadeTo(1500, 1);
+            setTimeout(function(){
+                $("#failed_message").fadeTo(1500, 0);
+            },5000);
+            console.log(data.responseText);
         }
     });
 }
@@ -242,9 +246,13 @@ function sortEventsByNameAndDate(type, order) {
             sortEvents(data);
         },
         error: function (data) {
-            alert("FAIL");
-            alert(data.responseText);
-            alert(data.toString());
+            $('#failed_message_text').text("Something went wrong with the submission.");
+            $('#failed_message').removeClass('d-none').addClass('show');
+            $("#failed_message").fadeTo(1500, 1);
+            setTimeout(function(){
+                $("#failed_message").fadeTo(1500, 0);
+            },5000);
+            console.log(data.responseText);
         }
     });
 }
@@ -334,27 +342,29 @@ if (eventDeleted === "true"){
 }
 
 //12. Validation Function
-function validateForm(vacancyName,vacancyDescription,startDate,endDate,postCode){
+function validateForm(){
 
     let verifier = true;
-    let attributesArray = [vacancyName,vacancyDescription,startDate,endDate]
+    let attributesArray = $(".form-required")
 
     // 11.1 Remove the Valid/Invalid class
-    $(".form-control").removeClass("is-invalid ").removeClass("is-valid ")
+    $(".form-required").removeClass("is-invalid ").removeClass("is-valid ")
     $(".selectpicker").removeClass("is-invalid ").removeClass("is-valid ")
 
     // 11.2 Add The Valid class to all elements
-    $(".form-control").add("is-valid ")
     $(".selectpicker").add("is-valid ")
 
     for(let i = 0; i < attributesArray.length; i++){
-        if(attributesArray[i].val()===""){
+        if(attributesArray[i].value===""){
             // 11.3 Remove The Valid/Invalid class
-            attributesArray[i].removeClass("is-invalid ").removeClass("is-valid ")
+            attributesArray[i].classList.remove("is-invalid")
+            attributesArray[i].classList.remove("is-valid")
             // 11.4 Add the Invalid class
-            attributesArray[i].addClass("is-invalid ")
+            attributesArray[i].classList.add("is-invalid")
             console.log(attributesArray[i])
             verifier = false
+        }else{
+            attributesArray[i].classList.add("is-valid")
         }
     }
     return verifier;
