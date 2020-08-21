@@ -386,6 +386,7 @@ function hideEmployers(ids){
 empAdded = localStorage.getItem("empAdded");
 
 if (empAdded === "true"){
+    $('#success_message_text').text(' The employer profile was created!');
     $('#success_message').removeClass('d-none').addClass('show');
     $("#success_message").fadeTo(1500, 1);
     setTimeout(function(){
@@ -398,7 +399,7 @@ if (empAdded === "true"){
 employerDeleted = localStorage.getItem("employerDeleted");
 
 if (employerDeleted === "true"){
-    document.getElementById('success_message').innerHTML = 'The employer is deleted!'
+    $('#success_message_text').text(' The employer profile is deleted!');
     $('#success_message').removeClass('d-none').addClass('show');
     $("#success_message").fadeTo(1500, 1);
     setTimeout(function(){
@@ -428,10 +429,6 @@ function validateForm(){
             attributesArray[i].classList.remove("is-valid")
             // 11.3.2 Add the Invalid class
             attributesArray[i].classList.add("is-invalid")
-            console.log(attributesArray[i])
-            verifier = false
-        } else {
-            // attributesArray[i].classList.add("is-valid")
         }
     }
 
@@ -446,9 +443,6 @@ function validateForm(){
             attributesArray[i].classList.remove("is-valid")
             // 11.5.2 Add the Invalid class
             attributesArray[i].parentNode.classList.add("is-invalid")
-            verifier = false
-        } else {
-            // attributesArray[i].parentNode.classList.add("is-valid")
         }
     }
 
@@ -489,6 +483,13 @@ function validateForm(){
 
     //11.9 Exception
     $('select[name=create-employer-alumni-school]').parent().removeClass("is-invalid");
+    $('select[id=employer-language]').parent().removeClass("is-invalid");
+
+    //11.10 Verify if there is any invalid class
+    if($(".selectpicker").parent().hasClass("is-invalid") || $(".form-required").hasClass("is-invalid")){
+        verifier = false
+    }
+
     return verifier;
 }
 
