@@ -48,7 +48,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="event-type">Event Type</label><br>
-                        <select class="selectpicker" data-width="80%" data-live-search="true" id="event-type">
+                        <select class="selectpicker" data-width="80%" data-live-search="true" id="event-type" title="Nothing selected" >
                             <option  th:each="event : ${allEventTypes}" th:value="${event.getTypeOfEventID()}" th:text="${event.getTypeOfEventName()}"></option>
                         </select>
                     </div>
@@ -123,7 +123,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>Can the event be conducted in Welsh?</label>
-                        <select  id="conducted-welsh" class="selectpicker"  data-width="80%">
+                        <select  id="conducted-welsh" class="selectpicker" title="Nothing selected"  data-width="80%">
                             <option value="1">Yes</option>
                             <option value="0">No</option>
                         </select>
@@ -133,7 +133,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>Does the event promote apprenticeship?</label>
-                        <select id="promote-apprenticheship" class="selectpicker"  data-width="80%">
+                        <select id="promote-apprenticheship" class="selectpicker" title="Nothing selected"  data-width="80%">
                             <option value="1">Yes</option>
                             <option value="0">No</option>
                         </select>
@@ -142,7 +142,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>Does the event challenger gender stereotypes?</label>
-                        <select  id="challenger-gender" class="selectpicker"  data-width="80%">
+                        <select  id="challenger-gender" class="selectpicker" title="Nothing selected"  data-width="80%">
                             <option value="1">Yes</option>
                             <option value="0">No</option>
                         </select>
@@ -151,7 +151,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>Is the Event going to be Public?</label>
-                        <select  id="event-public" class="selectpicker"  data-width="80%">
+                        <select  id="event-public" class="selectpicker"  title="Nothing selected" data-width="80%">
                             <option value="1">Yes</option>
                             <option value="0">No</option>
                         </select>
@@ -160,7 +160,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>Is the Event Cancelled?</label>
-                        <select  id="event-cancelled" class="selectpicker"  data-width="80%">
+                        <select  id="event-cancelled" class="selectpicker" title="Nothing selected" data-width="80%">
                             <option value="1">Yes</option>
                             <option value="0">No</option>
                         </select>

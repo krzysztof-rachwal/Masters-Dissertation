@@ -56,7 +56,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="employer-employees-number">Number of Employees</label><br>
-                        <select id="employer-employees-number"  data-width="80%" class="selectpicker">
+                        <select id="employer-employees-number"  data-width="80%" class="selectpicker" title="Nothing selected">
                             <option  th:each="employerNumberEmployees : ${allEmployerNumberOfEmployees}" th:value="${employerNumberEmployees.getNumberOfEmployeesID()}" th:text="${employerNumberEmployees.getNumberOfEmployeesName()}"></option>
                         </select>
                     </div>
@@ -156,8 +156,8 @@
                 </div>
                 <div class="col-md-6 mb-4 d-none" id="div-foreign-language">
                     <label for="employer-language">Which Foreign Language?</label><br>
-                    <select class="selectpicker" data-width="80%" multiple id="employer-language">
-                        <option  th:each="employerLanguage : ${allEmployerLanguage}" th:value="${employerLanguage.getEmployerLanguageID()}" th:text="${employerLanguage.getEmployerLanguageName()}"></option>
+                    <select class="selectpicker" data-width="80%" multiple id="employer-language" >
+                        <option th:each="employerLanguage : ${allEmployerLanguage}" th:value="${employerLanguage.getEmployerLanguageID()}" th:text="${employerLanguage.getEmployerLanguageName()}"></option>
                     </select>
                 </div>
 
@@ -168,7 +168,7 @@
 
                 <div class="col-md-6 mb-4" >
                     <label for="employer-status">Employer Status</label>
-                    <select class="selectpicker" data-width="80%" id="employer-status">
+                    <select class="selectpicker" data-width="80%" id="employer-status" title="Nothing selected">
                         <option  th:each="employerStatus : ${allEmployerStatus}" th:value="${employerStatus.getStatusOfEmployerID()}" th:text="${employerStatus.getStatusOfEmployerName()}"></option>
                     </select>
                 </div>
