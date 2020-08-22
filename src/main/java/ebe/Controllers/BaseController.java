@@ -20,9 +20,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static java.lang.Integer.parseInt;
+
 @Controller
 public class BaseController {
 
+    private AuthorisationQueries AuthorisationQrys;
     private EmployerQueries EmployerQrys;
     private EventQueries EventQrys;
     private SchoolQueries SchoolQrys;
@@ -30,12 +33,13 @@ public class BaseController {
     private StatisticsQueries statisticsQueries;
 
     @Autowired
-    public BaseController(EmployerQueries em, EventQueries ev, SchoolQueries sc, VacancyQueries va, StatisticsQueries sq){
+    public BaseController(EmployerQueries em, EventQueries ev, SchoolQueries sc, VacancyQueries va, StatisticsQueries sq, AuthorisationQueries aq){
         EmployerQrys = em;
         EventQrys = ev;
         SchoolQrys = sc;
         VacancyQrys = va;
         statisticsQueries = sq;
+        AuthorisationQrys = aq;
     }
 
     @Autowired
@@ -48,28 +52,57 @@ public class BaseController {
 
     // HomePage
     @GetMapping("/")
-    public ModelAndView HomePage( @AuthenticationPrincipal(expression = "claims['email']") String email,
+    public ModelAndView HomePage( HttpServletRequest request,
+                                  HttpSession session,
+                                  @AuthenticationPrincipal(expression = "claims['email']") String email,
                                   @AuthenticationPrincipal(expression = "claims['name']") String name) {
+
         ModelAndView mv = new ModelAndView();
 
-        mv.setViewName("homepageCWS");
+        //Get The Email and Name of the User
+        request.getSession().setAttribute("SESSION_Name", name);
+        request.getSession().setAttribute("SESSION_Email", email);
 
-        System.out.println(email);
-        System.out.println(name);
+        //With the Email Get the Role of the User
+        String role;
+        System.out.println("---------------------------squi");
+        role = AuthorisationQrys.getUserRoleCWS(email);
+        System.out.println(role);
 
-        int numberOfEvents = statisticsQueries.getTotalEvents();
-        int numberOfVacancies = statisticsQueries.getTotalVacancies();
-        int numberOfPupils = statisticsQueries.getTotalPupils();
-        int numberOfEmployers = statisticsQueries.getTotalEmployers();
-        int schoolAtEvents = statisticsQueries.getSchoolsAtEvents();
-        int requestsBySchools = statisticsQueries.getRequestsBySchools();
+        if(role == "none"){
+            role = AuthorisationQrys.getUserRoleTeacher(email,request);
+            String a =  session.getAttribute("SESSION_UserID").toString();
+            System.out.println("ISto: " + a);
+        }
+        System.out.println(role);
 
-        mv.addObject("numberOfEvents",numberOfEvents);
-        mv.addObject("numberOfEmployers",numberOfEmployers);
-        mv.addObject("numberOfVacancies",numberOfVacancies);
-        mv.addObject("numberOfPupils",numberOfPupils);
-        mv.addObject("schoolAtEvents",schoolAtEvents);
-        mv.addObject("requestsBySchools",requestsBySchools);
+        request.getSession().setAttribute("SESSION_Role", role);
+
+        if(role == "CWS") {
+            mv.setViewName("homepageCWS");
+
+            int numberOfEvents = statisticsQueries.getTotalEvents();
+            int numberOfVacancies = statisticsQueries.getTotalVacancies();
+            int numberOfPupils = statisticsQueries.getTotalPupils();
+            int numberOfEmployers = statisticsQueries.getTotalEmployers();
+            int schoolAtEvents = statisticsQueries.getSchoolsAtEvents();
+            int requestsBySchools = statisticsQueries.getRequestsBySchools();
+
+            mv.addObject("numberOfEvents", numberOfEvents);
+            mv.addObject("numberOfEmployers", numberOfEmployers);
+            mv.addObject("numberOfVacancies", numberOfVacancies);
+            mv.addObject("numberOfPupils", numberOfPupils);
+            mv.addObject("schoolAtEvents", schoolAtEvents);
+            mv.addObject("requestsBySchools", requestsBySchools);
+        }
+
+
+        //using a random schoolID as we will have to get it from authorization level
+        if(role == "Teacher"){
+            mv.setViewName("homepageTeacher");
+            List<Event> recommendedEvents = statisticsQueries.getEventsForSchool(parseInt(session.getAttribute("SESSION_UserID").toString()));
+            mv.addObject("recommendedEvents",recommendedEvents);
+        }
 
         return mv;
     };
@@ -513,39 +546,35 @@ public class BaseController {
     }
 
 
-    //    13. CWS home page
-    @GetMapping("/homecws")
-    public ModelAndView homeCWS(){
-        ModelAndView mv = new ModelAndView();
-        mv.setViewName("homepageCWS");
-
-        int numberOfEvents = statisticsQueries.getTotalEvents();
-        int numberOfVacancies = statisticsQueries.getTotalVacancies();
-        int numberOfPupils = statisticsQueries.getTotalPupils();
-        int numberOfEmployers = statisticsQueries.getTotalEmployers();
-        int schoolAtEvents = statisticsQueries.getSchoolsAtEvents();
-        int requestsBySchools = statisticsQueries.getRequestsBySchools();
-
-        mv.addObject("numberOfEvents",numberOfEvents);
-        mv.addObject("numberOfEmployers",numberOfEmployers);
-        mv.addObject("numberOfVacancies",numberOfVacancies);
-        mv.addObject("numberOfPupils",numberOfPupils);
-        mv.addObject("schoolAtEvents",schoolAtEvents);
-        mv.addObject("requestsBySchools",requestsBySchools);
-
-        return mv;
-    }
-
-    @GetMapping("/homeTeacher")
-    public ModelAndView homeTeach(){
-        ModelAndView mv = new ModelAndView();
-        mv.setViewName("homepageTeacher");
-        //using a random schoolID as we will have to get it from authorization level
-        List<Event> recommendedEvents = statisticsQueries.getEventsForSchool(5);
-
-        mv.addObject("recommendedEvents",recommendedEvents);
-        return mv;
-    }
+//    //    13. CWS home page
+//    @GetMapping("/homecws")
+//    public ModelAndView homeCWS(){
+//        ModelAndView mv = new ModelAndView();
+//        mv.setViewName("homepageCWS");
+//
+//        int numberOfEvents = statisticsQueries.getTotalEvents();
+//        int numberOfVacancies = statisticsQueries.getTotalVacancies();
+//        int numberOfPupils = statisticsQueries.getTotalPupils();
+//        int numberOfEmployers = statisticsQueries.getTotalEmployers();
+//        int schoolAtEvents = statisticsQueries.getSchoolsAtEvents();
+//        int requestsBySchools = statisticsQueries.getRequestsBySchools();
+//
+//        mv.addObject("numberOfEvents",numberOfEvents);
+//        mv.addObject("numberOfEmployers",numberOfEmployers);
+//        mv.addObject("numberOfVacancies",numberOfVacancies);
+//        mv.addObject("numberOfPupils",numberOfPupils);
+//        mv.addObject("schoolAtEvents",schoolAtEvents);
+//        mv.addObject("requestsBySchools",requestsBySchools);
+//
+//        return mv;
+//    }
+//
+//    @GetMapping("/homeTeacher")
+//    public ModelAndView homeTeach(){
+//        ModelAndView mv = new ModelAndView();
+//
+//        return mv;
+//    }
 
     @GetMapping("/error")
     public RedirectView ErrorPage() {
