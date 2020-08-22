@@ -7,6 +7,7 @@ import ebe.DBClasses.School;
 import ebe.DBClasses.Vacancy;
 import ebe.DBMethods.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
@@ -40,12 +41,21 @@ public class BaseController {
     @Autowired
     private HttpServletRequest context; // this will provide the current instance of HttpServletRequest
 
+//    @GetMapping("/test")
+//    public String test (){
+//        return "redirect:/";
+//    }
 
     // HomePage
     @GetMapping("/")
-    public ModelAndView HomePage(HttpSession session) {
+    public ModelAndView HomePage( @AuthenticationPrincipal(expression = "claims['email']") String email,
+                                  @AuthenticationPrincipal(expression = "claims['name']") String name) {
         ModelAndView mv = new ModelAndView();
+
         mv.setViewName("homepageCWS");
+
+        System.out.println(email);
+        System.out.println(name);
 
         int numberOfEvents = statisticsQueries.getTotalEvents();
         int numberOfVacancies = statisticsQueries.getTotalVacancies();
