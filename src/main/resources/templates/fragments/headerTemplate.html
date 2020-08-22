@@ -70,27 +70,27 @@
         <div class="nav__content">
             <ul>
                 <li>
-                    <a href="/homecws">Home</a>
+                    <a href="/">Home</a>
                 </li>
                 <li>
                     <a href="/employers">Employers</a>
                 </li>
-                <li>
+                <li th:if="${session.SESSION_Role =='CWS'}">
                     <a href="/vacancies">Vacancies</a>
                 </li>
-                <li>
+                <li th:if="${session.SESSION_Role =='CWS'}">
                     <a href="/events">Events</a>
                 </li>
-                <li>
+                <li th:if="${session.SESSION_Role  =='Teacher'}">
                     <a href="/request">Requests</a>
                 </li>
-                <li>
+                <li th:if="${session.SESSION_Role =='CWS'}">
                     <a href="/report">Report</a>
                 </li>
-                <li>
+                <li th:if="${session.SESSION_Role =='Teacher'}" >
                     <a href="/contact-us">Get in Touch</a>
                 </li>
-                <li>
+                <li class="float-right">
                     <a href="https://login.microsoftonline.com/bdb74b30-9568-4856-bdbf-06759778fcbc/oauth2/v2.0/logout">Logout</a>
                 </li>
             </ul>
