@@ -2,21 +2,27 @@ package ebe.Controllers;
 
 import ebe.API.EmailAPI;
 import ebe.Classes.Email;
+import ebe.Classes.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
+import javax.mail.MessagingException;
 
 @Controller
 public class EmailController {
     @Autowired
     private EmailAPI emailAPI;
 
-    @PostMapping("/sendemail")
-    public String greetingSubmit(@ModelAttribute Email email) {
+    @PostMapping("/contactUsEmail")
+    public String contactUsSubmit(@ModelAttribute Email email) {
         emailAPI.sendMail(email.getEmail(), email.getSubject(), email.getMessage());
         return "contactUsPage";
     }
+
+    @PostMapping("/requestEmail")
+    public String requestSubmit(@ModelAttribute Request request) throws MessagingException {
+        emailAPI.sendRequest(request.getEventName(), request.getEventDate(), request.getEventTime(), request.getEventNotes(), request.getEventType(), request.getGuests());
+        return "requestPage";
+    }
+
 }

@@ -2,8 +2,8 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
-    <meta id="_csrf" name="_csrf" th:content="${_csrf.token}"/>
-    <meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}"/>
+<!--    <meta id="_csrf" name="_csrf" th:content="${_csrf.token}"/>-->
+<!--    <meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}"/>-->
     <link rel="stylesheet" type="text/css" href="https://use.fortawesome.com/kits/747c3a74/publications/latest/eot.css">
     <link rel="stylesheet" type="text/css"
           href="https://use.fortawesome.com/kits/747c3a74/publications/latest/woff.css">
@@ -26,30 +26,23 @@
 
 <header>
 
+</header>
+
+<div>
+<p th:text="${eventNotes}"> CHuj CHuj CHuj</p> <!--th:text="${request.getEventNotes()}"-->
+</div>
+
+
+<footer>
     <div class="branded-masthead js-branded-masthead">
         <div class="branded-masthead__content">
             <div class="content__logos">
-                <a href="#" class="ignore-link" title="Careers Wales home">
+                <a href="https://careerswales.gov.wales/" class="ignore-link" title="Careers Wales home">
                     <img class="content--logo logo--mob-en" src="https://careerswales.gov.wales/styleguide/assets/img/logos/cw-logo-mob-en.svg" role="presentation" alt="">
-                    <img class="content--logo logo--mob-cy" src="https://careerswales.gov.wales/styleguide/assets/img/logos/cw-logo-mob-cy.svg" role="presentation" alt="">
-                    <img class="content--logo" src="https://careerswales.gov.wales/styleguide/assets/img/logos/cw-logo.svg" role="presentation" alt="">
-                    <span class="visually-hidden">Careers Wales home</span>
                 </a>
             </div>
         </div>
     </div>
-
-</header>
-
-<p>
-<!--TODO: link this template with controller.
-    TODO: get data from contact us page.
-    TODO: create JS popup message that email has been sent.
-    TODO: configure it in such a way that this template will be a confirmation email for sender. CWS can receive generic email. -->
-</p>
-
-
-<footer>
     <div class="footer__content">
         <div class="content__social">
             <div class="social__content">
@@ -78,12 +71,6 @@
 <script type="text/javascript" src="https://careerswales.gov.wales/styleguide/assets/js/gel-styleguide.js"></script>
 <script type="text/javascript" src="https://careerswales.gov.wales/styleguide/assets/js/gel-elements-loader.js"></script>
 <script type="text/javascript" src="https://careerswales.gov.wales/styleguide/assets/js/gel-elements.js"></script>
-<script th:src="@{../js/events.js}" src="../js/events.js"></script>
 
-<script>
-    $(document).ready(function () {
-        $('.js-example-basic-multiple').select2();
-    });
-</script>
 </body>
 </html>
