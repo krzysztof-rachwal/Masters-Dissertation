@@ -15,7 +15,7 @@ public class EmailController {
 
     @PostMapping("/contactUsEmail")
     public String contactUsSubmit(@ModelAttribute Email email) {
-        emailAPI.sendMail(email.getEmail(), email.getSubject(), email.getMessage());
+        emailAPI.sendMail(email.getName(), email.getEmail(), email.getPostcode(), email.getSubject(), email.getMessage());
         return "contactUsPage";
     }
 

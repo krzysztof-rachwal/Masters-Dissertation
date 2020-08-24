@@ -29,7 +29,11 @@
 </header>
 
 <div>
-<p th:text="${eventNotes}"> CHuj CHuj CHuj</p> <!--th:text="${request.getEventNotes()}"-->
+<p th:text="${eventNotes}"></p> <!--th:text="${request.getEventNotes()}"-->
+    <p th:text="${eventType}"></p>
+    <p th:text="${eventDate}"></p>
+    <p th:text="${eventTime}"></p>
+    <p th:text="${guests}"></p>
 </div>
 
 
@@ -38,7 +42,7 @@
         <div class="branded-masthead__content">
             <div class="content__logos">
                 <a href="https://careerswales.gov.wales/" class="ignore-link" title="Careers Wales home">
-                    <img class="content--logo logo--mob-en" src="https://careerswales.gov.wales/styleguide/assets/img/logos/cw-logo-mob-en.svg" role="presentation" alt="">
+                    <img class="content--logo logo--mob-en" src="https://careerswales.gov.wales/styleguide/assets/img/logos/cw-logo-mob-en.svg" role="presentation" width="600px" height="300px" alt="">
                 </a>
             </div>
         </div>
