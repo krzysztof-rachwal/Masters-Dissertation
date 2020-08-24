@@ -40,54 +40,63 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
+
+                    <div class="row mb-4">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="vacancy-name">Vacancy Name</label>
-                                <input type="text" class="form-control input-border" id="vacancy-name" th:value="${vacancy.getVacancyName()}">
+                                <input type="text" class="form-control form-required" id="vacancy-name" th:value="${vacancy.getVacancyName()}">
                                 <input type="hidden" id="vacancy-old-name" th:value="${vacancy.getVacancyName()}"/>
                             </div>
                         </div>
+
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="employer-name" class="mb-1">Employer Name</label><br>
-                                <select class="selectpicker" data-live-search="true" id="employer-name">
+                                <select class="selectpicker" data-width="80%" data-live-search="true" id="employer-name">
                                     <option  th:each="employer : ${AllEmployerNamesAndIds}" th:selected="${employer.getEmployerName()} ==  ${vacancyEmployerName.getEmployerName()}" th:value="${employer.getEmployerID()}" th:text="${employer.getEmployerName()}"></option>
                                 </select>
                             </div>
                         </div>
+                    </div>
 
-                        <div class="col-md-12">
+                    <div class="row mb-4">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label for="vacancy-summary" class="mb-1">Vacancy Description</label>
-                                <textarea class="d-block mt-2 border-0" id="vacancy-summary" rows="5" th:text="${vacancy.getVacancySummary()}"></textarea>
+                                <textarea class="form-control form-required text-area-w-80" id="vacancy-summary" rows="5" th:text="${vacancy.getVacancySummary()}"></textarea>
                             </div>
                         </div>
+
                         <div class="col-md-6">
-                            <div class="form-group">
+                            <div class="form-group pb-3">
                                 <label for="web-link" class="mb-1">Link to website</label>
-                                <input type="text" class="form-control input-border" id="web-link" th:value="${vacancy.getVacancyLink()}">
+                                <input type="text" class="form-control w-80" id="web-link" th:value="${vacancy.getVacancyLink()}">
                             </div>
-                        </div>
-                        <div class="col-md-6">
                             <div class="form-group">
                                 <label for="post-code" class="mb-1">Post Code</label>
-                                <input type="text" class="form-control input-border" id="post-code" th:value="${vacancy.getVacancyPostcode()}">
+                                <input type="text" class="form-control form-required w-80" id="post-code" th:value="${vacancy.getVacancyPostcode()}">
                                 <input type="hidden" id="old-post-code" th:value="${vacancy.getVacancyPostcode()}"/>
                             </div>
                         </div>
+                    </div>
+
+                    <div class="row mb-4">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="start-date" class="mb-1">Start Date</label>
-                                <input type="date" class="form-control input-border" id="start-date" th:value="${vacancy.getStartOfVacancy()}">
+                                <input type="date" class="form-control form-required w-80" id="start-date" th:value="${vacancy.getStartOfVacancy()}">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="closing-date" class="mb-1">Closing Date</label>
-                                <input type="date" class="form-control input-border" id="closing-date" th:value="${vacancy.getDeadlineForApplication()}">
+                                <input type="date" class="form-control form-required w-80" id="closing-date" th:value="${vacancy.getDeadlineForApplication()}">
                             </div>
                         </div>
+                    </div>
+
+                    <div class="row mb-4">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="vacancy-type" class="mb-1">Type of Vacancy</label>
@@ -104,6 +113,7 @@
                                 </select>
                             </div>
                         </div>
+
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="appl-method" class="mb-1">Application methods</label>
@@ -112,6 +122,7 @@
                                 </select>
                             </div>
                         </div>
+
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="vacancy-type" class=" mb-1">Status of Vacancy</label>
@@ -120,11 +131,12 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="container my-4 text-center">
-                            <button type="button" class="button--secondary text-center" onclick="UpdateThisVacancy()">Update Vacancy</button>
-                        </div>
                     </div>
-                </form>
+
+                    <div class="container my-4 text-center">
+                        <button type="button" class="button--secondary text-center" onclick="UpdateThisVacancy()">Update Vacancy</button>
+                    </div>
+            </form>
 
 
             </div>
@@ -152,12 +164,22 @@
 </div>
 
 <div class="gel-content-container">
+    <!-- Success Message    -->
     <div id="success_message" class="alert alert-success alert-dismissible fade d-none" role="alert">
-        <strong>Success!</strong> The vacancy has been updated!
+        <strong>Success!</strong> <span id="success_message_text"></span> The vacancy has been updated!
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
+
+    <!-- Failed Message    -->
+    <div id="failed_message" class="alert alert-danger alert-dismissible fade d-none" role="alert">
+        <strong>Failed!</strong> <span id="failed_message_text"></span>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
     <div class="container-headline my-5">
         <span class="title-h2" th:text="${vacancy.getVacancyName()}"></span>
         <button type="button"  id="deleteEvent"  data-toggle="modal" data-target="#deleteModal" class="buttonDelete float-right">Delete</button>
@@ -170,7 +192,7 @@
                 <p><strong>Employer name</strong></p>
             </div>
             <div class="col-lg-9">
-                <p th:text="${vacancyEmployerName.getEmployerName()}"></p>
+                <a th:text="${vacancyEmployerName.getEmployerName()}" th:href="@{/profile-employer(employerId=${vacancy.getEmployerID()})}"></a>
             </div>
         </div>
         <div class="row">
@@ -202,7 +224,7 @@
                 <p><strong>Start date</strong></p>
             </div>
             <div class="col-lg-9">
-                <p th:text="${vacancy.getStartOfVacancy()}"></p>
+                <p th:text="${#dates.format(vacancy.getStartOfVacancy(),'dd-MM-yyyy')}"></p>
             </div>
         </div>
         <div class="row">
@@ -210,7 +232,7 @@
                 <p><strong>Closing date</strong></p>
             </div>
             <div class="col-lg-9">
-                <p th:text="${vacancy.getDeadlineForApplication()}"></p>
+                <p th:text="${#dates.format(vacancy.getDeadlineForApplication(),'dd-MM-yyyy')}"></p>
 
             </div>
         </div>

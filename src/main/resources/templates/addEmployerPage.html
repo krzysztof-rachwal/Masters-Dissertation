@@ -28,6 +28,14 @@
     <div class="container my-4">
         <h2>Add Employer</h2>
     </div>
+
+    <div id="failed_message" class="alert alert-danger alert-dismissible fade d-none" role="alert">
+        <strong>Failed!</strong> <span id="failed_message_text"></span>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
     <form>
         <div class="container-fluid">
             <div class="row">
@@ -37,30 +45,31 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="company-name">Company Name</label>
-                        <input type="text" class="form-control input-border" id="company-name">
+                        <input type="text" class="form-control form-required" id="company-name">
                     </div>
                     <div class="form-group">
                         <label for="company-summary">Company Summary</label>
-                        <textarea class="input-border"  rows="3" id="company-summary"></textarea>
+                        <textarea class="form-control form-required text-area-w-80"  rows="3" id="company-summary"></textarea>
                     </div>
 
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="employer-employees-number">Number of Employees</label><br>
-                        <select id="employer-employees-number">
+                        <select id="employer-employees-number"  data-width="80%" class="selectpicker" title="Nothing selected">
                             <option  th:each="employerNumberEmployees : ${allEmployerNumberOfEmployees}" th:value="${employerNumberEmployees.getNumberOfEmployeesID()}" th:text="${employerNumberEmployees.getNumberOfEmployeesName()}"></option>
                         </select>
                     </div>
+
                     <label>Address</label>
-                    <div class="input-group">
+                    <div class="group-input">
                         <div class="input-group-prepend">
-                            <input type="text" id="employer-street" class="form-control border-right input-sm" placeholder="Street">
-                            <input type="text" id="employer-number" class="form-control" placeholder="Building No">
+                            <input type="text" id="employer-street" class="form-control border-right input-sm form-required w-80" placeholder="Street">
+                            <input type="text" id="employer-number" class="form-control form-required w-80" placeholder="Building No">
                         </div>
                         <div class="input-group-prepend mt-1">
-                            <input type="text" id="employer-postcode" class="form-control border-right" placeholder="Post Code">
-                            <input type="text" id="employer-city" class="form-control" placeholder="City">
+                            <input type="text" id="employer-postcode" class="form-control border-right form-required w-80" placeholder="Post Code">
+                            <input type="text" id="employer-city" class="form-control form-required w-80" placeholder="City">
                         </div>
                     </div>
                 </div>
@@ -72,15 +81,15 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="contact-name">Contact Name</label>
-                        <input type="text" class="form-control input-border" id="contact-name">
+                        <input type="text" class="form-control form-required" id="contact-name">
                     </div>
                     <div class="form-group">
                         <label for="contact-position">Contact Position</label>
-                        <input type="text" class="form-control input-border" id="contact-position">
+                        <input type="text" class="form-control form-required" id="contact-position">
                     </div>
                     <div class="form-group">
                         <label for="employer-phone">Phone Number</label>
-                        <input type="text" class="form-control input-border" id="employer-phone">
+                        <input type="text" class="form-control form-required" id="employer-phone">
                     </div>
 <!--                    <div class="form-group">-->
 <!--                        <label for="mob-num">Mobile number</label>-->
@@ -88,7 +97,7 @@
 <!--                    </div>-->
                     <div class="form-group">
                         <label for="employer-email">Email</label>
-                        <input type="text" class="form-control input-border" id="employer-email">
+                        <input type="text" class="form-control form-required" id="employer-email">
                     </div>
                 </div>
 
@@ -114,7 +123,7 @@
                 </div>
                 <div class="col-md-6">
                     <label for="industry-sector">Sector Areas</label><br>
-                    <select id="industry-sector"  data-width="80%" class="selectpicker" multiple data-live-search="true">
+                    <select id="industry-sector" data-width="80%" class="selectpicker" multiple data-live-search="true">
                         <option th:each="employerIndustrySector : ${allEmployerIndustrySectors}" th:value="${employerIndustrySector.getEmployerIndustrySectorID()}" th:text="${employerIndustrySector.getEmployerIndustrySectorName()}"></option>
                     </select>
                 </div>
@@ -147,8 +156,8 @@
                 </div>
                 <div class="col-md-6 mb-4 d-none" id="div-foreign-language">
                     <label for="employer-language">Which Foreign Language?</label><br>
-                    <select class="selectpicker" data-width="80%" multiple id="employer-language">
-                        <option  th:each="employerLanguage : ${allEmployerLanguage}" th:value="${employerLanguage.getEmployerLanguageID()}" th:text="${employerLanguage.getEmployerLanguageName()}"></option>
+                    <select class="selectpicker" data-width="80%" multiple id="employer-language" >
+                        <option th:each="employerLanguage : ${allEmployerLanguage}" th:value="${employerLanguage.getEmployerLanguageID()}" th:text="${employerLanguage.getEmployerLanguageName()}"></option>
                     </select>
                 </div>
 
@@ -159,7 +168,7 @@
 
                 <div class="col-md-6 mb-4" >
                     <label for="employer-status">Employer Status</label>
-                    <select class="selectpicker" data-width="80%" id="employer-status">
+                    <select class="selectpicker" data-width="80%" id="employer-status" title="Nothing selected">
                         <option  th:each="employerStatus : ${allEmployerStatus}" th:value="${employerStatus.getStatusOfEmployerID()}" th:text="${employerStatus.getStatusOfEmployerName()}"></option>
                     </select>
                 </div>
@@ -193,24 +202,6 @@
 <script th:src="@{../js/employer.js}" src="../js/employer.js"></script>
 <script>
     $('.selectpicker').selectpicker();
-
-
-    $( document ).ready(function() {
-        //Show/Hide the foreign language option
-
-
-        $('select[id=employer-preferences]').change(function(){
-            if($('select[id=employer-preferences]').val()!=undefined){
-                if($('select[id=employer-preferences]').val().includes("5")){
-                    $('div[id=div-foreign-language]').removeClass('d-none')
-                }else{
-                    $('div[id=div-foreign-language]').addClass('d-none')
-                }
-            }
-        });
-
-    });
-
 </script>
 
 </body>

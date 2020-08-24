@@ -1,6 +1,21 @@
 
 //1. Create Event
 function createNewEvent() {
+
+    // 1.1. validation
+    let verifier
+    verifier = validateForm();
+    // 1.2. Error Message
+    if(!verifier){
+        $('#failed_message_text').text("The Form was not filled properly.");
+        $('#failed_message').removeClass('d-none').addClass('show');
+        $("#failed_message").fadeTo(1500, 1);
+        setTimeout(function(){
+            $("#failed_message").fadeTo(1500, 0);
+        },5000);
+        return
+    }
+
     var baseUri = "/api/create/event";
     var eventName_url = "eventName=" + $('input[id=event-name]').val();
     var typeOfEventID_url = "typeOfEventID=" + $('select[id=event-type]').val();
@@ -21,7 +36,6 @@ function createNewEvent() {
     var challengesGenderStereotypes_url = "challengesGenderStereotypes=" + $('select[id=challenger-gender]').val();
     var employerAttending_url = "employerAttending=" + $('select[id=employers-attending]').val();
     var schoolAttending_url = "schoolAttending=" + $('select[id=schools-attending]').val();
-
 
     var fullUri = baseUri + "?" + "&" + eventName_url+ "&" + typeOfEventID_url + "&" + eventDate_url + "&" + eventTime_url + "&"
         + eventVenueName_url + "&" + eventAddressCity_url  + "&" + eventAddressStreet_url  + "&" + eventAddressNumber_url + "&"
@@ -49,9 +63,13 @@ function createNewEvent() {
             }
         },
         error: function (data) {
-            alert("FAIL");
-            alert(data.responseText);
-            alert(data.toString());
+            $('#failed_message_text').text("Something went wrong with the submission.");
+            $('#failed_message').removeClass('d-none').addClass('show');
+            $("#failed_message").fadeTo(1500, 1);
+            setTimeout(function(){
+                $("#failed_message").fadeTo(1500, 0);
+            },5000);
+            console.log(data.responseText);
         }
     });
 
@@ -59,6 +77,20 @@ function createNewEvent() {
 
 //2. Update Event
 function UpdateThisEvent(){
+    // 2.1. validation
+    let verifier
+    verifier = validateForm();
+    // 2.2. Error Message
+    if(!verifier){
+        $('#failed_message_text').text("The Form was not filled properly.");
+        $('#failed_message').removeClass('d-none').addClass('show');
+        $("#failed_message").fadeTo(1500, 1);
+        setTimeout(function(){
+            $("#failed_message").fadeTo(1500, 0);
+        },5000);
+        return
+    }
+
     var baseUri = "/api/update/event";
     var eventID_url = "eventID=" + $('input[id=event-id]').val();
     var eventName_url = "eventName=" + $('input[id=event-name]').val();
@@ -111,9 +143,13 @@ function UpdateThisEvent(){
             }
         },
         error: function (data) {
-            alert("FAIL");
-            alert(data.responseText);
-            alert(data.toString());
+            $('#failed_message_text').text("Something went wrong with the submission.");
+            $('#failed_message').removeClass('d-none').addClass('show');
+            $("#failed_message").fadeTo(1500, 1);
+            setTimeout(function(){
+                $("#failed_message").fadeTo(1500, 0);
+            },5000);
+            console.log(data.responseText);
         }
     });
 }
@@ -144,10 +180,14 @@ function deleteEvent(eventId) {
             }
         },
         error: function (data) {
-            alert("FAIL");
-            alert(data.responseText);
+            $('#failed_message_text').text("Something went wrong with the submission.");
+            $('#failed_message').removeClass('d-none').addClass('show');
+            $("#failed_message").fadeTo(1500, 1);
+            setTimeout(function(){
+                $("#failed_message").fadeTo(1500, 0);
+            },5000);
+            console.log(data.responseText);
         }
-
     });
 }
 
@@ -191,9 +231,13 @@ function sortEventsByNameAndDate(type, order) {
             sortEvents(data);
         },
         error: function (data) {
-            alert("FAIL");
-            alert(data.responseText);
-            alert(data.toString());
+            $('#failed_message_text').text("Something went wrong with the submission.");
+            $('#failed_message').removeClass('d-none').addClass('show');
+            $("#failed_message").fadeTo(1500, 1);
+            setTimeout(function(){
+                $("#failed_message").fadeTo(1500, 0);
+            },5000);
+            console.log(data.responseText);
         }
     });
 }
@@ -265,27 +309,88 @@ function filterEvents() {
 eventAdded = localStorage.getItem("eventAdded");
 
 if (eventAdded === "true"){
-    $('#success_message').removeClass('d-none')
+    $('#success_message_text').text(' The event was created!');
+    $('#success_message').removeClass('d-none').addClass('show');
     $("#success_message").fadeTo(1500, 1);
-    setTimeout(function(){$("#success_message").fadeTo(1500, 0); },5000);
+    setTimeout(function(){
+        $("#success_message").fadeTo(1500, 0);
+    },5000);
     localStorage.clear()
 }
 
 //11. Feedback - Remove Event
 eventDeleted = localStorage.getItem("eventDeleted");
+console.log(eventDeleted)
+console.log("aqui")
 
 if (eventDeleted === "true"){
-    console.log("is the object deleted " + eventDeleted)
-    document.getElementById('success_message').innerHTML =  "<strong> Success! </strong>" + 'The event was deleted!';
-    document.getElementById('success_message').classList.remove('d-none')
-    document.getElementById('success_message').classList.add('show')
-    $("#success_message").fadeTo(3000, 500).slideUp(500, function() {
-        $("#success_message").slideUp(500);
-    });
+    $('#success_message_text').text(' The event was deleted!');
+    $('#success_message').removeClass('d-none').addClass('show');
+    $("#success_message").fadeTo(1500, 1);
+    setTimeout(function(){
+        $("#success_message").fadeTo(1500, 0);
+    },5000);
     localStorage.clear()
 }
 
-//12. Document ready
+//12. Validation Function
+function validateForm(){
+
+    let verifier = true;
+    let attributesArray = $(".form-required")
+
+    // 12.1 Remove the Valid/Invalid class
+    $(".form-required").removeClass("is-invalid ").removeClass("is-valid ")
+    $(".selectpicker").parent().removeClass("is-invalid").removeClass("is-valid ")
+
+    // 12.2 Add The Valid class to all elements
+    $(".selectpicker").add("is-valid ")
+
+        // 12.3 Validate inputs
+        for (let i = 0; i < attributesArray.length; i++) {
+            if (attributesArray[i].value === "") {
+                // 11.3.1 Remove The Valid/Invalid class
+                attributesArray[i].classList.remove("is-invalid")
+                attributesArray[i].classList.remove("is-valid")
+                // 11.3.2 Add the Invalid class
+                attributesArray[i].classList.add("is-invalid")
+            }
+        }
+
+    // 12.4 Change variable data to selectpickers
+    attributesArray = $(".selectpicker")
+
+    //12.5 Validate selectpickers
+    for (let i = 0; i < attributesArray.length; i++) {
+        if (attributesArray[i].value === "") {
+            // 11.5.1 Remove The Valid/Invalid class
+            attributesArray[i].classList.remove("is-invalid")
+            attributesArray[i].classList.remove("is-valid")
+            // 11.5.2 Add the Invalid class
+            attributesArray[i].parentNode.classList.add("is-invalid")
+        }
+    }
+
+    // 12.6 Validate Input(PostCode)
+
+    // 12.6.1 Set the RegEx and test it
+    let postCodeVal = /[a-z][a-z]\d\d\s\d[a-z][a-z]|[a-z][a-z]\d\s\d[a-z][a-z]|[a-z]\d\s\d[a-z][a-z]|[a-z][a-z]\d[a-z]\s\d[a-z][a-z]|[a-z]\d\d\s\d[a-z][a-z]/i.test($("#event-postcode").val());
+    // let postCodeVal = postCodeValidation.test($("#employer-postcode").val());
+    // 12.6.2 Verify if it's needed to put an invalid class
+    if(!postCodeVal){
+        $("#event-postcode").removeClass("is-invalid").removeClass("is-valid")
+        $("#event-postcode").addClass("is-invalid")
+    }
+
+    //12.7 Verify if there is any invalid class
+    if($(".selectpicker").parent().hasClass("is-invalid") || $(".form-required").hasClass("is-invalid")){
+        verifier = false
+    }
+    return verifier;
+}
+
+
+//13. Document ready
 $(document).ready(function(){
     $('#filterButton').click(function(){
         filterEvents();
