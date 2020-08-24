@@ -202,24 +202,6 @@
 <script th:src="@{../js/employer.js}" src="../js/employer.js"></script>
 <script>
     $('.selectpicker').selectpicker();
-
-
-    $( document ).ready(function() {
-        //Show/Hide the foreign language option
-
-
-        $('select[id=employer-preferences]').change(function(){
-            if($('select[id=employer-preferences]').val()!=undefined){
-                if($('select[id=employer-preferences]').val().includes("5")){
-                    $('div[id=div-foreign-language]').removeClass('d-none')
-                }else{
-                    $('div[id=div-foreign-language]').addClass('d-none')
-                }
-            }
-        });
-
-    });
-
 </script>
 
 </body>

@@ -349,12 +349,12 @@ function validateForm(){
     // 11.6 Validate Input(PostCode)
 
     // 11.6.1 Set the RegEx and test it
-    let postCodeVal = /[a-z][a-z]\d\d\s\d[a-z][a-z]|[a-z][a-z]\d\s\d[a-z][a-z]|[a-z]\d\s\d[a-z][a-z]|[a-z][a-z]\d[a-z]\s\d[a-z][a-z]|[a-z]\d\d\s\d[a-z][a-z]/i.test($("#vacancy-postcode").val());
+    let postCodeVal = /[a-z][a-z]\d\d\s\d[a-z][a-z]|[a-z][a-z]\d\s\d[a-z][a-z]|[a-z]\d\s\d[a-z][a-z]|[a-z][a-z]\d[a-z]\s\d[a-z][a-z]|[a-z]\d\d\s\d[a-z][a-z]/i.test($("#post-code").val());
     // let postCodeVal = postCodeValidation.test($("#employer-postcode").val());
     // 11.6.2 Verify if it's needed to put an invalid class
     if(!postCodeVal){
-        $("#vacancy-postcode").removeClass("is-invalid").removeClass("is-valid")
-        $("#vacancy-postcode").addClass("is-invalid")
+        $("#post-code").removeClass("is-invalid").removeClass("is-valid")
+        $("#post-code").addClass("is-invalid")
     }
 
     //11.7 Verify if there is any invalid class
