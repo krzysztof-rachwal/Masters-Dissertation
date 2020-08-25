@@ -48,14 +48,15 @@ public class BaseController {
 
     // HomePage
     @GetMapping("/ebe/")
-    public ModelAndView HomePage( @AuthenticationPrincipal(expression = "claims['email']") String email,
-                                  @AuthenticationPrincipal(expression = "claims['name']") String name) {
+    public ModelAndView HomePage(HttpSession session) {
+    // public ModelAndView HomePage( @AuthenticationPrincipal(expression = "claims['email']") String email,
+    //                               @AuthenticationPrincipal(expression = "claims['name']") String name) {
         ModelAndView mv = new ModelAndView();
 
         mv.setViewName("homepageCWS");
 
-        System.out.println(email);
-        System.out.println(name);
+        // System.out.println(email);
+        // System.out.println(name);
 
         int numberOfEvents = statisticsQueries.getTotalEvents();
         int numberOfVacancies = statisticsQueries.getTotalVacancies();
