@@ -162,9 +162,9 @@ function searchEvents(){
     //4.3 Add classes for the right values
     $(".list-events").find(".searchable:contains('"+val+"')").closest(".event-card").addClass("event-found")
 
-    //4.4 Trigger function classChange which manages the d-none attribute distribution
-    $(".event-found").trigger('classChange');
-
+    //4.4 Add the d-none to all cards and then removes it from the ones that are filtered or searched
+    $(".event-card").addClass("d-none");
+    $('.event-filtered.event-found').removeClass('d-none');
 }
 
 //5. Sort Event By Name and Date
@@ -216,16 +216,17 @@ $( document ).ready(function() {
 //8. Hide Events
 function hideEvents(ids){
 
-    // remove previous filtering
+    //8.1 remove previous filtering
     $(".event-filtered").removeClass("event-filtered");
 
-    // add .event-filtered class to indicate which filtering results
+    //8.2 add .event-filtered class to indicate which filtering results
     for (i = 0; i < ids.length; i++) {
         $("#"+ids[i]).addClass("event-filtered");
     }
 
-    // trigger function classChange which manages the d-none attribute distribution
-    $(".event-filtered").trigger('classChange');
+    //8.3 Add the d-none to all cards and then removes it from the ones that are filtered or searched
+    $(".event-card").addClass("d-none");
+    $('.event-filtered.event-found').removeClass('d-none');
 }
 
 //9. Filter Events
@@ -289,12 +290,6 @@ if (eventDeleted === "true"){
 $(document).ready(function(){
     $('#filterButton').click(function(){
         filterEvents();
-    });
-
-    // Function classChange which is called whenever new .event-filtered or .event-found appears.
-    $('.event-card').on('classChange', function() {
-        $(".event-card").addClass("d-none");
-        $('.event-filtered.event-found').removeClass('d-none');
     });
 
     $("#tooltip").hover(function(){

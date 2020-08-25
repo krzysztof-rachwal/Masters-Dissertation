@@ -142,8 +142,9 @@ function searchVacancy(){
     //4.3 Add classes for the right values
     $(".list-vacancies").find(".searchable:contains('"+val+"')").closest(".vacancy-card").addClass("vacancy-found")
 
-    //4.4 Trigger function classChange which manages the d-none attribute distribution
-    $(".vacancy-found").trigger('classChange');
+    //4.4 Add the d-none to all cards and then removes it from the ones that are filtered or searched
+    $(".vacancy-card").addClass("d-none");
+    $('.vacancy-filtered.vacancy-found').removeClass('d-none');
 
 }
 
@@ -190,16 +191,17 @@ function sortVacancies(ids){
 // 7. Hide Vacancies
 function hideVacancies(ids){
 
-    // remove previous filtering
+    //7.1 remove previous filtering
     $(".vacancy-filtered").removeClass("vacancy-filtered");
 
-    // add .vacancy-filtered class to indicate which filtering results
+    //7.2 add .vacancy-filtered class to indicate which filtering results
     for (i = 0; i < ids.length; i++) {
         $("#"+ids[i]).addClass("vacancy-filtered");
     }
 
-    // trigger function classChange which manages the d-none attribute distribution
-    $(".vacancy-filtered").trigger('classChange');
+    //7.3 Add the d-none to all cards and then removes it from the ones that are filtered or searched
+    $(".vacancy-card").addClass("d-none");
+    $('.vacancy-filtered.vacancy-found').removeClass('d-none');
 }
 
 // 8. Filter Vacancies
@@ -271,12 +273,6 @@ $( document ).ready(function() {
 
     $('#filterButton').click(function(){
         filterVacancies();
-    });
-
-    // Function classChange which is called whenever new .vacancy-filtered or .vacancy-found appears.
-    $('.vacancy-card').on('classChange', function() {
-        $(".vacancy-card").addClass("d-none");
-        $('.vacancy-filtered.vacancy-found').removeClass('d-none');
     });
 
     $("#addVacancy").hover(function(){
