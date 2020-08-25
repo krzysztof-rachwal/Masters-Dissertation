@@ -53,9 +53,9 @@ public class BaseController {
 //        return "redirect:/";
 //    }
     public void Autentication(HttpServletRequest request,
-                         HttpSession session,
-                         @AuthenticationPrincipal(expression = "claims['email']") String email,
-                         @AuthenticationPrincipal(expression = "claims['name']") String name){
+                              HttpSession session,
+                              String email,
+                              String name){
         //Get The Email and Name of the User
         request.getSession().setAttribute("SESSION_Name", name);
         request.getSession().setAttribute("SESSION_Email", email);
@@ -121,9 +121,7 @@ public class BaseController {
     /////////1st - Header Menu (Employer) /////////
     //1. Search Employer
     @GetMapping("/employers")
-    public ModelAndView SearchEmployer(HttpSession session,
-                                       @AuthenticationPrincipal(expression = "claims['email']") String email,
-                                       @AuthenticationPrincipal(expression = "claims['name']") String name) {
+    public ModelAndView SearchEmployer() {
 
         ModelAndView mv = new ModelAndView();
         mv.setViewName("searchEmployerPage");
@@ -168,6 +166,7 @@ public class BaseController {
     //2. Employer Profile (with the id)
     @GetMapping("/profile-employer")
     public ModelAndView EmployersProfile(@RequestParam(value="employerId")int id,
+                                         HttpServletRequest request,
                                          HttpSession session,
                                          @AuthenticationPrincipal(expression = "claims['email']") String email,
                                          @AuthenticationPrincipal(expression = "claims['name']") String name) {
@@ -250,9 +249,13 @@ public class BaseController {
     //3. Add Employer
     @GetMapping("/add-employer")
     public ModelAndView AddEmployer (HttpSession session,
+                                     HttpServletRequest request,
                                      @AuthenticationPrincipal(expression = "claims['email']") String email,
                                      @AuthenticationPrincipal(expression = "claims['name']") String name) {
+
+        Autentication(request,session,email,name);
         ModelAndView mv = new ModelAndView();
+
         if(session.getAttribute("SESSION_Role") == "CWS") {
             mv.setViewName("addEmployerPage");
 
@@ -304,9 +307,11 @@ public class BaseController {
     //4. Search Vacancies
     @GetMapping("/vacancies")
     public ModelAndView SearchVacancies(HttpSession session,
+                                        HttpServletRequest request,
                                         @AuthenticationPrincipal(expression = "claims['email']") String email,
                                         @AuthenticationPrincipal(expression = "claims['name']") String name) {
 
+        Autentication(request,session,email,name);
         ModelAndView mv = new ModelAndView();
         if(session.getAttribute("SESSION_Role") == "CWS") {
             mv.setViewName("searchVacanciesPage");
@@ -342,8 +347,11 @@ public class BaseController {
     @GetMapping("/profile-vacancy")
     public ModelAndView Vacancy(@RequestParam(value="vacancyId")int id,
                                 HttpSession session,
+                                HttpServletRequest request,
                                 @AuthenticationPrincipal(expression = "claims['email']") String email,
                                 @AuthenticationPrincipal(expression = "claims['name']") String name){
+
+        Autentication(request,session,email,name);
         ModelAndView mv = new ModelAndView();
         if(session.getAttribute("SESSION_Role") == "CWS") {
             mv.setViewName("profileVacancyPage");
@@ -383,8 +391,11 @@ public class BaseController {
     //6. Add Vacancy
     @GetMapping("/add-vacancy")
     public ModelAndView AddVacancy (HttpSession session,
+                                    HttpServletRequest request,
                                     @AuthenticationPrincipal(expression = "claims['email']") String email,
                                     @AuthenticationPrincipal(expression = "claims['name']") String name) {
+
+        Autentication(request,session,email,name);
         ModelAndView mv = new ModelAndView();
         if(session.getAttribute("SESSION_Role") == "CWS") {
             mv.setViewName("addVacancyPage");
@@ -420,8 +431,11 @@ public class BaseController {
     //7. Search Events
     @GetMapping("/events")
     public ModelAndView SearchEvents(HttpSession session,
+                                     HttpServletRequest request,
                                      @AuthenticationPrincipal(expression = "claims['email']") String email,
                                      @AuthenticationPrincipal(expression = "claims['name']") String name) {
+
+        Autentication(request,session,email,name);
         ModelAndView mv = new ModelAndView();
         if(session.getAttribute("SESSION_Role") == "CWS") {
             mv.setViewName("searchEventsPage");
@@ -452,8 +466,11 @@ public class BaseController {
     @GetMapping("/profile-event")
     public ModelAndView EventProfile(@RequestParam(value="eventId")int id,
                                      HttpSession session,
+                                     HttpServletRequest request,
                                      @AuthenticationPrincipal(expression = "claims['email']") String email,
                                      @AuthenticationPrincipal(expression = "claims['name']") String name) {
+
+        Autentication(request,session,email,name);
         ModelAndView mv = new ModelAndView();
         if(session.getAttribute("SESSION_Role") == "CWS") {
             mv.setViewName("profileEventPage");
@@ -495,8 +512,11 @@ public class BaseController {
     //9. Add Events
     @GetMapping("/add-events")
     public ModelAndView AddEvents(HttpSession session,
+                                  HttpServletRequest request,
                                   @AuthenticationPrincipal(expression = "claims['email']") String email,
                                   @AuthenticationPrincipal(expression = "claims['name']") String name) {
+
+        Autentication(request,session,email,name);
         ModelAndView mv = new ModelAndView();
         if(session.getAttribute("SESSION_Role") == "CWS") {
             mv.setViewName("addEventsPage");
@@ -527,10 +547,13 @@ public class BaseController {
     //10. Request
     @GetMapping("/request")
     public ModelAndView Request(HttpSession session,
+                                HttpServletRequest request,
                                 @AuthenticationPrincipal(expression = "claims['email']") String email,
                                 @AuthenticationPrincipal(expression = "claims['name']") String name) {
+
+        Autentication(request,session,email,name);
         ModelAndView mv = new ModelAndView();
-        if(session.getAttribute("SESSION_Role") == "CWS") {
+        if(session.getAttribute("SESSION_Role") == "Teacher") {
             mv.setViewName("requestPage");
 
             ObjectMapper objectMapper = new ObjectMapper();
@@ -561,8 +584,11 @@ public class BaseController {
     //11. Report
     @GetMapping("/report")
     public ModelAndView Report(HttpSession session,
+                               HttpServletRequest request,
                                @AuthenticationPrincipal(expression = "claims['email']") String email,
                                @AuthenticationPrincipal(expression = "claims['name']") String name) {
+
+        Autentication(request,session,email,name);
         ModelAndView mv = new ModelAndView();
 
         if(session.getAttribute("SESSION_Role") == "CWS") {
@@ -617,8 +643,11 @@ public class BaseController {
     //12. Contact Us
     @GetMapping("/contact-us")
     public ModelAndView contactUs(HttpSession session,
+                                  HttpServletRequest request,
                                   @AuthenticationPrincipal(expression = "claims['email']") String email,
                                   @AuthenticationPrincipal(expression = "claims['name']") String name) {
+
+        Autentication(request,session,email,name);
         ModelAndView mv = new ModelAndView();
         if(session.getAttribute("SESSION_Role") == "Teacher") {
             ObjectMapper objectMapper = new ObjectMapper();
