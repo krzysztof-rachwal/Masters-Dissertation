@@ -279,6 +279,9 @@ public class EventQueries extends DBQueries {
         return list;
     }
 
+    ///////////////////////////////////// FILTER METHODS ///////////////////////////////////////////////
+
+    //14. Filter Events
     public List<Integer> filterEvents(List<Integer> typeOfEventList, List<String> nameOfAdviserList, int promotesApprenticeships, int promotesWelshLanguage, int challengesGenderStereotypes) {
         List<Integer> ids = new ArrayList<>();
         connection = ConnectionFactory.getConnection();
@@ -335,21 +338,7 @@ public class EventQueries extends DBQueries {
             }
             SQL4 = SQL4.concat(");");
         }
-
-//        if(promotesApprenticeships != 0){
-//            SQL4 = SQL4.concat(" PromotesApprenticeships = " + promotesApprenticeships);
-//        }
-//        if (promotesWelshLanguage != 0){
-//            SQL4 = SQL4.concat(" PromotesWelshLanguage = " + promotesWelshLanguage);
-//        }
-//        if (challengesGenderStereotypes != 0){
-//            SQL4 = SQL4.concat(" ChallengesGenderStereotypes = " + challengesGenderStereotypes);
-//        }
-//
-//        SQL4 = SQL4.concat(";");
         String finalSQL = SQL+SQL2+SQL3+SQL4;
-
-//        System.out.println(finalSQL);
 
         try {
             statement = connection.createStatement();

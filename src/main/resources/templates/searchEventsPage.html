@@ -36,7 +36,7 @@
     <div class="container-headline my-5">
         <span class="title-h2">Events</span>
         <a href="/add-events">
-            <button type="button"  id="addEvent" class="button--secondary float-right" >Add Event</button>
+            <button type="button" th:if="${session.SESSION_Role =='CWS'}" id="addEvent" class="button--secondary float-right" >Add Event</button>
         </a>
     </div>
 

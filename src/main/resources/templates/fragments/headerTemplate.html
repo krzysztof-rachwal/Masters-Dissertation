@@ -70,28 +70,28 @@
         <div class="nav__content">
             <ul>
                 <li>
-                    <a href="/homecws">Home</a>
+                    <a href="/" th:if="${session.SESSION_Role =='CWS' || session.SESSION_Role =='Teacher'}">Home</a>
                 </li>
                 <li>
-                    <a href="/employers">Employers</a>
+                    <a href="/employers" th:if="${session.SESSION_Role =='CWS'|| session.SESSION_Role =='Teacher'}">Employers</a>
                 </li>
-                <li>
+                <li th:if="${session.SESSION_Role =='CWS'}">
                     <a href="/vacancies">Vacancies</a>
                 </li>
-                <li>
+                <li th:if="${session.SESSION_Role =='CWS'}">
                     <a href="/events">Events</a>
                 </li>
-                <li>
+                <li th:if="${session.SESSION_Role  =='Teacher'}">
                     <a href="/request">Requests</a>
                 </li>
-                <li>
+                <li th:if="${session.SESSION_Role =='CWS'}">
                     <a href="/report">Report</a>
                 </li>
-                <li>
+                <li th:if="${session.SESSION_Role =='Teacher'}" >
                     <a href="/contact-us">Get in Touch</a>
                 </li>
-                <li>
-                    <a href="https://login.microsoftonline.com/bdb74b30-9568-4856-bdbf-06759778fcbc/oauth2/v2.0/logout">Logout</a>
+                <li class="float-right" th:if="${session.SESSION_Role =='CWS' || session.SESSION_Role =='Teacher'}">
+                    <a href="https://login.microsoftonline.com/bdb74b30-9568-4856-bdbf-06759778fcbc/oauth2/v2.0/logout?post_logout_redirect_uri=https%3A%2F%2Flocalhost%3A8080%2Flogin%2Foauth2%2Fcode%2Fazure">Logout</a>
                 </li>
             </ul>
         </div>
