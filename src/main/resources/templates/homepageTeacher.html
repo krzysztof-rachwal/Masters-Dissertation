@@ -50,7 +50,7 @@
                         <div class="content__body">
                             <div class="body__title" th:text="${#strings.capitalize(event.getEventName())}"></div>
                             <div class="body__body" th:text="'Event Venue: ' + ${#strings.capitalize(event.getEventVenueName())} "></div>
-                            <div class="body__body" th:text="'Date: ' + ${#strings.capitalize(event.getEventDateAndTime())} "></div>
+                            <div class="body__body" th:text="'Date: ' + ${#dates.format(event.getEventDateAndTime(),'dd-MM-yyyy')} "></div>
                         </div>
                     </div>
                 </a>

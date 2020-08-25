@@ -1,6 +1,21 @@
 
 //1. Create Event
 function createNewEvent() {
+
+    // 1.1. validation
+    let verifier
+    verifier = validateForm();
+    // 1.2. Error Message
+    if(!verifier){
+        $('#failed_message_text').text("The Form was not filled properly.");
+        $('#failed_message').removeClass('d-none').addClass('show');
+        $("#failed_message").fadeTo(1500, 1);
+        setTimeout(function(){
+            $("#failed_message").fadeTo(1500, 0);
+        },5000);
+        return
+    }
+
     var baseUri = "/api/create/event";
     var eventName_url = "eventName=" + $('input[id=event-name]').val();
     var typeOfEventID_url = "typeOfEventID=" + $('select[id=event-type]').val();
@@ -21,7 +36,6 @@ function createNewEvent() {
     var challengesGenderStereotypes_url = "challengesGenderStereotypes=" + $('select[id=challenger-gender]').val();
     var employerAttending_url = "employerAttending=" + $('select[id=employers-attending]').val();
     var schoolAttending_url = "schoolAttending=" + $('select[id=schools-attending]').val();
-
 
     var fullUri = baseUri + "?" + "&" + eventName_url+ "&" + typeOfEventID_url + "&" + eventDate_url + "&" + eventTime_url + "&"
         + eventVenueName_url + "&" + eventAddressCity_url  + "&" + eventAddressStreet_url  + "&" + eventAddressNumber_url + "&"
@@ -49,9 +63,13 @@ function createNewEvent() {
             }
         },
         error: function (data) {
-            alert("FAIL");
-            alert(data.responseText);
-            alert(data.toString());
+            $('#failed_message_text').text("Something went wrong with the submission.");
+            $('#failed_message').removeClass('d-none').addClass('show');
+            $("#failed_message").fadeTo(1500, 1);
+            setTimeout(function(){
+                $("#failed_message").fadeTo(1500, 0);
+            },5000);
+            console.log(data.responseText);
         }
     });
 
@@ -59,6 +77,20 @@ function createNewEvent() {
 
 //2. Update Event
 function UpdateThisEvent(){
+    // 2.1. validation
+    let verifier
+    verifier = validateForm();
+    // 2.2. Error Message
+    if(!verifier){
+        $('#failed_message_text').text("The Form was not filled properly.");
+        $('#failed_message').removeClass('d-none').addClass('show');
+        $("#failed_message").fadeTo(1500, 1);
+        setTimeout(function(){
+            $("#failed_message").fadeTo(1500, 0);
+        },5000);
+        return
+    }
+
     var baseUri = "/api/update/event";
     var eventID_url = "eventID=" + $('input[id=event-id]').val();
     var eventName_url = "eventName=" + $('input[id=event-name]').val();
@@ -111,9 +143,13 @@ function UpdateThisEvent(){
             }
         },
         error: function (data) {
-            alert("FAIL");
-            alert(data.responseText);
-            alert(data.toString());
+            $('#failed_message_text').text("Something went wrong with the submission.");
+            $('#failed_message').removeClass('d-none').addClass('show');
+            $("#failed_message").fadeTo(1500, 1);
+            setTimeout(function(){
+                $("#failed_message").fadeTo(1500, 0);
+            },5000);
+            console.log(data.responseText);
         }
     });
 }
@@ -144,10 +180,14 @@ function deleteEvent(eventId) {
             }
         },
         error: function (data) {
-            alert("FAIL");
-            alert(data.responseText);
+            $('#failed_message_text').text("Something went wrong with the submission.");
+            $('#failed_message').removeClass('d-none').addClass('show');
+            $("#failed_message").fadeTo(1500, 1);
+            setTimeout(function(){
+                $("#failed_message").fadeTo(1500, 0);
+            },5000);
+            console.log(data.responseText);
         }
-
     });
 }
 
@@ -156,25 +196,14 @@ function searchEvents(){
     // 4.1 Get the value from Search input
     let val = $('#event-search').val()
 
-    //4.2  If value is null exit the function
-    if (val==""){
-        $(".event-card").removeClass("d-none")
-    }
-
-    //4.3 Transform the first letters in a word to uppercase
-    let val2 = val.charAt(0).toUpperCase()+ val.slice(1);
-    //4.4 Remove class event found - to restart the "search"
+    //4.2 Remove class event found - to restart the "search"
     $(".event-found").removeClass("event-found")
-    $(".event-card").removeClass("d-none")
 
-    //4.5 Add classes for the right values
-    $(".list-events").find(".searchable:contains('"+val2+"')").closest(".event-card").addClass("event-found")
+    //4.3 Add classes for the right values
+    $(".list-events").find(".searchable:contains('"+val+"')").closest(".event-card").addClass("event-found")
 
-    //4.6 Remove the cards
-    $(".list-events").find(".searchable:not(:contains('"+val2+"'))").closest(".event-card").addClass("d-none")
-
-    //4.7 Show the "Right" Card
-    $(".event-found").removeClass("d-none")
+    //4.4 Trigger function classChange which manages the d-none attribute distribution
+    $(".event-found").trigger('classChange');
 
 }
 
@@ -202,9 +231,13 @@ function sortEventsByNameAndDate(type, order) {
             sortEvents(data);
         },
         error: function (data) {
-            alert("FAIL");
-            alert(data.responseText);
-            alert(data.toString());
+            $('#failed_message_text').text("Something went wrong with the submission.");
+            $('#failed_message').removeClass('d-none').addClass('show');
+            $("#failed_message").fadeTo(1500, 1);
+            setTimeout(function(){
+                $("#failed_message").fadeTo(1500, 0);
+            },5000);
+            console.log(data.responseText);
         }
     });
 }
@@ -224,6 +257,164 @@ $( document ).ready(function() {
     });
 });
 
+//8. Hide Events
+function hideEvents(ids){
 
-// For the Event Name selector
-// $('.selectpicker').selectpicker();
+    // remove previous filtering
+    $(".event-filtered").removeClass("event-filtered");
+
+    // add .event-filtered class to indicate which filtering results
+    for (i = 0; i < ids.length; i++) {
+        $("#"+ids[i]).addClass("event-filtered");
+    }
+
+    // trigger function classChange which manages the d-none attribute distribution
+    $(".event-filtered").trigger('classChange');
+}
+
+//9. Filter Events
+function filterEvents() {
+    var baseUri = "/api/event/filter";
+    var typeOfEventID_url = "typeOfEventID=" + $('select[id=event-type]').val();
+    var nameOfAdviser_url = "nameOfAdviser=" + $('select[id=event-advisor]').val();
+    var eventPreferences_url = "eventPreferences=" + $('select[id=event-preference]').val();
+
+    var fullUri = baseUri + "?" + "&" + typeOfEventID_url + "&" + nameOfAdviser_url+ "&" + eventPreferences_url;
+
+    var token = $("meta[name='_csrf']").attr("content");    // Used to bypass Spring Boot's CSRF protocol     -- Solution taken from 'https://stackoverflow.com/questions/34747437/use-of-spring-csrf-with-ajax-rest-call-and-html-page-with-thymeleaf' on Nov 26th 2019
+    var header = $("meta[name='_csrf_header']").attr("content");    // Used to bypass Spring Boot's CSRF protocol
+
+    console.log(fullUri)
+
+    $.ajax({
+        type: "GET",
+        url: fullUri,
+        dataType: 'json',
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader(header, token);
+        },
+        success: function (data) {
+            hideEvents(data);
+            console.log(data);
+        },
+        error: function (data) {
+            alert("FAIL");
+            alert(data.responseText);
+            alert(data.toString());
+        }
+    });
+}
+
+//10. Feedback - Add Event
+eventAdded = localStorage.getItem("eventAdded");
+
+if (eventAdded === "true"){
+    $('#success_message_text').text(' The event was created!');
+    $('#success_message').removeClass('d-none').addClass('show');
+    $("#success_message").fadeTo(1500, 1);
+    setTimeout(function(){
+        $("#success_message").fadeTo(1500, 0);
+    },5000);
+    localStorage.clear()
+}
+
+//11. Feedback - Remove Event
+eventDeleted = localStorage.getItem("eventDeleted");
+console.log(eventDeleted)
+console.log("aqui")
+
+if (eventDeleted === "true"){
+    $('#success_message_text').text(' The event was deleted!');
+    $('#success_message').removeClass('d-none').addClass('show');
+    $("#success_message").fadeTo(1500, 1);
+    setTimeout(function(){
+        $("#success_message").fadeTo(1500, 0);
+    },5000);
+    localStorage.clear()
+}
+
+//12. Validation Function
+function validateForm(){
+
+    let verifier = true;
+    let attributesArray = $(".form-required")
+
+    // 12.1 Remove the Valid/Invalid class
+    $(".form-required").removeClass("is-invalid ").removeClass("is-valid ")
+    $(".selectpicker").parent().removeClass("is-invalid").removeClass("is-valid ")
+
+    // 12.2 Add The Valid class to all elements
+    $(".selectpicker").add("is-valid ")
+
+        // 12.3 Validate inputs
+        for (let i = 0; i < attributesArray.length; i++) {
+            if (attributesArray[i].value === "") {
+                // 11.3.1 Remove The Valid/Invalid class
+                attributesArray[i].classList.remove("is-invalid")
+                attributesArray[i].classList.remove("is-valid")
+                // 11.3.2 Add the Invalid class
+                attributesArray[i].classList.add("is-invalid")
+            }
+        }
+
+    // 12.4 Change variable data to selectpickers
+    attributesArray = $(".selectpicker")
+
+    //12.5 Validate selectpickers
+    for (let i = 0; i < attributesArray.length; i++) {
+        if (attributesArray[i].value === "") {
+            // 11.5.1 Remove The Valid/Invalid class
+            attributesArray[i].classList.remove("is-invalid")
+            attributesArray[i].classList.remove("is-valid")
+            // 11.5.2 Add the Invalid class
+            attributesArray[i].parentNode.classList.add("is-invalid")
+        }
+    }
+
+    // 12.6 Validate Input(PostCode)
+
+    // 12.6.1 Set the RegEx and test it
+    let postCodeVal = /[a-z][a-z]\d\d\s\d[a-z][a-z]|[a-z][a-z]\d\s\d[a-z][a-z]|[a-z]\d\s\d[a-z][a-z]|[a-z][a-z]\d[a-z]\s\d[a-z][a-z]|[a-z]\d\d\s\d[a-z][a-z]/i.test($("#event-postcode").val());
+    // let postCodeVal = postCodeValidation.test($("#employer-postcode").val());
+    // 12.6.2 Verify if it's needed to put an invalid class
+    if(!postCodeVal){
+        $("#event-postcode").removeClass("is-invalid").removeClass("is-valid")
+        $("#event-postcode").addClass("is-invalid")
+    }
+
+    //12.7 Verify if there is any invalid class
+    if($(".selectpicker").parent().hasClass("is-invalid") || $(".form-required").hasClass("is-invalid")){
+        verifier = false
+    }
+    return verifier;
+}
+
+
+//13. Document ready
+$(document).ready(function(){
+    $('#filterButton').click(function(){
+        filterEvents();
+    });
+
+    // Function classChange which is called whenever new .event-filtered or .event-found appears.
+    $('.event-card').on('classChange', function() {
+        $(".event-card").addClass("d-none");
+        $('.event-filtered.event-found').removeClass('d-none');
+    });
+
+    $("#tooltip").hover(function(){
+            $(this).tooltip('show')
+        },
+        function(){
+            $(this).tooltip('hide')
+        }
+    )
+
+    // Overwriting contains to be case insensitive, found at :
+    // https://css-tricks.com/snippets/jquery/make-jquery-contains-case-insensitive/
+    $.expr[":"].contains = $.expr.createPseudo(function(arg) {
+        return function( elem ) {
+            return $(elem).text().toUpperCase().indexOf(arg.toUpperCase()) >= 0;
+        };
+    });
+});

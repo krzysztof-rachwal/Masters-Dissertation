@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -32,25 +33,25 @@ public class EventAPI {
     //1. Create Events
     @RequestMapping(value="/api/create/event", method= RequestMethod.GET)
     public boolean createEvent(
-            @RequestParam(name="eventName") String EventName,
-            @RequestParam(name="typeOfEventID") int TypeOfEventID,
-            @RequestParam(name="eventDate") String EventDate,
-            @RequestParam(name="eventTime") String EventTime,
-            @RequestParam(name="eventVenueName") String EventVenueName,
-            @RequestParam(name="eventAddressCity") String EventAddressCity,
-            @RequestParam(name="eventAddressStreet") String EventAddressStreet,
-            @RequestParam(name="eventAddressNumber") String EventAddressNumber,
-            @RequestParam(name="eventPostcode") String EventPostcode,
-            @RequestParam(name="eventSummary") String EventSummary,
-            @RequestParam(name="isPublic") Boolean IsPublic,
-            @RequestParam(name="isCancelled") Boolean isCancelled,
-            @RequestParam(name="nameOfAdviser") String NameOfAdviser,
-            @RequestParam(name="numberOfAttendees") int NumberOfAttendees,
-            @RequestParam(name="promotesApprenticeships") Boolean PromotesApprenticeships,
-            @RequestParam(name="promotesWelshLanguage") Boolean PromotesWelshLanguage,
-            @RequestParam(name="challengesGenderStereotypes") Boolean ChallengesGenderStereotypes,
-            @RequestParam(name="employerAttending") String EmployerAttending,
-            @RequestParam(name="schoolAttending") String SchoolAttending) throws ParseException {
+            @RequestParam(name="eventName", required = true) String EventName,
+            @RequestParam(name="typeOfEventID", required = true) int TypeOfEventID,
+            @RequestParam(name="eventDate", required = true) String EventDate,
+            @RequestParam(name="eventTime", required = true) String EventTime,
+            @RequestParam(name="eventVenueName", required = true) String EventVenueName,
+            @RequestParam(name="eventAddressCity", required = true) String EventAddressCity,
+            @RequestParam(name="eventAddressStreet", required = true) String EventAddressStreet,
+            @RequestParam(name="eventAddressNumber", required = true) String EventAddressNumber,
+            @RequestParam(name="eventPostcode", required = true) String EventPostcode,
+            @RequestParam(name="eventSummary", required = true) String EventSummary,
+            @RequestParam(name="isPublic", required = true) Boolean IsPublic,
+            @RequestParam(name="isCancelled", required = true) Boolean isCancelled,
+            @RequestParam(name="nameOfAdviser", required = true) String NameOfAdviser,
+            @RequestParam(name="numberOfAttendees", required = true) int NumberOfAttendees,
+            @RequestParam(name="promotesApprenticeships", required = true) Boolean PromotesApprenticeships,
+            @RequestParam(name="promotesWelshLanguage", required = true) Boolean PromotesWelshLanguage,
+            @RequestParam(name="challengesGenderStereotypes", required = true) Boolean ChallengesGenderStereotypes,
+            @RequestParam(name="employerAttending", required = true) String EmployerAttending,
+            @RequestParam(name="schoolAttending", required = true) String SchoolAttending) throws ParseException {
 
         // ---------------------------
         //1. Create the ArrayList that are going to be used to populate the database
@@ -90,26 +91,26 @@ public class EventAPI {
     //2. Update Events
     @RequestMapping(value="/api/update/event", method= RequestMethod.GET)
     public Boolean updateEvent(
-            @RequestParam(name="eventID") int EventID,
-            @RequestParam(name="eventName") String EventName,
-            @RequestParam(name="typeOfEventID") int TypeOfEventID,
-            @RequestParam(name="eventDate") String EventDate,
-            @RequestParam(name="eventTime") String EventTime,
-            @RequestParam(name="eventVenueName") String EventVenueName,
-            @RequestParam(name="eventAddressCity") String EventAddressCity,
-            @RequestParam(name="eventAddressStreet") String EventAddressStreet,
-            @RequestParam(name="eventAddressNumber") String EventAddressNumber,
-            @RequestParam(name="eventPostcode") String EventPostcode,
-            @RequestParam(name="eventSummary") String EventSummary,
-            @RequestParam(name="isPublic") Boolean IsPublic,
-            @RequestParam(name="isCancelled") Boolean isCancelled,
-            @RequestParam(name="nameOfAdviser") String NameOfAdviser,
-            @RequestParam(name="numberOfAttendees") int NumberOfAttendees,
-            @RequestParam(name="promotesApprenticeships") Boolean PromotesApprenticeships,
-            @RequestParam(name="promotesWelshLanguage") Boolean PromotesWelshLanguage,
-            @RequestParam(name="challengesGenderStereotypes") Boolean ChallengesGenderStereotypes,
-            @RequestParam(name="employerAttending") String EmployerAttending,
-            @RequestParam(name="schoolAttending") String SchoolAttending) throws ParseException {
+            @RequestParam(name="eventID", required = true) int EventID,
+            @RequestParam(name="eventName", required = true) String EventName,
+            @RequestParam(name="typeOfEventID", required = true) int TypeOfEventID,
+            @RequestParam(name="eventDate", required = true) String EventDate,
+            @RequestParam(name="eventTime", required = true) String EventTime,
+            @RequestParam(name="eventVenueName", required = true) String EventVenueName,
+            @RequestParam(name="eventAddressCity", required = true) String EventAddressCity,
+            @RequestParam(name="eventAddressStreet", required = true) String EventAddressStreet,
+            @RequestParam(name="eventAddressNumber", required = true) String EventAddressNumber,
+            @RequestParam(name="eventPostcode", required = true) String EventPostcode,
+            @RequestParam(name="eventSummary", required = true) String EventSummary,
+            @RequestParam(name="isPublic", required = true) Boolean IsPublic,
+            @RequestParam(name="isCancelled", required = true) Boolean isCancelled,
+            @RequestParam(name="nameOfAdviser", required = true) String NameOfAdviser,
+            @RequestParam(name="numberOfAttendees", required = true) int NumberOfAttendees,
+            @RequestParam(name="promotesApprenticeships", required = true) Boolean PromotesApprenticeships,
+            @RequestParam(name="promotesWelshLanguage", required = true) Boolean PromotesWelshLanguage,
+            @RequestParam(name="challengesGenderStereotypes", required = true) Boolean ChallengesGenderStereotypes,
+            @RequestParam(name="employerAttending", required = true) String EmployerAttending,
+            @RequestParam(name="schoolAttending", required = true) String SchoolAttending) throws ParseException {
 
         // ---------------------------
         //1. Create the ArrayList that are going to be used to populate the database
@@ -168,6 +169,52 @@ public class EventAPI {
         }
 
         return orderEventIds;
+    }
+
+    ///////////////////////    FILTER     ////////////////////////////////
+    @GetMapping("api/event/filter")
+    public List<Integer> filterEvents(@RequestParam(value="typeOfEventID") String typeOfEventID,
+                                      @RequestParam(value="nameOfAdviser") String nameOfAdviser,
+                                      @RequestParam(value="eventPreferences") String eventPreferences){
+
+        List<Integer> typeOfEventList = new ArrayList<Integer>();
+        List<String> nameOfAdviserList = new ArrayList<String>();
+        int PromotesApprenticeships = 0;
+        int PromotesWelshLanguage = 0;
+        int ChallengesGenderStereotypes = 0;
+
+        if (!typeOfEventID.equals("")) {
+            for (String typeOfEvent : typeOfEventID.split(",")) {
+                typeOfEventList.add(Integer.parseInt(typeOfEvent));
+            }
+        }  else{
+            typeOfEventList = Arrays.asList();
+        }
+
+        if (!nameOfAdviser.equals("")) {
+            for (String name : nameOfAdviser.split(",")) {
+                nameOfAdviserList.add(name);
+            }
+        }  else{
+            nameOfAdviserList = Arrays.asList();
+        }
+
+        if (!eventPreferences.equals("")) {
+            for (String preference : eventPreferences.split(",")) {
+                if (preference.equals("1")) {
+                    PromotesApprenticeships = 1;
+                } else if (preference.equals("2")) {
+                    PromotesWelshLanguage = 1;
+                } else if (preference.equals("3")) {
+                    ChallengesGenderStereotypes = 1;
+                }
+            }
+        }
+
+        List<Integer> ids = EventQrys.filterEvents(typeOfEventList, nameOfAdviserList,
+                PromotesApprenticeships, PromotesWelshLanguage,  ChallengesGenderStereotypes);
+
+        return ids;
     }
 
 }

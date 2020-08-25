@@ -165,7 +165,35 @@ ul{
 .alert{
     bottom: 0px;
     position: fixed;
-    z-index: 100;
+    z-index: 1060;
     right: 5px;
     width: 260px;
+}
+
+.tooltip-button{
+    background: transparent;
+    border: transparent;
+}
+
+.form-control{
+    border: solid 1px transparent !important;
+}
+
+.group-input{
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -ms-flex-align: stretch;
+    align-items: stretch;
+    width: 80%;
+}
+
+.text-area-w-80{
+    width:80% !important;
+}
+
+.search-box{
+    border: solid 1px gainsboro !important;
 }

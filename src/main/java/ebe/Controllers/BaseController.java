@@ -7,6 +7,7 @@ import ebe.DBClasses.School;
 import ebe.DBClasses.Vacancy;
 import ebe.DBMethods.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
@@ -15,7 +16,6 @@ import org.springframework.stereotype.Controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -41,12 +41,21 @@ public class BaseController {
     @Autowired
     private HttpServletRequest context; // this will provide the current instance of HttpServletRequest
 
+//    @GetMapping("/test")
+//    public String test (){
+//        return "redirect:/";
+//    }
 
     // HomePage
     @GetMapping("/")
-    public ModelAndView HomePage(HttpSession session) {
+    public ModelAndView HomePage( @AuthenticationPrincipal(expression = "claims['email']") String email,
+                                  @AuthenticationPrincipal(expression = "claims['name']") String name) {
         ModelAndView mv = new ModelAndView();
+
         mv.setViewName("homepageCWS");
+
+        System.out.println(email);
+        System.out.println(name);
 
         int numberOfEvents = statisticsQueries.getTotalEvents();
         int numberOfVacancies = statisticsQueries.getTotalVacancies();
@@ -136,6 +145,8 @@ public class BaseController {
         List<Employer> employerStatus;
         List<School> schoolAllNamesAndIds;
         List<Integer> employerSchoolPreferences;
+        List<Event> eventsAllTypes;
+
 
         employerInfo = EmployerQrys.getAllEmployers();
         employerLanguage = EmployerQrys.getAllLanguages();
@@ -157,6 +168,7 @@ public class BaseController {
         schoolAllNamesAndIds = SchoolQrys.getAllSchoolNamesAndIds();
         employerStatus = EmployerQrys.getAllEmployerStatus();
         employerSchoolPreferences = EmployerQrys.getEmployerSchoolPreferences(employer.getEmployerID());
+        eventsAllTypes = EventQrys.getAllTypesOfEvents();
 
         Map<String,Object> allEmployer = new HashMap<String,Object>();
         allEmployer.put("employer", employer);
@@ -180,11 +192,9 @@ public class BaseController {
         allEmployer.put("allSchoolNamesAndIds", schoolAllNamesAndIds);
         allEmployer.put("allEmployerStatus",employerStatus);
         allEmployer.put("allEmployerSchoolPreferences", employerSchoolPreferences);
-
+        allEmployer.put("allEventTypes", eventsAllTypes);
 
         mv.addAllObjects(allEmployer);
-
-
         return mv;
     }
 
@@ -239,11 +249,25 @@ public class BaseController {
     public ModelAndView SearchVacancies(HttpSession session) {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("searchVacanciesPage");
-        List<Vacancy> vacancies;
-        vacancies = VacancyQrys.getAllVacancy();
 
-        Map<String,Object> allVacancies = new HashMap<String,Object>();
+        List<Vacancy> vacancies;
+        List<Vacancy> vacanciesAllTypes;
+        List<Employer> employerAllNamesAndIds;
+        List<Vacancy> vacanciesAllOccupationalCodes;
+
+        vacancies = VacancyQrys.getAllVacancy();
+        vacanciesAllTypes = VacancyQrys.getAllTypesOfVacancy();
+        vacanciesAllOccupationalCodes = VacancyQrys.getAllOccupationalCodes();
+        employerAllNamesAndIds = EmployerQrys.getAllEmployerNamesAndIds();
+
+
+        Map<String,Object> allVacancies = new HashMap<>();
+
         allVacancies.put("allVacancies", vacancies);
+        allVacancies.put("AllEmployerNamesAndIds", employerAllNamesAndIds);
+        allVacancies.put("allVacanciesTypes", vacanciesAllTypes);
+        allVacancies.put("allVacanciesOccupationalCodes", vacanciesAllOccupationalCodes);
+
         mv.addAllObjects(allVacancies);
 
         return mv;
@@ -318,11 +342,19 @@ public class BaseController {
     public ModelAndView SearchEvents(HttpSession session) {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("searchEventsPage");
+
         List<Event> events;
+        List<Event> eventsAllTypes;
+        List<String> advisors;
+
         events = EventQrys.getAllEvents();
+        eventsAllTypes = EventQrys.getAllTypesOfEvents();
+        advisors = statisticsQueries.getAllEventsAdvisors();
 
         Map<String,Object> allEvents = new HashMap<String,Object>();
         allEvents.put("allEvents", events);
+        allEvents.put("allEventTypes", eventsAllTypes);
+        allEvents.put("allAdvisorsNames", advisors);
         mv.addAllObjects(allEvents);
 
         return mv;
@@ -403,9 +435,19 @@ public class BaseController {
         // session = context.getSession();
 
         List<Event> eventsAllTypes;
+        List<Employer> employerIndustrySectorAreas;
+        List<Employer> employerLanguage;
+        List<Employer> employers;
+
+        employers = EmployerQrys.getAllEmployers();
+        employerLanguage = EmployerQrys.getAllLanguages();
         eventsAllTypes = EventQrys.getAllTypesOfEvents();
+        employerIndustrySectorAreas = EmployerQrys.getAllIndustrySectors();
 
         mv.addObject("allEventTypes",eventsAllTypes);
+        mv.addObject("allIndustrySectors",employerIndustrySectorAreas);
+        mv.addObject("allLanguages",employerLanguage);
+        mv.addObject("allEmployers",employers);
         return mv;
     }
 
@@ -471,7 +513,7 @@ public class BaseController {
     }
 
 
-//    13. CWS home page
+    //    13. CWS home page
     @GetMapping("/homecws")
     public ModelAndView homeCWS(){
         ModelAndView mv = new ModelAndView();
@@ -504,7 +546,6 @@ public class BaseController {
         mv.addObject("recommendedEvents",recommendedEvents);
         return mv;
     }
-
 
     @GetMapping("/error")
     public RedirectView ErrorPage() {

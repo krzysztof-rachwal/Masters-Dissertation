@@ -43,7 +43,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="event-name">Event name</label>
-                                    <input type="text" class="form-control input-border" th:value="${event.getEventName()}" id="event-name">
+                                    <input type="text" class="form-control form-required" th:value="${event.getEventName()}" id="event-name">
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -57,51 +57,51 @@
                             <div class="col-md-6 ">
                                 <div class="form-group">
                                     <label for="event-summary">Event Summary</label>
-                                    <textarea class=" input-border" rows="3" id="event-summary" th:text="${event.getEventSummary()}" th:value="${event.getEventSummary()}"></textarea>
+                                    <textarea class="form-control form-required text-area-w-80" rows="3" id="event-summary" th:text="${event.getEventSummary()}" th:value="${event.getEventSummary()}"></textarea>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <label>Address</label>
-                                <div class="input-group">
+                                <div class="group-input">
                                     <div class="input-group-prepend">
-                                        <input type="text" id="event-street" class="form-control border-right input-sm" th:value="${event.getEventAddressStreet()}">
-                                        <input type="text" id="event-number" class="form-control" th:value="${event.getEventAddressNumber()}">
+                                        <input type="text" id="event-street" class="form-control border-right input-sm w-80 form-required" th:value="${event.getEventAddressStreet()}">
+                                        <input type="text" id="event-number" class="form-control w-80 form-required" th:value="${event.getEventAddressNumber()}">
                                     </div>
                                     <div class="input-group-prepend mt-1">
-                                        <input type="text" id="event-postcode" class="form-control border-right" th:value="${event.getEventVenuePostcode()}">
-                                        <input type="text" id="event-city" class="form-control" th:value="${event.getEventAddressCity()}">
+                                        <input type="text" id="event-postcode" class="form-control border-right w-80 form-required " th:value="${event.getEventVenuePostcode()}">
+                                        <input type="text" id="event-city" class="form-control w-80 form-required" th:value="${event.getEventAddressCity()}">
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="event-date">Event Date</label>
-                                    <input type="date" class="form-control input-border" id="event-date" th:value="${event.getEventDate()}">
+                                    <input type="date" class="form-control form-required" id="event-date" th:value="${event.getEventDate()}">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="event-time">Event Time</label>
-                                    <input type="time" class="form-control input-border" id="event-time" th:value="${#dates.format(event.getEventTime(),'HH:mm')}">
+                                    <input type="time" class="form-control form-required" id="event-time" th:value="${#dates.format(event.getEventTime(),'HH:mm')}">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="event-venue">Event Venue</label>
-                                    <input type="text" class="form-control input-border" id="event-venue" th:value="${event.getEventVenueName()}">
+                                    <input type="text" class="form-control form-required" id="event-venue" th:value="${event.getEventVenueName()}">
                                 </div>
                             </div>
 
                             <div class="col-md-6 ">
                                 <div class="form-group">
                                     <label for="adviser-name">Adviser Name</label>
-                                    <input type="text" class="form-control input-border" id="adviser-name" th:value="${event.getNameOfAdviser()}">
+                                    <input type="text" class="form-control form-required" id="adviser-name" th:value="${event.getNameOfAdviser()}">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="no-attendees">Number of Attendees</label>
-                                    <input type="number" class="form-control input-border" id="no-attendees" th:value="${event.getNumberOfAttendees()}">
+                                    <input type="number" min="0" class="form-control form-required" id="no-attendees" th:value="${event.getNumberOfAttendees()}">
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -202,12 +202,22 @@
 </div>
 
 <div class="gel-content-container">
+    <!-- Success Message        -->
     <div id="success_message" class="alert alert-success alert-dismissible fade d-none" role="alert">
         <strong>Success!</strong> The event has been updated!
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
+
+    <!-- Failed Message    -->
+    <div id="failed_message" class="alert alert-danger alert-dismissible fade d-none" role="alert">
+        <strong>Failed!</strong> <span id="failed_message_text"></span>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
 
     <div class="container-headline mt-5">
         <span class="title-h2" th:text="${#strings.capitalize(event.getEventName())}"></span>
@@ -234,7 +244,8 @@
             <div class="col-md-6">
                 <div class="form-group ">
                     <span class="font-weight-bold h5">Event Date </span>
-                    <p th:text="${event.getEventDate()}"></p>
+                    <p th:text="${#dates.format(event.getEventDate(),'dd-MM-yyyy')}"></p>
+
                 </div>
             </div>
             <div class="col-md-6">
@@ -252,7 +263,7 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <span class="font-weight-bold h5">Event Address </span>
-                    <p th:text="${event.getEventAddressNumber()} +', ' + ${event.getEventAddressStreet()} +', ' + ${event.getEventAddressCity()} "></p>
+                    <p th:text="${event.getEventAddressNumber()} +', ' + ${event.getEventAddressStreet()} +', ' + ${event.getEventAddressCity()} + ', ' + ${event.getEventVenuePostcode()} "></p>
                 </div>
             </div>
             <div class="col-md-6">
