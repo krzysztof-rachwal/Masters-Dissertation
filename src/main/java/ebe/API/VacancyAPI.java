@@ -31,17 +31,17 @@ public class VacancyAPI {
     //1. Create Vacancies
     @GetMapping(value="/api/create/vacancy")
     public boolean createVacancy(
-            @RequestParam(name="EmployerID") int employerId,
-            @RequestParam(name="VacancyName") String vacancyName,
-            @RequestParam(name="VacancyLink") String vacancyLink,
-            @RequestParam(name="VacancySummary") String vacancySummary,
-            @RequestParam(name="TypeOfVacancyID") int typeOfVacancyID,
-            @RequestParam(name="StatusOfVacancyID") int StatusOfVacancyID,
-            @RequestParam(name="StartOfVacancy") String startOfVacancy,
-            @RequestParam(name="DeadlineForApplication") String deadlineForApplication,
-            @RequestParam(name="OccupationalCodeID") int occupationalCodeID,
-            @RequestParam(name="ApplicationMethodID") String applicationMethodID,
-            @RequestParam(name="VacancyPostcode") String vacancyPostCode) throws ParseException {
+            @RequestParam(name="EmployerID", required = true) int employerId,
+            @RequestParam(name="VacancyName", required = true) String vacancyName,
+            @RequestParam(name="VacancyLink", required = false) String vacancyLink,
+            @RequestParam(name="VacancySummary", required = true) String vacancySummary,
+            @RequestParam(name="TypeOfVacancyID", required = true) int typeOfVacancyID,
+            @RequestParam(name="StatusOfVacancyID", required = true) int StatusOfVacancyID,
+            @RequestParam(name="StartOfVacancy", required = true) String startOfVacancy,
+            @RequestParam(name="DeadlineForApplication", required = true) String deadlineForApplication,
+            @RequestParam(name="OccupationalCodeID", required = true) int occupationalCodeID,
+            @RequestParam(name="ApplicationMethodID", required = true) String applicationMethodID,
+            @RequestParam(name="VacancyPostcode", required = true) String vacancyPostCode) throws ParseException {
 
         return 1 == VacancyQrys.createVacancy(employerId,vacancyName,vacancySummary,vacancyLink,typeOfVacancyID,
                 StatusOfVacancyID, startOfVacancy,deadlineForApplication,occupationalCodeID,applicationMethodID,
@@ -53,19 +53,19 @@ public class VacancyAPI {
     //2. Update Vacancies
     @GetMapping(value="/api/update/vacancy")
     public boolean updateVacancy(
-            @RequestParam(name="EmployerID") int employerId,
-            @RequestParam(name="VacancyName") String vacancyName,
-            @RequestParam(name="VacancyOldName") String vacancyOldName,
-            @RequestParam(name="VacancyLink") String vacancyLink,
-            @RequestParam(name="VacancySummary") String vacancySummary,
-            @RequestParam(name="TypeOfVacancyID") int typeOfVacancyID,
-            @RequestParam(name="StatusOfVacancyID") int StatusOfVacancyID,
-            @RequestParam(name="StartOfVacancy") String startOfVacancy,
-            @RequestParam(name="DeadlineForApplication") String deadlineForApplication,
-            @RequestParam(name="OccupationalCodeID") int occupationalCodeID,
-            @RequestParam(name="ApplicationMethodID") String applicationMethodID,
-            @RequestParam(name="VacancyPostcode") String vacancyPostCode,
-            @RequestParam(name="VacancyOldPostcode") String vacancyOldPostCode) throws ParseException {
+            @RequestParam(name="EmployerID", required = true) int employerId,
+            @RequestParam(name="VacancyName", required = true) String vacancyName,
+            @RequestParam(name="VacancyOldName", required = true) String vacancyOldName,
+            @RequestParam(name="VacancyLink", required = false) String vacancyLink,
+            @RequestParam(name="VacancySummary", required = true) String vacancySummary,
+            @RequestParam(name="TypeOfVacancyID", required = true) int typeOfVacancyID,
+            @RequestParam(name="StatusOfVacancyID", required = true) int StatusOfVacancyID,
+            @RequestParam(name="StartOfVacancy", required = true) String startOfVacancy,
+            @RequestParam(name="DeadlineForApplication", required = true) String deadlineForApplication,
+            @RequestParam(name="OccupationalCodeID", required = true) int occupationalCodeID,
+            @RequestParam(name="ApplicationMethodID", required = true) String applicationMethodID,
+            @RequestParam(name="VacancyPostcode", required = true) String vacancyPostCode,
+            @RequestParam(name="VacancyOldPostcode", required = true) String vacancyOldPostCode) throws ParseException {
 
         int vacancyId = VacancyQrys.getVacancyIdByNameAndPostCode(vacancyOldName,vacancyOldPostCode);
         return 1 == VacancyQrys.updateVacancy(vacancyId,employerId,vacancyName,vacancySummary,vacancyLink,typeOfVacancyID,

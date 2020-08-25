@@ -8,19 +8,19 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- Schema mydb
 -- -----------------------------------------------------
 -- -----------------------------------------------------
--- Schema c1976275_Spring_DB
+-- Schema ebedb
 -- -----------------------------------------------------
 
 -- -----------------------------------------------------
--- Schema c1976275_Spring_DB
+-- Schema ebedb
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `c1976275_Spring_DB` DEFAULT CHARACTER SET latin1 ;
-USE `c1976275_Spring_DB` ;
+CREATE SCHEMA IF NOT EXISTS `ebedb` DEFAULT CHARACTER SET latin1 ;
+USE `ebedb` ;
 
 -- -----------------------------------------------------
--- Table `c1976275_Spring_DB`.`School`
+-- Table `ebedb`.`School`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `c1976275_Spring_DB`.`School` (
+CREATE TABLE IF NOT EXISTS `ebedb`.`School` (
   `SchoolID` INT(11) NOT NULL AUTO_INCREMENT,
   `SchoolName` MEDIUMTEXT NULL DEFAULT NULL,
   `SchoolAddressCity` MEDIUMTEXT NULL DEFAULT NULL,
@@ -37,9 +37,9 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `c1976275_Spring_DB`.`Alumni`
+-- Table `ebedb`.`Alumni`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `c1976275_Spring_DB`.`Alumni` (
+CREATE TABLE IF NOT EXISTS `ebedb`.`Alumni` (
   `AlumniID` INT(11) NOT NULL AUTO_INCREMENT,
   `AlumniNameAndSurname` VARCHAR(255) NULL DEFAULT NULL,
   `AlumniSchoolID` INT(11) NULL DEFAULT NULL,
@@ -47,7 +47,7 @@ CREATE TABLE IF NOT EXISTS `c1976275_Spring_DB`.`Alumni` (
   INDEX `AlumniSchool_idx` (`AlumniSchoolID` ASC),
   CONSTRAINT `AlumniSchool`
     FOREIGN KEY (`AlumniSchoolID`)
-    REFERENCES `c1976275_Spring_DB`.`School` (`SchoolID`)
+    REFERENCES `ebedb`.`School` (`SchoolID`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB
@@ -56,9 +56,9 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `c1976275_Spring_DB`.`ApplicationMethodList`
+-- Table `ebedb`.`ApplicationMethodList`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `c1976275_Spring_DB`.`ApplicationMethodList` (
+CREATE TABLE IF NOT EXISTS `ebedb`.`ApplicationMethodList` (
   `ApplicationMethodID` INT(11) NOT NULL AUTO_INCREMENT,
   `ApplicationMethodName` MEDIUMTEXT NULL DEFAULT NULL,
   PRIMARY KEY (`ApplicationMethodID`))
@@ -68,9 +68,9 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `c1976275_Spring_DB`.`AreaOfCurriculumList`
+-- Table `ebedb`.`AreaOfCurriculumList`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `c1976275_Spring_DB`.`AreaOfCurriculumList` (
+CREATE TABLE IF NOT EXISTS `ebedb`.`AreaOfCurriculumList` (
   `AreaOfCurriculumID` INT(11) NOT NULL AUTO_INCREMENT,
   `AreaOfCurriculumName` MEDIUMTEXT NULL DEFAULT NULL,
   PRIMARY KEY (`AreaOfCurriculumID`))
@@ -80,9 +80,9 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `c1976275_Spring_DB`.`CooperationTypeList`
+-- Table `ebedb`.`CooperationTypeList`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `c1976275_Spring_DB`.`CooperationTypeList` (
+CREATE TABLE IF NOT EXISTS `ebedb`.`CooperationTypeList` (
   `CooperationTypeID` INT(11) NOT NULL AUTO_INCREMENT,
   `CooperationTypeName` MEDIUMTEXT NULL DEFAULT NULL,
   PRIMARY KEY (`CooperationTypeID`))
@@ -92,9 +92,9 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `c1976275_Spring_DB`.`EmployeesRangeList`
+-- Table `ebedb`.`EmployeesRangeList`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `c1976275_Spring_DB`.`EmployeesRangeList` (
+CREATE TABLE IF NOT EXISTS `ebedb`.`EmployeesRangeList` (
   `EmployeesRangeID` INT(11) NOT NULL AUTO_INCREMENT,
   `EmployeesRangeName` VARCHAR(255) NULL DEFAULT NULL,
   PRIMARY KEY (`EmployeesRangeID`))
@@ -104,9 +104,9 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `c1976275_Spring_DB`.`StatusOfEmployerList`
+-- Table `ebedb`.`StatusOfEmployerList`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `c1976275_Spring_DB`.`StatusOfEmployerList` (
+CREATE TABLE IF NOT EXISTS `ebedb`.`StatusOfEmployerList` (
   `StatusOfEmployerID` INT(11) NOT NULL AUTO_INCREMENT,
   `StatusOfEmployerName` VARCHAR(255) NULL DEFAULT NULL,
   PRIMARY KEY (`StatusOfEmployerID`))
@@ -116,9 +116,9 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `c1976275_Spring_DB`.`Employer`
+-- Table `ebedb`.`Employer`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `c1976275_Spring_DB`.`Employer` (
+CREATE TABLE IF NOT EXISTS `ebedb`.`Employer` (
   `EmployerID` INT(11) NOT NULL AUTO_INCREMENT,
   `StatusOfEmployerID` INT(11) NULL DEFAULT NULL,
   `EmployerName` MEDIUMTEXT NULL DEFAULT NULL,
@@ -153,12 +153,12 @@ CREATE TABLE IF NOT EXISTS `c1976275_Spring_DB`.`Employer` (
   INDEX `EmployeesRange_idx` (`NumberOfEmployeesID` ASC),
   CONSTRAINT `EmployeesRange`
     FOREIGN KEY (`NumberOfEmployeesID`)
-    REFERENCES `c1976275_Spring_DB`.`EmployeesRangeList` (`EmployeesRangeID`)
+    REFERENCES `ebedb`.`EmployeesRangeList` (`EmployeesRangeID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `EmployerStatus`
     FOREIGN KEY (`StatusOfEmployerID`)
-    REFERENCES `c1976275_Spring_DB`.`StatusOfEmployerList` (`StatusOfEmployerID`)
+    REFERENCES `ebedb`.`StatusOfEmployerList` (`StatusOfEmployerID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -167,9 +167,9 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `c1976275_Spring_DB`.`EmployerDocumentLinks`
+-- Table `ebedb`.`EmployerDocumentLinks`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `c1976275_Spring_DB`.`EmployerDocumentLinks` (
+CREATE TABLE IF NOT EXISTS `ebedb`.`EmployerDocumentLinks` (
   `DocumentLinkID` INT(11) NOT NULL AUTO_INCREMENT,
   `EmployerID` INT(11) NULL DEFAULT NULL,
   `Link` MEDIUMTEXT NULL DEFAULT NULL,
@@ -177,7 +177,7 @@ CREATE TABLE IF NOT EXISTS `c1976275_Spring_DB`.`EmployerDocumentLinks` (
   INDEX `EmployerDocumentLink_idx` (`EmployerID` ASC),
   CONSTRAINT `EmployerDocumentLink`
     FOREIGN KEY (`EmployerID`)
-    REFERENCES `c1976275_Spring_DB`.`Employer` (`EmployerID`)
+    REFERENCES `ebedb`.`Employer` (`EmployerID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -186,9 +186,9 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `c1976275_Spring_DB`.`TypeOfEventList`
+-- Table `ebedb`.`TypeOfEventList`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `c1976275_Spring_DB`.`TypeOfEventList` (
+CREATE TABLE IF NOT EXISTS `ebedb`.`TypeOfEventList` (
   `TypeOfEventID` INT(11) NOT NULL AUTO_INCREMENT,
   `TypeOfEventName` VARCHAR(255) NULL DEFAULT NULL,
   PRIMARY KEY (`TypeOfEventID`))
@@ -198,9 +198,9 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `c1976275_Spring_DB`.`Event`
+-- Table `ebedb`.`Event`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `c1976275_Spring_DB`.`Event` (
+CREATE TABLE IF NOT EXISTS `ebedb`.`Event` (
   `EventID` INT(11) NOT NULL AUTO_INCREMENT,
   `EventName` MEDIUMTEXT NULL DEFAULT NULL,
   `TypeOfEventID` INT(11) NULL DEFAULT NULL,
@@ -222,7 +222,7 @@ CREATE TABLE IF NOT EXISTS `c1976275_Spring_DB`.`Event` (
   INDEX `EventTypeOfEvent_idx` (`TypeOfEventID` ASC),
   CONSTRAINT `EventTypeOfEvent`
     FOREIGN KEY (`TypeOfEventID`)
-    REFERENCES `c1976275_Spring_DB`.`TypeOfEventList` (`TypeOfEventID`)
+    REFERENCES `ebedb`.`TypeOfEventList` (`TypeOfEventID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -231,21 +231,21 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `c1976275_Spring_DB`.`INT_AlumniWorkingForEmployer`
+-- Table `ebedb`.`INT_AlumniWorkingForEmployer`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `c1976275_Spring_DB`.`INT_AlumniWorkingForEmployer` (
+CREATE TABLE IF NOT EXISTS `ebedb`.`INT_AlumniWorkingForEmployer` (
   `EmployerID` INT(11) NOT NULL,
   `AlumniID` INT(11) NOT NULL,
   PRIMARY KEY (`EmployerID`, `AlumniID`),
   INDEX `AlumniEmployer_idx` (`AlumniID` ASC),
   CONSTRAINT `AlumniEmployer`
     FOREIGN KEY (`AlumniID`)
-    REFERENCES `c1976275_Spring_DB`.`Alumni` (`AlumniID`)
+    REFERENCES `ebedb`.`Alumni` (`AlumniID`)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
   CONSTRAINT `EmployerAlumni`
     FOREIGN KEY (`EmployerID`)
-    REFERENCES `c1976275_Spring_DB`.`Employer` (`EmployerID`)
+    REFERENCES `ebedb`.`Employer` (`EmployerID`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB
@@ -253,21 +253,21 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `c1976275_Spring_DB`.`INT_AttendingEmployerOnEvent`
+-- Table `ebedb`.`INT_AttendingEmployerOnEvent`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `c1976275_Spring_DB`.`INT_AttendingEmployerOnEvent` (
+CREATE TABLE IF NOT EXISTS `ebedb`.`INT_AttendingEmployerOnEvent` (
   `EventID` INT(11) NOT NULL,
   `EmployerID` INT(11) NOT NULL,
   PRIMARY KEY (`EventID`, `EmployerID`),
   INDEX `EmployerEvent_idx` (`EmployerID` ASC),
   CONSTRAINT `EmployerEvent`
     FOREIGN KEY (`EmployerID`)
-    REFERENCES `c1976275_Spring_DB`.`Employer` (`EmployerID`)
+    REFERENCES `ebedb`.`Employer` (`EmployerID`)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
   CONSTRAINT `EventEmployer`
     FOREIGN KEY (`EventID`)
-    REFERENCES `c1976275_Spring_DB`.`Event` (`EventID`)
+    REFERENCES `ebedb`.`Event` (`EventID`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB
@@ -275,21 +275,21 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `c1976275_Spring_DB`.`INT_AttendingSchoolOnEvent`
+-- Table `ebedb`.`INT_AttendingSchoolOnEvent`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `c1976275_Spring_DB`.`INT_AttendingSchoolOnEvent` (
+CREATE TABLE IF NOT EXISTS `ebedb`.`INT_AttendingSchoolOnEvent` (
   `EventID` INT(11) NOT NULL,
   `SchoolID` INT(11) NOT NULL,
   PRIMARY KEY (`EventID`, `SchoolID`),
   INDEX `SchoolEvent_idx` (`SchoolID` ASC),
   CONSTRAINT `EventSchool`
     FOREIGN KEY (`EventID`)
-    REFERENCES `c1976275_Spring_DB`.`Event` (`EventID`)
+    REFERENCES `ebedb`.`Event` (`EventID`)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
   CONSTRAINT `SchoolEvent`
     FOREIGN KEY (`SchoolID`)
-    REFERENCES `c1976275_Spring_DB`.`School` (`SchoolID`)
+    REFERENCES `ebedb`.`School` (`SchoolID`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB
@@ -297,21 +297,21 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `c1976275_Spring_DB`.`INT_EmployerCooperationType`
+-- Table `ebedb`.`INT_EmployerCooperationType`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `c1976275_Spring_DB`.`INT_EmployerCooperationType` (
+CREATE TABLE IF NOT EXISTS `ebedb`.`INT_EmployerCooperationType` (
   `EmployerID` INT(11) NOT NULL,
   `CooperationTypeID` INT(11) NOT NULL,
   PRIMARY KEY (`EmployerID`, `CooperationTypeID`),
   INDEX `CooperationEmployer_idx` (`CooperationTypeID` ASC),
   CONSTRAINT `CooperationEmployer`
     FOREIGN KEY (`CooperationTypeID`)
-    REFERENCES `c1976275_Spring_DB`.`CooperationTypeList` (`CooperationTypeID`)
+    REFERENCES `ebedb`.`CooperationTypeList` (`CooperationTypeID`)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
   CONSTRAINT `EmployerCooperation`
     FOREIGN KEY (`EmployerID`)
-    REFERENCES `c1976275_Spring_DB`.`Employer` (`EmployerID`)
+    REFERENCES `ebedb`.`Employer` (`EmployerID`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB
@@ -319,9 +319,9 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `c1976275_Spring_DB`.`IndustrySectorList`
+-- Table `ebedb`.`IndustrySectorList`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `c1976275_Spring_DB`.`IndustrySectorList` (
+CREATE TABLE IF NOT EXISTS `ebedb`.`IndustrySectorList` (
   `IndustrySectorID` INT(11) NOT NULL AUTO_INCREMENT,
   `IndustrySectorName` MEDIUMTEXT NULL DEFAULT NULL,
   PRIMARY KEY (`IndustrySectorID`))
@@ -331,21 +331,21 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `c1976275_Spring_DB`.`INT_EmployerIndustrySector`
+-- Table `ebedb`.`INT_EmployerIndustrySector`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `c1976275_Spring_DB`.`INT_EmployerIndustrySector` (
+CREATE TABLE IF NOT EXISTS `ebedb`.`INT_EmployerIndustrySector` (
   `EmployerID` INT(11) NOT NULL,
   `IndustrySectorID` INT(11) NOT NULL,
   PRIMARY KEY (`EmployerID`, `IndustrySectorID`),
   INDEX `IndustryEmployer_idx` (`IndustrySectorID` ASC),
   CONSTRAINT `EmployerIndustry`
     FOREIGN KEY (`EmployerID`)
-    REFERENCES `c1976275_Spring_DB`.`Employer` (`EmployerID`)
+    REFERENCES `ebedb`.`Employer` (`EmployerID`)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
   CONSTRAINT `IndustryEmployer`
     FOREIGN KEY (`IndustrySectorID`)
-    REFERENCES `c1976275_Spring_DB`.`IndustrySectorList` (`IndustrySectorID`)
+    REFERENCES `ebedb`.`IndustrySectorList` (`IndustrySectorID`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB
@@ -353,9 +353,9 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `c1976275_Spring_DB`.`PreferenceList`
+-- Table `ebedb`.`PreferenceList`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `c1976275_Spring_DB`.`PreferenceList` (
+CREATE TABLE IF NOT EXISTS `ebedb`.`PreferenceList` (
   `PreferenceID` INT(11) NOT NULL AUTO_INCREMENT,
   `PreferenceName` MEDIUMTEXT NULL DEFAULT NULL,
   PRIMARY KEY (`PreferenceID`))
@@ -365,21 +365,21 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `c1976275_Spring_DB`.`INT_EmployerPreference`
+-- Table `ebedb`.`INT_EmployerPreference`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `c1976275_Spring_DB`.`INT_EmployerPreference` (
+CREATE TABLE IF NOT EXISTS `ebedb`.`INT_EmployerPreference` (
   `EmployerID` INT(11) NOT NULL,
   `PreferenceID` INT(11) NOT NULL,
   PRIMARY KEY (`EmployerID`, `PreferenceID`),
   INDEX `PreferenceEmployer_idx` (`PreferenceID` ASC),
   CONSTRAINT `EmployerPreference`
     FOREIGN KEY (`EmployerID`)
-    REFERENCES `c1976275_Spring_DB`.`Employer` (`EmployerID`)
+    REFERENCES `ebedb`.`Employer` (`EmployerID`)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
   CONSTRAINT `PreferenceEmployer`
     FOREIGN KEY (`PreferenceID`)
-    REFERENCES `c1976275_Spring_DB`.`PreferenceList` (`PreferenceID`)
+    REFERENCES `ebedb`.`PreferenceList` (`PreferenceID`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB
@@ -387,21 +387,21 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `c1976275_Spring_DB`.`INT_EmployerSchoolPreference`
+-- Table `ebedb`.`INT_EmployerSchoolPreference`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `c1976275_Spring_DB`.`INT_EmployerSchoolPreference` (
+CREATE TABLE IF NOT EXISTS `ebedb`.`INT_EmployerSchoolPreference` (
   `EmployerID` INT(11) NOT NULL,
   `SchoolID` INT(11) NOT NULL,
   PRIMARY KEY (`EmployerID`, `SchoolID`),
   INDEX `SchoolEmployer_idx` (`SchoolID` ASC),
   CONSTRAINT `EmployerSchool`
     FOREIGN KEY (`EmployerID`)
-    REFERENCES `c1976275_Spring_DB`.`Employer` (`EmployerID`)
+    REFERENCES `ebedb`.`Employer` (`EmployerID`)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
   CONSTRAINT `SchoolEmployer`
     FOREIGN KEY (`SchoolID`)
-    REFERENCES `c1976275_Spring_DB`.`School` (`SchoolID`)
+    REFERENCES `ebedb`.`School` (`SchoolID`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB
@@ -409,21 +409,21 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `c1976275_Spring_DB`.`INT_EmployerSupportOfAreaOfCurriculum`
+-- Table `ebedb`.`INT_EmployerSupportOfAreaOfCurriculum`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `c1976275_Spring_DB`.`INT_EmployerSupportOfAreaOfCurriculum` (
+CREATE TABLE IF NOT EXISTS `ebedb`.`INT_EmployerSupportOfAreaOfCurriculum` (
   `EmployerID` INT(11) NOT NULL,
   `AreaOfCurriculumID` INT(11) NOT NULL,
   PRIMARY KEY (`EmployerID`, `AreaOfCurriculumID`),
   INDEX `AreasOfCurriculumEmployer_idx` (`AreaOfCurriculumID` ASC),
   CONSTRAINT `AreasOfCurriculumEmployer`
     FOREIGN KEY (`AreaOfCurriculumID`)
-    REFERENCES `c1976275_Spring_DB`.`AreaOfCurriculumList` (`AreaOfCurriculumID`)
+    REFERENCES `ebedb`.`AreaOfCurriculumList` (`AreaOfCurriculumID`)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
   CONSTRAINT `EmployerAreasOfCurriculum`
     FOREIGN KEY (`EmployerID`)
-    REFERENCES `c1976275_Spring_DB`.`Employer` (`EmployerID`)
+    REFERENCES `ebedb`.`Employer` (`EmployerID`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB
@@ -431,9 +431,9 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `c1976275_Spring_DB`.`LanguageList`
+-- Table `ebedb`.`LanguageList`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `c1976275_Spring_DB`.`LanguageList` (
+CREATE TABLE IF NOT EXISTS `ebedb`.`LanguageList` (
   `LanguageID` INT(11) NOT NULL AUTO_INCREMENT,
   `LanguageName` VARCHAR(255) NULL DEFAULT NULL,
   PRIMARY KEY (`LanguageID`))
@@ -443,21 +443,21 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `c1976275_Spring_DB`.`INT_LanguageUsedByEmployer`
+-- Table `ebedb`.`INT_LanguageUsedByEmployer`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `c1976275_Spring_DB`.`INT_LanguageUsedByEmployer` (
+CREATE TABLE IF NOT EXISTS `ebedb`.`INT_LanguageUsedByEmployer` (
   `EmployerID` INT(11) NOT NULL,
   `LanguageID` INT(11) NOT NULL,
   PRIMARY KEY (`EmployerID`, `LanguageID`),
   INDEX `LanguageEmployer_idx` (`LanguageID` ASC),
   CONSTRAINT `EmployerLanguage`
     FOREIGN KEY (`EmployerID`)
-    REFERENCES `c1976275_Spring_DB`.`Employer` (`EmployerID`)
+    REFERENCES `ebedb`.`Employer` (`EmployerID`)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
   CONSTRAINT `LanguageEmployer`
     FOREIGN KEY (`LanguageID`)
-    REFERENCES `c1976275_Spring_DB`.`LanguageList` (`LanguageID`)
+    REFERENCES `ebedb`.`LanguageList` (`LanguageID`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB
@@ -465,9 +465,9 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `c1976275_Spring_DB`.`LocalAuthorityList`
+-- Table `ebedb`.`LocalAuthorityList`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `c1976275_Spring_DB`.`LocalAuthorityList` (
+CREATE TABLE IF NOT EXISTS `ebedb`.`LocalAuthorityList` (
   `LocalAuthorityID` INT(11) NOT NULL AUTO_INCREMENT,
   `LocalAuthorityName` MEDIUMTEXT NULL DEFAULT NULL,
   PRIMARY KEY (`LocalAuthorityID`))
@@ -477,21 +477,21 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `c1976275_Spring_DB`.`INT_LocalAuthorityEmployerCanWorkWith`
+-- Table `ebedb`.`INT_LocalAuthorityEmployerCanWorkWith`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `c1976275_Spring_DB`.`INT_LocalAuthorityEmployerCanWorkWith` (
+CREATE TABLE IF NOT EXISTS `ebedb`.`INT_LocalAuthorityEmployerCanWorkWith` (
   `EmployerID` INT(11) NOT NULL,
   `LocalAuthorityID` INT(11) NOT NULL,
   PRIMARY KEY (`EmployerID`, `LocalAuthorityID`),
   INDEX `LocalAuthorityEmployer_idx` (`LocalAuthorityID` ASC),
   CONSTRAINT `EmployerLocalAuthority`
     FOREIGN KEY (`EmployerID`)
-    REFERENCES `c1976275_Spring_DB`.`Employer` (`EmployerID`)
+    REFERENCES `ebedb`.`Employer` (`EmployerID`)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
   CONSTRAINT `LocalAuthorityEmployer`
     FOREIGN KEY (`LocalAuthorityID`)
-    REFERENCES `c1976275_Spring_DB`.`LocalAuthorityList` (`LocalAuthorityID`)
+    REFERENCES `ebedb`.`LocalAuthorityList` (`LocalAuthorityID`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB
@@ -499,9 +499,9 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `c1976275_Spring_DB`.`OccupationalCodeList`
+-- Table `ebedb`.`OccupationalCodeList`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `c1976275_Spring_DB`.`OccupationalCodeList` (
+CREATE TABLE IF NOT EXISTS `ebedb`.`OccupationalCodeList` (
   `OccupationalCodeID` INT(11) NOT NULL AUTO_INCREMENT,
   `OccupationalCodeName` MEDIUMTEXT NULL DEFAULT NULL,
   PRIMARY KEY (`OccupationalCodeID`))
@@ -511,9 +511,9 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `c1976275_Spring_DB`.`PostcodeList`
+-- Table `ebedb`.`PostcodeList`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `c1976275_Spring_DB`.`PostcodeList` (
+CREATE TABLE IF NOT EXISTS `ebedb`.`PostcodeList` (
   `PostcodeID` INT(11) NOT NULL AUTO_INCREMENT,
   `PostcodeName` MEDIUMTEXT NULL DEFAULT NULL,
   `LocalAuthorityID` INT(11) NULL DEFAULT NULL,
@@ -521,7 +521,7 @@ CREATE TABLE IF NOT EXISTS `c1976275_Spring_DB`.`PostcodeList` (
   INDEX `LocalAuthorityPostCode_idx` (`LocalAuthorityID` ASC),
   CONSTRAINT `LocalAuthorityPostCode`
     FOREIGN KEY (`LocalAuthorityID`)
-    REFERENCES `c1976275_Spring_DB`.`LocalAuthorityList` (`LocalAuthorityID`)
+    REFERENCES `ebedb`.`LocalAuthorityList` (`LocalAuthorityID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -530,9 +530,9 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `c1976275_Spring_DB`.`StatusOfVacancyList`
+-- Table `ebedb`.`StatusOfVacancyList`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `c1976275_Spring_DB`.`StatusOfVacancyList` (
+CREATE TABLE IF NOT EXISTS `ebedb`.`StatusOfVacancyList` (
   `StatusOfVacancyID` INT(11) NOT NULL AUTO_INCREMENT,
   `StatusOfVacancyName` VARCHAR(255) NULL DEFAULT NULL,
   PRIMARY KEY (`StatusOfVacancyID`))
@@ -542,9 +542,9 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `c1976275_Spring_DB`.`TypeOfVacancyList`
+-- Table `ebedb`.`TypeOfVacancyList`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `c1976275_Spring_DB`.`TypeOfVacancyList` (
+CREATE TABLE IF NOT EXISTS `ebedb`.`TypeOfVacancyList` (
   `TypeOfVacancyID` INT(11) NOT NULL AUTO_INCREMENT,
   `TypeOfVacancyName` MEDIUMTEXT NULL DEFAULT NULL,
   PRIMARY KEY (`TypeOfVacancyID`))
@@ -554,9 +554,9 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `c1976275_Spring_DB`.`Vacancy`
+-- Table `ebedb`.`Vacancy`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `c1976275_Spring_DB`.`Vacancy` (
+CREATE TABLE IF NOT EXISTS `ebedb`.`Vacancy` (
   `VacancyID` INT(11) NOT NULL AUTO_INCREMENT,
   `EmployerID` INT(11) NULL DEFAULT NULL,
   `VacancyName` MEDIUMTEXT NULL DEFAULT NULL,
@@ -577,27 +577,27 @@ CREATE TABLE IF NOT EXISTS `c1976275_Spring_DB`.`Vacancy` (
   INDEX `VacancyApplicationMethod_idx` (`ApplicationMethodID` ASC),
   CONSTRAINT `VacancyApplicationMethod`
     FOREIGN KEY (`ApplicationMethodID`)
-    REFERENCES `c1976275_Spring_DB`.`ApplicationMethodList` (`ApplicationMethodID`)
+    REFERENCES `ebedb`.`ApplicationMethodList` (`ApplicationMethodID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `VacancyEmployer`
     FOREIGN KEY (`EmployerID`)
-    REFERENCES `c1976275_Spring_DB`.`Employer` (`EmployerID`)
+    REFERENCES `ebedb`.`Employer` (`EmployerID`)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
   CONSTRAINT `VacancyOccupatonalCode`
     FOREIGN KEY (`OccupationalCodeID`)
-    REFERENCES `c1976275_Spring_DB`.`OccupationalCodeList` (`OccupationalCodeID`)
+    REFERENCES `ebedb`.`OccupationalCodeList` (`OccupationalCodeID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `VacancyStatus`
     FOREIGN KEY (`StatusOfVacancyID`)
-    REFERENCES `c1976275_Spring_DB`.`StatusOfVacancyList` (`StatusOfVacancyID`)
+    REFERENCES `ebedb`.`StatusOfVacancyList` (`StatusOfVacancyID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `VacancyType`
     FOREIGN KEY (`TypeOfVacancyID`)
-    REFERENCES `c1976275_Spring_DB`.`TypeOfVacancyList` (`TypeOfVacancyID`)
+    REFERENCES `ebedb`.`TypeOfVacancyList` (`TypeOfVacancyID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -606,9 +606,9 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `c1976275_Spring_DB`.`CWSMemberList`
+-- Table `ebedb`.`CWSMemberList`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `c1976275_Spring_DB`.`CWSMemberList` (
+CREATE TABLE IF NOT EXISTS `ebedb`.`CWSMemberList` (
   `CWSMemberID` INT NOT NULL AUTO_INCREMENT,
   `CWSNameSurname` MEDIUMTEXT NULL,
   `CWSEmail` MEDIUMTEXT NULL,

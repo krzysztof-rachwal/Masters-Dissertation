@@ -309,17 +309,17 @@ INSERT INTO `PostcodeList` (`PostcodeID`,`PostcodeName`,`LocalAuthorityID`) VALU
 INSERT INTO `PostcodeList` (`PostcodeID`,`PostcodeName`,`LocalAuthorityID`) VALUES (230,"SA4",21);
 INSERT INTO `PostcodeList` (`PostcodeID`,`PostcodeName`,`LocalAuthorityID`) VALUES (231,"LL12",22);
 
-INSERT INTO CWSMemberList VALUES (1, "Daniel Potkanski", "potkanskid@cardiff.ac.uk");
-INSERT INTO CWSMemberList VALUES (2, "Daniel Leite", "leitedf@cardiff.ac.uk");
-INSERT INTO CWSMemberList VALUES (3, "Nikolina Antoniou", "antonioun2@cardiff.ac.uk");
-INSERT INTO CWSMemberList VALUES (4, "Krzysztof Rachwal", "rachwalk@cardiff.ac.uk");
-INSERT INTO CWSMemberList VALUES (5, "Louise Knight", "knightl2@cardiff.ac.uk");
-INSERT INTO CWSMemberList VALUES (6, "Andrea Jones", "andrea.jones@careerswales.gov.wales");
-INSERT INTO CWSMemberList VALUES (7, "Amie Field", "amie.field@careerswales.gov.wales");
-INSERT INTO CWSMemberList VALUES (8, "Becky James", "becky.james@careerswales.gov.wales");
-INSERT INTO CWSMemberList VALUES (9, "David Lintern", "david.lintern@careerswales.gov.wales");
-INSERT INTO CWSMemberList VALUES (10, "Luis Espinosa-Anke", "espinosa-ankel@cardiff.ac.uk");
-INSERT INTO CWSMemberList VALUES (11, "Ian Cooper", "cooperim@cardiff.ac.uk");
+INSERT INTO `` (`CWSMemberID`,`CWSNameSurname`,`CWSEmail`) VALUES (1,'Daniel Potkanski','potkanskid@cardiff.ac.uk');
+INSERT INTO `` (`CWSMemberID`,`CWSNameSurname`,`CWSEmail`) VALUES (2,'Daniel Leite','leitedf@cardiff.ac.uk');
+INSERT INTO `` (`CWSMemberID`,`CWSNameSurname`,`CWSEmail`) VALUES (3,'Nikolina Antoniou','antonioun2@cardiff.ac.uk');
+INSERT INTO `` (`CWSMemberID`,`CWSNameSurname`,`CWSEmail`) VALUES (4,'Krzysztof Rachwal','rachwalk@cardiff.ac.uk');
+INSERT INTO `` (`CWSMemberID`,`CWSNameSurname`,`CWSEmail`) VALUES (5,'Louise Knight','knightl2@cardiff.ac.uk');
+INSERT INTO `` (`CWSMemberID`,`CWSNameSurname`,`CWSEmail`) VALUES (6,'Andrea Jones','andrea.jones@careerswales.gov.wales');
+INSERT INTO `` (`CWSMemberID`,`CWSNameSurname`,`CWSEmail`) VALUES (7,'Amie Field','amie.field@careerswales.gov.wales');
+INSERT INTO `` (`CWSMemberID`,`CWSNameSurname`,`CWSEmail`) VALUES (8,'Becky James','becky.james@careerswales.gov.wales');
+INSERT INTO `` (`CWSMemberID`,`CWSNameSurname`,`CWSEmail`) VALUES (9,'David Lintern','david.lintern@careerswales.gov.wales');
+INSERT INTO `` (`CWSMemberID`,`CWSNameSurname`,`CWSEmail`) VALUES (10,'Luis Espinosa-Anke','espinosa-ankel@cardiff.ac.uk');
+INSERT INTO `` (`CWSMemberID`,`CWSNameSurname`,`CWSEmail`) VALUES (11,'Ian Cooper','cooperim@cardiff.ac.uk');
 
 insert ignore into Employer (employerid, statusofemployerid, employername, employeraddresscity, employeraddressstreet, employeraddressnumber, employerpostcode, employeremail, ContactPersonNameSurname, ContactPersonPosition, employerphone, employerwebsite, employertwitter, employerFB, numberofemployeesid, companysummary, notes, logolink, givessiteexperience, givessitevisits, givesworkshops, givespresentations, attendscareerfairs, giveswebinars, workswithprimarypupils, useofmodernforeignlanguage, runsbusinessinwelsh, candelivertoschoolsinwelsh, hasapprenticeshipprogramme) values (1, 2, 'Eimbee', 'Duitama', 'Village', '8', 'LL23', 'lsabbins0@sciencedaily.com', 'Leonerd Sabbins', 'Compensation Analyst', '535-905-7224', 'ibm.com', 'reddit.com', 'yahoo.co.jp', 4, 'Fusce consequat. Nulla nisl. Nunc nisl. Duis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus.', 'Maecenas rhoncus aliquam lacus. Morbi quis tortor id nulla ultrices aliquet.', 'http://dummyimage.com/162x118.bmp/5fa2dd/ffffff', false, false, false, true, true, true, false, false, true, false, false);
 insert ignore into Employer (employerid, statusofemployerid, employername, employeraddresscity, employeraddressstreet, employeraddressnumber, employerpostcode, employeremail, ContactPersonNameSurname, ContactPersonPosition, employerphone, employerwebsite, employertwitter, employerFB, numberofemployeesid, companysummary, notes, logolink, givessiteexperience, givessitevisits, givesworkshops, givespresentations, attendscareerfairs, giveswebinars, workswithprimarypupils, useofmodernforeignlanguage, runsbusinessinwelsh, candelivertoschoolsinwelsh, hasapprenticeshipprogramme) values (2, 1, 'Kanoodle', 'Tegalagung', 'Heffernan', '53334', 'LL13', 'tmarchetti1@simplemachines.org', 'Thayne Marchetti', 'Sales Representative', '227-651-1494', 'columbia.edu', 'addtoany.com', 'blogger.com', 1, 'Maecenas leo odio, condimentum id, luctus nec, molestie sed, justo. Pellentesque viverra pede ac diam. Cras pellentesque volutpat dui.', 'Vivamus in felis eu sapien cursus vestibulum. Proin eu mi.', 'http://dummyimage.com/217x150.png/cc0000/ffffff', true, true, false, false, true, true, false, true, false, false, false);

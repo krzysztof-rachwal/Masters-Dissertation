@@ -27,7 +27,7 @@
 
 <div class="gel-content-container">
     <div id="success_message" class="alert alert-success alert-dismissible fade d-none" role="alert">
-        <strong>Success!</strong> The event has been created!
+        <strong>Success!</strong><span id="success_message_text"></span>
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -122,7 +122,7 @@
                                     <div class="content__body">
                                         <div class="body__title searchable" name="event-card-title" th:text="${#strings.capitalize(event.getEventName())}"></div>
                                         <div class="body__body searchable">
-                                            <h5 class="searchable" name="event-card-date" th:text="${event.getEventDateAndTime()}"></h5>
+                                            <h5 class="searchable" name="event-card-date" th:text="${#dates.format(event.getEventDateAndTime(),'dd-MM-yyyy')}"></h5>
                                             <h5 class="searchable" name="event-card-summary" th:text="${event.getEventSummary()} "></h5>
 
                                             <!-- Hidden Data -->
