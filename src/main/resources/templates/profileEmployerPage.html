@@ -341,8 +341,8 @@
     <div class="container-headline my-5">
         <span class="title-h2" th:text="${employer.getEmployerName()}"></span>
         <input type="hidden" id="employer-id" th:value="${employer.getEmployerID()}" />
-        <button type="button" id="deleteEvent" data-toggle="modal" data-target="#deleteModal" class="buttonDelete float-right">Delete</button>
-        <button type="button" id="updateEvent" data-toggle="modal" data-target="#updateModal" class="buttonUpdate float-right">Update</button>
+        <button  th:if="${session.SESSION_Role =='CWS'}" type="button" id="deleteEvent" data-toggle="modal" data-target="#deleteModal" class="buttonDelete float-right">Delete</button>
+        <button  th:if="${session.SESSION_Role =='CWS'}" type="button" id="updateEvent" data-toggle="modal" data-target="#updateModal" class="buttonUpdate float-right">Update</button>
     </div>
 
 
@@ -357,11 +357,11 @@
                         <h4>Company Summary</h4>
                         <p th:text="${employer.getCompanySummary()}"></p>
                     </div>
-                    <div class="col-md-12">
+                    <div class="col-md-12" th:if="${session.SESSION_Role =='CWS'}">
                         <h4>Notes</h4>
                         <p th:text="${employer.getNotes()}"></p>
                     </div>
-                    <div class="col-md-12">
+                    <div class="col-md-12" th:if="${session.SESSION_Role =='CWS'}">
                         <h4>Employer Status</h4>
                         <p th:each="employerStatus : ${allEmployerStatus}"  th:remove="${employerStatus.getStatusOfEmployerID() == employer.getStatusOfEmployerID()} ? none : all" th:text="${employerStatus.getStatusOfEmployerName()}"></p>
                     </div>

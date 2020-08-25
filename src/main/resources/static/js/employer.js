@@ -273,8 +273,9 @@ function searchEmployer(){
     //4.3 Add classes for the right values
     $(".list-employers").find(".searchable:contains('"+val+"')").closest(".employer-card").addClass("employer-found")
 
-    //4.4 Trigger function classChange which manages the d-none attribute distribution
-    $(".employer-found").trigger('classChange');
+    //4.4 Add the d-none to all cards and then removes it from the ones that are filtered or searched
+    $(".employer-card").addClass("d-none");
+    $('.employer-filtered.employer-found').removeClass('d-none');
 
 }
 
@@ -362,16 +363,17 @@ function filterEmployers() {
 // 8. Hide Employer
 function hideEmployers(ids){
 
-    // remove previous filtering
+    //8.1 remove previous filtering
     $(".employer-filtered").removeClass("employer-filtered");
 
-    // add .employer-filtered class to indicate which filtering results
+    //8.2 add .employer-filtered class to indicate which filtering results
     for (i = 0; i < ids.length; i++) {
         $("#"+ids[i]).addClass("employer-filtered");
     }
 
-    // trigger function classChange which manages the d-none attribute distribution
-    $(".employer-filtered").trigger('classChange');
+    //8.3 Add the d-none to all cards and then removes it from the ones that are filtered or searched
+    $(".employer-card").addClass("d-none");
+    $('.employer-filtered.employer-found').removeClass('d-none');
 
 }
 
@@ -510,11 +512,11 @@ $( document ).ready(function() {
         filterEmployers();
     });
 
-    // Function classChange which is called whenever new .employer-filtered or .employer-found appears.
-    $('.employer-card').on('classChange', function() {
-        $(".employer-card").addClass("d-none");
-        $('.employer-filtered.employer-found').removeClass('d-none');
-    });
+    // // Function classChange which is called whenever new .employer-filtered or .employer-found appears.
+    // $('.employer-card').on('classChange', function() {
+    //     $(".employer-card").addClass("d-none");
+    //     $('.employer-filtered.employer-found').removeClass('d-none');
+    // });
 
     $("#tooltip").hover(function(){
             $(this).tooltip('show')
