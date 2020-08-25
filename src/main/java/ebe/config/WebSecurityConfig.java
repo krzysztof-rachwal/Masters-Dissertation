@@ -19,21 +19,24 @@ import javax.sql.DataSource;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 
     @Override
-    protected void configure( HttpSecurity http ) throws Exception {
+    protected void configure(HttpSecurity http) throws Exception{
+    http.authorizeRequests().antMatchers("/", "/home", "/js/**", "/css/**").permitAll();
 
-        http.authorizeRequests()
-                .antMatchers( "/oauth2/**", "/login/**" ).permitAll()
-                .anyRequest().authenticated()
-                .and()
-                .oauth2Login()
-                .defaultSuccessUrl("/");
+    // protected void configure( HttpSecurity http ) throws Exception {
+
+    //     http.authorizeRequests()
+    //             .antMatchers( "/oauth2/**", "/login/**" ).permitAll()
+    //             .anyRequest().authenticated()
+    //             .and()
+    //             .oauth2Login()
+    //             .defaultSuccessUrl("/");
 
     }
 
-//    @Bean
-//    public AuthenticationSuccessHandler authSuccessHandler(){
-//        return new AuthSuccessHandler();
-//    }
+    @Bean
+    public AuthenticationSuccessHandler authSuccessHandler(){
+        return new AuthSuccessHandler();
+    }
 }
 
 
