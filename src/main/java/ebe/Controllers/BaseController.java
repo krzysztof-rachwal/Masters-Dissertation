@@ -47,7 +47,7 @@ public class BaseController {
 //    }
 
     // HomePage
-    @GetMapping("/ebe/")
+    @GetMapping("ebe/")
     public ModelAndView HomePage( @AuthenticationPrincipal(expression = "claims['email']") String email,
                                   @AuthenticationPrincipal(expression = "claims['name']") String name) {
         ModelAndView mv = new ModelAndView();
@@ -76,7 +76,7 @@ public class BaseController {
 
     /////////1st - Header Menu (Employer) /////////
     //1. Search Employer
-    @GetMapping("/ebe/employers")
+    @GetMapping("ebe/employers")
     public ModelAndView SearchEmployer(HttpSession session) {
 
         ModelAndView mv = new ModelAndView();
@@ -120,7 +120,7 @@ public class BaseController {
     }
 
     //2. Employer Profile (with the id)
-    @GetMapping("/ebe/profile-employer")
+    @GetMapping("ebe/profile-employer")
     public ModelAndView EmployersProfile(@RequestParam(value="employerId")int id) {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("profileEmployerPage");
@@ -199,7 +199,7 @@ public class BaseController {
     }
 
     //3. Add Employer
-    @GetMapping("/ebe/add-employer")
+    @GetMapping("ebe/add-employer")
     public ModelAndView AddEmployer (HttpSession session) {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("addEmployerPage");
@@ -245,7 +245,7 @@ public class BaseController {
 
     /////////2nd - Header Menu (Vacancies) /////////
     //4. Search Vacancies
-    @GetMapping("/ebe/vacancies")
+    @GetMapping("ebe/vacancies")
     public ModelAndView SearchVacancies(HttpSession session) {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("searchVacanciesPage");
@@ -274,7 +274,7 @@ public class BaseController {
     }
 
     //5. Vacancy Profile
-    @GetMapping("/ebe/profile-vacancy")
+    @GetMapping("ebe/profile-vacancy")
     public ModelAndView Vacancy(@RequestParam(value="vacancyId")int id) {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("profileVacancyPage");
@@ -308,7 +308,7 @@ public class BaseController {
     }
 
     //6. Add Vacancy
-    @GetMapping("/ebe/add-vacancy")
+    @GetMapping("ebe/add-vacancy")
     public ModelAndView AddVacancy (HttpSession session) {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("addVacancyPage");
@@ -338,7 +338,7 @@ public class BaseController {
 
     /////////3rd - Header Menu (Events) /////////
     //7. Search Events
-    @GetMapping("/ebe/events")
+    @GetMapping("ebe/events")
     public ModelAndView SearchEvents(HttpSession session) {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("searchEventsPage");
@@ -362,7 +362,7 @@ public class BaseController {
 
 
     //8. Events Profile (get id of the event)
-    @GetMapping("/ebe/profile-event")
+    @GetMapping("ebe/profile-event")
     public ModelAndView EventProfile(@RequestParam(value="eventId")int id) {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("profileEventPage");
@@ -398,7 +398,7 @@ public class BaseController {
     }
 
     //9. Add Events
-    @GetMapping("/ebe/add-events")
+    @GetMapping("ebe/add-events")
     public ModelAndView AddEvents(HttpSession session) {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("addEventsPage");
@@ -426,7 +426,7 @@ public class BaseController {
 
     /////////4th - Header Menu (Request) /////////
     //10. Request
-    @GetMapping("/ebe/request")
+    @GetMapping("ebe/request")
     public ModelAndView Request(HttpSession session) {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("requestPage");
@@ -453,7 +453,7 @@ public class BaseController {
 
     /////////5th - Header Menu (Report) /////////
     //11. Report
-    @GetMapping("/ebe/report")
+    @GetMapping("ebe/report")
     public ModelAndView Report(/*@RequestParam(required = false,name="typeEvent") Integer typeID,
                                @RequestParam(required = false,name = "localAuth") Integer authID,*/
             HttpSession session) {
@@ -503,7 +503,7 @@ public class BaseController {
 
     /////////6th - Header Menu (Contact Us) /////////
     //12. Contact Us
-    @GetMapping("/ebe/contact-us")
+    @GetMapping("ebe/contact-us")
     public ModelAndView contactUs(HttpSession session) {
         ModelAndView mv = new ModelAndView();
         ObjectMapper objectMapper = new ObjectMapper();
@@ -514,7 +514,7 @@ public class BaseController {
 
 
     //    13. CWS home page
-    @GetMapping("/ebe/homecws")
+    @GetMapping("ebe/homecws")
     public ModelAndView homeCWS(){
         ModelAndView mv = new ModelAndView();
         mv.setViewName("homepageCWS");
@@ -536,7 +536,7 @@ public class BaseController {
         return mv;
     }
 
-    @GetMapping("/ebe/homeTeacher")
+    @GetMapping("ebe/homeTeacher")
     public ModelAndView homeTeach(){
         ModelAndView mv = new ModelAndView();
         mv.setViewName("homepageTeacher");
@@ -547,7 +547,7 @@ public class BaseController {
         return mv;
     }
 
-    @GetMapping("/ebe/error")
+    @GetMapping("ebe/error")
     public RedirectView ErrorPage() {
         return new RedirectView("/searchEmployerPage");
     }
