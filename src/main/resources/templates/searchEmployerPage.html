@@ -36,7 +36,7 @@
     <div class="container-headline my-5">
         <span class="title-h2">Employers</span>
         <a href="/add-employer">
-            <button type="button"   id="addEmployer" class="button--secondary float-right">Add Employer</button>
+            <button type="button" th:if="${session.SESSION_Role =='CWS'}" id="addEmployer" class="button--secondary float-right">Add Employer</button>
         </a>
     </div>
 

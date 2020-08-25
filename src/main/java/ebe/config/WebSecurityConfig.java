@@ -28,6 +28,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
                 .oauth2Login()
                 .defaultSuccessUrl("/");
 
+
+
+
     }
 
 //    @Bean
