@@ -3,30 +3,36 @@ package ebe.DBClasses;
 public class School {
 
     private int SchoolID;
-    private String Name;
-    private String AddressCity;
-    private String AddressStreet;
-    private String AddressNumber;
-    private String Email;
-    private String Phone;
+    private String SchoolName;
+    private String SchoolAddressCity;
+    private String SchoolAddressStreet;
+    private String SchoolAddressNumber;
+    private String SchoolPostCode;
+    private String SchoolEmail;
+    private String SchoolPhone;
 
-    public School(int schoolID, String name, String addressCity, String addressStreet, String addressNumber, String email, String phone) {
-        SchoolID = schoolID;
-        Name = name;
-        AddressCity = addressCity;
-        AddressStreet = addressStreet;
-        AddressNumber = addressNumber;
-        Email = email;
-        Phone = phone;
+    public School() {
     }
 
-    public School(String name, String addressCity, String addressStreet, String addressNumber, String email, String phone) {
-        Name = name;
-        AddressCity = addressCity;
-        AddressStreet = addressStreet;
-        AddressNumber = addressNumber;
-        Email = email;
-        Phone = phone;
+    public School(int schoolID, String schoolName, String schoolAddressCity, String schoolAddressStreet, String schoolAddressNumber, String schoolPostCode, String schoolEmail, String schoolPhone) {
+        SchoolID = schoolID;
+        SchoolName = schoolName;
+        SchoolAddressCity = schoolAddressCity;
+        SchoolAddressStreet = schoolAddressStreet;
+        SchoolAddressNumber = schoolAddressNumber;
+        SchoolPostCode = schoolPostCode;
+        SchoolEmail = schoolEmail;
+        SchoolPhone = schoolPhone;
+    }
+
+    public School(String schoolName, String schoolAddressCity, String schoolAddressStreet, String schoolAddressNumber, String schoolPostCode, String schoolEmail, String schoolPhone) {
+        SchoolName = schoolName;
+        SchoolAddressCity = schoolAddressCity;
+        SchoolAddressStreet = schoolAddressStreet;
+        SchoolAddressNumber = schoolAddressNumber;
+        SchoolPostCode = schoolPostCode;
+        SchoolEmail = schoolEmail;
+        SchoolPhone = schoolPhone;
     }
 
     public int getSchoolID() {
@@ -37,51 +43,59 @@ public class School {
         SchoolID = schoolID;
     }
 
-    public String getName() {
-        return Name;
+    public String getSchoolName() {
+        return SchoolName;
     }
 
-    public void setName(String name) {
-        Name = name;
+    public void setSchoolName(String schoolName) {
+        SchoolName = schoolName;
     }
 
-    public String getAddressCity() {
-        return AddressCity;
+    public String getSchoolAddressCity() {
+        return SchoolAddressCity;
     }
 
-    public void setAddressCity(String addressCity) {
-        AddressCity = addressCity;
+    public void setSchoolAddressCity(String schoolAddressCity) {
+        SchoolAddressCity = schoolAddressCity;
     }
 
-    public String getAddressStreet() {
-        return AddressStreet;
+    public String getSchoolAddressStreet() {
+        return SchoolAddressStreet;
     }
 
-    public void setAddressStreet(String addressStreet) {
-        AddressStreet = addressStreet;
+    public void setSchoolAddressStreet(String schoolAddressStreet) {
+        SchoolAddressStreet = schoolAddressStreet;
     }
 
-    public String getAddressNumber() {
-        return AddressNumber;
+    public String getSchoolAddressNumber() {
+        return SchoolAddressNumber;
     }
 
-    public void setAddressNumber(String addressNumber) {
-        AddressNumber = addressNumber;
+    public void setSchoolAddressNumber(String schoolAddressNumber) {
+        SchoolAddressNumber = schoolAddressNumber;
     }
 
-    public String getEmail() {
-        return Email;
+    public String getSchoolPostCode() {
+        return SchoolPostCode;
     }
 
-    public void setEmail(String email) {
-        Email = email;
+    public void setSchoolPostCode(String schoolPostCode) {
+        SchoolPostCode = schoolPostCode;
     }
 
-    public String getPhone() {
-        return Phone;
+    public String getSchoolEmail() {
+        return SchoolEmail;
     }
 
-    public void setPhone(String phone) {
-        Phone = phone;
+    public void setSchoolEmail(String schoolEmail) {
+        SchoolEmail = schoolEmail;
+    }
+
+    public String getSchoolPhone() {
+        return SchoolPhone;
+    }
+
+    public void setSchoolPhone(String schoolPhone) {
+        SchoolPhone = schoolPhone;
     }
 }

@@ -16,7 +16,7 @@
     <link th:href="@{../css/ebe_style.css}" href="../css/ebe_style.css" rel="stylesheet" />
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
-    <title>Contact Us</title>
+    <title>Get in Touch</title>
 </head>
 
 <body>
@@ -25,10 +25,10 @@
 
 <div class="gel-content-container">
     <div class="container mt-5">
-        <h2 class="title-h2">Contact Us</h2>
+        <h2 class="title-h2">Get in Touch</h2>
     </div>
 
-    <form th:action="@{/contactUsEmail}" th:object="${email}" method="post">
+    <form>
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-8">
@@ -49,8 +49,8 @@
             <div class="row">
                 <div class="col-md-8">
                     <div class="form-group">
-                        <label for="postCode">Postcode*</label>
-                        <input type="text" id="postcode" class="form-control input-border" name="postcode">
+                        <label for="postCode">Post Code*</label>
+                        <input type="text" id="postCode" class="form-control input-border" name="postCode">
                     </div>
                 </div>
             </div>
@@ -73,7 +73,7 @@
             </div>
         </div>
         <div class="container mb-4 mt-5 text-center">
-            <button type="submit" value="Submit" class="button--secondary text-center">Submit</button>
+            <button type="button" class="button--secondary text-center">Submit</button>
         </div>
     </form>
 </div>
