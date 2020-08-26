@@ -49,7 +49,7 @@ public class BaseController {
 //    }
 
     // HomePage
-    @GetMapping("/")
+    @GetMapping("/ebe/")
     public ModelAndView HomePage() {
         ModelAndView mv = new ModelAndView();
 
@@ -77,7 +77,7 @@ public class BaseController {
 
     /////////1st - Header Menu (Employer) /////////
     //1. Search Employer
-    @GetMapping("/employers")
+    @GetMapping("/ebe/employers")
     public ModelAndView SearchEmployer(HttpSession session) {
 
         ModelAndView mv = new ModelAndView();
@@ -121,7 +121,7 @@ public class BaseController {
     }
 
     //2. Employer Profile (with the id)
-    @GetMapping("/profile-employer")
+    @GetMapping("/ebe/profile-employer")
     public ModelAndView EmployersProfile(@RequestParam(value="employerId")int id) {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("profileEmployerPage");
