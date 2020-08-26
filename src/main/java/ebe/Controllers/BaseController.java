@@ -427,7 +427,7 @@ public class BaseController {
 
     /////////4th - Header Menu (Request) /////////
     //10. Request
-    @GetMapping("/request")
+    @GetMapping("ebe/request")
     public ModelAndView Request(HttpSession session) {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("requestPage");
