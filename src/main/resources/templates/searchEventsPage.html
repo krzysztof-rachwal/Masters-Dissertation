@@ -30,16 +30,12 @@
             </a>
         </div>
 
-        <div class="flex-container">
-            <div class="col-lg-3">
-                <div class="mb-3">
-                    <h6>TYPE OF EVENT</h6>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="ind1">
-                        <label class="form-check-label" for="ind1">
-                            Activate
-                        </label>
-                    </div>
+    <div class="container-headline my-5">
+        <span class="title-h2">Events</span>
+        <a href="/add-events">
+            <button type="button" th:if="${session.SESSION_Role =='CWS'}" id="addEvent" class="button--secondary float-right" >Add Event</button>
+        </a>
+    </div>
 
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" value="" id="ind2">
