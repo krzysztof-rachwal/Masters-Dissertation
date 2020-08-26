@@ -5,11 +5,7 @@ body {
 }
 
 .text-info{
-    color: #01778a!important;
-}
-
-.text-success{
-    color: #d1368b!important;
+    color: #007066!important;
 }
 
 .container-fluid, form, .modal-body, .well {
@@ -48,7 +44,7 @@ body {
 .buttonDelete{
     background:#fff ;
     color:#007066 ;
-    border-left: 2px solid #007066;
+    border-right: 2px solid #007066;
     padding: 5px 20px !important;
 }
 
@@ -116,7 +112,7 @@ a {
     text-decoration: none !important;
 }
 
-.list-employers, .list-vacancies, .list-events{
+.list-employers{
     overflow-y:scroll;
     overflow-x: hidden;
     -webkit-overflow-scrolling: touch;
@@ -143,9 +139,6 @@ a {
     font-weight: 500;
     line-height: 1.2;
 }
-.well3{
-    border: solid 10px white;
-}
 
 .typoWhite{
     color: white !important;
@@ -156,44 +149,4 @@ a {
         margin: 0 0 40px;
         padding: 40px;
         }
-}
-
-ul{
-    list-style-type: none;
-}
-
-.alert{
-    bottom: 0px;
-    position: fixed;
-    z-index: 1060;
-    right: 5px;
-    width: 260px;
-}
-
-.tooltip-button{
-    background: transparent;
-    border: transparent;
-}
-
-.form-control{
-    border: solid 1px transparent !important;
-}
-
-.group-input{
-    position: relative;
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
-    -ms-flex-align: stretch;
-    align-items: stretch;
-    width: 80%;
-}
-
-.text-area-w-80{
-    width:80% !important;
-}
-
-.search-box{
-    border: solid 1px gainsboro !important;
 }
