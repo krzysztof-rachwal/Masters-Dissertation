@@ -31,7 +31,9 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation "org.springframework.boot:spring-boot-starter-security"
     implementation "org.springframework.boot:spring-boot-starter-oauth2-client"
-//    implementation('org.springframework.session:spring-session-jdbc')
+//    implementation 'com.azure:com.microsoft.azure:azure-storage-spring-boot-starter:2.2.5'
+   // compile group: 'com.microsoft.azure', name: 'azure-storage-spring-boot-starter', version: '2.2.4'
+    compile group: 'com.microsoft.azure', name: 'azure-storage', version: '8.4.0'    //    implementation('org.springframework.session:spring-session-jdbc')
 //    implementation 'org.springframework.boot:spring-boot-starter-jdbc'
 //
 //    runtimeOnly 'com.microsoft.sqlserver:mssql-jdbc'
