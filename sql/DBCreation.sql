@@ -218,6 +218,7 @@ CREATE TABLE IF NOT EXISTS `ebedb`.`Event` (
   `PromotesApprenticeships` TINYINT(4) NULL DEFAULT NULL,
   `PromotesWelshLanguage` TINYINT(4) NULL DEFAULT NULL,
   `ChallengesGenderStereotypes` TINYINT(4) NULL DEFAULT NULL,
+  `IsFeatured` TINYINT NULL,
   PRIMARY KEY (`EventID`),
   INDEX `EventTypeOfEvent_idx` (`TypeOfEventID` ASC),
   CONSTRAINT `EventTypeOfEvent`
