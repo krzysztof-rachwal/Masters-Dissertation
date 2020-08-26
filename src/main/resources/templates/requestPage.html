@@ -19,12 +19,10 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
           integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css" rel="stylesheet"/>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css"/>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css"/>
+
     <link th:href="@{../css/ebe_style.css}" href="../css/ebe_style.css" rel="stylesheet"/>
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
     <title>Request</title>
@@ -41,92 +39,230 @@
         <span class="title-h2">Request</span>
         <p class="mt-3">Request an event of your choice with employers you want to attend.</p>
     </div>
+    <div class="tabs-wrapper">
+        <ul class="tabs js-tabs" gel-processed="processed" id="myTabs" role="tablist">
+            <li class="tabs__tab js-tab tab--first" tabindex="-1">
+                <a id="general-tab" href="#general" class="tab__link  tab--is-active" data-toggle="tab" role="tab"
+                   aria-selected="true" aria-controls="general">
+                    <strong>Request Event</strong>
+                </a>
+            </li>
+            <li class="tabs__tab js-tab" tabindex="-1">
+                <a id="sector-tab" class="tab__link" data-toggle="tab" href="#sector" role="tab" aria-selected="false"
+                   aria-controls="sector">
+                    <strong>Request by industry sector</strong>
+                </a>
+            </li>
+            <li class="tabs__tab js-tab" tabindex="-1">
+                <a id="lang-tab" class="tab__link" data-toggle="tab" href="#lang" role="tab" aria-selected="false"
+                   aria-controls="lang">
+                    <strong>Request by language</strong>
+                </a>
+            </li>
+        </ul>
+    </div>
 
-    <form th:action="@{/requestEmail}" th:object="${request}" method="post">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-8">
-                    <div class="form-group">
-                        <label for="eventName">Event Name</label>
-                        <input type="text" id="eventName" name="eventName" class="form-control input-border">
+    <div class="tab-content" id="myTabContent">
+        <div id="general" class="tab-pane fade show active" role="tabpanel" aria-labelledby="general-tab">
+            <form th:action="@{/requestEmail}" th:object="${request}" method="post">
+                <div class="container-fluid">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="event_name">Event Name</label>
+                            <input type="text" id="event_name" name="event_name" class="form-control input-border">
+                        </div>
+                        <div class="form-group">
+                            <label class=" text-left" for="event_date">Event Date</label>
+                            <input type="date" id="event_date" class="form-control input-border" name="event_date">
+                        </div>
+                        <div class="form-group mb-0">
+                            <label for="event_time">Event Time</label>
+                            <input type="time" id="event_time" class="form-control input-border" name="event_time">
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-8">
-                    <div class="form-group">
-                        <label class=" text-left" for="eventDate">Event Date</label>
-                        <input type="date" id="eventDate" class="form-control input-border" name="eventDate">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="event-type">Event Type</label>
+                                <select class="selectpicker w-100" data-live-search="true" id="event-type">
+                                    <option th:each="event : ${allEventTypes}" th:value="${event.getTypeOfEventID()}"
+                                            th:text="${event.getTypeOfEventName()}"></option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="event-guests">Guest(s)</label>
+                                <select class="selectpicker form-control"  multiple data-live-search="true"
+                                        id="event-guests">
+                                    <option th:each="emp : ${allEmployers}"
+                                            th:value="${emp.getEmployerID()}"
+                                            th:text="${emp.getEmployerName()}"></option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-8">
-                    <div class="form-group">
-                        <label for="eventTime">Event Time</label>
-                        <input type="time" id="eventTime" class="form-control input-border" name="eventTime">
+                    <div class="col-md-12 mt-3">
+                        <div class="form-group">
+                            <label for="event_notes">Event Notes</label>
+                            <textarea type="time" id="event_notes" class="form-control input-border border-0"
+                                      rows="5" name="event_notes"></textarea>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label for="eventNotes">Event Notes</label>
-                        <textarea type="time" id="eventNotes" class="form-control input-border border-0" rows="5" name="eventNotes"></textarea>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <div class="row d-inline">
-                            <label for="eventType" class="d-block">Event Type</label>
-                            <select id="eventType" name="eventType" class="selectpicker d-block">
-                                <option value="type1">type1</option>
-                                <option value="type2">type2</option>
-                                <option value="type3">type3</option>
-                            </select>
+                    <div class="row">
+                        <div class="container mt-5 mb-4 text-center">
+                            <button type="button" class="button--secondary text-center">Request</button>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-md-8">
-                    <div class="form-group">
-                        <label for="guests">Guest(s)</label><br>
-                        <select class="selectpicker" name="guests" multiple data-live-search="true" id="guests">
-                            <option value="guest1">Guest 1</option>
-                            <option value="guest2">Guest 2</option>
-                            <option value="guest3">Guest 3</option>
-                            <option value="guest4">Guest 4</option>
-                        </select>
+            </form>
+        </div>
+        <div id="lang" class="tab-pane fade" role="tabpanel" aria-labelledby="lang-tab">
+            <form>
+                <div class="container-fluid">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="event_name">Event Name</label>
+                            <input type="text" id="event_name_sector" name="event_name"
+                                   class="form-control input-border">
+                        </div>
+                        <div class="form-group">
+                            <label class=" text-left" for="event_date">Event Date</label>
+                            <input type="date" id="event_date_sector" class="form-control input-border"
+                                   name="event_date">
+                        </div>
+                        <div class="form-group mb-0">
+                            <label for="event_time">Event Time</label>
+                            <input type="time" id="event_time_sector" class="form-control input-border"
+                                   name="event_time">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="event-type2" class="d-block">Event Type</label>
+                                <select class="selectpicker w-100" data-live-search="true"
+                                        id="event-type2">
+                                    <option th:each="event : ${allEventTypes}"
+                                            th:value="${event.getTypeOfEventID()}"
+                                            th:text="${event.getTypeOfEventName()}"></option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="language">Language</label>
+                                <select class="selectpicker form-control" multiple data-live-search="true"
+                                        id="language">
+                                    <option th:each="lang : ${allLanguages}"
+                                            th:value="${lang.getEmployerLanguageID()}"
+                                            th:text="${lang.getEmployerLanguageName()}"></option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 mt-3">
+                        <div class="form-group">
+                            <label for="event_notes">Event Notes</label>
+                            <textarea type="time" id="event_notes_sector" class="form-control input-border border-0"
+                                      rows="5" name="event_notes"></textarea>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="container mt-5 mb-4 text-center">
+                            <button type="button" class="button--secondary text-center">Request</button>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="container mt-5 mb-4 text-center">
-                <button type="submit" value="Submit" class="button--secondary text-center">Request</button>
-            </div>
+            </form>
         </div>
-    </form>
+        <div id="sector" class="tab-pane fade" role="tabpanel" aria-labelledby="sector-tab">
+            <form>
+                <div class="container-fluid">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="event_name">Event Name</label>
+                            <input type="text" id="event_name_lang" name="event_name"
+                                   class="form-control input-border">
+                        </div>
+                        <div class="form-group">
+                            <label class=" text-left" for="event_date">Event Date</label>
+                            <input type="date" id="event_date_lang" class="form-control input-border"
+                                   name="event_date">
+                        </div>
+                        <div class="form-group mb-0">
+                            <label for="event_time">Event Time</label>
+                            <input type="time" id="event_time_lang" class="form-control input-border"
+                                   name="event_time">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="event-type3" class="d-block">Event Type</label>
+                                <select class="selectpicker w-100" data-live-search="true"
+                                        id="event-type3">
+                                    <option th:each="event : ${allEventTypes}"
+                                            th:value="${event.getTypeOfEventID()}"
+                                            th:text="${event.getTypeOfEventName()}"></option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="sectorPRef">Sector</label>
+                                <select class="selectpicker form-control" multiple data-live-search="true"
+                                        id="sectorPref">
+                                    <option th:each="employerIndustrySector : ${allIndustrySectors}"
+                                            th:value="${employerIndustrySector.getEmployerIndustrySectorID()}"
+                                            th:text="${employerIndustrySector.getEmployerIndustrySectorName()}"></option>
+
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 mt-3">
+                        <div class="form-group">
+                            <label for="event_notes">Event Notes</label>
+                            <textarea type="time" id="event_notes_lang" class="form-control input-border border-0"
+                                      rows="5" name="event_notes"></textarea>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="container mt-5 mb-4 text-center">
+                            <button type="button" class="button--secondary text-center">Request</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
 <!--END OF MAIN CONTENT-->
 
 <footer th:replace="fragments/footerTemplate :: footer"></footer>
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
 <script type="text/javascript" src="https://careerswales.gov.wales/styleguide/assets/js/gel-styleguide.js"></script>
-<script type="text/javascript" src="https://careerswales.gov.wales/styleguide/assets/js/gel-elements-loader.js"></script>
+<script type="text/javascript"
+        src="https://careerswales.gov.wales/styleguide/assets/js/gel-elements-loader.js"></script>
 <script type="text/javascript" src="https://careerswales.gov.wales/styleguide/assets/js/gel-elements.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
 
-
 <script>
-    $('select').selectpicker();
+    $('selectpicker').selectpicker();
+
+    //1. On document Ready
+    $(document).ready(function () {
+        $(".tab__link").click(function () {
+            $(".tab__link").removeClass("tab--is-active")
+            $(".tab__link").removeClass("active")
+            $(this).addClass("tab--is-active")
+        });
+    });
 </script>
 </body>
 </html>
