@@ -184,6 +184,7 @@ public class EventAPI {
         int PromotesApprenticeships = 0;
         int PromotesWelshLanguage = 0;
         int ChallengesGenderStereotypes = 0;
+        int IsFeatured = 0;
 
         if (!typeOfEventID.equals("")) {
             for (String typeOfEvent : typeOfEventID.split(",")) {
@@ -209,12 +210,14 @@ public class EventAPI {
                     PromotesWelshLanguage = 1;
                 } else if (preference.equals("3")) {
                     ChallengesGenderStereotypes = 1;
+                } else if (preference.equals("4")) {
+                    IsFeatured = 1;
                 }
             }
         }
 
         List<Integer> ids = EventQrys.filterEvents(typeOfEventList, nameOfAdviserList,
-                PromotesApprenticeships, PromotesWelshLanguage,  ChallengesGenderStereotypes);
+                PromotesApprenticeships, PromotesWelshLanguage,  ChallengesGenderStereotypes, IsFeatured);
 
         return ids;
     }

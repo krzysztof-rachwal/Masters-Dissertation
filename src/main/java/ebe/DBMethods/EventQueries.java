@@ -282,7 +282,7 @@ public class EventQueries extends DBQueries {
     ///////////////////////////////////// FILTER METHODS ///////////////////////////////////////////////
 
     //14. Filter Events
-    public List<Integer> filterEvents(List<Integer> typeOfEventList, List<String> nameOfAdviserList, int promotesApprenticeships, int promotesWelshLanguage, int challengesGenderStereotypes) {
+    public List<Integer> filterEvents(List<Integer> typeOfEventList, List<String> nameOfAdviserList, int promotesApprenticeships, int promotesWelshLanguage, int challengesGenderStereotypes, int isFeatured) {
         List<Integer> ids = new ArrayList<>();
         connection = ConnectionFactory.getConnection();
         ResultSet rs = null;
@@ -316,9 +316,9 @@ public class EventQueries extends DBQueries {
 
         String SQL4 = "";
 
-        List<Integer> booleanFilters = Arrays.asList(promotesApprenticeships, promotesWelshLanguage, challengesGenderStereotypes);
+        List<Integer> booleanFilters = Arrays.asList(promotesApprenticeships, promotesWelshLanguage, challengesGenderStereotypes, isFeatured);
 
-        List<String> SQLStatements = Arrays.asList(" PromotesApprenticeships = "," PromotesWelshLanguage = "," ChallengesGenderStereotypes = ");
+        List<String> SQLStatements = Arrays.asList(" PromotesApprenticeships = "," PromotesWelshLanguage = "," ChallengesGenderStereotypes = ", " IsFeatured = ");
 
         if (booleanFilters.contains(1)){
             SQL4 = SQL4.concat(" AND (");
