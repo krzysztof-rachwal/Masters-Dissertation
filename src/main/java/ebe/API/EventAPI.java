@@ -50,6 +50,7 @@ public class EventAPI {
             @RequestParam(name="promotesApprenticeships", required = true) Boolean PromotesApprenticeships,
             @RequestParam(name="promotesWelshLanguage", required = true) Boolean PromotesWelshLanguage,
             @RequestParam(name="challengesGenderStereotypes", required = true) Boolean ChallengesGenderStereotypes,
+            @RequestParam(name="isFeatured", required = true) Boolean isFeatured,
             @RequestParam(name="employerAttending", required = true) String EmployerAttending,
             @RequestParam(name="schoolAttending", required = true) String SchoolAttending) throws ParseException {
 
@@ -72,7 +73,7 @@ public class EventAPI {
         //3. Create the Event
         EventQrys.createEvent(EventName, TypeOfEventID, EventDateAndTime,  EventVenueName,  EventAddressCity,
                 EventAddressStreet, EventAddressNumber, EventPostcode, EventSummary, IsPublic, isCancelled, NameOfAdviser,
-                NumberOfAttendees,  PromotesApprenticeships,  PromotesWelshLanguage,ChallengesGenderStereotypes);
+                NumberOfAttendees,  PromotesApprenticeships,  PromotesWelshLanguage, ChallengesGenderStereotypes, isFeatured);
 
         //      Get Event Created Id
         int eventId = EventQrys.getLastEventCreated(EventName);
@@ -109,6 +110,7 @@ public class EventAPI {
             @RequestParam(name="promotesApprenticeships", required = true) Boolean PromotesApprenticeships,
             @RequestParam(name="promotesWelshLanguage", required = true) Boolean PromotesWelshLanguage,
             @RequestParam(name="challengesGenderStereotypes", required = true) Boolean ChallengesGenderStereotypes,
+            @RequestParam(name="isFeatured", required = true) Boolean isFeatured,
             @RequestParam(name="employerAttending", required = true) String EmployerAttending,
             @RequestParam(name="schoolAttending", required = true) String SchoolAttending) throws ParseException {
 
@@ -131,7 +133,7 @@ public class EventAPI {
         //3. Update the Event
         EventQrys.updateEvent(EventID, EventName, TypeOfEventID, EventDateAndTime,  EventVenueName,  EventAddressCity,
                 EventAddressStreet, EventAddressNumber, EventPostcode, EventSummary, IsPublic, isCancelled, NameOfAdviser,
-                NumberOfAttendees,  PromotesApprenticeships,  PromotesWelshLanguage,ChallengesGenderStereotypes);
+                NumberOfAttendees,  PromotesApprenticeships,  PromotesWelshLanguage,ChallengesGenderStereotypes, isFeatured);
 
 
         //      Insert into the Employer / Event intersection table
@@ -182,6 +184,7 @@ public class EventAPI {
         int PromotesApprenticeships = 0;
         int PromotesWelshLanguage = 0;
         int ChallengesGenderStereotypes = 0;
+        int IsFeatured = 0;
 
         if (!typeOfEventID.equals("")) {
             for (String typeOfEvent : typeOfEventID.split(",")) {
@@ -207,12 +210,14 @@ public class EventAPI {
                     PromotesWelshLanguage = 1;
                 } else if (preference.equals("3")) {
                     ChallengesGenderStereotypes = 1;
+                } else if (preference.equals("4")) {
+                    IsFeatured = 1;
                 }
             }
         }
 
         List<Integer> ids = EventQrys.filterEvents(typeOfEventList, nameOfAdviserList,
-                PromotesApprenticeships, PromotesWelshLanguage,  ChallengesGenderStereotypes);
+                PromotesApprenticeships, PromotesWelshLanguage,  ChallengesGenderStereotypes, IsFeatured);
 
         return ids;
     }

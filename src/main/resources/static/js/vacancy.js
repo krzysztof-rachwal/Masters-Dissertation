@@ -302,66 +302,73 @@ if (vacancyDeleted === "true"){
     localStorage.clear()
 }
 
-//11. Validation Function
+//11. Feedback - Update Vacancy
+vacancyUpdated = localStorage.getItem("vacancyUpdated");
+
+if (vacancyUpdated === "true"){
+    $('#success_message').removeClass('d-none')
+    $("#success_message").fadeTo(1500, 1);
+    setTimeout(function(){$("#success_message").fadeTo(1500, 0); },5000);
+    localStorage.clear()
+}
+
+//12. Validation Function
 function validateForm(){
 
     let verifier = true;
     let attributesArray = $(".form-required")
 
-    // 11.1 Remove the Valid/Invalid class
+    // 12.1 Remove the Valid/Invalid class
     $(".form-required").removeClass("is-invalid ").removeClass("is-valid ")
     $(".selectpicker").parent().removeClass("is-invalid").removeClass("is-valid ")
 
-    // 11.2 Add The Valid class to all elements
+    // 12.2 Add The Valid class to all elements
     $(".selectpicker").add("is-valid ")
 
-    // 11.3 Validate inputs(Empty)
+    // 12.3 Validate inputs(Empty)
     for (let i = 0; i < attributesArray.length; i++) {
         if (attributesArray[i].value === "") {
-            // 11.3.1 Remove The Valid/Invalid class
+            // 12.3.1 Remove The Valid/Invalid class
             attributesArray[i].classList.remove("is-invalid")
             attributesArray[i].classList.remove("is-valid")
-            // 11.3.2 Add the Invalid class
+            // 12.3.2 Add the Invalid class
             attributesArray[i].classList.add("is-invalid")
         }
     }
 
-    // 11.4 Change variable data to selectpickers
+    // 12.4 Change variable data to selectpickers
     attributesArray = $(".selectpicker")
 
-    //11.5 Validate selectpickers
+    //12.5 Validate selectpickers
     for (let i = 0; i < attributesArray.length; i++) {
         if (attributesArray[i].value === "") {
-            // 11.5.1 Remove The Valid/Invalid class
+            // 12.5.1 Remove The Valid/Invalid class
             attributesArray[i].classList.remove("is-invalid")
             attributesArray[i].classList.remove("is-valid")
-            // 11.5.2 Add the Invalid class
+            // 12.5.2 Add the Invalid class
             attributesArray[i].parentNode.classList.add("is-invalid")
         }
     }
 
-    // 11.6 Validate Input(PostCode)
+    // 12.6 Validate Input(PostCode)
 
-    // 11.6.1 Set the RegEx and test it
+    // 12.6.1 Set the RegEx and test it
     let postCodeVal = /[a-z][a-z]\d\d\s\d[a-z][a-z]|[a-z][a-z]\d\s\d[a-z][a-z]|[a-z]\d\s\d[a-z][a-z]|[a-z][a-z]\d[a-z]\s\d[a-z][a-z]|[a-z]\d\d\s\d[a-z][a-z]/i.test($("#post-code").val());
     // let postCodeVal = postCodeValidation.test($("#employer-postcode").val());
-    // 11.6.2 Verify if it's needed to put an invalid class
+    // 12.6.2 Verify if it's needed to put an invalid class
     if(!postCodeVal){
         $("#post-code").removeClass("is-invalid").removeClass("is-valid")
         $("#post-code").addClass("is-invalid")
     }
 
-    //11.7 Verify if there is any invalid class
+    //12.7 Verify if there is any invalid class
     if($(".selectpicker").parent().hasClass("is-invalid") || $(".form-required").hasClass("is-invalid")){
         verifier = false
     }
-
     return verifier;
 }
 
-
-
-//12. On document Ready
+//13. On document Ready
 $( document ).ready(function() {
     $("select[name=vacancy-sort-by]").change(function(){
         sortVacanciesByNameAndDate($(this).val(),$(this).children(":selected").attr("data-val"));
