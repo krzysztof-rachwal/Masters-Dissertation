@@ -26,18 +26,21 @@
 <body>
 
 <header th:replace="fragments/headerTemplate :: header"></header>
-<div class="gel-content-container">
+<div class="gel-content-container pr-5">
+
     <div class="container-headline my-5">
         <span class="title-h2">Quicklinks</span>
     </div>
-    <a href="/request" class="button button--icon d-block">Request an event</a>
-    <a href="/contact-us" class="button button--icon d-block">Get in touch</a>
+    <div class="col-md-12 mb-5">
+        <a href="/request" class="button button--icon d-block">Request an event</a>
+        <a href="/contact-us" class="button button--icon d-block">Get in touch</a>
+    </div>
 
     <div class="container-headline my-5">
         <span class="title-h2">Featured events</span>
     </div>
 
-    <div class="list-employers">
+    <div class="list-employers col-md-12 mb-5">
         <div class="gel-content-row" th:each="event : ${featuredEvents}">
             <article class="card js-card card--style-icon card--100" gel-processed="processed"
                      th:id="${event.getEventID()}">
@@ -64,7 +67,7 @@
         <span class="title-h2">Events in your Local Authority</span>
     </div>
 
-    <div class="list-employers">
+    <div class="list-employers col-md-12">
         <div class="gel-content-row" th:each="event : ${recommendedEvents}">
             <article class="card js-card card--style-icon card--100" gel-processed="processed"
                      th:id="${event.getEventID()}">
