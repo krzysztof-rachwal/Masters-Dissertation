@@ -116,7 +116,7 @@
             </form>
         </div>
         <div id="lang" class="tab-pane fade" role="tabpanel" aria-labelledby="lang-tab">
-            <form>
+            <form th:action="@{/requestEmail}" th:object="${request}" method="post">
                 <div class="container-fluid">
                     <div class="col-md-6">
                         <div class="form-group">
@@ -173,7 +173,7 @@
             </form>
         </div>
         <div id="sector" class="tab-pane fade" role="tabpanel" aria-labelledby="sector-tab">
-            <form>
+            <form th:action="@{/requestEmail}" th:object="${request}" method="post">
                 <div class="container-fluid">
                     <div class="col-md-6">
                         <div class="form-group">
