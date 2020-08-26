@@ -49,7 +49,7 @@ public class BaseController {
 //    }
 
     // HomePage
-    @GetMapping("/ebe/")
+    @GetMapping("/")
     public ModelAndView HomePage() {
         ModelAndView mv = new ModelAndView();
 
