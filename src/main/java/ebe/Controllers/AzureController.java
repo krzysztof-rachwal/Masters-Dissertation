@@ -17,7 +17,6 @@ public class AzureController {
 
     @GetMapping("/container")
     public ResponseEntity createContainer(@RequestParam String containerName){
-        System.out.println("JESTEM");
         boolean created = azureBlobAdapter.createContainer(containerName);
         return ResponseEntity.ok(created);
     }
@@ -34,7 +33,7 @@ public class AzureController {
         return ResponseEntity.ok(uris);
     }
 
-    @DeleteMapping
+    @DeleteMapping("/delete")
     public ResponseEntity delete(@RequestParam String containerName, @RequestParam String blobName){
         azureBlobAdapter.deleteBlob(containerName, blobName);
         return ResponseEntity.ok().build();
