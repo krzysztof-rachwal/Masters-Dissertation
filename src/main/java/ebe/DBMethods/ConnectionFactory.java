@@ -7,9 +7,9 @@ import java.sql.SQLException;
 public class ConnectionFactory {
     //static reference to itself
     private static ConnectionFactory instance = new ConnectionFactory();
-    public static final String URL = "jdbc:mysql://csmysql.cs.cf.ac.uk/c1976275_Spring_DB";
-    public static final String USER = "c1976275";
-    public static final String PASSWORD = "#Cardiffuni19";
+    public static final String URL = "jdbc:mysql://cw-ebe-sql.mysql.database.azure.com/ebedb?useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+    public static final String USER = "ebeadmin@cw-ebe-sql";
+    public static final String PASSWORD = "9gKJFcLmv7uG@#Ok";
     public static final String DRIVER_CLASS = "com.mysql.jdbc.Driver";
 
     //private constructor

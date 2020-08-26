@@ -170,6 +170,16 @@
                                     </select>
                                 </div>
                             </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Is the Event featured?</label>
+                                    <select  id="event-featured">
+                                        <option value="1" th:selected="${event.getFeatured()== true}">Yes</option>
+                                        <option value="0" th:selected="${event.getFeatured()== false}">No</option>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="container my-4 text-center">
@@ -222,8 +232,8 @@
     <div class="container-headline mt-5">
         <span class="title-h2" th:text="${#strings.capitalize(event.getEventName())}"></span>
         <input type="hidden" th:value="${event.getEventID()}" id="event-id"/>
-        <button type="button" id="deleteEvent" data-toggle="modal" data-target="#deleteModal" class="buttonDelete float-right">Delete</button>
-        <button type="button" id="updateEvent" data-toggle="modal" data-target="#updateModal" class="buttonUpdate float-right">Update</button>
+        <button type="button" id="deleteEvent" th:if="${session.SESSION_Role =='CWS'}" data-toggle="modal" data-target="#deleteModal" class="buttonDelete float-right">Delete</button>
+        <button type="button" id="updateEvent" th:if="${session.SESSION_Role =='CWS'}" data-toggle="modal" data-target="#updateModal" class="buttonUpdate float-right">Update</button>
     </div>
 
     <div class="container-fluid py-5 px-5 eventBackground">
@@ -273,48 +283,55 @@
                 </div>
             </div>
             <div class="col-md-6">
-                <div class="form-group">
+                <div class="form-group" th:if="${session.SESSION_Role =='CWS'}">
                     <span class="font-weight-bold h5">Number of Attendees </span>
                     <p th:text="${event.getNumberOfAttendees()}"></p>
                 </div>
             </div>
             <div class="col-md-6">
-                <div class="form-group">
+                <div class="form-group" th:if="${session.SESSION_Role =='CWS'}">
                     <span class="font-weight-bold h5">Can the event be conducted in Welsh? </span>
                     <p th:remove="${event.getPromotesWelshLanguage()== true}  ? none : all">Yes</p>
                     <p th:remove="${event.getPromotesWelshLanguage()== false}  ? none : all">No</p>
                 </div>
             </div>
             <div class="col-md-6">
-                <div class="form-group">
+                <div class="form-group"th:if="${session.SESSION_Role =='CWS'}">
                     <span class="font-weight-bold h5">Does the event promote apprenticeship? </span>
                     <p th:remove="${event.getPromotesApprenticeships()== true}  ? none : all">Yes</p>
                     <p th:remove="${event.getPromotesApprenticeships()== false}  ? none : all">No</p>
                 </div>
             </div>
             <div class="col-md-6">
-                <div class="form-group">
+                <div class="form-group" th:if="${session.SESSION_Role =='CWS'}">
                     <span class="font-weight-bold h5">Does the event challenger gender stereotypes? </span>
                     <p th:remove="${event.getChallengesGenderStereotypes()== true}  ? none : all">Yes</p>
                     <p th:remove="${event.getChallengesGenderStereotypes()== false}  ? none : all">No</p>
                 </div>
             </div>
             <div class="col-md-6">
-                <div class="form-group">
+                <div class="form-group" th:if="${session.SESSION_Role =='CWS'}">
                     <span class="font-weight-bold h5">Is the Event Public? </span>
                     <p th:remove="${event.getPublic()== true}  ? none : all">Yes</p>
                     <p th:remove="${event.getPublic()== false}  ? none : all">No</p>
                 </div>
             </div>
             <div class="col-md-6">
-                <div class="form-group">
+                <div class="form-group" th:if="${session.SESSION_Role =='CWS'}">
                     <span class="font-weight-bold h5">Is the Event Cancelled? </span>
                     <p th:remove="${event.getCancelled()== true}  ? none : all">Yes</p>
                     <p th:remove="${event.getCancelled()== false}  ? none : all">No</p>
                 </div>
             </div>
+            <div class="col-md-6">
+                <div class="form-group" th:if="${session.SESSION_Role =='CWS'}">
+                    <span class="font-weight-bold h5">Is the Event featured? </span>
+                    <p th:remove="${event.getFeatured() == true}  ? none : all">Yes</p>
+                    <p th:remove="${event.getFeatured() == false}  ? none : all">No</p>
+                </div>
+            </div>
         </div>
-        <div class="row pt-3">
+        <div class="row pt-3" th:if="${session.SESSION_Role =='CWS'}">
             <div class="mb-auto p-2 col-md-6 well2 well3">
                 <label class="font-weight-bold h5">Schools Attending</label>
                 <ul class="list-group">
@@ -332,6 +349,7 @@
                 </ul>
             </div>
         </div>
+
     </div>
 </div>
 <footer th:replace="fragments/footerTemplate :: footer"></footer>
@@ -345,20 +363,11 @@
 <script type="text/javascript" src="https://careerswales.gov.wales/styleguide/assets/js/gel-elements.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+<script th:src="@{../js/events.js}" src="../js/events.js"></script>
 <script>
     $('.selectpicker').selectpicker();
 </script>
-<script th:src="@{../js/events.js}" src="../js/events.js"></script>
-<script>
-    eventUpdated = localStorage.getItem("eventUpdated");
 
-    if (eventUpdated === "true"){
-        $('#success_message').removeClass('d-none')
-        $("#success_message").fadeTo(1500, 1);
-        setTimeout(function(){$("#success_message").fadeTo(1500, 0); },5000);
-        localStorage.clear()
-    }
 
-</script>
 </body>
 </html>

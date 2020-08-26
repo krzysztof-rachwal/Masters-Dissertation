@@ -34,6 +34,7 @@ function createNewEvent() {
     var promotesApprenticeships_url="promotesApprenticeships=" + $('select[id=promote-apprenticheship]').val();
     var promotesWelshLanguage_url = "promotesWelshLanguage=" + $('select[id=conducted-welsh]').val();
     var challengesGenderStereotypes_url = "challengesGenderStereotypes=" + $('select[id=challenger-gender]').val();
+    var isFeatured_url = "isFeatured=" + $('select[id=event-featured]').val();
     var employerAttending_url = "employerAttending=" + $('select[id=employers-attending]').val();
     var schoolAttending_url = "schoolAttending=" + $('select[id=schools-attending]').val();
 
@@ -41,7 +42,7 @@ function createNewEvent() {
         + eventVenueName_url + "&" + eventAddressCity_url  + "&" + eventAddressStreet_url  + "&" + eventAddressNumber_url + "&"
         + eventPostcode_url + "&" + eventSummary_url+ "&" + isPublic_url + "&" + isCancelled_url + "&" +nameOfAdviser_url +"&"
         + numberOfAttendees_url + "&" + promotesApprenticeships_url  + "&" + promotesWelshLanguage_url + "&" + challengesGenderStereotypes_url  + "&"
-        + employerAttending_url + "&" + schoolAttending_url ;
+        + isFeatured_url + "&" + employerAttending_url + "&" + schoolAttending_url ;
 
     var token = $("meta[name='_csrf']").attr("content");    // Used to bypass Spring Boot's CSRF protocol     -- Solution taken from 'https://stackoverflow.com/questions/34747437/use-of-spring-csrf-with-ajax-rest-call-and-html-page-with-thymeleaf' on Nov 26th 2019
     var header = $("meta[name='_csrf_header']").attr("content");    // Used to bypass Spring Boot's CSRF protocol
@@ -111,6 +112,7 @@ function UpdateThisEvent(){
     var promotesApprenticeships_url="promotesApprenticeships=" + $('select[id=promote-apprenticheship]').val();
     var promotesWelshLanguage_url = "promotesWelshLanguage=" + $('select[id=conducted-welsh]').val();
     var challengesGenderStereotypes_url = "challengesGenderStereotypes=" + $('select[id=challenger-gender]').val();
+    var isFeatured_url = "isFeatured=" + $('select[id=event-featured]').val();
 
     var employerAttending_url = "employerAttending=" + $('select[id=employers-attending]').val();
     var schoolAttending_url = "schoolAttending=" + $('select[id=schools-attending]').val();
@@ -120,7 +122,7 @@ function UpdateThisEvent(){
         + eventVenueName_url + "&" + eventAddressCity_url  + "&" + eventAddressStreet_url  + "&" + eventAddressNumber_url + "&"
         + eventPostcode_url + "&" + eventSummary_url+ "&" + isPublic_url + "&" + isCancelled_url + "&" +nameOfAdviser_url +"&"
         + numberOfAttendees_url + "&" + promotesApprenticeships_url  + "&" + promotesWelshLanguage_url + "&" + challengesGenderStereotypes_url  + "&"
-        + employerAttending_url + "&" + schoolAttending_url ;
+        + isFeatured_url + "&" + employerAttending_url + "&" + schoolAttending_url ;
 
     var token = $("meta[name='_csrf']").attr("content");    // Used to bypass Spring Boot's CSRF protocol     -- Solution taken from 'https://stackoverflow.com/questions/34747437/use-of-spring-csrf-with-ajax-rest-call-and-html-page-with-thymeleaf' on Nov 26th 2019
     var header = $("meta[name='_csrf_header']").attr("content");    // Used to bypass Spring Boot's CSRF protocol
@@ -333,57 +335,66 @@ if (eventDeleted === "true"){
     },5000);
     localStorage.clear()
 }
+//12. Feedback - Update Event
+eventUpdated = localStorage.getItem("eventUpdated");
 
-//12. Validation Function
+if (eventUpdated === "true"){
+    $('#success_message').removeClass('d-none')
+    $("#success_message").fadeTo(1500, 1);
+    setTimeout(function(){$("#success_message").fadeTo(1500, 0); },5000);
+    localStorage.clear()
+}
+
+//13. Validation Function
 function validateForm(){
 
     let verifier = true;
     let attributesArray = $(".form-required")
 
-    // 12.1 Remove the Valid/Invalid class
+    // 13.1 Remove the Valid/Invalid class
     $(".form-required").removeClass("is-invalid ").removeClass("is-valid ")
     $(".selectpicker").parent().removeClass("is-invalid").removeClass("is-valid ")
 
-    // 12.2 Add The Valid class to all elements
+    // 13.2 Add The Valid class to all elements
     $(".selectpicker").add("is-valid ")
 
-        // 12.3 Validate inputs
+        // 13.3 Validate inputs
         for (let i = 0; i < attributesArray.length; i++) {
             if (attributesArray[i].value === "") {
-                // 11.3.1 Remove The Valid/Invalid class
+                // 13.3.1 Remove The Valid/Invalid class
                 attributesArray[i].classList.remove("is-invalid")
                 attributesArray[i].classList.remove("is-valid")
-                // 11.3.2 Add the Invalid class
+                // 13.3.2 Add the Invalid class
                 attributesArray[i].classList.add("is-invalid")
             }
         }
 
-    // 12.4 Change variable data to selectpickers
+    // 13.4 Change variable data to selectpickers
     attributesArray = $(".selectpicker")
 
-    //12.5 Validate selectpickers
+    //13.5 Validate selectpickers
     for (let i = 0; i < attributesArray.length; i++) {
         if (attributesArray[i].value === "") {
-            // 11.5.1 Remove The Valid/Invalid class
+            // 13.5.1 Remove The Valid/Invalid class
             attributesArray[i].classList.remove("is-invalid")
             attributesArray[i].classList.remove("is-valid")
-            // 11.5.2 Add the Invalid class
+            // 13.5.2 Add the Invalid class
             attributesArray[i].parentNode.classList.add("is-invalid")
         }
     }
 
-    // 12.6 Validate Input(PostCode)
+    // 13.6 Validate Input(PostCode)
 
-    // 12.6.1 Set the RegEx and test it
+    // 13.6.1 Set the RegEx and test it
     let postCodeVal = /[a-z][a-z]\d\d\s\d[a-z][a-z]|[a-z][a-z]\d\s\d[a-z][a-z]|[a-z]\d\s\d[a-z][a-z]|[a-z][a-z]\d[a-z]\s\d[a-z][a-z]|[a-z]\d\d\s\d[a-z][a-z]/i.test($("#event-postcode").val());
     // let postCodeVal = postCodeValidation.test($("#employer-postcode").val());
-    // 12.6.2 Verify if it's needed to put an invalid class
+    // 13.6.2 Verify if it's needed to put an invalid class
     if(!postCodeVal){
         $("#event-postcode").removeClass("is-invalid").removeClass("is-valid")
         $("#event-postcode").addClass("is-invalid")
     }
 
-    //12.7 Verify if there is any invalid class
+    //13.7 Verify if there is any invalid class
     if($(".selectpicker").parent().hasClass("is-invalid") || $(".form-required").hasClass("is-invalid")){
         verifier = false
     }
@@ -391,7 +402,7 @@ function validateForm(){
 }
 
 
-//13. Document ready
+//14. Document ready
 $(document).ready(function(){
     $('#filterButton').click(function(){
         filterEvents();

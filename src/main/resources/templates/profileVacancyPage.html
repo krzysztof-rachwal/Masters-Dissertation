@@ -182,8 +182,8 @@
 
     <div class="container-headline my-5">
         <span class="title-h2" th:text="${vacancy.getVacancyName()}"></span>
-        <button type="button"  id="deleteEvent"  data-toggle="modal" data-target="#deleteModal" class="buttonDelete float-right">Delete</button>
-        <button type="button"  id="updateEvent" data-toggle="modal" data-target="#updateModal" class="buttonUpdate float-right">Update</button>
+        <button type="button"  th:if="${session.SESSION_Role =='CWS'}" id="deleteEvent"  data-toggle="modal" data-target="#deleteModal" class="buttonDelete float-right">Delete</button>
+        <button type="button"  th:if="${session.SESSION_Role =='CWS'}" id="updateEvent" data-toggle="modal" data-target="#updateModal" class="buttonUpdate float-right">Update</button>
     </div>
 
     <div class="container">
@@ -279,17 +279,6 @@
 <script th:src="@{../js/vacancy.js}" src="../js/vacancy.js"></script>
 <script>
     $('.selectpicker').selectpicker();
-</script>
-<script>
-    vacancyUpdated = localStorage.getItem("vacancyUpdated");
-
-    if (vacancyUpdated === "true"){
-        $('#success_message').removeClass('d-none')
-        $("#success_message").fadeTo(1500, 1);
-        setTimeout(function(){$("#success_message").fadeTo(1500, 0); },5000);
-        localStorage.clear()
-    }
-
 </script>
 </body>
 </html>
