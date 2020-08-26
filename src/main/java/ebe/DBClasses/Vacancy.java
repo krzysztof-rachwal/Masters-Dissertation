@@ -7,53 +7,45 @@ import java.util.Date;
 public class Vacancy {
 
     private int VacancyID;
-    private String VacancyName;
     private int EmployerID;
-    private String EmployerName;
-    private String VacancySummary;
-    private String VacancyLink;
-    private int  TypeOfVacancyID;
-    private String  TypeOfVacancyName;
-    private int StatusOfVacancyID;
-    private String StatusOfVacancyName;
+    private String VacancyTitle;
+    private String Details;
+    private String Link;
+    private int  TypeOfVacancy;
+    private int StatusOfVacancy;
     private @DateTimeFormat(pattern = "yyyy-MM-dd") Date StartOfVacancy;
-    private @DateTimeFormat(pattern = "yyyy-MM-dd") Date DeadlineForApplication;
-    private int OccupationalCodeID;
-    private String OccupationalCodeName;
-    private int ApplicationMethodID;
-    private String ApplicationMethodName;
-    private String VacancyPostcode;
+    private @DateTimeFormat(pattern = "yyyy-MM-dd") Date ClosingDate;
+    private int OccupationalCode;
+    private String ApplicationMethod;
+    private String Postcode;
 
-    public Vacancy() {
-    }
-
-    public Vacancy(int vacancyID, int employerID, String vacancyName, String vacancySummary, String vacancyLink, int typeOfVacancyID, int statusOfVacancyID, Date startOfVacancy, Date deadlineForApplication, int occupationalCodeID, int applicationMethodID, String vacancyPostcode) {
+    public Vacancy(int vacancyID, int employerID, String vacancyTitle, String details, String link, int typeOfVacancy, int statusOfVacancy, Date startOfVacancy, Date closingDate, int occupationalCode, String applicationMethod, String postcode) {
         VacancyID = vacancyID;
         EmployerID = employerID;
-        VacancyName = vacancyName;
-        VacancySummary = vacancySummary;
-        VacancyLink = vacancyLink;
-        TypeOfVacancyID = typeOfVacancyID;
-        StatusOfVacancyID = statusOfVacancyID;
+        VacancyTitle = vacancyTitle;
+        Details = details;
+        Link = link;
+        TypeOfVacancy = typeOfVacancy;
+        StatusOfVacancy = statusOfVacancy;
         StartOfVacancy = startOfVacancy;
-        DeadlineForApplication = deadlineForApplication;
-        OccupationalCodeID = occupationalCodeID;
-        ApplicationMethodID = applicationMethodID;
-        VacancyPostcode = vacancyPostcode;
+        ClosingDate = closingDate;
+        OccupationalCode = occupationalCode;
+        ApplicationMethod = applicationMethod;
+        Postcode = postcode;
     }
 
-    public Vacancy(int employerID, String vacancyName, String vacancySummary, String vacancyLink, int typeOfVacancyID, int statusOfVacancyID, Date startOfVacancy, Date deadlineForApplication, int occupationalCodeID, int applicationMethodID, String vacancyPostcode) {
+    public Vacancy(int employerID, String vacancyTitle, String details, String link, int typeOfVacancy, int statusOfVacancy, Date startOfVacancy, Date closingDate, int occupationalCode, String applicationMethod, String postcode) {
         EmployerID = employerID;
-        VacancyName = vacancyName;
-        VacancySummary = vacancySummary;
-        VacancyLink = vacancyLink;
-        TypeOfVacancyID = typeOfVacancyID;
-        StatusOfVacancyID = statusOfVacancyID;
+        VacancyTitle = vacancyTitle;
+        Details = details;
+        Link = link;
+        TypeOfVacancy = typeOfVacancy;
+        StatusOfVacancy = statusOfVacancy;
         StartOfVacancy = startOfVacancy;
-        DeadlineForApplication = deadlineForApplication;
-        OccupationalCodeID = occupationalCodeID;
-        ApplicationMethodID = applicationMethodID;
-        VacancyPostcode = vacancyPostcode;
+        ClosingDate = closingDate;
+        OccupationalCode = occupationalCode;
+        ApplicationMethod = applicationMethod;
+        Postcode = postcode;
     }
 
     public int getVacancyID() {
@@ -72,60 +64,44 @@ public class Vacancy {
         EmployerID = employerID;
     }
 
-    public String getVacancyName() {
-        return VacancyName;
+    public String getVacancyTitle() {
+        return VacancyTitle;
     }
 
-    public void setVacancyName(String vacancyName) {
-        VacancyName = vacancyName;
+    public void setVacancyTitle(String vacancyTitle) {
+        VacancyTitle = vacancyTitle;
     }
 
-    public String getVacancySummary() {
-        return VacancySummary;
+    public String getDetails() {
+        return Details;
     }
 
-    public void setVacancySummary(String vacancySummary) {
-        VacancySummary = vacancySummary;
+    public void setDetails(String details) {
+        Details = details;
     }
 
-    public String getVacancyLink() {
-        return VacancyLink;
+    public String getLink() {
+        return Link;
     }
 
-    public void setVacancyLink(String vacancyLink) {
-        VacancyLink = vacancyLink;
+    public void setLink(String link) {
+        Link = link;
     }
 
-    public int getTypeOfVacancyID() {
-        return TypeOfVacancyID;
+    public int getTypeOfVacancy() {
+        return TypeOfVacancy;
     }
 
-    public void setTypeOfVacancyID(int typeOfVacancyID) {
-        TypeOfVacancyID = typeOfVacancyID;
+    public void setTypeOfVacancy(int typeOfVacancy) {
+        TypeOfVacancy = typeOfVacancy;
     }
 
-    public String getTypeOfVacancyName() {
-        return TypeOfVacancyName;
+    public int getStatusOfVacancy() {
+        return StatusOfVacancy;
     }
 
-    public void setTypeOfVacancyName(String typeOfVacancyName) {
-        TypeOfVacancyName = typeOfVacancyName;
-    }
-
-    public int getStatusOfVacancyID() {
-        return StatusOfVacancyID;
-    }
-
-    public void setStatusOfVacancyID(int statusOfVacancyID) {
-        StatusOfVacancyID = statusOfVacancyID;
-    }
-
-    public String getStatusOfVacancyName() {
-        return StatusOfVacancyName;
-    }
-
-    public void setStatusOfVacancyName(String statusOfVacancyName) {
-        StatusOfVacancyName = statusOfVacancyName;
+    public void setStatusOfVacancy(int statusOfVacancy) {
+        StatusOfVacancy = statusOfVacancy;
     }
 
     public Date getStartOfVacancy() {
@@ -136,59 +112,35 @@ public class Vacancy {
         StartOfVacancy = startOfVacancy;
     }
 
-    public Date getDeadlineForApplication() {
-        return DeadlineForApplication;
+    public Date getClosingDate() {
+        return ClosingDate;
     }
 
-    public void setDeadlineForApplication(Date deadlineForApplication) {
-        DeadlineForApplication = deadlineForApplication;
+    public void setClosingDate(Date closingDate) {
+        ClosingDate = closingDate;
     }
 
-    public int getOccupationalCodeID() {
-        return OccupationalCodeID;
+    public int getOccupationalCode() {
+        return OccupationalCode;
     }
 
-    public void setOccupationalCodeID(int occupationalCodeID) {
-        OccupationalCodeID = occupationalCodeID;
+    public void setOccupationalCode(int occupationalCode) {
+        OccupationalCode = occupationalCode;
     }
 
-    public String getOccupationalCodeName() {
-        return OccupationalCodeName;
+    public String getApplicationMethod() {
+        return ApplicationMethod;
     }
 
-    public void setOccupationalCodeName(String occupationalCodeName) {
-        OccupationalCodeName = occupationalCodeName;
+    public void setApplicationMethod(String applicationMethod) {
+        ApplicationMethod = applicationMethod;
     }
 
-    public int getApplicationMethodID() {
-        return ApplicationMethodID;
+    public String getPostcode() {
+        return Postcode;
     }
 
-    public void setApplicationMethodID(int applicationMethodID) {
-        ApplicationMethodID = applicationMethodID;
-    }
-
-    public String getApplicationMethodName() {
-        return ApplicationMethodName;
-    }
-
-    public void setApplicationMethodName(String applicationMethodName) {
-        ApplicationMethodName = applicationMethodName;
-    }
-
-    public String getVacancyPostcode() {
-        return VacancyPostcode;
-    }
-
-    public void setVacancyPostcode(String vacancyPostcode) {
-        VacancyPostcode = vacancyPostcode;
-    }
-
-    public String getEmployerName() {
-        return EmployerName;
-    }
-
-    public void setEmployerName(String employerName) {
-        EmployerName = employerName;
+    public void setPostcode(String postcode) {
+        Postcode = postcode;
     }
 }

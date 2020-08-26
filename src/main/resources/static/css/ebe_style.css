@@ -5,11 +5,7 @@ body {
 }
 
 .text-info{
-    color: #01778a!important;
-}
-
-.text-success{
-    color: #d1368b!important;
+    color: #007066!important;
 }
 
 .container-fluid, form, .modal-body, .well {
@@ -48,7 +44,7 @@ body {
 .buttonDelete{
     background:#fff ;
     color:#007066 ;
-    border-left: 2px solid #007066;
+    border-right: 2px solid #007066;
     padding: 5px 20px !important;
 }
 
@@ -116,7 +112,7 @@ a {
     text-decoration: none !important;
 }
 
-.list-employers, .list-vacancies, .list-events{
+.list-employers{
     overflow-y:scroll;
     overflow-x: hidden;
     -webkit-overflow-scrolling: touch;
@@ -142,9 +138,6 @@ a {
     margin-bottom: .5rem;
     font-weight: 500;
     line-height: 1.2;
-}
-.well3{
-    border: solid 10px white;
 }
 
 .typoWhite{

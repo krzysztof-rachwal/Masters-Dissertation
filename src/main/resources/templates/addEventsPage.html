@@ -13,12 +13,15 @@
     <link rel="stylesheet" media="all" href="https://careerswales.gov.wales/sites/default/files/css/css_yFFWPpQsZCFeHMtvOieuCWLiTEiz--tT0otLunNJdLs.css"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css"/>
-
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
     <link th:href="@{../css/ebe_style.css}" href="../css/ebe_style.css" rel="stylesheet" />
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
-    <title>Add Event</title>
+    <title>Create Event</title>
 </head>
 
 <header th:replace="fragments/headerTemplate :: header">
@@ -28,168 +31,138 @@
     <div class="container my-4">
         <h2>Add Event</h2>
     </div>
-
-    <div id="failed_message" class="alert alert-danger alert-dismissible fade d-none" role="alert">
-        <strong>Failed!</strong> <span id="failed_message_text"></span>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-
     <form>
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="event-name">Event Name</label>
-                        <input type="text" class="form-control form-required" id="event-name">
+                        <label for="event-name">Event name</label>
+                        <input type="text" class="form-control input-border" id="event-name">
                     </div>
-                </div>
-                <div class="col-md-6">
                     <div class="form-group">
-                        <label for="event-type">Event Type</label><br>
-                        <select class="selectpicker" data-width="80%" data-live-search="true" id="event-type" title="Nothing selected" >
-                            <option  th:each="event : ${allEventTypes}" th:value="${event.getTypeOfEventID()}" th:text="${event.getTypeOfEventName()}"></option>
-                        </select>
+                        <label for="event-type">Event type</label>
+                        <input type="text" class="form-control input-border" id="event-type">
+                    </div>
+                    <div class="form-group">
+                        <label for="event-date">Event date</label>
+                        <input type="date" class="form-control input-border" id="event-date">
+                    </div>
+                    <div class="form-group">
+                        <label for="event-time">Event time</label>
+                        <input type="time" class="form-control input-border" id="event-time">
+                    </div>
+                    <div class="form-group">
+                        <label for="event-venue">Event venue</label>
+                        <input type="text" class="form-control input-border" id="event-venue">
                     </div>
                 </div>
                 <div class="col-md-6 ">
                     <div class="form-group">
-                        <label for="event-summary">Event Summary</label>
-                        <textarea class="form-control form-required text-area-w-80"  rows="3" id="event-summary"></textarea>
+                        <label for="adviser-name">Adviser name</label>
+                        <input type="text" class="form-control input-border" id="adviser-name">
                     </div>
-                </div>
-                <div class="col-md-6">
-                    <label>Address</label>
-                    <div class="group-input">
-                        <div class="input-group-prepend">
-                            <input type="text" id="event-street" class="form-control border-right input-sm form-required w-80" placeholder="Street">
-                            <input type="text" id="event-number" class="form-control w-80 form-required" placeholder="Building No">
-                        </div>
-                        <div class="input-group-prepend mt-1">
-                            <input type="text" id="event-postcode" class="form-control border-right form-required w-80" placeholder="Post Code">
-                            <input type="text" id="event-city" class="form-control form-required w-80" placeholder="City">
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
                     <div class="form-group">
-                        <label for="event-date">Event Date</label>
-                        <input type="date" class="form-control w-80 form-required" id="event-date">
+                        <label for="no-attendees">No of Attendees</label>
+                        <input type="number" class="form-control input-border" id="no-attendees">
+                    </div>
+                    <div class="form-group">
+                        <label for="schools-attending">Schools Attending</label>
+                        <input type="text" class="form-control input-border" id="schools-attending">
+                    </div>
+                    <div class="form-group">
+                        <label for="employers-attending">Employers Attending</label>
+                        <input type="text" class="form-control input-border" id="employers-attending">
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="event-time">Event Time</label>
-                        <input type="time" class="form-control w-80 form-required" id="event-time">
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="event-venue">Event Venue</label>
-                        <input type="text" class="form-control w-80 form-required" id="event-venue">
-                    </div>
-                </div>
-
-                <div class="col-md-6 ">
-                    <div class="form-group">
-                        <label for="adviser-name">Adviser Name</label>
-                        <input type="text" class="form-control w-80 form-required" id="adviser-name">
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="no-attendees">Number of Attendees</label>
-                        <input type="number" min="0" class="form-control w-80 form-required" id="no-attendees">
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="employers-attending">Employers Attending</label><br>
-                        <select class="selectpicker" multiple data-live-search="true" data-width="80%" id="employers-attending">
-                            <option  th:each="employer : ${AllEmployerNamesAndIds}" th:value="${employer.getEmployerID()}" th:text="${employer.getEmployerName()}"></option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="schools-attending">Schools Attending</label><br>
-                        <select class="selectpicker" multiple data-live-search="true" data-width="80%" id="schools-attending">
-                            <option  th:each="school : ${allSchoolNamesAndIds}" th:value="${school.getSchoolID()}" th:text="${school.getSchoolName()}"></option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="col-md-6">
-                    <div class="form-group">
+            </div>
+            <div class=" row flex-column pl-3">
+                <div class="form-group">
+                    <fieldset id="group1">
                         <label>Can the event be conducted in Welsh?</label>
-                        <select  id="conducted-welsh" class="selectpicker" title="Nothing selected"  data-width="80%">
-                            <option value="1">Yes</option>
-                            <option value="0">No</option>
-                        </select>
-                    </div>
+                        <input type="radio" id="welsh-yes" name="group1" value="No">
+                        <label for="welsh-yes">Yes</label>
+                        <input type="radio" id="welsh-no" name="group1" value="No">
+                        <label for="welsh-no">No</label>
+                    </fieldset>
                 </div>
-
-                <div class="col-md-6">
-                    <div class="form-group">
+                <div class="form-group">
+                    <fieldset id="group2">
                         <label>Does the event promote apprenticeship?</label>
-                        <select id="promote-apprenticheship" class="selectpicker" title="Nothing selected"  data-width="80%">
-                            <option value="1">Yes</option>
-                            <option value="0">No</option>
-                        </select>
-                    </div>
+                        <input type="radio" id="appr-yes" name="group2" value="No">
+                        <label for="appr-yes">Yes</label>
+                        <input type="radio" id="appr-no" name="group2" value="No">
+                        <label for="appr-no">No</label>
+                    </fieldset>
                 </div>
-                <div class="col-md-6">
-                    <div class="form-group">
+                <div class="form-group">
+                    <fieldset id="group3">
                         <label>Does the event challenger gender stereotypes?</label>
-                        <select  id="challenger-gender" class="selectpicker" title="Nothing selected"  data-width="80%">
-                            <option value="1">Yes</option>
-                            <option value="0">No</option>
-                        </select>
-                    </div>
+                        <input type="radio" id="gender-yes" name="group3" value="No">
+                        <label for="gender-yes">Yes</label>
+                        <input type="radio" id="gender-no" name="group3" value="No">
+                        <label for="gender-no">No</label>
+                    </fieldset>
                 </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label>Is the Event going to be Public?</label>
-                        <select  id="event-public" class="selectpicker"  title="Nothing selected" data-width="80%">
-                            <option value="1">Yes</option>
-                            <option value="0">No</option>
-                        </select>
-                    </div>
+            </div>
+            <div class="row flex-column">
+                <div class="mb-auto p-2 d-flex flex-column">
+                    <label>Choose employers</label>
+                    <select class="selectpicker" multiple data-live-search="true">
+                        <option value="Employer4">Employer1</option>
+                        <option value="Employer4">Employer2</option>
+                        <option value="Employer4">Employer3</option>
+                        <option value="Employer4">Employer4</option>
+                        <option value="Employer4">Employer5</option>
+                        <option value="Employer4">Employer6</option>
+                        <option value="Employer4">Employer7</option>
+                        <option value="Employer4">Employer8</option>
+                        <option value="Employer4">Employer9</option>
+                        <option value="Employer4">Employer10</option>
+                    </select>
                 </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label>Is the Event Cancelled?</label>
-                        <select  id="event-cancelled" class="selectpicker" title="Nothing selected" data-width="80%">
-                            <option value="1">Yes</option>
-                            <option value="0">No</option>
-                        </select>
-                    </div>
+                <div class="mt-auto p-2 d-flex flex-column">
+                    <label>Choose schools</label>
+                    <select class="selectpicker" multiple data-live-search="true">
+                        <option value="schools">School1</option>
+                        <option value="schools">School2</option>
+                        <option value="schools">School3</option>
+                        <option value="schools">School4</option>
+                        <option value="schools">School5</option>
+                        <option value="schools">School6</option>
+                        <option value="schools">School7</option>
+                        <option value="schools">School8</option>
+                        <option value="schools">School9</option>
+                        <option value="schools">School10</option>
+                    </select>
                 </div>
-
-        </div>
-
+            </div>
             <div class="container my-4 text-center">
-                <button type="button" class="button--secondary text-center" onclick="createNewEvent()">Add Event</button>
+                <button type="button" class="button--secondary text-center">Create Event</button>
             </div>
         </div>
     </form>
 </div>
 <footer th:replace="fragments/footerTemplate :: footer"></footer>
 
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
 <script type="text/javascript" src="https://careerswales.gov.wales/styleguide/assets/js/gel-styleguide.js"></script>
-<script type="text/javascript" src="https://careerswales.gov.wales/styleguide/assets/js/gel-elements-loader.js"></script>
+<script type="text/javascript"
+        src="https://careerswales.gov.wales/styleguide/assets/js/gel-elements-loader.js"></script>
 <script type="text/javascript" src="https://careerswales.gov.wales/styleguide/assets/js/gel-elements.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
-
-<script th:src="@{../js/events.js}" src="../js/events.js"></script>
 <script>
-    $('.selectpicker').selectpicker();
+    $('select').selectpicker();
 </script>
 
 </body>

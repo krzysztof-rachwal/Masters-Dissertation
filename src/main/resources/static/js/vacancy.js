@@ -1,55 +1,31 @@
 
-//1. Create Vacancy
-function createVacancy() {
+    //HTTP REQUEST METHODS
+    function deleteVacancy(vacancyId) {
+        var baseUri = "/api/delete/vacancy";
+        var vacancyId_url = "vacancyId=" + vacancyId;
+        var fullUri = baseUri + "?" + vacancyId_url;
 
-    // 1.1. validation
-    let verifier
-    verifier = validateForm();
-    // 1.2. Error Message
-    if(!verifier){
-        $('#failed_message_text').text("The Form was not filled properly.");
-        $('#failed_message').removeClass('d-none').addClass('show');
-        $("#failed_message").fadeTo(1500, 1);
-        setTimeout(function(){
-            $("#failed_message").fadeTo(1500, 0);
-        },5000);
-        return
-    }
+        var token = $("meta[name='_csrf']").attr("content");    // Used to bypass Spring Boot's CSRF protocol     -- SOlution taken from 'https://stackoverflow.com/questions/34747437/use-of-spring-csrf-with-ajax-rest-call-and-html-page-with-thymeleaf' on Nov 26th 2019
+        var header = $("meta[name='_csrf_header']").attr("content");    // Used to bypass SPring Boot's CSRF protocol
 
-    let baseUri = "/api/create/vacancy";
-    let employerID_url = "EmployerID=" + $('select[id=employer-name]').val();
-    let vacancyName_url = "VacancyName=" + $('input[id=vacancy-name]').val();
-    let vacancyLink_url = "VacancyLink=" + $('input[id=web-link]').val();
-    let vacancySummary = "VacancySummary=" + $('textarea[id=vacancy-summary]').val();
-    let typeOfVacancyID_url = "TypeOfVacancyID=" + $('select[id=vacancy-type]').val();
-    let statusOfVacancyID_url="StatusOfVacancyID=" + $('select[id=vacancy-status]').val();
-    let startOfVacancy_url = "StartOfVacancy=" + $('input[id=start-date]').val();
-    let deadlineForApplication_url = "DeadlineForApplication=" + $('input[id=closing-date]').val();
-    let occupationalCodeID_url = "OccupationalCodeID=" + $('select[id=occup-code]').val();
-    let applicationMethodID_url = "ApplicationMethodID=" + $('select[id=appl-method]').val();
-    let vacancyPostcode_url = "VacancyPostcode=" + $('input[id=post-code]').val();
 
-    let fullUri = baseUri + "?" + "&" + employerID_url+ "&" + vacancyName_url + "&" + vacancyLink_url
-        + "&" + vacancySummary + "&" + typeOfVacancyID_url  + "&" + "&" + statusOfVacancyID_url  + "&" + startOfVacancy_url + "&"
-        + deadlineForApplication_url + "&" + occupationalCodeID_url+ "&" + applicationMethodID_url + "&" + vacancyPostcode_url  ;
-
-    let token = $("meta[name='_csrf']").attr("content");    // Used to bypass Spring Boot's CSRF protocol     -- Solution taken from 'https://stackoverflow.com/questions/34747437/use-of-spring-csrf-with-ajax-rest-call-and-html-page-with-thymeleaf' on Nov 26th 2019
-    let header = $("meta[name='_csrf_header']").attr("content");    // Used to bypass Spring Boot's CSRF protocol
-    console.log(fullUri);
-
-    $.ajax({
-        type: "GET", url: fullUri,
-        beforeSend: function (xhr) {
-            xhr.setRequestHeader(header, token);
-        },
-        success: function (data) {
-            if (data === true) {
-                localStorage.setItem("vacAdded","true");
-                location.assign("/vacancies")
-            } else {
-                alert("There was an error, please try again.");
+        $.ajax({
+            type: "DELETE", url: fullUri,
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader(header, token);
+            },
+            success: function (data) {
+                if (data === true) {
+                    location.assign("/vacancies")
+                } else {
+                    alert("There was an error, please try again.")
+                    alert(data.responseText)
+                    alert(data)
+                }
+            },
+            error: function (data) {
+                alert("FAIL");
                 alert(data.responseText);
-                alert(data)
             }
         },
         error: function (data) {

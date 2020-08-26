@@ -3,9 +3,11 @@ package ebe.Controllers;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ebe.DBClasses.Employer;
 import ebe.DBClasses.Event;
-import ebe.DBClasses.School;
 import ebe.DBClasses.Vacancy;
-import ebe.DBMethods.*;
+import ebe.DBMethods.EmployerQueries;
+import ebe.DBMethods.EventQueries;
+import ebe.DBMethods.SchoolQueries;
+import ebe.DBMethods.VacancyQueries;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -31,7 +33,6 @@ public class BaseController {
     private EventQueries EventQrys;
     private SchoolQueries SchoolQrys;
     private VacancyQueries VacancyQrys;
-    private StatisticsQueries statisticsQueries;
 
     @Autowired
     public BaseController(EmployerQueries em, EventQueries ev, SchoolQueries sc, VacancyQueries va, StatisticsQueries sq, AuthorisationQueries aq){
@@ -125,39 +126,11 @@ public class BaseController {
 
         ModelAndView mv = new ModelAndView();
         mv.setViewName("searchEmployerPage");
-
         List<Employer> employers;
-        List<Employer> employerLanguage;
-        List<Employer> employerIndustrySectorAreas;
-        List<Employer> employerCurriculumAreas;
-        List<Employer> employerLocalAuthorities;
-        List<Employer> employerNumberOfEmployees;
-        List<Employer> employerCooperationType;
-        List<Employer> employerPreferences;
-        List<School> schoolAllNamesAndIds;
-
         employers = EmployerQrys.getAllEmployers();
-        employerLanguage = EmployerQrys.getAllLanguages();
-        employerLocalAuthorities = EmployerQrys.getAllLocalAuthorities();
-        employerIndustrySectorAreas = EmployerQrys.getAllIndustrySectors();
-        employerCurriculumAreas = EmployerQrys.getAllCurriculumAreas();
-        employerNumberOfEmployees = EmployerQrys.getAllNumberOfEmployersPossible();
-        employerCooperationType = EmployerQrys.getAllCooperationTypes();
-        employerPreferences = EmployerQrys.getAllPreferences();
-        schoolAllNamesAndIds = SchoolQrys.getAllSchoolNamesAndIds();
 
         Map<String,Object> allEmployers = new HashMap<String,Object>();
-
         allEmployers.put("allEmployers", employers);
-        allEmployers.put("allEmployerLanguage", employerLanguage);
-        allEmployers.put("allEmployerLocalAuthorities", employerLocalAuthorities);
-        allEmployers.put("allEmployerIndustrySectors", employerIndustrySectorAreas);
-        allEmployers.put("allEmployerCurriculumAreas", employerCurriculumAreas);
-        allEmployers.put("allEmployerNumberOfEmployees", employerNumberOfEmployees);
-        allEmployers.put("allEmployerCooperationType", employerCooperationType);
-        allEmployers.put("allEmployerPreferences", employerPreferences);
-        allEmployers.put("allSchoolNamesAndIds", schoolAllNamesAndIds);
-
         mv.addAllObjects(allEmployers);
 
         return mv;
@@ -173,76 +146,10 @@ public class BaseController {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("profileEmployerPage");
         Employer employer = EmployerQrys.getEmployerDetailsById(id);
-
-        List<Employer> employerInfo;
-        List<Employer> employerLanguage;
-        List<Integer> employerChosenLanguage;
-        List<Employer> employerIndustrySectorAreas;
-        List<Integer> employerChosenIndustrySectorAreas;
-        List<Employer> employerCurriculumAreas;
-        List<Integer> employerChosenCurriculumAreas;
-        List<Employer> employerLocalAuthorities;
-        List<Integer> employerChosenLocalAuthorities;
-        List<Employer> employerNumberOfEmployees;
-        List<Employer> employerCooperationType;
-        List<Integer> employerChosenCooperationType;
-        List<Employer> employerPreferences;
-        List<Integer> employerChosenPreferences;
-        List<Integer> employerAlumni;
-        List<Employer> employerAlumniNamesAndSchoolID;
-        List<Employer> employerStatus;
-        List<School> schoolAllNamesAndIds;
-        List<Integer> employerSchoolPreferences;
-        List<Event> eventsAllTypes;
-
-
-        employerInfo = EmployerQrys.getAllEmployers();
-        employerLanguage = EmployerQrys.getAllLanguages();
-        employerChosenLanguage = EmployerQrys.getEmployerLanguages(id);
-        employerLocalAuthorities = EmployerQrys.getAllLocalAuthorities();
-        employerChosenLocalAuthorities = EmployerQrys.getChosenLocalAuthorities(employer.getEmployerID());
-
-        employerIndustrySectorAreas = EmployerQrys.getAllIndustrySectors();
-        employerChosenIndustrySectorAreas = EmployerQrys.getChosenIndustrySectors(employer.getEmployerID());
-        employerCurriculumAreas = EmployerQrys.getAllCurriculumAreas();
-        employerChosenCurriculumAreas = EmployerQrys.getChosenCurriculumAreas(employer.getEmployerID());
-        employerNumberOfEmployees = EmployerQrys.getAllNumberOfEmployersPossible();
-        employerCooperationType = EmployerQrys.getAllCooperationTypes();
-        employerChosenCooperationType = EmployerQrys.getChosenCooperationTypes(employer.getEmployerID());
-        employerPreferences = EmployerQrys.getAllPreferences();
-        employerChosenPreferences = EmployerQrys.getChosenPreferences(employer.getEmployerID());
-        employerAlumni = EmployerQrys.getAllAlumni(employer.getEmployerID());
-        employerAlumniNamesAndSchoolID = EmployerQrys.getAllAlumniNamesAndSchoolID(employerAlumni);
-        schoolAllNamesAndIds = SchoolQrys.getAllSchoolNamesAndIds();
-        employerStatus = EmployerQrys.getAllEmployerStatus();
-        employerSchoolPreferences = EmployerQrys.getEmployerSchoolPreferences(employer.getEmployerID());
-        eventsAllTypes = EventQrys.getAllTypesOfEvents();
-
-        Map<String,Object> allEmployer = new HashMap<String,Object>();
-        allEmployer.put("employer", employer);
-        allEmployer.put("allEmployer", employerInfo);
-        allEmployer.put("allEmployerLanguage", employerLanguage);
-        allEmployer.put("allEmployerLanguagePreference",employerChosenLanguage);
-        System.out.println("------------------------------------------");
-        System.out.println(employerChosenLanguage);
-        allEmployer.put("allEmployerLocalAuthorities", employerLocalAuthorities);
-        allEmployer.put("allEmployerChosenLocalAuthorities", employerChosenLocalAuthorities);
-        allEmployer.put("allEmployerIndustrySectors", employerIndustrySectorAreas);
-        allEmployer.put("allEmployerChosenIndustrySectors", employerChosenIndustrySectorAreas);
-        allEmployer.put("allEmployerCurriculumAreas", employerCurriculumAreas);
-        allEmployer.put("allEmployerChosenCurriculumAreas", employerChosenCurriculumAreas);
-        allEmployer.put("allEmployerNumberOfEmployees", employerNumberOfEmployees);
-        allEmployer.put("allEmployerCooperationType", employerCooperationType);
-        allEmployer.put("allEmployerChosenCooperationType", employerChosenCooperationType);
-        allEmployer.put("allEmployerPreferences", employerPreferences);
-        allEmployer.put("allEmployerAlumni",employerAlumniNamesAndSchoolID);
-        allEmployer.put("allEmployerChosenPreferences", employerChosenPreferences);
-        allEmployer.put("allSchoolNamesAndIds", schoolAllNamesAndIds);
-        allEmployer.put("allEmployerStatus",employerStatus);
-        allEmployer.put("allEmployerSchoolPreferences", employerSchoolPreferences);
-        allEmployer.put("allEventTypes", eventsAllTypes);
-
-        mv.addAllObjects(allEmployer);
+        mv.addObject("employer",employer);
+        //        for (Employer employer : employers) {
+        //            System.out.println(employer.getName());
+        //        }
         return mv;
     }
 
