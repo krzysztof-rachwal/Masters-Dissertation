@@ -32,9 +32,38 @@
     </div>
     <a href="/request" class="button button--icon d-block">Request an event</a>
     <a href="/contact-us" class="button button--icon d-block">Get in touch</a>
+
+    <div class="container-headline my-5">
+        <span class="title-h2">Featured events</span>
+    </div>
+
+    <div class="list-employers">
+        <div class="gel-content-row" th:each="event : ${featuredEvents}">
+            <article class="card js-card card--style-icon card--100" gel-processed="processed"
+                     th:id="${event.getEventID()}">
+                <a th:href="@{/profile-event(eventId=${event.getEventID()})}" class="card__inner"
+                   gel-processed="processed" title="Link to Card heading and link title">
+                    <div class="card__content">
+                        <div class="content__image">
+                            <div>
+                                <img alt="Card image" src="https://source.unsplash.com/90x90/?business">
+                            </div>
+                        </div>
+                        <div class="content__body">
+                            <div class="body__title" th:text="${#strings.capitalize(event.getEventName())}"></div>
+                            <div class="body__body" th:text="'Event Venue: ' + ${#strings.capitalize(event.getEventVenueName())} "></div>
+                            <div class="body__body" th:text="'Date: ' + ${#dates.format(event.getEventDateAndTime(),'dd-MM-yyyy')} "></div>
+                        </div>
+                    </div>
+                </a>
+            </article>
+        </div>
+    </div>
+
     <div class="container-headline my-5">
         <span class="title-h2">Events in your Local Authority</span>
     </div>
+
     <div class="list-employers">
         <div class="gel-content-row" th:each="event : ${recommendedEvents}">
             <article class="card js-card card--style-icon card--100" gel-processed="processed"
@@ -57,6 +86,7 @@
             </article>
         </div>
     </div>
+
 </div>
 
 

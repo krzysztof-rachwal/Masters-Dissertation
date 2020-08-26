@@ -108,7 +108,10 @@ public class BaseController {
         if(session.getAttribute("SESSION_Role") == "Teacher"){
             mv.setViewName("homepageTeacher");
             List<Event> recommendedEvents = statisticsQueries.getEventsForSchool(parseInt(session.getAttribute("SESSION_UserID").toString()));
+            List<Event> featuredEvents = EventQrys.getFeaturedEvents();
+
             mv.addObject("recommendedEvents",recommendedEvents);
+            mv.addObject("featuredEvents",featuredEvents);
         }
 
         if(session.getAttribute("SESSION_Role") == "none"){

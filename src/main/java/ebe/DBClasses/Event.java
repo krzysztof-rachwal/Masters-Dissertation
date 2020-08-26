@@ -26,11 +26,12 @@ public class Event {
     private Boolean PromotesApprenticeships;
     private Boolean PromotesWelshLanguage;
     private Boolean ChallengesGenderStereotypes;
+    private Boolean IsFeatured;
 
     public Event() {
     }
 
-    public Event(int eventID, String eventName, int typeOfEventID, Date eventDateAndTime, String eventVenueName, String eventAddressCity, String eventAddressStreet, String eventAddressNumber, String eventVenuePostcode, String eventSummary, Boolean isPublic, Boolean isCancelled, String nameOfAdviser, int numberOfAttendees, Boolean promotesApprenticeships, Boolean promotesWelshLanguage, Boolean challengesGenderStereotypes) {
+    public Event(int eventID, String eventName, int typeOfEventID, Date eventDateAndTime, String eventVenueName, String eventAddressCity, String eventAddressStreet, String eventAddressNumber, String eventVenuePostcode, String eventSummary, Boolean isPublic, Boolean isCancelled, String nameOfAdviser, int numberOfAttendees, Boolean promotesApprenticeships, Boolean promotesWelshLanguage, Boolean challengesGenderStereotypes, Boolean isFeatured) {
         EventID = eventID;
         EventName = eventName;
         TypeOfEventID = typeOfEventID;
@@ -48,9 +49,10 @@ public class Event {
         PromotesApprenticeships = promotesApprenticeships;
         PromotesWelshLanguage = promotesWelshLanguage;
         ChallengesGenderStereotypes = challengesGenderStereotypes;
+        IsFeatured = isFeatured;
     }
 
-    public Event(String eventName, int typeOfEventID, Date eventDateAndTime, String eventVenueName, String eventAddressCity, String eventAddressStreet, String eventAddressNumber, String eventVenuePostcode, String eventSummary, Boolean isPublic, Boolean isCancelled, String nameOfAdviser, int numberOfAttendees, Boolean promotesApprenticeships, Boolean promotesWelshLanguage, Boolean challengesGenderStereotypes) {
+    public Event(String eventName, int typeOfEventID, Date eventDateAndTime, String eventVenueName, String eventAddressCity, String eventAddressStreet, String eventAddressNumber, String eventVenuePostcode, String eventSummary, Boolean isPublic, Boolean isCancelled, String nameOfAdviser, int numberOfAttendees, Boolean promotesApprenticeships, Boolean promotesWelshLanguage, Boolean challengesGenderStereotypes, Boolean isFeatured) {
         EventName = eventName;
         TypeOfEventID = typeOfEventID;
         EventDateAndTime = eventDateAndTime;
@@ -67,9 +69,10 @@ public class Event {
         PromotesApprenticeships = promotesApprenticeships;
         PromotesWelshLanguage = promotesWelshLanguage;
         ChallengesGenderStereotypes = challengesGenderStereotypes;
+        IsFeatured = isFeatured;
     }
 
-    public Event(int eventID, String eventName, int typeOfEventID, Date eventDate, Date eventTime, String eventVenueName, String eventAddressCity, String eventAddressStreet, String eventAddressNumber, String eventVenuePostcode, String eventSummary, Boolean isPublic, Boolean isCancelled, String nameOfAdviser, int numberOfAttendees, Boolean promotesApprenticeships, Boolean promotesWelshLanguage, Boolean challengesGenderStereotypes) {
+    public Event(int eventID, String eventName, int typeOfEventID, Date eventDate, Date eventTime, String eventVenueName, String eventAddressCity, String eventAddressStreet, String eventAddressNumber, String eventVenuePostcode, String eventSummary, Boolean isPublic, Boolean isCancelled, String nameOfAdviser, int numberOfAttendees, Boolean promotesApprenticeships, Boolean promotesWelshLanguage, Boolean challengesGenderStereotypes, Boolean isFeatured) {
         EventID = eventID;
         EventName = eventName;
         TypeOfEventID = typeOfEventID;
@@ -88,6 +91,7 @@ public class Event {
         PromotesApprenticeships = promotesApprenticeships;
         PromotesWelshLanguage = promotesWelshLanguage;
         ChallengesGenderStereotypes = challengesGenderStereotypes;
+        IsFeatured = isFeatured;
     }
 
     public int getEventID() {
@@ -249,4 +253,14 @@ public class Event {
     public void setEventTime(Date eventTime) {
         EventTime = eventTime;
     }
+
+    public Boolean getFeatured() {
+        return IsFeatured;
+    }
+
+    public void setFeatured(Boolean featured) {
+        IsFeatured = featured;
+    }
 }
+
+

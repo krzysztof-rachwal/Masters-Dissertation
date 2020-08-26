@@ -170,6 +170,16 @@
                                     </select>
                                 </div>
                             </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Is the Event featured?</label>
+                                    <select  id="event-featured">
+                                        <option value="1" th:selected="${event.getFeatured()== true}">Yes</option>
+                                        <option value="0" th:selected="${event.getFeatured()== false}">No</option>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="container my-4 text-center">
@@ -311,6 +321,13 @@
                     <span class="font-weight-bold h5">Is the Event Cancelled? </span>
                     <p th:remove="${event.getCancelled()== true}  ? none : all">Yes</p>
                     <p th:remove="${event.getCancelled()== false}  ? none : all">No</p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <span class="font-weight-bold h5">Is the Event featured? </span>
+                    <p th:remove="${event.getFeatured() == true}  ? none : all">Yes</p>
+                    <p th:remove="${event.getFeatured() == false}  ? none : all">No</p>
                 </div>
             </div>
         </div>
