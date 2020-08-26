@@ -77,7 +77,7 @@ public class BaseController {
 
     /////////1st - Header Menu (Employer) /////////
     //1. Search Employer
-    @GetMapping("ebe/employers")
+    @GetMapping("/ebe/employers")
     public ModelAndView SearchEmployer(HttpSession session) {
 
         ModelAndView mv = new ModelAndView();
