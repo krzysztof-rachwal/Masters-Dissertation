@@ -77,7 +77,7 @@ public class BaseController {
 
     /////////1st - Header Menu (Employer) /////////
     //1. Search Employer
-    @GetMapping("/ebe/employers")
+    @GetMapping("ebe/employers")
     public ModelAndView SearchEmployer(HttpSession session) {
 
         ModelAndView mv = new ModelAndView();
@@ -246,7 +246,7 @@ public class BaseController {
 
     /////////2nd - Header Menu (Vacancies) /////////
     //4. Search Vacancies
-    @GetMapping("/vacancies")
+    @GetMapping("ebe/vacancies")
     public ModelAndView SearchVacancies(HttpSession session) {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("searchVacanciesPage");
