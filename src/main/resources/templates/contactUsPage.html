@@ -24,7 +24,20 @@
 <header th:replace="fragments/headerTemplate :: header"></header>
 
 <div class="gel-content-container">
-    <div class="container mt-5">
+    <!-- Breadcrumbs -->
+    <nav aria-label="breadcrumb" class="breadcrumb pl-4 breadcrumb_ebe">
+        <span>You are here:</span>
+        <ul>
+            <li>
+                <a href="/" gel-processed="processed" title="Link to Home page">Home page</a>
+            </li>
+
+            <li>
+                <a href="#" gel-processed="processed" title="Link to Current page title as a link to the current page">Contact Us Page page</a>
+            </li>
+        </ul>
+    </nav>
+    <div class="container mt-2 mb-5">
         <h2 class="title-h2">Get in Touch</h2>
     </div>
 

@@ -197,3 +197,10 @@ ul{
 .search-box{
     border: solid 1px gainsboro !important;
 }
+
+.breadcrumb_ebe{
+    margin: 0;
+    padding: 0;
+    background-color: transparent;
+}
+

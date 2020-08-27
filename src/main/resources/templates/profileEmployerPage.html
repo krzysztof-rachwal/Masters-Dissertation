@@ -308,7 +308,7 @@
                             </div>
                             <div class="row">
                                 <div class="container mt-5 mb-4 text-center">
-                                    <button type="button" class="button--secondary text-center">Request</button>
+                                    <button type="button" class="button--secondary text-center">Send</button>
                                 </div>
                             </div>
                         </div>
@@ -337,8 +337,21 @@
         </button>
     </div>
 
-
-    <div class="container-headline my-5">
+    <nav aria-label="breadcrumb" class="breadcrumb pl-4 breadcrumb_ebe">
+        <span>You are here:</span>
+        <ul>
+            <li>
+                <a href="/" gel-processed="processed" title="Link to Home page">Home page</a>
+            </li>
+            <li>
+                <a href="/employers" gel-processed="processed" title="Link to Employers page">Employers page</a>
+            </li>
+            <li>
+                <a href="#" gel-processed="processed" title="Link to Current page title as a link to the current page">Employer Profile Page</a>
+            </li>
+        </ul>
+    </nav>
+    <div class="container-headline mt-2 mb-5">
         <span class="title-h2" th:text="${employer.getEmployerName()}"></span>
         <input type="hidden" id="employer-id" th:value="${employer.getEmployerID()}" />
         <button  th:if="${session.SESSION_Role =='CWS'}" type="button" id="deleteEvent" data-toggle="modal" data-target="#deleteModal" class="buttonDelete float-right">Delete</button>

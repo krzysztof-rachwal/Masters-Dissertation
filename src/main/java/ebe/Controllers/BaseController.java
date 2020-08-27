@@ -133,7 +133,7 @@ public class BaseController {
         Autentication(request,session,email,name);
         ModelAndView mv = new ModelAndView();
 
-        if(session.getAttribute("SESSION_Role") == "CWS") {
+        if((session.getAttribute("SESSION_Role") == "CWS") || (session.getAttribute("SESSION_Role") == "Teacher")) {
         mv.setViewName("searchEmployerPage");
 
         List<Employer> employers;
@@ -187,7 +187,7 @@ public class BaseController {
         Autentication(request,session,email,name);
         ModelAndView mv = new ModelAndView();
 
-        if(session.getAttribute("SESSION_Role") == "CWS") {
+        if((session.getAttribute("SESSION_Role") == "CWS") || (session.getAttribute("SESSION_Role") == "Teacher")) {
         mv.setViewName("profileEmployerPage");
         Employer employer = EmployerQrys.getEmployerDetailsById(id);
 
