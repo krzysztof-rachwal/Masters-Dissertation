@@ -125,9 +125,15 @@ public class BaseController {
     /////////1st - Header Menu (Employer) /////////
     //1. Search Employer
     @GetMapping("/employers")
-    public ModelAndView SearchEmployer() {
+    public ModelAndView SearchEmployer(HttpServletRequest request,
+                                       HttpSession session,
+                                       @AuthenticationPrincipal(expression = "claims['email']") String email,
+                                       @AuthenticationPrincipal(expression = "claims['name']") String name) {
 
+        Autentication(request,session,email,name);
         ModelAndView mv = new ModelAndView();
+
+        if(session.getAttribute("SESSION_Role") == "CWS") {
         mv.setViewName("searchEmployerPage");
 
         List<Employer> employers;
@@ -165,6 +171,10 @@ public class BaseController {
         mv.addAllObjects(allEmployers);
 
         return mv;
+        }else{
+            mv.setViewName("404");
+            return mv;
+        }
     }
 
     //2. Employer Profile (with the id)
@@ -174,7 +184,10 @@ public class BaseController {
                                          HttpSession session,
                                          @AuthenticationPrincipal(expression = "claims['email']") String email,
                                          @AuthenticationPrincipal(expression = "claims['name']") String name) {
+        Autentication(request,session,email,name);
         ModelAndView mv = new ModelAndView();
+
+        if(session.getAttribute("SESSION_Role") == "CWS") {
         mv.setViewName("profileEmployerPage");
         Employer employer = EmployerQrys.getEmployerDetailsById(id);
 
@@ -248,6 +261,10 @@ public class BaseController {
 
         mv.addAllObjects(allEmployer);
         return mv;
+        }else{
+            mv.setViewName("404");
+            return mv;
+        }
     }
 
     //3. Add Employer
