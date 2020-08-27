@@ -1,5 +1,6 @@
 package ebe.API;
 
+import ebe.DBMethods.EmployerQueries;
 import ebe.StorageAdapter.AzureBlobAdapter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +14,9 @@ import java.util.List;
 public class AzureStorageAPI {
 
     @Autowired
+    private EmployerQueries EmployerQrys;
+
+    @Autowired
     private AzureBlobAdapter azureBlobAdapter;
 
     @GetMapping("/container")
@@ -23,8 +27,12 @@ public class AzureStorageAPI {
 
     @PostMapping("/upload")
     @ResponseBody
-    public ResponseEntity upload(@RequestParam("name") String containerName, @RequestParam("file") MultipartFile file){
+    public ResponseEntity upload(@RequestParam("name") String containerName,
+                                 @RequestParam("file") MultipartFile file,
+                                 @RequestParam("employerID") String employerID){
+
         URI url = azureBlobAdapter.upload(containerName, file);
+        EmployerQrys.insertDocument(Integer.valueOf(employerID), url.toString());
         return ResponseEntity.ok(url);
     }
 

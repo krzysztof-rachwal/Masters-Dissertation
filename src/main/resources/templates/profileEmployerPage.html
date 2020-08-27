@@ -221,6 +221,18 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="row" id="documents">
+                                <div class="container my-3 p-0">
+                                    <h4>Employer's documents</h4>
+                                </div>
+                                <div class="col-md-12 my-4">
+                                    <form enctype="multipart/form-data" method="post" id="file-upload-form">
+                                        <label for="file-upload-input">Select file to upload</label>
+                                        <input type="file" id="file-upload-input" name="file">
+                                        <button type="button" value="Submit" onclick="uploadFile()"></button>
+                                    </form>
+                                </div>
+                            </div>
                         </div>
 
                     <div class="container my-4 text-center">

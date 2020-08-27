@@ -913,6 +913,14 @@ public class EmployerQueries extends DBQueries {
         }
     }
 
+    public void insertDocument(int employerID, String link) throws DataAccessException {
+
+        String insertSql = "INSERT INTO EmployerDocumentLinks(EmployerID, Link) VALUES (?,?)";
+        jdbcTemplate().update(insertSql, employerID, link);
+
+    }
+
+
 
     ///////////////////////////////////// DELETE ALL METHODS ///////////////////////////////////////////////
     //46. Delete Employer by Id

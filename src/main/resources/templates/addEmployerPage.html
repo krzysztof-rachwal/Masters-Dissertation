@@ -179,15 +179,6 @@
                         <option  th:each="employerLocalAuthority : ${allEmployerLocalAuthorities}" th:value="${employerLocalAuthority.getEmployerLocalAuthorityID()}"  th:text="${employerLocalAuthority.getEmployerLocalAuthorityName()}"></option>
                     </select>
                 </div>
-
-                <div class="col-md-12 my-4">
-                    <form enctype="multipart/form-data" method="post" id="file-upload-form">
-                        <label for="file-upload-input">Select file to upload</label>
-                        <input type="file" id="file-upload-input" name="file">
-                        <button type="button" value="Submit" onclick="uploadFile()"></button>
-                    </form>
-                </div>
-
             </div>
 
         <div class="container my-4 text-center">
