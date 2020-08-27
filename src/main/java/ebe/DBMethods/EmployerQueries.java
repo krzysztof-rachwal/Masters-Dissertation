@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 @Repository
@@ -920,7 +921,28 @@ public class EmployerQueries extends DBQueries {
 
     }
 
+    public List <String> getEmployerDocuments(int employerID) throws DataAccessException {
 
+        String sql = "SELECT Link FROM EmployerDocumentLinks WHERE EmployerID = " + employerID + ";";
+        List <String> documents = new ArrayList<>();
+        ResultSet rs = null;
+
+        try {
+        connection = ConnectionFactory.getConnection();
+        statement = connection.createStatement();
+        rs = statement.executeQuery(sql);
+        while (rs.next()) {
+            documents.add(rs.getString("Link"));
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }  finally {
+        DBUtil.close(rs);
+        DBUtil.close(statement);
+        DBUtil.close(connection);
+    }
+        return documents;
+    }
 
     ///////////////////////////////////// DELETE ALL METHODS ///////////////////////////////////////////////
     //46. Delete Employer by Id
