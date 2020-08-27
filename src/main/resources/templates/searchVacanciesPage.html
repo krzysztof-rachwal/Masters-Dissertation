@@ -70,9 +70,9 @@
                 <div class="row">
                     <!-- Search -->
                     <div class="input-group col-7">
-                        <input type="text" class="form-control input-border" onkeyup="searchVacancy()" id="vacancy-search"  placeholder="Search">
+                        <input type="text" class="search-box" onkeyup="searchVacancy()" id="vacancy-search"  placeholder="Search">
                         <div class="input-group-append">
-                            <button class="input-group-text input-border" onclick="searchVacancy()">
+                            <button class="input-group-text form-control" onclick="searchVacancy()">
                                 <i class="fa fa-search"></i>
                             </button>
                             <button class="tooltip-button input-group-text" id="tooltip" data-toggle="tooltip" data-placement="top" data-html="true" data-original-title="<span class='float-left'>Search By:</span><br><span class='float-left'>-Vacancy Name</span><br> <span class='float-left'>-Vacancy PostCode</span><br><span class='float-left'>-Employer Name</span><br><span>-Application Deadline</span>">
@@ -110,9 +110,10 @@
                             <a th:href="@{/profile-vacancy(vacancyId=${vacancy.getVacancyID()})}" class="card__inner" gel-processed="processed" >
                                 <div class="card__content">
                                     <div class="content__image">
-                                        <div>
-                                            <img alt="Card image" src="https://source.unsplash.com/90x90/?business">
-                                        </div>
+<!--                                        <div>-->
+<!--&lt;!&ndash;                                            <img alt="Card image" src="https://source.unsplash.com/90x90/?business">&ndash;&gt;-->
+<!--&lt;!&ndash;                                        </div>&ndash;&gt;-->
+<!--                                        </div>-->
                                     </div>
                                     <div class="content__body ">
                                         <div class="body__title searchable" name="vacancy-card-title" th:text="${vacancy.getVacancyName()}"></div>

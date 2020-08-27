@@ -91,7 +91,6 @@
                                     <input type="text" class="form-control form-required" id="event-venue" th:value="${event.getEventVenueName()}">
                                 </div>
                             </div>
-
                             <div class="col-md-6 ">
                                 <div class="form-group">
                                     <label for="adviser-name">Adviser Name</label>
@@ -120,7 +119,6 @@
                                     </select>
                                 </div>
                             </div>
-
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Can the event be conducted in Welsh?</label>
@@ -130,7 +128,6 @@
                                     </select>
                                 </div>
                             </div>
-
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Does the event promote apprenticeship?</label>
@@ -140,7 +137,6 @@
                                     </select>
                                 </div>
                             </div>
-
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Does the event challenger gender stereotypes?</label>
@@ -150,7 +146,6 @@
                                     </select>
                                 </div>
                             </div>
-
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Is the Event going to be Public?</label>
@@ -160,7 +155,6 @@
                                     </select>
                                 </div>
                             </div>
-
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Is the Event Cancelled?</label>
@@ -170,7 +164,6 @@
                                     </select>
                                 </div>
                             </div>
-
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Is the Event featured?</label>
@@ -228,15 +221,30 @@
         </button>
     </div>
 
+    <!-- Breadcrumbs -->
+    <nav aria-label="breadcrumb" class="breadcrumb pl-4 breadcrumb_ebe">
+        <span>You are here:</span>
+        <ul>
+            <li>
+                <a href="/" gel-processed="processed" title="Link to Home page">Home page</a>
+            </li>
+            <li>
+                <a href="/events" gel-processed="processed" title="Link to Events page">Events page</a>
+            </li>
+            <li>
+                <a href="#" gel-processed="processed" title="Link to Current page title as a link to the current page" th:text="${event.getEventName()}"></a>
+            </li>
+        </ul>
+    </nav>
 
-    <div class="container-headline mt-5">
+    <div class="container-headline mt-2 mb-5">
         <span class="title-h2" th:text="${#strings.capitalize(event.getEventName())}"></span>
         <input type="hidden" th:value="${event.getEventID()}" id="event-id"/>
         <button type="button" id="deleteEvent" th:if="${session.SESSION_Role =='CWS'}" data-toggle="modal" data-target="#deleteModal" class="buttonDelete float-right">Delete</button>
         <button type="button" id="updateEvent" th:if="${session.SESSION_Role =='CWS'}" data-toggle="modal" data-target="#updateModal" class="buttonUpdate float-right">Update</button>
     </div>
 
-    <div class="container-fluid py-5 px-5 eventBackground">
+    <div class="container-fluid px-5 eventBackground">
         <div class="row">
             <div class="col-md-12">
                 <div class="form-group">
@@ -350,6 +358,68 @@
             </div>
         </div>
 
+        <!-- Modal Show Interest -->
+        <div class="modal fade bd-example-modal-lg" id="interestEvent" tabindex="-1" role="dialog"
+             aria-labelledby="exampleModalCenterTitle" aria-hidden="true" th:if="${session.SESSION_Role =='Teacher'}">
+            <div class="modal-dialog gel-content-container" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="modal-center p-0">
+                            <div class="container-fluid">
+                                <div class="container my-3 p-0">
+                                    <h4 class="modal-title float-left">Show <span > Interest</span> </h4>
+                                    <button type="button" class="close float-right" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                            </div>
+                            <form>
+                                <div class="container-fluid">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="event_name_interest">Event Name</label>
+                                            <input type="text" id="event_name_interest" name="event_name_interest" disabled="disabled" th:value="${event.getEventName()}" class="form-control w-80">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class=" text-left" for="event_date_show_interest">Event Date</label>
+                                            <input type="date" id="event_date_show_interest"name="event_date_show_interest" disabled="disabled" th:value="${event.getEventDate()}" class="form-control  w-80">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-0">
+                                            <label for="event_time_show_interest">Event Time</label>
+                                            <input type="time" id="event_time_show_interest"name="event_date_show_interest"  disabled="disabled" th:value="${#dates.format(event.getEventTime(),'HH:mm')}"  class="form-control w-80">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 mt-3">
+                                        <div class="form-group">
+                                            <label for="event_notes">Notes</label>
+                                            <textarea type="time" id="event_notes" class="form-control" rows="5" name="event_notes_interest"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                    <div class="row">
+                                        <div class="container mt-5 mb-4 text-center">
+                                            <button type="button" class="button--secondary text-center">Send</button>
+                                        </div>
+                                    </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    <div class="text-center mt-2" th:if="${session.SESSION_Role =='Teacher'}">
+        <button type="button" class="button button--primary text-center" data-toggle="modal"
+                data-target="#interestEvent">Show Interest
+        </button>
     </div>
 </div>
 <footer th:replace="fragments/footerTemplate :: footer"></footer>
