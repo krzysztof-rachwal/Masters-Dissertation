@@ -24,18 +24,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
         http.authorizeRequests().antMatchers("/").permitAll();
     }
 
-    @Bean
-    public HttpFirewall allowUrlEncodedSlashHttpFirewall() {
-        StrictHttpFirewall firewall = new StrictHttpFirewall();
-        firewall.setAllowUrlEncodedSlash(true);
-        return firewall;
-    }
-    @Override
-    public void configure(WebSecurity web) throws Exception {
-        //@formatter:off
-        super.configure(web);
-        web.httpFirewall(allowUrlEncodedSlashHttpFirewall());
-    }
+//    @Bean
+//    public HttpFirewall allowUrlEncodedSlashHttpFirewall() {
+//        StrictHttpFirewall firewall = new StrictHttpFirewall();
+//        firewall.setAllowUrlEncodedSlash(true);
+//        return firewall;
+//    }
+//    @Override
+//    public void configure(WebSecurity web) throws Exception {
+//        //@formatter:off
+//        super.configure(web);
+//        web.httpFirewall(allowUrlEncodedSlashHttpFirewall());
+//    }
 
 //    @Bean
 //    public AuthenticationSuccessHandler authSuccessHandler(){
