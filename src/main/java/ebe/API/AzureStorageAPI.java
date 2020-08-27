@@ -1,6 +1,6 @@
-package ebe.Controllers;
+package ebe.API;
 
-import ebe.AzureBlobAdapter;
+import ebe.StorageAdapter.AzureBlobAdapter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,7 +10,7 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-public class AzureController {
+public class AzureStorageAPI {
 
     @Autowired
     private AzureBlobAdapter azureBlobAdapter;
@@ -39,6 +39,5 @@ public class AzureController {
         azureBlobAdapter.deleteBlob(containerName, blobName);
         return ResponseEntity.ok().build();
     }
-
 
 }

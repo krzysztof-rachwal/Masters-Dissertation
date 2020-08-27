@@ -555,7 +555,7 @@ function uploadFile(){
     var myFile = $('#file-upload-input').prop('files');
     var formData = new FormData();
 
-    formData.append("name", "newone");
+    formData.append("name", "employer");
     formData.append("file", myFile[0]);
 
     var token = $("meta[name='_csrf']").attr("content");    // Used to bypass Spring Boot's CSRF protocol     -- Solution taken from 'https://stackoverflow.com/questions/34747437/use-of-spring-csrf-with-ajax-rest-call-and-html-page-with-thymeleaf' on Nov 26th 2019

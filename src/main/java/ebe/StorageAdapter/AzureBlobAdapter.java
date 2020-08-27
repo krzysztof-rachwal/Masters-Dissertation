@@ -1,4 +1,4 @@
-package ebe;
+package ebe.StorageAdapter;
 
 import com.microsoft.azure.storage.OperationContext;
 import com.microsoft.azure.storage.StorageException;
