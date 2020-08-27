@@ -347,7 +347,7 @@
                 <a href="/employers" gel-processed="processed" title="Link to Employers page">Employers page</a>
             </li>
             <li>
-                <a href="#" gel-processed="processed" title="Link to Current page title as a link to the current page">Employer Profile Page</a>
+                <a href="#" gel-processed="processed" title="Link to Current page title as a link to the current page" th:text="${employer.getEmployerName()}"></a>
             </li>
         </ul>
     </nav>

@@ -239,7 +239,7 @@
                 <a href="/events" gel-processed="processed" title="Link to Events page">Events page</a>
             </li>
             <li>
-                <a href="#" gel-processed="processed" title="Link to Current page title as a link to the current page">Event Profile page</a>
+                <a href="#" gel-processed="processed" title="Link to Current page title as a link to the current page" th:text="${event.getEventName()}"></a>
             </li>
         </ul>
     </nav>
@@ -251,7 +251,7 @@
         <button type="button" id="updateEvent" th:if="${session.SESSION_Role =='CWS'}" data-toggle="modal" data-target="#updateModal" class="buttonUpdate float-right">Update</button>
     </div>
 
-    <div class="container-fluid py-5 px-5 eventBackground">
+    <div class="container-fluid px-5 eventBackground">
         <div class="row">
             <div class="col-md-12">
                 <div class="form-group">
