@@ -547,5 +547,34 @@ $( document ).ready(function() {
     if( $("span[name=employer-language-checker]").text() =="Yes"){
         $('div[id=div-foreign-language]').removeClass('d-none')
     }
-});
 
+    $("#file-upload-form").on("click", function (e) {
+
+        // cancel the default behavior
+        e.preventDefault();
+
+        console.log("pre");
+
+        // use $.ajax() to upload file
+        $.ajax({
+            url: "/upload",
+            type: "POST",
+            data: new FormData(this),
+            enctype: 'multipart/form-data',
+            processData: false,
+            contentType: false,
+            cache: false,
+            success: function (res) {
+                console.log(res);
+                console.log("good");
+            },
+            error: function (err) {
+                console.error(err);
+                console.error("bad");
+
+            }
+        });
+    });
+
+
+});

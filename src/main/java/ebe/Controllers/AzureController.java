@@ -21,7 +21,8 @@ public class AzureController {
         return ResponseEntity.ok(created);
     }
 
-    @GetMapping("/upload")
+    @PostMapping("/upload")
+    @ResponseBody
     public ResponseEntity upload(@RequestParam MultipartFile multipartFile){
         URI url = azureBlobAdapter.upload(multipartFile);
         return ResponseEntity.ok(url);
