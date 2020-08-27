@@ -47,11 +47,12 @@ public class AzureBlobAdapter {
         return containerCreated;
     }
 
-    public URI upload(MultipartFile multipartFile){
+    public URI upload(String containerName, MultipartFile multipartFile){
         URI uri = null;
         CloudBlockBlob blob = null;
         try {
-            blob = cloudBlobContainer.getBlockBlobReference(multipartFile.getOriginalFilename());
+            CloudBlobContainer container = cloudBlobClient.getContainerReference(containerName);
+            blob = container.getBlockBlobReference(multipartFile.getOriginalFilename());
             blob.upload(multipartFile.getInputStream(), -1);
             uri = blob.getUri();
         } catch (URISyntaxException e) {

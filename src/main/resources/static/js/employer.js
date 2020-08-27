@@ -548,33 +548,36 @@ $( document ).ready(function() {
         $('div[id=div-foreign-language]').removeClass('d-none')
     }
 
-    $("#file-upload-form").on("click", function (e) {
-
-        // cancel the default behavior
-        e.preventDefault();
-
-        console.log("pre");
-
-        // use $.ajax() to upload file
-        $.ajax({
-            url: "/upload",
-            type: "POST",
-            data: new FormData(this),
-            enctype: 'multipart/form-data',
-            processData: false,
-            contentType: false,
-            cache: false,
-            success: function (res) {
-                console.log(res);
-                console.log("good");
-            },
-            error: function (err) {
-                console.error(err);
-                console.error("bad");
-
-            }
-        });
-    });
-
-
 });
+
+function uploadFile(){
+
+    var myFile = $('#file-upload-input').prop('files');
+    var formData = new FormData();
+
+    formData.append("name", "newone");
+    formData.append("file", myFile[0]);
+
+    var token = $("meta[name='_csrf']").attr("content");    // Used to bypass Spring Boot's CSRF protocol     -- Solution taken from 'https://stackoverflow.com/questions/34747437/use-of-spring-csrf-with-ajax-rest-call-and-html-page-with-thymeleaf' on Nov 26th 2019
+    var header = $("meta[name='_csrf_header']").attr("content");    // Used to bypass Spring Boot's CSRF protocol
+
+    // use $.ajax() to upload file
+    $.ajax({
+        url: "/upload",
+        type: "POST",
+        data: formData,
+        enctype: 'multipart/form-data',
+        processData: false,
+        contentType: false,
+        cache: false,
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader(header, token);
+        },
+        success: function (res) {
+            console.log(res);
+        },
+        error: function (err) {
+            console.error(err);
+        }
+    });
+}
