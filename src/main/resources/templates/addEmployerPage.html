@@ -23,169 +23,172 @@
 
 <header th:replace="fragments/headerTemplate :: header">
 </header>
+<main class="js-main-content-area">
+    <div class="gel-content-container">
+        <div class="container my-4">
+            <h2>Add Employer</h2>
+        </div>
 
-<div class="gel-content-container">
-    <div class="container my-4">
-        <h2>Add Employer</h2>
-    </div>
+        <div id="failed_message" class="alert alert-danger alert-dismissible fade d-none" role="alert">
+            <strong>Failed!</strong> <span id="failed_message_text"></span>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
 
-    <div id="failed_message" class="alert alert-danger alert-dismissible fade d-none" role="alert">
-        <strong>Failed!</strong> <span id="failed_message_text"></span>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-
-    <form>
-        <div class="container-fluid">
-            <div class="row">
-                <div class="container my-3 p-0">
-                    <h4>Personal Info</h4>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="company-name">Company Name</label>
-                        <input type="text" class="form-control form-required" id="company-name">
+        <form>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="container my-3 p-0">
+                        <h4>Personal Info</h4>
                     </div>
-                    <div class="form-group">
-                        <label for="company-summary">Company Summary</label>
-                        <textarea class="form-control form-required text-area-w-80"  rows="3" id="company-summary"></textarea>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="company-name">Company Name</label>
+                            <input type="text" class="form-control form-required" id="company-name">
+                        </div>
+                        <div class="form-group">
+                            <label for="company-summary">Company Summary</label>
+                            <textarea class="form-control form-required text-area-w-80"  rows="3" id="company-summary"></textarea>
+                        </div>
+
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="employer-employees-number">Number of Employees</label><br>
+                            <select id="employer-employees-number"  data-width="80%" class="selectpicker" title="Nothing selected">
+                                <option  th:each="employerNumberEmployees : ${allEmployerNumberOfEmployees}" th:value="${employerNumberEmployees.getNumberOfEmployeesID()}" th:text="${employerNumberEmployees.getNumberOfEmployeesName()}"></option>
+                            </select>
+                        </div>
+
+                        <label>Address</label>
+                        <div class="group-input">
+                            <div class="input-group-prepend">
+                                <input type="text" id="employer-street" class="form-control border-right input-sm form-required w-80" placeholder="Street">
+                                <input type="text" id="employer-number" class="form-control form-required w-80" placeholder="Building No">
+                            </div>
+                            <div class="input-group-prepend mt-1">
+                                <input type="text" id="employer-postcode" class="form-control border-right form-required w-80" placeholder="Post Code">
+                                <input type="text" id="employer-city" class="form-control form-required w-80" placeholder="City">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="container my-3 p-0">
+                        <h4>Contact Info</h4>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="contact-name">Contact Name</label>
+                            <input type="text" class="form-control form-required" id="contact-name">
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-position">Contact Position</label>
+                            <input type="text" class="form-control form-required" id="contact-position">
+                        </div>
+                        <div class="form-group">
+                            <label for="employer-phone">Phone Number</label>
+                            <input type="text" class="form-control form-required" id="employer-phone">
+                        </div>
+    <!--                    <div class="form-group">-->
+    <!--                        <label for="mob-num">Mobile number</label>-->
+    <!--                        <input type="text" class="form-control input-border" id="employer-mobile">-->
+    <!--                    </div>-->
+                        <div class="form-group">
+                            <label for="employer-email">Email</label>
+                            <input type="text" class="form-control form-required" id="employer-email">
+                        </div>
                     </div>
 
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="employer-twitter">Twitter</label>
+                            <input type="text" class="form-control input-border" id="employer-twitter">
+                        </div>
+                        <div class="form-group">
+                            <label for="employer-facebook">Facebook</label>
+                            <input type="text" class="form-control input-border" id="employer-facebook">
+                        </div>
+                        <div class="form-group">
+                            <label for="employer-website">Website</label>
+                            <input type="text" class="form-control input-border" id="employer-website">
+                        </div>
+
+                    </div>
                 </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="employer-employees-number">Number of Employees</label><br>
-                        <select id="employer-employees-number"  data-width="80%" class="selectpicker" title="Nothing selected">
-                            <option  th:each="employerNumberEmployees : ${allEmployerNumberOfEmployees}" th:value="${employerNumberEmployees.getNumberOfEmployeesID()}" th:text="${employerNumberEmployees.getNumberOfEmployeesName()}"></option>
+                <div class="row">
+                    <div class="container my-3 p-0">
+                        <h4>Other</h4>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="industry-sector">Sector Areas</label><br>
+                        <select id="industry-sector" data-width="80%" class="selectpicker" multiple data-live-search="true">
+                            <option th:each="employerIndustrySector : ${allEmployerIndustrySectors}" th:value="${employerIndustrySector.getEmployerIndustrySectorID()}" th:text="${employerIndustrySector.getEmployerIndustrySectorName()}"></option>
                         </select>
                     </div>
 
-                    <label>Address</label>
-                    <div class="group-input">
-                        <div class="input-group-prepend">
-                            <input type="text" id="employer-street" class="form-control border-right input-sm form-required w-80" placeholder="Street">
-                            <input type="text" id="employer-number" class="form-control form-required w-80" placeholder="Building No">
-                        </div>
-                        <div class="input-group-prepend mt-1">
-                            <input type="text" id="employer-postcode" class="form-control border-right form-required w-80" placeholder="Post Code">
-                            <input type="text" id="employer-city" class="form-control form-required w-80" placeholder="City">
-                        </div>
+                    <div class="col-md-6 mb-4">
+                        <label for="employer-cooperation-type">Cooperation Type</label><br>
+                        <select id="employer-cooperation-type" data-width="80%"   class="selectpicker" multiple data-live-search="true">
+                            <option  th:each="employerCooperationType : ${allEmployerCooperationType}" th:value="${employerCooperationType.getEmployerCooperationTypeID()}" th:text="${employerCooperationType.getEmployerCooperationTypeName()}"></option>
+                        </select>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <label for="curriculum-area">Curriculum Areas</label><br>
+                        <select id="curriculum-area" data-width="80%" class="selectpicker" multiple data-live-search="true">
+                            <option th:each="employerCurriculumAreas : ${allEmployerCurriculumAreas}" th:value="${employerCurriculumAreas.getEmployerAreaOfCurriculumID()}" th:text="${employerCurriculumAreas.getEmployAreaOfCurriculumName()}"></option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-6 mb-4">
+                        <label for="schools-attending">Schools Preferences</label><br>
+                        <select class="selectpicker"  data-width="80%" multiple data-live-search="true" id="schools-attending">
+                            <option  th:each="school : ${allSchoolNamesAndIds}" th:value="${school.getSchoolID()}" th:text="${school.getSchoolName()}"></option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-6 mb-4">
+                        <label for="employer-preferences">Preferences</label><br>
+                        <select class="selectpicker"  data-width="80%" multiple data-live-search="true" id="employer-preferences">
+                            <option  th:each="employerPreferences : ${allEmployerPreferences}" th:value="${employerPreferences.getEmployerPreferencesID()}" th:text="${employerPreferences.getEmployerPreferencesName()}"></option>
+                        </select>
+                    </div>
+                    <div class="col-md-6 mb-4 d-none" id="div-foreign-language">
+                        <label for="employer-language">Which Foreign Language?</label><br>
+                        <select class="selectpicker" data-width="80%" multiple id="employer-language" >
+                            <option th:each="employerLanguage : ${allEmployerLanguage}" th:value="${employerLanguage.getEmployerLanguageID()}" th:text="${employerLanguage.getEmployerLanguageName()}"></option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-6 mb-4" >
+                        <label for="employer-notes">Notes</label>
+                        <input type="text" class="form-control input-border" id="employer-notes">
+                    </div>
+
+                    <div class="col-md-6 mb-4" >
+                        <label for="employer-status">Employer Status</label>
+                        <select class="selectpicker" data-width="80%" id="employer-status" title="Nothing selected">
+                            <option  th:each="employerStatus : ${allEmployerStatus}" th:value="${employerStatus.getStatusOfEmployerID()}" th:text="${employerStatus.getStatusOfEmployerName()}"></option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-12 my-4">
+                        <label for="local-authorities">Local Authorities</label><br>
+                        <select class="selectpicker" data-width="90%" multiple data-live-search="true" id="local-authorities">
+                            <option  th:each="employerLocalAuthority : ${allEmployerLocalAuthorities}" th:value="${employerLocalAuthority.getEmployerLocalAuthorityID()}"  th:text="${employerLocalAuthority.getEmployerLocalAuthorityName()}"></option>
+                        </select>
                     </div>
                 </div>
+
+            <div class="container my-4 text-center">
+                <button type="button" class="button--secondary text-center" onclick="createNewEmployer()">Add Employer</button>
             </div>
-            <div class="row">
-                <div class="container my-3 p-0">
-                    <h4>Contact Info</h4>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="contact-name">Contact Name</label>
-                        <input type="text" class="form-control form-required" id="contact-name">
-                    </div>
-                    <div class="form-group">
-                        <label for="contact-position">Contact Position</label>
-                        <input type="text" class="form-control form-required" id="contact-position">
-                    </div>
-                    <div class="form-group">
-                        <label for="employer-phone">Phone Number</label>
-                        <input type="text" class="form-control form-required" id="employer-phone">
-                    </div>
-<!--                    <div class="form-group">-->
-<!--                        <label for="mob-num">Mobile number</label>-->
-<!--                        <input type="text" class="form-control input-border" id="employer-mobile">-->
-<!--                    </div>-->
-                    <div class="form-group">
-                        <label for="employer-email">Email</label>
-                        <input type="text" class="form-control form-required" id="employer-email">
-                    </div>
-                </div>
-
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="employer-twitter">Twitter</label>
-                        <input type="text" class="form-control input-border" id="employer-twitter">
-                    </div>
-                    <div class="form-group">
-                        <label for="employer-facebook">Facebook</label>
-                        <input type="text" class="form-control input-border" id="employer-facebook">
-                    </div>
-                    <div class="form-group">
-                        <label for="employer-website">Website</label>
-                        <input type="text" class="form-control input-border" id="employer-website">
-                    </div>
-
-                </div>
-            </div>
-            <div class="row">
-                <div class="container my-3 p-0">
-                    <h4>Other</h4>
-                </div>
-                <div class="col-md-6">
-                    <label for="industry-sector">Sector Areas</label><br>
-                    <select id="industry-sector" data-width="80%" class="selectpicker" multiple data-live-search="true">
-                        <option th:each="employerIndustrySector : ${allEmployerIndustrySectors}" th:value="${employerIndustrySector.getEmployerIndustrySectorID()}" th:text="${employerIndustrySector.getEmployerIndustrySectorName()}"></option>
-                    </select>
-                </div>
-
-                <div class="col-md-6 mb-4">
-                    <label for="employer-cooperation-type">Cooperation Type</label><br>
-                    <select id="employer-cooperation-type" data-width="80%"   class="selectpicker" multiple data-live-search="true">
-                        <option  th:each="employerCooperationType : ${allEmployerCooperationType}" th:value="${employerCooperationType.getEmployerCooperationTypeID()}" th:text="${employerCooperationType.getEmployerCooperationTypeName()}"></option>
-                    </select>
-                </div>
-                <div class="col-md-6 mb-4">
-                    <label for="curriculum-area">Curriculum Areas</label><br>
-                    <select id="curriculum-area" data-width="80%" class="selectpicker" multiple data-live-search="true">
-                        <option th:each="employerCurriculumAreas : ${allEmployerCurriculumAreas}" th:value="${employerCurriculumAreas.getEmployerAreaOfCurriculumID()}" th:text="${employerCurriculumAreas.getEmployAreaOfCurriculumName()}"></option>
-                    </select>
-                </div>
-
-                <div class="col-md-6 mb-4">
-                    <label for="schools-attending">Schools Preferences</label><br>
-                    <select class="selectpicker"  data-width="80%" multiple data-live-search="true" id="schools-attending">
-                        <option  th:each="school : ${allSchoolNamesAndIds}" th:value="${school.getSchoolID()}" th:text="${school.getSchoolName()}"></option>
-                    </select>
-                </div>
-
-                <div class="col-md-6 mb-4">
-                    <label for="employer-preferences">Preferences</label><br>
-                    <select class="selectpicker"  data-width="80%" multiple data-live-search="true" id="employer-preferences">
-                        <option  th:each="employerPreferences : ${allEmployerPreferences}" th:value="${employerPreferences.getEmployerPreferencesID()}" th:text="${employerPreferences.getEmployerPreferencesName()}"></option>
-                    </select>
-                </div>
-                <div class="col-md-6 mb-4 d-none" id="div-foreign-language">
-                    <label for="employer-language">Which Foreign Language?</label><br>
-                    <select class="selectpicker" data-width="80%" multiple id="employer-language" >
-                        <option th:each="employerLanguage : ${allEmployerLanguage}" th:value="${employerLanguage.getEmployerLanguageID()}" th:text="${employerLanguage.getEmployerLanguageName()}"></option>
-                    </select>
-                </div>
-
-                <div class="col-md-6 mb-4" >
-                    <label for="employer-notes">Notes</label>
-                    <input type="text" class="form-control input-border" id="employer-notes">
-                </div>
-
-                <div class="col-md-6 mb-4" >
-                    <label for="employer-status">Employer Status</label>
-                    <select class="selectpicker" data-width="80%" id="employer-status" title="Nothing selected">
-                        <option  th:each="employerStatus : ${allEmployerStatus}" th:value="${employerStatus.getStatusOfEmployerID()}" th:text="${employerStatus.getStatusOfEmployerName()}"></option>
-                    </select>
-                </div>
-
-                <div class="col-md-12 my-4">
-                    <label for="local-authorities">Local Authorities</label><br>
-                    <select class="selectpicker" data-width="90%" multiple data-live-search="true" id="local-authorities">
-                        <option  th:each="employerLocalAuthority : ${allEmployerLocalAuthorities}" th:value="${employerLocalAuthority.getEmployerLocalAuthorityID()}"  th:text="${employerLocalAuthority.getEmployerLocalAuthorityName()}"></option>
-                    </select>
-                </div>
-            </div>
-
-        <div class="container my-4 text-center">
-            <button type="button" class="button--secondary text-center" onclick="createNewEmployer()">Add Employer</button>
         </div>
     </form>
-</div>
+
+    </div>
+</main>
 
 <footer th:replace="fragments/footerTemplate :: footer"></footer>
 

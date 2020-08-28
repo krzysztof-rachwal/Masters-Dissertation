@@ -26,71 +26,73 @@
 <body>
 
 <header th:replace="fragments/headerTemplate :: header"></header>
-<div class="gel-content-container pr-5">
+<main class="js-main-content-area">
+    <div class="gel-content-container pr-5">
 
-    <div class="container-headline my-5">
-        <span class="title-h2">Quicklinks</span>
-    </div>
-    <div class="d-flex justify-content-center">
-        <a href="/request" class="button button--icon d-inline mr-5 p-5 text-center w-100">Request an event</a>
-        <a href="/contact-us" class="button button--icon d-inline p-5 text-center w-100">Get in touch</a>
-    </div>
+        <div class="container-headline my-5">
+            <span class="title-h2">Quicklinks</span>
+        </div>
+        <div class="d-flex justify-content-center">
+            <a href="/request" class="button button--icon d-inline mr-5 p-5 text-center w-100">Request an event</a>
+            <a href="/contact-us" class="button button--icon d-inline p-5 text-center w-100">Get in touch</a>
+        </div>
 
-    <div class="container-headline my-5">
-        <span class="title-h2">Featured events</span>
-    </div>
+        <div class="container-headline my-5">
+            <span class="title-h2">Featured events</span>
+        </div>
 
-    <div class="list-employers col-md-12 mb-5">
-        <div class="gel-content-row" th:each="event : ${featuredEvents}">
-            <article class="card js-card card--style-icon card--100" gel-processed="processed"
-                     th:id="${event.getEventID()}">
-                <a th:href="@{/profile-event(eventId=${event.getEventID()})}" class="card__inner"
-                   gel-processed="processed" title="Link to Card heading and link title">
-                    <div class="card__content">
-                        <div class="content__image">
-                            <div>
-                                <img alt="Card image" src="https://source.unsplash.com/90x90/?business">
+        <div class="list-employers col-md-12 mb-5">
+            <div class="gel-content-row" th:each="event : ${featuredEvents}">
+                <article class="card js-card card--style-icon card--100" gel-processed="processed"
+                         th:id="${event.getEventID()}">
+                    <a th:href="@{/profile-event(eventId=${event.getEventID()})}" class="card__inner"
+                       gel-processed="processed" title="Link to Card heading and link title">
+                        <div class="card__content">
+                            <div class="content__image">
+                                <div>
+                                    <img alt="Card image" src="https://source.unsplash.com/90x90/?business">
+                                </div>
+                            </div>
+                            <div class="content__body">
+                                <div class="body__title" th:text="${#strings.capitalize(event.getEventName())}"></div>
+                                <div class="body__body" th:text="'Event Venue: ' + ${#strings.capitalize(event.getEventVenueName())} "></div>
+                                <div class="body__body" th:text="'Date: ' + ${#dates.format(event.getEventDateAndTime(),'dd-MM-yyyy')} "></div>
                             </div>
                         </div>
-                        <div class="content__body">
-                            <div class="body__title" th:text="${#strings.capitalize(event.getEventName())}"></div>
-                            <div class="body__body" th:text="'Event Venue: ' + ${#strings.capitalize(event.getEventVenueName())} "></div>
-                            <div class="body__body" th:text="'Date: ' + ${#dates.format(event.getEventDateAndTime(),'dd-MM-yyyy')} "></div>
-                        </div>
-                    </div>
-                </a>
-            </article>
+                    </a>
+                </article>
+            </div>
         </div>
-    </div>
 
-    <div class="container-headline my-5">
-        <span class="title-h2">Events in your Local Authority</span>
-    </div>
+        <div class="container-headline my-5">
+            <span class="title-h2">Events in your Local Authority</span>
+        </div>
 
-    <div class="list-employers col-md-12">
-        <div class="gel-content-row" th:each="event : ${recommendedEvents}">
-            <article class="card js-card card--style-icon card--100" gel-processed="processed"
-                     th:id="${event.getEventID()}">
-                <a th:href="@{/profile-event(eventId=${event.getEventID()})}" class="card__inner"
-                   gel-processed="processed" title="Link to Card heading and link title">
-                    <div class="card__content">
-                        <div class="content__image">
-                            <div>
-                                <img alt="Card image" src="https://source.unsplash.com/90x90/?business">
+        <div class="list-employers col-md-12">
+            <div class="gel-content-row" th:each="event : ${recommendedEvents}">
+                <article class="card js-card card--style-icon card--100" gel-processed="processed"
+                         th:id="${event.getEventID()}">
+                    <a th:href="@{/profile-event(eventId=${event.getEventID()})}" class="card__inner"
+                       gel-processed="processed" title="Link to Card heading and link title">
+                        <div class="card__content">
+                            <div class="content__image">
+                                <div>
+                                    <img alt="Card image" src="https://source.unsplash.com/90x90/?business">
+                                </div>
+                            </div>
+                            <div class="content__body">
+                                <div class="body__title" th:text="${#strings.capitalize(event.getEventName())}"></div>
+                                <div class="body__body" th:text="'Event Venue: ' + ${#strings.capitalize(event.getEventVenueName())} "></div>
+                                <div class="body__body" th:text="'Date: ' + ${#dates.format(event.getEventDateAndTime(),'dd-MM-yyyy')} "></div>
                             </div>
                         </div>
-                        <div class="content__body">
-                            <div class="body__title" th:text="${#strings.capitalize(event.getEventName())}"></div>
-                            <div class="body__body" th:text="'Event Venue: ' + ${#strings.capitalize(event.getEventVenueName())} "></div>
-                            <div class="body__body" th:text="'Date: ' + ${#dates.format(event.getEventDateAndTime(),'dd-MM-yyyy')} "></div>
-                        </div>
-                    </div>
-                </a>
-            </article>
+                    </a>
+                </article>
+            </div>
         </div>
-    </div>
 
-</div>
+    </div>
+</main>
 
 
 <footer th:replace="fragments/footerTemplate :: footer"></footer>
@@ -110,6 +112,6 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/i18n/defaults-*.min.js"></script>
-
+<script th:src="@{../js/home.js}" src="../js/home.js"></script>
 </body>
 </html>

@@ -23,167 +23,168 @@
 
 <header th:replace="fragments/headerTemplate :: header">
 </header>
-
-<div class="gel-content-container">
-    <div class="container my-4">
-        <h2>Add Event</h2>
-    </div>
-
-    <div id="failed_message" class="alert alert-danger alert-dismissible fade d-none" role="alert">
-        <strong>Failed!</strong> <span id="failed_message_text"></span>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-
-    <form>
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="event-name">Event Name</label>
-                        <input type="text" class="form-control form-required" id="event-name">
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="event-type">Event Type</label><br>
-                        <select class="selectpicker" data-width="80%" data-live-search="true" id="event-type" title="Nothing selected" >
-                            <option  th:each="event : ${allEventTypes}" th:value="${event.getTypeOfEventID()}" th:text="${event.getTypeOfEventName()}"></option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-md-6 ">
-                    <div class="form-group">
-                        <label for="event-summary">Event Summary</label>
-                        <textarea class="form-control form-required text-area-w-80"  rows="3" id="event-summary"></textarea>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <label>Address</label>
-                    <div class="group-input">
-                        <div class="input-group-prepend">
-                            <input type="text" id="event-street" class="form-control border-right input-sm form-required w-80" placeholder="Street">
-                            <input type="text" id="event-number" class="form-control w-80 form-required" placeholder="Building No">
-                        </div>
-                        <div class="input-group-prepend mt-1">
-                            <input type="text" id="event-postcode" class="form-control border-right form-required w-80" placeholder="Post Code">
-                            <input type="text" id="event-city" class="form-control form-required w-80" placeholder="City">
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="event-date">Event Date</label>
-                        <input type="date" class="form-control w-80 form-required" id="event-date">
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="event-time">Event Time</label>
-                        <input type="time" class="form-control w-80 form-required" id="event-time">
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="event-venue">Event Venue</label>
-                        <input type="text" class="form-control w-80 form-required" id="event-venue">
-                    </div>
-                </div>
-
-                <div class="col-md-6 ">
-                    <div class="form-group">
-                        <label for="adviser-name">Adviser Name</label>
-                        <input type="text" class="form-control w-80 form-required" id="adviser-name">
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="no-attendees">Number of Attendees</label>
-                        <input type="number" min="0" class="form-control w-80 form-required" id="no-attendees">
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="employers-attending">Employers Attending</label><br>
-                        <select class="selectpicker" multiple data-live-search="true" data-width="80%" id="employers-attending">
-                            <option  th:each="employer : ${AllEmployerNamesAndIds}" th:value="${employer.getEmployerID()}" th:text="${employer.getEmployerName()}"></option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="schools-attending">Schools Attending</label><br>
-                        <select class="selectpicker" multiple data-live-search="true" data-width="80%" id="schools-attending">
-                            <option  th:each="school : ${allSchoolNamesAndIds}" th:value="${school.getSchoolID()}" th:text="${school.getSchoolName()}"></option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label>Can the event be conducted in Welsh?</label>
-                        <select  id="conducted-welsh" class="selectpicker" title="Nothing selected"  data-width="80%">
-                            <option value="1">Yes</option>
-                            <option value="0">No</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label>Does the event promote apprenticeship?</label>
-                        <select id="promote-apprenticheship" class="selectpicker" title="Nothing selected"  data-width="80%">
-                            <option value="1">Yes</option>
-                            <option value="0">No</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label>Does the event challenger gender stereotypes?</label>
-                        <select  id="challenger-gender" class="selectpicker" title="Nothing selected"  data-width="80%">
-                            <option value="1">Yes</option>
-                            <option value="0">No</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label>Is the Event going to be Public?</label>
-                        <select  id="event-public" class="selectpicker"  title="Nothing selected" data-width="80%">
-                            <option value="1">Yes</option>
-                            <option value="0">No</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label>Is the Event Cancelled?</label>
-                        <select  id="event-cancelled" class="selectpicker" title="Nothing selected" data-width="80%">
-                            <option value="1">Yes</option>
-                            <option value="0">No</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label>Is this a featured event?</label>
-                        <select  id="event-featured" class="selectpicker" title="Nothing selected" data-width="80%">
-                            <option value="1">Yes</option>
-                            <option value="0">No</option>
-                        </select>
-                    </div>
-                </div>
-
+<main class="js-main-content-area">
+    <div class="gel-content-container">
+        <div class="container my-4">
+            <h2>Add Event</h2>
         </div>
 
-            <div class="container my-4 text-center">
-                <button type="button" class="button--secondary text-center" onclick="createNewEvent()">Add Event</button>
+        <div id="failed_message" class="alert alert-danger alert-dismissible fade d-none" role="alert">
+            <strong>Failed!</strong> <span id="failed_message_text"></span>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+
+        <form>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="event-name">Event Name</label>
+                            <input type="text" class="form-control form-required" id="event-name">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="event-type">Event Type</label><br>
+                            <select class="selectpicker" data-width="80%" data-live-search="true" id="event-type" title="Nothing selected" >
+                                <option  th:each="event : ${allEventTypes}" th:value="${event.getTypeOfEventID()}" th:text="${event.getTypeOfEventName()}"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6 ">
+                        <div class="form-group">
+                            <label for="event-summary">Event Summary</label>
+                            <textarea class="form-control form-required text-area-w-80"  rows="3" id="event-summary"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label>Address</label>
+                        <div class="group-input">
+                            <div class="input-group-prepend">
+                                <input type="text" id="event-street" class="form-control border-right input-sm form-required w-80" placeholder="Street">
+                                <input type="text" id="event-number" class="form-control w-80 form-required" placeholder="Building No">
+                            </div>
+                            <div class="input-group-prepend mt-1">
+                                <input type="text" id="event-postcode" class="form-control border-right form-required w-80" placeholder="Post Code">
+                                <input type="text" id="event-city" class="form-control form-required w-80" placeholder="City">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="event-date">Event Date</label>
+                            <input type="date" class="form-control w-80 form-required" id="event-date">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="event-time">Event Time</label>
+                            <input type="time" class="form-control w-80 form-required" id="event-time">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="event-venue">Event Venue</label>
+                            <input type="text" class="form-control w-80 form-required" id="event-venue">
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 ">
+                        <div class="form-group">
+                            <label for="adviser-name">Adviser Name</label>
+                            <input type="text" class="form-control w-80 form-required" id="adviser-name">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="no-attendees">Number of Attendees</label>
+                            <input type="number" min="0" class="form-control w-80 form-required" id="no-attendees">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="employers-attending">Employers Attending</label><br>
+                            <select class="selectpicker" multiple data-live-search="true" data-width="80%" id="employers-attending">
+                                <option  th:each="employer : ${AllEmployerNamesAndIds}" th:value="${employer.getEmployerID()}" th:text="${employer.getEmployerName()}"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="schools-attending">Schools Attending</label><br>
+                            <select class="selectpicker" multiple data-live-search="true" data-width="80%" id="schools-attending">
+                                <option  th:each="school : ${allSchoolNamesAndIds}" th:value="${school.getSchoolID()}" th:text="${school.getSchoolName()}"></option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Can the event be conducted in Welsh?</label>
+                            <select  id="conducted-welsh" class="selectpicker" title="Nothing selected"  data-width="80%">
+                                <option value="1">Yes</option>
+                                <option value="0">No</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Does the event promote apprenticeship?</label>
+                            <select id="promote-apprenticheship" class="selectpicker" title="Nothing selected"  data-width="80%">
+                                <option value="1">Yes</option>
+                                <option value="0">No</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Does the event challenger gender stereotypes?</label>
+                            <select  id="challenger-gender" class="selectpicker" title="Nothing selected"  data-width="80%">
+                                <option value="1">Yes</option>
+                                <option value="0">No</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Is the Event going to be Public?</label>
+                            <select  id="event-public" class="selectpicker"  title="Nothing selected" data-width="80%">
+                                <option value="1">Yes</option>
+                                <option value="0">No</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Is the Event Cancelled?</label>
+                            <select  id="event-cancelled" class="selectpicker" title="Nothing selected" data-width="80%">
+                                <option value="1">Yes</option>
+                                <option value="0">No</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Is this a featured event?</label>
+                            <select  id="event-featured" class="selectpicker" title="Nothing selected" data-width="80%">
+                                <option value="1">Yes</option>
+                                <option value="0">No</option>
+                            </select>
+                        </div>
+                    </div>
+
             </div>
-        </div>
-    </form>
-</div>
+
+                <div class="container my-4 text-center">
+                    <button type="button" class="button--secondary text-center" onclick="createNewEvent()">Add Event</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</main>
 <footer th:replace="fragments/footerTemplate :: footer"></footer>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

@@ -24,128 +24,127 @@
 <body>
 <header th:replace="fragments/headerTemplate :: header">
 </header>
+<main class="js-main-content-area">
 
-<div class="gel-content-container">
-    <div id="success_message" class="alert alert-success alert-dismissible fade d-none" role="alert">
-        <strong>Success!</strong><span id="success_message_text"></span>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
+    <div class="gel-content-container">
+        <div id="success_message" class="alert alert-success alert-dismissible fade d-none" role="alert">
+            <strong>Success!</strong><span id="success_message_text"></span>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
 
-    <div class="container-headline my-5">
-        <span class="title-h2">Events</span>
-        <a href="/add-events">
-            <button type="button" th:if="${session.SESSION_Role =='CWS'}" id="addEvent" class="button--secondary float-right" >Add Event</button>
-        </a>
-    </div>
-
-    <div class="flex-container">
-        <div class="col-lg-3">
-            <div class="mb-3">
-                <label for="event-type">Event Type</label><br>
-                <select class="selectpicker" data-width="100%" multiple data-live-search="true" id="event-type">
-                    <option  th:each="event : ${allEventTypes}" th:value="${event.getTypeOfEventID()}" th:text="${event.getTypeOfEventName()}"></option>
-                </select>
-            </div>
-
-            <div class="mb-3">
-                <label>Name of Advisor</label><br>
-                <select class="selectpicker" data-width="100%" multiple data-live-search="true" id="event-advisor">
-                    <option  th:each="advisor : ${allAdvisorsNames}" th:value="${advisor}" th:text="${advisor}"></option>
-                </select>
-            </div>
-
-            <div class="mb-3">
-                <label>Event Preference</label><br>
-                <select class="selectpicker" data-width="100%" multiple id="event-preference">
-                    <option  value="1" >Promotes apprenticeship</option>
-                    <option  value="2" >Conducted in Welsh</option>
-                    <option  value="3" >Challenges gender stereotypes</option>
-                    <option  value="4" >Featured</option>
-                </select>
-            </div>
-
-            <a href="#">
-                <button type="button" id="filterButton" class="button--secondary w-100 text-center">Filter</button>
+        <div class="container-headline my-5">
+            <span class="title-h2">Events</span>
+            <a href="/add-events">
+                <button type="button" th:if="${session.SESSION_Role =='CWS'}" id="addEvent" class="button--secondary float-right" >Add Event</button>
             </a>
-
         </div>
 
-        <div class="col-lg-9" style="border-left: grey 1px solid">
-            <div class="gel-content-container">
-
-                <div class="row">
-                    <!-- Search -->
-                    <div class="input-group col-7">
-                        <input type="text" class="form-control input-border" onkeyup="searchEvents()" id="event-search"  placeholder="Search">
-                        <div class="input-group-append">
-                            <button class="input-group-text input-border" onclick="searchEvents()">
-                                <i class="fa fa-search"></i>
-                            </button>
-                            <button class="tooltip-button input-group-text" id="tooltip" data-toggle="tooltip" data-placement="top" data-html="true" data-original-title= "<span class='float-left'>Search By:</span><br><span class='float-left'>-Event Name</span><br><span class='float-left'>-Adviser Name</span><br><span class='float-left'>-Event Venue</span><br><span class='float-left'>-Event City</span><br> <span>-Event PostCode</span>">
-                                <i class="fa fa-info-circle"></i>
-                            </button>
-                        </div>
-                    </div>
-
-
-                    <!-- Sorted by-->
-                    <div class="col-5">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text input-border">Sort By:</span>
-                            </div>
-                            <select class="form-control input-border selectpicker" name="event-sort-by">
-                                <option selected="selected" value="Featured">Featured</option>
-                                <option value="Name" data-val="DESC">Name (ASC)</option>
-                                <option value="Name" data-val="ASC">Name (DESC)</option>
-                                <option value="Date" data-val="DESC">Date (ASC)</option>
-                                <option value="Date" data-val="ASC">Date (DESC)</option>
-                            </select>
-                        </div>
-                    </div>
+        <div class="flex-container">
+            <div class="col-lg-3">
+                <div class="mb-3">
+                    <label for="event-type">Event Type</label><br>
+                    <select class="selectpicker" data-width="100%" multiple data-live-search="true" id="event-type">
+                        <option  th:each="event : ${allEventTypes}" th:value="${event.getTypeOfEventID()}" th:text="${event.getTypeOfEventName()}"></option>
+                    </select>
                 </div>
 
-                <br>
-
-                <!-- Cards -->
-                <div class="list-events">
-                    <div class="gel-content-row event-card event-found event-filtered"  th:each="event : ${allEvents}" th:id="${event.getEventID()}">
-                        <article class="card js-card card--style-icon card--100" gel-processed="processed">
-                            <a th:href="@{/profile-event(eventId=${event.getEventID()})}" class="card__inner" gel-processed="processed">
-                                <div class="card__content">
-                                    <div class="content__image">
-                                        <div>
-                                            <img alt="Card image" src="https://source.unsplash.com/90x90/?business">
-                                        </div>
-                                    </div>
-                                    <div class="content__body">
-                                        <div class="body__title searchable" name="event-card-title" th:text="${#strings.capitalize(event.getEventName())}"></div>
-                                        <div class="body__body searchable">
-                                            <h5 class="searchable" name="event-card-date" th:text="${#dates.format(event.getEventDateAndTime(),'dd-MM-yyyy')}"></h5>
-                                            <h5 class="searchable" name="event-card-summary" th:text="${event.getEventSummary()} "></h5>
-
-                                            <!-- Hidden Data -->
-                                            <h5 class="searchable d-none" th:text="${#strings.capitalize(event.getEventVenueName())}"></h5>
-                                            <h5 class="searchable d-none" th:text="${#strings.capitalize(event.getEventAddressCity())}"></h5>
-                                            <h5 class="searchable d-none" th:text="${#strings.capitalize(event.getEventVenuePostcode())}"></h5>
-                                            <h5 class="searchable d-none" th:text="${#strings.capitalize(event.getNameOfAdviser())}"></h5>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </article>
-                    </div>
+                <div class="mb-3">
+                    <label>Name of Advisor</label><br>
+                    <select class="selectpicker" data-width="100%" multiple data-live-search="true" id="event-advisor">
+                        <option  th:each="advisor : ${allAdvisorsNames}" th:value="${advisor}" th:text="${advisor}"></option>
+                    </select>
                 </div>
+
+                <div class="mb-3">
+                    <label>Event Preference</label><br>
+                    <select class="selectpicker" data-width="100%" multiple id="event-preference">
+                        <option  value="1" >Promotes apprenticeship</option>
+                        <option  value="2" >Conducted in Welsh</option>
+                        <option  value="3" >Challenges gender stereotypes</option>
+                        <option  value="4" >Featured</option>
+                    </select>
+                </div>
+
+                <a href="#">
+                    <button type="button" id="filterButton" class="button--secondary w-100 text-center">Filter</button>
+                </a>
 
             </div>
 
+            <div class="col-lg-9" style="border-left: grey 1px solid">
+                <div class="gel-content-container">
 
+                    <div class="row">
+                        <!-- Search -->
+                        <div class="input-group col-7">
+                            <input type="text" class="form-control input-border" onkeyup="searchEvents()" id="event-search"  placeholder="Search">
+                            <div class="input-group-append">
+                                <button class="input-group-text input-border" onclick="searchEvents()">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                                <button class="tooltip-button input-group-text" id="tooltip" data-toggle="tooltip" data-placement="top" data-html="true" data-original-title= "<span class='float-left'>Search By:</span><br><span class='float-left'>-Event Name</span><br><span class='float-left'>-Adviser Name</span><br><span class='float-left'>-Event Venue</span><br><span class='float-left'>-Event City</span><br> <span>-Event PostCode</span>">
+                                    <i class="fa fa-info-circle"></i>
+                                </button>
+                            </div>
+                        </div>
+
+
+                        <!-- Sorted by-->
+                        <div class="col-5">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text input-border">Sort By:</span>
+                                </div>
+                                <select class="form-control input-border selectpicker" name="event-sort-by">
+                                    <option selected="selected" value="Featured">Featured</option>
+                                    <option value="Name" data-val="DESC">Name (ASC)</option>
+                                    <option value="Name" data-val="ASC">Name (DESC)</option>
+                                    <option value="Date" data-val="DESC">Date (ASC)</option>
+                                    <option value="Date" data-val="ASC">Date (DESC)</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <br>
+
+                    <!-- Cards -->
+                    <div class="list-events">
+                        <div class="gel-content-row event-card event-found event-filtered"  th:each="event : ${allEvents}" th:id="${event.getEventID()}">
+                            <article class="card js-card card--style-icon card--100" gel-processed="processed">
+                                <a th:href="@{/profile-event(eventId=${event.getEventID()})}" class="card__inner" gel-processed="processed">
+                                    <div class="card__content">
+                                        <div class="content__image">
+                                            <div>
+                                                <img alt="Card image" src="https://source.unsplash.com/90x90/?business">
+                                            </div>
+                                        </div>
+                                        <div class="content__body">
+                                            <div class="body__title searchable" name="event-card-title" th:text="${#strings.capitalize(event.getEventName())}"></div>
+                                            <div class="body__body searchable">
+                                                <h5 class="searchable" name="event-card-date" th:text="${#dates.format(event.getEventDateAndTime(),'dd-MM-yyyy')}"></h5>
+                                                <h5 class="searchable" name="event-card-summary" th:text="${event.getEventSummary()} "></h5>
+
+                                                <!-- Hidden Data -->
+                                                <h5 class="searchable d-none" th:text="${#strings.capitalize(event.getEventVenueName())}"></h5>
+                                                <h5 class="searchable d-none" th:text="${#strings.capitalize(event.getEventAddressCity())}"></h5>
+                                                <h5 class="searchable d-none" th:text="${#strings.capitalize(event.getEventVenuePostcode())}"></h5>
+                                                <h5 class="searchable d-none" th:text="${#strings.capitalize(event.getNameOfAdviser())}"></h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </article>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
 
-</div>
+    </div>
+</main>
 
 <footer th:replace="fragments/footerTemplate :: footer"></footer>
 

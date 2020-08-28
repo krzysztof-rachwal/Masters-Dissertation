@@ -22,247 +22,248 @@
 </head>
 
 <header th:replace="fragments/headerTemplate :: header"></header>
+<main class="js-main-content-area">
 
-
-<!-- Modal Update -->
-<div class="modal fade bd-example-modal-lg" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog gel-content-container" role="document">
-        <div class="modal-content">
-            <div class="modal-body">
-                <form>
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="container my-3 p-0">
-                                <h4 class="modal-title float-left">Update Vacancy Information</h4>
-                                <button type="button" class="close float-right" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row mb-4">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="vacancy-name">Vacancy Name</label>
-                                <input type="text" class="form-control form-required" id="vacancy-name" th:value="${vacancy.getVacancyName()}">
-                                <input type="hidden" id="vacancy-old-name" th:value="${vacancy.getVacancyName()}"/>
+    <!-- Modal Update -->
+    <div class="modal fade bd-example-modal-lg" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog gel-content-container" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <form>
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="container my-3 p-0">
+                                    <h4 class="modal-title float-left">Update Vacancy Information</h4>
+                                    <button type="button" class="close float-right" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
                             </div>
                         </div>
 
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="employer-name" class="mb-1">Employer Name</label><br>
-                                <select class="selectpicker" data-width="80%" data-live-search="true" id="employer-name">
-                                    <option  th:each="employer : ${AllEmployerNamesAndIds}" th:selected="${employer.getEmployerName()} ==  ${vacancyEmployerName.getEmployerName()}" th:value="${employer.getEmployerID()}" th:text="${employer.getEmployerName()}"></option>
-                                </select>
+                        <div class="row mb-4">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="vacancy-name">Vacancy Name</label>
+                                    <input type="text" class="form-control form-required" id="vacancy-name" th:value="${vacancy.getVacancyName()}">
+                                    <input type="hidden" id="vacancy-old-name" th:value="${vacancy.getVacancyName()}"/>
+                                </div>
                             </div>
-                        </div>
-                    </div>
 
-                    <div class="row mb-4">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="vacancy-summary" class="mb-1">Vacancy Description</label>
-                                <textarea class="form-control form-required text-area-w-80" id="vacancy-summary" rows="5" th:text="${vacancy.getVacancySummary()}"></textarea>
-                            </div>
-                        </div>
-
-                        <div class="col-md-6">
-                            <div class="form-group pb-3">
-                                <label for="web-link" class="mb-1">Link to website</label>
-                                <input type="text" class="form-control w-80" id="web-link" th:value="${vacancy.getVacancyLink()}">
-                            </div>
-                            <div class="form-group">
-                                <label for="post-code" class="mb-1">Post Code</label>
-                                <input type="text" class="form-control form-required w-80" id="post-code" th:value="${vacancy.getVacancyPostcode()}">
-                                <input type="hidden" id="old-post-code" th:value="${vacancy.getVacancyPostcode()}"/>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row mb-4">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="start-date" class="mb-1">Start Date</label>
-                                <input type="date" class="form-control form-required w-80" id="start-date" th:value="${vacancy.getStartOfVacancy()}">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="closing-date" class="mb-1">Closing Date</label>
-                                <input type="date" class="form-control form-required w-80" id="closing-date" th:value="${vacancy.getDeadlineForApplication()}">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row mb-4">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="vacancy-type" class="mb-1">Type of Vacancy</label>
-                                <select class="selectpicker" id="vacancy-type" data-width="80%">
-                                    <option th:each="vacancyType : ${allVacanciesTypes}" th:selected="${vacancy.getTypeOfVacancyID()} == ${vacancyType.getTypeOfVacancyID()}" th:value="${vacancyType.getTypeOfVacancyID()}" th:text="${vacancyType.getTypeOfVacancyName()}"></option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="occup-code" class="mb-1">Occupational Code</label>
-                                <select class="selectpicker" id="occup-code" data-width="80%">
-                                    <option th:each="vacancyOccupationalCode : ${allVacanciesOccupationalCodes}"  th:selected="${vacancy.getOccupationalCodeID()} == ${vacancyOccupationalCode.getOccupationalCodeID()}" th:value="${vacancyOccupationalCode.getOccupationalCodeID()}" th:text="${vacancyOccupationalCode.getOccupationalCodeName()}"></option>
-                                </select>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="employer-name" class="mb-1">Employer Name</label><br>
+                                    <select class="selectpicker" data-width="80%" data-live-search="true" id="employer-name">
+                                        <option  th:each="employer : ${AllEmployerNamesAndIds}" th:selected="${employer.getEmployerName()} ==  ${vacancyEmployerName.getEmployerName()}" th:value="${employer.getEmployerID()}" th:text="${employer.getEmployerName()}"></option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
 
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="appl-method" class="mb-1">Application methods</label>
-                                <select class="selectpicker" id="appl-method" data-width="80%">
-                                    <option th:each="vacancyApplicationMethods : ${allVacanciesApplicationMethods}" th:selected="${vacancy.getApplicationMethodID()} == ${vacancyApplicationMethods.getApplicationMethodID()}" th:value="${vacancyApplicationMethods.getApplicationMethodID()}" th:text="${vacancyApplicationMethods.getApplicationMethodName()}"></option>
-                                </select>
+                        <div class="row mb-4">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="vacancy-summary" class="mb-1">Vacancy Description</label>
+                                    <textarea class="form-control form-required text-area-w-80" id="vacancy-summary" rows="5" th:text="${vacancy.getVacancySummary()}"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group pb-3">
+                                    <label for="web-link" class="mb-1">Link to website</label>
+                                    <input type="text" class="form-control w-80" id="web-link" th:value="${vacancy.getVacancyLink()}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="post-code" class="mb-1">Post Code</label>
+                                    <input type="text" class="form-control form-required w-80" id="post-code" th:value="${vacancy.getVacancyPostcode()}">
+                                    <input type="hidden" id="old-post-code" th:value="${vacancy.getVacancyPostcode()}"/>
+                                </div>
                             </div>
                         </div>
 
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="vacancy-type" class=" mb-1">Status of Vacancy</label>
-                                <select class="selectpicker" id="vacancy-status" data-width="80%">
-                                    <option th:each="vacancyStatus : ${allVacanciesStatus}" th:selected="${vacancy.getStatusOfVacancyID()} == ${vacancyStatus.getStatusOfVacancyID()}" th:value="${vacancyStatus.getStatusOfVacancyID()}" th:text="${vacancyStatus.getStatusOfVacancyName()}"></option>
-                                </select>
+                        <div class="row mb-4">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="start-date" class="mb-1">Start Date</label>
+                                    <input type="date" class="form-control form-required w-80" id="start-date" th:value="${vacancy.getStartOfVacancy()}">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="closing-date" class="mb-1">Closing Date</label>
+                                    <input type="date" class="form-control form-required w-80" id="closing-date" th:value="${vacancy.getDeadlineForApplication()}">
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="container my-4 text-center">
-                        <button type="button" class="button--secondary text-center" onclick="UpdateThisVacancy()">Update Vacancy</button>
-                    </div>
-            </form>
+                        <div class="row mb-4">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="vacancy-type" class="mb-1">Type of Vacancy</label>
+                                    <select class="selectpicker" id="vacancy-type" data-width="80%">
+                                        <option th:each="vacancyType : ${allVacanciesTypes}" th:selected="${vacancy.getTypeOfVacancyID()} == ${vacancyType.getTypeOfVacancyID()}" th:value="${vacancyType.getTypeOfVacancyID()}" th:text="${vacancyType.getTypeOfVacancyName()}"></option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="occup-code" class="mb-1">Occupational Code</label>
+                                    <select class="selectpicker" id="occup-code" data-width="80%">
+                                        <option th:each="vacancyOccupationalCode : ${allVacanciesOccupationalCodes}"  th:selected="${vacancy.getOccupationalCodeID()} == ${vacancyOccupationalCode.getOccupationalCodeID()}" th:value="${vacancyOccupationalCode.getOccupationalCodeID()}" th:text="${vacancyOccupationalCode.getOccupationalCodeName()}"></option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="appl-method" class="mb-1">Application methods</label>
+                                    <select class="selectpicker" id="appl-method" data-width="80%">
+                                        <option th:each="vacancyApplicationMethods : ${allVacanciesApplicationMethods}" th:selected="${vacancy.getApplicationMethodID()} == ${vacancyApplicationMethods.getApplicationMethodID()}" th:value="${vacancyApplicationMethods.getApplicationMethodID()}" th:text="${vacancyApplicationMethods.getApplicationMethodName()}"></option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="vacancy-type" class=" mb-1">Status of Vacancy</label>
+                                    <select class="selectpicker" id="vacancy-status" data-width="80%">
+                                        <option th:each="vacancyStatus : ${allVacanciesStatus}" th:selected="${vacancy.getStatusOfVacancyID()} == ${vacancyStatus.getStatusOfVacancyID()}" th:value="${vacancyStatus.getStatusOfVacancyID()}" th:text="${vacancyStatus.getStatusOfVacancyName()}"></option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="container my-4 text-center">
+                            <button type="button" class="button--secondary text-center" onclick="UpdateThisVacancy()">Update Vacancy</button>
+                        </div>
+                </form>
 
 
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<!-- Modal Delete -->
-<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog gel-content-container" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 class="modal-title">Delete Vacancy</h3>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <p th:text="'Are you sure you want to delete '+${vacancy.getVacancyName()}+' Vacancy Information?'"></p>
-                <button type="button" class="btn buttonUpdate" th:onclick="|deleteVacancy(${vacancy.getVacancyID()})|">Yes</button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+    <!-- Modal Delete -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog gel-content-container" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">Delete Vacancy</h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p th:text="'Are you sure you want to delete '+${vacancy.getVacancyName()}+' Vacancy Information?'"></p>
+                    <button type="button" class="btn buttonUpdate" th:onclick="|deleteVacancy(${vacancy.getVacancyID()})|">Yes</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<div class="gel-content-container">
-    <!-- Success Message    -->
-    <div id="success_message" class="alert alert-success alert-dismissible fade d-none" role="alert">
-        <strong>Success!</strong> <span id="success_message_text"></span> The vacancy has been updated!
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
+    <div class="gel-content-container">
+        <!-- Success Message    -->
+        <div id="success_message" class="alert alert-success alert-dismissible fade d-none" role="alert">
+            <strong>Success!</strong> <span id="success_message_text"></span> The vacancy has been updated!
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+
+        <!-- Failed Message    -->
+        <div id="failed_message" class="alert alert-danger alert-dismissible fade d-none" role="alert">
+            <strong>Failed!</strong> <span id="failed_message_text"></span>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+
+        <div class="container-headline my-5">
+            <span class="title-h2" th:text="${vacancy.getVacancyName()}"></span>
+            <button type="button"  th:if="${session.SESSION_Role =='CWS'}" id="deleteEvent"  data-toggle="modal" data-target="#deleteModal" class="buttonDelete float-right">Delete</button>
+            <button type="button"  th:if="${session.SESSION_Role =='CWS'}" id="updateEvent" data-toggle="modal" data-target="#updateModal" class="buttonUpdate float-right">Update</button>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <p><strong>Employer name</strong></p>
+                </div>
+                <div class="col-lg-9">
+                    <a th:text="${vacancyEmployerName.getEmployerName()}" th:href="@{/profile-employer(employerId=${vacancy.getEmployerID()})}"></a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3">
+                    <p><strong>Vacancy Summary</strong></p>
+                </div>
+                <div class="col-lg-9">
+                    <p th:text="${#strings.capitalize(vacancy.getVacancySummary())}"></p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3">
+                    <p><strong>Link to website</strong></p>
+                </div>
+                <div class="col-lg-9">
+                    <a th:href="@{'https://'+${vacancy.getVacancyLink()}}" th:text="${vacancy.getVacancyLink()}"></a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3">
+                    <p><strong>Type of vacancy</strong></p>
+                </div>
+                <div class="col-lg-9">
+                    <p th:if="${vacancy.getTypeOfVacancyID()} == ${vacancyType.getTypeOfVacancyID()}" th:each="vacancyType : ${allVacanciesTypes}" th:text="${vacancyType.getTypeOfVacancyName()}"></p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3">
+                    <p><strong>Start date</strong></p>
+                </div>
+                <div class="col-lg-9">
+                    <p th:text="${#dates.format(vacancy.getStartOfVacancy(),'dd-MM-yyyy')}"></p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3">
+                    <p><strong>Closing date</strong></p>
+                </div>
+                <div class="col-lg-9">
+                    <p th:text="${#dates.format(vacancy.getDeadlineForApplication(),'dd-MM-yyyy')}"></p>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3">
+                    <p><strong>Occupational code</strong></p>
+                </div>
+                <div class="col-lg-9">
+                    <p th:each="vacancyOccupationalCode : ${allVacanciesOccupationalCodes}"  th:if="${vacancy.getOccupationalCodeID()} == ${vacancyOccupationalCode.getOccupationalCodeID()}" th:value="${vacancyOccupationalCode.getOccupationalCodeID()}" th:text="${vacancyOccupationalCode.getOccupationalCodeName()}"></p>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3">
+                    <p><strong>Application method</strong></p>
+                </div>
+                <div class="col-lg-9">
+                    <p th:each="vacancyApplicationMethods : ${allVacanciesApplicationMethods}" th:if="${vacancy.getApplicationMethodID()} == ${vacancyApplicationMethods.getApplicationMethodID()}" th:value="${vacancyApplicationMethods.getApplicationMethodID()}" th:text="${vacancyApplicationMethods.getApplicationMethodName()}"></p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3">
+                    <p><strong>Postcode</strong></p>
+                </div>
+                <div class="col-lg-9">
+                    <p th:text="${vacancy.getVacancyPostcode()}"></p>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <!-- Failed Message    -->
-    <div id="failed_message" class="alert alert-danger alert-dismissible fade d-none" role="alert">
-        <strong>Failed!</strong> <span id="failed_message_text"></span>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-
-    <div class="container-headline my-5">
-        <span class="title-h2" th:text="${vacancy.getVacancyName()}"></span>
-        <button type="button"  th:if="${session.SESSION_Role =='CWS'}" id="deleteEvent"  data-toggle="modal" data-target="#deleteModal" class="buttonDelete float-right">Delete</button>
-        <button type="button"  th:if="${session.SESSION_Role =='CWS'}" id="updateEvent" data-toggle="modal" data-target="#updateModal" class="buttonUpdate float-right">Update</button>
-    </div>
-
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-3">
-                <p><strong>Employer name</strong></p>
-            </div>
-            <div class="col-lg-9">
-                <a th:text="${vacancyEmployerName.getEmployerName()}" th:href="@{/profile-employer(employerId=${vacancy.getEmployerID()})}"></a>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-3">
-                <p><strong>Vacancy Summary</strong></p>
-            </div>
-            <div class="col-lg-9">
-                <p th:text="${#strings.capitalize(vacancy.getVacancySummary())}"></p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-3">
-                <p><strong>Link to website</strong></p>
-            </div>
-            <div class="col-lg-9">
-                <a th:href="@{'https://'+${vacancy.getVacancyLink()}}" th:text="${vacancy.getVacancyLink()}"></a>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-3">
-                <p><strong>Type of vacancy</strong></p>
-            </div>
-            <div class="col-lg-9">
-                <p th:if="${vacancy.getTypeOfVacancyID()} == ${vacancyType.getTypeOfVacancyID()}" th:each="vacancyType : ${allVacanciesTypes}" th:text="${vacancyType.getTypeOfVacancyName()}"></p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-3">
-                <p><strong>Start date</strong></p>
-            </div>
-            <div class="col-lg-9">
-                <p th:text="${#dates.format(vacancy.getStartOfVacancy(),'dd-MM-yyyy')}"></p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-3">
-                <p><strong>Closing date</strong></p>
-            </div>
-            <div class="col-lg-9">
-                <p th:text="${#dates.format(vacancy.getDeadlineForApplication(),'dd-MM-yyyy')}"></p>
-
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-3">
-                <p><strong>Occupational code</strong></p>
-            </div>
-            <div class="col-lg-9">
-                <p th:each="vacancyOccupationalCode : ${allVacanciesOccupationalCodes}"  th:if="${vacancy.getOccupationalCodeID()} == ${vacancyOccupationalCode.getOccupationalCodeID()}" th:value="${vacancyOccupationalCode.getOccupationalCodeID()}" th:text="${vacancyOccupationalCode.getOccupationalCodeName()}"></p>
-
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-3">
-                <p><strong>Application method</strong></p>
-            </div>
-            <div class="col-lg-9">
-                <p th:each="vacancyApplicationMethods : ${allVacanciesApplicationMethods}" th:if="${vacancy.getApplicationMethodID()} == ${vacancyApplicationMethods.getApplicationMethodID()}" th:value="${vacancyApplicationMethods.getApplicationMethodID()}" th:text="${vacancyApplicationMethods.getApplicationMethodName()}"></p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-3">
-                <p><strong>Postcode</strong></p>
-            </div>
-            <div class="col-lg-9">
-                <p th:text="${vacancy.getVacancyPostcode()}"></p>
-            </div>
-        </div>
-    </div>
-</div>
+</main>
 
 <footer th:replace="fragments/footerTemplate :: footer"></footer>
 
