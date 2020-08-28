@@ -41,12 +41,14 @@ public class EmailAPI {
 
     }
 
-    public void sendRequestByEvent(String emailFrom, String eventName, String eventDate, String eventTime, String eventNotes, String eventType, String guests){
+    public void sendRequestByEvent(String emailFrom, String schoolName, String schoolPostcode, String eventName, String eventDate, String eventTime, String eventNotes, String eventType, String guests){
         var mailMessage = new SimpleMailMessage();
 
         mailMessage.setTo("carrers.wales@gmail.com");
         mailMessage.setSubject("Request for " + eventName);
         mailMessage.setText("You have a new request for " + eventName +
+                "\nSchool name: " + schoolName +
+                "\nSchool postcode: " + schoolPostcode +
                 "\nDate: " + eventDate +
                 "\nTime: " + eventTime +
                 "\nEvent type: " + eventType +
@@ -57,12 +59,14 @@ public class EmailAPI {
         javaMailSender.send(mailMessage);
     }
 
-    public void sendRequestByIndustry(String emailFrom, String eventName, String eventDate, String eventTime, String eventNotes, String eventType, String industry){
+    public void sendRequestByIndustry(String emailFrom, String schoolName, String schoolPostcode, String eventName, String eventDate, String eventTime, String eventNotes, String eventType, String industry){
         var mailMessage = new SimpleMailMessage();
 
         mailMessage.setTo("carrers.wales@gmail.com");
         mailMessage.setSubject("Request for " + eventName);
         mailMessage.setText("You have a new request for " + eventName +
+                "\nSchool name: " + schoolName +
+                "\nSchool postcode: " + schoolPostcode +
                 "\nDate: " + eventDate +
                 "\nTime: " + eventTime +
                 "\nEvent type: " + eventType +
@@ -73,12 +77,14 @@ public class EmailAPI {
         javaMailSender.send(mailMessage);
     }
 
-    public void sendRequestByLanguage(String emailFrom, String eventName, String eventDate, String eventTime, String eventNotes, String eventType, String language){
+    public void sendRequestByLanguage(String emailFrom, String schoolName, String schoolPostcode, String eventName, String eventDate, String eventTime, String eventNotes, String eventType, String language){
         var mailMessage = new SimpleMailMessage();
 
         mailMessage.setTo("carrers.wales@gmail.com");
         mailMessage.setSubject("Request for " + eventName);
         mailMessage.setText("You have a new request for " + eventName +
+                "\nSchool name: " + schoolName +
+                "\nSchool postcode: " + schoolPostcode +
                 "\nDate: " + eventDate +
                 "\nTime: " + eventTime +
                 "\nEvent type: " + eventType +

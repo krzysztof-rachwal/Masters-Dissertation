@@ -4,8 +4,10 @@ import ebe.DBClasses.School;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Repository;
 
+import javax.servlet.http.HttpServletRequest;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -132,11 +134,50 @@ public class SchoolQueries extends DBQueries {
         return list;
     }
 
+    //6. Get School name and postcode by email
+//    public School getSchoolNameAndPC(@AuthenticationPrincipal(expression = "claims['email']") String email) throws DataAccessException {
+//        String getQuery = String.format("SELECT SchoolName, SchoolPostCode FROM School WHERE SchoolEmail = \"%s\"", email);
+//        String schoolNameAndPC =null;
+//        ResultSet rs = null;
+//
+//        try {
+//            connection = ConnectionFactory.getConnection();
+//            statement = connection.createStatement();
+//            rs = statement.executeQuery(getQuery);
+//            while (rs.next()) {
+//                schoolNameAndPC = new School(rs.getString("SchoolName"), rs.getString("SchoolPostCode"));
+//                }
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }finally {
+//            DBUtil.close(rs);
+//            DBUtil.close(statement);
+//            DBUtil.close(connection);
+//        }
+//        return schoolNameAndPC;
+//    }
 
+
+//    public School getSchoolDetailsByEmail(String sessionEmail, HttpServletRequest request) throws DataAccessException {
+//
+////        return jdbcTemplate.query("SELECT SchoolName, SchoolPostCode FROM School WHERE SchoolEmail = ?",
+////                new Object[]{sessionEmail},
+////                (rs, i) -> new School(
+////                        rs.getString("SchoolName"),
+////                        rs.getString("SchoolPostCode"),
+////                )
+////        );
+//
+//        String getSql = String.format("SELECT SchoolName, SchoolPostCode FROM School WHERE SchoolEmail = \"%s\" LIMIT 1", sessionEmail);
+//        List<School> schoolEmailAndPC = jdbcTemplate().query(getSql, new Object[]{},
+//                (rs, i) -> new School(rs.getString("SchoolName"), rs.getString("SchoolPostCode"))
+//        );
+//        return schoolEmailAndPC.get(0);
+//    }
 
 
     ///////////////////////////////////// CREATE ALL METHODS ///////////////////////////////////////////////
-    // 6. Create a new School
+    // 7. Create a new School
     public int createNewSchool(String Name, String AddressCity, String AddressStreet,
                                Boolean AddressNumber, String Email, String Phone) throws DataAccessException {
 
@@ -147,7 +188,7 @@ public class SchoolQueries extends DBQueries {
 
     }
     ///////////////////////////////////// UPDATE ALL METHODS ///////////////////////////////////////////////
-    // 7. Update an School by Id
+    // 8. Update an School by Id
 
     public Integer updateSchool(int SchoolID,String Name, String AddressCity, String AddressStreet,
                                 Boolean AddressNumber, String Email, String Phone) throws DataAccessException {
@@ -159,7 +200,7 @@ public class SchoolQueries extends DBQueries {
     }
 
     ///////////////////////////////////// DELETE ALL METHODS ///////////////////////////////////////////////
-    // 8. Delete an School by ID
+    // 9. Delete an School by ID
 
     public Integer deleteSchool(int schoolId) throws DataAccessException {
         String deleteSql = String.format("DELETE FROM School WHERE SchoolID = '%s'",schoolId);
