@@ -95,10 +95,6 @@ public class EmailAPI {
         javaMailSender.send(mailMessage);
     }
 
-    //TODO: get data about which school is making the request.
-    //  count number of requests per school
-    //  get email address from session
-
 //    TODO: HTML email template.
 //    @Autowired
 //    private JavaMailSender emailSender;

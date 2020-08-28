@@ -134,46 +134,13 @@ public class SchoolQueries extends DBQueries {
         return list;
     }
 
-    //6. Get School name and postcode by email
-//    public School getSchoolNameAndPC(@AuthenticationPrincipal(expression = "claims['email']") String email) throws DataAccessException {
-//        String getQuery = String.format("SELECT SchoolName, SchoolPostCode FROM School WHERE SchoolEmail = \"%s\"", email);
-//        String schoolNameAndPC =null;
-//        ResultSet rs = null;
-//
-//        try {
-//            connection = ConnectionFactory.getConnection();
-//            statement = connection.createStatement();
-//            rs = statement.executeQuery(getQuery);
-//            while (rs.next()) {
-//                schoolNameAndPC = new School(rs.getString("SchoolName"), rs.getString("SchoolPostCode"));
-//                }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }finally {
-//            DBUtil.close(rs);
-//            DBUtil.close(statement);
-//            DBUtil.close(connection);
-//        }
-//        return schoolNameAndPC;
-//    }
+    //6. Add request for school
+    public int addRequestCount(String email) throws DataAccessException {
 
+        String updateSql = "UPDATE school SET SchoolNumberOfRequest = ISNULL(SchoolNumberOfRequest, 0) + 1 WHERE SchoolEmail = ?";
 
-//    public School getSchoolDetailsByEmail(String sessionEmail, HttpServletRequest request) throws DataAccessException {
-//
-////        return jdbcTemplate.query("SELECT SchoolName, SchoolPostCode FROM School WHERE SchoolEmail = ?",
-////                new Object[]{sessionEmail},
-////                (rs, i) -> new School(
-////                        rs.getString("SchoolName"),
-////                        rs.getString("SchoolPostCode"),
-////                )
-////        );
-//
-//        String getSql = String.format("SELECT SchoolName, SchoolPostCode FROM School WHERE SchoolEmail = \"%s\" LIMIT 1", sessionEmail);
-//        List<School> schoolEmailAndPC = jdbcTemplate().query(getSql, new Object[]{},
-//                (rs, i) -> new School(rs.getString("SchoolName"), rs.getString("SchoolPostCode"))
-//        );
-//        return schoolEmailAndPC.get(0);
-//    }
+        return jdbcTemplate().update(updateSql, email);
+    }
 
 
     ///////////////////////////////////// CREATE ALL METHODS ///////////////////////////////////////////////

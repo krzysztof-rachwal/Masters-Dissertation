@@ -20,6 +20,8 @@ public class EmailController {
     @Autowired
     private EmailAPI emailAPI;
 
+    private SchoolQueries schoolQueries;
+
 
     @PostMapping("/contactUsEmail")
     public String contactUsSubmit(@ModelAttribute Email email, HttpSession session) {
@@ -30,6 +32,8 @@ public class EmailController {
     @PostMapping("/requestEvent")
     public String requestEventSubmit(@ModelAttribute Request request, HttpSession session) throws MessagingException {
         emailAPI.sendRequestByEvent(session.getAttribute("SESSION_Email").toString(), session.getAttribute("SESSION_SchoolName").toString(), session.getAttribute("SESSION_SchoolPostCode").toString(), request.getEventName(), request.getEventDate(), request.getEventTime(), request.getEventNotes(), request.getEventType(), request.getGuests());
+//        schoolQueries.addRequestCount(session.getAttribute("SESSION_Email").toString());
+//        TODO: increase number of requests for school (above line). Most probably there is an error in SQL in SchoolQueries (number 6).
         return "requestPage";
     }
 

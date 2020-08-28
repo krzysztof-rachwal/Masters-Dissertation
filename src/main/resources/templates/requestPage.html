@@ -84,15 +84,16 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="eventType">Event Type</label>
-                                <select class="selectpicker w-100" data-live-search="true" id="eventType">
-                                    <option th:each="event : ${allEventTypes}" th:value="${event.getTypeOfEventID()}"
+                                <select class="selectpicker w-100" data-live-search="true" id="eventType" name="eventType">
+                                    <option th:each="event : ${allEventTypes}"
+                                            th:value="${event.getTypeOfEventName()}"
                                             th:text="${event.getTypeOfEventName()}"></option>
                                 </select>
                             </div>
                             <div class="form-group">
                                 <label for="guests">Guest(s)</label>
                                 <select class="selectpicker form-control"  multiple data-live-search="true"
-                                        id="guests">
+                                        id="guests" name="guests">
                                     <option th:each="emp : ${allEmployers}"
                                             th:value="${emp.getEmployerName()}"
                                             th:text="${emp.getEmployerName()}"></option>
