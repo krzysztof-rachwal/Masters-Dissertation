@@ -13,6 +13,8 @@ import org.thymeleaf.spring5.SpringTemplateEngine;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
@@ -29,19 +31,20 @@ public class EmailAPI {
 
         var mailMessage = new SimpleMailMessage();
 
-        mailMessage.setTo("carrers.wales69@gmail.com");
+        mailMessage.setTo("carrers.wales@gmail.com");
         mailMessage.setSubject(subject);
         mailMessage.setText("You have a new message from " + name + ". Postcode: " + postcode + ". \nContent of the message: \n" +
                 message);
         mailMessage.setFrom(fromEmail);
 
         javaMailSender.send(mailMessage);
+
     }
 
-    public void sendRequest(String eventName, String eventDate, String eventTime, String eventNotes, String eventType, String guests){
+    public void sendRequestByEvent(String emailFrom, String eventName, String eventDate, String eventTime, String eventNotes, String eventType, String guests){
         var mailMessage = new SimpleMailMessage();
 
-        mailMessage.setTo("carrers.wales69@gmail.com");
+        mailMessage.setTo("carrers.wales@gmail.com");
         mailMessage.setSubject("Request for " + eventName);
         mailMessage.setText("You have a new request for " + eventName +
                 "\nDate: " + eventDate +
@@ -49,10 +52,46 @@ public class EmailAPI {
                 "\nEvent type: " + eventType +
                 "\nAdditional notes: " + eventNotes +
                 "\nProposed guests: " + guests);
-//        mailMessage.setFrom(); TODO: add from email e.g. session email. It will be necessary for contact purposes.
+        mailMessage.setFrom(emailFrom);
 
         javaMailSender.send(mailMessage);
     }
+
+    public void sendRequestByIndustry(String emailFrom, String eventName, String eventDate, String eventTime, String eventNotes, String eventType, String industry){
+        var mailMessage = new SimpleMailMessage();
+
+        mailMessage.setTo("carrers.wales@gmail.com");
+        mailMessage.setSubject("Request for " + eventName);
+        mailMessage.setText("You have a new request for " + eventName +
+                "\nDate: " + eventDate +
+                "\nTime: " + eventTime +
+                "\nEvent type: " + eventType +
+                "\nAdditional notes: " + eventNotes +
+                "\nProposed Industry type(s): " + industry);
+        mailMessage.setFrom(emailFrom);
+
+        javaMailSender.send(mailMessage);
+    }
+
+    public void sendRequestByLanguage(String emailFrom, String eventName, String eventDate, String eventTime, String eventNotes, String eventType, String language){
+        var mailMessage = new SimpleMailMessage();
+
+        mailMessage.setTo("carrers.wales@gmail.com");
+        mailMessage.setSubject("Request for " + eventName);
+        mailMessage.setText("You have a new request for " + eventName +
+                "\nDate: " + eventDate +
+                "\nTime: " + eventTime +
+                "\nEvent type: " + eventType +
+                "\nAdditional notes: " + eventNotes +
+                "\nProposed language(s): " + language);
+        mailMessage.setFrom(emailFrom);
+
+        javaMailSender.send(mailMessage);
+    }
+
+    //TODO: get data about which school is making the request.
+    //  count number of requests per school
+    //  get email address from session
 
 //    TODO: HTML email template.
 //    @Autowired

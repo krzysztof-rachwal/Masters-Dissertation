@@ -37,7 +37,7 @@
 <div class="gel-content-container">
     <div class="container-headline mt-5">
         <span class="title-h2">Request</span>
-        <p class="mt-3">Request an event of your choice with employers you want to attend.</p>
+        <p class="mt-3">Select a type of request to submit.</p>
     </div>
     <div class="tabs-wrapper">
         <ul class="tabs js-tabs" gel-processed="processed" id="myTabs" role="tablist">
@@ -64,7 +64,7 @@
 
     <div class="tab-content" id="myTabContent">
         <div id="general" class="tab-pane fade show active" role="tabpanel" aria-labelledby="general-tab">
-            <form th:action="@{/requestEmail}" th:object="${request}" method="post">
+            <form th:action="@{/requestEvent}" th:object="${request}" method="post">
                 <div class="container-fluid">
                     <div class="col-md-6">
                         <div class="form-group">
@@ -94,7 +94,7 @@
                                 <select class="selectpicker form-control"  multiple data-live-search="true"
                                         id="guests">
                                     <option th:each="emp : ${allEmployers}"
-                                            th:value="${emp.getEmployerID()}"
+                                            th:value="${emp.getEmployerName()}"
                                             th:text="${emp.getEmployerName()}"></option>
                                 </select>
                             </div>
@@ -103,20 +103,20 @@
                     <div class="col-md-12 mt-3">
                         <div class="form-group">
                             <label for="eventNotes">Event Notes</label>
-                            <textarea type="time" id="eventNotes" class="form-control input-border border-0" rows="5" name="eventNotes">
+                            <textarea type="text" id="eventNotes" class="form-control input-border border-0" rows="5" name="eventNotes">
                             </textarea>
                         </div>
                     </div>
                     <div class="row">
                         <div class="container mt-5 mb-4 text-center">
-                            <button type="button" class="button--secondary text-center">Request</button>
+                            <button type="submit" value="submit" class="button--secondary text-center">Request</button>
                         </div>
                     </div>
                 </div>
             </form>
         </div>
         <div id="lang" class="tab-pane fade" role="tabpanel" aria-labelledby="lang-tab">
-            <form th:action="@{/requestEmail}" th:object="${request}" method="post">
+            <form th:action="@{/requestByLanguage}" th:object="${request}" method="post">
                 <div class="container-fluid">
                     <div class="col-md-6">
                         <div class="form-group">
@@ -140,18 +140,18 @@
                             <div class="form-group">
                                 <label for="event-type2" class="d-block">Event Type</label>
                                 <select class="selectpicker w-100" data-live-search="true"
-                                        id="event-type2">
+                                        id="event-type2" name="eventType">
                                     <option th:each="event : ${allEventTypes}"
-                                            th:value="${event.getTypeOfEventID()}"
+                                            th:value="${event.getTypeOfEventName()}"
                                             th:text="${event.getTypeOfEventName()}"></option>
                                 </select>
                             </div>
                             <div class="form-group">
                                 <label for="language">Language</label>
                                 <select class="selectpicker form-control" multiple data-live-search="true"
-                                        id="language">
+                                        id="language" name="language">
                                     <option th:each="lang : ${allLanguages}"
-                                            th:value="${lang.getEmployerLanguageID()}"
+                                            th:value="${lang.getEmployerLanguageName()}"
                                             th:text="${lang.getEmployerLanguageName()}"></option>
                                 </select>
                             </div>
@@ -160,7 +160,7 @@
                     <div class="col-md-12 mt-3">
                         <div class="form-group">
                             <label for="eventNotes">Event Notes</label>
-                            <textarea type="time" id="event_notes_sector" class="form-control input-border border-0"
+                            <textarea type="text" id="event_notes_sector" class="form-control input-border border-0"
                                       rows="5" name="eventNotes"></textarea>
                         </div>
                     </div>
@@ -173,7 +173,7 @@
             </form>
         </div>
         <div id="sector" class="tab-pane fade" role="tabpanel" aria-labelledby="sector-tab">
-            <form th:action="@{/requestEmail}" th:object="${request}" method="post">
+            <form th:action="@{/requestByIndustry}" th:object="${request}" method="post">
                 <div class="container-fluid">
                     <div class="col-md-6">
                         <div class="form-group">
@@ -197,18 +197,18 @@
                             <div class="form-group">
                                 <label for="event-type3" class="d-block">Event Type</label>
                                 <select class="selectpicker w-100" data-live-search="true"
-                                        id="event-type3">
+                                        id="event-type3" name="eventType">
                                     <option th:each="event : ${allEventTypes}"
-                                            th:value="${event.getTypeOfEventID()}"
+                                            th:value="${event.getTypeOfEventName()}"
                                             th:text="${event.getTypeOfEventName()}"></option>
                                 </select>
                             </div>
                             <div class="form-group">
                                 <label for="sectorPRef">Sector</label>
                                 <select class="selectpicker form-control" multiple data-live-search="true"
-                                        id="sectorPref">
+                                        id="sectorPref" name="industry">
                                     <option th:each="employerIndustrySector : ${allIndustrySectors}"
-                                            th:value="${employerIndustrySector.getEmployerIndustrySectorID()}"
+                                            th:value="${employerIndustrySector.getEmployerIndustrySectorName()}"
                                             th:text="${employerIndustrySector.getEmployerIndustrySectorName()}"></option>
                                 </select>
                             </div>
@@ -217,7 +217,7 @@
                     <div class="col-md-12 mt-3">
                         <div class="form-group">
                             <label for="eventNotes">Event Notes</label>
-                            <textarea type="time" id="event_notes_lang" class="form-control input-border border-0"
+                            <textarea type="text" id="event_notes_lang" class="form-control input-border border-0"
                                       rows="5" name="eventNotes"></textarea>
                         </div>
                     </div>

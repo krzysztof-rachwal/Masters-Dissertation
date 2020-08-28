@@ -1,12 +1,18 @@
 package ebe.DBClasses;
 
 public class Request {
+
+    //Request event
     private String eventName;
     private String eventDate;
     private String eventTime;
     private String eventNotes;
     private String eventType;
+
+    //Dropdowns
     private String guests;
+    private String language;
+    private String industry;
 
     public String getEventName() {
         return eventName;
@@ -54,5 +60,21 @@ public class Request {
 
     public void setGuests(String guests) {
         this.guests = guests;
+    }
+
+    public String getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(String language) {
+        this.language = language;
+    }
+
+    public String getIndustry() {
+        return industry;
+    }
+
+    public void setIndustry(String industry) {
+        this.industry = industry;
     }
 }
