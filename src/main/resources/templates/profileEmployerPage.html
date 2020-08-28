@@ -232,6 +232,14 @@
                                         <button type="button" value="Submit" onclick="uploadFile()"></button>
                                     </form>
                                 </div>
+                                <div class="col-md-12 my-4">
+                                    <h3>Employer Documents</h3>
+                                    <ul class="list-group">
+                                        <a th:each=" document : ${employerDocuments}"  th:href="@{${document}}" target="_blank">
+                                            <li class="list-group-item"  th:text="${document}"></li>
+                                        </a>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
 
