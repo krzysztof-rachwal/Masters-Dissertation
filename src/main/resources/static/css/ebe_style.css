@@ -197,3 +197,17 @@ ul{
 .search-box{
     border: solid 1px gainsboro !important;
 }
+
+@media (min-width: 768px) and (max-width: 991.98px){
+    .medium-dev{
+        padding-left: 0;
+    }
+
+    #eventsByAdv{
+        margin-top: 1rem;
+    }
+
+    .stats-numbers{
+        font-size: medium;
+    }
+}

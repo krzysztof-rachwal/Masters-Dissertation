@@ -46,7 +46,7 @@
         <!--    FILTERS -->
 
         <div class="flex-container">
-            <div class="col-lg-3">
+            <div class="col-lg-3 col-md-3">
                 <div class="mb-3">
                     <label for="vacancy-type" class="  mb-1">Type of Vacancy</label>
                     <select class="selectpicker" data-width="100%" multiple data-live-search="true"  id="vacancy-type">
@@ -86,7 +86,7 @@
 
 
                         <!-- Sorted by-->
-                        <div class="col-5">
+                        <div class="col-5 medium-dev">
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text input-border">Sort By:</span>
@@ -119,9 +119,8 @@
                                         <div class="content__body ">
                                             <div class="body__title searchable" name="vacancy-card-title" th:text="${vacancy.getVacancyName()}"></div>
                                             <div class="body__body">
-                                                <h5 th:each=" employer : ${AllEmployerNamesAndIds}" class="searchable" th:remove="${employer.getEmployerID() == vacancy.getEmployerID()} ? none : all" th:text="${#strings.capitalize(employer.getEmployerName())}"></h5>
-                                                <h5 th:text="${#dates.format(vacancy.getDeadlineForApplication(),'dd-MM-yyyy')}" name="vacancy-card-date"  class="searchable"></h5>
-                                                <h5 th:text="${#strings.capitalize(vacancy.getVacancySummary())}" name="vacancy-card-date"  class="searchable"></h5>
+                                                <h5 th:each=" employer : ${AllEmployerNamesAndIds}" class="searchable" th:remove="${employer.getEmployerID() == vacancy.getEmployerID()} ? none : all" th:text="'Employer: ' + ${#strings.capitalize(employer.getEmployerName())}"></h5>
+                                                <h5 th:text="'Deadline: ' + ${#dates.format(vacancy.getDeadlineForApplication(),'dd-MM-yyyy')}" name="vacancy-card-date"  class="searchable"></h5>
                                                 <!-- Hidden Data -->
                                                 <h5  class="searchable d-none" th:text="${#strings.capitalize(vacancy.getVacancyPostcode())}"></h5>
 

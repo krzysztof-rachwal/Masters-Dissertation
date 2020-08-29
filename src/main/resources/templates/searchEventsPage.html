@@ -42,7 +42,7 @@
         </div>
 
         <div class="flex-container">
-            <div class="col-lg-3">
+            <div class="col-lg-3 col-md-3">
                 <div class="mb-3">
                     <label for="event-type">Event Type</label><br>
                     <select class="selectpicker" data-width="100%" multiple data-live-search="true" id="event-type">
@@ -92,7 +92,7 @@
 
 
                         <!-- Sorted by-->
-                        <div class="col-5">
+                        <div class="col-5 medium-dev" >
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text input-border">Sort By:</span>
@@ -124,8 +124,8 @@
                                         <div class="content__body">
                                             <div class="body__title searchable" name="event-card-title" th:text="${#strings.capitalize(event.getEventName())}"></div>
                                             <div class="body__body searchable">
-                                                <h5 class="searchable" name="event-card-date" th:text="${#dates.format(event.getEventDateAndTime(),'dd-MM-yyyy')}"></h5>
-                                                <h5 class="searchable" name="event-card-summary" th:text="${event.getEventSummary()} "></h5>
+                                                <h5 class="searchable" name="event-card-date" th:text="'Event date: ' + ${#dates.format(event.getEventDateAndTime(),'dd-MM-yyyy')}"></h5>
+                                                <h5 class="searchable" name="event-card-summary" th:text="'Event venue: '+ ${event.getEventVenueName()} "></h5>
 
                                                 <!-- Hidden Data -->
                                                 <h5 class="searchable d-none" th:text="${#strings.capitalize(event.getEventVenueName())}"></h5>

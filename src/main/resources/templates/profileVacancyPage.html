@@ -188,76 +188,76 @@
 
         <div class="container">
             <div class="row">
-                <div class="col-lg-3">
+                <div class="col-lg-3 col-md-6">
                     <p><strong>Employer name</strong></p>
                 </div>
-                <div class="col-lg-9">
+                <div class="col-lg-9 col-md-6">
                     <a th:text="${vacancyEmployerName.getEmployerName()}" th:href="@{/profile-employer(employerId=${vacancy.getEmployerID()})}"></a>
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-3">
+                <div class="col-lg-3 col-md-6">
                     <p><strong>Vacancy Summary</strong></p>
                 </div>
-                <div class="col-lg-9">
+                <div class="col-lg-9 col-md-6">
                     <p th:text="${#strings.capitalize(vacancy.getVacancySummary())}"></p>
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-3">
+                <div class="col-lg-3 col-md-6">
                     <p><strong>Link to website</strong></p>
                 </div>
-                <div class="col-lg-9">
+                <div class="col-lg-9 col-md-6">
                     <a th:href="@{'https://'+${vacancy.getVacancyLink()}}" th:text="${vacancy.getVacancyLink()}"></a>
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-3">
+                <div class="col-lg-3 col-md-6">
                     <p><strong>Type of vacancy</strong></p>
                 </div>
-                <div class="col-lg-9">
+                <div class="col-lg-9 col-md-6">
                     <p th:if="${vacancy.getTypeOfVacancyID()} == ${vacancyType.getTypeOfVacancyID()}" th:each="vacancyType : ${allVacanciesTypes}" th:text="${vacancyType.getTypeOfVacancyName()}"></p>
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-3">
+                <div class="col-lg-3 col-md-6">
                     <p><strong>Start date</strong></p>
                 </div>
-                <div class="col-lg-9">
+                <div class="col-lg-9 col-md-6">
                     <p th:text="${#dates.format(vacancy.getStartOfVacancy(),'dd-MM-yyyy')}"></p>
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-3">
+                <div class="col-lg-3 col-md-6">
                     <p><strong>Closing date</strong></p>
                 </div>
-                <div class="col-lg-9">
+                <div class="col-lg-9 col-md-6">
                     <p th:text="${#dates.format(vacancy.getDeadlineForApplication(),'dd-MM-yyyy')}"></p>
 
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-3">
+                <div class="col-lg-3 col-md-6">
                     <p><strong>Occupational code</strong></p>
                 </div>
-                <div class="col-lg-9">
+                <div class="col-lg-9 col-md-6">
                     <p th:each="vacancyOccupationalCode : ${allVacanciesOccupationalCodes}"  th:if="${vacancy.getOccupationalCodeID()} == ${vacancyOccupationalCode.getOccupationalCodeID()}" th:value="${vacancyOccupationalCode.getOccupationalCodeID()}" th:text="${vacancyOccupationalCode.getOccupationalCodeName()}"></p>
 
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-3">
+                <div class="col-lg-3 col-md-6">
                     <p><strong>Application method</strong></p>
                 </div>
-                <div class="col-lg-9">
+                <div class="col-lg-9 col-md-6">
                     <p th:each="vacancyApplicationMethods : ${allVacanciesApplicationMethods}" th:if="${vacancy.getApplicationMethodID()} == ${vacancyApplicationMethods.getApplicationMethodID()}" th:value="${vacancyApplicationMethods.getApplicationMethodID()}" th:text="${vacancyApplicationMethods.getApplicationMethodName()}"></p>
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-3">
+                <div class="col-lg-3 col-md-6">
                     <p><strong>Postcode</strong></p>
                 </div>
-                <div class="col-lg-9">
+                <div class="col-lg-9 col-md-6">
                     <p th:text="${vacancy.getVacancyPostcode()}"></p>
                 </div>
             </div>

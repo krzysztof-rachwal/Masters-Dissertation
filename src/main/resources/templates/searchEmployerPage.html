@@ -44,7 +44,7 @@
         <!--- Filters --->
 
         <div class="flex-container">
-            <div class="col-lg-3">
+            <div class="col-lg-3 col-md-3">
                 <div class="mb-3">
                     <label for="industry-sector">Sector Areas</label><br>
                     <select id="industry-sector"  data-width="100%" class="selectpicker" multiple data-live-search="true">
@@ -87,14 +87,6 @@
                     </select>
                 </div>
 
-
-                <!--            <div class="mb-3">-->
-                <!--                <label for="employer-status">Employer Status</label><br>-->
-                <!--                <select class="selectpicker"  data-width="80%"  data-live-search="true" id="employer-status">-->
-                <!--                    <option  th:each="employerStatus : ${ allEmployerStatus}" th:value="${employerStatus.getStatusOfEmployerID()}" th:text="${employerStatus.getStatusOfEmployerName()}"></option>-->
-                <!--                </select>-->
-                <!--            </div>-->
-
                 <div class="form-group">
                     <label for="local-authorities">Local Authorities</label><br>
                     <select class="selectpicker" data-width="100%" multiple data-live-search="true" id="local-authorities">
@@ -109,7 +101,6 @@
 
             <div class="col-lg-9" style="border-left: grey 1px solid">
                 <div class="gel-content-container">
-
                     <div class="row">
                         <!-- Search -->
                         <div class="input-group col-7">
@@ -124,9 +115,8 @@
                             </div>
                         </div>
 
-
                         <!-- Sorted by-->
-                        <div class="col-5">
+                        <div class="col-5 medium-dev">
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text input-border">Sort By:</span>
@@ -143,7 +133,6 @@
                     <br>
 
                     <!-- Cards -->
-
                     <div class="list-employers">
                         <div class="gel-content-row employer-card employer-found employer-filtered" th:each="employer : ${allEmployers}"  th:id="${employer.getEmployerID()}" th:if="${session.SESSION_Role =='Teacher' && employer.getStatusOfEmployerID()==1 || session.SESSION_Role =='CWS'}">
                             <article class="card js-card card--style-icon card--100" gel-processed="processed">
