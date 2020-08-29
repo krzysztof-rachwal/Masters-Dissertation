@@ -194,6 +194,7 @@ public class BaseController {
         List<School> schoolAllNamesAndIds;
         List<Integer> employerSchoolPreferences;
         List<String> employerDocuments;
+        List<String> employerVideos;
         List<Event> eventsAllTypes;
 
 
@@ -218,6 +219,7 @@ public class BaseController {
         employerStatus = EmployerQrys.getAllEmployerStatus();
         employerSchoolPreferences = EmployerQrys.getEmployerSchoolPreferences(employer.getEmployerID());
         employerDocuments = EmployerQrys.getEmployerDocuments(employer.getEmployerID());
+        employerVideos = EmployerQrys.getEmployerVideos(employer.getEmployerID());
         eventsAllTypes = EventQrys.getAllTypesOfEvents();
 
         Map<String,Object> allEmployer = new HashMap<String,Object>();
@@ -242,6 +244,7 @@ public class BaseController {
         allEmployer.put("allEmployerStatus",employerStatus);
         allEmployer.put("allEmployerSchoolPreferences", employerSchoolPreferences);
         allEmployer.put("employerDocuments", employerDocuments);
+        allEmployer.put("employerVideos", employerVideos);
         allEmployer.put("allEventTypes", eventsAllTypes);
 
         mv.addAllObjects(allEmployer);

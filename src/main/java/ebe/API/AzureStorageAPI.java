@@ -32,7 +32,13 @@ public class AzureStorageAPI {
                                  @RequestParam("employerID") String employerID){
 
         URI url = azureBlobAdapter.upload(containerName, file);
-        EmployerQrys.insertDocument(Integer.valueOf(employerID), url.toString());
+        if (containerName.equals("employer")){
+            EmployerQrys.insertDocument(Integer.valueOf(employerID), url.toString());
+        }
+        if (containerName.equals("employerlogo")){
+            EmployerQrys.insertLogoLink(Integer.valueOf(employerID), url.toString());
+        }
+
         return ResponseEntity.ok(url);
     }
 

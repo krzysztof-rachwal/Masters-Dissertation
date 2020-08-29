@@ -921,6 +921,13 @@ public class EmployerQueries extends DBQueries {
 
     }
 
+    public void insertLogoLink(int employerID, String link) throws DataAccessException {
+
+        String insertSql = "UPDATE Employer SET LogoLink = ? WHERE EmployerID = ?;";
+        jdbcTemplate().update(insertSql, link, employerID);
+
+    }
+
     public List <String> getEmployerDocuments(int employerID) throws DataAccessException {
 
         String sql = "SELECT Link FROM EmployerDocumentLinks WHERE EmployerID = " + employerID + ";";
@@ -941,6 +948,29 @@ public class EmployerQueries extends DBQueries {
         DBUtil.close(statement);
         DBUtil.close(connection);
     }
+        return documents;
+    }
+
+    public List<String> getEmployerVideos(int employerID) throws DataAccessException {
+
+        String sql = "SELECT Link FROM EmployerVideoLinks WHERE EmployerID = " + employerID + ";";
+        List <String> documents = new ArrayList<>();
+        ResultSet rs = null;
+
+        try {
+            connection = ConnectionFactory.getConnection();
+            statement = connection.createStatement();
+            rs = statement.executeQuery(sql);
+            while (rs.next()) {
+                documents.add(rs.getString("Link"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }  finally {
+            DBUtil.close(rs);
+            DBUtil.close(statement);
+            DBUtil.close(connection);
+        }
         return documents;
     }
 
