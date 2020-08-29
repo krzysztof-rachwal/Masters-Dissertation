@@ -397,7 +397,7 @@ $( document ).ready(function() {
 
 });
 
-// Function to retrieve employerID from URL
+// Function to retrieve vacancyID from URL
 var getUrlParameter = function getUrlParameter(sParam) {
     var sPageURL = window.location.search.substring(1),
         sURLVariables = sPageURL.split('&'),

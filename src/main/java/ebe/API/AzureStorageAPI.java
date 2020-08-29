@@ -2,6 +2,7 @@ package ebe.API;
 
 import ebe.DBClasses.Vacancy;
 import ebe.DBMethods.EmployerQueries;
+import ebe.DBMethods.EventQueries;
 import ebe.DBMethods.VacancyQueries;
 import ebe.StorageAdapter.AzureBlobAdapter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,9 @@ public class AzureStorageAPI {
 
     @Autowired
     private VacancyQueries VacancyQrys;
+
+    @Autowired
+    private EventQueries EventQrys;
 
     @Autowired
     private AzureBlobAdapter azureBlobAdapter;
@@ -45,6 +49,9 @@ public class AzureStorageAPI {
         }
         if (containerName.equals("vacancy")){
             VacancyQrys.insertDocument(Integer.valueOf(ID), url.toString());
+        }
+        if (containerName.equals("event")){
+            EventQrys.insertDocument(Integer.valueOf(ID), url.toString());
         }
 
         return ResponseEntity.ok(url);

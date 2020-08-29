@@ -492,10 +492,11 @@ public class BaseController {
     //        List<School> eventSchoolNames = SchoolQrys.getAllSchoolNamesAttendingEvent(eventSchoolsIDs);
             List<Integer> eventEmployerIDs = EmployerQrys.getAllEmployerIDsAttendingEvent(id);
     //        List<Employer> eventEmployerNames = EmployerQrys.getAllEmployerNamesAttendingEvent(eventEmployerIDs);
-
+            List<String> eventDocuments;
 
             schoolAllNamesAndIds = SchoolQrys.getAllSchoolNamesAndIds();
             eventsAllTypes = EventQrys.getAllTypesOfEvents();
+            eventDocuments = EventQrys.getEventDocuments(event.getEventID());
             employerAllNamesAndIds = EmployerQrys.getAllEmployerNamesAndIds();
 
             Map<String,Object> Event = new HashMap<String,Object>();
@@ -506,6 +507,7 @@ public class BaseController {
             Event.put("EventEmployersIDs", eventEmployerIDs);
             Event.put("allSchoolNamesAndIds", schoolAllNamesAndIds);
             Event.put("allEventTypes", eventsAllTypes);
+            Event.put("eventDocuments", eventDocuments);
             Event.put("AllEmployerNamesAndIds", employerAllNamesAndIds);
             mv.addAllObjects(Event);
 

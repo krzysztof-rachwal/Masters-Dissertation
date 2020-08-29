@@ -353,4 +353,37 @@ public class EventQueries extends DBQueries {
         }
         return ids;
     }
+
+    ///////////////////////////////////// DOCUMENTS ///////////////////////////////////////////////
+
+    public void insertDocument(int eventID, String link) throws DataAccessException {
+
+        String insertSql = "INSERT INTO EventDocumentLink(EventID, Link) VALUES (?,?)";
+        jdbcTemplate().update(insertSql, eventID, link);
+
+    }
+
+    public List <String> getEventDocuments(int eventID) throws DataAccessException {
+
+        String sql = "SELECT Link FROM EventDocumentLink WHERE EventID = " + eventID + ";";
+        List <String> documents = new ArrayList<>();
+        ResultSet rs = null;
+
+        try {
+            connection = ConnectionFactory.getConnection();
+            statement = connection.createStatement();
+            rs = statement.executeQuery(sql);
+            while (rs.next()) {
+                documents.add(rs.getString("Link"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }  finally {
+            DBUtil.close(rs);
+            DBUtil.close(statement);
+            DBUtil.close(connection);
+        }
+        return documents;
+    }
+
 }
