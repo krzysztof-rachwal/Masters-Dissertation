@@ -630,3 +630,38 @@ function uploadLogo(){
     });
 }
 
+$("#videoButton").click(function() {
+    var link = $('#video-link').val();
+    var employerID = getUrlParameter('employerId');
+
+    var formData = new FormData();
+
+    formData.append("employerID", employerID);
+    formData.append("link", link);
+
+    var token = $("meta[name='_csrf']").attr("content");    // Used to bypass Spring Boot's CSRF protocol     -- Solution taken from 'https://stackoverflow.com/questions/34747437/use-of-spring-csrf-with-ajax-rest-call-and-html-page-with-thymeleaf' on Nov 26th 2019
+    var header = $("meta[name='_csrf_header']").attr("content");    // Used to bypass Spring Boot's CSRF protocol
+
+    // use $.ajax() to upload video
+    $.ajax({
+        url: "/api/add/video-link",
+        type: "POST",
+        data: formData,
+        enctype: 'multipart/form-data',
+        processData: false,
+        contentType: false,
+        cache: false,
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader(header, token);
+        },
+        success: function (res) {
+            console.log(res);
+            alert("Video file was added successfully")
+        },
+        error: function (err) {
+            console.error(err);
+        }
+    });
+
+});
+

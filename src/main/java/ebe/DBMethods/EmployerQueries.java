@@ -928,6 +928,13 @@ public class EmployerQueries extends DBQueries {
 
     }
 
+    public void insertVideoLink(int employerID, String link) throws DataAccessException {
+
+        String insertSql = "INSERT INTO EmployerVideoLinks(EmployerID, Link) VALUES (?,?)";
+        jdbcTemplate().update(insertSql, employerID, link);
+
+    }
+
     public List <String> getEmployerDocuments(int employerID) throws DataAccessException {
 
         String sql = "SELECT Link FROM EmployerDocumentLinks WHERE EmployerID = " + employerID + ";";

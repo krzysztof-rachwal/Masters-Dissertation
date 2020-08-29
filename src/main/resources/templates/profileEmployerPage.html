@@ -229,7 +229,7 @@
                             </div>
                             <div class="row" id="documents">
                                 <div class="container my-3 p-0">
-                                    <h4>Employer's documents</h4>
+                                    <h4>Add Employer's document</h4>
                                 </div>
                                 <div class="col-md-12 my-4">
                                     <form enctype="multipart/form-data" method="post" id="file-upload-form">
@@ -239,7 +239,7 @@
                                     </form>
                                 </div>
                                 <div class="col-md-12 my-4">
-                                    <h3>Employer Documents</h3>
+                                    <h3>Existing Employer's Documents</h3>
                                     <ul class="list-group">
                                         <a th:each=" document : ${employerDocuments}"  th:href="@{${document}}" target="_blank">
                                             <li class="list-group-item"  th:text="${document}"></li>
@@ -247,8 +247,25 @@
                                     </ul>
                                 </div>
                             </div>
+                            <div class="row" id="videos">
+                                <div class="container my-3 p-0">
+                                    <h4>Add Employer's video</h4>
+                                </div>
+                                <div class="col-md-12 my-4">
+                                    <label for="video-link">Link to a video...</label>
+                                    <input type="text" class="form-control input-border" id="video-link" name="video">
+                                    <button type="button" id="videoButton" value="Add video link" ></button>
+                                </div>
+                                <div class="col-md-12 my-4">
+                                    <h3>Existing Employer's Videos</h3>
+                                    <ul class="list-group">
+                                        <a th:each=" video : ${employerVideos}"  th:href="@{${video}}" target="_blank">
+                                            <li class="list-group-item"  th:text="${video}"></li>
+                                        </a>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
-
                     <div class="container my-4 text-center">
                         <button type="button" class="button--secondary text-center" onclick="updateThisEmployer()">Update Employer</button>
                     </div>
@@ -567,17 +584,18 @@
         </ul>
     </div>
 
-    <div class="row">
-        <div class="col"></div>
-        <hr class="col-md-6 float-center my-2">
-        <div class="col"></div>
-    </div>
+<!--    <div class="row">-->
+<!--        <div class="col"></div>-->
+<!--        <hr class="col-md-6 float-center my-2">-->
+<!--        <div class="col"></div>-->
+<!--    </div>-->
 
     <div class="col-md-12 my-4">
         <h3>Employer Videos</h3>
-        <ul>
-            <li>https://www.youtube.com/watch?v=8yAlRupcfds</li>
-            <li>https://www.youtube.com/watch?v=7rUKTcffJbM</li>
+        <ul class="list-group">
+            <a th:each=" video : ${employerVideos}"  th:href="@{${video}}" target="_blank">
+                <li class="list-group-item"  th:text="${video}"></li>
+            </a>
         </ul>
     </div>
 

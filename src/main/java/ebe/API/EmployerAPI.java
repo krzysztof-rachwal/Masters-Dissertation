@@ -456,6 +456,18 @@ public class EmployerAPI {
         return orderEmployerIds;
     }
 
+    ///////////////////////    ADD VIDEO LINK    ////////////////////////////////
+    @PostMapping("api/add/video-link")
+    //5. Filter Employers
+    public void addEmployerVideoLink(@RequestParam("employerID") String employerID,
+                                     @RequestParam("link") String link){
+
+        EmployerQrys.insertVideoLink(Integer.valueOf(employerID), link);
+
+    }
+
+
+
 }
 
 
