@@ -84,7 +84,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="event-type">Event Type</label>
-                                    <select class="selectpicker w-100" data-live-search="true" id="event-type">
+                                    <select class="selectpicker w-100" data-live-search="true" id="event-type" title="Nothing selected">
                                         <option th:each="event : ${allEventTypes}" th:value="${event.getTypeOfEventID()}"
                                                 th:text="${event.getTypeOfEventName()}"></option>
                                     </select>
@@ -140,7 +140,7 @@
                                 <div class="form-group">
                                     <label for="event-type2" class="d-block">Event Type</label>
                                     <select class="selectpicker w-100" data-live-search="true"
-                                            id="event-type2">
+                                            id="event-type2" title="Nothing selected">
                                         <option th:each="event : ${allEventTypes}"
                                                 th:value="${event.getTypeOfEventID()}"
                                                 th:text="${event.getTypeOfEventName()}"></option>
@@ -197,7 +197,7 @@
                                 <div class="form-group">
                                     <label for="event-type3" class="d-block">Event Type</label>
                                     <select class="selectpicker w-100" data-live-search="true"
-                                            id="event-type3">
+                                            id="event-type3" title="Nothing selected">
                                         <option th:each="event : ${allEventTypes}"
                                                 th:value="${event.getTypeOfEventID()}"
                                                 th:text="${event.getTypeOfEventName()}"></option>
@@ -206,7 +206,7 @@
                                 <div class="form-group">
                                     <label for="sectorPRef">Sector</label>
                                     <select class="selectpicker form-control" multiple data-live-search="true"
-                                            id="sectorPref">
+                                            id="sectorPref" >
                                         <option th:each="employerIndustrySector : ${allIndustrySectors}"
                                                 th:value="${employerIndustrySector.getEmployerIndustrySectorID()}"
                                                 th:text="${employerIndustrySector.getEmployerIndustrySectorName()}"></option>

@@ -211,3 +211,7 @@ ul{
         font-size: medium;
     }
 }
+
+#sectorPref li {
+    max-width: fit-content;
+}
