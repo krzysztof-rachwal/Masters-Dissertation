@@ -31,13 +31,13 @@ public class EmailAPI {
 
         var mailMessage = new SimpleMailMessage();
 
-        mailMessage.setTo("carrers.wales@gmail.com");
+        mailMessage.setTo("daniel.f.m.leite@gmail.com");
         mailMessage.setSubject(subject);
-        mailMessage.setText("You have a new message from " + name + ". Postcode: " + postcode + ". \nContent of the message: \n" +
-                message);
+        mailMessage.setText("You have a new message from " + name + ". Local Authority: " + postcode + ". \nContent of the message: \n" + message);
         mailMessage.setFrom(fromEmail);
 
         javaMailSender.send(mailMessage);
+
 
     }
 
@@ -47,16 +47,18 @@ public class EmailAPI {
         mailMessage.setTo("carrers.wales@gmail.com");
         mailMessage.setSubject("Request for " + eventName);
         mailMessage.setText("You have a new request for " + eventName +
-                "\nSchool name: " + schoolName +
-                "\nSchool postcode: " + schoolPostcode +
+                "\nSchool Name: " + schoolName +
+                "\nSchool Local Authority: " + schoolPostcode +
                 "\nDate: " + eventDate +
                 "\nTime: " + eventTime +
                 "\nEvent type: " + eventType +
                 "\nAdditional notes: " + eventNotes +
                 "\nProposed guests: " + guests);
         mailMessage.setFrom(emailFrom);
+        System.out.println(mailMessage);
 
         javaMailSender.send(mailMessage);
+        System.out.println("sent");
     }
 
     public void sendRequestByIndustry(String emailFrom, String schoolName, String schoolPostcode, String eventName, String eventDate, String eventTime, String eventNotes, String eventType, String industry){
@@ -65,8 +67,8 @@ public class EmailAPI {
         mailMessage.setTo("carrers.wales@gmail.com");
         mailMessage.setSubject("Request for " + eventName);
         mailMessage.setText("You have a new request for " + eventName +
-                "\nSchool name: " + schoolName +
-                "\nSchool postcode: " + schoolPostcode +
+                "\nSchool Name: " + schoolName +
+                "\nSchool Local Authority: " + schoolPostcode +
                 "\nDate: " + eventDate +
                 "\nTime: " + eventTime +
                 "\nEvent type: " + eventType +
@@ -80,11 +82,11 @@ public class EmailAPI {
     public void sendRequestByLanguage(String emailFrom, String schoolName, String schoolPostcode, String eventName, String eventDate, String eventTime, String eventNotes, String eventType, String language){
         var mailMessage = new SimpleMailMessage();
 
-        mailMessage.setTo("carrers.wales@gmail.com");
+        mailMessage.setTo("daniel.f.m.leite@gmail.com");
         mailMessage.setSubject("Request for " + eventName);
         mailMessage.setText("You have a new request for " + eventName +
-                "\nSchool name: " + schoolName +
-                "\nSchool postcode: " + schoolPostcode +
+                "\nSchool Name: " + schoolName +
+                "\nSchool Local Authority: " + schoolPostcode +
                 "\nDate: " + eventDate +
                 "\nTime: " + eventTime +
                 "\nEvent type: " + eventType +
@@ -96,28 +98,28 @@ public class EmailAPI {
     }
 
 //    TODO: HTML email template.
-//    @Autowired
-//    private JavaMailSender emailSender;
-//
-//    @Autowired
-//    private SpringTemplateEngine templateEngine;
-//
-//    public void sendRequest(String eventName, String eventDate, String eventTime, String eventNotes, String eventType, String guests) throws MessagingException {
-//        MimeMessage message = emailSender.createMimeMessage();
-//        MimeMessageHelper helper = new MimeMessageHelper(message,
-//                MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED,
-//                StandardCharsets.UTF_8.name());
-//
-//
-//        Context context = new Context();
-//
-//        String html = templateEngine.process("emailTemplate", context);
-//
-//        helper.setTo("carrers.wales69@gmail.com");
-//        helper.setText(html, true);
-//        helper.setSubject("Request for " + eventName);
-//        helper.setFrom("krzysiek.rachwal@gmail.com"); //TODO: get session email address.
-//
-//        emailSender.send(message);
-//    }
+    @Autowired
+    private JavaMailSender emailSender;
+
+    @Autowired
+    private SpringTemplateEngine templateEngine;
+
+    public void sendRequest(String eventName, String eventDate, String eventTime, String eventNotes, String eventType, String guests) throws MessagingException {
+        MimeMessage message = emailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message,
+                MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED,
+                StandardCharsets.UTF_8.name());
+
+
+        Context context = new Context();
+
+        String html = templateEngine.process("emailTemplate", context);
+
+        helper.setTo("carrers.wales69@gmail.com");
+        helper.setText(html, true);
+        helper.setSubject("Request for " + eventName);
+        helper.setFrom("krzysiek.rachwal@gmail.com"); //TODO: get session email address.
+
+        emailSender.send(message);
+    }
 }
