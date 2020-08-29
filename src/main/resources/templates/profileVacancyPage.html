@@ -131,8 +131,29 @@
                                 </select>
                             </div>
                         </div>
-                    </div>
 
+                        <div class="row" id="documents">
+                            <div class="container my-3 p-0">
+                                <h4>Add Vacancy's document</h4>
+                            </div>
+                            <div class="col-md-12 my-4">
+                                <form enctype="multipart/form-data" method="post" id="file-upload-form">
+                                    <label for="file-upload-input">Select file to upload</label>
+                                    <input type="file" id="file-upload-input" name="file">
+                                    <button type="button" value="Submit" onclick="uploadFile()"></button>
+                                </form>
+                            </div>
+                            <div class="col-md-12 my-4">
+                                <h3>Vacancy Documents</h3>
+                                <ul class="list-group">
+                                    <a th:each=" document : ${vacancyDocuments}"  th:href="@{${document}}" target="_blank">
+                                        <li class="list-group-item"  th:text="${document}"></li>
+                                    </a>
+                                </ul>
+                            </div>
+
+                        </div>
+                    </div>
                     <div class="container my-4 text-center">
                         <button type="button" class="button--secondary text-center" onclick="UpdateThisVacancy()">Update Vacancy</button>
                     </div>
@@ -260,6 +281,14 @@
             <div class="col-lg-9">
                 <p th:text="${vacancy.getVacancyPostcode()}"></p>
             </div>
+        </div>
+        <div class="col-md-12 my-4">
+            <h3>Vacancy Documents</h3>
+            <ul class="list-group">
+                <a th:each=" document : ${vacancyDocuments}"  th:href="@{${document}}" target="_blank">
+                    <li class="list-group-item"  th:text="${document}"></li>
+                </a>
+            </ul>
         </div>
     </div>
 </div>

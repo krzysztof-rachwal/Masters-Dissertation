@@ -396,3 +396,54 @@ $( document ).ready(function() {
     });
 
 });
+
+// Function to retrieve employerID from URL
+var getUrlParameter = function getUrlParameter(sParam) {
+    var sPageURL = window.location.search.substring(1),
+        sURLVariables = sPageURL.split('&'),
+        sParameterName,
+        i;
+
+    for (i = 0; i < sURLVariables.length; i++) {
+        sParameterName = sURLVariables[i].split('=');
+
+        if (sParameterName[0] === sParam) {
+            return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
+        }
+    }
+};
+
+function uploadFile(){
+
+    var myFile = $('#file-upload-input').prop('files');
+    var vacancyID = getUrlParameter('vacancyId');
+    var formData = new FormData();
+
+    formData.append("ID", vacancyID);
+    formData.append("name", "vacancy");
+    formData.append("file", myFile[0]);
+
+    var token = $("meta[name='_csrf']").attr("content");    // Used to bypass Spring Boot's CSRF protocol     -- Solution taken from 'https://stackoverflow.com/questions/34747437/use-of-spring-csrf-with-ajax-rest-call-and-html-page-with-thymeleaf' on Nov 26th 2019
+    var header = $("meta[name='_csrf_header']").attr("content");    // Used to bypass Spring Boot's CSRF protocol
+
+    // use $.ajax() to upload file
+    $.ajax({
+        url: "/upload",
+        type: "POST",
+        data: formData,
+        enctype: 'multipart/form-data',
+        processData: false,
+        contentType: false,
+        cache: false,
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader(header, token);
+        },
+        success: function (res) {
+            console.log(res);
+            alert("Your file was added successfully")
+        },
+        error: function (err) {
+            console.error(err);
+        }
+    });
+}

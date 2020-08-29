@@ -1,6 +1,8 @@
 package ebe.API;
 
+import ebe.DBClasses.Vacancy;
 import ebe.DBMethods.EmployerQueries;
+import ebe.DBMethods.VacancyQueries;
 import ebe.StorageAdapter.AzureBlobAdapter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +19,9 @@ public class AzureStorageAPI {
     private EmployerQueries EmployerQrys;
 
     @Autowired
+    private VacancyQueries VacancyQrys;
+
+    @Autowired
     private AzureBlobAdapter azureBlobAdapter;
 
     @GetMapping("/container")
@@ -29,14 +34,17 @@ public class AzureStorageAPI {
     @ResponseBody
     public ResponseEntity upload(@RequestParam("name") String containerName,
                                  @RequestParam("file") MultipartFile file,
-                                 @RequestParam("employerID") String employerID){
+                                 @RequestParam("ID") String ID){
 
         URI url = azureBlobAdapter.upload(containerName, file);
         if (containerName.equals("employer")){
-            EmployerQrys.insertDocument(Integer.valueOf(employerID), url.toString());
+            EmployerQrys.insertDocument(Integer.valueOf(ID), url.toString());
         }
         if (containerName.equals("employerlogo")){
-            EmployerQrys.insertLogoLink(Integer.valueOf(employerID), url.toString());
+            EmployerQrys.insertLogoLink(Integer.valueOf(ID), url.toString());
+        }
+        if (containerName.equals("vacancy")){
+            VacancyQrys.insertDocument(Integer.valueOf(ID), url.toString());
         }
 
         return ResponseEntity.ok(url);

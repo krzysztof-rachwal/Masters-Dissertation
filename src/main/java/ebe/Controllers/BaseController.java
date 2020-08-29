@@ -368,12 +368,14 @@ public class BaseController {
             List<Vacancy> vacanciesAllOccupationalCodes;
             List<Vacancy> vacanciesAllApplicationMethods;
             List<Employer> employerAllNamesAndIds;
+            List<String> vacancyDocuments;
 
             employerAllNamesAndIds = EmployerQrys.getAllEmployerNamesAndIds();
             vacanciesAllTypes = VacancyQrys.getAllTypesOfVacancy();
             vacanciesAllStatus = VacancyQrys.getAllStatusOfVacancy();
             vacanciesAllOccupationalCodes = VacancyQrys.getAllOccupationalCodes();
             vacanciesAllApplicationMethods = VacancyQrys.getAllApplicationMethods();
+            vacancyDocuments = VacancyQrys.getVacancyDocuments(vacancy.getVacancyID());
 
             Map<String,Object> allVacancies = new HashMap<String,Object>();
 
@@ -384,6 +386,8 @@ public class BaseController {
             allVacancies.put("allVacanciesStatus", vacanciesAllStatus);
             allVacancies.put("allVacanciesOccupationalCodes", vacanciesAllOccupationalCodes);
             allVacancies.put("allVacanciesApplicationMethods", vacanciesAllApplicationMethods);
+            allVacancies.put("vacancyDocuments", vacancyDocuments);
+
             mv.addAllObjects(allVacancies);
 
             return mv;

@@ -566,7 +566,7 @@ function uploadFile(){
     var employerID = getUrlParameter('employerId');
     var formData = new FormData();
 
-    formData.append("employerID", employerID);
+    formData.append("ID", employerID);
     formData.append("name", "employer");
     formData.append("file", myFile[0]);
 
@@ -601,7 +601,7 @@ function uploadLogo(){
     var employerID = getUrlParameter('employerId');
     var formData = new FormData();
 
-    formData.append("employerID", employerID);
+    formData.append("ID", employerID);
     formData.append("name", "employerlogo");
     formData.append("file", logo[0]);
 
