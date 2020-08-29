@@ -44,7 +44,7 @@ CREATE TABLE IF NOT EXISTS `ebedb`.`Alumni` (
   `AlumniNameAndSurname` VARCHAR(255) NULL DEFAULT NULL,
   `AlumniSchoolID` INT(11) NULL DEFAULT NULL,
   PRIMARY KEY (`AlumniID`),
-  INDEX `AlumniSchool_idx` (`AlumniSchoolID` ASC),
+  INDEX `AlumniSchool_idx` (`AlumniSchoolID` ASC) VISIBLE,
   CONSTRAINT `AlumniSchool`
     FOREIGN KEY (`AlumniSchoolID`)
     REFERENCES `ebedb`.`School` (`SchoolID`)
@@ -149,8 +149,8 @@ CREATE TABLE IF NOT EXISTS `ebedb`.`Employer` (
   `CanDeliverToSchoolsInWelsh` TINYINT(4) NULL DEFAULT NULL,
   `HasApprenticeshipProgramme` TINYINT(4) NULL DEFAULT NULL,
   PRIMARY KEY (`EmployerID`),
-  INDEX `EmployerStatus_idx` (`StatusOfEmployerID` ASC),
-  INDEX `EmployeesRange_idx` (`NumberOfEmployeesID` ASC),
+  INDEX `EmployerStatus_idx` (`StatusOfEmployerID` ASC) VISIBLE,
+  INDEX `EmployeesRange_idx` (`NumberOfEmployeesID` ASC) VISIBLE,
   CONSTRAINT `EmployeesRange`
     FOREIGN KEY (`NumberOfEmployeesID`)
     REFERENCES `ebedb`.`EmployeesRangeList` (`EmployeesRangeID`)
@@ -174,12 +174,12 @@ CREATE TABLE IF NOT EXISTS `ebedb`.`EmployerDocumentLinks` (
   `EmployerID` INT(11) NULL DEFAULT NULL,
   `Link` MEDIUMTEXT NULL DEFAULT NULL,
   PRIMARY KEY (`DocumentLinkID`),
-  INDEX `EmployerDocumentLink_idx` (`EmployerID` ASC),
+  INDEX `EmployerDocumentLink_idx` (`EmployerID` ASC) VISIBLE,
   CONSTRAINT `EmployerDocumentLink`
     FOREIGN KEY (`EmployerID`)
     REFERENCES `ebedb`.`Employer` (`EmployerID`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB
 AUTO_INCREMENT = 201
 DEFAULT CHARACTER SET = latin1;
@@ -218,8 +218,9 @@ CREATE TABLE IF NOT EXISTS `ebedb`.`Event` (
   `PromotesApprenticeships` TINYINT(4) NULL DEFAULT NULL,
   `PromotesWelshLanguage` TINYINT(4) NULL DEFAULT NULL,
   `ChallengesGenderStereotypes` TINYINT(4) NULL DEFAULT NULL,
+  `IsFeatured` TINYINT NULL,
   PRIMARY KEY (`EventID`),
-  INDEX `EventTypeOfEvent_idx` (`TypeOfEventID` ASC),
+  INDEX `EventTypeOfEvent_idx` (`TypeOfEventID` ASC) VISIBLE,
   CONSTRAINT `EventTypeOfEvent`
     FOREIGN KEY (`TypeOfEventID`)
     REFERENCES `ebedb`.`TypeOfEventList` (`TypeOfEventID`)
@@ -237,7 +238,7 @@ CREATE TABLE IF NOT EXISTS `ebedb`.`INT_AlumniWorkingForEmployer` (
   `EmployerID` INT(11) NOT NULL,
   `AlumniID` INT(11) NOT NULL,
   PRIMARY KEY (`EmployerID`, `AlumniID`),
-  INDEX `AlumniEmployer_idx` (`AlumniID` ASC),
+  INDEX `AlumniEmployer_idx` (`AlumniID` ASC) VISIBLE,
   CONSTRAINT `AlumniEmployer`
     FOREIGN KEY (`AlumniID`)
     REFERENCES `ebedb`.`Alumni` (`AlumniID`)
@@ -259,7 +260,7 @@ CREATE TABLE IF NOT EXISTS `ebedb`.`INT_AttendingEmployerOnEvent` (
   `EventID` INT(11) NOT NULL,
   `EmployerID` INT(11) NOT NULL,
   PRIMARY KEY (`EventID`, `EmployerID`),
-  INDEX `EmployerEvent_idx` (`EmployerID` ASC),
+  INDEX `EmployerEvent_idx` (`EmployerID` ASC) VISIBLE,
   CONSTRAINT `EmployerEvent`
     FOREIGN KEY (`EmployerID`)
     REFERENCES `ebedb`.`Employer` (`EmployerID`)
@@ -281,7 +282,7 @@ CREATE TABLE IF NOT EXISTS `ebedb`.`INT_AttendingSchoolOnEvent` (
   `EventID` INT(11) NOT NULL,
   `SchoolID` INT(11) NOT NULL,
   PRIMARY KEY (`EventID`, `SchoolID`),
-  INDEX `SchoolEvent_idx` (`SchoolID` ASC),
+  INDEX `SchoolEvent_idx` (`SchoolID` ASC) VISIBLE,
   CONSTRAINT `EventSchool`
     FOREIGN KEY (`EventID`)
     REFERENCES `ebedb`.`Event` (`EventID`)
@@ -303,7 +304,7 @@ CREATE TABLE IF NOT EXISTS `ebedb`.`INT_EmployerCooperationType` (
   `EmployerID` INT(11) NOT NULL,
   `CooperationTypeID` INT(11) NOT NULL,
   PRIMARY KEY (`EmployerID`, `CooperationTypeID`),
-  INDEX `CooperationEmployer_idx` (`CooperationTypeID` ASC),
+  INDEX `CooperationEmployer_idx` (`CooperationTypeID` ASC) VISIBLE,
   CONSTRAINT `CooperationEmployer`
     FOREIGN KEY (`CooperationTypeID`)
     REFERENCES `ebedb`.`CooperationTypeList` (`CooperationTypeID`)
@@ -337,7 +338,7 @@ CREATE TABLE IF NOT EXISTS `ebedb`.`INT_EmployerIndustrySector` (
   `EmployerID` INT(11) NOT NULL,
   `IndustrySectorID` INT(11) NOT NULL,
   PRIMARY KEY (`EmployerID`, `IndustrySectorID`),
-  INDEX `IndustryEmployer_idx` (`IndustrySectorID` ASC),
+  INDEX `IndustryEmployer_idx` (`IndustrySectorID` ASC) VISIBLE,
   CONSTRAINT `EmployerIndustry`
     FOREIGN KEY (`EmployerID`)
     REFERENCES `ebedb`.`Employer` (`EmployerID`)
@@ -371,7 +372,7 @@ CREATE TABLE IF NOT EXISTS `ebedb`.`INT_EmployerPreference` (
   `EmployerID` INT(11) NOT NULL,
   `PreferenceID` INT(11) NOT NULL,
   PRIMARY KEY (`EmployerID`, `PreferenceID`),
-  INDEX `PreferenceEmployer_idx` (`PreferenceID` ASC),
+  INDEX `PreferenceEmployer_idx` (`PreferenceID` ASC) VISIBLE,
   CONSTRAINT `EmployerPreference`
     FOREIGN KEY (`EmployerID`)
     REFERENCES `ebedb`.`Employer` (`EmployerID`)
@@ -393,7 +394,7 @@ CREATE TABLE IF NOT EXISTS `ebedb`.`INT_EmployerSchoolPreference` (
   `EmployerID` INT(11) NOT NULL,
   `SchoolID` INT(11) NOT NULL,
   PRIMARY KEY (`EmployerID`, `SchoolID`),
-  INDEX `SchoolEmployer_idx` (`SchoolID` ASC),
+  INDEX `SchoolEmployer_idx` (`SchoolID` ASC) VISIBLE,
   CONSTRAINT `EmployerSchool`
     FOREIGN KEY (`EmployerID`)
     REFERENCES `ebedb`.`Employer` (`EmployerID`)
@@ -415,7 +416,7 @@ CREATE TABLE IF NOT EXISTS `ebedb`.`INT_EmployerSupportOfAreaOfCurriculum` (
   `EmployerID` INT(11) NOT NULL,
   `AreaOfCurriculumID` INT(11) NOT NULL,
   PRIMARY KEY (`EmployerID`, `AreaOfCurriculumID`),
-  INDEX `AreasOfCurriculumEmployer_idx` (`AreaOfCurriculumID` ASC),
+  INDEX `AreasOfCurriculumEmployer_idx` (`AreaOfCurriculumID` ASC) VISIBLE,
   CONSTRAINT `AreasOfCurriculumEmployer`
     FOREIGN KEY (`AreaOfCurriculumID`)
     REFERENCES `ebedb`.`AreaOfCurriculumList` (`AreaOfCurriculumID`)
@@ -449,7 +450,7 @@ CREATE TABLE IF NOT EXISTS `ebedb`.`INT_LanguageUsedByEmployer` (
   `EmployerID` INT(11) NOT NULL,
   `LanguageID` INT(11) NOT NULL,
   PRIMARY KEY (`EmployerID`, `LanguageID`),
-  INDEX `LanguageEmployer_idx` (`LanguageID` ASC),
+  INDEX `LanguageEmployer_idx` (`LanguageID` ASC) VISIBLE,
   CONSTRAINT `EmployerLanguage`
     FOREIGN KEY (`EmployerID`)
     REFERENCES `ebedb`.`Employer` (`EmployerID`)
@@ -483,7 +484,7 @@ CREATE TABLE IF NOT EXISTS `ebedb`.`INT_LocalAuthorityEmployerCanWorkWith` (
   `EmployerID` INT(11) NOT NULL,
   `LocalAuthorityID` INT(11) NOT NULL,
   PRIMARY KEY (`EmployerID`, `LocalAuthorityID`),
-  INDEX `LocalAuthorityEmployer_idx` (`LocalAuthorityID` ASC),
+  INDEX `LocalAuthorityEmployer_idx` (`LocalAuthorityID` ASC) VISIBLE,
   CONSTRAINT `EmployerLocalAuthority`
     FOREIGN KEY (`EmployerID`)
     REFERENCES `ebedb`.`Employer` (`EmployerID`)
@@ -518,7 +519,7 @@ CREATE TABLE IF NOT EXISTS `ebedb`.`PostcodeList` (
   `PostcodeName` MEDIUMTEXT NULL DEFAULT NULL,
   `LocalAuthorityID` INT(11) NULL DEFAULT NULL,
   PRIMARY KEY (`PostcodeID`),
-  INDEX `LocalAuthorityPostCode_idx` (`LocalAuthorityID` ASC),
+  INDEX `LocalAuthorityPostCode_idx` (`LocalAuthorityID` ASC) VISIBLE,
   CONSTRAINT `LocalAuthorityPostCode`
     FOREIGN KEY (`LocalAuthorityID`)
     REFERENCES `ebedb`.`LocalAuthorityList` (`LocalAuthorityID`)
@@ -570,11 +571,11 @@ CREATE TABLE IF NOT EXISTS `ebedb`.`Vacancy` (
   `ApplicationMethodID` INT(11) NULL DEFAULT NULL,
   `VacancyPostcode` MEDIUMTEXT NULL DEFAULT NULL,
   PRIMARY KEY (`VacancyID`),
-  INDEX `VacancyOccupatonalCode_idx` (`OccupationalCodeID` ASC),
-  INDEX `VacanctyType_idx` (`TypeOfVacancyID` ASC),
-  INDEX `VacancyStatus_idx` (`StatusOfVacancyID` ASC),
-  INDEX `VacancyEmployer_idx` (`EmployerID` ASC),
-  INDEX `VacancyApplicationMethod_idx` (`ApplicationMethodID` ASC),
+  INDEX `VacancyOccupatonalCode_idx` (`OccupationalCodeID` ASC) VISIBLE,
+  INDEX `VacanctyType_idx` (`TypeOfVacancyID` ASC) VISIBLE,
+  INDEX `VacancyStatus_idx` (`StatusOfVacancyID` ASC) VISIBLE,
+  INDEX `VacancyEmployer_idx` (`EmployerID` ASC) VISIBLE,
+  INDEX `VacancyApplicationMethod_idx` (`ApplicationMethodID` ASC) VISIBLE,
   CONSTRAINT `VacancyApplicationMethod`
     FOREIGN KEY (`ApplicationMethodID`)
     REFERENCES `ebedb`.`ApplicationMethodList` (`ApplicationMethodID`)
@@ -613,6 +614,57 @@ CREATE TABLE IF NOT EXISTS `ebedb`.`CWSMemberList` (
   `CWSNameSurname` MEDIUMTEXT NULL,
   `CWSEmail` MEDIUMTEXT NULL,
   PRIMARY KEY (`CWSMemberID`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `ebedb`.`EmployerVideoLinks`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `ebedb`.`EmployerVideoLinks` (
+  `VideoLinkID` INT NOT NULL AUTO_INCREMENT,
+  `EmployerID` INT NULL,
+  `Link` MEDIUMTEXT NULL,
+  PRIMARY KEY (`VideoLinkID`),
+  INDEX `EmployerDocumentLink_idx` (`EmployerID` ASC) VISIBLE,
+  CONSTRAINT `EmployerDocumentLink`
+    FOREIGN KEY (`EmployerID`)
+    REFERENCES `ebedb`.`Employer` (`EmployerID`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `ebedb`.`VacancyDocumentLinks`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `ebedb`.`VacancyDocumentLinks` (
+  `DocumentLinkID` INT NOT NULL AUTO_INCREMENT,
+  `VacancyID` INT NULL,
+  `Link` MEDIUMTEXT NULL,
+  PRIMARY KEY (`DocumentLinkID`),
+  INDEX `VacancyDocumentLink_idx` (`VacancyID` ASC) VISIBLE,
+  CONSTRAINT `VacancyDocumentLink`
+    FOREIGN KEY (`VacancyID`)
+    REFERENCES `ebedb`.`Vacancy` (`VacancyID`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `ebedb`.`EventDocumentLink`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `ebedb`.`EventDocumentLink` (
+  `DocumentLinkID` INT NOT NULL AUTO_INCREMENT,
+  `EventID` INT NULL,
+  `Link` MEDIUMTEXT NULL,
+  PRIMARY KEY (`DocumentLinkID`),
+  INDEX `EventDocument_idx` (`EventID` ASC) VISIBLE,
+  CONSTRAINT `EventDocument`
+    FOREIGN KEY (`EventID`)
+    REFERENCES `ebedb`.`Event` (`EventID`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
