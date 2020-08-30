@@ -235,12 +235,12 @@
 
                                     <ul class="list-group w-100">
                                         <div class="col-md-12 px-0" th:each=" document : ${employerDocuments}">
-                                            <div class="col-md-10 my-2">
+                                            <div class="col-md-10 my-0">
                                                 <a th:href="@{${document}}" target="_blank">
                                                     <li class="list-group-item"  th:text="${#strings.substring(document,52)}"></li>
                                                 </a>
                                             </div>
-                                            <div class="col-md-1 py-4 pr-1">
+                                            <div class="col-md-1 mt-3 pr-1">
                                                 <button type="button" class="close" onclick="">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
@@ -263,13 +263,13 @@
                                 </div>
 
                                     <ul class="list-group w-100">
-                                        <div class="col-md-12 px-0">
-                                            <div class="col-md-10 my-2">
-                                                <a th:each=" video : ${employerVideos}"  th:href="@{${video}}" target="_blank">
+                                        <div class="col-md-12 px-0" th:each=" video : ${employerVideos}" >
+                                            <div class="col-md-10 my-0">
+                                                <a  th:href="@{${video}}" target="_blank">
                                                     <li class="list-group-item"  th:text="${video}"></li>
                                                 </a>
                                             </div>
-                                            <div class="col-md-1 py-4 pr-1">
+                                            <div class="col-md-1 mt-3 pr-1">
                                                 <button type="button" class="close" onclick="">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
