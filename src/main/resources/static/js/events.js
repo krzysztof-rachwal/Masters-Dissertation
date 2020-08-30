@@ -401,6 +401,10 @@ function validateForm(){
     return verifier;
 }
 
+//16. Feedback - Store local storage
+function EventProfileShowInterest() {
+    localStorage.setItem("EventProfileShowInterest","true");
+}
 
 //14. Document ready
 $(document).ready(function(){
@@ -423,4 +427,5 @@ $(document).ready(function(){
             return $(elem).text().toUpperCase().indexOf(arg.toUpperCase()) >= 0;
         };
     });
+
 });

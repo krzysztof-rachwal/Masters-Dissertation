@@ -82,7 +82,7 @@ public class EmailAPI {
     public void sendRequestByLanguage(String emailFrom, String schoolName, String schoolPostcode, String eventName, String eventDate, String eventTime, String eventNotes, String eventType, String language){
         var mailMessage = new SimpleMailMessage();
 
-        mailMessage.setTo("daniel.f.m.leite@gmail.com");
+        mailMessage.setTo("carrers.wales@gmail.com");
         mailMessage.setSubject("Request for " + eventName);
         mailMessage.setText("You have a new request for " + eventName +
                 "\nSchool Name: " + schoolName +
@@ -96,6 +96,29 @@ public class EmailAPI {
 
         javaMailSender.send(mailMessage);
     }
+
+    public void sendShowInterest(String emailFrom, String schoolName, String schoolPostcode, String eventName, String eventDate, String eventTime, String eventNotes){
+        var mailMessage = new SimpleMailMessage();
+
+        mailMessage.setTo("carrers.wales@gmail.com");
+        mailMessage.setSubject("Show Interest for" + eventName);
+        mailMessage.setText("You have a new request for " + eventName +
+                "\nSchool Name: " + schoolName +
+                "\nSchool Local Authority: " + schoolPostcode +
+                "\nDate: " + eventDate +
+                "\nTime: " + eventTime +
+                "\nAdditional notes: " + eventNotes);
+        mailMessage.setFrom(emailFrom);
+
+        javaMailSender.send(mailMessage);
+    }
+
+
+
+
+
+
+
 
 //    TODO: HTML email template.
     @Autowired
