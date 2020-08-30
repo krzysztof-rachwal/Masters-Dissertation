@@ -197,3 +197,7 @@ ul{
 .search-box{
     border: solid 1px gainsboro !important;
 }
+
+.upload_form{
+    padding: 0 !important;
+}

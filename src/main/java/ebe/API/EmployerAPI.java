@@ -189,7 +189,9 @@ public class EmployerAPI {
             @RequestParam(name="CreateEmployerAlumniSchoolID", required = false) String createEmployerAlumniSchoolID,
             @RequestParam(name="UpdateEmployerAlumniID", required = false) String updateEmployerAlumniID,
             @RequestParam(name="UpdateEmployerAlumniName", required = false) String updateEmployerAlumniName,
-            @RequestParam(name="UpdateEmployerAlumniSchoolID", required = false) String updateEmployerAlumniSchoolID) throws ParseException {
+            @RequestParam(name="UpdateEmployerAlumniSchoolID", required = false) String updateEmployerAlumniSchoolID,
+            @RequestParam(name="VideoLink", required = false) String VideoLink
+            ) throws ParseException {
 
         // ---------------------------
         //1. Create the ArrayList that are going to be used to populate the database
@@ -334,6 +336,11 @@ public class EmployerAPI {
             EmployerQrys.createEmployerAlumniIntersection(employerID, alumniIdList);
         }
 
+        // 4.12 Upload Video Link
+        if(!VideoLink.isEmpty()){
+            EmployerQrys.insertVideoLink(Integer.valueOf(employerID), VideoLink);
+        }
+
         return updateVal == 1;
     }
 
@@ -457,14 +464,14 @@ public class EmployerAPI {
     }
 
     ///////////////////////    ADD VIDEO LINK    ////////////////////////////////
-    @PostMapping("api/add/video-link")
-    //5. Filter Employers
-    public void addEmployerVideoLink(@RequestParam("employerID") String employerID,
-                                     @RequestParam("link") String link){
-
-        EmployerQrys.insertVideoLink(Integer.valueOf(employerID), link);
-
-    }
+//    @PostMapping("api/add/video-link")
+//    //5. Filter Employers
+//    public void addEmployerVideoLink(@RequestParam("employerID") String employerID,
+//                                     @RequestParam("link") String link){
+//
+//        EmployerQrys.insertVideoLink(Integer.valueOf(employerID), link);
+//
+//    }
 
 
 

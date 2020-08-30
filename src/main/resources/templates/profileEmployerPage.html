@@ -55,10 +55,10 @@
                                     <textarea class="form-control form-required text-area-w-80"  rows="3" id="company-summary" th:text="${employer.getCompanySummary()}" th:value="${employer.getCompanySummary()}"></textarea>
                                 </div>
                                 <div class="form-group">
-                                    <form enctype="multipart/form-data" method="post" id="logo-upload-form">
+                                    <form enctype="multipart/form-data" class="upload_form" method="post" id="logo-upload-form">
                                         <label for="file-upload-input">Select logo file to upload</label>
                                         <input type="file" id="logo-upload-input" name="file">
-                                        <button type="button" value="Submit" onclick="uploadLogo()"></button>
+<!--                                        <button type="button" class="button&#45;&#45;secondary" value="Submit" onclick="uploadLogo()"></button>-->
                                     </form>
                                 </div>
                             </div>
@@ -227,49 +227,69 @@
                                     </div>
                                 </div>
                             </div>
+
                             <div class="row" id="documents">
-                                <div class="container my-3 p-0">
-                                    <h4>Add Employer's document</h4>
+                                <div class="container mt-5 mb-2 p-0">
+                                    <h4>Employer's Documents</h4>
                                 </div>
-                                <div class="col-md-12 my-4">
-                                    <form enctype="multipart/form-data" method="post" id="file-upload-form">
+
+                                    <ul class="list-group w-100">
+                                        <div class="col-md-12 px-0" th:each=" document : ${employerDocuments}">
+                                            <div class="col-md-10 my-2">
+                                                <a th:href="@{${document}}" target="_blank">
+                                                    <li class="list-group-item"  th:text="${#strings.substring(document,52)}"></li>
+                                                </a>
+                                            </div>
+                                            <div class="col-md-1 py-4 pr-1">
+                                                <button type="button" class="close" onclick="">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </ul>
+
+                                    <!-- Upload Documents -->
+                                    <form enctype="multipart/form-data" class="upload_form ml-3 mt-4" method="post" id="file-upload-form">
                                         <label for="file-upload-input">Select file to upload</label>
                                         <input type="file" id="file-upload-input" name="file">
-                                        <button type="button" value="Submit" onclick="uploadFile()"></button>
+<!--                                        <button type="button" value="Submit" onclick="uploadFile()"></button>-->
                                     </form>
                                 </div>
-                                <div class="col-md-12 my-4">
-                                    <h3>Existing Employer's Documents</h3>
-                                    <ul class="list-group">
-                                        <a th:each=" document : ${employerDocuments}"  th:href="@{${document}}" target="_blank">
-                                            <li class="list-group-item"  th:text="${document}"></li>
-                                        </a>
-                                    </ul>
-                                </div>
-                            </div>
+
+
                             <div class="row" id="videos">
                                 <div class="container my-3 p-0">
-                                    <h4>Add Employer's video</h4>
+                                    <h4>Employer's Videos</h4>
                                 </div>
-                                <div class="col-md-12 my-4">
-                                    <label for="video-link">Link to a video...</label>
-                                    <input type="text" class="form-control input-border" id="video-link" name="video">
-                                    <button type="button" id="videoButton" value="Add video link" ></button>
-                                </div>
-                                <div class="col-md-12 my-4">
-                                    <h3>Existing Employer's Videos</h3>
-                                    <ul class="list-group">
-                                        <a th:each=" video : ${employerVideos}"  th:href="@{${video}}" target="_blank">
-                                            <li class="list-group-item"  th:text="${video}"></li>
-                                        </a>
+
+                                    <ul class="list-group w-100">
+                                        <div class="col-md-12 px-0">
+                                            <div class="col-md-10 my-2">
+                                                <a th:each=" video : ${employerVideos}"  th:href="@{${video}}" target="_blank">
+                                                    <li class="list-group-item"  th:text="${video}"></li>
+                                                </a>
+                                            </div>
+                                            <div class="col-md-1 py-4 pr-1">
+                                                <button type="button" class="close" onclick="">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                        </div>
                                     </ul>
+
+                                    <!-- Upload Youtube video links -->
+                                    <div class="col-md-12 my-4">
+                                        <label for="video-link">Link to a video...</label>
+                                        <input type="text" class="form-control input-border" id="video-link" name="video">
+<!--                                        <button type="button" id="videoButton" value="Add video link" ></button>-->
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
+
                     <div class="container my-4 text-center">
                         <button type="button" class="button--secondary text-center" onclick="updateThisEmployer()">Update Employer</button>
                     </div>
-                </form>
+                </div>
+            </form>
 
             </div>
         </div>
@@ -579,7 +599,7 @@
         <h3>Employer Documents</h3>
         <ul class="list-group">
             <a th:each=" document : ${employerDocuments}"  th:href="@{${document}}" target="_blank">
-                <li class="list-group-item"  th:text="${document}"></li>
+                <li th:text="${#strings.substring(document,52)}"></li>
             </a>
         </ul>
     </div>
@@ -594,7 +614,7 @@
         <h3>Employer Videos</h3>
         <ul class="list-group">
             <a th:each=" video : ${employerVideos}"  th:href="@{${video}}" target="_blank">
-                <li class="list-group-item"  th:text="${video}"></li>
+                <li th:text="${video}"></li>
             </a>
         </ul>
     </div>
