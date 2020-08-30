@@ -337,8 +337,21 @@
         </button>
     </div>
 
-
-    <div class="container-headline my-5">
+    <nav aria-label="breadcrumb" class="breadcrumb pl-4 breadcrumb_ebe">
+        <span>You are here:</span>
+        <ul>
+            <li>
+                <a href="/" gel-processed="processed" title="Link to Home page">Home page</a>
+            </li>
+            <li>
+                <a href="/employers" gel-processed="processed" title="Link to Employers page">Employers page</a>
+            </li>
+            <li>
+                <a href="#" gel-processed="processed" title="Link to Current page title as a link to the current page" th:text="${employer.getEmployerName()}"></a>
+            </li>
+        </ul>
+    </nav>
+    <div class="container-headline mt-2 mb-5">
         <span class="title-h2" th:text="${employer.getEmployerName()}"></span>
         <input type="hidden" id="employer-id" th:value="${employer.getEmployerID()}" />
         <button  th:if="${session.SESSION_Role =='CWS'}" type="button" id="deleteEvent" data-toggle="modal" data-target="#deleteModal" class="buttonDelete float-right">Delete</button>
@@ -349,7 +362,7 @@
     <div class="container-fluid eventBackground">
         <div class="row">
             <div class="col-md-4">
-                <img alt="Card image" src="https://source.unsplash.com/400x400">
+                <img alt="Card image" src="https://pbs.twimg.com/profile_images/1243552736039313411/ccpSwaNu_400x400.jpg">
             </div>
             <div class="col-md-8">
                 <div class="row">

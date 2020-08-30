@@ -25,7 +25,22 @@
 </header>
 
 <div class="gel-content-container">
-    <div class="container my-4">
+    <!-- Breadcrumbs -->
+    <nav aria-label="breadcrumb" class="breadcrumb pl-4 breadcrumb_ebe">
+        <span>You are here:</span>
+        <ul>
+            <li>
+                <a href="/" gel-processed="processed" title="Link to Home page">Home page</a>
+            </li>
+            <li>
+                <a href="/events" gel-processed="processed" title="Link to Events page">Events page</a>
+            </li>
+            <li>
+                <a href="#" gel-processed="processed" title="Link to Current page title as a link to the current page">Add Event page</a>
+            </li>
+        </ul>
+    </nav>
+    <div class="container mt-2 mb-5">
         <h2>Add Event</h2>
     </div>
 
@@ -161,6 +176,15 @@
                     <div class="form-group">
                         <label>Is the Event Cancelled?</label>
                         <select  id="event-cancelled" class="selectpicker" title="Nothing selected" data-width="80%">
+                            <option value="1">Yes</option>
+                            <option value="0">No</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Is this a featured event?</label>
+                        <select  id="event-featured" class="selectpicker" title="Nothing selected" data-width="80%">
                             <option value="1">Yes</option>
                             <option value="0">No</option>
                         </select>

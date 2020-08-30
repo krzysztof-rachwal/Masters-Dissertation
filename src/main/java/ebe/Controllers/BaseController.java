@@ -17,6 +17,7 @@ import org.springframework.stereotype.Controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -108,7 +109,10 @@ public class BaseController {
         if(session.getAttribute("SESSION_Role") == "Teacher"){
             mv.setViewName("homepageTeacher");
             List<Event> recommendedEvents = statisticsQueries.getEventsForSchool(parseInt(session.getAttribute("SESSION_UserID").toString()));
+            List<Event> featuredEvents = EventQrys.getFeaturedEvents();
+
             mv.addObject("recommendedEvents",recommendedEvents);
+            mv.addObject("featuredEvents",featuredEvents);
         }
 
         if(session.getAttribute("SESSION_Role") == "none"){
@@ -121,9 +125,15 @@ public class BaseController {
     /////////1st - Header Menu (Employer) /////////
     //1. Search Employer
     @GetMapping("/employers")
-    public ModelAndView SearchEmployer() {
+    public ModelAndView SearchEmployer(HttpServletRequest request,
+                                       HttpSession session,
+                                       @AuthenticationPrincipal(expression = "claims['email']") String email,
+                                       @AuthenticationPrincipal(expression = "claims['name']") String name) {
 
+        Autentication(request,session,email,name);
         ModelAndView mv = new ModelAndView();
+
+        if((session.getAttribute("SESSION_Role") == "CWS") || (session.getAttribute("SESSION_Role") == "Teacher")) {
         mv.setViewName("searchEmployerPage");
 
         List<Employer> employers;
@@ -161,6 +171,10 @@ public class BaseController {
         mv.addAllObjects(allEmployers);
 
         return mv;
+        }else{
+            mv.setViewName("404");
+            return mv;
+        }
     }
 
     //2. Employer Profile (with the id)
@@ -170,7 +184,10 @@ public class BaseController {
                                          HttpSession session,
                                          @AuthenticationPrincipal(expression = "claims['email']") String email,
                                          @AuthenticationPrincipal(expression = "claims['name']") String name) {
+        Autentication(request,session,email,name);
         ModelAndView mv = new ModelAndView();
+
+        if((session.getAttribute("SESSION_Role") == "CWS") || (session.getAttribute("SESSION_Role") == "Teacher")) {
         mv.setViewName("profileEmployerPage");
         Employer employer = EmployerQrys.getEmployerDetailsById(id);
 
@@ -244,6 +261,10 @@ public class BaseController {
 
         mv.addAllObjects(allEmployer);
         return mv;
+        }else{
+            mv.setViewName("404");
+            return mv;
+        }
     }
 
     //3. Add Employer
@@ -480,10 +501,7 @@ public class BaseController {
             List<School> schoolAllNamesAndIds;
             List<Employer> employerAllNamesAndIds;
             List<Integer> eventSchoolsIDs = SchoolQrys.getAllSchoolIDsAttendingEvent(id);
-    //        List<School> eventSchoolNames = SchoolQrys.getAllSchoolNamesAttendingEvent(eventSchoolsIDs);
             List<Integer> eventEmployerIDs = EmployerQrys.getAllEmployerIDsAttendingEvent(id);
-    //        List<Employer> eventEmployerNames = EmployerQrys.getAllEmployerNamesAttendingEvent(eventEmployerIDs);
-
 
             schoolAllNamesAndIds = SchoolQrys.getAllSchoolNamesAndIds();
             eventsAllTypes = EventQrys.getAllTypesOfEvents();
@@ -491,22 +509,63 @@ public class BaseController {
 
             Map<String,Object> Event = new HashMap<String,Object>();
             Event.put("event", event);
-    //        Event.put("AllSchoolsNames", eventSchoolNames);
             Event.put("EventSchoolsIDs", eventSchoolsIDs);
-    //        Event.put("AllEmployersNames", eventEmployerNames);
             Event.put("EventEmployersIDs", eventEmployerIDs);
             Event.put("allSchoolNamesAndIds", schoolAllNamesAndIds);
             Event.put("allEventTypes", eventsAllTypes);
             Event.put("AllEmployerNamesAndIds", employerAllNamesAndIds);
             mv.addAllObjects(Event);
 
-    //        mv.addObject("event",event);
-
             return mv;
-        }else{
+        } else if (session.getAttribute("SESSION_Role") == "Teacher" ) {
+
+            // Getting the eventID of Events that can be seen by teacher, so localauth events and featured
+            List<Event> recommendedEvents = statisticsQueries.getEventsForSchool(parseInt(session.getAttribute("SESSION_UserID").toString()));
+            List<Event> featuredEvents = EventQrys.getFeaturedEvents();
+            List<Integer> permittedEventsId = new ArrayList<>();
+
+            // creating the list of events that can be seen by teacher
+            for(Event event : recommendedEvents){
+                permittedEventsId.add(event.getEventID());
+            }
+            for(Event event : featuredEvents){
+                permittedEventsId.add(event.getEventID());
+            }
+
+            // if it's legal eventID, then present the page
+            if (permittedEventsId.contains(id)){
+
+                mv.setViewName("profileEventPage");
+
+                Event event = EventQrys.getEventDetailsById(id);
+                List<Event> eventsAllTypes;
+                List<School> schoolAllNamesAndIds;
+                List<Employer> employerAllNamesAndIds;
+                List<Integer> eventSchoolsIDs = SchoolQrys.getAllSchoolIDsAttendingEvent(id);
+                List<Integer> eventEmployerIDs = EmployerQrys.getAllEmployerIDsAttendingEvent(id);
+
+                schoolAllNamesAndIds = SchoolQrys.getAllSchoolNamesAndIds();
+                eventsAllTypes = EventQrys.getAllTypesOfEvents();
+                employerAllNamesAndIds = EmployerQrys.getAllEmployerNamesAndIds();
+
+                Map<String,Object> Event = new HashMap<String,Object>();
+                Event.put("event", event);
+                Event.put("EventSchoolsIDs", eventSchoolsIDs);
+                Event.put("EventEmployersIDs", eventEmployerIDs);
+                Event.put("allSchoolNamesAndIds", schoolAllNamesAndIds);
+                Event.put("allEventTypes", eventsAllTypes);
+                Event.put("AllEmployerNamesAndIds", employerAllNamesAndIds);
+                mv.addAllObjects(Event);
+            } else {
+                mv.setViewName("404");
+                return mv;
+            }
+
+        } else {
             mv.setViewName("404");
             return mv;
         }
+        return mv;
     }
 
     //9. Add Events

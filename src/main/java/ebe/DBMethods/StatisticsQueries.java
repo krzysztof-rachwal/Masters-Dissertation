@@ -303,7 +303,7 @@ public class StatisticsQueries extends DBQueries {
                         rs.getBoolean("isPublic"), rs.getBoolean("isCancelled"),
                         rs.getString("NameOfAdviser"), rs.getInt("NumberOfAttendees"),
                         rs.getBoolean("PromotesApprenticeships"), rs.getBoolean("PromotesWelshLanguage"),
-                        rs.getBoolean("ChallengesGenderStereotypes"));
+                        rs.getBoolean("ChallengesGenderStereotypes"), rs.getBoolean("isFeatured"));
 
                 events.add(event);
             }
