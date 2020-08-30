@@ -35,6 +35,14 @@
 
 <!--MAIN CONTENT-->
 <div class="gel-content-container">
+    <!-- Success Feedback -->
+    <div id="success_message" class="alert alert-success alert-dismissible fade d-none" role="alert">
+        <strong>Success!</strong> <span id="success_message_text"></span>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
     <div class="container-headline mt-5">
         <span class="title-h2">Request</span>
         <p class="mt-3">Select a type of request to submit.</p>
@@ -64,7 +72,7 @@
 
     <div class="tab-content" id="myTabContent">
         <div id="general" class="tab-pane fade show active" role="tabpanel" aria-labelledby="general-tab">
-            <form th:action="@{/requestEvent}" th:object="${request}" method="post">
+            <form th:action="@{/requestEvent}" th:object="${request}" method="post" onSubmit="requestFeedback()">
                 <div class="container-fluid">
                     <div class="col-md-6">
                         <div class="form-group">
@@ -104,7 +112,7 @@
                     <div class="col-md-12 mt-3">
                         <div class="form-group">
                             <label for="eventNotes">Event Notes</label>
-                            <textarea type="text" id="eventNotes" class="form-control input-border border-0" rows="5" name="eventNotes">
+                            <textarea id="eventNotes" class="form-control input-border border-0" rows="5" name="eventNotes">
                             </textarea>
                         </div>
                     </div>
@@ -218,7 +226,7 @@
                     <div class="col-md-12 mt-3">
                         <div class="form-group">
                             <label for="eventNotes">Event Notes</label>
-                            <textarea type="text" id="event_notes_lang" class="form-control input-border border-0"
+                            <textarea id="event_notes_lang" class="form-control input-border border-0"
                                       rows="5" name="eventNotes"></textarea>
                         </div>
                     </div>
@@ -228,10 +236,10 @@
                     </div>
                 </div>
             </form>
+
         </div>
     </div>
 </div>
-<!--END OF MAIN CONTENT-->
 
 <footer th:replace="fragments/footerTemplate :: footer"></footer>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
@@ -251,17 +259,10 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
 
+<script th:src="@{../js/request.js}" src="../js/request.js"></script>
+
 <script>
     $('selectpicker').selectpicker();
-
-    //1. On document Ready
-    $(document).ready(function () {
-        $(".tab__link").click(function () {
-            $(".tab__link").removeClass("tab--is-active")
-            $(".tab__link").removeClass("active")
-            $(this).addClass("tab--is-active")
-        });
-    });
 </script>
 </body>
 </html>
