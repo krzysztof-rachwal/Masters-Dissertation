@@ -73,6 +73,8 @@ public class AuthorisationQueries extends DBQueries {
                 if (!((rs.getString("SchoolEmail") == ""))) {
                     role = "Teacher";
                     request.getSession().setAttribute("SESSION_UserID", rs.getString("SchoolID"));
+                    request.getSession().setAttribute("SESSION_SchoolName", rs.getString("SchoolName"));
+                    request.getSession().setAttribute("SESSION_SchoolPostCode", rs.getString("SchoolPostCode"));
                 }
             }
         } catch (SQLException e) {

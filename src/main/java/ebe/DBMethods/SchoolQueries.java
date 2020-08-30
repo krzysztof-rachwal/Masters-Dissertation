@@ -4,8 +4,10 @@ import ebe.DBClasses.School;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Repository;
 
+import javax.servlet.http.HttpServletRequest;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -132,11 +134,17 @@ public class SchoolQueries extends DBQueries {
         return list;
     }
 
+    //6. Add request for school
+    public int addRequestCount(String email) throws DataAccessException {
 
+        String updateSql = "UPDATE school SET SchoolNumberOfRequest = ISNULL(SchoolNumberOfRequest, 0) + 1 WHERE SchoolEmail = ?";
+
+        return jdbcTemplate().update(updateSql, email);
+    }
 
 
     ///////////////////////////////////// CREATE ALL METHODS ///////////////////////////////////////////////
-    // 6. Create a new School
+    // 7. Create a new School
     public int createNewSchool(String Name, String AddressCity, String AddressStreet,
                                Boolean AddressNumber, String Email, String Phone) throws DataAccessException {
 
@@ -147,7 +155,7 @@ public class SchoolQueries extends DBQueries {
 
     }
     ///////////////////////////////////// UPDATE ALL METHODS ///////////////////////////////////////////////
-    // 7. Update an School by Id
+    // 8. Update an School by Id
 
     public Integer updateSchool(int SchoolID,String Name, String AddressCity, String AddressStreet,
                                 Boolean AddressNumber, String Email, String Phone) throws DataAccessException {
@@ -159,7 +167,7 @@ public class SchoolQueries extends DBQueries {
     }
 
     ///////////////////////////////////// DELETE ALL METHODS ///////////////////////////////////////////////
-    // 8. Delete an School by ID
+    // 9. Delete an School by ID
 
     public Integer deleteSchool(int schoolId) throws DataAccessException {
         String deleteSql = String.format("DELETE FROM School WHERE SchoolID = '%s'",schoolId);

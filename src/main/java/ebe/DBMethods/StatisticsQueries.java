@@ -7,6 +7,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import javax.servlet.http.HttpServletRequest;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -212,7 +213,7 @@ public class StatisticsQueries extends DBQueries {
             statement = connection.createStatement();
             rs = statement.executeQuery(query);
             while (rs.next()) {
-              eventNumber = rs.getInt("count(eve.EventID)");
+                eventNumber = rs.getInt("count(eve.EventID)");
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -257,7 +258,7 @@ public class StatisticsQueries extends DBQueries {
         return schoolMap;
     }
 
-    private int getLocalAuthID(int schoolID){
+    public int getLocalAuthID(int schoolID){
         String query = String.format("select la.LocalAuthorityID as schoolAuthorityID " +
                 "FROM School sc " +
                 "INNER JOIN PostcodeList pc ON pc.PostcodeName LIKE CONCAT('%%',sc.SchoolPostcode) " +
@@ -328,9 +329,44 @@ public class StatisticsQueries extends DBQueries {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return advisors;
+    }
 
+    public String getLocalAuthNameById(int authId) throws DataAccessException{
+        String query = String.format("SELECT * FROM localauthoritylist WHERE LocalAuthorityID = \"%s\";",authId);
+        ResultSet rs = null;
+        String localAuth = null;
+        try {
+            connection = ConnectionFactory.getConnection();
+            statement = connection.createStatement();
+            rs = statement.executeQuery(query);
+            while (rs.next()) {
+                localAuth = rs.getString("LocalAuthorityName");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return localAuth;
+    }
+
+    public Integer updateSchoolRequestNumber(int schoolID) throws DataAccessException{
+        String query = String.format("SELECT * FROM School WHERE SchoolID = \"%s\";",schoolID);
+        ResultSet rs = null;
+        Integer numberOfRequests = 0;
+        try {
+            connection = ConnectionFactory.getConnection();
+            statement = connection.createStatement();
+            rs = statement.executeQuery(query);
+            while (rs.next()) {
+                numberOfRequests = rs.getInt("SchoolNumberOfRequest");
+                numberOfRequests = numberOfRequests +1;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        String updateSql = "UPDATE School SET SchoolNumberOfRequest=? WHERE  SchoolID=?";
+        return jdbcTemplate().update(updateSql,numberOfRequests, schoolID);
     }
 
 }
