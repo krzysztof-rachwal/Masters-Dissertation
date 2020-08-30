@@ -31,7 +31,7 @@ public class EmailAPI {
 
         var mailMessage = new SimpleMailMessage();
 
-        mailMessage.setTo("daniel.f.m.leite@gmail.com");
+        mailMessage.setTo("carrers.wales@gmail.com");
         mailMessage.setSubject(subject);
         mailMessage.setText("You have a new message from " + name + ". Local Authority: " + postcode + ". \nContent of the message: \n" + message);
         mailMessage.setFrom(fromEmail);
@@ -82,7 +82,7 @@ public class EmailAPI {
     public void sendRequestByLanguage(String emailFrom, String schoolName, String schoolPostcode, String eventName, String eventDate, String eventTime, String eventNotes, String eventType, String language){
         var mailMessage = new SimpleMailMessage();
 
-        mailMessage.setTo("daniel.f.m.leite@gmail.com");
+        mailMessage.setTo("carrers.wales@gmail.com");
         mailMessage.setSubject("Request for " + eventName);
         mailMessage.setText("You have a new request for " + eventName +
                 "\nSchool Name: " + schoolName +
@@ -115,7 +115,7 @@ public class EmailAPI {
 
         String html = templateEngine.process("emailTemplate", context);
 
-        helper.setTo("carrers.wales69@gmail.com");
+        helper.setTo("carrers.wales@gmail.com");
         helper.setText(html, true);
         helper.setSubject("Request for " + eventName);
         helper.setFrom("krzysiek.rachwal@gmail.com"); //TODO: get session email address.
