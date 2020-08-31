@@ -591,9 +591,10 @@ function uploadFile(){
             xhr.setRequestHeader(header, token);
         },
         success: function (res) {
+
         },
         error: function (err) {
-            console.error(err);
+            // console.error(err);
         }
     });
 }
@@ -624,10 +625,10 @@ function uploadLogo(){
             xhr.setRequestHeader(header, token);
         },
         success: function (res) {
-            console.log(res);
+            // console.log(res);
         },
         error: function (err) {
-            console.error(err);
+            // console.error(err);
         }
     });
 }
@@ -660,10 +661,11 @@ function deleteFile(document) {
             xhr.setRequestHeader(header, token);
         },
         success: function (res) {
-            console.error(res);
+            alert("Your file was deleted successfully")
+            // console.error(res);
         },
         error: function (err) {
-            console.error(err);
+            // console.error(err);
         }
     });
 }
@@ -692,10 +694,11 @@ function deleteFile(document) {
                 xhr.setRequestHeader(header, token);
             },
             success: function (res) {
-                console.log(res);
+                // console.log(res);
+                alert("The video was deleted successfully")
             },
             error: function (err) {
-                console.error(err);
+                // console.error(err);
             }
         });
 

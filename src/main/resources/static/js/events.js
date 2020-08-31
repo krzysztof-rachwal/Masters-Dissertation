@@ -459,7 +459,7 @@ function uploadFile(){
             xhr.setRequestHeader(header, token);
         },
         success: function (res) {
-            console.log(res);
+            alert("Your file was added successfully")
         },
         error: function (err) {
             console.error(err);
@@ -495,7 +495,7 @@ function deleteFile(document) {
             xhr.setRequestHeader(header, token);
         },
         success: function (res) {
-            console.error(res);
+            alert("Your file was deleted successfully")
         },
         error: function (err) {
             console.error(err);
