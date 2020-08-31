@@ -126,7 +126,11 @@ function UpdateThisEvent(){
 
     var token = $("meta[name='_csrf']").attr("content");    // Used to bypass Spring Boot's CSRF protocol     -- Solution taken from 'https://stackoverflow.com/questions/34747437/use-of-spring-csrf-with-ajax-rest-call-and-html-page-with-thymeleaf' on Nov 26th 2019
     var header = $("meta[name='_csrf_header']").attr("content");    // Used to bypass Spring Boot's CSRF protocol
-    console.log(fullUri)
+    console.log(fullUri);
+    //Validates if there is any file to be submited
+    if(!($('#file-upload-input').val() =="")){
+        uploadFile()
+    }
 
     $.ajax({
         type: "GET", url: fullUri,
@@ -433,3 +437,102 @@ $(document).ready(function(){
     });
 
 });
+
+
+// Function to retrieve eventID from URL
+var getUrlParameter = function getUrlParameter(sParam) {
+    var sPageURL = window.location.search.substring(1),
+        sURLVariables = sPageURL.split('&'),
+        sParameterName,
+        i;
+
+    for (i = 0; i < sURLVariables.length; i++) {
+        sParameterName = sURLVariables[i].split('=');
+
+        if (sParameterName[0] === sParam) {
+            return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
+        }
+    }
+};
+
+function uploadFile(){
+
+    var myFile = $('#file-upload-input').prop('files');
+    var eventID = getUrlParameter('eventId');
+    var formData = new FormData();
+
+    formData.append("ID", eventID);
+    formData.append("name", "event");
+    formData.append("file", myFile[0]);
+
+    var token = $("meta[name='_csrf']").attr("content");    // Used to bypass Spring Boot's CSRF protocol     -- Solution taken from 'https://stackoverflow.com/questions/34747437/use-of-spring-csrf-with-ajax-rest-call-and-html-page-with-thymeleaf' on Nov 26th 2019
+    var header = $("meta[name='_csrf_header']").attr("content");    // Used to bypass Spring Boot's CSRF protocol
+
+    // use $.ajax() to upload file
+    $.ajax({
+        url: "/upload",
+        type: "POST",
+        data: formData,
+        enctype: 'multipart/form-data',
+        processData: false,
+        contentType: false,
+        cache: false,
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader(header, token);
+        },
+        success: function (res) {
+
+        },
+        error: function (err) {
+            console.error(err);
+
+        }
+    });
+}
+
+function deleteFile(document, fileID) {
+
+    var eventID = getUrlParameter('eventId');
+    var formData = new FormData();
+
+    var filename = document.replace(/^.*[\\\/]/, '')
+
+    formData.append("ID", eventID);
+    formData.append("name", "event");
+    formData.append("file", filename);
+    formData.append("URL", document);
+
+    var token = $("meta[name='_csrf']").attr("content");    // Used to bypass Spring Boot's CSRF protocol     -- Solution taken from 'https://stackoverflow.com/questions/34747437/use-of-spring-csrf-with-ajax-rest-call-and-html-page-with-thymeleaf' on Nov 26th 2019
+    var header = $("meta[name='_csrf_header']").attr("content");    // Used to bypass Spring Boot's CSRF protocol
+
+    // use $.ajax() to upload file
+    $.ajax({
+        url: "/delete",
+        type: "DELETE",
+        data: formData,
+        enctype: 'multipart/form-data',
+        processData: false,
+        contentType: false,
+        cache: false,
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader(header, token);
+        },
+        success: function (res) {
+            //Remove the file from frontend
+            fileID.parent().parent().remove();
+
+            $('#success_message_text').empty()
+            $('#success_message_text').text('The file was deleted!');
+            $('#success_message').removeClass('d-none').addClass('show');
+            localStorage.clear()
+            $("#success_message").fadeTo(1500, 1);
+            setTimeout(function(){
+                $("#success_message").fadeTo(1500, 0);
+            },5000);
+        },
+        error: function (err) {
+            console.error(err);
+        }
+    });
+}
+

@@ -178,8 +178,8 @@ CREATE TABLE IF NOT EXISTS `ebedb`.`EmployerDocumentLinks` (
   CONSTRAINT `EmployerDocumentLink`
     FOREIGN KEY (`EmployerID`)
     REFERENCES `ebedb`.`Employer` (`EmployerID`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB
 AUTO_INCREMENT = 201
 DEFAULT CHARACTER SET = latin1;
@@ -614,6 +614,57 @@ CREATE TABLE IF NOT EXISTS `ebedb`.`CWSMemberList` (
   `CWSNameSurname` MEDIUMTEXT NULL,
   `CWSEmail` MEDIUMTEXT NULL,
   PRIMARY KEY (`CWSMemberID`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `ebedb`.`EmployerVideoLinks`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `ebedb`.`EmployerVideoLinks` (
+  `VideoLinkID` INT NOT NULL AUTO_INCREMENT,
+  `EmployerID` INT NULL,
+  `Link` MEDIUMTEXT NULL,
+  PRIMARY KEY (`VideoLinkID`),
+  INDEX `EmployerDocumentLink_idx` (`EmployerID` ASC),
+  CONSTRAINT `EmployerVideoLink`
+    FOREIGN KEY (`EmployerID`)
+    REFERENCES `ebedb`.`Employer` (`EmployerID`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `ebedb`.`VacancyDocumentLinks`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `ebedb`.`VacancyDocumentLinks` (
+  `DocumentLinkID` INT NOT NULL AUTO_INCREMENT,
+  `VacancyID` INT NULL,
+  `Link` MEDIUMTEXT NULL,
+  PRIMARY KEY (`DocumentLinkID`),
+  INDEX `VacancyDocumentLink_idx` (`VacancyID` ASC),
+  CONSTRAINT `VacancyDocumentLink`
+    FOREIGN KEY (`VacancyID`)
+    REFERENCES `ebedb`.`Vacancy` (`VacancyID`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `ebedb`.`EventDocumentLink`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `ebedb`.`EventDocumentLink` (
+  `DocumentLinkID` INT NOT NULL AUTO_INCREMENT,
+  `EventID` INT NULL,
+  `Link` MEDIUMTEXT NULL,
+  PRIMARY KEY (`DocumentLinkID`),
+  INDEX `EventDocument_idx` (`EventID` ASC),
+  CONSTRAINT `EventDocumentLink`
+    FOREIGN KEY (`EventID`)
+    REFERENCES `ebedb`.`Event` (`EventID`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 

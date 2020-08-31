@@ -445,5 +445,44 @@ public class VacancyQueries extends DBQueries {
         return list;
     }
 
+    ///////////////////////////////////// DOCUMENTS ///////////////////////////////////////////////
+
+    public void insertDocument(int vacancyID, String link) throws DataAccessException {
+
+        String insertSql = "INSERT INTO VacancyDocumentLinks(VacancyID, Link) VALUES (?,?)";
+        jdbcTemplate().update(insertSql, vacancyID, link);
+
+    }
+
+    public void deleteDocument(int vacancyID, String link) throws DataAccessException {
+
+        String insertSql = "DELETE FROM VacancyDocumentLinks WHERE VacancyID = ? AND Link = ?";
+        jdbcTemplate().update(insertSql, vacancyID, link);
+
+    }
+
+    public List <String> getVacancyDocuments(int vacancyID) throws DataAccessException {
+
+        String sql = "SELECT Link FROM VacancyDocumentLinks WHERE VacancyID = " + vacancyID + ";";
+        List <String> documents = new ArrayList<>();
+        ResultSet rs = null;
+
+        try {
+            connection = ConnectionFactory.getConnection();
+            statement = connection.createStatement();
+            rs = statement.executeQuery(sql);
+            while (rs.next()) {
+                documents.add(rs.getString("Link"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }  finally {
+            DBUtil.close(rs);
+            DBUtil.close(statement);
+            DBUtil.close(connection);
+        }
+        return documents;
+    }
+
 }
 

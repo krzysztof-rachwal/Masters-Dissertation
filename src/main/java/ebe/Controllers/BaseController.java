@@ -210,6 +210,8 @@ public class BaseController {
         List<Employer> employerStatus;
         List<School> schoolAllNamesAndIds;
         List<Integer> employerSchoolPreferences;
+        List<String> employerDocuments;
+        List<String> employerVideos;
         List<Event> eventsAllTypes;
 
 
@@ -233,6 +235,8 @@ public class BaseController {
         schoolAllNamesAndIds = SchoolQrys.getAllSchoolNamesAndIds();
         employerStatus = EmployerQrys.getAllEmployerStatus();
         employerSchoolPreferences = EmployerQrys.getEmployerSchoolPreferences(employer.getEmployerID());
+        employerDocuments = EmployerQrys.getEmployerDocuments(employer.getEmployerID());
+        employerVideos = EmployerQrys.getEmployerVideos(employer.getEmployerID());
         eventsAllTypes = EventQrys.getAllTypesOfEvents();
 
         Map<String,Object> allEmployer = new HashMap<String,Object>();
@@ -255,6 +259,8 @@ public class BaseController {
         allEmployer.put("allSchoolNamesAndIds", schoolAllNamesAndIds);
         allEmployer.put("allEmployerStatus",employerStatus);
         allEmployer.put("allEmployerSchoolPreferences", employerSchoolPreferences);
+        allEmployer.put("employerDocuments", employerDocuments);
+        allEmployer.put("employerVideos", employerVideos);
         allEmployer.put("allEventTypes", eventsAllTypes);
 
         mv.addAllObjects(allEmployer);
@@ -382,12 +388,14 @@ public class BaseController {
             List<Vacancy> vacanciesAllOccupationalCodes;
             List<Vacancy> vacanciesAllApplicationMethods;
             List<Employer> employerAllNamesAndIds;
+            List<String> vacancyDocuments;
 
             employerAllNamesAndIds = EmployerQrys.getAllEmployerNamesAndIds();
             vacanciesAllTypes = VacancyQrys.getAllTypesOfVacancy();
             vacanciesAllStatus = VacancyQrys.getAllStatusOfVacancy();
             vacanciesAllOccupationalCodes = VacancyQrys.getAllOccupationalCodes();
             vacanciesAllApplicationMethods = VacancyQrys.getAllApplicationMethods();
+            vacancyDocuments = VacancyQrys.getVacancyDocuments(vacancy.getVacancyID());
 
             Map<String,Object> allVacancies = new HashMap<String,Object>();
 
@@ -398,6 +406,8 @@ public class BaseController {
             allVacancies.put("allVacanciesStatus", vacanciesAllStatus);
             allVacancies.put("allVacanciesOccupationalCodes", vacanciesAllOccupationalCodes);
             allVacancies.put("allVacanciesApplicationMethods", vacanciesAllApplicationMethods);
+            allVacancies.put("vacancyDocuments", vacancyDocuments);
+
             mv.addAllObjects(allVacancies);
 
             return mv;
@@ -500,66 +510,26 @@ public class BaseController {
             List<Employer> employerAllNamesAndIds;
             List<Integer> eventSchoolsIDs = SchoolQrys.getAllSchoolIDsAttendingEvent(id);
             List<Integer> eventEmployerIDs = EmployerQrys.getAllEmployerIDsAttendingEvent(id);
+    //        List<Employer> eventEmployerNames = EmployerQrys.getAllEmployerNamesAttendingEvent(eventEmployerIDs);
+            List<String> eventDocuments;
 
             schoolAllNamesAndIds = SchoolQrys.getAllSchoolNamesAndIds();
             eventsAllTypes = EventQrys.getAllTypesOfEvents();
+            eventDocuments = EventQrys.getEventDocuments(event.getEventID());
             employerAllNamesAndIds = EmployerQrys.getAllEmployerNamesAndIds();
 
             Map<String,Object> Event = new HashMap<String,Object>();
             Event.put("event", event);
+    //        Event.put("AllSchoolsNames", eventSchoolNames);
             Event.put("EventSchoolsIDs", eventSchoolsIDs);
+    //        Event.put("AllEmployersNames", eventEmployerNames);
             Event.put("EventEmployersIDs", eventEmployerIDs);
             Event.put("allSchoolNamesAndIds", schoolAllNamesAndIds);
             Event.put("allEventTypes", eventsAllTypes);
+            Event.put("eventDocuments", eventDocuments);
             Event.put("AllEmployerNamesAndIds", employerAllNamesAndIds);
             mv.addAllObjects(Event);
-
-            return mv;
-        } else if (session.getAttribute("SESSION_Role") == "Teacher" ) {
-
-            // Getting the eventID of Events that can be seen by teacher, so localauth events and featured
-            List<Event> recommendedEvents = statisticsQueries.getEventsForSchool(parseInt(session.getAttribute("SESSION_UserID").toString()));
-            List<Event> featuredEvents = EventQrys.getFeaturedEvents();
-            List<Integer> permittedEventsId = new ArrayList<>();
-
-            // creating the list of events that can be seen by teacher
-            for(Event event : recommendedEvents){
-                permittedEventsId.add(event.getEventID());
-            }
-            for(Event event : featuredEvents){
-                permittedEventsId.add(event.getEventID());
-            }
-
-            // if it's legal eventID, then present the page
-            if (permittedEventsId.contains(id)){
-
-                mv.setViewName("profileEventPage");
-
-                Event event = EventQrys.getEventDetailsById(id);
-                List<Event> eventsAllTypes;
-                List<School> schoolAllNamesAndIds;
-                List<Employer> employerAllNamesAndIds;
-                List<Integer> eventSchoolsIDs = SchoolQrys.getAllSchoolIDsAttendingEvent(id);
-                List<Integer> eventEmployerIDs = EmployerQrys.getAllEmployerIDsAttendingEvent(id);
-
-                schoolAllNamesAndIds = SchoolQrys.getAllSchoolNamesAndIds();
-                eventsAllTypes = EventQrys.getAllTypesOfEvents();
-                employerAllNamesAndIds = EmployerQrys.getAllEmployerNamesAndIds();
-
-                Map<String,Object> Event = new HashMap<String,Object>();
-                Event.put("event", event);
-                Event.put("EventSchoolsIDs", eventSchoolsIDs);
-                Event.put("EventEmployersIDs", eventEmployerIDs);
-                Event.put("allSchoolNamesAndIds", schoolAllNamesAndIds);
-                Event.put("allEventTypes", eventsAllTypes);
-                Event.put("AllEmployerNamesAndIds", employerAllNamesAndIds);
-                mv.addAllObjects(Event);
-            } else {
-                mv.setViewName("404");
-                return mv;
-            }
-
-        } else {
+        }else{
             mv.setViewName("404");
             return mv;
         }

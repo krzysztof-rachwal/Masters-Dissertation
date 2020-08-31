@@ -161,35 +161,51 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Is the Event Cancelled?</label>
-                                        <select  id="event-cancelled">
-                                            <option value="1" th:selected="${event.getCancelled()== true}">Yes</option>
-                                            <option value="0" th:selected="${event.getCancelled()== false}">No</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Is the Event featured?</label>
-                                        <select  id="event-featured">
-                                            <option value="1" th:selected="${event.getFeatured()== true}">Yes</option>
-                                            <option value="0" th:selected="${event.getFeatured()== false}">No</option>
-                                        </select>
-                                    </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Is the Event Cancelled?</label>
+                                    <select  id="event-cancelled">
+                                        <option value="1" th:selected="${event.getCancelled()== true}">Yes</option>
+                                        <option value="0" th:selected="${event.getCancelled()== false}">No</option>
+                                    </select>
                                 </div>
                             </div>
+
+                            <div class="row mx-3" id="documents">
+                                <label for="eventDocuments" class="mb-1">Vacancy's Documents</label>
+                                <ul class="list-group w-100 mb-3" id="eventDocuments">
+                                    <div class="col-md-12 px-0" th:each=" document : ${eventDocuments}">
+                                        <div class="col-md-11 px-0">
+                                            <a th:href="@{${document}}" target="_blank">
+                                                <li class="list-group-item"  th:text="${#strings.substring(document,49)}"></li>
+                                            </a>
+                                        </div>
+                                        <div class="col-md-1 mt-3 pr-1">
+                                            <button type="button" class="close" th:attr="onclick=|deleteFile('${document}',$(this))|" >
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </ul>
+
+                                <!-- Upload Documents -->
+                                <form enctype="multipart/form-data" class="upload_form ml-3 mt-4" method="post" id="file-upload-form">
+<!--                                    <label for="file-upload-input">Select file to upload</label>-->
+                                    <input type="file" id="file-upload-input" name="file">
+                                    <!--                                        <button type="button" value="Submit" onclick="uploadFile()"></button>-->
+                                </form>
+                            </div>
+
                         </div>
-                        <div class="container my-4 text-center">
-                            <button type="button" class="button--secondary buttonUpdateModal text-center" onclick="UpdateThisEvent()">Update Event</button>
-                        </div>
-                    </form>
-                </div>
+                    </div>
+                    <div class="container my-4 text-center">
+                        <button type="button" class="button--secondary text-center" onclick="UpdateThisEvent()">Update Event</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
+</div>
 
     <!-- Modal Delete -->
     <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -338,6 +354,36 @@
                         <p th:remove="${event.getCancelled()== false}  ? none : all">No</p>
                     </div>
                 </div>
+            </div>
+            <div class="col-md-12 my-4" th:remove="${eventDocuments.size()== 0} ? all : none">
+                <h3>Event Documents</h3>
+                <ul class="list-group">
+                    <a th:each=" document : ${eventDocuments}"  th:href="@{${document}}" target="_blank">
+                        <li th:text="${#strings.substring(document,49)}"></li>
+                    </a>
+                </ul>
+            </div>
+        </div>
+        <div class="row pt-3">
+            <div class="mb-auto p-2 col-md-6 well2 well3">
+                <label class="font-weight-bold h5">Schools Attending</label>
+                <ul class="list-group">
+                    <a th:each="school : ${allSchoolNamesAndIds}">
+                        <li class="list-group-item" th:remove="${EventSchoolsIDs.contains(school.getSchoolID())} ? none : all" th:text="${school.getSchoolName()}"></li>
+                    </a>
+                </ul>
+            </div>
+            <div class="mb-auto p-2 col-md-6 well2 well3">
+                <label class="font-weight-bold h5">Employers Attending</label>
+                <ul class="list-group">
+                    <a th:each="employer : ${AllEmployerNamesAndIds}" th:href="@{/profile-employer(employerId=${employer.getEmployerID()})}">
+                        <li class="list-group-item"  th:remove="${EventEmployersIDs.contains(employer.getEmployerID())} ? none : all" th:text="${employer.getEmployerName()}"></li>
+                    </a>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
                 <div class="col-md-6">
                     <div class="form-group" th:if="${session.SESSION_Role =='CWS'}">
                         <span class="font-weight-bold h5">Is the Event featured? </span>

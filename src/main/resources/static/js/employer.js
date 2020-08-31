@@ -122,6 +122,8 @@ function updateThisEmployer() {
     let localAuthorities_url = "LocalAuthorities=" + $('select[id=local-authorities]').val();
     let createEmployerAlumniName_url = "CreateEmployerAlumniName=" + $('input[name=create-employer-alumni-name]').val();
     let createEmployerAlumniSchoolID_url = "CreateEmployerAlumniSchoolID=" + $('select[name=create-employer-alumni-school]').val();
+    let viodeLink_url = "VideoLink=" + $('#video-link').val();
+
     if ($('select[name=create-employer-alumni-school]').val() == "" && $('input[name=create-employer-alumni-name]').val() !=""){alert("You forgot to fill the School Name of the Alumni!"); return;}
     if ($('select[name=create-employer-alumni-school]').val() != "" && $('input[name=create-employer-alumni-name]').val()==""){alert("You forgot to fill the Full Name of the Alumni!"); return;}
 
@@ -159,11 +161,22 @@ function updateThisEmployer() {
         + EmployerFB_url + "&" + NumberOfEmployeesID_url  + "&" + EmployerNotes_url + "&" + EmployerSectorIndustry_url  + "&"
         + EmployerCooperationType_url + "&" + EmployerCurriculumAreas_url + "&" + EmployerPreferences_url+ "&" + EmployerLanguage_url +  "&"
         + SchoolPreferences_url + "&"+ localAuthorities_url + "&" + createEmployerAlumniName_url + "&" + createEmployerAlumniSchoolID_url + "&"
-        + updateEmployerAlumniName_url + "&" + updateEmployerAlumniSchoolID_url + "&" + updateEmployerAlumniID_url;
+        + updateEmployerAlumniName_url + "&" + updateEmployerAlumniSchoolID_url + "&" + updateEmployerAlumniID_url + "&" + viodeLink_url;
 
     let token = $("meta[name='_csrf']").attr("content");    // Used to bypass Spring Boot's CSRF protocol     -- Solution taken from 'https://stackoverflow.com/questions/34747437/use-of-spring-csrf-with-ajax-rest-call-and-html-page-with-thymeleaf' on Nov 26th 2019
     let header = $("meta[name='_csrf_header']").attr("content");    // Used to bypass Spring Boot's CSRF protocol
     console.log(fullUri)
+
+    //Validates if there is any file to be submited
+    if(!($('#file-upload-input').val() =="")){
+        uploadFile()
+    }
+    //Validates if there is any file to be submited
+    if(!($('#logo-upload-input').val() =="")){
+        uploadLogo()
+    }
+
+
 
     $.ajax({
         type: "GET", url: fullUri,
@@ -497,6 +510,7 @@ function validateForm(){
     if($(".selectpicker").parent().hasClass("is-invalid") || $(".form-required").hasClass("is-invalid")){
         verifier = false
     }
+
     return verifier;
 }
 
@@ -513,12 +527,6 @@ $( document ).ready(function() {
     $('#filterButton').click(function(){
         filterEmployers();
     });
-
-    // // Function classChange which is called whenever new .employer-filtered or .employer-found appears.
-    // $('.employer-card').on('classChange', function() {
-    //     $(".employer-card").addClass("d-none");
-    //     $('.employer-filtered.employer-found').removeClass('d-none');
-    // });
 
     $("#tooltip").hover(function(){
             $(this).tooltip('show')
@@ -549,7 +557,175 @@ $( document ).ready(function() {
     if( $("span[name=employer-language-checker]").text() =="Yes"){
         $('div[id=div-foreign-language]').removeClass('d-none')
     }
+
 });
+
+// Function to retrieve employerID from URL
+var getUrlParameter = function getUrlParameter(sParam) {
+    var sPageURL = window.location.search.substring(1),
+        sURLVariables = sPageURL.split('&'),
+        sParameterName,
+        i;
+
+    for (i = 0; i < sURLVariables.length; i++) {
+        sParameterName = sURLVariables[i].split('=');
+
+        if (sParameterName[0] === sParam) {
+            return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
+        }
+    }
+};
+
+function uploadFile(){
+
+
+    var myFile = $('#file-upload-input').prop('files');
+    var employerID = getUrlParameter('employerId');
+    var formData = new FormData();
+
+    formData.append("ID", employerID);
+    formData.append("name", "employer");
+    formData.append("file", myFile[0]);
+
+    var token = $("meta[name='_csrf']").attr("content");    // Used to bypass Spring Boot's CSRF protocol     -- Solution taken from 'https://stackoverflow.com/questions/34747437/use-of-spring-csrf-with-ajax-rest-call-and-html-page-with-thymeleaf' on Nov 26th 2019
+    var header = $("meta[name='_csrf_header']").attr("content");    // Used to bypass Spring Boot's CSRF protocol
+
+    // use $.ajax() to upload file
+    $.ajax({
+        url: "/upload",
+        type: "POST",
+        data: formData,
+        enctype: 'multipart/form-data',
+        processData: false,
+        contentType: false,
+        cache: false,
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader(header, token);
+        },
+        success: function (res) {
+
+        },
+        error: function (err) {
+            console.error(err);
+        }
+    });
+}
+
+function uploadLogo(){
+
+    var logo = $('#logo-upload-input').prop('files');
+    var employerID = getUrlParameter('employerId');
+    var formData = new FormData();
+
+    formData.append("ID", employerID);
+    formData.append("name", "employerlogo");
+    formData.append("file", logo[0]);
+
+    var token = $("meta[name='_csrf']").attr("content");    // Used to bypass Spring Boot's CSRF protocol     -- Solution taken from 'https://stackoverflow.com/questions/34747437/use-of-spring-csrf-with-ajax-rest-call-and-html-page-with-thymeleaf' on Nov 26th 2019
+    var header = $("meta[name='_csrf_header']").attr("content");    // Used to bypass Spring Boot's CSRF protocol
+
+    // use $.ajax() to upload file
+    $.ajax({
+        url: "/upload",
+        type: "POST",
+        data: formData,
+        enctype: 'multipart/form-data',
+        processData: false,
+        contentType: false,
+        cache: false,
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader(header, token);
+        },
+        success: function (res) {
+            // console.log(res);
+        },
+        error: function (err) {
+            // console.error(err);
+        }
+    });
+}
+
+function deleteFile(document, fileID) {
+
+    var employerID = getUrlParameter('employerId');
+    var formData = new FormData();
+
+    var filename = document.replace(/^.*[\\\/]/, '')
+
+    formData.append("ID", employerID);
+    formData.append("name", "employer");
+    formData.append("file", filename);
+    formData.append("URL", document);
+
+    var token = $("meta[name='_csrf']").attr("content");    // Used to bypass Spring Boot's CSRF protocol     -- Solution taken from 'https://stackoverflow.com/questions/34747437/use-of-spring-csrf-with-ajax-rest-call-and-html-page-with-thymeleaf' on Nov 26th 2019
+    var header = $("meta[name='_csrf_header']").attr("content");    // Used to bypass Spring Boot's CSRF protocol
+
+    // use $.ajax() to upload file
+    $.ajax({
+        url: "/delete",
+        type: "DELETE",
+        data: formData,
+        enctype: 'multipart/form-data',
+        processData: false,
+        contentType: false,
+        cache: false,
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader(header, token);
+        },
+        success: function (res) {
+            //Remove the file from frontend
+            fileID.parent().parent().remove();
+
+            $('#success_message_text').empty()
+            $('#success_message_text').text('The file was deleted!');
+            $('#success_message').removeClass('d-none').addClass('show');
+            localStorage.clear()
+            $("#success_message").fadeTo(1500, 1);
+            setTimeout(function(){
+                $("#success_message").fadeTo(1500, 0);
+            },5000);
+
+            // console.error(res);
+        },
+        error: function (err) {
+            // console.error(err);
+        }
+    });
+}
+
+    function deleteVideo(document) {
+
+        var employerID = getUrlParameter('employerId');
+        var formData = new FormData();
+
+        formData.append("employerID", employerID);
+        formData.append("link", document);
+
+        var token = $("meta[name='_csrf']").attr("content");    // Used to bypass Spring Boot's CSRF protocol     -- Solution taken from 'https://stackoverflow.com/questions/34747437/use-of-spring-csrf-with-ajax-rest-call-and-html-page-with-thymeleaf' on Nov 26th 2019
+        var header = $("meta[name='_csrf_header']").attr("content");    // Used to bypass Spring Boot's CSRF protocol
+
+        // use $.ajax() to upload file
+        $.ajax({
+            url: "api/delete/video-link",
+            type: "DELETE",
+            data: formData,
+            enctype: 'multipart/form-data',
+            processData: false,
+            contentType: false,
+            cache: false,
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader(header, token);
+            },
+            success: function (res) {
+                // console.log(res);
+                alert("The video was deleted successfully")
+            },
+            error: function (err) {
+                // console.error(err);
+            }
+        });
+
+}
 
 //14. Feedback - Store local storage
 function requestEmployerEmail(){

@@ -226,3 +226,6 @@ ul{
 #sectorPref li {
     max-width: fit-content;
 }
+.upload_form{
+    padding: 0 !important;
+}
