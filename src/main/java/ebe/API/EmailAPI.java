@@ -27,13 +27,13 @@ public class EmailAPI {
         this.javaMailSender = javaMailSender;
     }
 
-    public void sendMail(String name, String fromEmail, String postcode, String subject, String message) {
+    public void sendMail(String name, String fromEmail, String localAuth, String subject, String message) {
 
         var mailMessage = new SimpleMailMessage();
 
         mailMessage.setTo("carrers.wales@gmail.com");
         mailMessage.setSubject(subject);
-        mailMessage.setText("You have a new message from " + name + ". Local Authority: " + postcode + ". \nContent of the message: \n" + message);
+        mailMessage.setText("You have a new message from " + name + ". Local Authority: " + localAuth + ". \nContent of the message: \n" + message);
         mailMessage.setFrom(fromEmail);
 
         javaMailSender.send(mailMessage);
@@ -41,14 +41,14 @@ public class EmailAPI {
 
     }
 
-    public void sendRequestByEvent(String emailFrom, String schoolName, String schoolPostcode, String eventName, String eventDate, String eventTime, String eventNotes, String eventType, String guests){
+    public void sendRequestByEvent(String emailFrom, String schoolName, String localAuth, String eventName, String eventDate, String eventTime, String eventNotes, String eventType, String guests){
         var mailMessage = new SimpleMailMessage();
 
         mailMessage.setTo("carrers.wales@gmail.com");
         mailMessage.setSubject("Request for " + eventName);
         mailMessage.setText("You have a new request for " + eventName +
                 "\nSchool Name: " + schoolName +
-                "\nSchool Local Authority: " + schoolPostcode +
+                "\nSchool Local Authority: " + localAuth +
                 "\nDate: " + eventDate +
                 "\nTime: " + eventTime +
                 "\nEvent type: " + eventType +
@@ -61,14 +61,14 @@ public class EmailAPI {
         System.out.println("sent");
     }
 
-    public void sendRequestByIndustry(String emailFrom, String schoolName, String schoolPostcode, String eventName, String eventDate, String eventTime, String eventNotes, String eventType, String industry){
+    public void sendRequestByIndustry(String emailFrom, String schoolName, String localAuth, String eventName, String eventDate, String eventTime, String eventNotes, String eventType, String industry){
         var mailMessage = new SimpleMailMessage();
 
         mailMessage.setTo("carrers.wales@gmail.com");
         mailMessage.setSubject("Request for " + eventName);
         mailMessage.setText("You have a new request for " + eventName +
                 "\nSchool Name: " + schoolName +
-                "\nSchool Local Authority: " + schoolPostcode +
+                "\nSchool Local Authority: " + localAuth +
                 "\nDate: " + eventDate +
                 "\nTime: " + eventTime +
                 "\nEvent type: " + eventType +
@@ -97,14 +97,14 @@ public class EmailAPI {
         javaMailSender.send(mailMessage);
     }
 
-    public void sendShowInterest(String emailFrom, String schoolName, String schoolPostcode, String eventName, String eventDate, String eventTime, String eventNotes){
+    public void sendShowInterest(String emailFrom, String schoolName, String localAuth, String eventName, String eventDate, String eventTime, String eventNotes){
         var mailMessage = new SimpleMailMessage();
 
         mailMessage.setTo("carrers.wales@gmail.com");
-        mailMessage.setSubject("Show Interest for" + eventName);
+        mailMessage.setSubject("Show Interest for " + eventName);
         mailMessage.setText("You have a new request for " + eventName +
                 "\nSchool Name: " + schoolName +
-                "\nSchool Local Authority: " + schoolPostcode +
+                "\nSchool Local Authority: " + localAuth +
                 "\nDate: " + eventDate +
                 "\nTime: " + eventTime +
                 "\nAdditional notes: " + eventNotes);
@@ -113,6 +113,26 @@ public class EmailAPI {
         javaMailSender.send(mailMessage);
     }
 
+    public void sendRequestEmployer(String fromEmail, String schoolName, String localAuth, String eventName,
+                                    String eventDate, String eventTime, String eventNotes, String eventType, String employerName){
+
+        var mailMessage = new SimpleMailMessage();
+
+
+        mailMessage.setTo("carrers.wales@gmail.com");
+        mailMessage.setSubject("Request event with employer: " + employerName);
+        mailMessage.setText("There is a new request for event " + eventName +
+                " with employer " + employerName + "." +
+                "\n\nSchool Name: " + schoolName +
+                "\nSchool Local Authority: " + localAuth +
+                "\nDate: " + eventDate +
+                "\nTime: " + eventTime +
+                "\nType: " + eventType +
+                "\nAdditional notes: " + eventNotes);
+        mailMessage.setFrom(fromEmail);
+
+        javaMailSender.send(mailMessage);
+    }
 
 
 
