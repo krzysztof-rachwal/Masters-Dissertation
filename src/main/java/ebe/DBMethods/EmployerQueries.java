@@ -483,6 +483,7 @@ public class EmployerQueries extends DBQueries {
             DBUtil.close(statement);
             DBUtil.close(connection);
         }
+        System.out.println("------------------------777777777777777777777777--------"+list);
         return list;
     }
 

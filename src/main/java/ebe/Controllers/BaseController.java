@@ -53,7 +53,7 @@ public class BaseController {
 //    public String test (){
 //        return "redirect:/";
 //    }
-    public void Autentication(HttpServletRequest request,
+    public void Authentication(HttpServletRequest request,
                               HttpSession session,
                               String email,
                               String name){
@@ -84,7 +84,7 @@ public class BaseController {
 
         ModelAndView mv = new ModelAndView();
 
-        Autentication(request,session,email,name);
+        Authentication(request,session,email,name);
 
         if((session.getAttribute("SESSION_Role") == "CWS")) {
             mv.setViewName("homepageCWS");
@@ -130,7 +130,7 @@ public class BaseController {
                                        @AuthenticationPrincipal(expression = "claims['email']") String email,
                                        @AuthenticationPrincipal(expression = "claims['name']") String name) {
 
-        Autentication(request,session,email,name);
+        Authentication(request,session,email,name);
         ModelAndView mv = new ModelAndView();
 
         if((session.getAttribute("SESSION_Role") == "CWS") || (session.getAttribute("SESSION_Role") == "Teacher")) {
@@ -184,7 +184,7 @@ public class BaseController {
                                          HttpSession session,
                                          @AuthenticationPrincipal(expression = "claims['email']") String email,
                                          @AuthenticationPrincipal(expression = "claims['name']") String name) {
-        Autentication(request,session,email,name);
+        Authentication(request,session,email,name);
         ModelAndView mv = new ModelAndView();
 
         if((session.getAttribute("SESSION_Role") == "CWS") || (session.getAttribute("SESSION_Role") == "Teacher")) {
@@ -240,8 +240,6 @@ public class BaseController {
         allEmployer.put("allEmployer", employerInfo);
         allEmployer.put("allEmployerLanguage", employerLanguage);
         allEmployer.put("allEmployerLanguagePreference",employerChosenLanguage);
-        System.out.println("------------------------------------------");
-        System.out.println(employerChosenLanguage);
         allEmployer.put("allEmployerLocalAuthorities", employerLocalAuthorities);
         allEmployer.put("allEmployerChosenLocalAuthorities", employerChosenLocalAuthorities);
         allEmployer.put("allEmployerIndustrySectors", employerIndustrySectorAreas);
@@ -274,7 +272,7 @@ public class BaseController {
                                      @AuthenticationPrincipal(expression = "claims['email']") String email,
                                      @AuthenticationPrincipal(expression = "claims['name']") String name) {
 
-        Autentication(request,session,email,name);
+        Authentication(request,session,email,name);
         ModelAndView mv = new ModelAndView();
 
         if(session.getAttribute("SESSION_Role") == "CWS") {
@@ -332,7 +330,7 @@ public class BaseController {
                                         @AuthenticationPrincipal(expression = "claims['email']") String email,
                                         @AuthenticationPrincipal(expression = "claims['name']") String name) {
 
-        Autentication(request,session,email,name);
+        Authentication(request,session,email,name);
         ModelAndView mv = new ModelAndView();
         if(session.getAttribute("SESSION_Role") == "CWS") {
             mv.setViewName("searchVacanciesPage");
@@ -372,7 +370,7 @@ public class BaseController {
                                 @AuthenticationPrincipal(expression = "claims['email']") String email,
                                 @AuthenticationPrincipal(expression = "claims['name']") String name){
 
-        Autentication(request,session,email,name);
+        Authentication(request,session,email,name);
         ModelAndView mv = new ModelAndView();
         if(session.getAttribute("SESSION_Role") == "CWS") {
             mv.setViewName("profileVacancyPage");
@@ -416,7 +414,7 @@ public class BaseController {
                                     @AuthenticationPrincipal(expression = "claims['email']") String email,
                                     @AuthenticationPrincipal(expression = "claims['name']") String name) {
 
-        Autentication(request,session,email,name);
+        Authentication(request,session,email,name);
         ModelAndView mv = new ModelAndView();
         if(session.getAttribute("SESSION_Role") == "CWS") {
             mv.setViewName("addVacancyPage");
@@ -456,7 +454,7 @@ public class BaseController {
                                      @AuthenticationPrincipal(expression = "claims['email']") String email,
                                      @AuthenticationPrincipal(expression = "claims['name']") String name) {
 
-        Autentication(request,session,email,name);
+        Authentication(request,session,email,name);
         ModelAndView mv = new ModelAndView();
         if(session.getAttribute("SESSION_Role") == "CWS") {
             mv.setViewName("searchEventsPage");
@@ -491,7 +489,7 @@ public class BaseController {
                                      @AuthenticationPrincipal(expression = "claims['email']") String email,
                                      @AuthenticationPrincipal(expression = "claims['name']") String name) {
 
-        Autentication(request,session,email,name);
+        Authentication(request,session,email,name);
         ModelAndView mv = new ModelAndView();
         if(session.getAttribute("SESSION_Role") == "CWS") {
             mv.setViewName("profileEventPage");
@@ -575,7 +573,7 @@ public class BaseController {
                                   @AuthenticationPrincipal(expression = "claims['email']") String email,
                                   @AuthenticationPrincipal(expression = "claims['name']") String name) {
 
-        Autentication(request,session,email,name);
+        Authentication(request,session,email,name);
         ModelAndView mv = new ModelAndView();
         if(session.getAttribute("SESSION_Role") == "CWS") {
             mv.setViewName("addEventsPage");
@@ -610,7 +608,7 @@ public class BaseController {
                                 @AuthenticationPrincipal(expression = "claims['email']") String email,
                                 @AuthenticationPrincipal(expression = "claims['name']") String name) {
 
-        Autentication(request,session,email,name);
+        Authentication(request,session,email,name);
         ModelAndView mv = new ModelAndView();
         if(session.getAttribute("SESSION_Role") == "Teacher") {
             mv.setViewName("requestPage");
@@ -647,7 +645,7 @@ public class BaseController {
                                @AuthenticationPrincipal(expression = "claims['email']") String email,
                                @AuthenticationPrincipal(expression = "claims['name']") String name) {
 
-        Autentication(request,session,email,name);
+        Authentication(request,session,email,name);
         ModelAndView mv = new ModelAndView();
 
         if(session.getAttribute("SESSION_Role") == "CWS") {
@@ -706,7 +704,7 @@ public class BaseController {
                                   @AuthenticationPrincipal(expression = "claims['email']") String email,
                                   @AuthenticationPrincipal(expression = "claims['name']") String name) {
 
-        Autentication(request,session,email,name);
+        Authentication(request,session,email,name);
         ModelAndView mv = new ModelAndView();
         if(session.getAttribute("SESSION_Role") == "Teacher") {
             ObjectMapper objectMapper = new ObjectMapper();
