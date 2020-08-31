@@ -28,7 +28,7 @@ public class VacancyQueries extends DBQueries {
     ///////////////////////////////////// GET ALL METHODS ///////////////////////////////////////////////
     // 1. Get All Vacancy
     public List<Vacancy> getAllVacancy() throws DataAccessException {
-        String getQuery = "SELECT * FROM Vacancy";
+        String getQuery = "SELECT *, LogoLink FROM Vacancy INNER JOIN employer on vacancy.EmployerID = employer.EmployerID;";
         List<Vacancy> list = new ArrayList<Vacancy>();
         Vacancy vacancy = null;
         ResultSet rs = null;
@@ -43,6 +43,7 @@ public class VacancyQueries extends DBQueries {
                         rs.getDate("StartOfVacancy"),rs.getDate("DeadlineForApplication"),
                         rs.getInt("OccupationalCodeID"), rs.getInt("ApplicationMethodID"),
                         rs.getString("VacancyPostcode"));
+                vacancy.setLogoLink(rs.getString("LogoLink"));
 
                 list.add(vacancy);
             }
