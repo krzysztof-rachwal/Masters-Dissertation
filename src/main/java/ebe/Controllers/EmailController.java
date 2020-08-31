@@ -1,10 +1,7 @@
 package ebe.Controllers;
 
 import ebe.API.EmailAPI;
-import ebe.DBClasses.Email;
-import ebe.DBClasses.Employer;
-import ebe.DBClasses.Request;
-import ebe.DBClasses.School;
+import ebe.DBClasses.*;
 import ebe.DBMethods.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -78,14 +75,14 @@ public class EmailController {
     }
 
     @PostMapping("/event/showInterest")
-    public ModelAndView eventShowInterestSubmit(@ModelAttribute Request request, HttpSession session) throws MessagingException {
+    public ModelAndView eventShowInterestSubmit(@ModelAttribute Request request, HttpSession session, Event event) throws MessagingException {
         int localAuthorityID = statisticsQueries.getLocalAuthID(parseInt(session.getAttribute("SESSION_UserID").toString()));
         String localAuthorityName = statisticsQueries.getLocalAuthNameById(localAuthorityID);
 
         emailAPI.sendShowInterest(session.getAttribute("SESSION_Email").toString(), session.getAttribute("SESSION_SchoolName").toString(), localAuthorityName, request.getEventName(), request.getEventDate(), request.getEventTime(), request.getEventNotes());
         statisticsQueries.updateSchoolRequestNumber(parseInt(session.getAttribute("SESSION_UserID").toString()));
 
-        return new ModelAndView("redirect:/");
+        return new ModelAndView("redirect:/profile-event?eventId="+event.getEventID());
     }
 
     @PostMapping("/requestEmployer")
@@ -96,9 +93,8 @@ public class EmailController {
         emailAPI.sendRequestEmployer(session.getAttribute("SESSION_Email").toString(), session.getAttribute("SESSION_SchoolName").toString(),
                 localAuthorityName, request.getEventName(), request.getEventDate(), request.getEventTime(),
                 request.getEventNotes(), request.getEventType(), request.getGuests());
-        System.out.println(request.getEventDate());
-        return new ModelAndView("redirect:/");
-//        return new ModelAndView("redirect:/profile-employer?employerId="+String.valueOf(employer.getEmployerID())); TODO: redirect to the same emp page instead of home. Needs notification.
+
+        return new ModelAndView("redirect:/profile-employer?employerId="+employer.getEmployerID());
     }
 }
 

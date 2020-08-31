@@ -432,4 +432,17 @@ $(document).ready(function(){
         };
     });
 
+    //1.1.  Feedback - Success
+    let eventProfileShowInterest = localStorage.getItem("EventProfileShowInterest");
+
+    if (eventProfileShowInterest === "true"){
+        $('#success_message_text').text(' Interest was registered!');
+        $('#success_message').removeClass('d-none').addClass('show');
+        localStorage.clear()
+        $("#success_message").fadeTo(1500, 1);
+        setTimeout(function(){
+            $("#success_message").fadeTo(1500, 0);
+        },5000);
+    }
+
 });

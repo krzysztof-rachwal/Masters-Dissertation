@@ -528,6 +528,19 @@ $( document ).ready(function() {
         }
     );
 
+    let requestEmployerEmail = localStorage.getItem("requestEmployerEmail");
+
+    if (requestEmployerEmail === "true"){
+        $('#success_message_text').empty();
+        $('#success_message_text').text(' Event requested.');
+        $('#success_message').removeClass('d-none').addClass('show');
+        localStorage.clear()
+        $("#success_message").fadeTo(1500, 1);
+        setTimeout(function(){
+            $("#success_message").fadeTo(1500, 0);
+        },5000);
+    };
+
     // Overwriting contains to be case insensitive, found at :
     // https://css-tricks.com/snippets/jquery/make-jquery-contains-case-insensitive/
     $.expr[":"].contains = $.expr.createPseudo(function(arg) {
