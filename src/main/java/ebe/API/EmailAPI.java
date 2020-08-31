@@ -147,21 +147,23 @@ public class EmailAPI {
     @Autowired
     private SpringTemplateEngine templateEngine;
 
-    public void sendRequest(String eventName, String eventDate, String eventTime, String eventNotes, String eventType, String guests) throws MessagingException {
+    public void htmlSubmit(String schoolName, String fromEmail, String localAuth, String subject, String messageBody) throws MessagingException {
         MimeMessage message = emailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message,
                 MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED,
                 StandardCharsets.UTF_8.name());
 
-
         Context context = new Context();
+        context.setVariable("schoolName", schoolName);
+        context.setVariable("localAuth", localAuth);
+        context.setVariable("messageBody", messageBody);
 
-        String html = templateEngine.process("emailTemplate", context);
+        String html = templateEngine.process("email/emailTemplate", context);
 
         helper.setTo("carrers.wales@gmail.com");
         helper.setText(html, true);
-        helper.setSubject("Request for " + eventName);
-        helper.setFrom("krzysiek.rachwal@gmail.com"); //TODO: get session email address.
+        helper.setSubject(subject);
+        helper.setFrom(fromEmail);
 
         emailSender.send(message);
     }
