@@ -595,7 +595,7 @@
         <div class="col"></div>
     </div>
 
-    <div class="col-md-12 my-4">
+    <div class="col-md-12 my-4" th:remove="${employerDocuments.size()== 0} ? all : none">
         <h3>Employer Documents</h3>
         <ul class="list-group">
             <a th:each=" document : ${employerDocuments}"  th:href="@{${document}}" target="_blank">
@@ -610,7 +610,7 @@
 <!--        <div class="col"></div>-->
 <!--    </div>-->
 
-    <div class="col-md-12 my-4">
+    <div class="col-md-12 my-4" th:remove="${employerVideos.size()== 0} ? all : none">
         <h3>Employer Videos</h3>
         <ul class="list-group">
             <a th:each=" video : ${employerVideos}"  th:href="@{${video}}" target="_blank">

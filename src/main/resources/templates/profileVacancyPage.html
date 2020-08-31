@@ -141,7 +141,7 @@
                                     <div class="col-md-12 px-0" th:each=" document : ${vacancyDocuments}">
                                         <div class="col-md-11 px-0">
                                             <a th:href="@{${document}}" target="_blank">
-                                                <li class="list-group-item"  th:text="${#strings.substring(document,52)}"></li>
+                                                <li class="list-group-item"  th:text="${#strings.substring(document,51)}"></li>
                                             </a>
                                         </div>
                                         <div class="col-md-1 mt-3 pr-1">
@@ -291,11 +291,11 @@
                 <p th:text="${vacancy.getVacancyPostcode()}"></p>
             </div>
         </div>
-        <div class="col-md-12 my-4">
+        <div class="col-md-12 my-4" th:remove="${vacancyDocuments.size()== 0} ? all : none">
             <h3>Vacancy Documents</h3>
             <ul class="list-group">
                 <a th:each=" document : ${vacancyDocuments}"  th:href="@{${document}}" target="_blank">
-                    <li th:text="${#strings.substring(document,52)}"></li>
+                    <li th:text="${#strings.substring(document,51)}"></li>
                 </a>
             </ul>
         </div>

@@ -167,8 +167,16 @@ function updateThisEmployer() {
     let header = $("meta[name='_csrf_header']").attr("content");    // Used to bypass Spring Boot's CSRF protocol
     console.log(fullUri)
 
-    uploadFile()
-    uploadLogo()
+    //Validates if there is any file to be submited
+    if(!($('#file-upload-input').val() =="")){
+        uploadFile()
+    }
+    //Validates if there is any file to be submited
+    if(!($('#logo-upload-input').val() =="")){
+        uploadLogo()
+    }
+
+
 
     $.ajax({
         type: "GET", url: fullUri,
@@ -566,6 +574,7 @@ var getUrlParameter = function getUrlParameter(sParam) {
 };
 
 function uploadFile(){
+
 
     var myFile = $('#file-upload-input').prop('files');
     var employerID = getUrlParameter('employerId');

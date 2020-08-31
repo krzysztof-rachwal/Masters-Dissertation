@@ -171,16 +171,13 @@
                                 </div>
                             </div>
 
-                            <div class="row" id="documents">
-                                <div class="container mt-5 mb-2 p-0">
-                                    <h4>Event's Documents</h4>
-                                </div>
-
-                                <ul class="list-group w-100 mb-3">
+                            <div class="row mx-3" id="documents">
+                                <label for="eventDocuments" class="mb-1">Vacancy's Documents</label>
+                                <ul class="list-group w-100 mb-3" id="eventDocuments">
                                     <div class="col-md-12 px-0" th:each=" document : ${eventDocuments}">
                                         <div class="col-md-11 px-0">
                                             <a th:href="@{${document}}" target="_blank">
-                                                <li class="list-group-item"  th:text="${#strings.substring(document,52)}"></li>
+                                                <li class="list-group-item"  th:text="${#strings.substring(document,49)}"></li>
                                             </a>
                                         </div>
                                         <div class="col-md-1 mt-3 pr-1">
@@ -202,7 +199,7 @@
                         </div>
                     </div>
                     <div class="container my-4 text-center">
-                        <button type="button" class="button--secondary buttonUpdateModal text-center" onclick="UpdateThisEvent()">Update Event</button>
+                        <button type="button" class="button--secondary text-center" onclick="UpdateThisEvent()">Update Event</button>
                     </div>
                 </form>
             </div>
@@ -342,11 +339,11 @@
                     <p th:remove="${event.getCancelled()== false}  ? none : all">No</p>
                 </div>
             </div>
-            <div class="col-md-12 my-4">
+            <div class="col-md-12 my-4" th:remove="${eventDocuments.size()== 0} ? all : none">
                 <h3>Event Documents</h3>
                 <ul class="list-group">
                     <a th:each=" document : ${eventDocuments}"  th:href="@{${document}}" target="_blank">
-                        <li th:text="${#strings.substring(document,52)}"></li>
+                        <li th:text="${#strings.substring(document,49)}"></li>
                     </a>
                 </ul>
             </div>

@@ -105,7 +105,11 @@ function UpdateThisVacancy() {
     var header = $("meta[name='_csrf_header']").attr("content");    // Used to bypass Spring Boot's CSRF protocol
     console.log(fullUri);
 
-    uploadFile();
+    //Validates if there is any file to be submited
+    if(!($('#file-upload-input').val() =="")){
+        uploadFile()
+    }
+
 
     $.ajax({
         type: "GET", url: fullUri,
