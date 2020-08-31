@@ -27,7 +27,7 @@ public class EmailController {
     private StatisticsQueries statisticsQueries;
 
     @Autowired
-    public EmailController(StatisticsQueries sq){
+    public EmailController(StatisticsQueries sq) {
         statisticsQueries = sq;
     }
 
@@ -45,7 +45,7 @@ public class EmailController {
     public ModelAndView requestEventSubmit(@ModelAttribute Request request, HttpSession session) throws MessagingException {
         int localAuthorityID = statisticsQueries.getLocalAuthID(parseInt(session.getAttribute("SESSION_UserID").toString()));
         String localAuthorityName = statisticsQueries.getLocalAuthNameById(localAuthorityID);
-        emailAPI.sendRequestByEvent(session.getAttribute("SESSION_Email").toString(), session.getAttribute("SESSION_SchoolName").toString(),localAuthorityName, request.getEventName(), request.getEventDate(), request.getEventTime(), request.getEventNotes(), request.getEventType(), request.getGuests());
+        emailAPI.sendRequestByEvent(session.getAttribute("SESSION_Email").toString(), session.getAttribute("SESSION_SchoolName").toString(), localAuthorityName, request.getEventName(), request.getEventDate(), request.getEventTime(), request.getEventNotes(), request.getEventType(), request.getGuests());
 
         statisticsQueries.updateSchoolRequestNumber(parseInt(session.getAttribute("SESSION_UserID").toString()));
 
@@ -57,7 +57,7 @@ public class EmailController {
         int localAuthorityID = statisticsQueries.getLocalAuthID(parseInt(session.getAttribute("SESSION_UserID").toString()));
         String localAuthorityName = statisticsQueries.getLocalAuthNameById(localAuthorityID);
         System.out.println("--------------------------------");
-        System.out.println("User ID: " +parseInt(session.getAttribute("SESSION_UserID").toString()));
+        System.out.println("User ID: " + parseInt(session.getAttribute("SESSION_UserID").toString()));
 
         emailAPI.sendRequestByIndustry(session.getAttribute("SESSION_Email").toString(), session.getAttribute("SESSION_SchoolName").toString(), localAuthorityName, request.getEventName(), request.getEventDate(), request.getEventTime(), request.getEventNotes(), request.getEventType(), request.getIndustry());
 
@@ -88,6 +88,17 @@ public class EmailController {
         return new ModelAndView("redirect:/");
     }
 
+    @PostMapping("/requestEmployer")
+    public ModelAndView requestEmployerSubmit(@ModelAttribute Request request, HttpSession session, Employer employer) throws MessagingException {
+        int localAuthorityID = statisticsQueries.getLocalAuthID(parseInt(session.getAttribute("SESSION_UserID").toString()));
+        String localAuthorityName = statisticsQueries.getLocalAuthNameById(localAuthorityID);
 
+        emailAPI.sendRequestEmployer(session.getAttribute("SESSION_Email").toString(), session.getAttribute("SESSION_SchoolName").toString(),
+                localAuthorityName, request.getEventName(), request.getEventDate(), request.getEventTime(),
+                request.getEventNotes(), request.getEventType(), request.getGuests());
+        System.out.println(request.getEventDate());
+        return new ModelAndView("redirect:/");
+//        return new ModelAndView("redirect:/profile-employer?employerId="+String.valueOf(employer.getEmployerID())); TODO: redirect to the same emp page instead of home. Needs notification.
+    }
 }
 

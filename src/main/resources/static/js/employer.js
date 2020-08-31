@@ -551,5 +551,12 @@ $( document ).ready(function() {
     }
 });
 
+//14. Feedback - Store local storage
+function requestEmployerEmail(){
+    localStorage.setItem("requestEmployerEmail","true");
+}
+
+
+
 
 
