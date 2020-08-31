@@ -466,3 +466,40 @@ function uploadFile(){
         }
     });
 }
+
+function deleteFile(document) {
+
+    var eventID = getUrlParameter('eventId');
+    var formData = new FormData();
+
+    var filename = document.replace(/^.*[\\\/]/, '')
+
+    formData.append("ID", eventID);
+    formData.append("name", "event");
+    formData.append("file", filename);
+    formData.append("URL", document);
+
+    var token = $("meta[name='_csrf']").attr("content");    // Used to bypass Spring Boot's CSRF protocol     -- Solution taken from 'https://stackoverflow.com/questions/34747437/use-of-spring-csrf-with-ajax-rest-call-and-html-page-with-thymeleaf' on Nov 26th 2019
+    var header = $("meta[name='_csrf_header']").attr("content");    // Used to bypass Spring Boot's CSRF protocol
+
+    // use $.ajax() to upload file
+    $.ajax({
+        url: "/delete",
+        type: "DELETE",
+        data: formData,
+        enctype: 'multipart/form-data',
+        processData: false,
+        contentType: false,
+        cache: false,
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader(header, token);
+        },
+        success: function (res) {
+            console.error(res);
+        },
+        error: function (err) {
+            console.error(err);
+        }
+    });
+}
+

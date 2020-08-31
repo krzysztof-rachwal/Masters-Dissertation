@@ -358,8 +358,15 @@ public class EventQueries extends DBQueries {
 
     public void insertDocument(int eventID, String link) throws DataAccessException {
 
-        String insertSql = "INSERT INTO EventDocumentLink(EventID, Link) VALUES (?,?)";
-        jdbcTemplate().update(insertSql, eventID, link);
+        String Sql = "INSERT INTO EventDocumentLink(EventID, Link) VALUES (?,?)";
+        jdbcTemplate().update(Sql, eventID, link);
+
+    }
+
+    public void deleteDocument(int eventID, String link) throws DataAccessException {
+
+        String Sql = "DELETE FROM EventDocumentLink WHERE EventID = ? AND Link = ?";
+        jdbcTemplate().update(Sql, eventID, link);
 
     }
 

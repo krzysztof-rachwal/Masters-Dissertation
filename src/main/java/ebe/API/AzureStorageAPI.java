@@ -70,7 +70,18 @@ public class AzureStorageAPI {
                                  @RequestParam("ID") String ID){
 
         azureBlobAdapter.deleteBlob(containerName, blobName);
-        EmployerQrys.deleteDocument(Integer.valueOf(ID), url);
+
+        if (containerName.equals("employer")){
+            EmployerQrys.deleteDocument(Integer.valueOf(ID), url);
+        }
+
+        if (containerName.equals("event")){
+            EventQrys.deleteDocument(Integer.valueOf(ID), url);
+        }
+
+
+
+
 
         return ResponseEntity.ok().build();
     }

@@ -184,7 +184,7 @@
                                             </a>
                                         </div>
                                         <div class="col-md-1 mt-3 pr-1">
-                                            <button type="button" class="close" onclick="">
+                                            <button type="button" class="close" th:attr="onclick=|deleteFile('${document}')|" >
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
