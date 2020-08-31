@@ -70,3 +70,5 @@ function getEventsBySchool() {
         }
     });
 }
+
+$("#menuReport").addClass("is-active")

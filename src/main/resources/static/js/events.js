@@ -401,12 +401,16 @@ function validateForm(){
     return verifier;
 }
 
-//16. Feedback - Store local storage
+
+
+//14. Feedback - Store local storage
 function EventProfileShowInterest() {
     localStorage.setItem("EventProfileShowInterest","true");
 }
 
-//14. Document ready
+$("#menuEvents").addClass("is-active")
+
+//15. Document ready
 $(document).ready(function(){
     $('#filterButton').click(function(){
         filterEvents();

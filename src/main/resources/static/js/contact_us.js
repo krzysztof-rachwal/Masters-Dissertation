@@ -20,3 +20,5 @@ $(document).ready(function () {
 function contactUsFeedback() {
     localStorage.setItem("contactFeedback","true");
 }
+
+$("#menuGetInTouch").addClass("is-active")

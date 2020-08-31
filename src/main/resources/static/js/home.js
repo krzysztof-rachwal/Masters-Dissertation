@@ -13,5 +13,6 @@ $(document).ready(function () {
             $("#success_message").fadeTo(1500, 0);
         },5000);
     }
-
 });
+
+$("#menuHome").addClass("is-active")

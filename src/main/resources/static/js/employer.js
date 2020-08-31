@@ -497,9 +497,11 @@ function validateForm(){
     if($(".selectpicker").parent().hasClass("is-invalid") || $(".form-required").hasClass("is-invalid")){
         verifier = false
     }
-
     return verifier;
 }
+
+$("#menuEmployers").addClass("is-active")
+
 
 
 //13. Document on Ready

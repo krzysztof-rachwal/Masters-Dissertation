@@ -28,4 +28,5 @@ function requestFeedback() {
     localStorage.setItem("requestfeedback","true");
 }
 
+$("#menuRequest").addClass("is-active")
 
