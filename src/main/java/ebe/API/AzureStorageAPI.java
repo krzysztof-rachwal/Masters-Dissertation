@@ -74,14 +74,12 @@ public class AzureStorageAPI {
         if (containerName.equals("employer")){
             EmployerQrys.deleteDocument(Integer.valueOf(ID), url);
         }
-
         if (containerName.equals("event")){
             EventQrys.deleteDocument(Integer.valueOf(ID), url);
         }
-
-
-
-
+        if (containerName.equals("vacancy")){
+            VacancyQrys.deleteDocument(Integer.valueOf(ID), url);
+        }
 
         return ResponseEntity.ok().build();
     }

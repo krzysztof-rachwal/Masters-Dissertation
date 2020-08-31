@@ -453,6 +453,13 @@ public class VacancyQueries extends DBQueries {
 
     }
 
+    public void deleteDocument(int vacancyID, String link) throws DataAccessException {
+
+        String insertSql = "DELETE FROM VacancyDocumentLinks WHERE VacancyID = ? AND Link = ?";
+        jdbcTemplate().update(insertSql, vacancyID, link);
+
+    }
+
     public List <String> getVacancyDocuments(int vacancyID) throws DataAccessException {
 
         String sql = "SELECT Link FROM VacancyDocumentLinks WHERE VacancyID = " + vacancyID + ";";
