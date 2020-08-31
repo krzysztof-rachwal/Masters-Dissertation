@@ -89,7 +89,7 @@ public class EmailController {
     }
 
     @PostMapping("/requestEmployer")
-    public ModelAndView requestEmployerSubmit(@ModelAttribute Request request, HttpSession session) throws MessagingException {
+    public ModelAndView requestEmployerSubmit(@ModelAttribute Request request, HttpSession session, Employer employer) throws MessagingException {
         int localAuthorityID = statisticsQueries.getLocalAuthID(parseInt(session.getAttribute("SESSION_UserID").toString()));
         String localAuthorityName = statisticsQueries.getLocalAuthNameById(localAuthorityID);
 
@@ -98,6 +98,7 @@ public class EmailController {
                 request.getEventNotes(), request.getEventType(), request.getGuests());
         System.out.println(request.getEventDate());
         return new ModelAndView("redirect:/");
+//        return new ModelAndView("redirect:/profile-employer?employerId="+String.valueOf(employer.getEmployerID())); TODO: redirect to the same emp page instead of home. Needs notification.
     }
 }
 

@@ -383,6 +383,7 @@
                                             <label for="event-guests">Guest</label>
                                             <input class="w-100 search-box" th:value="${employer.getEmployerName()}"
                                                    id="event-guests" readonly name="guests">
+                                            <input type="hidden" id="EmployerId" name="EmployerID" th:value="${employer.getEmployerID()}">
                                         </div>
                                     </div>
                                 </div>
