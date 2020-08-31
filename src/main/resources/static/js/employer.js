@@ -632,5 +632,72 @@ function uploadLogo(){
     });
 }
 
+function deleteFile(document) {
 
+    var employerID = getUrlParameter('employerId');
+    var formData = new FormData();
+
+    var filename = document.replace(/^.*[\\\/]/, '')
+
+    formData.append("ID", employerID);
+    formData.append("name", "employer");
+    formData.append("file", filename);
+    formData.append("URL", document);
+
+    var token = $("meta[name='_csrf']").attr("content");    // Used to bypass Spring Boot's CSRF protocol     -- Solution taken from 'https://stackoverflow.com/questions/34747437/use-of-spring-csrf-with-ajax-rest-call-and-html-page-with-thymeleaf' on Nov 26th 2019
+    var header = $("meta[name='_csrf_header']").attr("content");    // Used to bypass Spring Boot's CSRF protocol
+
+    // use $.ajax() to upload file
+    $.ajax({
+        url: "/delete",
+        type: "DELETE",
+        data: formData,
+        enctype: 'multipart/form-data',
+        processData: false,
+        contentType: false,
+        cache: false,
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader(header, token);
+        },
+        success: function (res) {
+            console.error(res);
+        },
+        error: function (err) {
+            console.error(err);
+        }
+    });
+}
+
+    function deleteVideo(document) {
+
+        var employerID = getUrlParameter('employerId');
+        var formData = new FormData();
+
+        formData.append("employerID", employerID);
+        formData.append("link", document);
+
+        var token = $("meta[name='_csrf']").attr("content");    // Used to bypass Spring Boot's CSRF protocol     -- Solution taken from 'https://stackoverflow.com/questions/34747437/use-of-spring-csrf-with-ajax-rest-call-and-html-page-with-thymeleaf' on Nov 26th 2019
+        var header = $("meta[name='_csrf_header']").attr("content");    // Used to bypass Spring Boot's CSRF protocol
+
+        // use $.ajax() to upload file
+        $.ajax({
+            url: "api/delete/video-link",
+            type: "DELETE",
+            data: formData,
+            enctype: 'multipart/form-data',
+            processData: false,
+            contentType: false,
+            cache: false,
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader(header, token);
+            },
+            success: function (res) {
+                console.log(res);
+            },
+            error: function (err) {
+                console.error(err);
+            }
+        });
+
+}
 

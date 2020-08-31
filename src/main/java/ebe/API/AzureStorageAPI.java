@@ -64,8 +64,14 @@ public class AzureStorageAPI {
     }
 
     @DeleteMapping("/delete")
-    public ResponseEntity delete(@RequestParam String containerName, @RequestParam String blobName){
+    public ResponseEntity delete(@RequestParam("name") String containerName,
+                                 @RequestParam("file") String blobName,
+                                 @RequestParam("URL") String url,
+                                 @RequestParam("ID") String ID){
+
         azureBlobAdapter.deleteBlob(containerName, blobName);
+        EmployerQrys.deleteDocument(Integer.valueOf(ID), url);
+
         return ResponseEntity.ok().build();
     }
 

@@ -921,6 +921,14 @@ public class EmployerQueries extends DBQueries {
 
     }
 
+    public void deleteDocument(int employerID, String link) throws DataAccessException {
+
+        String insertSql = "DELETE FROM employerdocumentlinks WHERE EmployerID = ? AND Link = ?";
+        jdbcTemplate().update(insertSql, employerID, link);
+
+    }
+
+
     public void insertLogoLink(int employerID, String link) throws DataAccessException {
 
         String insertSql = "UPDATE Employer SET LogoLink = ? WHERE EmployerID = ?;";
@@ -931,6 +939,13 @@ public class EmployerQueries extends DBQueries {
     public void insertVideoLink(int employerID, String link) throws DataAccessException {
 
         String insertSql = "INSERT INTO EmployerVideoLinks(EmployerID, Link) VALUES (?,?)";
+        jdbcTemplate().update(insertSql, employerID, link);
+
+    }
+
+    public void deleteVideoLink(int employerID, String link) throws DataAccessException {
+
+        String insertSql = "DELETE FROM employervideolinks WHERE EmployerID = ? AND Link = ?";
         jdbcTemplate().update(insertSql, employerID, link);
 
     }
