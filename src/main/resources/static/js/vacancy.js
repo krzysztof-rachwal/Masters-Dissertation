@@ -401,5 +401,4 @@ $( document ).ready(function() {
             return $(elem).text().toUpperCase().indexOf(arg.toUpperCase()) >= 0;
         };
     });
-
 });

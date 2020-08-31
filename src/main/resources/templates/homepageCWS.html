@@ -26,72 +26,74 @@
 <body>
 
 <header th:replace="fragments/headerTemplate :: header"></header>
-<div class="gel-content-container pr-5">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="container-headline my-5">
-                <span class="title-h2">Quicklinks</span>
-            </div>
-            <div class="d-block col-md-12">
-                <a href="/add-employer" class="button nbutton--icon d-block">Add new Employer</a>
-                <a href="/add-vacancy" class="button button--icon d-block">Add new Vacancy</a>
-                <a href="/add-events" class="button button--icon d-block">Add new Event</a>
+<main class="js-main-content-area">
+    <div class="gel-content-container pr-5">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="container-headline my-5">
+                    <span class="title-h2">Quicklinks</span>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <a href="/add-employer" class="button button--icon d-inline mr-5 p-5 text-center w-100">Add new Employer</a>
+                    <a href="/add-vacancy" class="button button--icon d-inline mr-5 p-5 text-center w-100">Add new Vacancy</a>
+                    <a href="/add-events" class="button button--icon d-inline p-5 text-center w-100">Add new Event</a>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="row mt-3">
-        <div class="col"></div>
-        <hr class="col-md-9 float-center my-2 thin">
-        <div class="col"></div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="container-headline mb-5">
-                <span class="title-h2">Statistics</span>
-            </div>
-            <div class="container-fluid eventBackground">
-                <div class="row">
-                    <div class="card-group mt-4 mb-4">
-                        <div class="card">
-                            <div class="card-body p-2">
-                                <h4 class="card-title gel-text-align-center text-success font-weight-bold"
-                                    th:text="${numberOfEvents}"></h4>
-                                <span class="h5 gel-text-align-center mt-0">Events hosted</span>
+        <div class="row mt-3">
+            <div class="col"></div>
+            <hr class="col-md-9 float-center my-2 thin">
+            <div class="col"></div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="container-headline mb-5">
+                    <span class="title-h2">Statistics</span>
+                </div>
+                <div class="container-fluid eventBackground">
+                    <div class="row">
+                        <div class="card-group mt-4 mb-4">
+                            <div class="card">
+                                <div class="card-body p-2">
+                                    <h4 class="card-title gel-text-align-center text-success font-weight-bold"
+                                        th:text="${numberOfEvents}"></h4>
+                                    <span class="h5 gel-text-align-center mt-0 stats-numbers">Events hosted</span>
+                                </div>
                             </div>
-                        </div>
-                        <div class="card">
-                            <div class="card-body p-2">
-                                <h4 class="card-title gel-text-align-center text-info font-weight-bold"
-                                    th:text="${numberOfEmployers}"></h4>
-                                <span class="h5 gel-text-align-center mt-0">Employers</span>
+                            <div class="card">
+                                <div class="card-body p-2">
+                                    <h4 class="card-title gel-text-align-center text-info font-weight-bold"
+                                        th:text="${numberOfEmployers}"></h4>
+                                    <span class="h5 gel-text-align-center mt-0 stats-numbers">Employers</span>
+                                </div>
                             </div>
-                        </div>
-                        <div class="card">
-                            <div class="card-body p-2">
-                                <h4 class="card-title gel-text-align-center text-success font-weight-bold"
-                                    th:text="${numberOfVacancies}"></h4>
-                                <span class="h5 gel-text-align-center mt-0">Vacancies</span>
+                            <div class="card">
+                                <div class="card-body p-2">
+                                    <h4 class="card-title gel-text-align-center text-success font-weight-bold"
+                                        th:text="${numberOfVacancies}"></h4>
+                                    <span class="h5 gel-text-align-center mt-0 stats-numbers">Vacancies</span>
+                                </div>
                             </div>
-                        </div>
-                        <div class="card">
-                            <div class="card-body p-2">
-                                <h4 class="card-title gel-text-align-center text-info font-weight-bold"
-                                    th:text="${requestsBySchools}"></h4>
-                                <span class="h5 gel-text-align-center mt-0">Requests by schools</span>
+                            <div class="card">
+                                <div class="card-body p-2">
+                                    <h4 class="card-title gel-text-align-center text-info font-weight-bold"
+                                        th:text="${requestsBySchools}"></h4>
+                                    <span class="h5 gel-text-align-center mt-0 stats-numbers">Requests by schools</span>
+                                </div>
                             </div>
-                        </div>
-                        <div class="card">
-                            <div class="card-body p-2">
-                                <h4 class="card-title gel-text-align-center text-success font-weight-bold"
-                                    th:text="${schoolAtEvents}"></h4>
-                                <span class="h5 gel-text-align-center mt-0">Schools at events</span>
+                            <div class="card">
+                                <div class="card-body p-2">
+                                    <h4 class="card-title gel-text-align-center text-success font-weight-bold"
+                                        th:text="${schoolAtEvents}"></h4>
+                                    <span class="h5 gel-text-align-center mt-0 stats-numbers">Schools at events</span>
+                                </div>
                             </div>
-                        </div>
-                        <div class="card">
-                            <div class="card-body p-2">
-                                <h4 class="card-title gel-text-align-center text-info font-weight-bold"
-                                    th:text="${numberOfPupils}"></h4>
-                                <span class="h5 gel-text-align-center mt-0">Total pupils</span>
+                            <div class="card">
+                                <div class="card-body p-2">
+                                    <h4 class="card-title gel-text-align-center text-info font-weight-bold"
+                                        th:text="${numberOfPupils}"></h4>
+                                    <span class="h5 gel-text-align-center mt-0 stats-numbers">Total pupils</span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -99,7 +101,7 @@
             </div>
         </div>
     </div>
-</div>
+</main>
 
 <footer th:replace="fragments/footerTemplate :: footer"></footer>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
@@ -118,34 +120,7 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/i18n/defaults-*.min.js"></script>
-<script>
-    const counters = document.querySelectorAll('.counter');
-    const speed = 150; // The lower the slower
-
-    counters.forEach(counter => {
-        const updateCount = () => {
-            const target = +counter.getAttribute('data-target');
-            const count = +counter.innerText;
-
-            // Lower inc to slow and higher to slow
-            const inc = target / speed;
-
-            // console.log(inc);
-            // console.log(count);
-
-            // Check if target is reached
-            if (count < target) {
-                // Add inc to count and output in counter
-                counter.innerText = count + inc;
-                // Call function every ms
-                setTimeout(updateCount, 1);
-            } else {
-                counter.innerText = target;
-            }
-        };
-
-        updateCount();
-    });
-</script>
+<script th:src="@{../js/counter.js}" src="../js/counter.js"></script>
+<script th:src="@{../js/burger-button.js}" src="../js/burger-button.js"></script>
 </body>
 </html>

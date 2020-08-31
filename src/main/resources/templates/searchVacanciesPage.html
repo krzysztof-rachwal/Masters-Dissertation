@@ -25,7 +25,9 @@
 <header th:replace="fragments/headerTemplate :: header">
 </header>
 
-<div class="gel-content-container">
+<main class="js-main-content-area">
+
+    <div class="gel-content-container">
 
     <div id="success_message" class="alert alert-success alert-dismissible fade d-none" role="alert">
         <strong>Success!</strong><span id="success_message_text"></span>
@@ -43,14 +45,14 @@
 
     <!--    FILTERS -->
 
-    <div class="flex-container">
-        <div class="col-lg-3">
-            <div class="mb-3">
-                <label for="vacancy-type" class="  mb-1">Type of Vacancy</label>
-                <select class="selectpicker" data-width="100%" multiple data-live-search="true"  id="vacancy-type">
-                    <option th:each="vacancyType : ${allVacanciesTypes}" th:value="${vacancyType.getTypeOfVacancyID()}" th:text="${vacancyType.getTypeOfVacancyName()}"></option>
-                </select>
-            </div>
+        <div class="flex-container">
+            <div class="col-lg-3 col-md-3">
+                <div class="mb-3">
+                    <label for="vacancy-type" class="  mb-1">Type of Vacancy</label>
+                    <select class="selectpicker" data-width="100%" multiple data-live-search="true"  id="vacancy-type">
+                        <option th:each="vacancyType : ${allVacanciesTypes}" th:value="${vacancyType.getTypeOfVacancyID()}" th:text="${vacancyType.getTypeOfVacancyName()}"></option>
+                    </select>
+                </div>
 
             <div class="mb-3">
                 <label for="occup-code" class="  mb-1">Occupational Area</label>
@@ -70,7 +72,7 @@
                 <div class="row">
                     <!-- Search -->
                     <div class="input-group col-7">
-                        <input type="text" class="search-box" onkeyup="searchVacancy()" id="vacancy-search"  placeholder="Search">
+                        <input type="text" class="search-box" onkeyup="searchVacancy()" id="vacancy-search"  placeholder=" Search">
                         <div class="input-group-append">
                             <button class="input-group-text form-control" onclick="searchVacancy()">
                                 <i class="fa fa-search"></i>
@@ -79,28 +81,28 @@
                                 <i class="fa fa-info-circle"></i>
                             </button>
 
-                        </div>
-                    </div>
-
-
-                    <!-- Sorted by-->
-                    <div class="col-5">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text input-border">Sort By:</span>
                             </div>
-                            <select class="form-control input-border selectpicker" name="vacancy-sort-by">
-                                <option selected="selected" value="Featured">Featured</option>
-                                <option value="Name" data-val="DESC">Name (ASC)</option>
-                                <option value="Name" data-val="ASC">Name (DESC)</option>
-                                <option value="Date" data-val="DESC">Date (ASC)</option>
-                                <option value="Date" data-val="ASC">Date (DESC)</option>
-                            </select>
+                        </div>
+
+
+                        <!-- Sorted by-->
+                        <div class="col-5 medium-dev">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text input-border">Sort By:</span>
+                                </div>
+                                <select class="form-control input-border selectpicker" name="vacancy-sort-by">
+                                    <option selected="selected" value="Featured">Featured</option>
+                                    <option value="Name" data-val="DESC">Name (ASC)</option>
+                                    <option value="Name" data-val="ASC">Name (DESC)</option>
+                                    <option value="Date" data-val="DESC">Date (ASC)</option>
+                                    <option value="Date" data-val="ASC">Date (DESC)</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <br>
+                    <br>
 
                 <!-- Cards -->
 
@@ -124,21 +126,18 @@
                                             <!-- Hidden Data -->
                                             <h5  class="searchable d-none" th:text="${#strings.capitalize(vacancy.getVacancyPostcode())}"></h5>
 
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </a>
-                        </article>
+                                </a>
+                            </article>
+                        </div>
                     </div>
-
                 </div>
             </div>
-
-
         </div>
     </div>
-
-</div>
+</main>
 
 <footer th:replace="fragments/footerTemplate :: footer"></footer>
 
@@ -156,6 +155,8 @@
 <script>
     $('.selectpicker').selectpicker();
 </script>
+<script th:src="@{../js/burger-button.js}" src="../js/burger-button.js"></script>
+
 </body>
 </html>
 

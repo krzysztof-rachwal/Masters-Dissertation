@@ -31,7 +31,7 @@
 <body>
 <header th:replace="fragments/headerTemplate :: header">
 </header>
-
+<main class="js-main-content-area">
 
 <!--MAIN CONTENT-->
 <div class="gel-content-container">
@@ -54,7 +54,7 @@
             </li>
         </ul>
     </nav>
-    <div class="container-headline mt-5">
+    <div class="container-headline mt-2 mb-5">
         <span class="title-h2">Request</span>
         <p class="mt-3">Select a type of request to submit.</p>
     </div>
@@ -103,7 +103,8 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="eventType">Event Type</label>
-                                <select class="selectpicker w-100" data-live-search="true" id="eventType" name="eventType">
+                                <select class="selectpicker w-100" data-live-search="true" id="eventType" name="eventType"
+                                        title="Nothing selected">
                                     <option th:each="event : ${allEventTypes}"
                                             th:value="${event.getTypeOfEventName()}"
                                             th:text="${event.getTypeOfEventName()}"></option>
@@ -161,7 +162,7 @@
                             <div class="form-group">
                                 <label for="event-type2" class="d-block">Event Type</label>
                                 <select class="selectpicker w-100" data-live-search="true"
-                                        id="event-type2" name="eventType">
+                                        id="event-type2" name="eventType" title="Nothing selected">
                                     <option th:each="event : ${allEventTypes}"
                                             th:value="${event.getTypeOfEventName()}"
                                             th:text="${event.getTypeOfEventName()}"></option>
@@ -218,7 +219,7 @@
                             <div class="form-group">
                                 <label for="event-type3" class="d-block">Event Type</label>
                                 <select class="selectpicker w-100" data-live-search="true"
-                                        id="event-type3" name="eventType">
+                                        id="event-type3" name="eventType" title="Nothing selected">
                                     <option th:each="event : ${allEventTypes}"
                                             th:value="${event.getTypeOfEventName()}"
                                             th:text="${event.getTypeOfEventName()}"></option>
@@ -252,6 +253,7 @@
         </div>
     </div>
 </div>
+</main>
 
 <footer th:replace="fragments/footerTemplate :: footer"></footer>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
@@ -273,8 +275,7 @@
 
 <script th:src="@{../js/request.js}" src="../js/request.js"></script>
 
-<script>
-    $('selectpicker').selectpicker();
-</script>
+<script>$('selectpicker').selectpicker();</script>
+<script th:src="@{../js/burger-button.js}" src="../js/burger-button.js"></script>
 </body>
 </html>
