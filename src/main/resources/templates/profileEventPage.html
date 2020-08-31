@@ -176,15 +176,15 @@
                                     <h4>Event's Documents</h4>
                                 </div>
 
-                                <ul class="list-group w-100">
+                                <ul class="list-group w-100 mb-3">
                                     <div class="col-md-12 px-0" th:each=" document : ${eventDocuments}">
-                                        <div class="col-md-10 my-0">
+                                        <div class="col-md-11 px-0">
                                             <a th:href="@{${document}}" target="_blank">
                                                 <li class="list-group-item"  th:text="${#strings.substring(document,52)}"></li>
                                             </a>
                                         </div>
                                         <div class="col-md-1 mt-3 pr-1">
-                                            <button type="button" class="close" th:attr="onclick=|deleteFile('${document}')|" >
+                                            <button type="button" class="close" th:attr="onclick=|deleteFile('${document}',$(this))|" >
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
@@ -193,7 +193,7 @@
 
                                 <!-- Upload Documents -->
                                 <form enctype="multipart/form-data" class="upload_form ml-3 mt-4" method="post" id="file-upload-form">
-                                    <label for="file-upload-input">Select file to upload</label>
+<!--                                    <label for="file-upload-input">Select file to upload</label>-->
                                     <input type="file" id="file-upload-input" name="file">
                                     <!--                                        <button type="button" value="Submit" onclick="uploadFile()"></button>-->
                                 </form>

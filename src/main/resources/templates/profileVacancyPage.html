@@ -131,36 +131,38 @@
                                 </select>
                             </div>
                         </div>
+                    </div>
 
-                        <div class="row" id="documents">
-                            <div class="container mt-5 mb-2 p-0">
-                                <h4>Vacancy's Documents</h4>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="vacancyDocuments" class="mb-1">Vacancy's Documents</label>
+                                <ul class="list-group w-100 mb-3" id="vacancyDocuments">
+                                    <div class="col-md-12 px-0" th:each=" document : ${vacancyDocuments}">
+                                        <div class="col-md-11 px-0">
+                                            <a th:href="@{${document}}" target="_blank">
+                                                <li class="list-group-item"  th:text="${#strings.substring(document,52)}"></li>
+                                            </a>
+                                        </div>
+                                        <div class="col-md-1 mt-3 pr-1">
+                                            <button type="button" class="close" th:attr="onclick=|deleteFile('${document}',$(this))|" >
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </ul>
+
+                                <!-- Upload Documents -->
+                                <form enctype="multipart/form-data" class="upload_form ml-3 mt-4" method="post" id="file-upload-form">
+<!--                                    <label for="file-upload-input">Select file to upload</label>-->
+                                    <input type="file" id="file-upload-input" name="file">
+                                </form>
                             </div>
-
-                            <ul class="list-group w-100">
-                                <div class="col-md-12 px-0" th:each=" document : ${vacancyDocuments}">
-                                    <div class="col-md-10 my-0">
-                                        <a th:href="@{${document}}" target="_blank">
-                                            <li class="list-group-item"  th:text="${#strings.substring(document,52)}"></li>
-                                        </a>
-                                    </div>
-                                    <div class="col-md-1 mt-3 pr-1">
-                                        <button type="button" class="close" th:attr="onclick=|deleteFile('${document}')|" >
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </ul>
-
-                            <!-- Upload Documents -->
-                            <form enctype="multipart/form-data" class="upload_form ml-3 mt-4" method="post" id="file-upload-form">
-                                <label for="file-upload-input">Select file to upload</label>
-                                <input type="file" id="file-upload-input" name="file">
-                                <!--                                        <button type="button" value="Submit" onclick="uploadFile()"></button>-->
-                            </form>
                         </div>
 
                     </div>
+
+
                     <div class="container my-4 text-center">
                         <button type="button" class="button--secondary text-center" onclick="UpdateThisVacancy()">Update Vacancy</button>
                     </div>

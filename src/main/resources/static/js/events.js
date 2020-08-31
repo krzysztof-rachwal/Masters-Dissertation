@@ -459,15 +459,16 @@ function uploadFile(){
             xhr.setRequestHeader(header, token);
         },
         success: function (res) {
-            alert("Your file was added successfully")
+
         },
         error: function (err) {
             console.error(err);
+
         }
     });
 }
 
-function deleteFile(document) {
+function deleteFile(document, fileID) {
 
     var eventID = getUrlParameter('eventId');
     var formData = new FormData();
@@ -495,7 +496,17 @@ function deleteFile(document) {
             xhr.setRequestHeader(header, token);
         },
         success: function (res) {
-            alert("Your file was deleted successfully")
+            //Remove the file from frontend
+            fileID.parent().parent().remove();
+
+            $('#success_message_text').empty()
+            $('#success_message_text').text('The file was deleted!');
+            $('#success_message').removeClass('d-none').addClass('show');
+            localStorage.clear()
+            $("#success_message").fadeTo(1500, 1);
+            setTimeout(function(){
+                $("#success_message").fadeTo(1500, 0);
+            },5000);
         },
         error: function (err) {
             console.error(err);
