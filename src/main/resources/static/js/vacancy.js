@@ -368,6 +368,9 @@ function validateForm(){
     return verifier;
 }
 
+
+$("#menuVacancies").addClass("is-active")
+
 //13. On document Ready
 $( document ).ready(function() {
     $("select[name=vacancy-sort-by]").change(function(){

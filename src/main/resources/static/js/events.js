@@ -402,7 +402,15 @@ function validateForm(){
 }
 
 
-//14. Document ready
+
+//14. Feedback - Store local storage
+function EventProfileShowInterest() {
+    localStorage.setItem("EventProfileShowInterest","true");
+}
+
+$("#menuEvents").addClass("is-active")
+
+//15. Document ready
 $(document).ready(function(){
     $('#filterButton').click(function(){
         filterEvents();

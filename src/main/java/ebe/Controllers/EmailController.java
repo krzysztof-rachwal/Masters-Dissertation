@@ -77,6 +77,17 @@ public class EmailController {
         return new ModelAndView("redirect:/request");
     }
 
+    @PostMapping("/event/showInterest")
+    public ModelAndView eventShowInterestSubmit(@ModelAttribute Request request, HttpSession session) throws MessagingException {
+        int localAuthorityID = statisticsQueries.getLocalAuthID(parseInt(session.getAttribute("SESSION_UserID").toString()));
+        String localAuthorityName = statisticsQueries.getLocalAuthNameById(localAuthorityID);
+
+        emailAPI.sendShowInterest(session.getAttribute("SESSION_Email").toString(), session.getAttribute("SESSION_SchoolName").toString(), localAuthorityName, request.getEventName(), request.getEventDate(), request.getEventTime(), request.getEventNotes());
+        statisticsQueries.updateSchoolRequestNumber(parseInt(session.getAttribute("SESSION_UserID").toString()));
+
+        return new ModelAndView("redirect:/");
+    }
+
 
 }
 
