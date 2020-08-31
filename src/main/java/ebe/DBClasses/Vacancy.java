@@ -23,6 +23,7 @@ public class Vacancy {
     private int ApplicationMethodID;
     private String ApplicationMethodName;
     private String VacancyPostcode;
+    private String logoLink;
 
     public Vacancy() {
     }
@@ -190,5 +191,13 @@ public class Vacancy {
 
     public void setEmployerName(String employerName) {
         EmployerName = employerName;
+    }
+
+    public String getLogoLink() {
+        return logoLink;
+    }
+
+    public void setLogoLink(String logoLink) {
+        this.logoLink = logoLink;
     }
 }
