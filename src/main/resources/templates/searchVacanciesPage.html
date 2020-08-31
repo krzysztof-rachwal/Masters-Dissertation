@@ -112,10 +112,9 @@
                             <a th:href="@{/profile-vacancy(vacancyId=${vacancy.getVacancyID()})}" class="card__inner" gel-processed="processed" >
                                 <div class="card__content">
                                     <div class="content__image">
-<!--                                        <div>-->
-<!--&lt;!&ndash;                                            <img alt="Card image" src="https://source.unsplash.com/90x90/?business">&ndash;&gt;-->
-<!--&lt;!&ndash;                                        </div>&ndash;&gt;-->
-<!--                                        </div>-->
+                                        <div>
+                                            <img alt="Card image" th:src="@{${vacancy.getLogoLink()}}">
+                                        </div>
                                     </div>
                                     <div class="content__body ">
                                         <div class="body__title searchable" name="vacancy-card-title" th:text="${vacancy.getVacancyName()}"></div>
