@@ -103,7 +103,9 @@ function UpdateThisVacancy() {
 
     var token = $("meta[name='_csrf']").attr("content");    // Used to bypass Spring Boot's CSRF protocol     -- SOlution taken from 'https://stackoverflow.com/questions/34747437/use-of-spring-csrf-with-ajax-rest-call-and-html-page-with-thymeleaf' on Nov 26th 2019
     var header = $("meta[name='_csrf_header']").attr("content");    // Used to bypass Spring Boot's CSRF protocol
-    console.log(fullUri)
+    console.log(fullUri);
+
+    uploadFile();
 
     $.ajax({
         type: "GET", url: fullUri,

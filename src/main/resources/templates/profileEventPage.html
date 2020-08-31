@@ -172,24 +172,31 @@
                             </div>
 
                             <div class="row" id="documents">
-                                <div class="container my-3 p-0">
-                                    <h4>Add Event document</h4>
+                                <div class="container mt-5 mb-2 p-0">
+                                    <h4>Event's Documents</h4>
                                 </div>
-                                <div class="col-md-12 my-4">
-                                    <form enctype="multipart/form-data" method="post" id="file-upload-form">
-                                        <label for="file-upload-input">Select file to upload</label>
-                                        <input type="file" id="file-upload-input" name="file">
-                                        <button type="button" value="Submit" onclick="uploadFile()"></button>
-                                    </form>
-                                </div>
-                                <div class="col-md-12 my-4">
-                                    <h3>Event Documents</h3>
-                                    <ul class="list-group">
-                                        <a th:each=" document : ${eventDocuments}"  th:href="@{${document}}" target="_blank">
-                                            <li class="list-group-item"  th:text="${document}"></li>
-                                        </a>
-                                    </ul>
-                                </div>
+
+                                <ul class="list-group w-100">
+                                    <div class="col-md-12 px-0" th:each=" document : ${eventDocuments}">
+                                        <div class="col-md-10 my-0">
+                                            <a th:href="@{${document}}" target="_blank">
+                                                <li class="list-group-item"  th:text="${#strings.substring(document,52)}"></li>
+                                            </a>
+                                        </div>
+                                        <div class="col-md-1 mt-3 pr-1">
+                                            <button type="button" class="close" onclick="">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </ul>
+
+                                <!-- Upload Documents -->
+                                <form enctype="multipart/form-data" class="upload_form ml-3 mt-4" method="post" id="file-upload-form">
+                                    <label for="file-upload-input">Select file to upload</label>
+                                    <input type="file" id="file-upload-input" name="file">
+                                    <!--                                        <button type="button" value="Submit" onclick="uploadFile()"></button>-->
+                                </form>
                             </div>
 
                         </div>
@@ -339,7 +346,7 @@
                 <h3>Event Documents</h3>
                 <ul class="list-group">
                     <a th:each=" document : ${eventDocuments}"  th:href="@{${document}}" target="_blank">
-                        <li class="list-group-item"  th:text="${document}"></li>
+                        <li th:text="${#strings.substring(document,52)}"></li>
                     </a>
                 </ul>
             </div>
