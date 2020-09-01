@@ -505,7 +505,7 @@
 
     <div class="container-fluid eventBackground">
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-4" th:if="${session.SESSION_Role =='CWS'}">
                 <img alt="Card image" th:src="${employer.getLogoLink()}" >
             </div>
             <div class="col-md-8">
@@ -528,7 +528,6 @@
             </div>
 
             <div class="row my-5">
-
                 <div class="col-md-4 well ">
                     <div class="my-2">
                         <h6 class=" font-weight-bold">Sectors:</h6>
@@ -557,7 +556,6 @@
                             th:text="${employerCurriculumAreas.getEmployAreaOfCurriculumName()}"></li>
                     </ul>
                 </div>
-
             </div>
 
             <div class="row mb-4">
@@ -568,7 +566,7 @@
                           th:text="${employerNumberEmployees.getNumberOfEmployeesName()}"></span>
                 </div>
 
-                <div class="my-2 col-md-4">
+                <div class="my-2 col-md-4" th:if="${session.SESSION_Role =='CWS'}">
                     <span class="text-h5 font-weight-bold">Works with primary schools:</span>
                     <span class="text-h5"
                           th:remove="${allEmployerChosenPreferences.contains(1)}  ? none : all">Yes</span>
@@ -576,7 +574,7 @@
                           th:remove="${allEmployerChosenPreferences.contains(1)}  ? all : none">No</span>
                 </div>
 
-                <div class="my-2 col-md-4">
+                <div class="my-2 col-md-4" th:if="${session.SESSION_Role =='CWS'}">
                     <span class="text-h5 font-weight-bold">Works in Welsh:</span>
                     <span class="text-h5"
                           th:remove="${allEmployerChosenPreferences.contains(2)}  ? none : all">Yes</span>
@@ -584,7 +582,7 @@
                           th:remove="${allEmployerChosenPreferences.contains(2)}  ? all : none">No</span>
                 </div>
 
-                <div class="my-2 col-md-4">
+                <div class="my-2 col-md-4" th:if="${session.SESSION_Role =='CWS'}">
                     <span class="text-h5 font-weight-bold">Deliver in Welsh:</span>
                     <span class="text-h5"
                           th:remove="${allEmployerChosenPreferences.contains(3)}  ? none : all">Yes</span>
@@ -600,7 +598,7 @@
                           th:remove="${allEmployerChosenPreferences.contains(4)}  ? all : none">No</span>
                 </div>
 
-                <div class="my-2 col-md-4">
+                <div class="my-2 col-md-4" th:if="${session.SESSION_Role =='CWS'}">
                     <span class="text-h5 font-weight-bold">Works in foreign languages:</span>
                     <span class="text-h5" name="employer-language-checker"
                           th:remove="${allEmployerChosenPreferences.contains(5)}  ? none : all">Yes</span>
@@ -608,7 +606,7 @@
                           th:remove="${allEmployerChosenPreferences.contains(5)}  ? all : none">No</span>
                 </div>
 
-                <div class="my-2 col-md-12" th:remove="${allEmployerChosenPreferences.contains(5)}  ? none : all">
+                <div class="my-2 col-md-12" th:remove="${allEmployerChosenPreferences.contains(5)}  ? none : all" th:if="${session.SESSION_Role =='CWS'}">
                     <span class="text-h5 font-weight-bold">Foreign languages:</span>
                     <span th:each="employerLanguage,i : ${allEmployerLanguage}">
                     <span th:remove="${allEmployerLanguagePreference.contains(employerLanguage.getEmployerLanguageID())} ? none : all"
@@ -625,7 +623,7 @@
 
         <div class="row">
             <div class="col"></div>
-            <hr class="col-md-6 float-center my-2">
+            <hr class="col-md-8 float-center my-2 ">
             <div class="col"></div>
         </div>
 
@@ -643,21 +641,21 @@
 
         <div class="row">
             <div class="col"></div>
-            <hr class="col-md-6 float-center my-2">
+            <hr class="col-md-8 float-center my-2">
             <div class="col"></div>
         </div>
 
         <div class="col-md-12 my-4">
             <h3>Employer Info</h3>
             <div class="row">
-                <div class="col-md-4 mt-2">
+                <div class="col-md-4 mt-2" >
                     <h4 class="font-weight-bold">Address</h4>
-                    <h6 th:text="${employer.getEmployerAddressNumber()} +' '+ ${employer.getEmployerAddressStreet()}"></h6>
+                    <h6 th:text="${employer.getEmployerAddressNumber()} +' '+ ${employer.getEmployerAddressStreet()}" th:if="${session.SESSION_Role =='CWS'}"></h6>
                     <h6 th:text="${employer.getEmployerPostcode()}"></h6>
-                    <h6 th:text="${employer.getEmployerAddressCity()}"></h6>
+                    <h6 th:text="${employer.getEmployerAddressCity()}" th:if="${session.SESSION_Role =='CWS'}"></h6>
                 </div>
 
-                <div class="col-md-4">
+                <div class="col-md-4" th:if="${session.SESSION_Role =='CWS'}">
                     <h4 class="font-weight-bold">Contact</h4>
                     <div>
                         <span th:text=" 'Name: ' + ${employer.getContactPersonNameSurname()}"></span>
@@ -698,11 +696,11 @@
 
         <div class="row">
             <div class="col"></div>
-            <hr class="col-md-6 float-center my-2">
+            <hr class="col-md-8 float-center my-2">
             <div class="col"></div>
         </div>
 
-        <div class="col-md-12 my-4">
+        <div class="col-md-12 my-4" >
             <h3>School Preferences</h3>
             <ul>
                 <li th:each="school : ${allSchoolNamesAndIds}"
@@ -713,7 +711,7 @@
 
         <div class="row">
             <div class="col"></div>
-            <hr class="col-md-6 float-center my-2">
+            <hr class="col-md-8 float-center my-2 ">
             <div class="col"></div>
         </div>
 
@@ -725,12 +723,6 @@
             </a>
         </ul>
     </div>
-
-<!--    <div class="row">-->
-<!--        <div class="col"></div>-->
-<!--        <hr class="col-md-6 float-center my-2">-->
-<!--        <div class="col"></div>-->
-<!--    </div>-->
 
     <div class="col-md-12 my-4" th:remove="${employerVideos.size()== 0} ? all : none">
         <h3>Employer Videos</h3>
