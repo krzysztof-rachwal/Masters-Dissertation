@@ -59,7 +59,7 @@ function createNewEmployer() {
         success: function (data) {
             if (data === true) {
                 localStorage.setItem("empAdded","true");
-                location.assign("/employers")
+                location.assign("/ebe/employers")
             } else {
                 alert("There was an error, please try again.")
                 alert(data.responseText)
@@ -225,7 +225,7 @@ function deleteEmployer(employerId) {
         success: function (data) {
             if (data === true) {
                 localStorage.setItem("employerDeleted", "true")
-                location.assign("/employers")
+                location.assign("/ebe/employers")
             } else {
                 alert("There was an error, please try again.")
                 alert(data.responseText)

@@ -56,7 +56,7 @@ function createNewEvent() {
         success: function (data) {
             if (data === true) {
                 localStorage.setItem("eventAdded","true");
-                location.assign("/events")
+                location.assign("/ebe/events")
             } else {
                 alert("There was an error, please try again.")
                 alert(data.responseText)
@@ -178,7 +178,7 @@ function deleteEvent(eventId) {
         success: function (data) {
             if (data === true) {
                 localStorage.setItem("eventDeleted", "true")
-                location.assign("/events")
+                location.assign("/ebe/events")
             } else {
                 alert("There was an error, please try again.")
                 alert(data.responseText)

@@ -218,7 +218,7 @@
                 <a href="/" gel-processed="processed" title="Link to Home page">Home page</a>
             </li>
             <li>
-                <a href="/vacancies" gel-processed="processed" title="Link to Events page">Vacancies page</a>
+                <a href="/ebe/vacancies" gel-processed="processed" title="Link to Events page">Vacancies page</a>
             </li>
             <li>
                 <a href="#" gel-processed="processed" title="Link to Current page title as a link to the current page" th:text="${vacancy.getVacancyName()}"></a>
@@ -307,6 +307,15 @@
                 <p th:text="${vacancy.getVacancyPostcode()}"></p>
             </div>
         </div>
+            <div class="row">
+                <div class="col-lg-3 col-md-6">
+                    <p><strong>Status Of Vacancy</strong></p>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <p th:each="vacancyStatus : ${allVacanciesStatus}" th:remove="${vacancy.getStatusOfVacancyID()} == ${vacancyStatus.getStatusOfVacancyID()} ? none : all" th:text="${vacancyStatus.getStatusOfVacancyName()}"></p>
+                </div>
+            </div>
+
         <div class="col-md-12 my-4" th:remove="${vacancyDocuments.size()== 0} ? all : none">
             <h3>Vacancy Documents</h3>
             <ul class="list-group">

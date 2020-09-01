@@ -35,7 +35,7 @@ public class EmailController {
         String localAuthorityName = statisticsQueries.getLocalAuthNameById(localAuthorityID);
         emailAPI.sendMail(session.getAttribute("SESSION_SchoolName").toString(), session.getAttribute("SESSION_Email").toString(), localAuthorityName, email.getSubject(), email.getMessage());
 
-        return new ModelAndView("redirect:/contact-us");
+        return new ModelAndView("redirect:/ebe/contact-us");
     }
 
     @PostMapping("/ebe/requestEvent")
@@ -46,7 +46,7 @@ public class EmailController {
 
         statisticsQueries.updateSchoolRequestNumber(parseInt(session.getAttribute("SESSION_UserID").toString()));
 
-        return new ModelAndView("redirect:/request");
+        return new ModelAndView("redirect:/ebe/request");
     }
 
     @PostMapping("/ebe/requestByIndustry")
@@ -60,7 +60,7 @@ public class EmailController {
 
         statisticsQueries.updateSchoolRequestNumber(parseInt(session.getAttribute("SESSION_UserID").toString()));
 
-        return new ModelAndView("redirect:/request");
+        return new ModelAndView("redirect:/ebe/request");
     }
 
     @PostMapping("/ebe/requestByLanguage")
@@ -71,7 +71,7 @@ public class EmailController {
         emailAPI.sendRequestByLanguage(session.getAttribute("SESSION_Email").toString(), session.getAttribute("SESSION_SchoolName").toString(), localAuthorityName, request.getEventName(), request.getEventDate(), request.getEventTime(), request.getEventNotes(), request.getEventType(), request.getLanguage());
         statisticsQueries.updateSchoolRequestNumber(parseInt(session.getAttribute("SESSION_UserID").toString()));
 
-        return new ModelAndView("redirect:/request");
+        return new ModelAndView("redirect:/ebe/request");
     }
 
     @PostMapping("/ebe/event/showInterest")
@@ -82,7 +82,7 @@ public class EmailController {
         emailAPI.sendShowInterest(session.getAttribute("SESSION_Email").toString(), session.getAttribute("SESSION_SchoolName").toString(), localAuthorityName, request.getEventName(), request.getEventDate(), request.getEventTime(), request.getEventNotes());
         statisticsQueries.updateSchoolRequestNumber(parseInt(session.getAttribute("SESSION_UserID").toString()));
 
-        return new ModelAndView("redirect:/profile-event?eventId="+event.getEventID());
+        return new ModelAndView("redirect:/ebe/profile-event?eventId="+event.getEventID());
     }
 
     @PostMapping("/ebe/requestEmployer")
@@ -94,7 +94,7 @@ public class EmailController {
                 localAuthorityName, request.getEventName(), request.getEventDate(), request.getEventTime(),
                 request.getEventNotes(), request.getEventType(), request.getGuests());
 
-        return new ModelAndView("redirect:/profile-employer?employerId="+employer.getEmployerID());
+        return new ModelAndView("redirect:/ebe/profile-employer?employerId="+employer.getEmployerID());
     }
 }
 

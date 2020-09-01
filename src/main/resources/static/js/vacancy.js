@@ -45,7 +45,7 @@ function createVacancy() {
         success: function (data) {
             if (data === true) {
                 localStorage.setItem("vacAdded","true");
-                location.assign("/vacancies")
+                location.assign("/ebe/vacancies")
             } else {
                 alert("There was an error, please try again.");
                 alert(data.responseText);
@@ -158,7 +158,7 @@ function deleteVacancy(vacancyId) {
         success: function (data) {
             if (data === true) {
                 localStorage.setItem("vacancyDeleted", "true")
-                location.assign("/vacancies")
+                location.assign("/ebe/vacancies")
             } else {
                 alert("There was an error, please try again.")
                 alert(data.responseText)

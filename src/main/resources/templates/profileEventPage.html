@@ -262,7 +262,7 @@
                 <a href="/" gel-processed="processed" title="Link to Home page">Home page</a>
             </li>
             <li>
-                <a href="/events" gel-processed="processed" title="Link to Events page">Events page</a>
+                <a href="/ebe/events" gel-processed="processed" title="Link to Events page">Events page</a>
             </li>
             <li>
                 <a href="#" gel-processed="processed" title="Link to Current page title as a link to the current page" th:text="${event.getEventName()}"></a>
@@ -364,36 +364,7 @@
                         <p th:remove="${event.getCancelled()== false}  ? none : all">No</p>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-12 my-4" th:remove="${eventDocuments.size()== 0} ? all : none">
-                <h3>Event Documents</h3>
-                <ul class="list-group">
-                    <a th:each=" document : ${eventDocuments}"  th:href="@{${document}}" target="_blank">
-                        <li th:text="${#strings.substring(document,49)}"></li>
-                    </a>
-                </ul>
-            </div>
-        </div>
-        <div class="row pt-3">
-            <div class="mb-auto p-2 col-md-6 well2 well3">
-                <label class="font-weight-bold h5">Schools Attending</label>
-                <ul class="list-group">
-                    <a th:each="school : ${allSchoolNamesAndIds}">
-                        <li class="list-group-item" th:remove="${EventSchoolsIDs.contains(school.getSchoolID())} ? none : all" th:text="${school.getSchoolName()}"></li>
-                    </a>
-                </ul>
-            </div>
-            <div class="mb-auto p-2 col-md-6 well2 well3">
-                <label class="font-weight-bold h5">Employers Attending</label>
-                <ul class="list-group">
-                    <a th:each="employer : ${AllEmployerNamesAndIds}" th:href="@{/ebe/profile-employer(employerId=${employer.getEmployerID()})}">
-                        <li class="list-group-item"  th:remove="${EventEmployersIDs.contains(employer.getEmployerID())} ? none : all" th:text="${employer.getEmployerName()}"></li>
-                    </a>
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
+
                 <div class="col-md-6">
                     <div class="form-group" th:if="${session.SESSION_Role =='CWS'}">
                         <span class="font-weight-bold h5">Is the Event featured? </span>
@@ -402,6 +373,16 @@
                     </div>
                 </div>
             </div>
+
+            <div class="col-md-12 my-4" th:remove="${eventDocuments.size()== 0} ? all : none">
+                <h3>Event Documents</h3>
+                <ul class="list-group">
+                    <a th:each=" document : ${eventDocuments}"  th:href="@{${document}}" target="_blank">
+                        <li th:text="${#strings.substring(document,49)}"></li>
+                    </a>
+                </ul>
+            </div>
+
             <div class="row pt-3" th:if="${session.SESSION_Role =='CWS'}">
                 <div class="mb-auto p-2 col-md-6 well2 well3">
                     <label class="font-weight-bold h5">Schools Attending</label>
@@ -420,6 +401,9 @@
                     </ul>
                 </div>
             </div>
+        </div>
+
+
 
         <!-- Modal Show Interest -->
         <div class="modal fade bd-example-modal-lg" id="interestEvent" tabindex="-1" role="dialog"
