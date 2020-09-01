@@ -9,6 +9,9 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.oauth2.client.web.AuthorizationRequestRepository;
+import org.springframework.security.oauth2.client.web.HttpSessionOAuth2AuthorizationRequestRepository;
+import org.springframework.security.oauth2.core.endpoint.OAuth2AuthorizationRequest;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 import javax.sql.DataSource;
@@ -26,13 +29,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
                 .anyRequest().authenticated()
                 .and()
                 .oauth2Login()
-//                .defaultSuccessUrl("/");
+                .loginPage("/ebe/login")
         	    .authorizationEndpoint()
-                .baseUri("ebe/oauth2/authorization");
+                .baseUri("/ebe/oauth2/authorization")
+//                .defaultSuccessUrl("/")
+                .authorizationRequestRepository(authorizationRequestRepository());
 
 
+    }
 
+    @Bean
+    public AuthorizationRequestRepository<OAuth2AuthorizationRequest>
+    authorizationRequestRepository() {
 
+        return new HttpSessionOAuth2AuthorizationRequestRepository();
     }
 //
 //    @Bean
