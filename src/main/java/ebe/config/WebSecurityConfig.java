@@ -30,7 +30,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
                 .and()
                 .oauth2Login()
                 .redirectionEndpoint()
-                .baseUri("/ebe/login/oauth2/code/")
+                .baseUri("/ebe/login/oauth2/code")
                 .and()
 //                .loginPage("/ebe/login")
         	    .authorizationEndpoint()
