@@ -230,7 +230,7 @@
     <div class="gel-content-container">
         <!-- Success Message        -->
         <div id="success_message" class="alert alert-success alert-dismissible fade d-none" role="alert">
-            <strong>Success!</strong> The event has been updated!
+            <strong>Success!</strong><span id="success_message_text"></span>
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
@@ -431,19 +431,20 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="event_name_interest">Event Name</label>
-                                            <input type="text" id="event_name_interest" name="eventName"  th:value="${event.getEventName()}" class="form-control w-80">
+                                            <input type="text" id="event_name_interest" name="eventName" readonly th:value="${event.getEventName()}" class="form-control w-80" >
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class=" text-left" for="event_date_show_interest">Event Date</label>
-                                            <input type="date" id="event_date_show_interest" name="eventDate"  th:value="${event.getEventDate()}" class="form-control  w-80">
+                                            <input type="date" id="event_date_show_interest" name="eventDate" readonly th:value="${event.getEventDate()}" class="form-control  w-80" >
+                                            <input type="hidden" id="eventID" name="eventID" th:value="${event.getEventID()}">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group mb-0">
                                             <label for="event_time_show_interest">Event Time</label>
-                                            <input type="time" id="event_time_show_interest"name="eventTime"  th:value="${#dates.format(event.getEventTime(),'HH:mm')}"  class="form-control w-80">
+                                            <input type="time" id="event_time_show_interest"name="eventTime" readonly th:value="${#dates.format(event.getEventTime(),'HH:mm')}"  class="form-control w-80">
                                         </div>
                                     </div>
                                     <div class="col-md-12 mt-3">
@@ -472,8 +473,6 @@
         </button>
     </div>
 </div>
-        </div>
-    </div>
 </main>
 <footer th:replace="fragments/footerTemplate :: footer"></footer>
 
