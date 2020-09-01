@@ -18,7 +18,7 @@
 
     <link th:href="@{../css/ebe_style.css}" href="../css/ebe_style.css" rel="stylesheet" />
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
-    <title>Events Profile</title>
+    <title th:text="${event.getEventName()}">Event</title>
 </head>
 
 <header th:replace="fragments/headerTemplate :: header">
@@ -182,7 +182,7 @@
                             </div>
 
                             <div class="row mx-3" id="documents">
-                                <label for="eventDocuments" class="mb-1">Vacancy's Documents</label>
+                                <label for="eventDocuments" class="mb-1">Event's Documents</label>
                                 <ul class="list-group w-100 mb-3" id="eventDocuments">
                                     <div class="col-md-12 px-0" th:each=" document : ${eventDocuments}">
                                         <div class="col-md-11 px-0">
