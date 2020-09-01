@@ -16,27 +16,27 @@ function createNewEvent() {
         return
     }
 
-    var baseUri = "/api/create/event";
-    var eventName_url = "eventName=" + $('input[id=event-name]').val();
-    var typeOfEventID_url = "typeOfEventID=" + $('select[id=event-type]').val();
-    var eventDate_url = "eventDate=" + $('input[id=event-date]').val();
-    var eventTime_url = "eventTime=" + $('input[id=event-time]').val();
-    var eventVenueName_url = "eventVenueName=" + $('input[id=event-venue]').val();
-    var eventAddressCity_url = "eventAddressCity=" + $('input[id=event-city]').val();
-    var eventAddressStreet_url = "eventAddressStreet=" + $('input[id=event-street]').val();
-    var eventAddressNumber_url = "eventAddressNumber=" + $('input[id=event-number]').val();
-    var eventPostcode_url = "eventPostcode=" + $('input[id=event-postcode]').val();
-    var eventSummary_url = "eventSummary=" + $('textarea[id=event-summary]').val();
-    var isPublic_url = "isPublic=" + $('select[id=event-public]').val();
-    var isCancelled_url = "isCancelled=" + $('select[id=event-cancelled]').val();
-    var nameOfAdviser_url = "nameOfAdviser=" + $('input[id=adviser-name]').val();
-    var numberOfAttendees_url = "numberOfAttendees=" + $('input[id=no-attendees]').val();
-    var promotesApprenticeships_url="promotesApprenticeships=" + $('select[id=promote-apprenticheship]').val();
-    var promotesWelshLanguage_url = "promotesWelshLanguage=" + $('select[id=conducted-welsh]').val();
-    var challengesGenderStereotypes_url = "challengesGenderStereotypes=" + $('select[id=challenger-gender]').val();
-    var isFeatured_url = "isFeatured=" + $('select[id=event-featured]').val();
-    var employerAttending_url = "employerAttending=" + $('select[id=employers-attending]').val();
-    var schoolAttending_url = "schoolAttending=" + $('select[id=schools-attending]').val();
+    let baseUri = "/api/create/event";
+    let eventName_url = "eventName=" + $('input[id=event-name]').val();
+    let typeOfEventID_url = "typeOfEventID=" + $('select[id=event-type]').val();
+    let eventDate_url = "eventDate=" + $('input[id=event-date]').val();
+    let eventTime_url = "eventTime=" + $('input[id=event-time]').val();
+    let eventVenueName_url = "eventVenueName=" + $('input[id=event-venue]').val();
+    let eventAddressCity_url = "eventAddressCity=" + $('input[id=event-city]').val();
+    let eventAddressStreet_url = "eventAddressStreet=" + $('input[id=event-street]').val();
+    let eventAddressNumber_url = "eventAddressNumber=" + $('input[id=event-number]').val();
+    let eventPostcode_url = "eventPostcode=" + $('input[id=event-postcode]').val();
+    let eventSummary_url = "eventSummary=" + $('textarea[id=event-summary]').val();
+    let isPublic_url = "isPublic=" + $('select[id=event-public]').val();
+    let isCancelled_url = "isCancelled=" + $('select[id=event-cancelled]').val();
+    let nameOfAdviser_url = "nameOfAdviser=" + $('input[id=adviser-name]').val();
+    let numberOfAttendees_url = "numberOfAttendees=" + $('input[id=no-attendees]').val();
+    let promotesApprenticeships_url="promotesApprenticeships=" + $('select[id=promote-apprenticheship]').val();
+    let promotesWelshLanguage_url = "promotesWelshLanguage=" + $('select[id=conducted-welsh]').val();
+    let challengesGenderStereotypes_url = "challengesGenderStereotypes=" + $('select[id=challenger-gender]').val();
+    let isFeatured_url = "isFeatured=" + $('select[id=event-featured]').val();
+    let employerAttending_url = "employerAttending=" + $('select[id=employers-attending]').val();
+    let schoolAttending_url = "schoolAttending=" + $('select[id=schools-attending]').val();
 
     var fullUri = baseUri + "?" + "&" + eventName_url+ "&" + typeOfEventID_url + "&" + eventDate_url + "&" + eventTime_url + "&"
         + eventVenueName_url + "&" + eventAddressCity_url  + "&" + eventAddressStreet_url  + "&" + eventAddressNumber_url + "&"
@@ -370,6 +370,7 @@ function validateForm(){
                 attributesArray[i].classList.remove("is-valid")
                 // 13.3.2 Add the Invalid class
                 attributesArray[i].classList.add("is-invalid")
+                console.log("empty test - inputs")
             }
         }
 
@@ -384,6 +385,7 @@ function validateForm(){
             attributesArray[i].classList.remove("is-valid")
             // 13.5.2 Add the Invalid class
             attributesArray[i].parentNode.classList.add("is-invalid")
+            console.log("empty test - selectpickers")
         }
     }
 
@@ -396,6 +398,7 @@ function validateForm(){
     if(!postCodeVal){
         $("#event-postcode").removeClass("is-invalid").removeClass("is-valid")
         $("#event-postcode").addClass("is-invalid")
+        console.log("empty test - postcode")
     }
 
     //13.7 Verify if there is any invalid class

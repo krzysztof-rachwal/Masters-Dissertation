@@ -447,6 +447,7 @@ function validateForm(){
             attributesArray[i].classList.remove("is-valid")
             // 12.3.2 Add the Invalid class
             attributesArray[i].classList.add("is-invalid")
+            console.log("empty test input - enter")
         }
     }
 
@@ -461,6 +462,8 @@ function validateForm(){
             attributesArray[i].classList.remove("is-valid")
             // 12.5.2 Add the Invalid class
             attributesArray[i].parentNode.classList.add("is-invalid")
+            console.log("empty test selectpicker - enter")
+            console.log("selectpicker:" + i)
         }
     }
 
@@ -473,6 +476,7 @@ function validateForm(){
     if(!emailVal){
         $("#employer-email").removeClass("is-invalid").removeClass("is-valid")
         $("#employer-email").addClass("is-invalid")
+        console.log("email test - enter")
     }
 
     // 12.7 Validate Input(Phone)
@@ -485,6 +489,7 @@ function validateForm(){
     if(!phoneVal){
         $("#employer-phone").removeClass("is-invalid").removeClass("is-valid")
         $("#employer-phone").addClass("is-invalid")
+        console.log("phone test - enter")
     }
 
 
@@ -497,6 +502,7 @@ function validateForm(){
     if(!postCodeVal){
         $("#employer-postcode").removeClass("is-invalid").removeClass("is-valid")
         $("#employer-postcode").addClass("is-invalid")
+        console.log("postcode test - enter")
     }
 
     //12.9 Exception
@@ -505,11 +511,17 @@ function validateForm(){
     if($('div[id=div-foreign-language]').hasClass('d-none')){
         $('select[id=employer-language]').parent().removeClass("is-invalid");
     }
+    //Request Employer exception
+    $('.requestEmployer_selectPicker').parent().removeClass("is-invalid");
+
+
+
 
     //12.10 Verify if there is any invalid class
     if($(".selectpicker").parent().hasClass("is-invalid") || $(".form-required").hasClass("is-invalid")){
         verifier = false
     }
+    console.log("verifier: " + verifier)
 
     return verifier;
 }

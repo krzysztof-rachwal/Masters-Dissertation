@@ -419,7 +419,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="eventType">Event Type</label>
-                                            <select class="selectpicker w-100" data-live-search="true" id="eventType"
+                                            <select class="selectpicker w-100 requestEmployer_selectPicker" data-live-search="true" id="eventType"
                                                     title="Nothing selected" name="eventType">
                                                 <option th:each="event : ${allEventTypes}"
                                                         th:value="${event.getTypeOfEventName()}"

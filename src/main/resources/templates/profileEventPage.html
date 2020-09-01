@@ -171,6 +171,16 @@
                                 </div>
                             </div>
 
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Is the Event featured?</label>
+                                    <select  id="event-featured">
+                                        <option value="1" th:selected="${event.getFeatured()== true}">Yes</option>
+                                        <option value="0" th:selected="${event.getFeatured()== false}">No</option>
+                                    </select>
+                                </div>
+                            </div>
+
                             <div class="row mx-3" id="documents">
                                 <label for="eventDocuments" class="mb-1">Vacancy's Documents</label>
                                 <ul class="list-group w-100 mb-3" id="eventDocuments">
