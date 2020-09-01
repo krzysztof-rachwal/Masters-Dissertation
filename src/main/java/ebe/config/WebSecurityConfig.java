@@ -26,7 +26,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
                 .anyRequest().authenticated()
                 .and()
                 .oauth2Login()
-                .defaultSuccessUrl("/");
+//                .defaultSuccessUrl("/");
+        	    .authorizationEndpoint()
+                .baseUri("ebe/oauth2/authorization");
 
 
 
