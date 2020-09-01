@@ -343,6 +343,7 @@ if (eventDeleted === "true"){
 eventUpdated = localStorage.getItem("eventUpdated");
 
 if (eventUpdated === "true"){
+    $('#success_message_text').text(' The event was updated!');
     $('#success_message').removeClass('d-none')
     $("#success_message").fadeTo(1500, 1);
     setTimeout(function(){$("#success_message").fadeTo(1500, 0); },5000);

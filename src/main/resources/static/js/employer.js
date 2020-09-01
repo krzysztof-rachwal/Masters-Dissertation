@@ -420,6 +420,7 @@ if (employerDeleted === "true"){
 employerUpdated = localStorage.getItem("employerUpdated");
 
 if (employerUpdated === "true"){
+    $('#success_message_text').text(' The employer was updated!');
     $('#success_message').removeClass('d-none')
     $("#success_message").fadeTo(1500, 1);
     setTimeout(function(){$("#success_message").fadeTo(1500, 0); },5000);
