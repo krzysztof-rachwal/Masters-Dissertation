@@ -501,7 +501,7 @@ public class BaseController {
 
         Authentication(request,session,email,name);
         ModelAndView mv = new ModelAndView();
-        if(session.getAttribute("SESSION_Role") == "CWS") {
+        if(session.getAttribute("SESSION_Role") == "CWS" || session.getAttribute("SESSION_Role") == "Teacher" ) {
             mv.setViewName("profileEventPage");
 
             Event event = EventQrys.getEventDetailsById(id);
@@ -530,6 +530,7 @@ public class BaseController {
             Event.put("AllEmployerNamesAndIds", employerAllNamesAndIds);
             mv.addAllObjects(Event);
         }else{
+            System.out.println("================================");
             mv.setViewName("404");
             return mv;
         }

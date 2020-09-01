@@ -402,17 +402,17 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="eventName">Event Name</label>
-                                        <input type="text" id="eventName" name="eventName" class="form-control input-border">
+                                        <input type="text" id="eventName" name="eventName" class="form-control input-border" required>
                                     </div>
                                     <div class="form-group">
                                         <label class=" text-left" for="eventDate">Event Date</label>
                                         <input type="date" id="eventDate" class="form-control input-border"
-                                               name="eventDate">
+                                               name="eventDate" required>
                                     </div>
                                     <div class="form-group mb-0">
                                         <label for="eventTime">Event Time</label>
                                         <input type="time" id="eventTime" class="form-control input-border"
-                                               name="eventTime">
+                                               name="eventTime" required>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -429,7 +429,7 @@
                                         <div class="form-group">
                                             <label for="event-guests">Guest</label>
                                             <input class="w-100 search-box" th:value="${employer.getEmployerName()}"
-                                                   id="event-guests" readonly name="guests">
+                                                   id="event-guests" readonly name="guests" required>
                                             <input type="hidden" id="EmployerId" name="EmployerID" th:value="${employer.getEmployerID()}">
                                         </div>
                                     </div>
@@ -439,7 +439,7 @@
                                         <label for="event_notes">Event Notes</label>
                                         <textarea type="time" id="event_notes"
                                                   class="form-control input-border border-0"
-                                                  rows="5" name="eventNotes"></textarea>
+                                                  rows="5" name="eventNotes" required></textarea>
                                     </div>
                                 </div>
                                 <div class="row">

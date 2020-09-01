@@ -81,23 +81,23 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="eventName">Event Name</label>
-                            <input type="text" id="eventName" name="eventName" class="form-control input-border">
+                            <input type="text" id="eventName" name="eventName" class="form-control input-border" required>
                         </div>
                         <div class="form-group">
                             <label class=" text-left" for="eventDate">Event Date</label>
-                            <input type="date" id="eventDate" class="form-control input-border" name="eventDate">
+                            <input type="date" id="eventDate" class="form-control input-border" name="eventDate" required>
                         </div>
                         <div class="form-group mb-0">
                             <label for="eventTime">Event Time</label>
-                            <input type="time" id="eventTime" class="form-control input-border" name="eventTime">
+                            <input type="time" id="eventTime" class="form-control input-border" name="eventTime" required>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="eventType">Event Type</label>
-                                <select class="selectpicker w-100" data-live-search="true" id="eventType" name="eventType"
-                                        title="Nothing selected">
+                                <select class="selectpicker w-100" id="eventType" name="eventType"
+                                        title="Nothing selected" required>
                                     <option th:each="event : ${allEventTypes}"
                                             th:value="${event.getTypeOfEventName()}"
                                             th:text="${event.getTypeOfEventName()}"></option>
@@ -106,7 +106,7 @@
                             <div class="form-group">
                                 <label for="guests">Guest(s)</label>
                                 <select class="selectpicker form-control"  multiple data-live-search="true"
-                                        id="guests" name="guests">
+                                        id="guests" name="guests" required>
                                     <option th:each="emp : ${allEmployers}"
                                             th:value="${emp.getEmployerName()}"
                                             th:text="${emp.getEmployerName()}"></option>
@@ -118,7 +118,7 @@
                         <div class="form-group">
                             <label for="eventNotes">Event Notes</label>
                             <textarea id="eventNotes" class="form-control input-border border-0"
-                                      rows="5" name="eventNotes"></textarea>
+                                      rows="5" name="eventNotes" required></textarea>
                         </div>
                     </div>
 
@@ -137,25 +137,25 @@
                         <div class="form-group">
                             <label for="eventName">Event Name</label>
                             <input type="text" id="event_name_sector" name="eventName"
-                                   class="form-control input-border">
+                                   class="form-control input-border" required>
                         </div>
                         <div class="form-group">
                             <label class=" text-left" for="eventDate">Event Date</label>
                             <input type="date" id="event_date_sector" class="form-control input-border"
-                                   name="eventDate">
+                                   name="eventDate" required>
                         </div>
                         <div class="form-group mb-0">
                             <label for="eventTime">Event Time</label>
                             <input type="time" id="event_time_sector" class="form-control input-border"
-                                   name="eventTime">
+                                   name="eventTime" required>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="event-type2" class="d-block">Event Type</label>
-                                <select class="selectpicker w-100" data-live-search="true"
-                                        id="event-type2" name="eventType" title="Nothing selected">
+                                <select class="selectpicker w-100"
+                                        id="event-type2" name="eventType" title="Nothing selected" required>
                                     <option th:each="event : ${allEventTypes}"
                                             th:value="${event.getTypeOfEventName()}"
                                             th:text="${event.getTypeOfEventName()}"></option>
@@ -164,7 +164,7 @@
                             <div class="form-group">
                                 <label for="language">Language</label>
                                 <select class="selectpicker form-control" multiple data-live-search="true"
-                                        id="language" name="language">
+                                        id="language" name="language" required>
                                     <option th:each="lang : ${allLanguages}"
                                             th:value="${lang.getEmployerLanguageName()}"
                                             th:text="${lang.getEmployerLanguageName()}"></option>
@@ -176,7 +176,7 @@
                         <div class="form-group">
                             <label for="eventNotes">Event Notes</label>
                             <textarea id="event_notes_sector" class="form-control input-border border-0"
-                                      rows="5" name="eventNotes"></textarea>
+                                      rows="5" name="eventNotes" required></textarea>
                         </div>
                     </div>
                     <div class="row">
@@ -194,25 +194,25 @@
                         <div class="form-group">
                             <label for="eventName">Event Name</label>
                             <input type="text" id="event_name_lang" name="eventName"
-                                   class="form-control input-border">
+                                   class="form-control input-border" required>
                         </div>
                         <div class="form-group">
                             <label class=" text-left" for="eventDate">Event Date</label>
                             <input type="date" id="event_date_lang" class="form-control input-border"
-                                   name="eventDate">
+                                   name="eventDate" required>
                         </div>
                         <div class="form-group mb-0">
                             <label for="eventTime">Event Time</label>
                             <input type="time" id="event_time_lang" class="form-control input-border"
-                                   name="eventTime">
+                                   name="eventTime" required>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="event-type3" class="d-block">Event Type</label>
-                                <select class="selectpicker w-100" data-live-search="true"
-                                        id="event-type3" name="eventType" title="Nothing selected">
+                                <select class="selectpicker w-100"
+                                        id="event-type3" name="eventType" title="Nothing selected" required>
                                     <option th:each="event : ${allEventTypes}"
                                             th:value="${event.getTypeOfEventName()}"
                                             th:text="${event.getTypeOfEventName()}"></option>
@@ -221,7 +221,7 @@
                             <div class="form-group">
                                 <label for="sectorPRef">Sector</label>
                                 <select class="selectpicker form-control" multiple data-live-search="true"
-                                        id="sectorPref" name="industry">
+                                        id="sectorPref" name="industry" required>
                                     <option th:each="employerIndustrySector : ${allIndustrySectors}"
                                             th:value="${employerIndustrySector.getEmployerIndustrySectorName()}"
                                             th:text="${employerIndustrySector.getEmployerIndustrySectorName()}"></option>
@@ -233,7 +233,7 @@
                         <div class="form-group">
                             <label for="eventNotes">Event Notes</label>
                             <textarea id="event_notes_lang" class="form-control input-border border-0"
-                                      rows="5" name="eventNotes"></textarea>
+                                      rows="5" name="eventNotes" required></textarea>
                         </div>
                     </div>
                     <div class="row">
