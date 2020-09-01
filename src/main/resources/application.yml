@@ -18,5 +18,5 @@
 # server:
 #   forward-headers-strategy: native
 
-  grails.plugin.springsecurity.httpFirewallBeanClass = "CustomHttpFirewall"
+#  grails.plugin.springsecurity.httpFirewallBeanClass = "CustomHttpFirewall"
 
