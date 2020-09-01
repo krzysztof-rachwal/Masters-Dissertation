@@ -441,26 +441,26 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="event_name_interest">Event Name</label>
-                                            <input type="text" id="event_name_interest" name="eventName" readonly th:value="${event.getEventName()}" class="form-control w-80" >
+                                            <input type="text" id="event_name_interest" name="eventName" readonly th:value="${event.getEventName()}" class="form-control w-80" required >
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class=" text-left" for="event_date_show_interest">Event Date</label>
-                                            <input type="date" id="event_date_show_interest" name="eventDate" readonly th:value="${event.getEventDate()}" class="form-control  w-80" >
+                                            <input type="date" id="event_date_show_interest" name="eventDate" readonly th:value="${event.getEventDate()}" class="form-control  w-80" required >
                                             <input type="hidden" id="eventID" name="eventID" th:value="${event.getEventID()}">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group mb-0">
                                             <label for="event_time_show_interest">Event Time</label>
-                                            <input type="time" id="event_time_show_interest"name="eventTime" readonly th:value="${#dates.format(event.getEventTime(),'HH:mm')}"  class="form-control w-80">
+                                            <input type="time" id="event_time_show_interest"name="eventTime" readonly th:value="${#dates.format(event.getEventTime(),'HH:mm')}"  class="form-control w-80" required>
                                         </div>
                                     </div>
                                     <div class="col-md-12 mt-3">
                                         <div class="form-group">
                                             <label for="event_notes">Notes</label>
-                                            <textarea type="time" id="event_notes" class="form-control" rows="5" name="eventNotes"></textarea>
+                                            <textarea type="time" id="event_notes" class="form-control" rows="5" name="eventNotes" required></textarea>
                                         </div>
                                     </div>
                                 </div>
