@@ -15,7 +15,7 @@ function createNewEmployer() {
         return
     }
 
-    let baseUri = "/api/create/employer";
+    let baseUri = "/ebe/api/create/employer";
     let EmployerStatus_url ="StatusOfEmployerID=" + $('select[id=employer-status]').val();
     let EmployerName_url = "EmployerName=" + $('input[id=company-name]').val();
     let EmployerSummary_url = "EmployerSummary=" + $('textarea[id=company-summary]').val();
@@ -95,7 +95,7 @@ function updateThisEmployer() {
         return
     }
 
-    let baseUri = "/api/update/employer";
+    let baseUri = "/ebe/api/update/employer";
     let EmployerID_url ="EmployerID=" + $('input[id=employer-id]').val();
     let EmployerStatus_url ="StatusOfEmployerID=" + $('select[id=employer-status]').val();
     let EmployerName_url = "EmployerName=" + $('input[id=company-name]').val();
@@ -209,7 +209,7 @@ function updateThisEmployer() {
 
 // 3.Delete Employer
 function deleteEmployer(employerId) {
-    let baseUri = "/api/delete/employer";
+    let baseUri = "/ebe/api/delete/employer";
     let employerId_url = "employerId=" + employerId;
     let fullUri = baseUri + "?" + employerId_url;
 
@@ -242,7 +242,7 @@ function deleteEmployer(employerId) {
 
 //4. Delete Alumni
 function deleteAlumni(alumniID) {
-    let baseUri = "/api/delete/employer/alumni";
+    let baseUri = "/ebe/api/delete/employer/alumni";
     let alumniId_url = "alumniID=" + alumniID.val();
     let fullUri = baseUri + "?" + alumniId_url;
 
@@ -335,7 +335,7 @@ function sortEmployers(ids){
 //7. FilterEmployers
 function filterEmployers() {
 
-    var baseUri = "/api/filter/employer";
+    var baseUri = "/ebe/api/filter/employer";
     var EmployerSectorIndustry_url = "EmployerSectorIndustry=" + $('select[id=industry-sector]').val();
     var EmployerCooperationType_url = "EmployerCooperationType=" + $('select[id=employer-cooperation-type]').val();
     var EmployerCurriculumAreas_url = "EmployerCurriculumAreas=" + $('select[id=curriculum-area]').val();
@@ -617,7 +617,7 @@ function uploadFile(){
 
     // use $.ajax() to upload file
     $.ajax({
-        url: "/upload",
+        url: "/ebe/upload",
         type: "POST",
         data: formData,
         enctype: 'multipart/form-data',
@@ -651,7 +651,7 @@ function uploadLogo(){
 
     // use $.ajax() to upload file
     $.ajax({
-        url: "/upload",
+        url: "/ebe/upload",
         type: "POST",
         data: formData,
         enctype: 'multipart/form-data',
@@ -687,7 +687,7 @@ function deleteFile(document, fileID) {
 
     // use $.ajax() to upload file
     $.ajax({
-        url: "/delete",
+        url: "/ebe/delete",
         type: "DELETE",
         data: formData,
         enctype: 'multipart/form-data',
@@ -731,7 +731,7 @@ function deleteFile(document, fileID) {
 
         // use $.ajax() to upload file
         $.ajax({
-            url: "api/delete/video-link",
+            url: "/ebe/api/delete/video-link",
             type: "DELETE",
             data: formData,
             enctype: 'multipart/form-data',

@@ -1,7 +1,7 @@
 
 // Return number of events by auth and type
 function getEventsByAuthAndType(){
-    let baseUri = "/api/filter/";
+    let baseUri = "/ebe/api/filter/";
     let eventType = "EventType=" + $('select[id=typeOfEvent]').val();
     let authority = "LocalAuthority=" + $('select[id=authorityForEve]').val();
 
@@ -37,7 +37,7 @@ function getEventsByAuthAndType(){
 }
 
 function getEventsBySchool() {
-    let baseUri = "/api/filter/school";
+    let baseUri = "/ebe/api/filter/school";
     let school = "School=" + $('select[id=schoolForEvent]').val();
 
     let fullUri = baseUri + "?" + "&" + school;

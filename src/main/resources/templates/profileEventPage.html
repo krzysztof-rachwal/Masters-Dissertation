@@ -386,7 +386,7 @@
             <div class="mb-auto p-2 col-md-6 well2 well3">
                 <label class="font-weight-bold h5">Employers Attending</label>
                 <ul class="list-group">
-                    <a th:each="employer : ${AllEmployerNamesAndIds}" th:href="@{/profile-employer(employerId=${employer.getEmployerID()})}">
+                    <a th:each="employer : ${AllEmployerNamesAndIds}" th:href="@{/ebe/profile-employer(employerId=${employer.getEmployerID()})}">
                         <li class="list-group-item"  th:remove="${EventEmployersIDs.contains(employer.getEmployerID())} ? none : all" th:text="${employer.getEmployerName()}"></li>
                     </a>
                 </ul>
@@ -414,7 +414,7 @@
                 <div class="mb-auto p-2 col-md-6 well2 well3">
                     <label class="font-weight-bold h5">Employers Attending</label>
                     <ul class="list-group">
-                        <a th:each="employer : ${AllEmployerNamesAndIds}" th:href="@{/profile-employer(employerId=${employer.getEmployerID()})}">
+                        <a th:each="employer : ${AllEmployerNamesAndIds}" th:href="@{/ebe/profile-employer(employerId=${employer.getEmployerID()})}">
                             <li class="list-group-item"  th:remove="${EventEmployersIDs.contains(employer.getEmployerID())} ? none : all" th:text="${employer.getEmployerName()}"></li>
                         </a>
                     </ul>
@@ -436,7 +436,7 @@
                                     </button>
                                 </div>
                             </div>
-                            <form th:action="@{/event/showInterest}" th:object="${request}" method="post" onSubmit="EventProfileShowInterest()">
+                            <form th:action="@{/ebe/event/showInterest}" th:object="${request}" method="post" onSubmit="EventProfileShowInterest()">
                                 <div class="container-fluid">
                                     <div class="col-md-6">
                                         <div class="form-group">

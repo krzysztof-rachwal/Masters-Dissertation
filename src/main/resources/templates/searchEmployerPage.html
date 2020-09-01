@@ -150,7 +150,7 @@
                 <div class="list-employers">
                     <div class="gel-content-row employer-card employer-found employer-filtered" th:each="employer : ${allEmployers}"  th:id="${employer.getEmployerID()}" th:if="${session.SESSION_Role =='Teacher' && employer.getStatusOfEmployerID()==1 || session.SESSION_Role =='CWS'}">
                         <article class="card js-card card--style-icon card--100" gel-processed="processed">
-                            <a th:href="@{/profile-employer(employerId=${employer.getEmployerID()})}" class="card__inner" gel-processed="processed">
+                            <a th:href="@{/ebe/profile-employer(employerId=${employer.getEmployerID()})}" class="card__inner" gel-processed="processed">
                                 <div class="card__content">
                                     <div class="content__image">
                                         <div>

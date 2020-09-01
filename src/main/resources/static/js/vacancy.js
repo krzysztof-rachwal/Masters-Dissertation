@@ -16,7 +16,7 @@ function createVacancy() {
         return
     }
 
-    let baseUri = "/api/create/vacancy";
+    let baseUri = "/ebe/api/create/vacancy";
     let employerID_url = "EmployerID=" + $('select[id=employer-name]').val();
     let vacancyName_url = "VacancyName=" + $('input[id=vacancy-name]').val();
     let vacancyLink_url = "VacancyLink=" + $('input[id=web-link]').val();
@@ -81,7 +81,7 @@ function UpdateThisVacancy() {
         return
     }
 
-    var baseUri = "/api/update/vacancy";
+    var baseUri = "/ebe/api/update/vacancy";
     var employerID_url = "EmployerID=" + $('select[id=employer-name]').val();
     var vacancyName_url = "VacancyName=" + $('input[id=vacancy-name]').val();
     var vacancyOldId_url = "VacancyOldName=" + $('input[id=vacancy-old-name]').val();
@@ -142,7 +142,7 @@ function UpdateThisVacancy() {
 
 // 3.Delete Vacancy
 function deleteVacancy(vacancyId) {
-    var baseUri = "/api/delete/vacancy";
+    var baseUri = "/ebe/api/delete/vacancy";
     var vacancyId_url = "vacancyId=" + vacancyId;
     var fullUri = baseUri + "?" + vacancyId_url;
 
@@ -195,7 +195,7 @@ function searchVacancy(){
 //5. Sort Vacancy By Name and Date
 function sortVacanciesByNameAndDate(type, order) {
 
-    let baseUri = "api/vacancy/sortBy";
+    let baseUri = "/ebe/api/vacancy/sortBy";
     let orderBy_url = "orderBy=" + order ;
     let sortBy_url = "sortBy=" + type ;
 
@@ -251,7 +251,7 @@ function hideVacancies(ids){
 // 8. Filter Vacancies
 function filterVacancies() {
 
-    var baseUri = "/api/filter/vacancy";
+    var baseUri = "/ebe/api/filter/vacancy";
     var typeOfVacancyID_url = "typeOfVacancyID=" + $('select[id=vacancy-type]').val();
     var occupationalCodeID_url = "occupationalCodeID=" + $('select[id=occup-code]').val();
 
@@ -443,7 +443,7 @@ function uploadFile(){
 
     // use $.ajax() to upload file
     $.ajax({
-        url: "/upload",
+        url: "/ebe/upload",
         type: "POST",
         data: formData,
         enctype: 'multipart/form-data',
@@ -481,7 +481,7 @@ function deleteFile(document, fileID) {
 
     // use $.ajax() to upload file
     $.ajax({
-        url: "/delete",
+        url: "/ebe/delete",
         type: "DELETE",
         data: formData,
         enctype: 'multipart/form-data',

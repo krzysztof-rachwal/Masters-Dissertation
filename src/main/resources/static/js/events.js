@@ -16,7 +16,7 @@ function createNewEvent() {
         return
     }
 
-    let baseUri = "/api/create/event";
+    let baseUri = "/ebe/api/create/event";
     let eventName_url = "eventName=" + $('input[id=event-name]').val();
     let typeOfEventID_url = "typeOfEventID=" + $('select[id=event-type]').val();
     let eventDate_url = "eventDate=" + $('input[id=event-date]').val();
@@ -92,7 +92,7 @@ function UpdateThisEvent(){
         return
     }
 
-    var baseUri = "/api/update/event";
+    var baseUri = "/ebe/api/update/event";
     var eventID_url = "eventID=" + $('input[id=event-id]').val();
     var eventName_url = "eventName=" + $('input[id=event-name]').val();
     var typeOfEventID_url = "typeOfEventID=" + $('select[id=event-type]').val();
@@ -162,7 +162,7 @@ function UpdateThisEvent(){
 
 // 3.Delete Event
 function deleteEvent(eventId) {
-    var baseUri = "/api/delete/event";
+    var baseUri = "/ebe/api/delete/event";
     var eventId_url = "eventId=" + eventId;
     var fullUri = baseUri + "?" + eventId_url;
 
@@ -281,7 +281,7 @@ function hideEvents(ids){
 
 //9. Filter Events
 function filterEvents() {
-    var baseUri = "/api/event/filter";
+    var baseUri = "/ebe/api/event/filter";
     var typeOfEventID_url = "typeOfEventID=" + $('select[id=event-type]').val();
     var nameOfAdviser_url = "nameOfAdviser=" + $('select[id=event-advisor]').val();
     var eventPreferences_url = "eventPreferences=" + $('select[id=event-preference]').val();
@@ -486,7 +486,7 @@ function uploadFile(){
 
     // use $.ajax() to upload file
     $.ajax({
-        url: "/upload",
+        url: "/ebe/upload",
         type: "POST",
         data: formData,
         enctype: 'multipart/form-data',
@@ -523,7 +523,7 @@ function deleteFile(document, fileID) {
 
     // use $.ajax() to upload file
     $.ajax({
-        url: "/delete",
+        url: "/ebe/delete",
         type: "DELETE",
         data: formData,
         enctype: 'multipart/form-data',

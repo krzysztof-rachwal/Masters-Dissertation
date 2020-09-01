@@ -31,7 +31,7 @@ public class EventAPI {
 
     ///////////////////////    CREATE     ////////////////////////////////
     //1. Create Events
-    @RequestMapping(value="/api/create/event", method= RequestMethod.GET)
+    @RequestMapping(value="/ebe/api/create/event", method= RequestMethod.GET)
     public boolean createEvent(
             @RequestParam(name="eventName", required = true) String EventName,
             @RequestParam(name="typeOfEventID", required = true) int TypeOfEventID,
@@ -90,7 +90,7 @@ public class EventAPI {
 
     ///////////////////////    UPDATE     ////////////////////////////////
     //2. Update Events
-    @RequestMapping(value="/api/update/event", method= RequestMethod.GET)
+    @RequestMapping(value="/ebe/api/update/event", method= RequestMethod.GET)
     public Boolean updateEvent(
             @RequestParam(name="eventID", required = true) int EventID,
             @RequestParam(name="eventName", required = true) String EventName,
@@ -146,7 +146,7 @@ public class EventAPI {
     }
     ///////////////////////    DELETE     ////////////////////////////////
     //3. Delete Events
-    @DeleteMapping("api/delete/event")
+    @DeleteMapping("/ebe/api/delete/event")
     public boolean deleteEvents(@RequestParam(value="eventId") Integer eventId){
 
         if (EventQrys.deleteEvent(eventId) == 1) {
@@ -157,7 +157,7 @@ public class EventAPI {
     }
 
     ///////////////////////    SORT BY     ////////////////////////////////
-    @GetMapping("api/event/sortBy")
+    @GetMapping("/ebe/api/event/sortBy")
     public List<Integer> SortBy(@RequestParam(value="sortBy") String sortBy,
                                 @RequestParam(value="orderBy") String orderBy){
 
@@ -174,7 +174,7 @@ public class EventAPI {
     }
 
     ///////////////////////    FILTER     ////////////////////////////////
-    @GetMapping("api/event/filter")
+    @GetMapping("/ebe/api/event/filter")
     public List<Integer> filterEvents(@RequestParam(value="typeOfEventID") String typeOfEventID,
                                       @RequestParam(value="nameOfAdviser") String nameOfAdviser,
                                       @RequestParam(value="eventPreferences") String eventPreferences){

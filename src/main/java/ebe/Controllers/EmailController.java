@@ -29,7 +29,7 @@ public class EmailController {
     }
 
 
-    @PostMapping("/contactUsEmail")
+    @PostMapping("/ebe/contactUsEmail")
     public ModelAndView contactUsSubmit(@ModelAttribute Email email, HttpSession session) {
         int localAuthorityID = statisticsQueries.getLocalAuthID(parseInt(session.getAttribute("SESSION_UserID").toString()));
         String localAuthorityName = statisticsQueries.getLocalAuthNameById(localAuthorityID);
@@ -38,7 +38,7 @@ public class EmailController {
         return new ModelAndView("redirect:/contact-us");
     }
 
-    @PostMapping("/requestEvent")
+    @PostMapping("/ebe/requestEvent")
     public ModelAndView requestEventSubmit(@ModelAttribute Request request, HttpSession session) throws MessagingException {
         int localAuthorityID = statisticsQueries.getLocalAuthID(parseInt(session.getAttribute("SESSION_UserID").toString()));
         String localAuthorityName = statisticsQueries.getLocalAuthNameById(localAuthorityID);
@@ -49,7 +49,7 @@ public class EmailController {
         return new ModelAndView("redirect:/request");
     }
 
-    @PostMapping("/requestByIndustry")
+    @PostMapping("/ebe/requestByIndustry")
     public ModelAndView requestByIndustrySubmit(@ModelAttribute Request request, HttpSession session) throws MessagingException {
         int localAuthorityID = statisticsQueries.getLocalAuthID(parseInt(session.getAttribute("SESSION_UserID").toString()));
         String localAuthorityName = statisticsQueries.getLocalAuthNameById(localAuthorityID);
@@ -63,7 +63,7 @@ public class EmailController {
         return new ModelAndView("redirect:/request");
     }
 
-    @PostMapping("/requestByLanguage")
+    @PostMapping("/ebe/requestByLanguage")
     public ModelAndView requestByLanguageSubmit(@ModelAttribute Request request, HttpSession session) throws MessagingException {
         int localAuthorityID = statisticsQueries.getLocalAuthID(parseInt(session.getAttribute("SESSION_UserID").toString()));
         String localAuthorityName = statisticsQueries.getLocalAuthNameById(localAuthorityID);
@@ -74,7 +74,7 @@ public class EmailController {
         return new ModelAndView("redirect:/request");
     }
 
-    @PostMapping("/event/showInterest")
+    @PostMapping("/ebe/event/showInterest")
     public ModelAndView eventShowInterestSubmit(@ModelAttribute Request request, HttpSession session, Event event) throws MessagingException {
         int localAuthorityID = statisticsQueries.getLocalAuthID(parseInt(session.getAttribute("SESSION_UserID").toString()));
         String localAuthorityName = statisticsQueries.getLocalAuthNameById(localAuthorityID);
@@ -85,7 +85,7 @@ public class EmailController {
         return new ModelAndView("redirect:/profile-event?eventId="+event.getEventID());
     }
 
-    @PostMapping("/requestEmployer")
+    @PostMapping("/ebe/requestEmployer")
     public ModelAndView requestEmployerSubmit(@ModelAttribute Request request, HttpSession session, Employer employer) throws MessagingException {
         int localAuthorityID = statisticsQueries.getLocalAuthID(parseInt(session.getAttribute("SESSION_UserID").toString()));
         String localAuthorityName = statisticsQueries.getLocalAuthNameById(localAuthorityID);

@@ -28,13 +28,13 @@ public class AzureStorageAPI {
     @Autowired
     private AzureBlobAdapter azureBlobAdapter;
 
-    @GetMapping("/container")
+    @GetMapping("/ebe/container")
     public ResponseEntity createContainer(@RequestParam String containerName){
         boolean created = azureBlobAdapter.createContainer(containerName);
         return ResponseEntity.ok(created);
     }
 
-    @PostMapping("/upload")
+    @PostMapping("/ebe/upload")
     @ResponseBody
     public ResponseEntity upload(@RequestParam("name") String containerName,
                                  @RequestParam("file") MultipartFile file,
@@ -57,13 +57,13 @@ public class AzureStorageAPI {
         return ResponseEntity.ok(url);
     }
 
-    @GetMapping("/blobs")
+    @GetMapping("/ebe/blobs")
     public ResponseEntity getAllBlobs(@RequestParam String containerName){
         List<URI> uris = azureBlobAdapter.listBlobs(containerName);
         return ResponseEntity.ok(uris);
     }
 
-    @DeleteMapping("/delete")
+    @DeleteMapping("/ebe/delete")
     public ResponseEntity delete(@RequestParam("name") String containerName,
                                  @RequestParam("file") String blobName,
                                  @RequestParam("URL") String url,

@@ -27,7 +27,7 @@ public class EmployerAPI {
     }
 
     //1. Create Employer
-    @GetMapping(value="/api/create/employer")
+    @GetMapping(value="/ebe/api/create/employer")
     public boolean createEmployer(
             @RequestParam(name="StatusOfEmployerID", required = true) int statusOfEmployerID,
             @RequestParam(name="EmployerName", required = true) String employerName,
@@ -158,7 +158,7 @@ public class EmployerAPI {
 
 
     //2. Update Employer
-    @GetMapping(value="/api/update/employer")
+    @GetMapping(value="/ebe/api/update/employer")
     public boolean updateEmployer(
             @RequestParam(name="EmployerID", required = true) int employerID,
             @RequestParam(name="StatusOfEmployerID", required = true) int statusOfEmployerID,
@@ -345,7 +345,7 @@ public class EmployerAPI {
     }
 
     //3. Delete Employer
-    @DeleteMapping("api/delete/employer")
+    @DeleteMapping("/ebe/api/delete/employer")
     public boolean deleteEmployers(@RequestParam(value="employerId") Integer employerId){
         if (EmployerQrys.deleteEmployer(employerId) == 1) {
             return true;
@@ -355,7 +355,7 @@ public class EmployerAPI {
     }
 
     //4. Delete Alumni
-    @DeleteMapping("/api/delete/employer/alumni")
+    @DeleteMapping("/ebe/api/delete/employer/alumni")
     public boolean deleteAlumni(@RequestParam(value="alumniID") Integer alumniID){
         if (EmployerQrys.deleteAlumni(alumniID) == 1) {
             return true;
@@ -365,7 +365,7 @@ public class EmployerAPI {
     }
 
     ///////////////////////    FILTER     ////////////////////////////////
-    @RequestMapping("api/filter/employer")
+    @RequestMapping("/ebe/api/filter/employer")
     //5. Filter Employers
     public List<Integer> filterEmployers(@RequestParam(name="EmployerSectorIndustry") String EmployerSectorIndustry,
                                          @RequestParam(name="EmployerCooperationType") String EmployerCooperationType,
@@ -450,7 +450,7 @@ public class EmployerAPI {
     }
 
     ///////////////////////    SORT BY     ////////////////////////////////
-    @GetMapping("api/employer/sortBy")
+    @GetMapping("/ebe/api/employer/sortBy")
     public List<Integer> SortBy(@RequestParam(value="sortBy") String sortBy,
                                 @RequestParam(value="orderBy") String orderBy){
 
@@ -464,7 +464,7 @@ public class EmployerAPI {
     }
 
     /////////////////////    DELETE LINK    ////////////////////////////////
-    @DeleteMapping("api/delete/video-link")
+    @DeleteMapping("/ebe/api/delete/video-link")
     //5. Filter Employers
     public void addEmployerVideoLink(@RequestParam("employerID") String employerID,
                                      @RequestParam("link") String link){

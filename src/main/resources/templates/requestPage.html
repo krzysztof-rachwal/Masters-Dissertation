@@ -76,7 +76,7 @@
 
     <div class="tab-content" id="myTabContent">
         <div id="general" class="tab-pane fade show active" role="tabpanel" aria-labelledby="general-tab">
-            <form th:action="@{/requestEvent}" th:object="${request}" method="post" onSubmit="requestFeedback()">
+            <form th:action="@{/ebe/requestEvent}" th:object="${request}" method="post" onSubmit="requestFeedback()">
                 <div class="container-fluid">
                     <div class="col-md-6">
                         <div class="form-group">
@@ -131,7 +131,7 @@
             </form>
         </div>
         <div id="lang" class="tab-pane fade" role="tabpanel" aria-labelledby="lang-tab">
-            <form th:action="@{/requestByLanguage}" th:object="${request}" method="post">
+            <form th:action="@{/ebe/requestByLanguage}" th:object="${request}" method="post">
                 <div class="container-fluid">
                     <div class="col-md-6">
                         <div class="form-group">
@@ -188,7 +188,7 @@
             </form>
         </div>
         <div id="sector" class="tab-pane fade" role="tabpanel" aria-labelledby="sector-tab">
-            <form th:action="@{/requestByIndustry}" th:object="${request}" method="post">
+            <form th:action="@{/ebe/requestByIndustry}" th:object="${request}" method="post">
                 <div class="container-fluid">
                     <div class="col-md-6">
                         <div class="form-group">

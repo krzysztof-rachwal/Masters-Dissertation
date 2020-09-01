@@ -124,7 +124,7 @@ public class BaseController {
 
     /////////1st - Header Menu (Employer) /////////
     //1. Search Employer
-    @GetMapping("/employers")
+    @GetMapping("/ebe/employers")
     public ModelAndView SearchEmployer(HttpServletRequest request,
                                        HttpSession session,
                                        @AuthenticationPrincipal(expression = "claims['email']") String email,
@@ -178,7 +178,7 @@ public class BaseController {
     }
 
     //2. Employer Profile (with the id)
-    @GetMapping("/profile-employer")
+    @GetMapping("/ebe/profile-employer")
     public ModelAndView EmployersProfile(@RequestParam(value="employerId")int id,
                                          HttpServletRequest request,
                                          HttpSession session,
@@ -186,7 +186,6 @@ public class BaseController {
                                          @AuthenticationPrincipal(expression = "claims['name']") String name) {
         Authentication(request,session,email,name);
         ModelAndView mv = new ModelAndView();
-
         if((session.getAttribute("SESSION_Role") == "CWS") || (session.getAttribute("SESSION_Role") == "Teacher")) {
         mv.setViewName("profileEmployerPage");
         Employer employer = EmployerQrys.getEmployerDetailsById(id);
@@ -272,7 +271,7 @@ public class BaseController {
     }
 
     //3. Add Employer
-    @GetMapping("/add-employer")
+    @GetMapping("/ebe/add-employer")
     public ModelAndView AddEmployer (HttpSession session,
                                      HttpServletRequest request,
                                      @AuthenticationPrincipal(expression = "claims['email']") String email,
@@ -330,7 +329,7 @@ public class BaseController {
 
     /////////2nd - Header Menu (Vacancies) /////////
     //4. Search Vacancies
-    @GetMapping("/vacancies")
+    @GetMapping("/ebe/vacancies")
     public ModelAndView SearchVacancies(HttpSession session,
                                         HttpServletRequest request,
                                         @AuthenticationPrincipal(expression = "claims['email']") String email,
@@ -369,7 +368,7 @@ public class BaseController {
     }
 
     //5. Vacancy Profile
-    @GetMapping("/profile-vacancy")
+    @GetMapping("/ebe/profile-vacancy")
     public ModelAndView Vacancy(@RequestParam(value="vacancyId")int id,
                                 HttpSession session,
                                 HttpServletRequest request,
@@ -418,7 +417,7 @@ public class BaseController {
     }
 
     //6. Add Vacancy
-    @GetMapping("/add-vacancy")
+    @GetMapping("/ebe/add-vacancy")
     public ModelAndView AddVacancy (HttpSession session,
                                     HttpServletRequest request,
                                     @AuthenticationPrincipal(expression = "claims['email']") String email,
@@ -458,7 +457,7 @@ public class BaseController {
 
     /////////3rd - Header Menu (Events) /////////
     //7. Search Events
-    @GetMapping("/events")
+    @GetMapping("/ebe/events")
     public ModelAndView SearchEvents(HttpSession session,
                                      HttpServletRequest request,
                                      @AuthenticationPrincipal(expression = "claims['email']") String email,
@@ -492,7 +491,7 @@ public class BaseController {
 
 
     //8. Events Profile (get id of the event)
-    @GetMapping("/profile-event")
+    @GetMapping("/ebe/profile-event")
     public ModelAndView EventProfile(@RequestParam(value="eventId")int id,
                                      HttpSession session,
                                      HttpServletRequest request,
@@ -501,7 +500,7 @@ public class BaseController {
 
         Authentication(request,session,email,name);
         ModelAndView mv = new ModelAndView();
-        if(session.getAttribute("SESSION_Role") == "CWS") {
+        if(session.getAttribute("SESSION_Role") == "CWS" || session.getAttribute("SESSION_Role") == "Teacher") {
             mv.setViewName("profileEventPage");
 
             Event event = EventQrys.getEventDetailsById(id);
@@ -537,7 +536,7 @@ public class BaseController {
     }
 
     //9. Add Events
-    @GetMapping("/add-events")
+    @GetMapping("/ebe/add-events")
     public ModelAndView AddEvents(HttpSession session,
                                   HttpServletRequest request,
                                   @AuthenticationPrincipal(expression = "claims['email']") String email,
@@ -572,7 +571,7 @@ public class BaseController {
 
     /////////4th - Header Menu (Request) /////////
     //10. Request
-    @GetMapping("/request")
+    @GetMapping("/ebe/request")
     public ModelAndView Request(HttpSession session,
                                 HttpServletRequest request,
                                 @AuthenticationPrincipal(expression = "claims['email']") String email,
@@ -609,7 +608,7 @@ public class BaseController {
 
     /////////5th - Header Menu (Report) /////////
     //11. Report
-    @GetMapping("/report")
+    @GetMapping("/ebe/report")
     public ModelAndView Report(HttpSession session,
                                HttpServletRequest request,
                                @AuthenticationPrincipal(expression = "claims['email']") String email,
@@ -668,7 +667,7 @@ public class BaseController {
 
     /////////6th - Header Menu (Contact Us) /////////
     //12. Contact Us
-    @GetMapping("/contact-us")
+    @GetMapping("/ebe/contact-us")
     public ModelAndView contactUs(HttpSession session,
                                   HttpServletRequest request,
                                   @AuthenticationPrincipal(expression = "claims['email']") String email,

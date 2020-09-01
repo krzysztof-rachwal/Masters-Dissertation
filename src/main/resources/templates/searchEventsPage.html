@@ -127,7 +127,7 @@
                 <div class="list-events">
                     <div class="gel-content-row event-card event-found event-filtered"  th:each="event : ${allEvents}" th:id="${event.getEventID()}">
                         <article class="card js-card card--style-icon card--100" gel-processed="processed">
-                            <a th:href="@{/profile-event(eventId=${event.getEventID()})}" class="card__inner" gel-processed="processed">
+                            <a th:href="@{/ebe/profile-event(eventId=${event.getEventID()})}" class="card__inner" gel-processed="processed">
                                 <div class="card__content">
                                     <div class="content__image">
                                         <div>
