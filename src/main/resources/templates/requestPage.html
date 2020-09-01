@@ -131,7 +131,7 @@
             </form>
         </div>
         <div id="lang" class="tab-pane fade" role="tabpanel" aria-labelledby="lang-tab">
-            <form th:action="@{/ebe/requestByLanguage}" th:object="${request}" method="post">
+            <form th:action="@{/ebe/requestByLanguage}" th:object="${request}" method="post" onsubmit="requestFeedback()">
                 <div class="container-fluid">
                     <div class="col-md-6">
                         <div class="form-group">
@@ -188,7 +188,7 @@
             </form>
         </div>
         <div id="sector" class="tab-pane fade" role="tabpanel" aria-labelledby="sector-tab">
-            <form th:action="@{/ebe/requestByIndustry}" th:object="${request}" method="post">
+            <form th:action="@{/ebe/requestByIndustry}" th:object="${request}" method="post" onsubmit="requestFeedback()">
                 <div class="container-fluid">
                     <div class="col-md-6">
                         <div class="form-group">
@@ -238,7 +238,8 @@
                     </div>
                     <div class="row">
                         <div class="container mt-5 mb-4 text-center">
-                            <button type="submit" value="Submit" class="button--secondary text-center">Request</button>                        </div>
+                            <button type="submit" value="Submit" class="button--secondary text-center">Request</button>
+                        </div>
                     </div>
                 </div>
             </form>

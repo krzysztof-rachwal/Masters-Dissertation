@@ -30,13 +30,22 @@ public class EmailController {
 
 
     @PostMapping("/ebe/contactUsEmail")
-    public ModelAndView contactUsSubmit(@ModelAttribute Email email, HttpSession session) {
+    public ModelAndView contactUsSubmit(@ModelAttribute Email email, HttpSession session) throws MessagingException {
         int localAuthorityID = statisticsQueries.getLocalAuthID(parseInt(session.getAttribute("SESSION_UserID").toString()));
         String localAuthorityName = statisticsQueries.getLocalAuthNameById(localAuthorityID);
-        emailAPI.sendMail(session.getAttribute("SESSION_SchoolName").toString(), session.getAttribute("SESSION_Email").toString(), localAuthorityName, email.getSubject(), email.getMessage());
+        emailAPI.getInTouchSubmit(session.getAttribute("SESSION_SchoolName").toString(), session.getAttribute("SESSION_Email").toString(), localAuthorityName, email.getSubject(), email.getMessage());
 
         return new ModelAndView("redirect:/ebe/contact-us");
     }
+
+//    @PostMapping("/contactUsEmail")
+//    public ModelAndView htmlSubmit(@ModelAttribute Email email, HttpSession session) throws MessagingException {
+//        int localAuthorityID = statisticsQueries.getLocalAuthID(parseInt(session.getAttribute("SESSION_UserID").toString()));
+//        String localAuthorityName = statisticsQueries.getLocalAuthNameById(localAuthorityID);
+//        emailAPI.htmlSubmit(session.getAttribute("SESSION_SchoolName").toString(), session.getAttribute("SESSION_Email").toString(), localAuthorityName, email.getSubject(), email.getMessage());
+//
+//        return new ModelAndView("redirect:/contact-us");
+//    }
 
     @PostMapping("/ebe/requestEvent")
     public ModelAndView requestEventSubmit(@ModelAttribute Request request, HttpSession session) throws MessagingException {

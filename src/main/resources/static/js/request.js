@@ -8,7 +8,7 @@ $(document).ready(function () {
     });
 
     // 1.2 Feedback - Success
-    requestfeedback = localStorage.getItem("requestfeedback");
+    let requestfeedback = localStorage.getItem("requestFeedback");
 
     if (requestfeedback === "true"){
         console.log("entrei")
@@ -25,7 +25,7 @@ $(document).ready(function () {
 
 //2. Feedback - Store local storage
 function requestFeedback() {
-    localStorage.setItem("requestfeedback","true");
+    localStorage.setItem("requestFeedback","true");
 }
 
 $("#menuRequest").addClass("is-active")
