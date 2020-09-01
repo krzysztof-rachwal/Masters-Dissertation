@@ -31,7 +31,7 @@ public class EventAPI {
 
     ///////////////////////    CREATE     ////////////////////////////////
     //1. Create Events
-    @RequestMapping(value="/api/create/event", method= RequestMethod.GET)
+    @RequestMapping(value="/ebe/api/create/event", method= RequestMethod.GET)
     public boolean createEvent(
             @RequestParam(name="eventName", required = true) String EventName,
             @RequestParam(name="typeOfEventID", required = true) int TypeOfEventID,
@@ -50,6 +50,7 @@ public class EventAPI {
             @RequestParam(name="promotesApprenticeships", required = true) Boolean PromotesApprenticeships,
             @RequestParam(name="promotesWelshLanguage", required = true) Boolean PromotesWelshLanguage,
             @RequestParam(name="challengesGenderStereotypes", required = true) Boolean ChallengesGenderStereotypes,
+            @RequestParam(name="isFeatured", required = true) Boolean isFeatured,
             @RequestParam(name="employerAttending", required = true) String EmployerAttending,
             @RequestParam(name="schoolAttending", required = true) String SchoolAttending) throws ParseException {
 
@@ -72,7 +73,7 @@ public class EventAPI {
         //3. Create the Event
         EventQrys.createEvent(EventName, TypeOfEventID, EventDateAndTime,  EventVenueName,  EventAddressCity,
                 EventAddressStreet, EventAddressNumber, EventPostcode, EventSummary, IsPublic, isCancelled, NameOfAdviser,
-                NumberOfAttendees,  PromotesApprenticeships,  PromotesWelshLanguage,ChallengesGenderStereotypes);
+                NumberOfAttendees,  PromotesApprenticeships,  PromotesWelshLanguage, ChallengesGenderStereotypes, isFeatured);
 
         //      Get Event Created Id
         int eventId = EventQrys.getLastEventCreated(EventName);
@@ -89,7 +90,7 @@ public class EventAPI {
 
     ///////////////////////    UPDATE     ////////////////////////////////
     //2. Update Events
-    @RequestMapping(value="/api/update/event", method= RequestMethod.GET)
+    @RequestMapping(value="/ebe/api/update/event", method= RequestMethod.GET)
     public Boolean updateEvent(
             @RequestParam(name="eventID", required = true) int EventID,
             @RequestParam(name="eventName", required = true) String EventName,
@@ -109,6 +110,7 @@ public class EventAPI {
             @RequestParam(name="promotesApprenticeships", required = true) Boolean PromotesApprenticeships,
             @RequestParam(name="promotesWelshLanguage", required = true) Boolean PromotesWelshLanguage,
             @RequestParam(name="challengesGenderStereotypes", required = true) Boolean ChallengesGenderStereotypes,
+            @RequestParam(name="isFeatured", required = true) Boolean isFeatured,
             @RequestParam(name="employerAttending", required = true) String EmployerAttending,
             @RequestParam(name="schoolAttending", required = true) String SchoolAttending) throws ParseException {
 
@@ -131,7 +133,7 @@ public class EventAPI {
         //3. Update the Event
         EventQrys.updateEvent(EventID, EventName, TypeOfEventID, EventDateAndTime,  EventVenueName,  EventAddressCity,
                 EventAddressStreet, EventAddressNumber, EventPostcode, EventSummary, IsPublic, isCancelled, NameOfAdviser,
-                NumberOfAttendees,  PromotesApprenticeships,  PromotesWelshLanguage,ChallengesGenderStereotypes);
+                NumberOfAttendees,  PromotesApprenticeships,  PromotesWelshLanguage,ChallengesGenderStereotypes, isFeatured);
 
 
         //      Insert into the Employer / Event intersection table
@@ -144,7 +146,7 @@ public class EventAPI {
     }
     ///////////////////////    DELETE     ////////////////////////////////
     //3. Delete Events
-    @DeleteMapping("api/delete/event")
+    @DeleteMapping("/ebe/api/delete/event")
     public boolean deleteEvents(@RequestParam(value="eventId") Integer eventId){
 
         if (EventQrys.deleteEvent(eventId) == 1) {
@@ -155,7 +157,7 @@ public class EventAPI {
     }
 
     ///////////////////////    SORT BY     ////////////////////////////////
-    @GetMapping("api/event/sortBy")
+    @GetMapping("/ebe/api/event/sortBy")
     public List<Integer> SortBy(@RequestParam(value="sortBy") String sortBy,
                                 @RequestParam(value="orderBy") String orderBy){
 
@@ -172,7 +174,7 @@ public class EventAPI {
     }
 
     ///////////////////////    FILTER     ////////////////////////////////
-    @GetMapping("api/event/filter")
+    @GetMapping("/ebe/api/event/filter")
     public List<Integer> filterEvents(@RequestParam(value="typeOfEventID") String typeOfEventID,
                                       @RequestParam(value="nameOfAdviser") String nameOfAdviser,
                                       @RequestParam(value="eventPreferences") String eventPreferences){
@@ -182,6 +184,7 @@ public class EventAPI {
         int PromotesApprenticeships = 0;
         int PromotesWelshLanguage = 0;
         int ChallengesGenderStereotypes = 0;
+        int IsFeatured = 0;
 
         if (!typeOfEventID.equals("")) {
             for (String typeOfEvent : typeOfEventID.split(",")) {
@@ -207,12 +210,14 @@ public class EventAPI {
                     PromotesWelshLanguage = 1;
                 } else if (preference.equals("3")) {
                     ChallengesGenderStereotypes = 1;
+                } else if (preference.equals("4")) {
+                    IsFeatured = 1;
                 }
             }
         }
 
         List<Integer> ids = EventQrys.filterEvents(typeOfEventList, nameOfAdviserList,
-                PromotesApprenticeships, PromotesWelshLanguage,  ChallengesGenderStereotypes);
+                PromotesApprenticeships, PromotesWelshLanguage,  ChallengesGenderStereotypes, IsFeatured);
 
         return ids;
     }

@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 @Repository
@@ -913,6 +914,87 @@ public class EmployerQueries extends DBQueries {
         }
     }
 
+    public void insertDocument(int employerID, String link) throws DataAccessException {
+
+        String insertSql = "INSERT INTO EmployerDocumentLinks(EmployerID, Link) VALUES (?,?)";
+        jdbcTemplate().update(insertSql, employerID, link);
+
+    }
+
+    public void deleteDocument(int employerID, String link) throws DataAccessException {
+
+        String insertSql = "DELETE FROM employerdocumentlinks WHERE EmployerID = ? AND Link = ?";
+        jdbcTemplate().update(insertSql, employerID, link);
+
+    }
+
+
+    public void insertLogoLink(int employerID, String link) throws DataAccessException {
+
+        String insertSql = "UPDATE Employer SET LogoLink = ? WHERE EmployerID = ?;";
+        jdbcTemplate().update(insertSql, link, employerID);
+
+    }
+
+    public void insertVideoLink(int employerID, String link) throws DataAccessException {
+
+        String insertSql = "INSERT INTO EmployerVideoLinks(EmployerID, Link) VALUES (?,?)";
+        jdbcTemplate().update(insertSql, employerID, link);
+
+    }
+
+    public void deleteVideoLink(int employerID, String link) throws DataAccessException {
+
+        String insertSql = "DELETE FROM employervideolinks WHERE EmployerID = ? AND Link = ?";
+        jdbcTemplate().update(insertSql, employerID, link);
+
+    }
+
+    public List <String> getEmployerDocuments(int employerID) throws DataAccessException {
+
+        String sql = "SELECT Link FROM EmployerDocumentLinks WHERE EmployerID = " + employerID + ";";
+        List <String> documents = new ArrayList<>();
+        ResultSet rs = null;
+
+        try {
+        connection = ConnectionFactory.getConnection();
+        statement = connection.createStatement();
+        rs = statement.executeQuery(sql);
+        while (rs.next()) {
+            documents.add(rs.getString("Link"));
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }  finally {
+        DBUtil.close(rs);
+        DBUtil.close(statement);
+        DBUtil.close(connection);
+    }
+        return documents;
+    }
+
+    public List<String> getEmployerVideos(int employerID) throws DataAccessException {
+
+        String sql = "SELECT Link FROM EmployerVideoLinks WHERE EmployerID = " + employerID + ";";
+        List <String> documents = new ArrayList<>();
+        ResultSet rs = null;
+
+        try {
+            connection = ConnectionFactory.getConnection();
+            statement = connection.createStatement();
+            rs = statement.executeQuery(sql);
+            while (rs.next()) {
+                documents.add(rs.getString("Link"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }  finally {
+            DBUtil.close(rs);
+            DBUtil.close(statement);
+            DBUtil.close(connection);
+        }
+        return documents;
+    }
 
     ///////////////////////////////////// DELETE ALL METHODS ///////////////////////////////////////////////
     //46. Delete Employer by Id

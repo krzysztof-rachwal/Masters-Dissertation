@@ -29,7 +29,7 @@ public class VacancyAPI {
 
     ///////////////////////    CREATE     ////////////////////////////////
     //1. Create Vacancies
-    @GetMapping(value="/api/create/vacancy")
+    @GetMapping(value="/ebe/api/create/vacancy")
     public boolean createVacancy(
             @RequestParam(name="EmployerID", required = true) int employerId,
             @RequestParam(name="VacancyName", required = true) String vacancyName,
@@ -51,7 +51,7 @@ public class VacancyAPI {
 
     ///////////////////////    Update     ////////////////////////////////
     //2. Update Vacancies
-    @GetMapping(value="/api/update/vacancy")
+    @GetMapping(value="/ebe/api/update/vacancy")
     public boolean updateVacancy(
             @RequestParam(name="EmployerID", required = true) int employerId,
             @RequestParam(name="VacancyName", required = true) String vacancyName,
@@ -75,7 +75,7 @@ public class VacancyAPI {
 
     ///////////////////////    DELETE     ////////////////////////////////
     //3. Delete Vacancy
-    @DeleteMapping("api/delete/vacancy")
+    @DeleteMapping("/ebe/api/delete/vacancy")
     public boolean deleteVacancies(@RequestParam(value="vacancyId") Integer vacancyId){
         if (VacancyQrys.deleteVacancy(vacancyId) == 1) {
             return true;
@@ -86,7 +86,7 @@ public class VacancyAPI {
 
     ///////////////////////    FILTER     ////////////////////////////////
     //4. Filter Vacancy
-    @RequestMapping("api/filter/vacancy")
+    @RequestMapping("/ebe/api/filter/vacancy")
     public List<Integer> filterVacancies(@RequestParam(name="typeOfVacancyID") String typeOfVacancyID,
                                          @RequestParam(name="occupationalCodeID") String occupationalCodeID){
 
@@ -117,7 +117,7 @@ public class VacancyAPI {
 
     ///////////////////////    SORT BY     ////////////////////////////////
     // 5. Sort By Vacancy
-    @GetMapping("api/vacancy/sortBy")
+    @GetMapping("/ebe/api/vacancy/sortBy")
     public List<Integer> SortBy(@RequestParam(value="sortBy") String sortBy,
                                 @RequestParam(value="orderBy") String orderBy) {
 

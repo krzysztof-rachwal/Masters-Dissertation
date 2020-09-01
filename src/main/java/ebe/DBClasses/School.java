@@ -35,6 +35,12 @@ public class School {
         SchoolPhone = schoolPhone;
     }
 
+    //Constructor for locating school by email required for email sender.
+    public School(String schoolName, String schoolPostCode){
+        SchoolName = schoolName;
+        SchoolPostCode = schoolPostCode;
+    }
+
     public int getSchoolID() {
         return SchoolID;
     }

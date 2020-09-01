@@ -46,7 +46,7 @@ public class EventQueries extends DBQueries {
                         rs.getBoolean("isPublic"), rs.getBoolean("isCancelled"),
                         rs.getString("NameOfAdviser"), rs.getInt("NumberOfAttendees"),
                         rs.getBoolean("PromotesApprenticeships"), rs.getBoolean("PromotesWelshLanguage"),
-                        rs.getBoolean("ChallengesGenderStereotypes"));
+                        rs.getBoolean("ChallengesGenderStereotypes"), rs.getBoolean("isFeatured"));
 
                 list.add(event);
             }
@@ -79,7 +79,7 @@ public class EventQueries extends DBQueries {
                         rs.getBoolean("isPublic"), rs.getBoolean("isCancelled"),
                         rs.getString("NameOfAdviser"), rs.getInt("NumberOfAttendees"),
                         rs.getBoolean("PromotesApprenticeships"), rs.getBoolean("PromotesWelshLanguage"),
-                        rs.getBoolean("ChallengesGenderStereotypes"));
+                        rs.getBoolean("ChallengesGenderStereotypes"),rs.getBoolean("IsFeatured"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -150,16 +150,16 @@ public class EventQueries extends DBQueries {
     public int createEvent( String EventName, int TypeOfEventID, String EventDateAndTime, String EventVenueName,
                             String EventAddressCity, String EventAddressStreet, String EventAddressNumber, String EventVenuePostcode,
                             String EventSummary, Boolean IsPublic, Boolean IsCancelled, String NameOfAdviser, int NumberOfAttendees,
-                            Boolean PromotesApprenticeships, Boolean PromotesWelshLanguage, Boolean ChallengesGenderStereoTypes) throws DataAccessException {
+                            Boolean PromotesApprenticeships, Boolean PromotesWelshLanguage, Boolean ChallengesGenderStereoTypes, Boolean isFeatured) throws DataAccessException {
 
         String insertSql = "INSERT INTO Event(EventName, TypeOfEventID, EventDateAndTime, EventVenueName, EventAddressCity," +
                 " EventAddressStreet, EventAddressNumber, EventVenuePostcode, EventSummary, IsPublic, IsCancelled, NameOfAdviser," +
-                " NumberOfAttendees, PromotesApprenticeships, PromotesWelshLanguage,ChallengesGenderStereoTypes)" +
-                " VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                " NumberOfAttendees, PromotesApprenticeships, PromotesWelshLanguage,ChallengesGenderStereoTypes, isFeatured)" +
+                " VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
         return jdbcTemplate().update(insertSql, EventName, TypeOfEventID, EventDateAndTime, EventVenueName, EventAddressCity,
                 EventAddressStreet, EventAddressNumber, EventVenuePostcode, EventSummary, IsPublic, IsCancelled, NameOfAdviser,
-                NumberOfAttendees, PromotesApprenticeships, PromotesWelshLanguage, ChallengesGenderStereoTypes);
+                NumberOfAttendees, PromotesApprenticeships, PromotesWelshLanguage, ChallengesGenderStereoTypes, isFeatured);
     }
 
     // 6. Create new Employer / Event Intersection
@@ -188,15 +188,15 @@ public class EventQueries extends DBQueries {
     public Integer updateEvent( int EventID, String EventName, int TypeOfEventID, String EventDateAndTime, String EventVenueName,
                                 String EventAddressCity, String EventAddressStreet, String EventAddressNumber, String EventVenuePostcode,
                                 String EventSummary, Boolean IsPublic, Boolean IsCancelled, String NameOfAdviser, int NumberOfAttendees,
-                                Boolean PromotesApprenticeships, Boolean PromotesWelshLanguage, Boolean ChallengesGenderStereoTypes) throws DataAccessException {
+                                Boolean PromotesApprenticeships, Boolean PromotesWelshLanguage, Boolean ChallengesGenderStereoTypes, Boolean isFeatured) throws DataAccessException {
 
         String updateSql = "UPDATE Event SET EventName =?, TypeOfEventID =?, EventDateAndTime= ?, EventVenueName=?, EventAddressCity=?," +
                 " EventAddressStreet=?, EventAddressNumber=?, EventVenuePostcode=?, EventSummary=?,  IsPublic=?, IsCancelled=?," +
-                " NameOfAdviser=?, NumberOfAttendees=?, PromotesApprenticeships=?, PromotesWelshLanguage=?, ChallengesGenderStereoTypes=? WHERE EventID =?";
+                " NameOfAdviser=?, NumberOfAttendees=?, PromotesApprenticeships=?, PromotesWelshLanguage=?, ChallengesGenderStereoTypes=?, isFeatured=? WHERE EventID =?";
 
         return jdbcTemplate().update(updateSql, EventName, TypeOfEventID, EventDateAndTime,EventVenueName, EventAddressCity, EventAddressStreet,
                 EventAddressNumber, EventVenuePostcode, EventSummary, IsPublic, IsCancelled, NameOfAdviser,
-                NumberOfAttendees, PromotesApprenticeships, PromotesWelshLanguage, ChallengesGenderStereoTypes, EventID);
+                NumberOfAttendees, PromotesApprenticeships, PromotesWelshLanguage, ChallengesGenderStereoTypes, isFeatured, EventID);
     }
 
     // 9. Update new Employer / Event Intersection
@@ -279,7 +279,10 @@ public class EventQueries extends DBQueries {
         return list;
     }
 
-    public List<Integer> filterEvents(List<Integer> typeOfEventList, List<String> nameOfAdviserList, int promotesApprenticeships, int promotesWelshLanguage, int challengesGenderStereotypes) {
+    ///////////////////////////////////// FILTER METHODS ///////////////////////////////////////////////
+
+    //14. Filter Events
+    public List<Integer> filterEvents(List<Integer> typeOfEventList, List<String> nameOfAdviserList, int promotesApprenticeships, int promotesWelshLanguage, int challengesGenderStereotypes, int isFeatured) {
         List<Integer> ids = new ArrayList<>();
         connection = ConnectionFactory.getConnection();
         ResultSet rs = null;
@@ -313,9 +316,9 @@ public class EventQueries extends DBQueries {
 
         String SQL4 = "";
 
-        List<Integer> booleanFilters = Arrays.asList(promotesApprenticeships, promotesWelshLanguage, challengesGenderStereotypes);
+        List<Integer> booleanFilters = Arrays.asList(promotesApprenticeships, promotesWelshLanguage, challengesGenderStereotypes, isFeatured);
 
-        List<String> SQLStatements = Arrays.asList(" PromotesApprenticeships = "," PromotesWelshLanguage = "," ChallengesGenderStereotypes = ");
+        List<String> SQLStatements = Arrays.asList(" PromotesApprenticeships = "," PromotesWelshLanguage = "," ChallengesGenderStereotypes = ", " IsFeatured = ");
 
         if (booleanFilters.contains(1)){
             SQL4 = SQL4.concat(" AND (");
@@ -335,21 +338,7 @@ public class EventQueries extends DBQueries {
             }
             SQL4 = SQL4.concat(");");
         }
-
-//        if(promotesApprenticeships != 0){
-//            SQL4 = SQL4.concat(" PromotesApprenticeships = " + promotesApprenticeships);
-//        }
-//        if (promotesWelshLanguage != 0){
-//            SQL4 = SQL4.concat(" PromotesWelshLanguage = " + promotesWelshLanguage);
-//        }
-//        if (challengesGenderStereotypes != 0){
-//            SQL4 = SQL4.concat(" ChallengesGenderStereotypes = " + challengesGenderStereotypes);
-//        }
-//
-//        SQL4 = SQL4.concat(";");
         String finalSQL = SQL+SQL2+SQL3+SQL4;
-
-//        System.out.println(finalSQL);
 
         try {
             statement = connection.createStatement();
@@ -364,4 +353,79 @@ public class EventQueries extends DBQueries {
         }
         return ids;
     }
+
+    //////////////////////////// GET FEATURED METHOD //////////////////////////////////////
+
+    public List<Event> getFeaturedEvents() throws DataAccessException {
+        String getQuery = "SELECT * FROM Event WHERE isFeatured = 1";
+        List<Event> list = new ArrayList<Event>();
+        Event event = null;
+        ResultSet rs = null;
+        try {
+            connection = ConnectionFactory.getConnection();
+            statement = connection.createStatement();
+            rs = statement.executeQuery(getQuery);
+            while (rs.next()) {
+                event = new Event(rs.getInt("EventID"), rs.getString("EventName"),
+                        rs.getInt("TypeOfEventID"), rs.getDate("EventDateAndTime"),
+                        rs.getString("EventVenueName"),rs.getString("EventAddressCity"),
+                        rs.getString("EventAddressStreet"),rs.getString("EventAddressNumber"),
+                        rs.getString("EventVenuePostcode"),rs.getString("EventSummary"),
+                        rs.getBoolean("isPublic"), rs.getBoolean("isCancelled"),
+                        rs.getString("NameOfAdviser"), rs.getInt("NumberOfAttendees"),
+                        rs.getBoolean("PromotesApprenticeships"), rs.getBoolean("PromotesWelshLanguage"),
+                        rs.getBoolean("ChallengesGenderStereotypes"), rs.getBoolean("isFeatured"));
+
+                list.add(event);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.close(rs);
+            DBUtil.close(statement);
+            DBUtil.close(connection);
+        }
+        return list;
+    }
+
+
+    ///////////////////////////////////// DOCUMENTS ///////////////////////////////////////////////
+
+    public void insertDocument(int eventID, String link) throws DataAccessException {
+
+        String Sql = "INSERT INTO EventDocumentLink(EventID, Link) VALUES (?,?)";
+        jdbcTemplate().update(Sql, eventID, link);
+
+    }
+
+    public void deleteDocument(int eventID, String link) throws DataAccessException {
+
+        String Sql = "DELETE FROM EventDocumentLink WHERE EventID = ? AND Link = ?";
+        jdbcTemplate().update(Sql, eventID, link);
+
+    }
+
+    public List <String> getEventDocuments(int eventID) throws DataAccessException {
+
+        String sql = "SELECT Link FROM EventDocumentLink WHERE EventID = " + eventID + ";";
+        List <String> documents = new ArrayList<>();
+        ResultSet rs = null;
+
+        try {
+            connection = ConnectionFactory.getConnection();
+            statement = connection.createStatement();
+            rs = statement.executeQuery(sql);
+            while (rs.next()) {
+                documents.add(rs.getString("Link"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }  finally {
+            DBUtil.close(rs);
+            DBUtil.close(statement);
+            DBUtil.close(connection);
+        }
+        return documents;
+    }
+
 }

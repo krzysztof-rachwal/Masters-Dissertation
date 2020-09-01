@@ -16,7 +16,7 @@ function createVacancy() {
         return
     }
 
-    let baseUri = "/api/create/vacancy";
+    let baseUri = "/ebe/api/create/vacancy";
     let employerID_url = "EmployerID=" + $('select[id=employer-name]').val();
     let vacancyName_url = "VacancyName=" + $('input[id=vacancy-name]').val();
     let vacancyLink_url = "VacancyLink=" + $('input[id=web-link]').val();
@@ -45,7 +45,7 @@ function createVacancy() {
         success: function (data) {
             if (data === true) {
                 localStorage.setItem("vacAdded","true");
-                location.assign("/vacancies")
+                location.assign("/ebe/vacancies")
             } else {
                 alert("There was an error, please try again.");
                 alert(data.responseText);
@@ -81,7 +81,7 @@ function UpdateThisVacancy() {
         return
     }
 
-    var baseUri = "/api/update/vacancy";
+    var baseUri = "/ebe/api/update/vacancy";
     var employerID_url = "EmployerID=" + $('select[id=employer-name]').val();
     var vacancyName_url = "VacancyName=" + $('input[id=vacancy-name]').val();
     var vacancyOldId_url = "VacancyOldName=" + $('input[id=vacancy-old-name]').val();
@@ -103,7 +103,13 @@ function UpdateThisVacancy() {
 
     var token = $("meta[name='_csrf']").attr("content");    // Used to bypass Spring Boot's CSRF protocol     -- SOlution taken from 'https://stackoverflow.com/questions/34747437/use-of-spring-csrf-with-ajax-rest-call-and-html-page-with-thymeleaf' on Nov 26th 2019
     var header = $("meta[name='_csrf_header']").attr("content");    // Used to bypass Spring Boot's CSRF protocol
-    console.log(fullUri)
+    console.log(fullUri);
+
+    //Validates if there is any file to be submited
+    if(!($('#file-upload-input').val() =="")){
+        uploadFile()
+    }
+
 
     $.ajax({
         type: "GET", url: fullUri,
@@ -136,7 +142,7 @@ function UpdateThisVacancy() {
 
 // 3.Delete Vacancy
 function deleteVacancy(vacancyId) {
-    var baseUri = "/api/delete/vacancy";
+    var baseUri = "/ebe/api/delete/vacancy";
     var vacancyId_url = "vacancyId=" + vacancyId;
     var fullUri = baseUri + "?" + vacancyId_url;
 
@@ -152,7 +158,7 @@ function deleteVacancy(vacancyId) {
         success: function (data) {
             if (data === true) {
                 localStorage.setItem("vacancyDeleted", "true")
-                location.assign("/vacancies")
+                location.assign("/ebe/vacancies")
             } else {
                 alert("There was an error, please try again.")
                 alert(data.responseText)
@@ -180,15 +186,16 @@ function searchVacancy(){
     //4.3 Add classes for the right values
     $(".list-vacancies").find(".searchable:contains('"+val+"')").closest(".vacancy-card").addClass("vacancy-found")
 
-    //4.4 Trigger function classChange which manages the d-none attribute distribution
-    $(".vacancy-found").trigger('classChange');
+    //4.4 Add the d-none to all cards and then removes it from the ones that are filtered or searched
+    $(".vacancy-card").addClass("d-none");
+    $('.vacancy-filtered.vacancy-found').removeClass('d-none');
 
 }
 
 //5. Sort Vacancy By Name and Date
 function sortVacanciesByNameAndDate(type, order) {
 
-    let baseUri = "api/vacancy/sortBy";
+    let baseUri = "/ebe/api/vacancy/sortBy";
     let orderBy_url = "orderBy=" + order ;
     let sortBy_url = "sortBy=" + type ;
 
@@ -228,22 +235,23 @@ function sortVacancies(ids){
 // 7. Hide Vacancies
 function hideVacancies(ids){
 
-    // remove previous filtering
+    //7.1 remove previous filtering
     $(".vacancy-filtered").removeClass("vacancy-filtered");
 
-    // add .vacancy-filtered class to indicate which filtering results
+    //7.2 add .vacancy-filtered class to indicate which filtering results
     for (i = 0; i < ids.length; i++) {
         $("#"+ids[i]).addClass("vacancy-filtered");
     }
 
-    // trigger function classChange which manages the d-none attribute distribution
-    $(".vacancy-filtered").trigger('classChange');
+    //7.3 Add the d-none to all cards and then removes it from the ones that are filtered or searched
+    $(".vacancy-card").addClass("d-none");
+    $('.vacancy-filtered.vacancy-found').removeClass('d-none');
 }
 
 // 8. Filter Vacancies
 function filterVacancies() {
 
-    var baseUri = "/api/filter/vacancy";
+    var baseUri = "/ebe/api/filter/vacancy";
     var typeOfVacancyID_url = "typeOfVacancyID=" + $('select[id=vacancy-type]').val();
     var occupationalCodeID_url = "occupationalCodeID=" + $('select[id=occup-code]').val();
 
@@ -300,66 +308,76 @@ if (vacancyDeleted === "true"){
     localStorage.clear()
 }
 
-//11. Validation Function
+//11. Feedback - Update Vacancy
+vacancyUpdated = localStorage.getItem("vacancyUpdated");
+
+if (vacancyUpdated === "true"){
+    $('#success_message').removeClass('d-none')
+    $("#success_message").fadeTo(1500, 1);
+    setTimeout(function(){$("#success_message").fadeTo(1500, 0); },5000);
+    localStorage.clear()
+}
+
+//12. Validation Function
 function validateForm(){
 
     let verifier = true;
     let attributesArray = $(".form-required")
 
-    // 11.1 Remove the Valid/Invalid class
+    // 12.1 Remove the Valid/Invalid class
     $(".form-required").removeClass("is-invalid ").removeClass("is-valid ")
     $(".selectpicker").parent().removeClass("is-invalid").removeClass("is-valid ")
 
-    // 11.2 Add The Valid class to all elements
+    // 12.2 Add The Valid class to all elements
     $(".selectpicker").add("is-valid ")
 
-    // 11.3 Validate inputs(Empty)
+    // 12.3 Validate inputs(Empty)
     for (let i = 0; i < attributesArray.length; i++) {
         if (attributesArray[i].value === "") {
-            // 11.3.1 Remove The Valid/Invalid class
+            // 12.3.1 Remove The Valid/Invalid class
             attributesArray[i].classList.remove("is-invalid")
             attributesArray[i].classList.remove("is-valid")
-            // 11.3.2 Add the Invalid class
+            // 12.3.2 Add the Invalid class
             attributesArray[i].classList.add("is-invalid")
         }
     }
 
-    // 11.4 Change variable data to selectpickers
+    // 12.4 Change variable data to selectpickers
     attributesArray = $(".selectpicker")
 
-    //11.5 Validate selectpickers
+    //12.5 Validate selectpickers
     for (let i = 0; i < attributesArray.length; i++) {
         if (attributesArray[i].value === "") {
-            // 11.5.1 Remove The Valid/Invalid class
+            // 12.5.1 Remove The Valid/Invalid class
             attributesArray[i].classList.remove("is-invalid")
             attributesArray[i].classList.remove("is-valid")
-            // 11.5.2 Add the Invalid class
+            // 12.5.2 Add the Invalid class
             attributesArray[i].parentNode.classList.add("is-invalid")
         }
     }
 
-    // 11.6 Validate Input(PostCode)
+    // 12.6 Validate Input(PostCode)
 
-    // 11.6.1 Set the RegEx and test it
+    // 12.6.1 Set the RegEx and test it
     let postCodeVal = /[a-z][a-z]\d\d\s\d[a-z][a-z]|[a-z][a-z]\d\s\d[a-z][a-z]|[a-z]\d\s\d[a-z][a-z]|[a-z][a-z]\d[a-z]\s\d[a-z][a-z]|[a-z]\d\d\s\d[a-z][a-z]/i.test($("#post-code").val());
     // let postCodeVal = postCodeValidation.test($("#employer-postcode").val());
-    // 11.6.2 Verify if it's needed to put an invalid class
+    // 12.6.2 Verify if it's needed to put an invalid class
     if(!postCodeVal){
         $("#post-code").removeClass("is-invalid").removeClass("is-valid")
         $("#post-code").addClass("is-invalid")
     }
 
-    //11.7 Verify if there is any invalid class
+    //12.7 Verify if there is any invalid class
     if($(".selectpicker").parent().hasClass("is-invalid") || $(".form-required").hasClass("is-invalid")){
         verifier = false
     }
-
     return verifier;
 }
 
 
+$("#menuVacancies").addClass("is-active")
 
-//12. On document Ready
+//13. On document Ready
 $( document ).ready(function() {
     $("select[name=vacancy-sort-by]").change(function(){
         sortVacanciesByNameAndDate($(this).val(),$(this).children(":selected").attr("data-val"));
@@ -367,12 +385,6 @@ $( document ).ready(function() {
 
     $('#filterButton').click(function(){
         filterVacancies();
-    });
-
-    // Function classChange which is called whenever new .vacancy-filtered or .vacancy-found appears.
-    $('.vacancy-card').on('classChange', function() {
-        $(".vacancy-card").addClass("d-none");
-        $('.vacancy-filtered.vacancy-found').removeClass('d-none');
     });
 
     $("#addVacancy").hover(function(){
@@ -398,5 +410,102 @@ $( document ).ready(function() {
             return $(elem).text().toUpperCase().indexOf(arg.toUpperCase()) >= 0;
         };
     });
-
 });
+
+// Function to retrieve vacancyID from URL
+var getUrlParameter = function getUrlParameter(sParam) {
+    var sPageURL = window.location.search.substring(1),
+        sURLVariables = sPageURL.split('&'),
+        sParameterName,
+        i;
+
+    for (i = 0; i < sURLVariables.length; i++) {
+        sParameterName = sURLVariables[i].split('=');
+
+        if (sParameterName[0] === sParam) {
+            return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
+        }
+    }
+};
+
+function uploadFile(){
+
+    var myFile = $('#file-upload-input').prop('files');
+    var vacancyID = getUrlParameter('vacancyId');
+    var formData = new FormData();
+
+    formData.append("ID", vacancyID);
+    formData.append("name", "vacancy");
+    formData.append("file", myFile[0]);
+
+    var token = $("meta[name='_csrf']").attr("content");    // Used to bypass Spring Boot's CSRF protocol     -- Solution taken from 'https://stackoverflow.com/questions/34747437/use-of-spring-csrf-with-ajax-rest-call-and-html-page-with-thymeleaf' on Nov 26th 2019
+    var header = $("meta[name='_csrf_header']").attr("content");    // Used to bypass Spring Boot's CSRF protocol
+
+    // use $.ajax() to upload file
+    $.ajax({
+        url: "/ebe/upload",
+        type: "POST",
+        data: formData,
+        enctype: 'multipart/form-data',
+        processData: false,
+        contentType: false,
+        cache: false,
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader(header, token);
+        },
+        success: function (res) {
+            console.log(res);
+
+        },
+        error: function (err) {
+            console.error(err);
+
+        }
+    });
+}
+
+function deleteFile(document, fileID) {
+
+    var vacancyID = getUrlParameter('vacancyId');
+    var formData = new FormData();
+
+    var filename = document.replace(/^.*[\\\/]/, '')
+
+    formData.append("ID", vacancyID);
+    formData.append("name", "vacancy");
+    formData.append("file", filename);
+    formData.append("URL", document);
+
+    var token = $("meta[name='_csrf']").attr("content");    // Used to bypass Spring Boot's CSRF protocol     -- Solution taken from 'https://stackoverflow.com/questions/34747437/use-of-spring-csrf-with-ajax-rest-call-and-html-page-with-thymeleaf' on Nov 26th 2019
+    var header = $("meta[name='_csrf_header']").attr("content");    // Used to bypass Spring Boot's CSRF protocol
+
+    // use $.ajax() to upload file
+    $.ajax({
+        url: "/ebe/delete",
+        type: "DELETE",
+        data: formData,
+        enctype: 'multipart/form-data',
+        processData: false,
+        contentType: false,
+        cache: false,
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader(header, token);
+        },
+        success: function (res) {
+            //Remove the file from frontend
+            fileID.parent().parent().remove();
+
+            $('#success_message_text').empty()
+            $('#success_message_text').text('The file was deleted!');
+            $('#success_message').removeClass('d-none').addClass('show');
+            localStorage.clear()
+            $("#success_message").fadeTo(1500, 1);
+            setTimeout(function(){
+                $("#success_message").fadeTo(1500, 0);
+            },5000);
+        },
+        error: function (err) {
+            console.error(err);
+        }
+    });
+}

@@ -10,6 +10,9 @@ DROP TABLE IF EXISTS INT_EmployerCooperationType;
 DROP TABLE IF EXISTS INT_EmployerPreference;
 
 DROP TABLE IF EXISTS EmployerDocumentLinks;
+DROP TABLE IF EXISTS EventDocumentLink;
+DROP TABLE IF EXISTS VacancyDocumentLinks;
+DROP TABLE IF EXISTS EmployerVideoLinks;
 DROP TABLE IF EXISTS Alumni;
 DROP TABLE IF EXISTS School;
 DROP TABLE IF EXISTS Event;

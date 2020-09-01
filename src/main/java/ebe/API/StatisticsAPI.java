@@ -22,7 +22,7 @@ public class StatisticsAPI {
         this.schoolQueries = schoolQueries;
     }
 
-    @RequestMapping(value = "/api/filter", method = RequestMethod.GET)
+    @RequestMapping(value = "/ebe/api/filter", method = RequestMethod.GET)
     public int getEvents(@RequestParam(required = false, name = "LocalAuthority") Integer authId,
                          @RequestParam(required = false, name = "EventType") Integer eventId) {
 
@@ -35,7 +35,7 @@ public class StatisticsAPI {
         return noOfEventsByAuthAndTypeOfEvent;
     }
 
-    @RequestMapping(value = "/api/filter/school", method = RequestMethod.GET)
+    @RequestMapping(value = "/ebe/api/filter/school", method = RequestMethod.GET)
     public int getEventsBySchool(@RequestParam(required = false, name = "School") Integer schoolId) {
         int noOfEventsBySchool = 0;
 

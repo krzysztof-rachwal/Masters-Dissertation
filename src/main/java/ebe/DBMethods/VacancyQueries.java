@@ -28,7 +28,7 @@ public class VacancyQueries extends DBQueries {
     ///////////////////////////////////// GET ALL METHODS ///////////////////////////////////////////////
     // 1. Get All Vacancy
     public List<Vacancy> getAllVacancy() throws DataAccessException {
-        String getQuery = "SELECT * FROM Vacancy";
+        String getQuery = "SELECT *, LogoLink FROM Vacancy INNER JOIN employer on vacancy.EmployerID = employer.EmployerID;";
         List<Vacancy> list = new ArrayList<Vacancy>();
         Vacancy vacancy = null;
         ResultSet rs = null;
@@ -43,6 +43,7 @@ public class VacancyQueries extends DBQueries {
                         rs.getDate("StartOfVacancy"),rs.getDate("DeadlineForApplication"),
                         rs.getInt("OccupationalCodeID"), rs.getInt("ApplicationMethodID"),
                         rs.getString("VacancyPostcode"));
+                vacancy.setLogoLink(rs.getString("LogoLink"));
 
                 list.add(vacancy);
             }
@@ -442,6 +443,45 @@ public class VacancyQueries extends DBQueries {
             DBUtil.close(connection);
         }
         return list;
+    }
+
+    ///////////////////////////////////// DOCUMENTS ///////////////////////////////////////////////
+
+    public void insertDocument(int vacancyID, String link) throws DataAccessException {
+
+        String insertSql = "INSERT INTO VacancyDocumentLinks(VacancyID, Link) VALUES (?,?)";
+        jdbcTemplate().update(insertSql, vacancyID, link);
+
+    }
+
+    public void deleteDocument(int vacancyID, String link) throws DataAccessException {
+
+        String insertSql = "DELETE FROM VacancyDocumentLinks WHERE VacancyID = ? AND Link = ?";
+        jdbcTemplate().update(insertSql, vacancyID, link);
+
+    }
+
+    public List <String> getVacancyDocuments(int vacancyID) throws DataAccessException {
+
+        String sql = "SELECT Link FROM VacancyDocumentLinks WHERE VacancyID = " + vacancyID + ";";
+        List <String> documents = new ArrayList<>();
+        ResultSet rs = null;
+
+        try {
+            connection = ConnectionFactory.getConnection();
+            statement = connection.createStatement();
+            rs = statement.executeQuery(sql);
+            while (rs.next()) {
+                documents.add(rs.getString("Link"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }  finally {
+            DBUtil.close(rs);
+            DBUtil.close(statement);
+            DBUtil.close(connection);
+        }
+        return documents;
     }
 
 }
