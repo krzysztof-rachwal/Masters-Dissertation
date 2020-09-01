@@ -25,7 +25,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
     protected void configure( HttpSecurity http ) throws Exception {
 
         http.authorizeRequests()
-                .antMatchers( "/oauth2/**", "/login/**" ).permitAll()
+                .antMatchers( "/ebe/oauth2/**", "/ebe/login/**","/actuator/health" ).permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .oauth2Login()
