@@ -17,6 +17,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
+import java.util.List;
 
 @Service
 public class EmailAPI {
@@ -149,7 +151,7 @@ public class EmailAPI {
     @Autowired
     private SpringTemplateEngine templateEngine;
 
-    public void htmlSubmit(String schoolName, String fromEmail, String localAuth, String subject, String messageBody) throws MessagingException {
+    public void getInTouchSubmit(String schoolName, String fromEmail, String localAuth, String subject, String messageBody) throws MessagingException {
         MimeMessage message = emailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message,
                 MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED,
@@ -160,7 +162,7 @@ public class EmailAPI {
         context.setVariable("localAuth", localAuth);
         context.setVariable("messageBody", messageBody);
 
-        String html = templateEngine.process("email/contactUsEmailTemplate", context);
+        String html = templateEngine.process("email/getInTouchEmailTemplate", context);
 
         helper.setTo(cwEmail);
         helper.setText(html, true);
@@ -176,6 +178,9 @@ public class EmailAPI {
                 MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED,
                 StandardCharsets.UTF_8.name());
 
+        //Change comma-separates string into list so that you can put it as a list in html.
+        List<String> guestsList = Arrays.asList(guests.split("\\s*,\\s*"));
+
         Context context = new Context();
         context.setVariable("schoolName", schoolName);
         context.setVariable("localAuth", localAuth);
@@ -184,9 +189,9 @@ public class EmailAPI {
         context.setVariable("eventTime", eventTime);
         context.setVariable("eventNotes", eventNotes);
         context.setVariable("eventType", eventType);
-        context.setVariable("guests", guests);
+        context.setVariable("guests", guestsList);
 
-        String html = templateEngine.process("email/contactUsEmailTemplate", context);
+        String html = templateEngine.process("email/requestByEventEmailTemplate", context);
 
         helper.setTo(cwEmail);
         helper.setText(html, true);
@@ -202,6 +207,9 @@ public class EmailAPI {
                 MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED,
                 StandardCharsets.UTF_8.name());
 
+        //Change comma-separates string into list so that you can put it as a list in html.
+        List<String> industryList = Arrays.asList(industry.split("\\s*,\\s*"));
+
         Context context = new Context();
         context.setVariable("schoolName", schoolName);
         context.setVariable("localAuth", localAuth);
@@ -210,9 +218,9 @@ public class EmailAPI {
         context.setVariable("eventTime", eventTime);
         context.setVariable("eventNotes", eventNotes);
         context.setVariable("eventType", eventType);
-        context.setVariable("industry", industry);
+        context.setVariable("industry", industryList);
 
-        String html = templateEngine.process("email/contactUsEmailTemplate", context);
+        String html = templateEngine.process("email/requestByIndustryEmailTemplate", context);
 
         helper.setTo(cwEmail);
         helper.setText(html, true);
@@ -228,6 +236,9 @@ public class EmailAPI {
                 MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED,
                 StandardCharsets.UTF_8.name());
 
+        //Change comma-separates string into list so that you can put it as a list in html.
+        List<String> languageList = Arrays.asList(language.split("\\s*,\\s*"));
+
         Context context = new Context();
         context.setVariable("schoolName", schoolName);
         context.setVariable("localAuth", localAuth);
@@ -236,9 +247,9 @@ public class EmailAPI {
         context.setVariable("eventTime", eventTime);
         context.setVariable("eventNotes", eventNotes);
         context.setVariable("eventType", eventType);
-        context.setVariable("guests", language);
+        context.setVariable("language", languageList);
 
-        String html = templateEngine.process("email/contactUsEmailTemplate", context);
+        String html = templateEngine.process("email/requestByLanguageEmailTemplate", context);
 
         helper.setTo(cwEmail);
         helper.setText(html, true);
@@ -262,11 +273,11 @@ public class EmailAPI {
         context.setVariable("eventTime", eventTime);
         context.setVariable("eventNotes", eventNotes);
 
-        String html = templateEngine.process("email/contactUsEmailTemplate", context);
+        String html = templateEngine.process("email/showInterestEmailTemplate", context);
 
         helper.setTo(cwEmail);
         helper.setText(html, true);
-        helper.setSubject("Request for " + eventName);
+        helper.setSubject(schoolName + " showed interest for " + eventName);
         helper.setFrom(emailFrom);
 
         emailSender.send(message);
@@ -289,11 +300,11 @@ public class EmailAPI {
         context.setVariable("eventType", eventType);
         context.setVariable("employerName", employerName);
 
-        String html = templateEngine.process("email/contactUsEmailTemplate", context);
+        String html = templateEngine.process("email/requestEmployerEmailTemplate", context);
 
         helper.setTo(cwEmail);
         helper.setText(html, true);
-        helper.setSubject("Request for " + eventName);
+        helper.setSubject("Request for " + eventName + " with " + employerName);
         helper.setFrom(fromEmail);
 
         emailSender.send(message);
