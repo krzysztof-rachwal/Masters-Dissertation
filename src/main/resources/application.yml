@@ -14,6 +14,7 @@ spring:
             client-secret: ~M.0E_BNMR~V6rQdcxrt6Z4DL~iro0X0_A
             authorization-grant-type: authorization_code
             redirect-uri: 'https://sysint.careerswales.gov.wales/ebe/login/oauth2/code/azure'
+#            'http://localhost:8080/ebe/login/oauth2/code/azure'
 #            'https://sysint.careerswales.gov.wales/ebe/login/oauth2/code/azure'
             scope: openid,profile
 server:
