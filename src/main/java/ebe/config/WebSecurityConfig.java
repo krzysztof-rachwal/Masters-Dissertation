@@ -38,7 +38,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 //                .defaultSuccessUrl("/")
                 .authorizationRequestRepository(authorizationRequestRepository())
                 .and()
-                .defaultSuccessUrl("/ebe/*");
+                .defaultSuccessUrl("/ebe/")
+                .failureUrl("/ebe/");
 
 
     }
