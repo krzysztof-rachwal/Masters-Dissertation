@@ -21,7 +21,8 @@
     <link rel="icon" type="image/png" href="https://careerswales.gov.wales/styleguide/assets/img/favicon/favicon-16x16.png" sizes="16x16">
     <link rel="icon" type="image/png" href="https://careerswales.gov.wales/styleguide/assets/img/favicon/favicon-128.png" sizes="128x128">
 
-    <link th:href="@{../css/ebe_style.css}" href="../css/ebe_style.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="https://krzysztof-rachwal.github.io/ebecss/ebe_style.css">
+<!--    <link th:href="@{../css/ebe_style.css}" href="../css/ebe_style.css" rel="stylesheet" />-->
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
     <title th:text="${vacancy.getVacancyName()}">Vacancy</title>
 </head>
@@ -354,10 +355,14 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
 
-<script th:src="@{../js/vacancy.js}" src="../js/vacancy.js"></script>
+<!--<script th:src="@{../js/burger-button.js}" src="../js/burger-button.js"></script>-->
+<!--<script th:src="@{../js/vacancy.js}" src="../js/vacancy.js"></script>-->
+
+<script src="https://krzysztof-rachwal.github.io/ebecss/vacancy.js"></script>
+<script src="https://krzysztof-rachwal.github.io/ebecss/burger-button.js"></script>
+
 <script>
     $('.selectpicker').selectpicker();
 </script>
-<script th:src="@{../js/burger-button.js}" src="../js/burger-button.js"></script>
 </body>
 </html>
