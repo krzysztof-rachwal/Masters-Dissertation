@@ -49,6 +49,17 @@ public class SchoolQueries extends DBQueries {
         return schoolInfo.get(0);
     }
 
+       public School getSchoolDetailsByEmail(String email) throws DataAccessException {
+        String getSql = String.format("SELECT * FROM School WHERE SchoolEmail = \"%s\"", email);
+        List<School> schoolInfo = jdbcTemplate().query(getSql, new Object[]{},
+                (rs, i) -> new School(rs.getInt("SchoolID"), rs.getString("SchoolName"),
+                        rs.getString("SchoolAddressCity"), rs.getString("SchoolAddressStreet"),
+                        rs.getString("SchoolAddressNumber"), rs.getString("SchoolEmail"),
+                        rs.getString("SchoolPostCode"),rs.getString("SchoolPhone"))
+        );
+        return schoolInfo.get(0);
+    }
+
 
     // 3. Get All School Names and Ids
     public List<School> getAllSchoolNamesAndIds() throws DataAccessException {
