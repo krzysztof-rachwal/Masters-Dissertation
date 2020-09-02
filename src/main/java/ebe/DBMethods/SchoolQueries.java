@@ -50,7 +50,7 @@ public class SchoolQueries extends DBQueries {
     }
 
        public School getSchoolDetailsByEmail(String email) throws DataAccessException {
-        String getSql = "SELECT * FROM School WHERE SchoolEmail = " + email + ";";
+        String getSql = String.format("SELECT * FROM School WHERE SchoolEmail = \"%s\"", email);
         List<School> schoolInfo = jdbcTemplate().query(getSql, new Object[]{},
                 (rs, i) -> new School(rs.getInt("SchoolID"), rs.getString("SchoolName"),
                         rs.getString("SchoolAddressCity"), rs.getString("SchoolAddressStreet"),
