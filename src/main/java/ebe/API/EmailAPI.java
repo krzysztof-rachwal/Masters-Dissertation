@@ -7,12 +7,12 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.TemplateEngine;
-import org.thymeleaf.context.Context;
 import org.thymeleaf.spring5.SpringTemplateEngine;
 
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
+import javax.naming.Context;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
@@ -147,22 +147,22 @@ public class EmailAPI {
     @Autowired
     private SpringTemplateEngine templateEngine;
 
-    public void sendRequest(String eventName, String eventDate, String eventTime, String eventNotes, String eventType, String guests) throws MessagingException {
-        MimeMessage message = emailSender.createMimeMessage();
-        MimeMessageHelper helper = new MimeMessageHelper(message,
-                MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED,
-                StandardCharsets.UTF_8.name());
-
-
-        Context context = new Context();
-
-        String html = templateEngine.process("emailTemplate", context);
-
-        helper.setTo("carrers.wales@gmail.com");
-        helper.setText(html, true);
-        helper.setSubject("Request for " + eventName);
-        helper.setFrom("krzysiek.rachwal@gmail.com"); //TODO: get session email address.
-
-        emailSender.send(message);
-    }
+//    public void sendRequest(String eventName, String eventDate, String eventTime, String eventNotes, String eventType, String guests) throws MessagingException {
+//        MimeMessage message = emailSender.createMimeMessage();
+//        MimeMessageHelper helper = new MimeMessageHelper(message,
+//                MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED,
+//                StandardCharsets.UTF_8.name());
+//
+//
+//        Context context = new Context();
+//
+//        String html = templateEngine.process("emailTemplate", context);
+//
+//        helper.setTo("carrers.wales@gmail.com");
+//        helper.setText(html, true);
+//        helper.setSubject("Request for " + eventName);
+//        helper.setFrom("krzysiek.rachwal@gmail.com"); //TODO: get session email address.
+//
+//        emailSender.send(message);
+//    }
 }
