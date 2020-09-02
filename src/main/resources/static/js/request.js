@@ -8,13 +8,13 @@ $(document).ready(function () {
     });
 
     // 1.2 Feedback - Success
-    requestfeedback = localStorage.getItem("requestfeedback");
+    let requestfeedback = localStorage.getItem("requestFeedback");
 
     if (requestfeedback === "true"){
-        console.log("entrei")
+        localStorage.clear()
+        $('#success_message_text').empty()
         $('#success_message_text').text(' The Request was sent!');
         $('#success_message').removeClass('d-none').addClass('show');
-        localStorage.clear()
         $("#success_message").fadeTo(1500, 1);
         setTimeout(function(){
             $("#success_message").fadeTo(1500, 0);
@@ -25,7 +25,7 @@ $(document).ready(function () {
 
 //2. Feedback - Store local storage
 function requestFeedback() {
-    localStorage.setItem("requestfeedback","true");
+    localStorage.setItem("requestFeedback","true");
 }
 
 $("#menuRequest").addClass("is-active")

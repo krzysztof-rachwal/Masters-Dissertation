@@ -22,8 +22,14 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css"/>
+    <!-- Favicon    /-->
+    <link rel="icon" type="image/png" href="https://careerswales.gov.wales/styleguide/assets/img/favicon/favicon-196x196.png" sizes="196x196"><link rel="icon" type="image/png" href="/styleguide/assets/img/favicon/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="https://careerswales.gov.wales/styleguide/assets/img/favicon/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="https://careerswales.gov.wales/styleguide/assets/img/favicon/favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="https://careerswales.gov.wales/styleguide/assets/img/favicon/favicon-128.png" sizes="128x128">
 
-    <link th:href="@{../css/ebe_style.css}" href="../css/ebe_style.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="https://krzysztof-rachwal.github.io/ebecss/ebe_style.css">
+<!--    <link th:href="@{../css/ebe_style.css}" href="../css/ebe_style.css" rel="stylesheet"/>-->
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
     <title th:text="${employer.getEmployerName()}">Employer</title>
 </head>
@@ -332,7 +338,7 @@
                                                 </a>
                                             </div>
                                             <div class="col-md-1 mt-3 pr-1">
-                                                <button type="button" class="close" th:attr="onclick=|deleteVideo('${video}')|">
+                                                <button type="button" class="close" th:attr="onclick=|deleteVideo('${video}',$(this))|">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
@@ -419,7 +425,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="eventType">Event Type</label>
-                                            <select class="selectpicker w-100 requestEmployer_selectPicker" data-live-search="true" id="eventType"
+                                            <select class="selectpicker w-100 requestEmployer_selectPicker" required id="eventType"
                                                     title="Nothing selected" name="eventType">
                                                 <option th:each="event : ${allEventTypes}"
                                                         th:value="${event.getTypeOfEventName()}"
@@ -505,7 +511,7 @@
 
     <div class="container-fluid eventBackground">
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-4" th:if="${session.SESSION_Role =='CWS'}">
                 <img alt="Card image" th:src="${employer.getLogoLink()}" >
             </div>
             <div class="col-md-8">
@@ -528,7 +534,6 @@
             </div>
 
             <div class="row my-5">
-
                 <div class="col-md-4 well ">
                     <div class="my-2">
                         <h6 class=" font-weight-bold">Sectors:</h6>
@@ -557,7 +562,6 @@
                             th:text="${employerCurriculumAreas.getEmployAreaOfCurriculumName()}"></li>
                     </ul>
                 </div>
-
             </div>
 
             <div class="row mb-4">
@@ -568,7 +572,7 @@
                           th:text="${employerNumberEmployees.getNumberOfEmployeesName()}"></span>
                 </div>
 
-                <div class="my-2 col-md-4">
+                <div class="my-2 col-md-4" th:if="${session.SESSION_Role =='CWS'}">
                     <span class="text-h5 font-weight-bold">Works with primary schools:</span>
                     <span class="text-h5"
                           th:remove="${allEmployerChosenPreferences.contains(1)}  ? none : all">Yes</span>
@@ -576,7 +580,7 @@
                           th:remove="${allEmployerChosenPreferences.contains(1)}  ? all : none">No</span>
                 </div>
 
-                <div class="my-2 col-md-4">
+                <div class="my-2 col-md-4" th:if="${session.SESSION_Role =='CWS'}">
                     <span class="text-h5 font-weight-bold">Works in Welsh:</span>
                     <span class="text-h5"
                           th:remove="${allEmployerChosenPreferences.contains(2)}  ? none : all">Yes</span>
@@ -584,7 +588,7 @@
                           th:remove="${allEmployerChosenPreferences.contains(2)}  ? all : none">No</span>
                 </div>
 
-                <div class="my-2 col-md-4">
+                <div class="my-2 col-md-4" th:if="${session.SESSION_Role =='CWS'}">
                     <span class="text-h5 font-weight-bold">Deliver in Welsh:</span>
                     <span class="text-h5"
                           th:remove="${allEmployerChosenPreferences.contains(3)}  ? none : all">Yes</span>
@@ -600,7 +604,7 @@
                           th:remove="${allEmployerChosenPreferences.contains(4)}  ? all : none">No</span>
                 </div>
 
-                <div class="my-2 col-md-4">
+                <div class="my-2 col-md-4" th:if="${session.SESSION_Role =='CWS'}">
                     <span class="text-h5 font-weight-bold">Works in foreign languages:</span>
                     <span class="text-h5" name="employer-language-checker"
                           th:remove="${allEmployerChosenPreferences.contains(5)}  ? none : all">Yes</span>
@@ -608,7 +612,7 @@
                           th:remove="${allEmployerChosenPreferences.contains(5)}  ? all : none">No</span>
                 </div>
 
-                <div class="my-2 col-md-12" th:remove="${allEmployerChosenPreferences.contains(5)}  ? none : all">
+                <div class="my-2 col-md-12" th:remove="${allEmployerChosenPreferences.contains(5)}  ? none : all" th:if="${session.SESSION_Role =='CWS'}">
                     <span class="text-h5 font-weight-bold">Foreign languages:</span>
                     <span th:each="employerLanguage,i : ${allEmployerLanguage}">
                     <span th:remove="${allEmployerLanguagePreference.contains(employerLanguage.getEmployerLanguageID())} ? none : all"
@@ -620,44 +624,26 @@
 
                 </div>
             </div>
+    </div>
 
-        </div>
-
-        <div class="row">
-            <div class="col"></div>
-            <hr class="col-md-6 float-center my-2">
-            <div class="col"></div>
-        </div>
-
-        <div class="col-md-12 my-4">
-            <h3>Alumni</h3>
-            <ul>
-                <li th:each="alumni : ${allEmployerAlumni}" class="col-md-12">
-                    <span class="col-md-4" th:utext="'<b>Name:</b> ' +${alumni.getEmployerAlumniName()}"></span>
-                    <span class="col-md-8" th:each="school : ${allSchoolNamesAndIds}"
-                          th:remove="${alumni.getEmployerAlumniSchoolID() == school.getSchoolID()} ? none : all"
-                          th:utext="'<b>School:</b>  ' +${school.getSchoolName()}"></span>
-                </li>
-            </ul>
-        </div>
 
         <div class="row">
             <div class="col"></div>
-            <hr class="col-md-6 float-center my-2">
+            <hr class="col-md-11 my-2 pl-2">
             <div class="col"></div>
         </div>
 
         <div class="col-md-12 my-4">
             <h3>Employer Info</h3>
             <div class="row">
-                <div class="col-md-4 mt-2">
+                <div class="col-md-4 mt-2" >
                     <h4 class="font-weight-bold">Address</h4>
-                    <h6 th:text="${employer.getEmployerAddressNumber()} +' '+ ${employer.getEmployerAddressStreet()}"></h6>
+                    <h6 th:text="${employer.getEmployerAddressNumber()} +' '+ ${employer.getEmployerAddressStreet()}" th:if="${session.SESSION_Role =='CWS'}"></h6>
                     <h6 th:text="${employer.getEmployerPostcode()}"></h6>
-                    <h6 th:text="${employer.getEmployerAddressCity()}"></h6>
+                    <h6 th:text="${employer.getEmployerAddressCity()}" th:if="${session.SESSION_Role =='CWS'}"></h6>
                 </div>
 
-                <div class="col-md-4">
+                <div class="col-md-4" th:if="${session.SESSION_Role =='CWS'}">
                     <h4 class="font-weight-bold">Contact</h4>
                     <div>
                         <span th:text=" 'Name: ' + ${employer.getContactPersonNameSurname()}"></span>
@@ -696,49 +682,99 @@
             </div>
         </div>
 
-        <div class="row">
+        <div class="row" th:remove="${allEmployerLocalAuthorities.size()== 0} ? all : none">
             <div class="col"></div>
-            <hr class="col-md-6 float-center my-2">
+            <hr class="col-md-11 my-2 pl-2">
             <div class="col"></div>
         </div>
 
-        <div class="col-md-12 my-4">
+        <div class="col-md-12 my-4" th:remove="${allEmployerLocalAuthorities.size()== 0} ? all : none">
+            <h3>Local Authorities</h3>
+            <table class="table table-hover">
+                <tbody  th:each="employerLocalAuthority : ${allEmployerLocalAuthorities}" th:remove="${allEmployerChosenLocalAuthorities.contains(employerLocalAuthority.getEmployerLocalAuthorityID())} ? none : all">
+                <td th:text="${employerLocalAuthority.getEmployerLocalAuthorityName()}">
+                </td>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="row" th:remove="${allEmployerAlumni.size()== 0} ? all : none">
+            <div class="col"></div>
+            <hr class="col-md-11 my-2 pl-2">
+            <div class="col"></div>
+        </div>
+
+        <div class="col-md-12 my-4" th:remove="${allEmployerAlumni.size()== 0} ? all : none">
+            <h3>Alumni</h3>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Alumni Name</th>
+                        <th>Alumni School</th>
+                    </tr>
+                </thead>
+                <th:block th:each="alumni : ${allEmployerAlumni}">
+                    <tbody>
+                    <tr>
+                        <td th:utext="${alumni.getEmployerAlumniName()}"></td>
+                        <td th:each="school : ${allSchoolNamesAndIds}"
+                                  th:remove="${alumni.getEmployerAlumniSchoolID() == school.getSchoolID()} ? none : all"
+                                  th:utext="${school.getSchoolName()}">
+                        </td>
+                    </tr>
+                    </tbody>
+                </th:block>
+            </table>
+        </div>
+
+
+        <div class="row" th:remove="${allSchoolNamesAndIds.size()== 0} ? all : none">
+            <div class="col"></div>
+            <hr class="col-md-11 my-2 pl-2">
+            <div class="col"></div>
+        </div>
+
+        <div class="col-md-12 my-4" th:remove="${allSchoolNamesAndIds.size()== 0} ? all : none">
             <h3>School Preferences</h3>
-            <ul>
-                <li th:each="school : ${allSchoolNamesAndIds}"
-                    th:remove="${allEmployerSchoolPreferences.contains(school.getSchoolID())} ? none : all"
-                    th:text="${school.getSchoolName()}"></li>
-            </ul>
+            <table class="table table-hover">
+                <tbody th:each="school : ${allSchoolNamesAndIds}" th:remove="${allEmployerSchoolPreferences.contains(school.getSchoolID())} ? none : all">
+                    <td th:text="${school.getSchoolName()}"></td>
+                </tbody>
+            </table>
         </div>
 
-        <div class="row">
+        <div class="row" th:remove="${employerDocuments.size()== 0} ? all : none">
             <div class="col"></div>
-            <hr class="col-md-6 float-center my-2">
+            <hr class="col-md-11 my-2 pl-2">
             <div class="col"></div>
         </div>
 
     <div class="col-md-12 my-4" th:remove="${employerDocuments.size()== 0} ? all : none">
         <h3>Employer Documents</h3>
-        <ul class="list-group">
-            <a th:each=" document : ${employerDocuments}"  th:href="@{${document}}" target="_blank">
-                <li th:text="${#strings.substring(document,52)}"></li>
-            </a>
-        </ul>
+        <table class="table table-hover">
+            <tbody th:each=" document : ${employerDocuments}">
+                <td>
+                    <a th:href="@{${document}}" target="_blank" th:text="${#strings.substring(document,52)}">></a>
+                </td>
+            </tbody>
+        </table>
     </div>
 
-<!--    <div class="row">-->
-<!--        <div class="col"></div>-->
-<!--        <hr class="col-md-6 float-center my-2">-->
-<!--        <div class="col"></div>-->
-<!--    </div>-->
+    <div class="row" th:remove="${employerVideos.size()== 0} ? all : none">
+        <div class="col"></div>
+        <hr class="col-md-11 my-2 pl-2">
+        <div class="col"></div>
+    </div>
 
     <div class="col-md-12 my-4" th:remove="${employerVideos.size()== 0} ? all : none">
         <h3>Employer Videos</h3>
-        <ul class="list-group">
-            <a th:each=" video : ${employerVideos}"  th:href="@{${video}}" target="_blank">
-                <li th:text="${video}"></li>
-            </a>
-        </ul>
+        <table class="table table-hover">
+            <tbody th:each=" video : ${employerVideos}">
+                <td>
+                <a th:href="@{${video}}" target="_blank" th:text="${video}"></a>
+                </td>
+            </tbody>
+        </table>
     </div>
 
         <div class="text-center mt-2" th:if="${session.SESSION_Role =='Teacher'}">
@@ -767,11 +803,17 @@
 <!--<script type="text/javascript" src="https://careerswales.gov.wales/styleguide/assets/js/gel-elements.js"></script>-->
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
-<script th:src="@{../js/employer.js}" src="../js/employer.js"></script>
+
+<!--<script th:src="@{../js/burger-button.js}" src="../js/burger-button.js"></script>-->
+<!--<script th:src="@{../js/employer.js}" src="../js/employer.js"></script>-->
+
+<script src="https://krzysztof-rachwal.github.io/ebecss/burger-button.js"></script>
+<script src="https://krzysztof-rachwal.github.io/ebecss/employer.js"></script>
+
 <script>
     $('.selectpicker').selectpicker();
 </script>
-<script th:src="@{../js/burger-button.js}" src="../js/burger-button.js"></script>
+
 
 </body>
 </html>

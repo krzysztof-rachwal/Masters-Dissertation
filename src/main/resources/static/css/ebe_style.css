@@ -114,6 +114,12 @@ hr{
 }
 a {
     text-decoration: none !important;
+    color: #0360a6;
+    font-weight: 700;
+}
+
+a:visited {
+    color: #0360a6;
 }
 
 .list-employers, .list-vacancies, .list-events{

@@ -6,6 +6,7 @@ function createNewEmployer() {
     verifier = validateForm();
     // 1.2. Error Message
     if(!verifier){
+        $('#failed_message_text').empty()
         $('#failed_message_text').text("The Form was not filled properly.");
         $('#failed_message').removeClass('d-none').addClass('show');
         $("#failed_message").fadeTo(1500, 1);
@@ -67,6 +68,7 @@ function createNewEmployer() {
             }
         },
         error: function (data) {
+            $('#failed_message_text').empty()
             $('#failed_message_text').text("Something went wrong with the submission.");
             $('#failed_message').removeClass('d-none').addClass('show');
             $("#failed_message").fadeTo(1500, 1);
@@ -86,6 +88,7 @@ function updateThisEmployer() {
     verifier = validateForm();
     // 2.2. Error Message
     if(!verifier){
+        $('#failed_message_text').empty()
         $('#failed_message_text').text("The Form was not filled properly.");
         $('#failed_message').removeClass('d-none').addClass('show');
         $("#failed_message").fadeTo(1500, 1);
@@ -195,6 +198,7 @@ function updateThisEmployer() {
             }
         },
         error: function (data) {
+            $('#failed_message_text').empty()
             $('#failed_message_text').text("Something went wrong with the submission.");
             $('#failed_message').removeClass('d-none').addClass('show');
             $("#failed_message").fadeTo(1500, 1);
@@ -394,32 +398,37 @@ function hideEmployers(ids){
 empAdded = localStorage.getItem("empAdded");
 
 if (empAdded === "true"){
+    localStorage.clear()
+    $('#success_message_text').empty()
     $('#success_message_text').text(' The employer profile was created!');
     $('#success_message').removeClass('d-none').addClass('show');
     $("#success_message").fadeTo(1500, 1);
     setTimeout(function(){
         $("#success_message").fadeTo(1500, 0);
     },5000);
-    localStorage.clear()
 }
 
 //10. Feedback - Remove Employer
 employerDeleted = localStorage.getItem("employerDeleted");
 
 if (employerDeleted === "true"){
+    localStorage.clear()
+    $('#success_message_text').empty()
     $('#success_message_text').text(' The employer profile is deleted!');
     $('#success_message').removeClass('d-none').addClass('show');
     $("#success_message").fadeTo(1500, 1);
     setTimeout(function(){
         $("#success_message").fadeTo(1500, 0);
     },5000);
-    localStorage.clear()
 }
 
 //11. Feedback - Update Employer
 employerUpdated = localStorage.getItem("employerUpdated");
 
 if (employerUpdated === "true"){
+    localStorage.clear()
+    $('#success_message_text').empty()
+    $('#success_message_text').text(' The employer was updated!');
     $('#success_message').removeClass('d-none')
     $("#success_message").fadeTo(1500, 1);
     setTimeout(function(){$("#success_message").fadeTo(1500, 0); },5000);
@@ -551,10 +560,10 @@ $( document ).ready(function() {
     let requestEmployerEmail = localStorage.getItem("requestEmployerEmail");
 
     if (requestEmployerEmail === "true"){
+        localStorage.clear()
         $('#success_message_text').empty();
         $('#success_message_text').text(' Event requested.');
         $('#success_message').removeClass('d-none').addClass('show');
-        localStorage.clear()
         $("#success_message").fadeTo(1500, 1);
         setTimeout(function(){
             $("#success_message").fadeTo(1500, 0);
@@ -704,7 +713,6 @@ function deleteFile(document, fileID) {
             $('#success_message_text').empty()
             $('#success_message_text').text('The file was deleted!');
             $('#success_message').removeClass('d-none').addClass('show');
-            localStorage.clear()
             $("#success_message").fadeTo(1500, 1);
             setTimeout(function(){
                 $("#success_message").fadeTo(1500, 0);
@@ -718,7 +726,7 @@ function deleteFile(document, fileID) {
     });
 }
 
-    function deleteVideo(document) {
+    function deleteVideo(document, fileID) {
 
         var employerID = getUrlParameter('employerId');
         var formData = new FormData();
@@ -743,7 +751,14 @@ function deleteFile(document, fileID) {
             },
             success: function (res) {
                 // console.log(res);
-                alert("The video was deleted successfully")
+                fileID.parent().parent().remove();
+                $('#success_message_text').empty()
+                $('#success_message_text').text('The video was deleted!');
+                $('#success_message').removeClass('d-none').addClass('show');
+                $("#success_message").fadeTo(1500, 1);
+                setTimeout(function(){
+                    $("#success_message").fadeTo(1500, 0);
+                },5000);
             },
             error: function (err) {
                 // console.error(err);

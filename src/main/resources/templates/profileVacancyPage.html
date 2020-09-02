@@ -15,8 +15,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css"/>
+    <!-- Favicon    /-->
+    <link rel="icon" type="image/png" href="https://careerswales.gov.wales/styleguide/assets/img/favicon/favicon-196x196.png" sizes="196x196"><link rel="icon" type="image/png" href="/styleguide/assets/img/favicon/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="https://careerswales.gov.wales/styleguide/assets/img/favicon/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="https://careerswales.gov.wales/styleguide/assets/img/favicon/favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="https://careerswales.gov.wales/styleguide/assets/img/favicon/favicon-128.png" sizes="128x128">
 
-    <link th:href="@{../css/ebe_style.css}" href="../css/ebe_style.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="https://krzysztof-rachwal.github.io/ebecss/ebe_style.css">
+<!--    <link th:href="@{../css/ebe_style.css}" href="../css/ebe_style.css" rel="stylesheet" />-->
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
     <title th:text="${vacancy.getVacancyName()}">Vacancy</title>
 </head>
@@ -226,13 +232,13 @@
         </ul>
     </nav>
 
-    <div class="container-headline mt-2 mb-5">
+    <div class="container-headline mt-2 mb-5 ml-2">
         <span class="title-h2" th:text="${vacancy.getVacancyName()}"></span>
         <button type="button"  th:if="${session.SESSION_Role =='CWS'}" id="deleteEvent"  data-toggle="modal" data-target="#deleteModal" class="buttonDelete float-right">Delete</button>
         <button type="button"  th:if="${session.SESSION_Role =='CWS'}" id="updateEvent" data-toggle="modal" data-target="#updateModal" class="buttonUpdate float-right">Update</button>
     </div>
 
-        <div class="container">
+        <div class="container ml-2">
             <div class="row">
                 <div class="col-lg-3 col-md-6">
                     <p><strong>Employer name</strong></p>
@@ -316,14 +322,23 @@
                 </div>
             </div>
 
-        <div class="col-md-12 my-4" th:remove="${vacancyDocuments.size()== 0} ? all : none">
-            <h3>Vacancy Documents</h3>
-            <ul class="list-group">
-                <a th:each=" document : ${vacancyDocuments}"  th:href="@{${document}}" target="_blank">
-                    <li th:text="${#strings.substring(document,51)}"></li>
-                </a>
-            </ul>
-        </div>
+
+            <div class="row" th:remove="${vacancyDocuments.size()== 0} ? all : none">
+                <hr class="col-md-11 mt-5 ml-3">
+            </div>
+
+
+            <div class="col-md-12 mt-1 px-0 pr-3" th:remove="${vacancyDocuments.size()== 0} ? all : none">
+                <h3>Vacancy Documents</h3>
+                <table class="table table-hover">
+                    <tbody th:each=" document : ${vacancyDocuments}">
+                    <td>
+                        <a th:href="@{${document}}" target="_blank" th:text="${#strings.substring(document,51)}">></a>
+                    </td>
+                    </tbody>
+                </table>
+            </div>
+
     </div>
 </div>
 </main>
@@ -340,10 +355,14 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
 
-<script th:src="@{../js/vacancy.js}" src="../js/vacancy.js"></script>
+<!--<script th:src="@{../js/burger-button.js}" src="../js/burger-button.js"></script>-->
+<!--<script th:src="@{../js/vacancy.js}" src="../js/vacancy.js"></script>-->
+
+<script src="https://krzysztof-rachwal.github.io/ebecss/vacancy.js"></script>
+<script src="https://krzysztof-rachwal.github.io/ebecss/burger-button.js"></script>
+
 <script>
     $('.selectpicker').selectpicker();
 </script>
-<script th:src="@{../js/burger-button.js}" src="../js/burger-button.js"></script>
 </body>
 </html>
