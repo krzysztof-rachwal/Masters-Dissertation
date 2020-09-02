@@ -76,7 +76,7 @@ public class BaseController {
     }
 
     // HomePage
-    @GetMapping("/")
+    @GetMapping("/ebe/")
     public ModelAndView HomePage( HttpServletRequest request,
                                   HttpSession session,
                                   @AuthenticationPrincipal(expression = "claims['email']") String email,
