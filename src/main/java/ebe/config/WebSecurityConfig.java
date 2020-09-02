@@ -34,11 +34,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
                 .and()
 //                .loginPage("/ebe/login")
         	    .authorizationEndpoint()
-                .baseUri("/ebe/oauth2/authorization")
+                .baseUri("/ebe/oauth2/authorization/*")
 //                .defaultSuccessUrl("/")
                 .authorizationRequestRepository(authorizationRequestRepository())
                 .and()
-                .defaultSuccessUrl("/ebe/");
+                .defaultSuccessUrl("/ebe/*");
 
 
     }
