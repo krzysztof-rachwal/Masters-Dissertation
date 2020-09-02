@@ -713,11 +713,13 @@
 
         <div class="col-md-12 my-4" >
             <h3>School Preferences</h3>
-            <ul>
-                <li th:each="school : ${allSchoolNamesAndIds}"
-                    th:remove="${allEmployerSchoolPreferences.contains(school.getSchoolID())} ? none : all"
-                    th:text="${school.getSchoolName()}"></li>
-            </ul>
+            <table class="table table-hover">
+                <tbody>
+                    <td th:each="school : ${allSchoolNamesAndIds}"
+                        th:remove="${allEmployerSchoolPreferences.contains(school.getSchoolID())} ? none : all"
+                        th:text="${school.getSchoolName()}"></td>
+                </tbody>
+            </table>
         </div>
 
         <div class="row">
@@ -728,20 +730,24 @@
 
     <div class="col-md-12 my-4" th:remove="${employerDocuments.size()== 0} ? all : none">
         <h3>Employer Documents</h3>
-        <ul class="list-group">
-            <a th:each=" document : ${employerDocuments}"  th:href="@{${document}}" target="_blank">
-                <li th:text="${#strings.substring(document,52)}"></li>
-            </a>
-        </ul>
+        <table class="table table-hover">
+            <tbody th:each=" document : ${employerDocuments}">
+                <td>
+                    <a th:href="@{${document}}" target="_blank" th:text="${#strings.substring(document,52)}">></a>
+                </td>
+            </tbody>
+        </table>
     </div>
 
     <div class="col-md-12 my-4" th:remove="${employerVideos.size()== 0} ? all : none">
         <h3>Employer Videos</h3>
-        <ul class="list-group">
-            <a th:each=" video : ${employerVideos}"  th:href="@{${video}}" target="_blank">
-                <li th:text="${video}"></li>
-            </a>
-        </ul>
+        <table class="table table-hover">
+            <tbody th:each=" video : ${employerVideos}">
+                <td>
+                <a th:href="@{${video}}" target="_blank" th:text="${video}"></a>
+                </td>
+            </tbody>
+        </table>
     </div>
 
         <div class="text-center mt-2" th:if="${session.SESSION_Role =='Teacher'}">

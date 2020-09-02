@@ -376,11 +376,13 @@
 
             <div class="col-md-12 my-4" th:remove="${eventDocuments.size()== 0} ? all : none">
                 <h3>Event Documents</h3>
-                <ul class="list-group">
-                    <a th:each=" document : ${eventDocuments}"  th:href="@{${document}}" target="_blank">
-                        <li th:text="${#strings.substring(document,49)}"></li>
-                    </a>
-                </ul>
+                <table class="table table-hover">
+                    <tbody th:each=" document : ${eventDocuments}">
+                        <td>
+                            <a   th:href="@{${document}}" target="_blank" th:text="${#strings.substring(document,49)}"></a>
+                        </td>
+                    </tbody>
+                </table>
             </div>
 
             <div class="row pt-3" th:if="${session.SESSION_Role =='CWS'}">
