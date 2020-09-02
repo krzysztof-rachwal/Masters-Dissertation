@@ -64,6 +64,7 @@ function createNewEvent() {
             }
         },
         error: function (data) {
+            $('#failed_message_text').empty()
             $('#failed_message_text').text("Something went wrong with the submission.");
             $('#failed_message').removeClass('d-none').addClass('show');
             $("#failed_message").fadeTo(1500, 1);
@@ -83,6 +84,7 @@ function UpdateThisEvent(){
     verifier = validateForm();
     // 2.2. Error Message
     if(!verifier){
+        $('#failed_message_text').empty()
         $('#failed_message_text').text("The Form was not filled properly.");
         $('#failed_message').removeClass('d-none').addClass('show');
         $("#failed_message").fadeTo(1500, 1);
@@ -149,6 +151,7 @@ function UpdateThisEvent(){
             }
         },
         error: function (data) {
+            $('#failed_message_text').empty()
             $('#failed_message_text').text("Something went wrong with the submission.");
             $('#failed_message').removeClass('d-none').addClass('show');
             $("#failed_message").fadeTo(1500, 1);
@@ -186,6 +189,7 @@ function deleteEvent(eventId) {
             }
         },
         error: function (data) {
+            $('#failed_message_text').empty()
             $('#failed_message_text').text("Something went wrong with the submission.");
             $('#failed_message').removeClass('d-none').addClass('show');
             $("#failed_message").fadeTo(1500, 1);
@@ -237,6 +241,7 @@ function sortEventsByNameAndDate(type, order) {
             sortEvents(data);
         },
         error: function (data) {
+            $('#failed_message_text').empty()
             $('#failed_message_text').text("Something went wrong with the submission.");
             $('#failed_message').removeClass('d-none').addClass('show');
             $("#failed_message").fadeTo(1500, 1);
@@ -316,13 +321,14 @@ function filterEvents() {
 eventAdded = localStorage.getItem("eventAdded");
 
 if (eventAdded === "true"){
+    localStorage.clear()
+    $('#success_message_text').empty()
     $('#success_message_text').text(' The event was created!');
     $('#success_message').removeClass('d-none').addClass('show');
     $("#success_message").fadeTo(1500, 1);
     setTimeout(function(){
         $("#success_message").fadeTo(1500, 0);
     },5000);
-    localStorage.clear()
 }
 
 //11. Feedback - Remove Event
@@ -331,23 +337,25 @@ console.log(eventDeleted)
 console.log("aqui")
 
 if (eventDeleted === "true"){
+    localStorage.clear()
+    $('#success_message_text').empty()
     $('#success_message_text').text(' The event was deleted!');
     $('#success_message').removeClass('d-none').addClass('show');
     $("#success_message").fadeTo(1500, 1);
     setTimeout(function(){
         $("#success_message").fadeTo(1500, 0);
     },5000);
-    localStorage.clear()
 }
 //12. Feedback - Update Event
 eventUpdated = localStorage.getItem("eventUpdated");
 
 if (eventUpdated === "true"){
+    localStorage.clear()
+    $('#success_message_text').empty()
     $('#success_message_text').text(' The event was updated!');
     $('#success_message').removeClass('d-none')
     $("#success_message").fadeTo(1500, 1);
     setTimeout(function(){$("#success_message").fadeTo(1500, 0); },5000);
-    localStorage.clear()
 }
 
 //13. Validation Function
@@ -444,9 +452,10 @@ $(document).ready(function(){
     let eventProfileShowInterest = localStorage.getItem("EventProfileShowInterest");
 
     if (eventProfileShowInterest === "true"){
+        localStorage.clear()
+        $('#success_message_text').empty()
         $('#success_message_text').text(' Interest was registered!');
         $('#success_message').removeClass('d-none').addClass('show');
-        localStorage.clear()
         $("#success_message").fadeTo(1500, 1);
         setTimeout(function(){
             $("#success_message").fadeTo(1500, 0);

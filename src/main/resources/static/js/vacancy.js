@@ -128,6 +128,7 @@ function UpdateThisVacancy() {
             }
         },
         error: function (data) {
+            $('#failed_message_text').empty()
             $('#failed_message_text').text("Something went wrong with the submission.");
             $('#failed_message').removeClass('d-none').addClass('show');
             $("#failed_message").fadeTo(1500, 1);
@@ -286,6 +287,7 @@ function filterVacancies() {
 vacAdded = localStorage.getItem("vacAdded");
 
 if (vacAdded === "true"){
+    $('#success_message_text').empty()
     $('#success_message_text').text(' The vacancy was created!');
     $('#success_message').removeClass('d-none').addClass('show');
     localStorage.clear()
@@ -299,6 +301,7 @@ if (vacAdded === "true"){
 vacancyDeleted = localStorage.getItem("vacancyDeleted");
 
 if (vacancyDeleted === "true"){
+    $('#success_message_text').empty()
     $('#success_message_text').text(' The vacancy was deleted!');
     $('#success_message').removeClass('d-none').addClass('show');
     $("#success_message").fadeTo(1500, 1);
@@ -312,6 +315,7 @@ if (vacancyDeleted === "true"){
 vacancyUpdated = localStorage.getItem("vacancyUpdated");
 
 if (vacancyUpdated === "true"){
+    $('#success_message_text').empty()
     $('#success_message_text').text(' The vacancy was updated!');
     $('#success_message').removeClass('d-none')
     $("#success_message").fadeTo(1500, 1);

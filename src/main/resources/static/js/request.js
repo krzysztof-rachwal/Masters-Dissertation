@@ -11,10 +11,10 @@ $(document).ready(function () {
     let requestfeedback = localStorage.getItem("requestFeedback");
 
     if (requestfeedback === "true"){
-        console.log("entrei")
+        localStorage.clear()
+        $('#success_message_text').empty()
         $('#success_message_text').text(' The Request was sent!');
         $('#success_message').removeClass('d-none').addClass('show');
-        localStorage.clear()
         $("#success_message").fadeTo(1500, 1);
         setTimeout(function(){
             $("#success_message").fadeTo(1500, 0);
