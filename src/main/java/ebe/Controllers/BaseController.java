@@ -102,6 +102,8 @@ public class BaseController {
             mv.addObject("numberOfPupils", numberOfPupils);
             mv.addObject("schoolAtEvents", schoolAtEvents);
             mv.addObject("requestsBySchools", requestsBySchools);
+            mv.addObject("name", name);
+            mv.addObject("role", session.getAttribute("SESSION_Role"));
         }
 
 
@@ -110,9 +112,12 @@ public class BaseController {
             mv.setViewName("homepageTeacher");
             List<Event> recommendedEvents = statisticsQueries.getEventsForSchool(parseInt(session.getAttribute("SESSION_UserID").toString()));
             List<Event> featuredEvents = EventQrys.getFeaturedEvents();
+            School school = SchoolQrys.getSchoolDetailsByEmail(email);
 
             mv.addObject("recommendedEvents",recommendedEvents);
             mv.addObject("featuredEvents",featuredEvents);
+            mv.addObject("name", school.getSchoolName());
+            mv.addObject("role", session.getAttribute("SESSION_Role"));
         }
 
         if(session.getAttribute("SESSION_Role") == "none"){
