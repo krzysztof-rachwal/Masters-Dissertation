@@ -627,17 +627,25 @@
             <div class="col"></div>
         </div>
 
-        <div class="col-md-12 my-4">
-            <h3>Alumni</h3>
-            <ul>
-                <li th:each="alumni : ${allEmployerAlumni}" class="col-md-12">
-                    <span class="col-md-4" th:utext="'<b>Name:</b> ' +${alumni.getEmployerAlumniName()}"></span>
-                    <span class="col-md-8" th:each="school : ${allSchoolNamesAndIds}"
-                          th:remove="${alumni.getEmployerAlumniSchoolID() == school.getSchoolID()} ? none : all"
-                          th:utext="'<b>School:</b>  ' +${school.getSchoolName()}"></span>
-                </li>
-            </ul>
-        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Alumni Name</th>
+                    <th>Alumni School</th>
+                </tr>
+            </thead>
+            <th:block th:each="alumni : ${allEmployerAlumni}">
+                <tbody>
+                <tr>
+                    <td th:utext="${alumni.getEmployerAlumniName()}"></td>
+                    <td th:each="school : ${allSchoolNamesAndIds}"
+                              th:remove="${alumni.getEmployerAlumniSchoolID() == school.getSchoolID()} ? none : all"
+                              th:utext="${school.getSchoolName()}">
+                    </td>
+                </tr>
+                </tbody>
+            </th:block>
+        </table>
 
         <div class="row">
             <div class="col"></div>
