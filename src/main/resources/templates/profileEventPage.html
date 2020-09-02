@@ -15,6 +15,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css"/>
+    <!-- Favicon    /-->
+    <link rel="icon" type="image/png" href="https://careerswales.gov.wales/styleguide/assets/img/favicon/favicon-196x196.png" sizes="196x196"><link rel="icon" type="image/png" href="/styleguide/assets/img/favicon/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="https://careerswales.gov.wales/styleguide/assets/img/favicon/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="https://careerswales.gov.wales/styleguide/assets/img/favicon/favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="https://careerswales.gov.wales/styleguide/assets/img/favicon/favicon-128.png" sizes="128x128">
 
     <link th:href="@{../css/ebe_style.css}" href="../css/ebe_style.css" rel="stylesheet" />
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
@@ -270,14 +275,14 @@
         </ul>
     </nav>
 
-    <div class="container-headline mt-2 mb-5">
+    <div class="container-headline mt-2 mb-5 pl-4">
         <span class="title-h2" th:text="${#strings.capitalize(event.getEventName())}"></span>
         <input type="hidden" th:value="${event.getEventID()}" id="event-id"/>
         <button type="button" id="deleteEvent" th:if="${session.SESSION_Role =='CWS'}" data-toggle="modal" data-target="#deleteModal" class="buttonDelete float-right">Delete</button>
         <button type="button" id="updateEvent" th:if="${session.SESSION_Role =='CWS'}" data-toggle="modal" data-target="#updateModal" class="buttonUpdate float-right">Update</button>
     </div>
 
-    <div class="container-fluid px-5 eventBackground">
+    <div class="container-fluid px-4 eventBackground">
         <div class="row">
             <div class="col-md-12">
                 <div class="form-group">
@@ -374,7 +379,11 @@
                 </div>
             </div>
 
-            <div class="col-md-12 my-4" th:remove="${eventDocuments.size()== 0} ? all : none">
+        <div class="row" th:remove="${eventDocuments.size()== 0} ? all : none">
+            <hr class="col-md-11 mt-5 ml-3">
+        </div>
+
+            <div class="col-md-12 px-0 pr-4" th:remove="${eventDocuments.size()== 0} ? all : none">
                 <h3>Event Documents</h3>
                 <table class="table table-hover">
                     <tbody th:each=" document : ${eventDocuments}">
@@ -385,7 +394,11 @@
                 </table>
             </div>
 
-            <div class="row pt-3" th:if="${session.SESSION_Role =='CWS'}">
+        <div class="row" th:if="${session.SESSION_Role =='CWS'}" th:remove="${allSchoolNamesAndIds.size()== 0 && AllEmployerNamesAndIds.size()==0} ? all : none">
+            <hr class="col-md-11 mt-5 ml-3">
+        </div>
+
+            <div class="row row pl-2 pr-4" th:if="${session.SESSION_Role =='CWS'}" th:remove="${allSchoolNamesAndIds.size()== 0 && AllEmployerNamesAndIds.size()==0} ? all : none">
                 <div class="mb-auto p-2 col-md-6 well2 well3">
                     <label class="font-weight-bold h5">Schools Attending</label>
                     <ul class="list-group">

@@ -719,7 +719,7 @@ function deleteFile(document, fileID) {
     });
 }
 
-    function deleteVideo(document) {
+    function deleteVideo(document, fileID) {
 
         var employerID = getUrlParameter('employerId');
         var formData = new FormData();
@@ -744,7 +744,15 @@ function deleteFile(document, fileID) {
             },
             success: function (res) {
                 // console.log(res);
-                alert("The video was deleted successfully")
+                fileID.parent().parent().remove();
+                $('#success_message_text').empty()
+                $('#success_message_text').text('The video was deleted!');
+                $('#success_message').removeClass('d-none').addClass('show');
+                localStorage.clear()
+                $("#success_message").fadeTo(1500, 1);
+                setTimeout(function(){
+                    $("#success_message").fadeTo(1500, 0);
+                },5000);
             },
             error: function (err) {
                 // console.error(err);
