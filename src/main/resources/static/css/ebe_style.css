@@ -235,3 +235,7 @@ ul{
 .upload_form{
     padding: 0 !important;
 }
+
+.dis-none{
+    display: none;
+}

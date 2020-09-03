@@ -135,7 +135,7 @@
                             </button>
 
                             <!--Teachers-->
-                            <button class="tooltip-button input-group-text" th:if="${session.SESSION_Role =='Teacher'}" id="tooltip" data-toggle="tooltip" data-placement="top" data-html="true" data-original-title= "<span class='float-left'>Search By:</span><br><span class='float-left'>-Employer Name</span>">
+                            <button class="tooltip-button input-group-text" th:if="${session.SESSION_Role =='Teacher'}" id="tooltip" data-toggle="tooltip" data-placement="top" data-html="true" data-original-title= "<span class='float-left'>Search By:</span><br><span class='float-left'>-Employer Name</span><br>">
                                 <i class="fa fa-info-circle"></i>
                             </button>
                         </div>
@@ -161,7 +161,7 @@
                 <!-- Cards -->
 
                 <div class="list-employers">
-                    <div class="gel-content-row employer-card employer-found employer-filtered" th:each="employer : ${allEmployers}"  th:id="${employer.getEmployerID()}" th:if="${session.SESSION_Role =='Teacher' && employer.getStatusOfEmployerID()==1 || session.SESSION_Role =='CWS'}">
+                    <div class="gel-content-row employer-card employer-found employer-filtered" th:each="employer : ${allEmployers}"  th:id="${employer.getEmployerID()}" th:classappend="${session.SESSION_Role =='Teacher' && employer.getStatusOfEmployerID()==1} ? dis-none : dis-block">
                         <article class="card js-card card--style-icon card--100" gel-processed="processed">
                             <a th:href="@{/ebe/profile-employer(employerId=${employer.getEmployerID()})}" class="card__inner" gel-processed="processed">
                                 <div class="card__content">
