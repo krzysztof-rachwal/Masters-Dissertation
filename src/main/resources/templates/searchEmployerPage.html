@@ -128,7 +128,14 @@
                             <button class="input-group-text input-border" onclick="searchEmployer()">
                                 <i class="fa fa-search"></i>
                             </button>
-                            <button class="tooltip-button input-group-text" id="tooltip" data-toggle="tooltip" data-placement="top" data-html="true" data-original-title= "<span class='float-left'>Search By:</span><br><span class='float-left'>-Notes</span><br><span class='float-left'>-Employer Name</span><br><span class='float-left'>-Employer City</span><br><span class='float-left'>-Employer PostCode</span><br><span class='float-left'>-Contact Person</span><br><span>-Contact Person Position</span>">
+
+                            <!--CWS-->
+                            <button class="tooltip-button input-group-text" th:if="${session.SESSION_Role =='CWS'}" id="tooltip" data-toggle="tooltip" data-placement="top" data-html="true" data-original-title= "<span class='float-left'>Search By:</span><br><span class='float-left'>-Notes</span><br><span class='float-left'>-Employer Name</span><br><span class='float-left'>-Employer City</span><br><span class='float-left'>-Employer PostCode</span><br><span class='float-left'>-Contact Person</span><br><span>-Contact Person Position</span>">
+                                <i class="fa fa-info-circle"></i>
+                            </button>
+
+                            <!--Teachers-->
+                            <button class="tooltip-button input-group-text" th:if="${session.SESSION_Role =='Teacher'}" id="tooltip" data-toggle="tooltip" data-placement="top" data-html="true" data-original-title= "<span class='float-left'>Search By:</span><br><span class='float-left'>-Employer Name</span>">
                                 <i class="fa fa-info-circle"></i>
                             </button>
                         </div>
@@ -160,18 +167,22 @@
                                 <div class="card__content">
                                     <div class="content__image">
                                         <div>
-                                            <img alt="Card image" th:src="${employer.getLogoLink()}" >
+                                            <img alt="Card image" th:src="${employer.getLogoLink()}"  th:if="${employer.getLogoLink().length() != 0}" >
+                                            <img alt="Card image" src="https://pbs.twimg.com/profile_images/1243552736039313411/ccpSwaNu_400x400.jpg" th:if="${employer.getLogoLink().length() == 0}" >
+
                                         </div>
                                     </div>
                                     <div class="content__body">
                                         <div class="body__title searchable"  name="employer-card-title" th:text="${#strings.capitalize(employer.getEmployerName())}"></div>
                                         <div class="body__body" th:text="${#strings.capitalize(employer.getCompanySummary())}"></div>
 
+                                        <span th:if="${session.SESSION_Role =='CWS'}">
                                             <h5 class="searchable d-none" th:text="${employer.getEmployerAddressCity()}"></h5>
                                             <h5 class="searchable d-none" th:text="${employer.getEmployerPostcode()}"></h5>
                                             <h5 class="searchable d-none" th:text="${#strings.capitalize(employer.getContactPersonNameSurname())}"></h5>
                                             <h5 class="searchable d-none" th:text="${#strings.capitalize(employer.getContactPersonPosition())}"></h5>
                                             <h5 class="searchable d-none" th:text="${#strings.capitalize(employer.getNotes())}"></h5>
+                                        </span>
 
                                         </div>
                                     </div>

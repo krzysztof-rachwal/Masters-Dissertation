@@ -63,14 +63,14 @@
                     <div class="row mb-4">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="vacancy-name" class="mb-1">Vacancy Name</label>
+                                <label for="vacancy-name" class="mb-1">Vacancy Name &#42;</label>
                                 <input type="text" class="form-control w-80 form-required" id="vacancy-name">
                             </div>
                         </div>
 
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="employer-name" class="mb-1">Employer Name</label><br>
+                                <label for="employer-name" class="mb-1">Employer Name &#42;</label><br>
                                 <select class="selectpicker" data-width="80%" data-live-search="true" id="employer-name"
                                         title="Nothing selected">
                                     <option th:each="employer : ${AllEmployerNamesAndIds}"
@@ -84,7 +84,7 @@
                     <div class="row mb-4">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="vacancy-summary" class="mb-1">Vacancy Description</label>
+                                <label for="vacancy-summary" class="mb-1">Vacancy Description &#42;</label>
                                 <textarea class="form-control form-required text-area-w-80" id="vacancy-summary"
                                           rows="5"></textarea>
                             </div>
@@ -97,7 +97,7 @@
                                 <input type="text" class="form-control w-80" id="web-link">
                             </div>
                             <div class="form-group">
-                                <label for="post-code" class="mb-1">Post Code</label>
+                                <label for="post-code" class="mb-1">Post Code &#42;</label>
                                 <input type="text" class="form-control w-80 form-required" id="post-code">
                             </div>
                         </div>
@@ -106,14 +106,14 @@
                     <div class="row mb-4">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="start-date" class="mb-1">Start Date</label>
+                                <label for="start-date" class="mb-1">Start Date &#42;</label>
                                 <input type="date" class="form-control w-80 form-required" id="start-date">
                             </div>
                         </div>
 
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="closing-date" class="mb-1">Closing Date</label>
+                                <label for="closing-date" class="mb-1">Closing Date &#42;</label>
                                 <input type="date" class="form-control w-80 form-required" id="closing-date">
                             </div>
                         </div>
@@ -121,7 +121,7 @@
                     <div class="row mb-4">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="vacancy-type" class="mb-1">Status of Vacancy</label><br>
+                                <label for="vacancy-type" class="mb-1">Status of Vacancy &#42;</label><br>
                                 <select class="selectpicker" data-width="80%" id="vacancy-status"
                                         title="Nothing selected">
                                     <option th:each="vacancyStatus : ${allVacanciesStatus}"
@@ -133,7 +133,7 @@
 
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="vacancy-type" class="mb-1">Type of Vacancy</label><br>
+                                <label for="vacancy-type" class="mb-1">Type of Vacancy &#42;</label><br>
                                 <select class="selectpicker" data-width="80%" id="vacancy-type"
                                         title="Nothing selected">
                                     <option th:each="vacancyType : ${allVacanciesTypes}"
@@ -145,7 +145,7 @@
 
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="occup-code" class="mb-1">Occupational Code</label><br>
+                                <label for="occup-code" class="mb-1">Occupational Code &#42;</label><br>
                                 <select class="selectpicker" data-width="80%" id="occup-code" title="Nothing selected">
                                     <option th:each="vacancyOccupationalCode : ${allVacanciesOccupationalCodes}"
                                             th:value="${vacancyOccupationalCode.getOccupationalCodeID()}"
@@ -156,7 +156,7 @@
 
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="appl-method" class="mb-1">Application Methods</label><br>
+                                <label for="appl-method" class="mb-1">Application Methods &#42;</label><br>
                                 <select class="selectpicker" data-width="80%" id="appl-method" title="Nothing selected">
                                     <option th:each="vacancyApplicationMethods : ${allVacanciesApplicationMethods}"
                                             th:value="${vacancyApplicationMethods.getApplicationMethodID()}"

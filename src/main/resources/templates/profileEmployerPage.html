@@ -60,11 +60,11 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="company-name">Company name</label>
+                                    <label for="company-name">Company Name &#42;</label>
                                     <input type="text" class="form-control form-required" id="company-name" th:value="${employer.getEmployerName()}">
                                 </div>
                                 <div class="form-group">
-                                    <label for="company-summary">Company summary</label>
+                                    <label for="company-summary">Company Summary &#42;</label>
                                     <textarea class="form-control form-required text-area-w-80"  rows="3" id="company-summary" th:text="${employer.getCompanySummary()}" th:value="${employer.getCompanySummary()}"></textarea>
                                 </div>
                                 <div class="form-group">
@@ -77,12 +77,12 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="employer-employees-number">Number of Employees</label><br>
+                                    <label for="employer-employees-number">Number of Employees &#42;</label><br>
                                     <select id="employer-employees-number" data-width="80%" class="selectpicker">
                                         <option  th:each="employerNumberEmployees : ${allEmployerNumberOfEmployees}" th:selected="${employerNumberEmployees.getNumberOfEmployeesID() == employer.getNumberOfEmployeesID()}"  th:value="${employerNumberEmployees.getNumberOfEmployeesID()}" th:text="${employerNumberEmployees.getNumberOfEmployeesName()}"></option>
                                     </select>
                                 </div>
-                                <label>Address</label>
+                                <label>Address &#42;</label>
                                 <div class="group-input">
                                     <div class="input-group-prepend">
                                         <input type="text" id="employer-street" class="form-control border-right input-sm form-required w-80" th:value="${employer.getEmployerAddressStreet()}">
@@ -101,17 +101,17 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="contact-name">Contact Name</label>
+                                        <label for="contact-name">Contact Name &#42;</label>
                                         <input type="text" class="form-control form-required" id="contact-name"
                                                th:value="${employer.getContactPersonNameSurname()}">
                                     </div>
                                     <div class="form-group">
-                                        <label for="contact-position">Contact Position</label>
+                                        <label for="contact-position">Contact Position &#42;</label>
                                         <input type="text" class="form-control form-required" id="contact-position"
                                                th:value="${employer.getContactPersonPosition()}">
                                     </div>
                                     <div class="form-group">
-                                        <label for="employer-phone">Phone number</label>
+                                        <label for="employer-phone">Phone Number &#42;</label>
                                         <input type="text" class="form-control form-required" id="employer-phone"
                                                th:value="${employer.getEmployerPhone()}">
                                     </div>
@@ -120,7 +120,7 @@
                                     <!--                        <input type="text" class="form-control input-border" id="employer-mobile">-->
                                     <!--                    </div>-->
                                     <div class="form-group">
-                                        <label for="employer-email">Email</label>
+                                        <label for="employer-email">Email &#42;</label>
                                         <input type="text" class="form-control form-required" id="employer-email"
                                                th:value="${employer.getEmployerEmail()}">
                                     </div>
@@ -150,7 +150,7 @@
                                     <h4>Other</h4>
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="industry-sector">Industry Sector</label><br>
+                                    <label for="industry-sector">Industry Sector &#42;</label><br>
                                     <select id="industry-sector" data-width="80%" class="selectpicker" multiple
                                             data-live-search="true">
                                         <option th:each="employerIndustrySector : ${allEmployerIndustrySectors}"
@@ -161,7 +161,7 @@
                                 </div>
 
                                 <div class="col-md-6 mb-4">
-                                    <label for="employer-cooperation-type">Cooperation Type</label><br>
+                                    <label for="employer-cooperation-type">Cooperation Type &#42;</label><br>
                                     <select id="employer-cooperation-type" data-width="80%" class="selectpicker"
                                             multiple data-live-search="true">
                                         <option th:each="employerCooperationType : ${allEmployerCooperationType}"
@@ -171,7 +171,7 @@
                                     </select>
                                 </div>
                                 <div class="col-md-6 mb-4">
-                                    <label for="curriculum-area">Curriculum Areas</label><br>
+                                    <label for="curriculum-area">Curriculum Areas &#42;</label><br>
                                     <select id="curriculum-area" data-width="80%" class="selectpicker" multiple
                                             data-live-search="true">
                                         <option th:each="employerCurriculumAreas : ${allEmployerCurriculumAreas}"
@@ -182,7 +182,7 @@
                                 </div>
 
                                 <div class="col-md-6 mb-4">
-                                    <label for="schools-attending">Schools Preferences</label><br>
+                                    <label for="schools-attending">Schools Preferences &#42;</label><br>
                                     <select class="selectpicker" data-width="80%" multiple data-live-search="true"
                                             id="schools-attending">
                                         <option th:each="school : ${allSchoolNamesAndIds}"
@@ -193,7 +193,7 @@
                                 </div>
 
                                 <div class="col-md-6 mb-4">
-                                    <label for="employer-preferences">Preferences</label><br>
+                                    <label for="employer-preferences">Preferences &#42;</label><br>
                                     <select class="selectpicker" data-width="80%" multiple data-live-search="true"
                                             id="employer-preferences">
                                         <option th:each="employerPreferences : ${allEmployerPreferences}"
@@ -203,7 +203,7 @@
                                     </select>
                                 </div>
                                 <div class="col-md-6 mb-4 d-none" id="div-foreign-language">
-                                    <label for="employer-language">Which Foreign Language?</label><br>
+                                    <label for="employer-language">Which Foreign Language? &#42;</label><br>
                                     <select class="selectpicker" data-width="80%" multiple data-live-search="true"
                                             id="employer-language">
                                         <option th:each="employerLanguage : ${allEmployerLanguage}"
@@ -220,7 +220,7 @@
                                 </div>
 
                                 <div class="col-md-6 mb-4">
-                                    <label for="employer-status">Employer Status</label>
+                                    <label for="employer-status">Employer Status &#42;</label>
                                     <select class="selectpicker" data-width="80%" id="employer-status">
                                         <option th:each="employerStatus : ${allEmployerStatus}"
                                                 th:value="${employerStatus.getStatusOfEmployerID()}"
@@ -230,7 +230,7 @@
                                 </div>
 
                                 <div class="col-md-12 my-4">
-                                    <label for="local-authorities">LocalAuthorities</label><br>
+                                    <label for="local-authorities">LocalAuthorities &#42;</label><br>
                                     <select class="selectpicker" data-width="90%" multiple data-live-search="true"
                                             id="local-authorities">
                                         <option th:each="employerLocalAuthority : ${allEmployerLocalAuthorities}"
@@ -407,7 +407,7 @@
                             <div class="container-fluid">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="eventName">Event Name</label>
+                                        <label for="eventName">Event Name </label>
                                         <input type="text" id="eventName" name="eventName" class="form-control input-border" required>
                                     </div>
                                     <div class="form-group">
@@ -754,7 +754,7 @@
         <table class="table table-hover">
             <tbody th:each=" document : ${employerDocuments}">
                 <td>
-                    <a th:href="@{${document}}" target="_blank" th:text="${#strings.substring(document,52)}">></a>
+                    <a th:href="@{${document}}" target="_blank" th:text="${#strings.substring(document,52)}"></a>
                 </td>
             </tbody>
         </table>

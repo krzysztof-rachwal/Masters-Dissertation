@@ -63,13 +63,13 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="event-name">Event Name</label>
+                            <label for="event-name">Event Name &#42;</label>
                             <input type="text" class="form-control form-required" id="event-name">
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="event-type">Event Type</label><br>
+                            <label for="event-type">Event Type &#42;</label><br>
                             <select class="selectpicker" data-width="80%" data-live-search="true" id="event-type"
                                     title="Nothing selected">
                                 <option th:each="event : ${allEventTypes}" th:value="${event.getTypeOfEventID()}"
@@ -79,13 +79,13 @@
                     </div>
                     <div class="col-md-6 ">
                         <div class="form-group">
-                            <label for="event-summary">Event Summary</label>
+                            <label for="event-summary">Event Summary &#42;</label>
                             <textarea class="form-control form-required text-area-w-80" rows="3"
                                       id="event-summary"></textarea>
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <label>Address</label>
+                        <label>Address &#42;</label>
                         <div class="group-input">
                             <div class="input-group-prepend">
                                 <input type="text" id="event-street"
@@ -104,38 +104,38 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="event-date">Event Date</label>
+                            <label for="event-date">Event Date &#42;</label>
                             <input type="date" class="form-control w-80 form-required" id="event-date">
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="event-time">Event Time</label>
+                            <label for="event-time">Event Time &#42;</label>
                             <input type="time" class="form-control w-80 form-required" id="event-time">
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="event-venue">Event Venue</label>
-                            <input type="text" class="form-control w-80 form-required" id="event-venue">
+                            <label for="event-venue">Event Venue </label>
+                            <input type="text" class="form-control w-80" id="event-venue">
                         </div>
                     </div>
 
                     <div class="col-md-6 ">
                         <div class="form-group">
-                            <label for="adviser-name">Adviser Name</label>
-                            <input type="text" class="form-control w-80 form-required" id="adviser-name">
+                            <label for="adviser-name">Adviser Name </label>
+                            <input type="text" class="form-control w-80 " id="adviser-name">
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="no-attendees">Number of Attendees</label>
-                            <input type="number" min="0" class="form-control w-80 form-required" id="no-attendees">
+                            <label for="no-attendees">Number of Attendees </label>
+                            <input type="number" min="0" class="form-control w-80 " id="no-attendees">
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="employers-attending">Employers Attending</label><br>
+                            <label for="employers-attending">Employers Attending &#42;</label><br>
                             <select class="selectpicker" multiple data-live-search="true" data-width="80%"
                                     id="employers-attending">
                                 <option th:each="employer : ${AllEmployerNamesAndIds}"
@@ -146,7 +146,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="schools-attending">Schools Attending</label><br>
+                            <label for="schools-attending">Schools Attending&#42;</label><br>
                             <select class="selectpicker" multiple data-live-search="true" data-width="80%"
                                     id="schools-attending">
                                 <option th:each="school : ${allSchoolNamesAndIds}" th:value="${school.getSchoolID()}"
@@ -157,7 +157,7 @@
 
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label>Can the event be conducted in Welsh?</label>
+                            <label>Can the event be conducted in Welsh? &#42;</label>
                             <select id="conducted-welsh" class="selectpicker" title="Nothing selected" data-width="80%">
                                 <option value="1">Yes</option>
                                 <option value="0">No</option>
@@ -167,7 +167,7 @@
 
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label>Does the event promote apprenticeship?</label>
+                            <label>Does the event promote apprenticeship? &#42;</label>
                             <select id="promote-apprenticheship" class="selectpicker" title="Nothing selected"
                                     data-width="80%">
                                 <option value="1">Yes</option>
@@ -177,7 +177,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label>Does the event challenger gender stereotypes?</label>
+                            <label>Does the event challenger gender stereotypes? &#42;</label>
                             <select id="challenger-gender" class="selectpicker" title="Nothing selected"
                                     data-width="80%">
                                 <option value="1">Yes</option>
@@ -187,7 +187,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label>Is the Event going to be Public?</label>
+                            <label>Is the Event going to be Public? &#42;</label>
                             <select id="event-public" class="selectpicker" title="Nothing selected" data-width="80%">
                                 <option value="1">Yes</option>
                                 <option value="0">No</option>
@@ -196,7 +196,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label>Is the Event Cancelled?</label>
+                            <label>Is the Event Cancelled? &#42;</label>
                             <select id="event-cancelled" class="selectpicker" title="Nothing selected" data-width="80%">
                                 <option value="1">Yes</option>
                                 <option value="0">No</option>
@@ -205,7 +205,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label>Is this a featured event?</label>
+                            <label>Is this a featured event? &#42;</label>
                             <select id="event-featured" class="selectpicker" title="Nothing selected" data-width="80%">
                                 <option value="1">Yes</option>
                                 <option value="0">No</option>

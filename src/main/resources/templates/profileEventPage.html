@@ -48,13 +48,13 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="event-name">Event name</label>
+                                        <label for="event-name">Event Name &#42;</label>
                                         <input type="text" class="form-control form-required" th:value="${event.getEventName()}" id="event-name">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="event-type">Event type</label><br>
+                                        <label for="event-type">Event Type &#42;</label><br>
                                         <select class="selectpicker" data-width="80%" data-live-search="true" id="event-type">
                                             <option  th:each="eventTypes : ${allEventTypes}"  th:selected="${eventTypes.getTypeOfEventID()} == ${event.getTypeOfEventID()}"  th:value="${eventTypes.getTypeOfEventID()}" th:text="${eventTypes.getTypeOfEventName()}"></option>
                                         </select>
@@ -62,12 +62,12 @@
                                 </div>
                                 <div class="col-md-6 ">
                                     <div class="form-group">
-                                        <label for="event-summary">Event Summary</label>
+                                        <label for="event-summary">Event Summary &#42;</label>
                                         <textarea class="form-control form-required text-area-w-80" rows="3" id="event-summary" th:text="${event.getEventSummary()}" th:value="${event.getEventSummary()}"></textarea>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <label>Address</label>
+                                    <label>Address &#42;</label>
                                     <div class="group-input">
                                         <div class="input-group-prepend">
                                             <input type="text" id="event-street" class="form-control border-right input-sm w-80 form-required" th:value="${event.getEventAddressStreet()}">
@@ -81,38 +81,38 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="event-date">Event Date</label>
+                                        <label for="event-date">Event Date &#42;</label>
                                         <input type="date" class="form-control form-required" id="event-date" th:value="${event.getEventDate()}">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="event-time">Event Time</label>
+                                        <label for="event-time">Event Time &#42;</label>
                                         <input type="time" class="form-control form-required" id="event-time" th:value="${#dates.format(event.getEventTime(),'HH:mm')}">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="event-venue">Event Venue</label>
-                                        <input type="text" class="form-control form-required" id="event-venue" th:value="${event.getEventVenueName()}">
+                                        <input type="text" class="form-control" id="event-venue" th:value="${event.getEventVenueName()}">
                                     </div>
                                 </div>
 
                                 <div class="col-md-6 ">
                                     <div class="form-group">
                                         <label for="adviser-name">Adviser Name</label>
-                                        <input type="text" class="form-control form-required" id="adviser-name" th:value="${event.getNameOfAdviser()}">
+                                        <input type="text" class="form-control " id="adviser-name" th:value="${event.getNameOfAdviser()}">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="no-attendees">Number of Attendees</label>
-                                        <input type="number" min="0" class="form-control form-required" id="no-attendees" th:value="${event.getNumberOfAttendees()}">
+                                        <input type="number" min="0" class="form-control " id="no-attendees" th:value="${event.getNumberOfAttendees()}">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="employers-attending">Employers Attending</label><br>
+                                        <label for="employers-attending">Employers Attending &#42;</label><br>
                                         <select class="selectpicker" multiple data-live-search="true" data-width="80%" id="employers-attending" >
                                             <option  th:each="employer : ${AllEmployerNamesAndIds}" th:selected="${EventEmployersIDs.contains(employer.getEmployerID())}" th:value="${employer.getEmployerID()}" th:text="${employer.getEmployerName()}"></option>
                                         </select>
@@ -120,7 +120,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="schools-attending">Schools Attending</label><br>
+                                        <label for="schools-attending">Schools Attending &#42;</label><br>
                                         <select class="selectpicker" multiple data-live-search="true" data-width="80%" id="schools-attending">
                                             <option  th:each="school : ${allSchoolNamesAndIds}"   th:selected="${EventSchoolsIDs.contains(school.getSchoolID())}"th:value="${school.getSchoolID()}" th:text="${school.getSchoolName()}"></option>
                                         </select>
@@ -129,7 +129,7 @@
 
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>Can the event be conducted in Welsh?</label>
+                                        <label>Can the event be conducted in Welsh? &#42;</label>
                                         <select  id="conducted-welsh">
                                             <option value="1" th:selected="${event.getPromotesWelshLanguage()== true}">Yes</option>
                                             <option value="0" th:selected="${event.getPromotesWelshLanguage()== false}">No</option>
@@ -139,7 +139,7 @@
 
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>Does the event promote apprenticeship?</label>
+                                        <label>Does the event promote apprenticeship? &#42;</label>
                                         <select  id="promote-apprenticheship">
                                             <option value="1" th:selected="${event.getPromotesApprenticeships() == true}">Yes</option>
                                             <option value="0" th:selected="${event.getPromotesApprenticeships() == false}">No</option>
@@ -149,7 +149,7 @@
 
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>Does the event challenger gender stereotypes?</label>
+                                        <label>Does the event challenger gender stereotypes? &#42;</label>
                                         <select  id="challenger-gender">
                                             <option value="1" th:selected="${event.getChallengesGenderStereotypes() == true}">Yes</option>
                                             <option value="0" th:selected="${event.getChallengesGenderStereotypes()== false}">No</option>
@@ -159,7 +159,7 @@
 
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>Is the Event going to be Public?</label>
+                                        <label>Is the Event going to be Public? &#42;</label>
                                         <select  id="event-public">
                                             <option value="1" th:selected="${event.getPublic()== true}">Yes</option>
                                             <option value="0" th:selected="${event.getPublic()== false}">No</option>
@@ -169,7 +169,7 @@
 
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label>Is the Event Cancelled?</label>
+                                    <label>Is the Event Cancelled? &#42;</label>
                                     <select  id="event-cancelled">
                                         <option value="1" th:selected="${event.getCancelled()== true}">Yes</option>
                                         <option value="0" th:selected="${event.getCancelled()== false}">No</option>
@@ -179,7 +179,7 @@
 
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label>Is the Event featured?</label>
+                                    <label>Is the Event featured? &#42;</label>
                                     <select  id="event-featured">
                                         <option value="1" th:selected="${event.getFeatured()== true}">Yes</option>
                                         <option value="0" th:selected="${event.getFeatured()== false}">No</option>

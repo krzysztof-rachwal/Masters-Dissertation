@@ -50,7 +50,7 @@
                         <div class="row mb-4">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="vacancy-name">Vacancy Name</label>
+                                    <label for="vacancy-name">Vacancy Name &#42;</label>
                                     <input type="text" class="form-control form-required" id="vacancy-name" th:value="${vacancy.getVacancyName()}">
                                     <input type="hidden" id="vacancy-old-name" th:value="${vacancy.getVacancyName()}"/>
                                 </div>
@@ -58,7 +58,7 @@
 
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="employer-name" class="mb-1">Employer Name</label><br>
+                                    <label for="employer-name" class="mb-1">Employer Name &#42;</label><br>
                                     <select class="selectpicker" data-width="80%" data-live-search="true" id="employer-name">
                                         <option  th:each="employer : ${AllEmployerNamesAndIds}" th:selected="${employer.getEmployerName()} ==  ${vacancyEmployerName.getEmployerName()}" th:value="${employer.getEmployerID()}" th:text="${employer.getEmployerName()}"></option>
                                     </select>
@@ -69,7 +69,7 @@
                         <div class="row mb-4">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="vacancy-summary" class="mb-1">Vacancy Description</label>
+                                    <label for="vacancy-summary" class="mb-1">Vacancy Description &#42;</label>
                                     <textarea class="form-control form-required text-area-w-80" id="vacancy-summary" rows="5" th:text="${vacancy.getVacancySummary()}"></textarea>
                                 </div>
                             </div>
@@ -80,7 +80,7 @@
                                     <input type="text" class="form-control w-80" id="web-link" th:value="${vacancy.getVacancyLink()}">
                                 </div>
                                 <div class="form-group">
-                                    <label for="post-code" class="mb-1">Post Code</label>
+                                    <label for="post-code" class="mb-1">Post Code &#42;</label>
                                     <input type="text" class="form-control form-required w-80" id="post-code" th:value="${vacancy.getVacancyPostcode()}">
                                     <input type="hidden" id="old-post-code" th:value="${vacancy.getVacancyPostcode()}"/>
                                 </div>
@@ -90,13 +90,13 @@
                         <div class="row mb-4">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="start-date" class="mb-1">Start Date</label>
+                                    <label for="start-date" class="mb-1">Start Date &#42;</label>
                                     <input type="date" class="form-control form-required w-80" id="start-date" th:value="${vacancy.getStartOfVacancy()}">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="closing-date" class="mb-1">Closing Date</label>
+                                    <label for="closing-date" class="mb-1">Closing Date &#42;</label>
                                     <input type="date" class="form-control form-required w-80" id="closing-date" th:value="${vacancy.getDeadlineForApplication()}">
                                 </div>
                             </div>
@@ -105,7 +105,7 @@
                         <div class="row mb-4">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="vacancy-type" class="mb-1">Type of Vacancy</label>
+                                    <label for="vacancy-type" class="mb-1">Type of Vacancy &#42;</label>
                                     <select class="selectpicker" id="vacancy-type" data-width="80%">
                                         <option th:each="vacancyType : ${allVacanciesTypes}" th:selected="${vacancy.getTypeOfVacancyID()} == ${vacancyType.getTypeOfVacancyID()}" th:value="${vacancyType.getTypeOfVacancyID()}" th:text="${vacancyType.getTypeOfVacancyName()}"></option>
                                     </select>
@@ -113,7 +113,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="occup-code" class="mb-1">Occupational Code</label>
+                                    <label for="occup-code" class="mb-1">Occupational Code &#42;</label>
                                     <select class="selectpicker" id="occup-code" data-width="80%">
                                         <option th:each="vacancyOccupationalCode : ${allVacanciesOccupationalCodes}"  th:selected="${vacancy.getOccupationalCodeID()} == ${vacancyOccupationalCode.getOccupationalCodeID()}" th:value="${vacancyOccupationalCode.getOccupationalCodeID()}" th:text="${vacancyOccupationalCode.getOccupationalCodeName()}"></option>
                                     </select>
@@ -122,7 +122,7 @@
 
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="appl-method" class="mb-1">Application methods</label>
+                                    <label for="appl-method" class="mb-1">Application methods &#42;</label>
                                     <select class="selectpicker" id="appl-method" data-width="80%">
                                         <option th:each="vacancyApplicationMethods : ${allVacanciesApplicationMethods}" th:selected="${vacancy.getApplicationMethodID()} == ${vacancyApplicationMethods.getApplicationMethodID()}" th:value="${vacancyApplicationMethods.getApplicationMethodID()}" th:text="${vacancyApplicationMethods.getApplicationMethodName()}"></option>
                                     </select>
@@ -131,7 +131,7 @@
 
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="vacancy-type" class=" mb-1">Status of Vacancy</label>
+                                    <label for="vacancy-type" class=" mb-1">Status of Vacancy &#42;</label>
                                     <select class="selectpicker" id="vacancy-status" data-width="80%">
                                         <option th:each="vacancyStatus : ${allVacanciesStatus}" th:selected="${vacancy.getStatusOfVacancyID()} == ${vacancyStatus.getStatusOfVacancyID()}" th:value="${vacancyStatus.getStatusOfVacancyID()}" th:text="${vacancyStatus.getStatusOfVacancyName()}"></option>
                                     </select>
@@ -241,7 +241,7 @@
         <div class="container ml-2">
             <div class="row">
                 <div class="col-lg-3 col-md-6">
-                    <p><strong>Employer name</strong></p>
+                    <p><strong>Employer Name</strong></p>
                 </div>
                 <div class="col-lg-9 col-md-6">
                     <a th:text="${vacancyEmployerName.getEmployerName()}" th:href="@{/ebe/profile-employer(employerId=${vacancy.getEmployerID()})}"></a>
@@ -333,7 +333,7 @@
                 <table class="table table-hover">
                     <tbody th:each=" document : ${vacancyDocuments}">
                     <td>
-                        <a th:href="@{${document}}" target="_blank" th:text="${#strings.substring(document,51)}">></a>
+                        <a th:href="@{${document}}" target="_blank" th:text="${#strings.substring(document,51)}"></a>
                     </td>
                     </tbody>
                 </table>

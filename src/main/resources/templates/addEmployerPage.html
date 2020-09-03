@@ -66,24 +66,24 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="company-name">Company Name</label>
+                            <label for="company-name">Company Name &#42;</label>
                             <input type="text" class="form-control form-required" id="company-name">
                         </div>
                         <div class="form-group">
-                            <label for="company-summary">Company Summary</label>
+                            <label for="company-summary">Company Summary &#42;</label>
                             <textarea class="form-control form-required text-area-w-80"  rows="3" id="company-summary"></textarea>
                         </div>
 
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="employer-employees-number">Number of Employees</label><br>
+                            <label for="employer-employees-number">Number of Employees &#42;</label><br>
                             <select id="employer-employees-number"  data-width="80%" class="selectpicker" title="Nothing selected">
                                 <option  th:each="employerNumberEmployees : ${allEmployerNumberOfEmployees}" th:value="${employerNumberEmployees.getNumberOfEmployeesID()}" th:text="${employerNumberEmployees.getNumberOfEmployeesName()}"></option>
                             </select>
                         </div>
 
-                        <label>Address</label>
+                        <label>Address &#42;</label>
                         <div class="group-input">
                             <div class="input-group-prepend">
                                 <input type="text" id="employer-street" class="form-control border-right input-sm form-required w-80" placeholder="Street">
@@ -102,19 +102,19 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="contact-name">Contact Name</label>
+                            <label for="contact-name">Contact Name &#42;</label>
                             <input type="text" class="form-control form-required" id="contact-name">
                         </div>
                         <div class="form-group">
-                            <label for="contact-position">Contact Position</label>
+                            <label for="contact-position">Contact Position &#42;</label>
                             <input type="text" class="form-control form-required" id="contact-position">
                         </div>
                         <div class="form-group">
-                            <label for="employer-phone">Phone Number</label>
+                            <label for="employer-phone">Phone Number &#42;</label>
                             <input type="text" class="form-control form-required" id="employer-phone">
                         </div>
                         <div class="form-group">
-                            <label for="employer-email">Email</label>
+                            <label for="employer-email">Email &#42;</label>
                             <input type="text" class="form-control form-required" id="employer-email">
                         </div>
                     </div>
@@ -140,40 +140,40 @@
                         <h4>Other</h4>
                     </div>
                     <div class="col-md-6">
-                        <label for="industry-sector">Sector Areas</label><br>
+                        <label for="industry-sector">Sector Areas &#42;</label><br>
                         <select id="industry-sector" data-width="80%" class="selectpicker" multiple data-live-search="true">
                             <option th:each="employerIndustrySector : ${allEmployerIndustrySectors}" th:value="${employerIndustrySector.getEmployerIndustrySectorID()}" th:text="${employerIndustrySector.getEmployerIndustrySectorName()}"></option>
                         </select>
                     </div>
 
                     <div class="col-md-6 mb-4">
-                        <label for="employer-cooperation-type">Cooperation Type</label><br>
+                        <label for="employer-cooperation-type">Cooperation Type &#42;</label><br>
                         <select id="employer-cooperation-type" data-width="80%"   class="selectpicker" multiple data-live-search="true">
                             <option  th:each="employerCooperationType : ${allEmployerCooperationType}" th:value="${employerCooperationType.getEmployerCooperationTypeID()}" th:text="${employerCooperationType.getEmployerCooperationTypeName()}"></option>
                         </select>
                     </div>
                     <div class="col-md-6 mb-4">
-                        <label for="curriculum-area">Curriculum Areas</label><br>
+                        <label for="curriculum-area">Curriculum Areas &#42;</label><br>
                         <select id="curriculum-area" data-width="80%" class="selectpicker" multiple data-live-search="true">
                             <option th:each="employerCurriculumAreas : ${allEmployerCurriculumAreas}" th:value="${employerCurriculumAreas.getEmployerAreaOfCurriculumID()}" th:text="${employerCurriculumAreas.getEmployAreaOfCurriculumName()}"></option>
                         </select>
                     </div>
 
                     <div class="col-md-6 mb-4">
-                        <label for="schools-attending">Schools Preferences</label><br>
+                        <label for="schools-attending">Schools Preferences &#42;</label><br>
                         <select class="selectpicker"  data-width="80%" multiple data-live-search="true" id="schools-attending">
                             <option  th:each="school : ${allSchoolNamesAndIds}" th:value="${school.getSchoolID()}" th:text="${school.getSchoolName()}"></option>
                         </select>
                     </div>
 
                     <div class="col-md-6 mb-4">
-                        <label for="employer-preferences">Preferences</label><br>
+                        <label for="employer-preferences">Preferences &#42;</label><br>
                         <select class="selectpicker"  data-width="80%" multiple data-live-search="true" id="employer-preferences">
                             <option  th:each="employerPreferences : ${allEmployerPreferences}" th:value="${employerPreferences.getEmployerPreferencesID()}" th:text="${employerPreferences.getEmployerPreferencesName()}"></option>
                         </select>
                     </div>
                     <div class="col-md-6 mb-4 d-none" id="div-foreign-language">
-                        <label for="employer-language">Which Foreign Language?</label><br>
+                        <label for="employer-language">Which Foreign Language? &#42;</label><br>
                         <select class="selectpicker" data-width="80%" multiple id="employer-language" >
                             <option th:each="employerLanguage : ${allEmployerLanguage}" th:value="${employerLanguage.getEmployerLanguageID()}" th:text="${employerLanguage.getEmployerLanguageName()}"></option>
                         </select>
@@ -185,14 +185,14 @@
                     </div>
 
                     <div class="col-md-6 mb-4" >
-                        <label for="employer-status">Employer Status</label>
+                        <label for="employer-status">Employer Status &#42;</label>
                         <select class="selectpicker" data-width="80%" id="employer-status" title="Nothing selected">
                             <option  th:each="employerStatus : ${allEmployerStatus}" th:value="${employerStatus.getStatusOfEmployerID()}" th:text="${employerStatus.getStatusOfEmployerName()}"></option>
                         </select>
                     </div>
 
                     <div class="col-md-12 my-4">
-                        <label for="local-authorities">Local Authorities</label><br>
+                        <label for="local-authorities">Local Authorities &#42;</label><br>
                         <select class="selectpicker" data-width="90%" multiple data-live-search="true" id="local-authorities">
                             <option  th:each="employerLocalAuthority : ${allEmployerLocalAuthorities}" th:value="${employerLocalAuthority.getEmployerLocalAuthorityID()}"  th:text="${employerLocalAuthority.getEmployerLocalAuthorityName()}"></option>
                         </select>
