@@ -167,8 +167,8 @@
                                 <div class="card__content">
                                     <div class="content__image">
                                         <div>
-                                            <img alt="Card image" th:src="${employer.getLogoLink()}"  th:if="${employer.getLogoLink().length() != 0}" >
-                                            <img alt="Card image" src="https://pbs.twimg.com/profile_images/1243552736039313411/ccpSwaNu_400x400.jpg" th:if="${employer.getLogoLink().length() == 0}" >
+                                            <img alt="Card image"  th:src="${employer.getLogoLink()}" th:if="${employer.getLogoLink()!= null}">
+                                            <img alt="Card image" src="https://pbs.twimg.com/profile_images/1243552736039313411/ccpSwaNu_400x400.jpg" th:if="${employer.getLogoLink()== null}" >
 
                                         </div>
                                     </div>
