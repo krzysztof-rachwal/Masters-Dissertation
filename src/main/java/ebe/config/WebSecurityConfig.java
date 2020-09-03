@@ -13,6 +13,7 @@ import org.springframework.security.oauth2.client.web.AuthorizationRequestReposi
 import org.springframework.security.oauth2.client.web.HttpSessionOAuth2AuthorizationRequestRepository;
 import org.springframework.security.oauth2.core.endpoint.OAuth2AuthorizationRequest;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import javax.sql.DataSource;
 
@@ -38,8 +39,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 //                .defaultSuccessUrl("/")
                 .authorizationRequestRepository(authorizationRequestRepository())
                 .and()
-                .defaultSuccessUrl("/ebe/");
+                .defaultSuccessUrl("/ebe/")
 //                .failureUrl("/ebe/");
+                .and()
+                .logout()
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                .logoutSuccessUrl("/login")
+                .invalidateHttpSession(true)        // set invalidation state when logout
+                .deleteCookies("JSESSIONID");
 
 
     }
