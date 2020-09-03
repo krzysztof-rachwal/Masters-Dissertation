@@ -44,7 +44,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
                 .and()
                 .logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/ebe/logout"))
-                .logoutSuccessUrl("https://sysint.careerswales.gov.wales/ebe/")
+                .logoutSuccessUrl("/")
                 .invalidateHttpSession(true)        // set invalidation state when logout
                 .deleteCookies("SESSION");
 
